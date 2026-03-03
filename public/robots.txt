@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /_redirects
+
+Sitemap: https://claudia-conen-expert-platform.bolt.host/sitemap.xml
+
+# Google-Bot speziell erlauben
+User-agent: Googlebot
+Allow: /
+
+# Bing-Bot speziell erlauben
+User-agent: bingbot
+Allow: /
+
+# Crawl-Delay für alle Bots
+Crawl-delay: 1

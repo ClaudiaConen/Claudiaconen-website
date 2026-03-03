@@ -1,0 +1,165 @@
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { AnimatePresence } from 'framer-motion';
+import { Menu, X, ChevronDown, Calendar } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { megaMenuItems } from '../lib/megaMenuData';
+import MegaMenuPanel from './mega-menu/MegaMenuPanel';
+import MobileMegaMenu from './mega-menu/MobileMegaMenu';
+
+export default function Navigation() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeMenuId, setActiveMenuId] = useState<string | null>(null);
+  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const openTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const clearTimers = useCallback(() => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    if (openTimeoutRef.current) {
+      clearTimeout(openTimeoutRef.current);
+      openTimeoutRef.current = null;
+    }
+  }, []);
+
+  const handleMenuEnter = useCallback((menuId: string) => {
+    clearTimers();
+    if (activeMenuId) {
+      setActiveMenuId(menuId);
+    } else {
+      openTimeoutRef.current = setTimeout(() => {
+        setActiveMenuId(menuId);
+      }, 150);
+    }
+  }, [activeMenuId, clearTimers]);
+
+  const handleMenuLeave = useCallback(() => {
+    clearTimers();
+    closeTimeoutRef.current = setTimeout(() => {
+      setActiveMenuId(null);
+    }, 400);
+  }, [clearTimers]);
+
+  const handlePanelEnter = useCallback(() => {
+    clearTimers();
+  }, [clearTimers]);
+
+  const handlePanelLeave = useCallback(() => {
+    clearTimers();
+    closeTimeoutRef.current = setTimeout(() => {
+      setActiveMenuId(null);
+    }, 300);
+  }, [clearTimers]);
+
+  const closeMegaMenu = useCallback(() => {
+    clearTimers();
+    setActiveMenuId(null);
+  }, [clearTimers]);
+
+  const handleCtaClick = () => {
+    setIsMobileMenuOpen(false);
+    closeMegaMenu();
+    navigate('/');
+    setTimeout(() => {
+      const el = document.querySelector('#contact');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  };
+
+  return (
+    <nav
+      className={`fixed top-10 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? 'mega-nav-scrolled'
+          : 'mega-nav-default'
+      }`}
+      style={{ borderBottom: '1px solid rgba(212,175,55,0.2)' }}
+    >
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-[72px]">
+          <a
+            href="/"
+            onClick={(e) => { e.preventDefault(); navigate('/'); closeMegaMenu(); }}
+            className="flex-shrink-0 hover:opacity-80 transition-opacity duration-300"
+          >
+            <span
+              className="font-montserrat font-black text-[1.55rem] tracking-tight whitespace-nowrap"
+              style={{
+                background: 'linear-gradient(135deg, #D4AF37 0%, #F7E7CE 50%, #C9A961 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                filter: 'drop-shadow(0 0 10px rgba(212,175,55,0.3))',
+              }}
+            >
+              CLAUDIA CONEN
+            </span>
+          </a>
+
+          <ul className="hidden xl:flex items-center gap-1 list-none">
+            {megaMenuItems.map((item) => (
+              <li
+                key={item.id}
+                className="relative"
+                onMouseEnter={() => handleMenuEnter(item.id)}
+                onMouseLeave={handleMenuLeave}
+              >
+                <button
+                  className={`mega-nav-link ${activeMenuId === item.id ? 'active' : ''}`}
+                >
+                  {item.label}
+                  <ChevronDown
+                    size={12}
+                    className={`mega-nav-chevron ${activeMenuId === item.id ? 'rotate-180' : ''}`}
+                  />
+                </button>
+
+                {activeMenuId === item.id && (
+                  <div
+                    className="mega-menu-container"
+                    onMouseEnter={handlePanelEnter}
+                    onMouseLeave={handlePanelLeave}
+                  >
+                    <MegaMenuPanel item={item} onClose={closeMegaMenu} />
+                  </div>
+                )}
+              </li>
+            ))}
+          </ul>
+
+          <div className="hidden xl:flex items-center">
+            <button
+              onClick={handleCtaClick}
+              className="mega-nav-cta"
+            >
+              <Calendar size={16} />
+              Jetzt anfragen
+            </button>
+          </div>
+
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="xl:hidden text-pearl-white p-2 hover:text-[#D4AF37] transition-colors"
+          >
+            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
+      </div>
+
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <MobileMegaMenu onClose={() => setIsMobileMenuOpen(false)} />
+        )}
+      </AnimatePresence>
+    </nav>
+  );
+}

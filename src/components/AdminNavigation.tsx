@@ -4,7 +4,7 @@ import {
   LayoutDashboard, Calendar, Video, MessageSquare, LogOut, CalendarCheck,
   Clock, ListChecks, Brain, Upload, FileText, Users, GraduationCap,
   BookOpen, Home, Star, Menu, X, ChevronDown, ChevronRight, Settings,
-  CreditCard, Lightbulb, ClipboardList
+  CreditCard, Lightbulb, ClipboardList, Award
 } from 'lucide-react';
 import { logoutAdmin } from '../lib/adminAuth';
 import { useNavigate } from 'react-router-dom';
@@ -151,6 +151,24 @@ export default function AdminNavigation() {
       label: 'Inhalte',
       icon: Video,
       items: [
+        {
+          to: '/admin/seiteninhalte',
+          icon: FileText,
+          label: 'Seiteninhalte',
+          description: 'Texte & Headlines bearbeiten'
+        },
+        {
+          to: '/admin/events',
+          icon: Calendar,
+          label: 'Events',
+          description: 'Veranstaltungen verwalten'
+        },
+        {
+          to: '/admin/mentoring',
+          icon: Award,
+          label: 'Mentoring',
+          description: 'Mentoring-Pakete verwalten'
+        },
         {
           to: '/admin/adventskalender',
           icon: Calendar,

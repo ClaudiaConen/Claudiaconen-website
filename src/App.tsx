@@ -118,6 +118,9 @@ import AdminFlashcardEdit from './pages/AdminFlashcardEdit';
 import AdminMemberStudents from './pages/AdminMemberStudents';
 import AdminWelcomeContent from './pages/AdminWelcomeContent';
 import AdminRecommendations from './pages/AdminRecommendations';
+import AdminEvents from './pages/AdminEvents';
+import AdminMentoring from './pages/AdminMentoring';
+import AdminSiteContent from './pages/AdminSiteContent';
 import MemberCertificate from './pages/MemberCertificate';
 import AdminModuleBonusEdit from './pages/AdminModuleBonusEdit';
 import AdminQuizList from './pages/AdminQuizList';
@@ -245,6 +248,9 @@ function App() {
         <Route path="/admin/member-miniaufgaben" element={<ProtectedRoute><AdminMiniTaskList /></ProtectedRoute>} />
         <Route path="/admin/willkommen" element={<ProtectedRoute><AdminWelcomeContent /></ProtectedRoute>} />
         <Route path="/admin/empfehlungen" element={<ProtectedRoute><AdminRecommendations /></ProtectedRoute>} />
+        <Route path="/admin/events" element={<ProtectedRoute><AdminEvents /></ProtectedRoute>} />
+        <Route path="/admin/mentoring" element={<ProtectedRoute><AdminMentoring /></ProtectedRoute>} />
+        <Route path="/admin/seiteninhalte" element={<ProtectedRoute><AdminSiteContent /></ProtectedRoute>} />
 
         <Route path="/events" element={<Events />} />
         <Route path="/blog" element={<Blog />} />

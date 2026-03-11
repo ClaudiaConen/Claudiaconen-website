@@ -122,8 +122,6 @@ Deno.serve(async (req: Request) => {
       sub: adminUser.id,
       email: adminUser.email,
       name: adminUser.name,
-      role: adminUser.role || 'viewer',
-      allowed_sections: adminUser.allowed_sections || [],
     })
       .setProtectedHeader({ alg: "HS256" })
       .setIssuedAt()
@@ -137,8 +135,6 @@ Deno.serve(async (req: Request) => {
           id: adminUser.id,
           email: adminUser.email,
           name: adminUser.name,
-          role: adminUser.role || 'viewer',
-          allowed_sections: adminUser.allowed_sections || [],
         },
       }),
       {

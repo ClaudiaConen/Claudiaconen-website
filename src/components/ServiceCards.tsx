@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Mic, Users, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import AnimatedBorder from './AnimatedBorder';
 
 export default function ServiceCards() {
   const services = [
@@ -57,19 +56,14 @@ export default function ServiceCards() {
               >
                 <Link to={service.link} className="block h-full">
                   <motion.div
-                    whileHover={{ y: -6 }}
-                    transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-                    className="kriss-card kriss-shine relative h-full bg-white rounded-2xl border border-gray-200 hover:border-gray-300 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-visible p-8 flex flex-col"
+                    whileHover={{ y: -5, scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
+                    className="relative h-full bg-white rounded-2xl border border-gray-200 hover:border-gray-300 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden p-8 flex flex-col"
                     style={{
                       borderTopWidth: '4px',
                       borderTopColor: service.borderColor === 'luxury-gold' ? '#DAA520' : service.borderColor === 'royal-navy' ? '#1A2B4C' : '#0A1628'
                     }}
                   >
-                    <AnimatedBorder
-                      borderRadius={16}
-                      strokeColor={service.borderColor === 'luxury-gold' ? 'rgba(218, 165, 32, 0.3)' : service.borderColor === 'royal-navy' ? 'rgba(26, 43, 76, 0.3)' : 'rgba(10, 22, 40, 0.3)'}
-                      cornerColor={service.borderColor === 'luxury-gold' ? 'rgba(218, 165, 32, 0.6)' : service.borderColor === 'royal-navy' ? 'rgba(26, 43, 76, 0.6)' : 'rgba(10, 22, 40, 0.6)'}
-                    />
                     <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-gray-50 to-transparent rounded-bl-full" />
 
                     <div className="relative z-10 flex-1 flex flex-col">
@@ -95,12 +89,23 @@ export default function ServiceCards() {
                       </p>
 
                       <div className="space-y-4">
-                        <div className="flex items-center gap-2 text-midnight-blue font-semibold kriss-hover-translate rounded-lg px-2 py-1 -mx-2">
-                          <span className="kriss-hover-title">Jetzt entdecken</span>
-                          <div className="kriss-cta-arrow">
+                        <motion.div
+                          className="flex items-center gap-2 text-midnight-blue font-semibold group-hover:gap-4 transition-all duration-300"
+                        >
+                          <span>Jetzt entdecken</span>
+                          <motion.div
+                            animate={{
+                              x: [0, 5, 0],
+                            }}
+                            transition={{
+                              duration: 1.5,
+                              repeat: Infinity,
+                              ease: "easeInOut",
+                            }}
+                          >
                             <ArrowRight size={20} className="text-luxury-gold" />
-                          </div>
-                        </div>
+                          </motion.div>
+                        </motion.div>
 
                         <div className={`inline-block px-4 py-2 bg-gradient-to-r ${service.gradient} rounded-full`}>
                           <span className="text-white font-semibold text-sm">

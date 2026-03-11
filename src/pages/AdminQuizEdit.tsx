@@ -41,14 +41,6 @@ interface Answer {
   order_index: number;
 }
 
-interface LessonOption {
-  id: string;
-  title: string;
-  module_id: string;
-  module_title: string;
-  lesson_number: number;
-}
-
 export default function AdminQuizEdit() {
   const { quizId } = useParams();
   const [searchParams] = useSearchParams();
@@ -71,8 +63,6 @@ export default function AdminQuizEdit() {
   const [isLoading, setIsLoading] = useState(!isNew);
   const [isSaving, setIsSaving] = useState(false);
   const [lessonModuleId, setLessonModuleId] = useState<string | null>(null);
-  const [allLessons, setAllLessons] = useState<LessonOption[]>([]);
-  const [lessonsLoading, setLessonsLoading] = useState(true);
 
   const apiCall = async (action: string, method: string = 'GET', body?: any) => {
     const adminToken = getToken();
@@ -104,22 +94,10 @@ export default function AdminQuizEdit() {
   };
 
   useEffect(() => {
-    loadAllLessons();
     if (!isNew && quizId) {
       loadQuiz();
     }
   }, [quizId]);
-
-  const loadAllLessons = async () => {
-    try {
-      const result = await apiCall('get-all-lessons', 'GET');
-      setAllLessons(result.data || []);
-    } catch (error) {
-      console.error('Error loading lessons:', error);
-    } finally {
-      setLessonsLoading(false);
-    }
-  };
 
   const loadQuiz = async () => {
     try {
@@ -149,11 +127,6 @@ export default function AdminQuizEdit() {
   const handleSave = async () => {
     if (!quiz.title) {
       alert('Bitte fülle alle Pflichtfelder aus');
-      return;
-    }
-
-    if (!quiz.lesson_id) {
-      alert('Bitte wähle eine Lektion für dieses Quiz aus');
       return;
     }
 
@@ -390,38 +363,6 @@ export default function AdminQuizEdit() {
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="z.B. ChatGPT Grundlagen Quiz"
               />
-            </div>
-
-            <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Lektion *
-              </label>
-              {lessonsLoading ? (
-                <div className="flex items-center space-x-2 text-gray-500">
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                  <span>Lektionen werden geladen...</span>
-                </div>
-              ) : (
-                <select
-                  value={quiz.lesson_id || ''}
-                  onChange={(e) => {
-                    const selectedId = e.target.value || null;
-                    setQuiz({ ...quiz, lesson_id: selectedId });
-                    if (selectedId) {
-                      const lesson = allLessons.find(l => l.id === selectedId);
-                      if (lesson) setLessonModuleId(lesson.module_id);
-                    }
-                  }}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                >
-                  <option value="">-- Lektion auswählen --</option>
-                  {allLessons.map((lesson) => (
-                    <option key={lesson.id} value={lesson.id}>
-                      {lesson.module_title} → {lesson.title}
-                    </option>
-                  ))}
-                </select>
-              )}
             </div>
 
             <div className="md:col-span-2">

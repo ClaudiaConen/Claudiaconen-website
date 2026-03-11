@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { checkAdminAuth } from '../lib/adminAuth';
 import AdminNavigation from '../components/AdminNavigation';
-import { Calendar, Video, MessageSquare, ArrowRight, BarChart, Brain, GraduationCap, Mail, Users, FileDown, ChevronDown, ChevronUp, FolderKanban, ExternalLink } from 'lucide-react';
+import { Calendar, Video, MessageSquare, ArrowRight, BarChart, Brain, GraduationCap, Mail, Users, FileDown, ChevronDown, ChevronUp } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
 export default function AdminDashboard() {
@@ -193,16 +193,6 @@ export default function AdminDashboard() {
 
   const adminSections = [
     {
-      title: 'Projektmanagement',
-      description: 'Kanban-Board, Content Hub und Schaltzentrale für alle Projekte & Social Media',
-      icon: FolderKanban,
-      link: 'https://community.claudiaconen.com/projektmanagement',
-      color: 'from-indigo-500 to-blue-600',
-      stat: 'Schaltzentrale',
-      features: ['Kanban-Board', 'Content Hub', 'Team & Rollen', 'Ampel-System'],
-      external: true
-    },
-    {
       title: 'Adventskalender',
       description: 'Verwalte alle 24 Türchen des Adventskalenders mit Inhalten, Videos und Ressourcen',
       icon: Calendar,
@@ -280,32 +270,37 @@ export default function AdminDashboard() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {adminSections.map((section) => {
             const Icon = section.icon;
-            const CardContent = (
-              <>
+            return (
+              <Link
+                key={section.link}
+                to={section.link}
+                className="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-gray-200"
+              >
                 <div className={`h-2 bg-gradient-to-r ${section.color}`} />
+
                 <div className="p-6">
                   <div className="flex items-start justify-between mb-4">
                     <div className={`p-3 rounded-xl bg-gradient-to-r ${section.color} text-white`}>
                       <Icon className="w-6 h-6" />
                     </div>
-                    {(section as any).external ? (
-                      <ExternalLink className="w-5 h-5 text-gray-400 group-hover:text-gray-600 transition-all" />
-                    ) : (
-                      <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-gray-600 group-hover:translate-x-1 transition-all" />
-                    )}
+                    <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-gray-600 group-hover:translate-x-1 transition-all" />
                   </div>
+
                   <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
                     {section.title}
                   </h3>
+
                   <p className="text-gray-600 mb-4 text-sm leading-relaxed">
                     {section.description}
                   </p>
+
                   <div className="flex items-center gap-2 mb-4">
                     <BarChart className="w-4 h-4 text-gray-400" />
                     <span className="text-sm font-semibold text-gray-700">
                       {section.stat}
                     </span>
                   </div>
+
                   <div className="border-t border-gray-100 pt-4">
                     <ul className="space-y-2">
                       {section.features.map((feature, idx) => (
@@ -317,30 +312,6 @@ export default function AdminDashboard() {
                     </ul>
                   </div>
                 </div>
-              </>
-            );
-
-            if ((section as any).external) {
-              return (
-                <a
-                  key={section.link}
-                  href={section.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-gray-200"
-                >
-                  {CardContent}
-                </a>
-              );
-            }
-
-            return (
-              <Link
-                key={section.link}
-                to={section.link}
-                className="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-gray-200"
-              >
-                {CardContent}
               </Link>
             );
           })}
@@ -445,16 +416,6 @@ export default function AdminDashboard() {
             Nutze die Navigation oben, um schnell zwischen den verschiedenen Admin-Bereichen zu wechseln.
           </p>
           <div className="flex flex-wrap gap-3">
-            <a
-              href="https://community.claudiaconen.com/projektmanagement"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors text-sm font-medium"
-            >
-              <FolderKanban className="w-4 h-4" />
-              Projektmanagement
-              <ExternalLink className="w-3 h-3" />
-            </a>
             <Link
               to="/admin/adventskalender"
               className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"

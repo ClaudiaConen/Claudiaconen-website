@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import { BookOpen, Clock, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import AnimatedBorder from './AnimatedBorder';
 
 interface Question {
   title: string;
@@ -88,9 +87,8 @@ export default function FrequentQuestions() {
             >
               <Link
                 to={`/wissensbibliothek#${question.slug}`}
-                className="kriss-card kriss-shine block h-full bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-visible border-2 border-transparent hover:border-luxury-gold/30 group relative"
+                className="block h-full bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-luxury-gold/30 group"
               >
-                <AnimatedBorder borderRadius={16} />
                 <div className="p-6 space-y-4 h-full flex flex-col">
                   <div className="flex items-center gap-3 text-sm text-gray-500">
                     <div className="flex items-center gap-1">
@@ -122,11 +120,9 @@ export default function FrequentQuestions() {
                     ))}
                   </div>
 
-                  <div className="flex items-center gap-2 text-bright-gold font-semibold transition-all">
-                    <span className="kriss-hover-title">Jetzt lesen</span>
-                    <span className="kriss-cta-arrow">
-                      <ArrowRight size={16} />
-                    </span>
+                  <div className="flex items-center gap-2 text-bright-gold font-semibold group-hover:gap-3 transition-all">
+                    <span>Jetzt lesen</span>
+                    <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
               </Link>
@@ -143,13 +139,11 @@ export default function FrequentQuestions() {
         >
           <Link
             to="/wissensbibliothek"
-            className="kriss-cta inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-midnight-blue font-bold rounded-full shadow-xl"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-midnight-blue font-bold rounded-full hover:scale-105 transition-transform shadow-xl"
           >
             <BookOpen size={20} />
             Zur kompletten Wissensbibliothek
-            <span className="kriss-cta-arrow">
-              <ArrowRight size={20} />
-            </span>
+            <ArrowRight size={20} />
           </Link>
         </motion.div>
       </div>

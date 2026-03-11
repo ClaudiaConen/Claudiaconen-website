@@ -1,17 +1,8 @@
 import SubpageTemplate from '../components/SubpageTemplate';
-import EventsList from '../components/EventsList';
 
 export default function UnternehmenEvents() {
   const bodyContent = (
     <div className="space-y-8">
-      {/* Dynamische Events aus dem Admin-Bereich */}
-      <div>
-        <h2 className="text-3xl font-bold text-midnight-blue mb-4">
-          Kommende Veranstaltungen
-        </h2>
-        <EventsList />
-      </div>
-
       <div>
         <h2 className="text-3xl font-bold text-midnight-blue mb-4">
           Interne Events & Moderation

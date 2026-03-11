@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Check, Sparkles, Star } from 'lucide-react';
 import CoachingInquiryForm from './CoachingInquiryForm';
-import AnimatedBorder from './AnimatedBorder';
 
 export default function Offers() {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -104,18 +103,13 @@ export default function Offers() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.2 }}
-                  whileHover={{ y: offer.highlighted ? -8 : -6 }}
-                  className={`kriss-card kriss-shine relative bg-royal-navy/30 backdrop-blur-sm rounded-2xl border transition-all duration-300 overflow-visible ${
+                  whileHover={{ y: offer.highlighted ? -10 : -5, scale: offer.highlighted ? 1.02 : 1 }}
+                  className={`relative bg-royal-navy/30 backdrop-blur-sm rounded-2xl border transition-all duration-300 overflow-hidden ${
                     offer.highlighted
                       ? 'border-luxury-gold ring-4 ring-luxury-gold/20 shadow-2xl'
                       : 'border-luxury-gold/10 hover:border-luxury-gold/30'
                   }`}
                 >
-                  <AnimatedBorder
-                    borderRadius={16}
-                    strokeColor={offer.highlighted ? 'rgba(218, 165, 32, 0.4)' : 'rgba(218, 165, 32, 0.2)'}
-                    cornerColor={offer.highlighted ? 'rgba(255, 215, 0, 0.7)' : 'rgba(218, 165, 32, 0.5)'}
-                  />
                   {offer.highlighted && (
                     <motion.div
                       animate={{

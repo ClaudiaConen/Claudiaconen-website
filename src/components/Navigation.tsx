@@ -68,7 +68,11 @@ export default function Navigation() {
   const handleCtaClick = () => {
     setIsMobileMenuOpen(false);
     closeMegaMenu();
-    navigate('/termin-buchen');
+    navigate('/');
+    setTimeout(() => {
+      const el = document.querySelector('#contact');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
   };
 
   return (
@@ -106,39 +110,27 @@ export default function Navigation() {
               <li
                 key={item.id}
                 className="relative"
-                onMouseEnter={() => !item.href && handleMenuEnter(item.id)}
-                onMouseLeave={() => !item.href && handleMenuLeave()}
+                onMouseEnter={() => handleMenuEnter(item.id)}
+                onMouseLeave={handleMenuLeave}
               >
-                {item.href ? (
-                  <a
-                    href={item.href}
-                    onClick={(e) => { e.preventDefault(); navigate(item.href!); closeMegaMenu(); }}
-                    className="mega-nav-link"
-                  >
-                    {item.label}
-                  </a>
-                ) : (
-                  <>
-                    <button
-                      className={`mega-nav-link ${activeMenuId === item.id ? 'active' : ''}`}
-                    >
-                      {item.label}
-                      <ChevronDown
-                        size={12}
-                        className={`mega-nav-chevron ${activeMenuId === item.id ? 'rotate-180' : ''}`}
-                      />
-                    </button>
+                <button
+                  className={`mega-nav-link ${activeMenuId === item.id ? 'active' : ''}`}
+                >
+                  {item.label}
+                  <ChevronDown
+                    size={12}
+                    className={`mega-nav-chevron ${activeMenuId === item.id ? 'rotate-180' : ''}`}
+                  />
+                </button>
 
-                    {activeMenuId === item.id && (
-                      <div
-                        className="mega-menu-container"
-                        onMouseEnter={handlePanelEnter}
-                        onMouseLeave={handlePanelLeave}
-                      >
-                        <MegaMenuPanel item={item} onClose={closeMegaMenu} />
-                      </div>
-                    )}
-                  </>
+                {activeMenuId === item.id && (
+                  <div
+                    className="mega-menu-container"
+                    onMouseEnter={handlePanelEnter}
+                    onMouseLeave={handlePanelLeave}
+                  >
+                    <MegaMenuPanel item={item} onClose={closeMegaMenu} />
+                  </div>
                 )}
               </li>
             ))}
@@ -150,7 +142,7 @@ export default function Navigation() {
               className="mega-nav-cta"
             >
               <Calendar size={16} />
-              Termin buchen
+              Jetzt anfragen
             </button>
           </div>
 

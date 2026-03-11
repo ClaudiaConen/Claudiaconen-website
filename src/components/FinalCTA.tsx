@@ -29,13 +29,11 @@ export default function FinalCTA() {
               href="https://claudiaconen.com/termin-buchen"
               target="_blank"
               rel="noopener noreferrer"
-              className="kriss-cta flex items-center gap-2 px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-midnight-blue font-semibold rounded-full shadow-2xl text-sm md:text-base"
+              className="flex items-center gap-2 px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300 shadow-2xl text-sm md:text-base"
             >
               <Calendar size={20} />
               Kostenloses Erstgespräch buchen
-              <span className="kriss-cta-arrow">
-                <ArrowRight size={20} />
-              </span>
+              <ArrowRight size={20} />
             </a>
           </div>
 

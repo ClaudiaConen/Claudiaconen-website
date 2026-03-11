@@ -33,6 +33,24 @@ export default function MemberLogin() {
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
       </div>
 
+      {/* Elegante, fast transparente Bilder neben dem Login */}
+      <div className="hidden lg:block absolute left-[5%] top-1/2 -translate-y-1/2 z-0">
+        <img
+          src="/Claudia15.png"
+          alt=""
+          className="w-72 h-auto opacity-[0.08] grayscale blur-[0.5px] rounded-2xl select-none pointer-events-none"
+          draggable={false}
+        />
+      </div>
+      <div className="hidden lg:block absolute right-[5%] top-1/2 -translate-y-1/2 z-0">
+        <img
+          src="/Claudia16.png"
+          alt=""
+          className="w-72 h-auto opacity-[0.08] grayscale blur-[0.5px] rounded-2xl select-none pointer-events-none"
+          draggable={false}
+        />
+      </div>
+
       <div className="w-full max-w-md relative z-10">
         <div className="bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl border border-white/20 overflow-hidden">
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-8 text-center">

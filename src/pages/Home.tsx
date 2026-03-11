@@ -1,27 +1,24 @@
 import Navigation from '../components/Navigation';
 import Hero from '../components/Hero';
-import MissionSection from '../components/MissionSection';
-import ThemenCarousel from '../components/ThemenCarousel';
 import ServiceCards from '../components/ServiceCards';
-import HeroBrainSection from '../components/HeroBrainSection';
-import Timeline from '../components/Timeline';
 import About from '../components/About';
+import UpcomingEvents from '../components/UpcomingEvents';
 import SocialProof from '../components/SocialProof';
-import ClaudiaAI from '../components/ClaudiaAI';
 import Offers from '../components/Offers';
 import FrequentQuestions from '../components/FrequentQuestions';
 import ContactSection from '../components/ContactSection';
-import FinalCTA from '../components/FinalCTA';
 import Footer from '../components/Footer';
 import WhatsAppButton from '../components/WhatsAppButton';
 import CookieBanner from '../components/CookieBanner';
 import SEO from '../components/SEO';
+import ScrollProgressBar from '../components/ScrollProgressBar';
 
 const SEO_KEYWORDS = ['Claudia Conen', 'Voice-to-Brain', 'Köln', 'Witten', 'Kommunikationstraining', 'Persönlichkeitsentwicklung', 'Stimm-Coaching', 'Neurowissenschaft', 'Speaker Training', 'Business Coach Köln'];
 
 export default function Home() {
   return (
     <div className="relative">
+      <ScrollProgressBar />
       <SEO
         title="Claudia Conen | Voice-to-Brain® Expert Köln | Der Türöffner ins Kundengehirn"
         description="In nur 180ms entscheidet sich alles. Claudia Conen aus Köln zeigt dir, wie du mit Voice-to-Brain® deine Persönlichkeit zum unkopierbaren Erfolgsgarant machst. Jetzt mehr erfahren!"
@@ -35,18 +32,13 @@ export default function Home() {
       </header>
       <main id="main">
         <Hero />
-        <ThemenCarousel />
         <ServiceCards />
-        <HeroBrainSection />
-        <MissionSection />
-        <Timeline />
         <About />
+        <UpcomingEvents />
         <SocialProof />
-        <ClaudiaAI />
         <Offers />
         <FrequentQuestions />
         <ContactSection />
-        <FinalCTA />
       </main>
       <Footer />
       <WhatsAppButton />

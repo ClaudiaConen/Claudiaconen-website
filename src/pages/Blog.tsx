@@ -1,62 +1,96 @@
-import { Link } from 'react-router-dom';
-import { ArrowRight, Brain, Sparkles, Lightbulb } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { ArrowRight, Brain, Sparkles, Lightbulb, Filter } from 'lucide-react';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 
+const CATEGORIES = [
+  { id: 'all', label: 'Alle Kategorien' },
+  { id: 'ki', label: 'Mensch & KI' },
+  { id: 'wirkung', label: 'Wirkung & Persönlichkeit' },
+  { id: 'neuro', label: 'Neurowissenschaft' },
+];
+
+const blogPosts = [
+  {
+    id: 'mensch-ki',
+    category: 'ki',
+    title: 'Mensch & KI',
+    description: 'Perfektion ist klickbar – Persönlichkeit bleibt. Warum Einzigartigkeit im Zeitalter der künstlichen Intelligenz dein größter Wettbewerbsvorteil ist.',
+    icon: Sparkles,
+    image: 'https://images.pexels.com/photos/6476776/pexels-photo-6476776.jpeg?auto=compress&cs=tinysrgb&w=800',
+    path: '/blog-ki',
+    gradient: 'from-[#B8860B] via-[#D4AF37] to-[#FFD700]',
+    topics: [
+      'Neurowissenschaft trifft KI',
+      'Vertrauen im digitalen Zeitalter',
+      'Die 7 As der modernen Vermarktung',
+      'Authentizität als Wettbewerbsvorteil'
+    ]
+  },
+  {
+    id: 'wirkung',
+    category: 'wirkung',
+    title: 'Wirkung & Persönlichkeit',
+    description: 'Artikel über authentische Präsenz, Persönlichkeitsentwicklung und die Kunst, mit Ihrer Einzigartigkeit zu überzeugen.',
+    icon: Lightbulb,
+    image: 'https://images.pexels.com/photos/8761542/pexels-photo-8761542.jpeg?auto=compress&cs=tinysrgb&w=800',
+    path: '/blog-wirkung',
+    gradient: 'from-[#B8860B] via-[#D4AF37] to-[#FFD700]',
+    topics: [
+      'Authentische Präsenz',
+      'Die Macht der Verletzlichkeit',
+      'Charisma entwickeln',
+      'Stimmige Persönlichkeit'
+    ]
+  },
+  {
+    id: 'neuro',
+    category: 'neuro',
+    title: 'Neurowissenschaft & Verkauf',
+    description: 'Wissenschaftlich fundierte Erkenntnisse über Kaufentscheidungen und ethisches Verkaufen.',
+    icon: Brain,
+    image: 'https://images.pexels.com/photos/17483868/pexels-photo-17483868.jpeg?auto=compress&cs=tinysrgb&w=800',
+    path: '/blog-neuro',
+    gradient: 'from-[#B8860B] via-[#D4AF37] to-[#FFD700]',
+    topics: [
+      'Das emotionale Gehirn',
+      'Spiegelneuronen im Verkauf',
+      'Die Stimme und das limbische System',
+      'Neuromarketing-Strategien'
+    ]
+  }
+];
+
 export default function Blog() {
-  const blogPosts = [
-    {
-      id: 'mensch-ki',
-      title: 'Mensch & KI',
-      description: 'Perfektion ist klickbar – Persönlichkeit bleibt. Warum Einzigartigkeit im Zeitalter der künstlichen Intelligenz dein größter Wettbewerbsvorteil ist.',
-      icon: Sparkles,
-      image: 'https://images.pexels.com/photos/6476776/pexels-photo-6476776.jpeg?auto=compress&cs=tinysrgb&w=800',
-      path: '/blog-ki',
-      gradient: 'from-[#B8860B] via-[#D4AF37] to-[#FFD700]',
-      topics: [
-        'Neurowissenschaft trifft KI',
-        'Vertrauen im digitalen Zeitalter',
-        'Die 7 As der modernen Vermarktung',
-        'Authentizität als Wettbewerbsvorteil'
-      ]
-    },
-    {
-      id: 'wirkung',
-      title: 'Wirkung & Persönlichkeit',
-      description: 'Artikel über authentische Präsenz, Persönlichkeitsentwicklung und die Kunst, mit Ihrer Einzigartigkeit zu überzeugen.',
-      icon: Lightbulb,
-      image: 'https://images.pexels.com/photos/8761542/pexels-photo-8761542.jpeg?auto=compress&cs=tinysrgb&w=800',
-      path: '/blog-wirkung',
-      gradient: 'from-[#B8860B] via-[#D4AF37] to-[#FFD700]',
-      topics: [
-        'Authentische Präsenz',
-        'Die Macht der Verletzlichkeit',
-        'Charisma entwickeln',
-        'Stimmige Persönlichkeit'
-      ]
-    },
-    {
-      id: 'neuro',
-      title: 'Neurowissenschaft & Verkauf',
-      description: 'Wissenschaftlich fundierte Erkenntnisse über Kaufentscheidungen und ethisches Verkaufen.',
-      icon: Brain,
-      image: 'https://images.pexels.com/photos/17483868/pexels-photo-17483868.jpeg?auto=compress&cs=tinysrgb&w=800',
-      path: '/blog-neuro',
-      gradient: 'from-[#B8860B] via-[#D4AF37] to-[#FFD700]',
-      topics: [
-        'Das emotionale Gehirn',
-        'Spiegelneuronen im Verkauf',
-        'Die Stimme und das limbische System',
-        'Neuromarketing-Strategien'
-      ]
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [activeFilter, setActiveFilter] = useState('all');
+
+  useEffect(() => {
+    const filter = searchParams.get('filter');
+    if (filter && CATEGORIES.some(c => c.id === filter)) {
+      setActiveFilter(filter);
     }
-  ];
+  }, [searchParams]);
+
+  const handleFilterChange = (filterId: string) => {
+    setActiveFilter(filterId);
+    if (filterId === 'all') {
+      setSearchParams({});
+    } else {
+      setSearchParams({ filter: filterId });
+    }
+  };
+
+  const filteredPosts = activeFilter === 'all'
+    ? blogPosts
+    : blogPosts.filter(p => p.category === activeFilter);
 
   return (
     <>
       <SEO
-        title="Blog"
+        title="Blog & Aktuelles | Claudia Conen"
         description="Entdecken Sie inspirierende Artikel über KI, Persönlichkeitsentwicklung, Neurowissenschaft und die Kunst der wirkungsvollen Kommunikation."
       />
       <div className="min-h-screen bg-gradient-to-b from-pearl-white to-white">
@@ -64,7 +98,7 @@ export default function Blog() {
 
         <section className="pt-40 pb-20 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-16">
+            <div className="text-center mb-12">
               <h1 className="font-montserrat font-bold text-5xl md:text-6xl lg:text-7xl text-midnight-blue mb-6">
                 Blog & <span className="bg-gradient-to-r from-[#D4AF37] to-[#FFD700] bg-clip-text text-transparent">Aktuelles</span>
               </h1>
@@ -73,8 +107,26 @@ export default function Blog() {
               </p>
             </div>
 
+            {/* Filter Tabs */}
+            <div className="flex items-center justify-center gap-2 mb-12 flex-wrap">
+              <Filter size={18} className="text-gray-500" />
+              {CATEGORIES.map(cat => (
+                <button
+                  key={cat.id}
+                  onClick={() => handleFilterChange(cat.id)}
+                  className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${
+                    activeFilter === cat.id
+                      ? 'bg-midnight-blue text-pearl-white'
+                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  }`}
+                >
+                  {cat.label}
+                </button>
+              ))}
+            </div>
+
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {blogPosts.map((post) => {
+              {filteredPosts.map((post) => {
                 const Icon = post.icon;
                 return (
                   <Link
@@ -117,7 +169,7 @@ export default function Blog() {
                       </div>
 
                       <div className="flex items-center gap-2 text-bright-gold font-semibold group-hover:gap-4 transition-all">
-                        <span>Zum Blog</span>
+                        <span>Weiterlesen</span>
                         <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                       </div>
                     </div>

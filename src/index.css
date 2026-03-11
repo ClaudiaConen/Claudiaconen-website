@@ -1199,3 +1199,279 @@ html, body { cursor: auto; }
     display: none;
   }
 }
+
+/* ========================================
+   KRISS.AI-INSPIRED EFFECTS
+   Animated SVG Borders, Scroll Progress,
+   Enhanced Micro-Interactions
+======================================== */
+
+/* --- Scroll Progress Bar --- */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #DAA520, #FFD700, #DAA520);
+  z-index: 9999;
+  transition: width 0.05s linear;
+  box-shadow: 0 0 8px rgba(218, 165, 32, 0.6),
+              0 0 20px rgba(218, 165, 32, 0.3);
+}
+
+.scroll-progress-track {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(0, 0, 0, 0.12);
+  z-index: 9998;
+}
+
+/* --- Animated SVG Corner Border --- */
+.kriss-border-container {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  bottom: -8px;
+  left: -8px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.kriss-border-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.kriss-border-rect {
+  fill: none;
+  stroke: rgba(218, 165, 32, 0.25);
+  stroke-width: 1;
+  rx: 20;
+  ry: 20;
+  transition: stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+              stroke 0.4s ease,
+              stroke-width 0.4s ease;
+}
+
+.kriss-border-corner {
+  fill: none;
+  stroke: rgba(218, 165, 32, 0.5);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  transition: opacity 0.4s ease,
+              stroke 0.4s ease;
+}
+
+/* Hover: SVG border animiert ein */
+.kriss-card:hover .kriss-border-rect {
+  stroke: rgba(218, 165, 32, 0.6);
+  stroke-width: 1.5;
+  stroke-dashoffset: 0 !important;
+}
+
+.kriss-card:hover .kriss-border-corner {
+  stroke: rgba(255, 215, 0, 0.8);
+  opacity: 1;
+}
+
+/* --- Kriss Card Base --- */
+.kriss-card {
+  position: relative;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.4s ease;
+}
+
+.kriss-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(10, 22, 40, 0.15),
+              0 8px 24px rgba(218, 165, 32, 0.12);
+}
+
+/* --- Enhanced Glass Effect (kriss.ai-inspired) --- */
+.kriss-glass {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 18px;
+}
+
+.kriss-glass-dark {
+  background: rgba(26, 39, 68, 0.55);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(218, 165, 32, 0.15);
+  border-radius: 18px;
+}
+
+/* --- CTA Button with Arrow Animation (kriss.ai style) --- */
+.kriss-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #DAA520, #FFD700);
+  color: #0A1628;
+  font-weight: 700;
+  border-radius: 6px;
+  transition: background 0.3s ease,
+              transform 0.3s ease,
+              box-shadow 0.3s ease;
+  cursor: pointer;
+  border: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.kriss-cta:hover {
+  background: linear-gradient(135deg, #C9A227, #DAA520);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(218, 165, 32, 0.35);
+}
+
+.kriss-cta-arrow {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+}
+
+.kriss-cta:hover .kriss-cta-arrow {
+  transform: translateX(5px);
+}
+
+/* --- Smooth Section Reveal --- */
+.kriss-section-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.kriss-section-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Hover Translate Effect (kriss.ai menu item style) --- */
+.kriss-hover-translate {
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.kriss-hover-translate:hover {
+  background: rgba(218, 165, 32, 0.06);
+}
+
+.kriss-hover-translate:hover .kriss-hover-icon,
+.kriss-hover-translate:hover .kriss-hover-title {
+  transform: translateX(8px);
+}
+
+.kriss-hover-icon,
+.kriss-hover-title {
+  transition: transform 0.3s ease;
+}
+
+/* --- Scroll Indicator Bob Animation --- */
+@keyframes kriss-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+.kriss-scroll-indicator {
+  animation: kriss-bob 1.5s ease-in-out infinite;
+}
+
+/* --- Feature Card Stroke Hover --- */
+.kriss-feature-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  transition: background-color 0.3s ease, transform 0.4s ease;
+  cursor: pointer;
+}
+
+.kriss-feature-card:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: scale(0.99);
+}
+
+.kriss-feature-card:hover .kriss-feature-icon {
+  transform: scale(1.06);
+}
+
+.kriss-feature-icon {
+  transition: transform 0.3s ease;
+}
+
+/* --- Nav Links Opacity Effect (kriss.ai style) --- */
+.kriss-nav-links:hover .kriss-nav-link {
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.kriss-nav-links:hover .kriss-nav-link:hover {
+  opacity: 1;
+}
+
+/* --- Percentage/Number Background Effect --- */
+.kriss-bg-number {
+  position: fixed;
+  bottom: 4vh;
+  right: 4vh;
+  color: rgba(218, 165, 32, 0.06);
+  font-size: 18vh;
+  font-weight: 700;
+  line-height: 0.7em;
+  pointer-events: none;
+  z-index: 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* --- Shine Effect on Card Hover (kriss.ai style) --- */
+.kriss-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.kriss-shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(218, 165, 32, 0.04) 40%,
+    rgba(218, 165, 32, 0.12) 50%,
+    rgba(218, 165, 32, 0.04) 60%,
+    transparent 100%
+  );
+  transform: skewX(-15deg);
+  transition: left 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.kriss-shine:hover::after {
+  left: 120%;
+}
+
+/* --- Reduced Motion --- */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-progress-bar { transition: none; }
+  .kriss-border-rect { transition: none; }
+  .kriss-border-corner { transition: none; }
+  .kriss-card:hover { transform: translateY(-3px); }
+  .kriss-section-reveal { opacity: 1; transform: none; transition: none; }
+  .kriss-scroll-indicator { animation: none; }
+  .kriss-shine::after { display: none; }
+  .kriss-cta:hover { transform: none; }
+  .kriss-cta:hover .kriss-cta-arrow { transform: none; }
+}

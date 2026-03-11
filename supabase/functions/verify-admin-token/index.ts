@@ -73,7 +73,7 @@ Deno.serve(async (req: Request) => {
 
     const { data: adminUser, error: fetchError } = await supabase
       .from("admin_users")
-      .select("id, email, name, is_active")
+      .select("id, email, name, is_active, role, allowed_sections")
       .eq("id", payload.sub)
       .maybeSingle();
 
@@ -104,6 +104,8 @@ Deno.serve(async (req: Request) => {
           id: adminUser.id,
           email: adminUser.email,
           name: adminUser.name,
+          role: adminUser.role || 'viewer',
+          allowed_sections: adminUser.allowed_sections || [],
         },
       }),
       {

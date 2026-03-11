@@ -1,10 +1,25 @@
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
+export type AdminRole = 'super_admin' | 'admin' | 'editor' | 'viewer';
+
+export const ADMIN_SECTIONS = [
+  'dashboard',
+  'kursverwaltung',
+  'terminverwaltung',
+  'inhalte',
+  'projektmanagement',
+  'verwaltung',
+] as const;
+
+export type AdminSection = typeof ADMIN_SECTIONS[number];
+
 export interface AdminUser {
   id: string;
   email: string;
   name: string;
+  role: AdminRole;
+  allowed_sections: AdminSection[];
 }
 
 export interface LoginResponse {
@@ -16,6 +31,16 @@ export interface VerifyResponse {
   valid: boolean;
   admin: AdminUser;
 }
+
+export const isSuperAdmin = (user: AdminUser | null): boolean => {
+  return user?.role === 'super_admin';
+};
+
+export const hasSection = (user: AdminUser | null, section: AdminSection): boolean => {
+  if (!user) return false;
+  if (user.role === 'super_admin') return true;
+  return user.allowed_sections.includes(section);
+};
 
 const TOKEN_KEY = 'admin_token';
 const ADMIN_KEY = 'admin_user';

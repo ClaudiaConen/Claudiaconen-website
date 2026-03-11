@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Lightbulb, MessageCircle, BookOpen, Mic2, Eye, Sparkles, Heart, Calendar, Star } from 'lucide-react';
+import { Lightbulb, MessageCircle, BookOpen, Mic2, Eye, Sparkles, Heart, Calendar, Star, ChevronDown, ArrowRight } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import AudioButton from './AudioButton';
 import VideoButton from './VideoButton';
@@ -213,7 +213,7 @@ export default function Hero() {
             >
               <a
                 href="#schritt1"
-                className="flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg whitespace-nowrap"
+                className="kriss-cta group/cta flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-midnight-blue font-semibold rounded-full shadow-lg whitespace-nowrap"
                 onClick={(e) => {
                   e.preventDefault();
                   const target = document.querySelector('#schritt1');
@@ -226,14 +226,20 @@ export default function Hero() {
               >
                 <Calendar size={20} />
                 JETZT UNVERWECHSELBAR WERDEN
+                <span className="kriss-cta-arrow">
+                  <ArrowRight size={18} />
+                </span>
               </a>
               <a
                 href="https://claudiaconen-akademie.de/workshop-claudia"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center px-8 py-4 border-2 border-luxury-gold text-pearl-white font-semibold rounded-full hover:bg-luxury-gold/10 transition-all duration-300 whitespace-nowrap"
+                className="flex items-center justify-center px-8 py-4 border-2 border-luxury-gold text-pearl-white font-semibold rounded-full hover:bg-luxury-gold/10 transition-all duration-300 whitespace-nowrap group/webinar"
               >
                 Zum Gratis Webinar
+                <span className="ml-2 kriss-cta-arrow">
+                  <ArrowRight size={16} />
+                </span>
               </a>
             </motion.div>
           </motion.div>
@@ -258,6 +264,19 @@ export default function Hero() {
           </motion.div>
         </div>
       </div>
+
+      {/* Scroll-Down Indicator (kriss.ai style) */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 0.8 }}
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
+      >
+        <span className="text-pearl-white/50 text-xs tracking-widest uppercase">Scroll</span>
+        <div className="kriss-scroll-indicator">
+          <ChevronDown size={20} className="text-luxury-gold/60" />
+        </div>
+      </motion.div>
 
       {currentVideo && (
         <VideoModal

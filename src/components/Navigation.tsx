@@ -68,11 +68,7 @@ export default function Navigation() {
   const handleCtaClick = () => {
     setIsMobileMenuOpen(false);
     closeMegaMenu();
-    navigate('/');
-    setTimeout(() => {
-      const el = document.querySelector('#contact');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
+    navigate('/termin-buchen');
   };
 
   return (
@@ -110,27 +106,39 @@ export default function Navigation() {
               <li
                 key={item.id}
                 className="relative"
-                onMouseEnter={() => handleMenuEnter(item.id)}
-                onMouseLeave={handleMenuLeave}
+                onMouseEnter={() => !item.href && handleMenuEnter(item.id)}
+                onMouseLeave={() => !item.href && handleMenuLeave()}
               >
-                <button
-                  className={`mega-nav-link ${activeMenuId === item.id ? 'active' : ''}`}
-                >
-                  {item.label}
-                  <ChevronDown
-                    size={12}
-                    className={`mega-nav-chevron ${activeMenuId === item.id ? 'rotate-180' : ''}`}
-                  />
-                </button>
-
-                {activeMenuId === item.id && (
-                  <div
-                    className="mega-menu-container"
-                    onMouseEnter={handlePanelEnter}
-                    onMouseLeave={handlePanelLeave}
+                {item.href ? (
+                  <a
+                    href={item.href}
+                    onClick={(e) => { e.preventDefault(); navigate(item.href!); closeMegaMenu(); }}
+                    className="mega-nav-link"
                   >
-                    <MegaMenuPanel item={item} onClose={closeMegaMenu} />
-                  </div>
+                    {item.label}
+                  </a>
+                ) : (
+                  <>
+                    <button
+                      className={`mega-nav-link ${activeMenuId === item.id ? 'active' : ''}`}
+                    >
+                      {item.label}
+                      <ChevronDown
+                        size={12}
+                        className={`mega-nav-chevron ${activeMenuId === item.id ? 'rotate-180' : ''}`}
+                      />
+                    </button>
+
+                    {activeMenuId === item.id && (
+                      <div
+                        className="mega-menu-container"
+                        onMouseEnter={handlePanelEnter}
+                        onMouseLeave={handlePanelLeave}
+                      >
+                        <MegaMenuPanel item={item} onClose={closeMegaMenu} />
+                      </div>
+                    )}
+                  </>
                 )}
               </li>
             ))}
@@ -142,7 +150,7 @@ export default function Navigation() {
               className="mega-nav-cta"
             >
               <Calendar size={16} />
-              Jetzt anfragen
+              Termin buchen
             </button>
           </div>
 

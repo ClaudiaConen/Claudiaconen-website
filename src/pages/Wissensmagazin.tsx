@@ -26,7 +26,7 @@ export default function Wissensmagazin() {
       description: 'Entdecken Sie die 7 A-Fragen zur Wirkungskraft: Wie Sie Stimme, Marke und Persönlichkeit in Einklang bringen.',
       date: '2025-01-15',
       tags: ['Wirkungskraft', 'Stimme', 'Persönlichkeit', 'Marke'],
-      image: '/photo_2025-11-08 17.45.50 (1).jpeg',
+      image: 'https://images.pexels.com/photos/8345974/pexels-photo-8345974.jpeg?auto=compress&cs=tinysrgb&w=1200',
       content: (
         <div className="space-y-6">
           <p className="text-lg text-gray-700 leading-relaxed">

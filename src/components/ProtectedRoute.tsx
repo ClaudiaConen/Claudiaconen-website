@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import { checkAdminAuth, getToken, getAdminUser } from '../lib/adminAuth';
+import { checkAdminAuth, getToken, getAdminUser, hasSection } from '../lib/adminAuth';
+import type { AdminSection } from '../lib/adminAuth';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
+  requiredSection?: AdminSection;
 }
 
 function isTokenExpired(token: string): boolean {
@@ -17,9 +19,10 @@ function isTokenExpired(token: string): boolean {
   }
 }
 
-export default function ProtectedRoute({ children }: ProtectedRouteProps) {
+export default function ProtectedRoute({ children, requiredSection }: ProtectedRouteProps) {
   const [isChecking, setIsChecking] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [hasAccess, setHasAccess] = useState(true);
 
   useEffect(() => {
     const verifyAuth = () => {
@@ -45,11 +48,17 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
       }
 
       setIsAuthenticated(true);
+
+      // Check section access
+      if (requiredSection) {
+        setHasAccess(hasSection(adminUser, requiredSection));
+      }
+
       setIsChecking(false);
     };
 
     verifyAuth();
-  }, []);
+  }, [requiredSection]);
 
   if (isChecking) {
     return (
@@ -64,6 +73,10 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
 
   if (!isAuthenticated) {
     return <Navigate to="/admin/login" replace />;
+  }
+
+  if (!hasAccess) {
+    return <Navigate to="/admin" replace />;
   }
 
   return <>{children}</>;

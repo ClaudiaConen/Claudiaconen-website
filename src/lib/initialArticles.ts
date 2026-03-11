@@ -77,6 +77,6 @@ Untersuchungen der Stanford University (2019) ergänzen: Authentische Kommunikat
       }
     ],
     tags: ['Authentizität', 'Wirkung', 'Persönlichkeit', 'Business-Kommunikation', 'Neurowissenschaft'],
-    image_url: '/photo_2025-11-08 17.45.50 (1).jpeg'
+    image_url: 'https://images.pexels.com/photos/3756678/pexels-photo-3756678.jpeg?auto=compress&cs=tinysrgb&w=1200'
   }
 ];

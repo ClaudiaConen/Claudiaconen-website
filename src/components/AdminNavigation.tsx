@@ -4,9 +4,11 @@ import {
   LayoutDashboard, Calendar, Video, MessageSquare, LogOut, CalendarCheck,
   Clock, ListChecks, Brain, Upload, FileText, Users, GraduationCap,
   BookOpen, Home, Star, Menu, X, ChevronDown, ChevronRight, Settings,
-  CreditCard, Lightbulb, ClipboardList
+  CreditCard, Lightbulb, ClipboardList, FolderKanban, ExternalLink,
+  Award, Globe
 } from 'lucide-react';
-import { logoutAdmin } from '../lib/adminAuth';
+import { logoutAdmin, getAdminUser, hasSection } from '../lib/adminAuth';
+import type { AdminSection } from '../lib/adminAuth';
 import { useNavigate } from 'react-router-dom';
 
 interface NavItem {
@@ -14,12 +16,14 @@ interface NavItem {
   icon: any;
   label: string;
   description: string;
+  external?: boolean;
 }
 
 interface NavCategory {
   label: string;
   icon: any;
   items: NavItem[];
+  section: AdminSection;
 }
 
 export default function AdminNavigation() {
@@ -50,10 +54,13 @@ export default function AdminNavigation() {
     setExpandedCategories(newExpanded);
   };
 
-  const navCategories: NavCategory[] = [
+  const adminUser = getAdminUser();
+
+  const allNavCategories: NavCategory[] = [
     {
       label: 'Dashboard',
       icon: LayoutDashboard,
+      section: 'dashboard',
       items: [
         {
           to: '/admin',
@@ -66,6 +73,7 @@ export default function AdminNavigation() {
     {
       label: 'Kursverwaltung',
       icon: GraduationCap,
+      section: 'kursverwaltung',
       items: [
         {
           to: '/admin/member-studenten',
@@ -120,6 +128,7 @@ export default function AdminNavigation() {
     {
       label: 'Terminverwaltung',
       icon: CalendarCheck,
+      section: 'terminverwaltung',
       items: [
         {
           to: '/admin/buchungen',
@@ -150,7 +159,26 @@ export default function AdminNavigation() {
     {
       label: 'Inhalte',
       icon: Video,
+      section: 'inhalte',
       items: [
+        {
+          to: '/admin/seiteninhalte',
+          icon: Globe,
+          label: 'Seiteninhalte',
+          description: 'Texte & Headlines bearbeiten'
+        },
+        {
+          to: '/admin/events',
+          icon: Calendar,
+          label: 'Events',
+          description: 'Veranstaltungen verwalten'
+        },
+        {
+          to: '/admin/mentoring',
+          icon: Award,
+          label: 'Mentoring',
+          description: 'Mentoring-Pakete verwalten'
+        },
         {
           to: '/admin/adventskalender',
           icon: Calendar,
@@ -172,8 +200,37 @@ export default function AdminNavigation() {
       ]
     },
     {
+      label: 'Projektmanagement',
+      icon: FolderKanban,
+      section: 'projektmanagement',
+      items: [
+        {
+          to: 'https://community.claudiaconen.com/projektmanagement',
+          icon: FolderKanban,
+          label: 'Projektmanagement',
+          description: 'Kanban-Board & Aufgaben',
+          external: true
+        },
+        {
+          to: 'https://community.claudiaconen.com/content-hub',
+          icon: FileText,
+          label: 'Content Hub',
+          description: 'Social-Media-Planung',
+          external: true
+        },
+        {
+          to: 'https://community.claudiaconen.com/admin',
+          icon: LayoutDashboard,
+          label: 'Schaltzentrale',
+          description: 'Community Admin-Bereich',
+          external: true
+        }
+      ]
+    },
+    {
       label: 'Verwaltung',
       icon: Settings,
+      section: 'verwaltung',
       items: [
         {
           to: '/admin/benutzer',
@@ -202,6 +259,9 @@ export default function AdminNavigation() {
       ]
     }
   ];
+
+  // Filter categories based on user permissions
+  const navCategories = allNavCategories.filter(cat => hasSection(adminUser, cat.section));
 
   const isItemActive = (itemPath: string) => {
     return location.pathname === itemPath ||
@@ -238,6 +298,15 @@ export default function AdminNavigation() {
           </div>
 
           <div className="flex items-center gap-3">
+            <a
+              href="https://community.claudiaconen.com/admin"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 text-sm text-indigo-600 hover:text-indigo-800 transition-colors font-medium hidden sm:block"
+              title="Schaltzentrale & Projektmanagement öffnen"
+            >
+              Schaltzentrale <ExternalLink className="w-3 h-3 inline" />
+            </a>
             <Link
               to={hasStudentAccess ? "/member/dashboard" : "/member/login"}
               className="text-sm text-blue-600 hover:text-blue-800 transition-colors font-medium hidden sm:block"
@@ -318,7 +387,25 @@ export default function AdminNavigation() {
                     <div className="mt-1 ml-4 space-y-1">
                       {category.items.map((item) => {
                         const ItemIcon = item.icon;
-                        const itemIsActive = isItemActive(item.to);
+                        const itemIsActive = !item.external && isItemActive(item.to);
+
+                        if (item.external) {
+                          return (
+                            <a
+                              key={item.to}
+                              href={item.to}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={() => setIsMobileMenuOpen(false)}
+                              className="flex items-center gap-3 px-3 py-2 rounded-lg transition-all text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                              title={item.description}
+                            >
+                              <ItemIcon className="w-4 h-4 flex-shrink-0" />
+                              <span className="text-sm font-medium">{item.label}</span>
+                              <ExternalLink className="w-3 h-3 ml-auto opacity-50" />
+                            </a>
+                          );
+                        }
 
                         return (
                           <Link

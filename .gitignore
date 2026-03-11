@@ -24,3 +24,6 @@ dist-ssr
 .bolt
 advent-contacts.csv
 .github/workflows/
+
+# Local Netlify folder
+.netlify

@@ -238,7 +238,7 @@ export const megaMenuItems: MegaMenuItem[] = [
         panelTitle: 'Events & Termine',
         panelSubtitle: 'Erlebe Claudia Conen live',
         tiles: [
-          { name: 'Kommende Events', desc: 'Alle Termine auf einen Blick', href: '/termin-buchen', icon: Calendar },
+          { name: 'Kommende Events', desc: 'Alle Termine auf einen Blick', href: '/events', icon: Calendar },
           { name: 'Online-Webinare', desc: 'Live & kostenlos dabei sein', href: '/wissen-webinare', icon: Monitor },
           { name: 'Claudia als Rednerin buchen', desc: 'Keynote-Anfragen für deine Veranstaltung', href: '/#contact', icon: Star, fullWidth: true },
         ],

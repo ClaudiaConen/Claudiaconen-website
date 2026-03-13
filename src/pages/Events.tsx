@@ -6,6 +6,7 @@ import { supabaseCms, type WebsiteEvent } from '../lib/supabaseCms';
 import {
   ChevronLeft,
   ChevronRight,
+  ChevronDown,
   MapPin,
   Monitor,
   Users,
@@ -13,7 +14,11 @@ import {
   Calendar,
   Crown,
   Plus,
+  Ticket,
+  ExternalLink,
 } from 'lucide-react';
+
+const FALLBACK_IMAGE = 'https://free.the-power-of.ai/assets/hero.jpg';
 
 // ─── Types ──────────────────────────────────────────
 interface CommunityEvent {
@@ -31,6 +36,7 @@ interface CommunityEvent {
   max_participants?: number;
   current_participants: number;
   color: string;
+  image_url?: string;
   created_at: string;
 }
 
@@ -80,6 +86,7 @@ function mapWebsiteEvent(ev: WebsiteEvent): CommunityEvent {
     max_participants: ev.max_participants ?? undefined,
     current_participants: 0,
     color: EVENT_COLORS[type] || EVENT_COLORS.zoom,
+    image_url: ev.image_url || undefined,
     created_at: ev.created_at,
   };
 }
@@ -273,95 +280,152 @@ function AnimatedCalendar({ year, month, events, selectedDate, onSelectDate, onP
 
 // ─── Event Card ─────────────────────────────────────
 function EventCard({ event }: { event: CommunityEvent }) {
+  const [expanded, setExpanded] = useState(false);
   const isOnline = !event.location;
   const spotsLeft = event.max_participants ? event.max_participants - event.current_participants : null;
   const isExternal = event.registration_link?.startsWith('http');
+  const imgSrc = event.image_url || FALLBACK_IMAGE;
+
+  const eventDate = new Date(event.date);
+  const dayNum = eventDate.getDate();
+  const monthName = MONTH_NAMES[eventDate.getMonth()].substring(0, 3).toUpperCase();
+  const yearNum = eventDate.getFullYear();
 
   return (
-    <motion.article variants={itemVariants} whileHover={{ y: -3 }} className="events-card overflow-hidden cursor-pointer group">
-      <div className="flex">
-        <div className="w-1.5 shrink-0 rounded-l-[20px]" style={{ backgroundColor: event.color }} />
-        <div className="flex-1 p-5 space-y-3">
-          <div className="flex items-center justify-between flex-wrap gap-2">
-            <span className="px-3 py-1 rounded-full font-inter text-xs font-semibold"
-              style={{ backgroundColor: `${event.color}20`, color: event.color, border: `1px solid ${event.color}40` }}
-            >
-              {EVENT_TYPE_LABELS[event.type]}
-            </span>
-            <div className="flex items-center gap-1.5 text-pearl-white/50">
-              <Clock className="w-3.5 h-3.5" />
-              <span className="font-inter text-xs">
-                {formatTime(event.date)}
-                {event.end_date ? ` - ${formatTime(event.end_date)}` : ''}
-              </span>
-            </div>
-          </div>
+    <motion.article variants={itemVariants} className="events-card overflow-hidden group">
+      {/* Image header */}
+      <div className="relative w-full h-44 overflow-hidden">
+        <img
+          src={imgSrc}
+          alt={event.title}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          loading="lazy"
+        />
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-midnight-blue via-midnight-blue/40 to-transparent" />
+        {/* Color accent stripe */}
+        <div className="absolute top-0 left-0 right-0 h-1" style={{ backgroundColor: event.color }} />
 
-          <h4 className="font-montserrat text-lg font-bold text-pearl-white group-hover:text-luxury-gold transition-colors duration-300">
+        {/* Date badge */}
+        <div className="absolute top-4 right-4 flex flex-col items-center justify-center w-14 h-14 rounded-xl backdrop-blur-sm border"
+          style={{ backgroundColor: `${event.color}25`, borderColor: `${event.color}50` }}
+        >
+          <span className="font-montserrat text-xl font-black leading-none" style={{ color: event.color }}>{dayNum}</span>
+          <span className="font-inter text-[9px] font-bold tracking-widest text-pearl-white/80 uppercase mt-0.5">{monthName}</span>
+          <span className="font-inter text-[9px] text-pearl-white/50">{yearNum}</span>
+        </div>
+
+        {/* Type badge */}
+        <div className="absolute top-4 left-4">
+          <span className="px-3 py-1 rounded-full font-inter text-xs font-semibold backdrop-blur-sm"
+            style={{ backgroundColor: `${event.color}30`, color: event.color, border: `1px solid ${event.color}50` }}
+          >
+            {EVENT_TYPE_LABELS[event.type]}
+          </span>
+        </div>
+
+        {/* Title on image bottom */}
+        <div className="absolute bottom-0 left-0 right-0 p-4">
+          <h4 className="font-montserrat text-lg font-bold text-pearl-white group-hover:text-luxury-gold transition-colors duration-300 leading-tight">
             {event.title}
           </h4>
+        </div>
+      </div>
 
-          {event.description && (
-            <p className="font-inter text-sm text-pearl-white/50 leading-relaxed">{event.description}</p>
-          )}
-
-          <div className="flex items-center gap-2 text-pearl-white/60">
-            <Calendar className="w-4 h-4 text-luxury-gold/60" />
-            <span className="font-inter text-sm">{formatGermanDate(event.date)}</span>
+      {/* Card body */}
+      <div className="p-5">
+        {/* Meta row */}
+        <div className="flex flex-wrap items-center gap-3 mb-4">
+          <div className="flex items-center gap-1.5 text-pearl-white/60">
+            <Clock className="w-3.5 h-3.5 text-luxury-gold/60" />
+            <span className="font-inter text-xs">
+              {formatTime(event.date)}
+              {event.end_date ? ` – ${formatTime(event.end_date)}` : ''} Uhr
+            </span>
           </div>
-
-          <div className="flex items-center gap-2 text-pearl-white/50">
+          <div className="flex items-center gap-1.5 text-pearl-white/60">
             {isOnline ? (
               <>
-                <Monitor className="w-4 h-4 text-[#4A90D9]" />
-                <span className="font-inter text-sm">Online</span>
+                <Monitor className="w-3.5 h-3.5 text-[#4A90D9]" />
+                <span className="font-inter text-xs">Online</span>
               </>
             ) : (
               <>
-                <MapPin className="w-4 h-4 text-luxury-gold/60" />
-                <span className="font-inter text-sm">{event.location}</span>
+                <MapPin className="w-3.5 h-3.5 text-luxury-gold/60" />
+                <span className="font-inter text-xs">{event.location}</span>
               </>
             )}
           </div>
-
-          <div className="flex items-center justify-between pt-2">
-            <div className="flex items-center gap-2 text-pearl-white/50">
-              {event.max_participants ? (
-                <>
-                  <Users className="w-4 h-4" />
-                  <span className="font-inter text-sm">
-                    Max. {event.max_participants} Plätze
-                  </span>
-                  {spotsLeft !== null && spotsLeft <= 5 && spotsLeft > 0 && (
-                    <span className="text-xs text-[#E74C3C] font-medium ml-1">
-                      Nur noch {spotsLeft} {spotsLeft === 1 ? 'Platz' : 'Plätze'}!
-                    </span>
-                  )}
-                </>
-              ) : event.price_text ? (
-                <span className="font-inter text-sm text-luxury-gold/80 font-medium">{event.price_text}</span>
-              ) : null}
+          {event.price_text && (
+            <div className="flex items-center gap-1.5">
+              <Ticket className="w-3.5 h-3.5 text-luxury-gold/60" />
+              <span className="font-inter text-xs font-semibold text-luxury-gold/90">{event.price_text}</span>
             </div>
-            {event.registration_link ? (
-              <motion.a
-                href={event.registration_link}
-                target={isExternal ? '_blank' : undefined}
-                rel={isExternal ? 'noopener noreferrer' : undefined}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="events-outline-btn font-inter text-xs font-semibold px-4 py-2 rounded-full"
-              >
-                Jetzt anmelden
-              </motion.a>
-            ) : (
-              <motion.a href="/#contact" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
-                className="events-outline-btn font-inter text-xs font-semibold px-4 py-2 rounded-full"
-              >
-                Anfragen
-              </motion.a>
-            )}
-          </div>
+          )}
+          {event.max_participants && (
+            <div className="flex items-center gap-1.5 text-pearl-white/50">
+              <Users className="w-3.5 h-3.5" />
+              <span className="font-inter text-xs">Max. {event.max_participants} Plätze</span>
+              {spotsLeft !== null && spotsLeft <= 5 && spotsLeft > 0 && (
+                <span className="text-[10px] text-[#E74C3C] font-bold ml-0.5">Nur noch {spotsLeft}!</span>
+              )}
+            </div>
+          )}
         </div>
+
+        {/* Toggle + CTA row */}
+        <div className="flex items-center justify-between gap-3">
+          {event.description ? (
+            <motion.button
+              onClick={() => setExpanded((v) => !v)}
+              className="flex items-center gap-1.5 text-pearl-white/50 hover:text-luxury-gold transition-colors font-inter text-xs font-medium"
+              whileTap={{ scale: 0.97 }}
+            >
+              <motion.div animate={{ rotate: expanded ? 180 : 0 }} transition={{ duration: 0.25 }}>
+                <ChevronDown className="w-4 h-4" />
+              </motion.div>
+              {expanded ? 'Weniger anzeigen' : 'Details anzeigen'}
+            </motion.button>
+          ) : <span />}
+
+          {event.registration_link ? (
+            <motion.a
+              href={event.registration_link}
+              target={isExternal ? '_blank' : undefined}
+              rel={isExternal ? 'noopener noreferrer' : undefined}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="events-outline-btn font-inter text-xs font-semibold px-4 py-2 rounded-full flex items-center gap-1.5 shrink-0"
+            >
+              Jetzt anmelden
+              {isExternal && <ExternalLink className="w-3 h-3" />}
+            </motion.a>
+          ) : (
+            <motion.a href="/#contact" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+              className="events-outline-btn font-inter text-xs font-semibold px-4 py-2 rounded-full shrink-0"
+            >
+              Anfragen
+            </motion.a>
+          )}
+        </div>
+
+        {/* Collapsible description */}
+        <AnimatePresence initial={false}>
+          {expanded && event.description && (
+            <motion.div
+              key="desc"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+              className="overflow-hidden"
+            >
+              <div className="mt-4 pt-4 border-t border-pearl-white/10">
+                <p className="font-inter text-sm text-pearl-white/60 leading-relaxed">{event.description}</p>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </motion.article>
   );
@@ -539,17 +603,18 @@ export default function Events() {
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="mt-16 mb-8">
             <div className="events-card overflow-hidden">
               <div className="flex flex-col md:flex-row">
-                <div className="relative w-full md:w-2/5 aspect-video md:aspect-auto overflow-hidden">
+                <div className="relative w-full md:w-2/5 aspect-video md:aspect-auto overflow-hidden min-h-[240px]">
                   <img
-                    src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop"
-                    alt="Community Event"
-                    className="w-full h-full object-cover min-h-[240px]"
+                    src={FALLBACK_IMAGE}
+                    alt="The Power of AI Event"
+                    className="w-full h-full object-cover"
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent to-midnight-blue/40 md:to-midnight-blue/80" />
-                  <div className="absolute inset-0 flex items-center justify-center md:hidden">
-                    <div className="w-14 h-14 rounded-full bg-luxury-gold/20 border-2 border-luxury-gold/50 flex items-center justify-center backdrop-blur-sm">
-                      <Calendar className="w-6 h-6 text-luxury-gold" />
+                  {/* Logo overlay */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-16 h-16 rounded-full bg-luxury-gold/20 border-2 border-luxury-gold/50 flex items-center justify-center backdrop-blur-sm">
+                      <Crown className="w-7 h-7 text-luxury-gold" />
                     </div>
                   </div>
                 </div>
@@ -565,12 +630,23 @@ export default function Events() {
                     Top-Speaker teilen ihre Erfahrungen mit KI im Business. Von inspirierenden
                     Keynotes bis hin zu praxisnahen Workshops &ndash; hier passiert echte Verbindung.
                   </p>
-                  <motion.a whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} href="/#contact"
-                    className="events-outline-btn font-inter text-sm font-semibold px-6 py-3 rounded-full self-start flex items-center gap-2"
-                  >
-                    Jetzt anfragen
-                    <ChevronRight className="w-4 h-4" />
-                  </motion.a>
+                  <div className="flex flex-wrap gap-3">
+                    <motion.a
+                      whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
+                      href="https://free.the-power-of.ai/?event=6"
+                      target="_blank" rel="noopener noreferrer"
+                      className="gold-button font-inter text-sm font-semibold text-midnight-blue px-6 py-3 rounded-full self-start flex items-center gap-2"
+                    >
+                      Ticket sichern
+                      <ExternalLink className="w-4 h-4" />
+                    </motion.a>
+                    <motion.a whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} href="/#contact"
+                      className="events-outline-btn font-inter text-sm font-semibold px-6 py-3 rounded-full self-start flex items-center gap-2"
+                    >
+                      Anfragen
+                      <ChevronRight className="w-4 h-4" />
+                    </motion.a>
+                  </div>
                 </div>
               </div>
             </div>

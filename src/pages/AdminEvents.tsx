@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Calendar, Plus, Edit2, Trash2, Eye, EyeOff, Star, MapPin, Clock, Users, ExternalLink, Save, X, ChevronUp, ChevronDown } from 'lucide-react';
+import { Calendar, Plus, Edit2, Trash2, Eye, EyeOff, Star, MapPin, Clock, Users, ExternalLink, Save, X, ChevronUp, ChevronDown, Upload, ImageIcon } from 'lucide-react';
 import { checkAdminAuth } from '../lib/adminAuth';
 import AdminNavigation from '../components/AdminNavigation';
 import AdminLayout from '../components/AdminLayout';
@@ -51,6 +51,28 @@ function EventForm({ formData, setFormData, error, saving, onSave, onCancel, isN
   onCancel: () => void;
   isNew: boolean;
 }) {
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState('');
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleImageUpload = async (file: File) => {
+    setUploading(true);
+    setUploadError('');
+    const fileExt = file.name.split('.').pop()?.toLowerCase() || 'jpg';
+    const fileName = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}.${fileExt}`;
+    const { error: uploadErr } = await supabaseCms.storage
+      .from('event-images')
+      .upload(fileName, file, { upsert: true });
+    if (uploadErr) {
+      setUploadError('Upload fehlgeschlagen: ' + uploadErr.message);
+      setUploading(false);
+      return;
+    }
+    const { data } = supabaseCms.storage.from('event-images').getPublicUrl(fileName);
+    setFormData(prev => ({ ...prev, image_url: data.publicUrl }));
+    setUploading(false);
+  };
+
   return (
     <div className={`p-6 rounded-xl border ${isNew ? 'bg-blue-50 border-blue-200' : 'bg-yellow-50 border-yellow-200'} space-y-4`}>
       <h3 className="font-bold text-lg">{isNew ? 'Neues Event erstellen' : 'Event bearbeiten'}</h3>
@@ -176,14 +198,57 @@ function EventForm({ formData, setFormData, error, saving, onSave, onCancel, isN
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Bild-URL</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Eventbild</label>
+          {formData.image_url && (
+            <div className="relative mb-2 rounded-lg overflow-hidden border bg-gray-50">
+              <img
+                src={formData.image_url}
+                alt="Vorschau"
+                className="h-36 w-full object-cover"
+                onError={e => (e.currentTarget.style.display = 'none')}
+              />
+              <button
+                type="button"
+                onClick={() => setFormData(prev => ({ ...prev, image_url: '' }))}
+                className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
+                title="Bild entfernen"
+              >
+                <X className="w-3 h-3" />
+              </button>
+            </div>
+          )}
+          <button
+            type="button"
+            disabled={uploading}
+            onClick={() => fileInputRef.current?.click()}
+            className="w-full flex items-center justify-center gap-2 px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {uploading ? (
+              <>
+                <div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+                <span className="text-sm text-blue-600">Wird hochgeladen...</span>
+              </>
+            ) : (
+              <>
+                <Upload className="w-4 h-4 text-gray-400" />
+                <span className="text-sm text-gray-500">
+                  {formData.image_url ? 'Anderes Bild hochladen' : 'Bild hochladen (JPG, PNG, WebP)'}
+                </span>
+              </>
+            )}
+          </button>
           <input
-            type="text"
-            value={formData.image_url}
-            onChange={e => setFormData(prev => ({ ...prev, image_url: e.target.value }))}
-            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
-            placeholder="https://..."
+            ref={fileInputRef}
+            type="file"
+            accept="image/jpeg,image/png,image/webp,image/gif"
+            className="hidden"
+            onChange={e => {
+              const file = e.target.files?.[0];
+              if (file) handleImageUpload(file);
+              e.target.value = '';
+            }}
           />
+          {uploadError && <p className="text-red-500 text-xs mt-1">{uploadError}</p>}
         </div>
       </div>
 

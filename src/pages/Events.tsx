@@ -1,6 +1,8 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SEO from '../components/SEO';
+import Navigation from '../components/Navigation';
+import { supabaseCms, type WebsiteEvent } from '../lib/supabaseCms';
 import {
   ChevronLeft,
   ChevronRight,
@@ -24,7 +26,8 @@ interface CommunityEvent {
   end_date?: string;
   type: 'zoom' | 'live' | 'workshop' | 'vortrag' | 'meetup' | 'speaker';
   location?: string;
-  zoom_link?: string;
+  registration_link?: string;
+  price_text?: string;
   max_participants?: number;
   current_participants: number;
   color: string;
@@ -40,123 +43,46 @@ const EVENT_COLORS: Record<string, string> = {
   speaker: '#E91E63',
 };
 
-// ─── Demo Events ────────────────────────────────────
-const demoEvents: CommunityEvent[] = [
-  {
-    id: '1',
-    creator_id: '1',
+// ─── Mapping: WebsiteEvent → CommunityEvent ────────
+function mapCategoryToType(category: string, eventType: string): CommunityEvent['type'] {
+  switch (category) {
+    case 'workshop': return 'workshop';
+    case 'keynote': return 'speaker';
+    case 'networking': return 'meetup';
+    case 'webinar': return 'vortrag';
+    case 'mentoring': return 'zoom';
+    default: return eventType === 'offline' ? 'live' : eventType === 'online' ? 'zoom' : 'live';
+  }
+}
+
+function parseStartTime(timeStr: string): string {
+  const match = timeStr.match(/(\d{1,2}):(\d{2})/);
+  return match ? `${match[1].padStart(2, '0')}:${match[2]}` : '00:00';
+}
+
+function mapWebsiteEvent(ev: WebsiteEvent): CommunityEvent {
+  const type = mapCategoryToType(ev.category, ev.event_type);
+  const startTime = ev.event_time ? parseStartTime(ev.event_time) : '00:00';
+  const date = ev.event_date ? `${ev.event_date}T${startTime}:00` : ev.created_at;
+
+  return {
+    id: ev.id,
+    creator_id: 'admin',
     creator_name: 'Claudia Conen',
-    title: 'Community Call: KI im Coaching',
-    description: 'Monatlicher Community Call. Dieses Mal: Wie KI dein Coaching-Business transformiert.',
-    date: '2026-04-02T18:00:00',
-    end_date: '2026-04-02T19:30:00',
-    type: 'zoom',
-    max_participants: 100,
-    current_participants: 42,
-    color: EVENT_COLORS.zoom,
-    created_at: '2026-03-01',
-  },
-  {
-    id: '2',
-    creator_id: '5',
-    creator_name: 'Thomas Krause',
-    title: 'Keynote Workshop: Live in Köln',
-    description: 'Ganztägiger Workshop zum Thema Keynote Speaking. Praxis pur.',
-    date: '2026-04-12T09:00:00',
-    end_date: '2026-04-12T17:00:00',
-    type: 'live',
-    location: 'Köln, Design Offices',
-    max_participants: 20,
-    current_participants: 14,
-    color: EVENT_COLORS.live,
-    created_at: '2026-03-05',
-  },
-  {
-    id: '3',
-    creator_id: '4',
-    creator_name: 'Marina Weber',
-    title: 'Leadership Circle',
-    description: 'Exklusiver Austausch für Führungskräfte. Vertraulich, ehrlich, transformativ.',
-    date: '2026-04-08T10:00:00',
-    end_date: '2026-04-08T12:00:00',
-    type: 'zoom',
-    max_participants: 12,
-    current_participants: 8,
-    color: EVENT_COLORS.zoom,
-    created_at: '2026-03-02',
-  },
-  {
-    id: '4',
-    creator_id: '1',
-    creator_name: 'Claudia Conen',
-    title: 'The Power of AI – Speaker Night',
-    description: 'Top-Speaker teilen ihre Erfahrungen mit KI im Business. Networking & Inspiration.',
-    date: '2026-04-18T19:00:00',
-    end_date: '2026-04-18T21:30:00',
-    type: 'speaker',
-    location: 'Düsseldorf, Stadttor',
-    max_participants: 80,
-    current_participants: 53,
-    color: EVENT_COLORS.speaker,
-    created_at: '2026-03-03',
-  },
-  {
-    id: '5',
-    creator_id: '1',
-    creator_name: 'Claudia Conen',
-    title: 'VIP Mastermind',
-    description: 'Exklusives Mastermind für VIP-Mitglieder. Strategie, Austausch, Wachstum.',
-    date: '2026-04-15T14:00:00',
-    end_date: '2026-04-15T16:00:00',
-    type: 'workshop',
-    max_participants: 8,
-    current_participants: 6,
-    color: EVENT_COLORS.workshop,
-    created_at: '2026-03-04',
-  },
-  {
-    id: '6',
-    creator_id: '3',
-    creator_name: 'Fabian Mahnke',
-    title: 'KI für Anfänger: Workshop',
-    description: 'Hands-on Workshop: Deine ersten Schritte mit künstlicher Intelligenz.',
-    date: '2026-04-20T15:00:00',
-    end_date: '2026-04-20T17:00:00',
-    type: 'workshop',
-    max_participants: 30,
-    current_participants: 18,
-    color: EVENT_COLORS.workshop,
-    created_at: '2026-03-05',
-  },
-  {
-    id: '7',
-    creator_id: '6',
-    creator_name: 'Sarah Hoffmann',
-    title: 'Vortrag: Stimme & Wirkung',
-    description: 'Wie du mit deiner Stimme Menschen erreichst – im Business und im Leben.',
-    date: '2026-04-25T18:00:00',
-    end_date: '2026-04-25T19:30:00',
-    type: 'vortrag',
-    current_participants: 31,
-    color: EVENT_COLORS.vortrag,
-    created_at: '2026-03-06',
-  },
-  {
-    id: '8',
-    creator_id: '2',
-    creator_name: 'Gabi Lindemann',
-    title: 'Excel meets KI – Meetup',
-    description: 'Lockeres Meetup rund um Excel-Automatisierung mit KI-Tools.',
-    date: '2026-04-22T17:00:00',
-    end_date: '2026-04-22T18:30:00',
-    type: 'meetup',
-    location: 'Online & Köln, WeWork',
-    max_participants: 40,
-    current_participants: 22,
-    color: EVENT_COLORS.meetup,
-    created_at: '2026-03-07',
-  },
-];
+    title: ev.title,
+    description: ev.description || ev.subtitle || '',
+    date,
+    end_date: ev.end_date ? `${ev.end_date}T23:59:00` : undefined,
+    type,
+    location: ev.event_type !== 'online' ? ev.location : undefined,
+    registration_link: ev.registration_link || undefined,
+    price_text: ev.price_text || undefined,
+    max_participants: ev.max_participants ?? undefined,
+    current_participants: 0,
+    color: EVENT_COLORS[type] || EVENT_COLORS.zoom,
+    created_at: ev.created_at,
+  };
+}
 
 // ─── Type label mapping ─────────────────────────────
 const EVENT_TYPE_LABELS: Record<string, string> = {
@@ -349,6 +275,7 @@ function AnimatedCalendar({ year, month, events, selectedDate, onSelectDate, onP
 function EventCard({ event }: { event: CommunityEvent }) {
   const isOnline = !event.location;
   const spotsLeft = event.max_participants ? event.max_participants - event.current_participants : null;
+  const isExternal = event.registration_link?.startsWith('http');
 
   return (
     <motion.article variants={itemVariants} whileHover={{ y: -3 }} className="events-card overflow-hidden cursor-pointer group">
@@ -374,12 +301,14 @@ function EventCard({ event }: { event: CommunityEvent }) {
             {event.title}
           </h4>
 
+          {event.description && (
+            <p className="font-inter text-sm text-pearl-white/50 leading-relaxed">{event.description}</p>
+          )}
+
           <div className="flex items-center gap-2 text-pearl-white/60">
             <Calendar className="w-4 h-4 text-luxury-gold/60" />
             <span className="font-inter text-sm">{formatGermanDate(event.date)}</span>
           </div>
-
-          <p className="font-inter text-sm text-pearl-white/50">von {event.creator_name}</p>
 
           <div className="flex items-center gap-2 text-pearl-white/50">
             {isOnline ? (
@@ -397,22 +326,40 @@ function EventCard({ event }: { event: CommunityEvent }) {
 
           <div className="flex items-center justify-between pt-2">
             <div className="flex items-center gap-2 text-pearl-white/50">
-              <Users className="w-4 h-4" />
-              <span className="font-inter text-sm">
-                {event.current_participants}
-                {event.max_participants ? ` / ${event.max_participants}` : ''} Teilnehmer
-              </span>
-              {spotsLeft !== null && spotsLeft <= 5 && spotsLeft > 0 && (
-                <span className="text-xs text-[#E74C3C] font-medium ml-1">
-                  Nur noch {spotsLeft} {spotsLeft === 1 ? 'Platz' : 'Plätze'}!
-                </span>
-              )}
+              {event.max_participants ? (
+                <>
+                  <Users className="w-4 h-4" />
+                  <span className="font-inter text-sm">
+                    Max. {event.max_participants} Plätze
+                  </span>
+                  {spotsLeft !== null && spotsLeft <= 5 && spotsLeft > 0 && (
+                    <span className="text-xs text-[#E74C3C] font-medium ml-1">
+                      Nur noch {spotsLeft} {spotsLeft === 1 ? 'Platz' : 'Plätze'}!
+                    </span>
+                  )}
+                </>
+              ) : event.price_text ? (
+                <span className="font-inter text-sm text-luxury-gold/80 font-medium">{event.price_text}</span>
+              ) : null}
             </div>
-            <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
-              className="events-outline-btn font-inter text-xs font-semibold px-4 py-2 rounded-full"
-            >
-              Teilnehmen
-            </motion.button>
+            {event.registration_link ? (
+              <motion.a
+                href={event.registration_link}
+                target={isExternal ? '_blank' : undefined}
+                rel={isExternal ? 'noopener noreferrer' : undefined}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="events-outline-btn font-inter text-xs font-semibold px-4 py-2 rounded-full"
+              >
+                Jetzt anmelden
+              </motion.a>
+            ) : (
+              <motion.a href="/#contact" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+                className="events-outline-btn font-inter text-xs font-semibold px-4 py-2 rounded-full"
+              >
+                Anfragen
+              </motion.a>
+            )}
           </div>
         </div>
       </div>
@@ -427,6 +374,30 @@ export default function Events() {
   const [currentMonth, setCurrentMonth] = useState(today.getMonth());
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [activeTypeFilter, setActiveTypeFilter] = useState<string | null>(null);
+  const [dbEvents, setDbEvents] = useState<CommunityEvent[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // Lade Events aus Supabase (website_events, nur aktive)
+  useEffect(() => {
+    const loadEvents = async () => {
+      try {
+        const { data, error } = await supabaseCms
+          .from('website_events')
+          .select('*')
+          .eq('is_active', true)
+          .order('display_order', { ascending: true });
+
+        if (!error && data) {
+          setDbEvents(data.map(mapWebsiteEvent));
+        }
+      } catch {
+        // Silently fail – show empty state
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadEvents();
+  }, []);
 
   const goToPrevMonth = useCallback(() => {
     setCurrentMonth((prev) => {
@@ -445,17 +416,17 @@ export default function Events() {
   }, []);
 
   const filteredEvents = useMemo(() => {
-    let events = [...demoEvents];
+    let events = [...dbEvents];
     if (activeTypeFilter) events = events.filter((e) => e.type === activeTypeFilter);
     if (selectedDate) events = events.filter((e) => isSameDay(new Date(e.date), selectedDate));
     events.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
     return events;
-  }, [activeTypeFilter, selectedDate]);
+  }, [activeTypeFilter, selectedDate, dbEvents]);
 
   const allEventsForCalendar = useMemo(() => {
-    if (activeTypeFilter) return demoEvents.filter((e) => e.type === activeTypeFilter);
-    return demoEvents;
-  }, [activeTypeFilter]);
+    if (activeTypeFilter) return dbEvents.filter((e) => e.type === activeTypeFilter);
+    return dbEvents;
+  }, [activeTypeFilter, dbEvents]);
 
   return (
     <>
@@ -464,18 +435,19 @@ export default function Events() {
         description="Zoom-Calls, Workshops, Meetups und Vorträge – Entdecke kommende Events im Kalender."
         canonical="/events"
       />
-      <div className="min-h-screen pt-24 pb-16 relative" style={{ background: 'linear-gradient(180deg, #F7F3EB 0%, #1A2B4C 220px, #0A1628 400px)' }}>
+      <Navigation />
+      <div className="min-h-screen pt-24 pb-16 relative" style={{ background: 'linear-gradient(180deg, #0A1628 0%, #1A2B4C 200px, #0A1628 500px)' }}>
         <div
           className="absolute top-0 left-0 right-0 h-[400px] pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse 120% 80% at 50% -5%, rgba(253,251,247,0.4) 0%, rgba(218,165,32,0.05) 50%, transparent 80%)' }}
+          style={{ background: 'radial-gradient(ellipse 120% 80% at 50% -5%, rgba(218,165,32,0.08) 0%, rgba(218,165,32,0.03) 50%, transparent 80%)' }}
         />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="text-center mb-12">
-            <h1 className="font-montserrat text-4xl sm:text-5xl lg:text-6xl font-bold text-midnight mb-4">
+            <h1 className="font-montserrat text-4xl sm:text-5xl lg:text-6xl font-bold text-pearl-white mb-4">
               Events &amp; Kalender
             </h1>
-            <p className="font-inter text-lg sm:text-xl text-midnight/55 max-w-2xl mx-auto">
+            <p className="font-inter text-lg sm:text-xl text-pearl-white/60 max-w-2xl mx-auto">
               Zoom-Calls, Workshops, Meetups &ndash; erlebe Claudia Conen live
             </p>
           </motion.div>

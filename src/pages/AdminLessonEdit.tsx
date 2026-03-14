@@ -3,6 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { getToken } from '../lib/adminAuth';
 import AdminNavigation from '../components/AdminNavigation';
 import MediaUploader from '../components/MediaUploader';
+import GapTextEditor, { GapTextEditorData } from '../components/GapTextEditor';
 import {
   Save,
   ArrowLeft,
@@ -80,6 +81,8 @@ export default function AdminLessonEdit() {
   const [isLoading, setIsLoading] = useState(!isNew);
   const [isSaving, setIsSaving] = useState(false);
   const [_errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [initialGapText, setInitialGapText] = useState<GapTextEditorData | null>(null);
+  const [gapText, setGapText] = useState<GapTextEditorData | null>(null);
 
   const apiCall = async (action: string, method: string = 'GET', body?: any) => {
     const adminToken = getToken();
@@ -135,6 +138,16 @@ export default function AdminLessonEdit() {
       setSelectedRecommendations(recommendations || []);
       if (quizId) setSelectedQuizId(quizId);
       if (flashcardDeckId) setSelectedFlashcardDeckId(flashcardDeckId);
+
+      try {
+        const gapResult = await apiCall(`get-gap-text&lessonId=${lessonId}`, 'GET');
+        if (gapResult.data) {
+          setInitialGapText(gapResult.data);
+          setGapText(gapResult.data);
+        }
+      } catch {
+        // No gap text yet – that's fine
+      }
     } catch (error: any) {
       console.error('Error loading lesson:', error);
       setErrorMessage(error.message || 'Fehler beim Laden der Lektion');
@@ -216,6 +229,22 @@ export default function AdminLessonEdit() {
         hasQuiz: lesson.has_quiz,
         hasFlashcards: lesson.has_flashcards,
       });
+
+      // Save gap text
+      if (gapText && gapText.template && gapText.correct_answers.some(Boolean)) {
+        await apiCall('save-gap-text', 'POST', {
+          lessonId: savedLessonId,
+          template: gapText.template,
+          correct_answers: gapText.correct_answers,
+          word_bank: gapText.word_bank,
+        });
+      } else if (!gapText && !isNew && savedLessonId) {
+        try {
+          await apiCall('delete-gap-text', 'POST', { lessonId: savedLessonId });
+        } catch {
+          // No gap text to delete
+        }
+      }
 
       if (isNew) {
         navigate(`/admin/member-kurse/modul/${moduleId}/lektion/${savedLessonId}`);
@@ -742,50 +771,59 @@ export default function AdminLessonEdit() {
             )}
           </div>
 
-          <div className="border-t border-gray-200 pt-6 mt-6">
-            <h3 className="text-xl font-bold text-gray-900 mb-2 flex items-center space-x-2">
-              <Upload className="w-6 h-6 text-blue-600" />
-              <span>Datei-Uploads</span>
-            </h3>
-            <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-              <p className="text-sm text-blue-800">
-                Dateien werden sofort hochgeladen. Klicke "Speichern" oben, um alle Änderungen zu übernehmen.
-              </p>
-            </div>
+        </div>
 
-            <div className="space-y-6">
-              <div>
-                <MediaUploader
-                  bucket="course-media"
-                  folder="audio"
-                  fileType="audio"
-                  maxSizeMB={200}
-                  label="Audio-Datei hochladen"
-                  currentUrl={lesson.audio_url || ''}
-                  onUploadComplete={(url) => setLesson({ ...lesson, audio_url: url })}
-                />
-                {lesson.audio_url && (
-                  <div className="mt-4">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Audio-Dauer (Sekunden)
-                    </label>
-                    <input
-                      type="number"
-                      value={lesson.audio_duration_seconds || ''}
-                      onChange={(e) =>
-                        setLesson({
-                          ...lesson,
-                          audio_duration_seconds: e.target.value
-                            ? parseInt(e.target.value)
-                            : null,
-                        })
-                      }
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      min="0"
-                    />
-                  </div>
-                )}
-              </div>
+        <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <GapTextEditor
+            key={lessonId}
+            initialData={initialGapText}
+            onChange={setGapText}
+          />
+        </div>
+
+        <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <h3 className="text-xl font-bold text-gray-900 mb-2 flex items-center space-x-2">
+            <Upload className="w-6 h-6 text-blue-600" />
+            <span>Datei-Uploads</span>
+          </h3>
+          <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+            <p className="text-sm text-blue-800">
+              Dateien werden sofort hochgeladen. Klicke "Speichern" oben, um alle Änderungen zu übernehmen.
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            <div>
+              <MediaUploader
+                bucket="course-media"
+                folder="audio"
+                fileType="audio"
+                maxSizeMB={200}
+                label="Audio-Datei hochladen"
+                currentUrl={lesson.audio_url || ''}
+                onUploadComplete={(url) => setLesson({ ...lesson, audio_url: url })}
+              />
+              {lesson.audio_url && (
+                <div className="mt-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Audio-Dauer (Sekunden)
+                  </label>
+                  <input
+                    type="number"
+                    value={lesson.audio_duration_seconds || ''}
+                    onChange={(e) =>
+                      setLesson({
+                        ...lesson,
+                        audio_duration_seconds: e.target.value
+                          ? parseInt(e.target.value)
+                          : null,
+                      })
+                    }
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    min="0"
+                  />
+                </div>
+              )}
             </div>
           </div>
         </div>

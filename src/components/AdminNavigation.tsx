@@ -4,7 +4,7 @@ import {
   LayoutDashboard, Calendar, Video, MessageSquare, LogOut, CalendarCheck,
   Clock, ListChecks, Brain, Upload, FileText, Users, GraduationCap,
   BookOpen, Home, Star, Menu, X, ChevronDown, ChevronRight, Settings,
-  CreditCard, Lightbulb, ClipboardList, Award
+  CreditCard, Lightbulb, ClipboardList, Award, AlignLeft
 } from 'lucide-react';
 import { logoutAdmin } from '../lib/adminAuth';
 import { useNavigate } from 'react-router-dom';
@@ -108,6 +108,12 @@ export default function AdminNavigation() {
           icon: ClipboardList,
           label: 'Miniaufgaben',
           description: 'Miniaufgaben-Verwaltung'
+        },
+        {
+          to: '/admin/member-lückentexte',
+          icon: AlignLeft,
+          label: 'Lückentexte',
+          description: 'Lückentext-Übungen'
         },
         {
           to: '/admin/willkommen',

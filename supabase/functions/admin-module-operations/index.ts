@@ -104,6 +104,7 @@ Deno.serve(async (req: Request) => {
         order_index: body.order_index || body.module_number || 0,
         is_published: body.is_published || false,
         thumbnail_url: body.thumbnail_url || null,
+        audio_url: body.audio_url || null,
         module_quiz_id: body.module_quiz_id || null,
         bonus_page_enabled: body.bonus_page_enabled || false,
         qr_code_data: body.qr_code_data || null,
@@ -1332,6 +1333,60 @@ Deno.serve(async (req: Request) => {
       return new Response(JSON.stringify({ success: true }), { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } });
     }
 
+    if (action === "get-gap-text") {
+      const lessonId = url.searchParams.get("lessonId");
+      const { data, error: err } = await supabase
+        .from("member_lesson_gap_texts")
+        .select("*")
+        .eq("lesson_id", lessonId)
+        .maybeSingle();
+
+      if (err) {
+        return new Response(JSON.stringify({ error: err.message }), { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } });
+      }
+      return new Response(JSON.stringify({ data }), { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } });
+    }
+
+    if (action === "save-gap-text") {
+      const { lessonId, template, correct_answers, word_bank } = body;
+
+      const { data: existing } = await supabase
+        .from("member_lesson_gap_texts")
+        .select("id")
+        .eq("lesson_id", lessonId)
+        .maybeSingle();
+
+      if (existing) {
+        const { error: err } = await supabase
+          .from("member_lesson_gap_texts")
+          .update({ template, correct_answers, word_bank, updated_at: new Date().toISOString() })
+          .eq("lesson_id", lessonId);
+        if (err) {
+          return new Response(JSON.stringify({ error: err.message }), { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } });
+        }
+      } else {
+        const { error: err } = await supabase
+          .from("member_lesson_gap_texts")
+          .insert({ lesson_id: lessonId, template, correct_answers, word_bank });
+        if (err) {
+          return new Response(JSON.stringify({ error: err.message }), { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } });
+        }
+      }
+      return new Response(JSON.stringify({ success: true }), { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } });
+    }
+
+    if (action === "delete-gap-text") {
+      const { lessonId } = body;
+      const { error: err } = await supabase
+        .from("member_lesson_gap_texts")
+        .delete()
+        .eq("lesson_id", lessonId);
+      if (err) {
+        return new Response(JSON.stringify({ error: err.message }), { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } });
+      }
+      return new Response(JSON.stringify({ success: true }), { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } });
+    }
+
     if (action === "get-all-lessons") {
       const { data, error: err } = await supabase
         .from("member_course_lessons")
@@ -1352,6 +1407,47 @@ Deno.serve(async (req: Request) => {
       }));
 
       return new Response(JSON.stringify({ data: lessonsWithModule }), { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } });
+    }
+
+    if (action === "get-all-gap-texts") {
+      const { data, error: err } = await supabase
+        .from("member_lesson_gap_texts")
+        .select("id, lesson_id, template, correct_answers, word_bank, created_at, updated_at")
+        .order("created_at", { ascending: false });
+
+      if (err) {
+        return new Response(JSON.stringify({ error: err.message }), { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } });
+      }
+
+      const gapTextsWithLesson = await Promise.all((data || []).map(async (gt: any) => {
+        const { data: lessonData } = await supabase
+          .from("member_course_lessons")
+          .select("title, lesson_number, module_id")
+          .eq("id", gt.lesson_id)
+          .maybeSingle();
+
+        let moduleTitle = '';
+        let moduleId = '';
+        if (lessonData?.module_id) {
+          const { data: moduleData } = await supabase
+            .from("member_course_modules")
+            .select("title, id")
+            .eq("id", lessonData.module_id)
+            .maybeSingle();
+          moduleTitle = moduleData?.title || '';
+          moduleId = moduleData?.id || '';
+        }
+
+        return {
+          ...gt,
+          lesson_title: lessonData?.title || null,
+          lesson_number: lessonData?.lesson_number || null,
+          module_title: moduleTitle,
+          module_id: moduleId,
+        };
+      }));
+
+      return new Response(JSON.stringify({ data: gapTextsWithLesson }), { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } });
     }
 
     return new Response(

@@ -24,3 +24,5 @@ dist-ssr
 .bolt
 advent-contacts.csv
 .github/workflows/
+.netlify/
+supabase/.temp/

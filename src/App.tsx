@@ -129,6 +129,8 @@ import AdminTakeawayList from './pages/AdminTakeawayList';
 import AdminTakeawayEdit from './pages/AdminTakeawayEdit';
 import AdminMiniTaskList from './pages/AdminMiniTaskList';
 import AdminMiniTaskEdit from './pages/AdminMiniTaskEdit';
+import AdminGapTextList from './pages/AdminGapTextList';
+import AdminGapTextEdit from './pages/AdminGapTextEdit';
 import NotFound from './pages/NotFound';
 import CustomCursor from './components/CustomCursor';
 import ScrollToTop from './components/ScrollToTop';
@@ -246,6 +248,9 @@ function App() {
         <Route path="/admin/member-flashcards" element={<ProtectedRoute><AdminFlashcardList /></ProtectedRoute>} />
         <Route path="/admin/member-takeaways" element={<ProtectedRoute><AdminTakeawayList /></ProtectedRoute>} />
         <Route path="/admin/member-miniaufgaben" element={<ProtectedRoute><AdminMiniTaskList /></ProtectedRoute>} />
+        <Route path="/admin/member-lückentexte" element={<ProtectedRoute><AdminGapTextList /></ProtectedRoute>} />
+        <Route path="/admin/member-lückentexte/neu" element={<ProtectedRoute><AdminGapTextEdit /></ProtectedRoute>} />
+        <Route path="/admin/member-lückentexte/bearbeiten/:lessonId" element={<ProtectedRoute><AdminGapTextEdit /></ProtectedRoute>} />
         <Route path="/admin/willkommen" element={<ProtectedRoute><AdminWelcomeContent /></ProtectedRoute>} />
         <Route path="/admin/empfehlungen" element={<ProtectedRoute><AdminRecommendations /></ProtectedRoute>} />
         <Route path="/admin/events" element={<ProtectedRoute><AdminEvents /></ProtectedRoute>} />

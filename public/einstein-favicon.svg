@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Hintergrund -->
+  <rect width="32" height="32" rx="6" fill="#1a1a2e"/>
+  <!-- Kopf/Gesicht Silhouette -->
+  <ellipse cx="16" cy="12" rx="7" ry="8" fill="#e8d5a3"/>
+  <!-- Haare (chaotisch wie Einstein) -->
+  <path d="M9 10 Q7 4 10 3 Q12 2 13 5" fill="#c8b090" stroke="#c8b090" stroke-width="0.5"/>
+  <path d="M23 10 Q25 4 22 3 Q20 2 19 5" fill="#c8b090" stroke="#c8b090" stroke-width="0.5"/>
+  <path d="M10 7 Q8 3 12 2 Q16 1 20 2 Q24 3 22 7" fill="#c8b090"/>
+  <!-- Schnurrbart -->
+  <path d="M12 16 Q14 17 16 16.5 Q18 17 20 16" stroke="#8b7355" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <!-- Blitz (E=mc²) -->
+  <path d="M14 20 L17 24 L15 24 L18 29 L13 23 L16 23 Z" fill="#ffd700"/>
+</svg>

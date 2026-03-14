@@ -18,6 +18,7 @@ interface Module {
   order_index: number;
   is_published: boolean;
   thumbnail_url?: string | null;
+  audio_url?: string | null;
   module_quiz_id?: string | null;
   bonus_page_enabled?: boolean;
   qr_code_data?: string | null;
@@ -51,6 +52,7 @@ export default function AdminModuleEdit() {
     order_index: 0,
     is_published: false,
     thumbnail_url: null,
+    audio_url: null,
     module_quiz_id: null,
     bonus_page_enabled: false,
     qr_code_data: null,
@@ -449,12 +451,26 @@ export default function AdminModuleEdit() {
             <div className="md:col-span-2">
               <MediaUploader
                 bucket="member-modules"
-                folder="thumbnails"
+                folder="infographics"
                 fileType="image"
-                label="Modul-Thumbnail"
+                label="Infografik"
                 currentUrl={module.thumbnail_url || ''}
                 onUploadComplete={(url) =>
                   setModule({ ...module, thumbnail_url: url })
+                }
+              />
+            </div>
+
+            <div className="md:col-span-2">
+              <MediaUploader
+                bucket="course-media"
+                folder="module-audio"
+                fileType="audio"
+                maxSizeMB={200}
+                label="Audio / Podcast"
+                currentUrl={module.audio_url || ''}
+                onUploadComplete={(url) =>
+                  setModule({ ...module, audio_url: url })
                 }
               />
             </div>

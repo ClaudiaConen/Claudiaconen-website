@@ -6,6 +6,7 @@ import { getEmbedUrl } from '../lib/videoUtils';
 import MemberNavigation from '../components/MemberNavigation';
 import LessonTakeaway from '../components/lesson/LessonTakeaway';
 import LessonMiniTask from '../components/lesson/LessonMiniTask';
+import GapTextExercise, { GapTextData } from '../components/GapTextExercise';
 import {
   Play,
   Pause,
@@ -170,6 +171,7 @@ export default function MemberLesson() {
   const [takeawayCompleted, setTakeawayCompleted] = useState(false);
   const [miniTask, setMiniTask] = useState<MiniTask | null>(null);
   const [miniTaskSubmission, setMiniTaskSubmission] = useState<MiniTaskSubmission | null>(null);
+  const [gapText, setGapText] = useState<GapTextData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSavingProgress, setIsSavingProgress] = useState(false);
   const [videoPlaying, setVideoPlaying] = useState(false);
@@ -342,6 +344,16 @@ export default function MemberLesson() {
         if (currentIndex >= 0 && currentIndex < allLessons.length - 1) {
           setNextLesson(allLessons[currentIndex + 1].id);
         }
+      }
+
+      const { data: gapTextRow } = await supabase
+        .from('member_lesson_gap_texts')
+        .select('*')
+        .eq('lesson_id', lessonId)
+        .maybeSingle();
+
+      if (gapTextRow) {
+        setGapText(gapTextRow);
       }
     } catch (error) {
       console.error('Error loading lesson:', error);
@@ -596,6 +608,12 @@ export default function MemberLesson() {
           </div>
         )}
 
+        {gapText && (
+          <div className="mt-6">
+            <GapTextExercise gapText={gapText} nextLesson={nextLesson} />
+          </div>
+        )}
+
         {(lesson.audio_url || downloads.length > 0) && (
           <div className="mb-6 bg-white rounded-2xl shadow-lg overflow-hidden">
             {lesson.audio_url && (
@@ -833,6 +851,7 @@ export default function MemberLesson() {
 
           </div>
         </div>
+
       </div>
     </div>
   );

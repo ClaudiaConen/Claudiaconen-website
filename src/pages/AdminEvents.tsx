@@ -53,11 +53,22 @@ function EventForm({ formData, setFormData, error, saving, onSave, onCancel, isN
 }) {
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState('');
+  const [previewUrl, setPreviewUrl] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    return () => {
+      if (previewUrl) URL.revokeObjectURL(previewUrl);
+    };
+  }, [previewUrl]);
 
   const handleImageUpload = async (file: File) => {
     setUploading(true);
     setUploadError('');
+    // Sofortige lokale Vorschau – kein CDN-Delay
+    const localPreview = URL.createObjectURL(file);
+    setPreviewUrl(localPreview);
+
     const fileExt = file.name.split('.').pop()?.toLowerCase() || 'jpg';
     const fileName = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}.${fileExt}`;
     const { error: uploadErr } = await supabaseCms.storage
@@ -65,6 +76,8 @@ function EventForm({ formData, setFormData, error, saving, onSave, onCancel, isN
       .upload(fileName, file, { upsert: true });
     if (uploadErr) {
       setUploadError('Upload fehlgeschlagen: ' + uploadErr.message);
+      URL.revokeObjectURL(localPreview);
+      setPreviewUrl('');
       setUploading(false);
       return;
     }
@@ -199,17 +212,20 @@ function EventForm({ formData, setFormData, error, saving, onSave, onCancel, isN
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Eventbild</label>
-          {formData.image_url && (
+          {(previewUrl || formData.image_url) && (
             <div className="relative mb-2 rounded-lg overflow-hidden border bg-gray-50">
               <img
-                src={formData.image_url}
+                key={previewUrl || formData.image_url}
+                src={previewUrl || formData.image_url}
                 alt="Vorschau"
                 className="h-36 w-full object-cover"
-                onError={e => (e.currentTarget.style.display = 'none')}
               />
               <button
                 type="button"
-                onClick={() => setFormData(prev => ({ ...prev, image_url: '' }))}
+                onClick={() => {
+                  setFormData(prev => ({ ...prev, image_url: '' }));
+                  if (previewUrl) { URL.revokeObjectURL(previewUrl); setPreviewUrl(''); }
+                }}
                 className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
                 title="Bild entfernen"
               >
@@ -278,11 +294,11 @@ function EventForm({ formData, setFormData, error, saving, onSave, onCancel, isN
       <div className="flex gap-3">
         <button
           onClick={onSave}
-          disabled={saving || !formData.title}
+          disabled={saving || uploading || !formData.title}
           className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
         >
           <Save className="w-4 h-4" />
-          {saving ? 'Speichert...' : 'Speichern'}
+          {uploading ? 'Bild wird hochgeladen...' : saving ? 'Speichert...' : 'Speichern'}
         </button>
         <button
           onClick={onCancel}
@@ -294,6 +310,26 @@ function EventForm({ formData, setFormData, error, saving, onSave, onCancel, isN
       </div>
     </div>
   );
+}
+
+function playSuccessSound() {
+  try {
+    const ctx = new AudioContext();
+    const times = [0, 0.12, 0.24];
+    const freqs = [523.25, 659.25, 783.99]; // C5, E5, G5
+    times.forEach((t, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.frequency.value = freqs[i];
+      osc.type = 'sine';
+      gain.gain.setValueAtTime(0.25, ctx.currentTime + t);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + t + 0.4);
+      osc.start(ctx.currentTime + t);
+      osc.stop(ctx.currentTime + t + 0.4);
+    });
+  } catch (_) {}
 }
 
 export default function AdminEvents() {
@@ -340,6 +376,7 @@ export default function AdminEvents() {
     if (error) {
       setError('Fehler beim Erstellen: ' + error.message);
     } else {
+      playSuccessSound();
       setFormData(emptyEvent);
       setShowAddForm(false);
       await loadEvents();
@@ -359,6 +396,7 @@ export default function AdminEvents() {
     if (error) {
       setError('Fehler beim Speichern: ' + error.message);
     } else {
+      playSuccessSound();
       setEditingId(null);
       await loadEvents();
     }

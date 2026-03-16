@@ -608,12 +608,6 @@ export default function MemberLesson() {
           </div>
         )}
 
-        {gapText && (
-          <div className="mt-6">
-            <GapTextExercise gapText={gapText} nextLesson={nextLesson} />
-          </div>
-        )}
-
         {(lesson.audio_url || downloads.length > 0) && (
           <div className="mb-6 bg-white rounded-2xl shadow-lg overflow-hidden">
             {lesson.audio_url && (
@@ -685,6 +679,12 @@ export default function MemberLesson() {
                 </div>
               </div>
             )}
+          </div>
+        )}
+
+        {gapText && (
+          <div className="mt-6">
+            <GapTextExercise gapText={gapText} nextLesson={nextLesson} />
           </div>
         )}
 

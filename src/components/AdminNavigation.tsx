@@ -236,6 +236,14 @@ export default function AdminNavigation() {
     return category.items.some(item => isItemActive(item.to));
   };
 
+  useEffect(() => {
+    navCategories.forEach((category) => {
+      if (isCategoryActive(category)) {
+        setExpandedCategories((prev) => new Set([...prev, category.label]));
+      }
+    });
+  }, [location.pathname]);
+
   return (
     <>
       <header className="bg-white border-b border-gray-200 fixed top-0 left-0 right-0 z-50 shadow-sm">

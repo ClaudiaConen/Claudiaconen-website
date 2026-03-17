@@ -180,6 +180,7 @@ export default function MemberLesson() {
   const [quizJustUnlocked, setQuizJustUnlocked] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const progressIntervalRef = useRef<number | null>(null);
+  const initialVideoSecondsRef = useRef<number>(0);
 
   useEffect(() => {
     if (lessonId) {
@@ -238,8 +239,8 @@ export default function MemberLesson() {
           notes: progressData.notes || '',
         });
 
-        if (videoRef.current && progressData.video_progress_seconds) {
-          videoRef.current.currentTime = progressData.video_progress_seconds;
+        if (progressData.video_progress_seconds) {
+          initialVideoSecondsRef.current = progressData.video_progress_seconds;
         }
       }
 
@@ -304,7 +305,7 @@ export default function MemberLesson() {
         }
       }
 
-      {
+      if (lessonData.has_mini_tasks) {
         const { data: miniTaskData } = await supabase
           .from('member_mini_tasks')
           .select('id, title, description, task_type, xp_reward')
@@ -559,6 +560,11 @@ export default function MemberLesson() {
                   ref={videoRef}
                   src={lesson.video_url}
                   className="w-full aspect-video"
+                  onLoadedMetadata={() => {
+                    if (initialVideoSecondsRef.current && videoRef.current) {
+                      videoRef.current.currentTime = initialVideoSecondsRef.current;
+                    }
+                  }}
                   onPlay={() => setVideoPlaying(true)}
                   onPause={() => setVideoPlaying(false)}
                   onEnded={() => {

@@ -40,13 +40,19 @@ Deno.serve(async (req: Request) => {
     const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-    const { data: student, error: studentError } = await supabase
+    const isRefresh = accessCode.trim() === 'refresh';
+
+    let query = supabase
       .from('member_students')
       .select('*')
       .eq('email', email.toLowerCase().trim())
-      .eq('access_code', accessCode.trim())
-      .eq('is_active', true)
-      .maybeSingle();
+      .eq('is_active', true);
+
+    if (!isRefresh) {
+      query = query.eq('access_code', accessCode.trim());
+    }
+
+    const { data: student, error: studentError } = await query.maybeSingle();
 
     if (studentError) {
       console.error('Database error:', studentError);

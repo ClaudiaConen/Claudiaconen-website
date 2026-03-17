@@ -231,7 +231,7 @@ export default function AdminLessonEdit() {
       });
 
       // Save gap text
-      if (gapText && gapText.template && gapText.correct_answers.some(Boolean)) {
+      if (gapText && gapText.template.trim()) {
         await apiCall('save-gap-text', 'POST', {
           lessonId: savedLessonId,
           template: gapText.template,

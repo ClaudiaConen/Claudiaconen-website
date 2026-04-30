@@ -378,7 +378,7 @@ function BookHero() {
 function ParticipantStrip() {
   const pct = Math.min(100, Math.round((PARTICIPANTS.current / PARTICIPANTS.target) * 100));
   return (
-    <section className="relative -mt-8 mb-16 z-20">
+    <section className="relative mt-8 lg:-mt-8 mb-16 z-20">
       <div className="mx-auto max-w-5xl px-5 md:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

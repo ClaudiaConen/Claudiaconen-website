@@ -78,6 +78,7 @@ import Impressum from './pages/Impressum';
 import Datenschutz from './pages/Datenschutz';
 import AGB from './pages/AGB';
 import VonSchattenZuLicht from './pages/VonSchattenZuLicht';
+import Buchprojekt from './pages/Buchprojekt';
 import WorkbookGenerator from './pages/WorkbookGenerator';
 import QuizGenerator from './pages/QuizGenerator';
 import WirkungskraftQuiz from './pages/WirkungskraftQuiz';
@@ -268,6 +269,7 @@ function App() {
         <Route path="/datenschutz" element={<Datenschutz />} />
         <Route path="/agb" element={<AGB />} />
         <Route path="/von-schatten-zu-licht" element={<VonSchattenZuLicht />} />
+        <Route path="/buchprojekt" element={<Buchprojekt />} />
 
         <Route path="/generatoren" element={<Generatoren />} />
         <Route path="/workbook-generator" element={<WorkbookGenerator />} />

@@ -30,10 +30,11 @@ const LAUNCH_DEADLINE = (() => {
   return d;
 })();
 
-const PARTICIPANTS = { current: 37, target: 80 };
+const PARTICIPANTS = { current: 36, target: 77 };
 
 const CITIES = [
-  { name: 'Köln', status: 'start', meta: 'Startstadt 2026' },
+  { name: 'Hauptbuch 2026', status: 'start', meta: 'DACH · Premiere Edition' },
+  { name: 'Köln 2027', status: 'planned', meta: 'in Planung' },
   { name: 'Leipzig', status: 'planned', meta: 'in Planung' },
   { name: 'Berlin', status: 'planned', meta: 'in Planung' },
   { name: 'Frankfurt', status: 'planned', meta: 'in Planung' },
@@ -179,9 +180,9 @@ function Hero({ onCTA }: { onCTA: () => void }) {
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           <div className="lg:col-span-7">
             <FadeIn delay={0}>
-              <span className="inline-flex items-center gap-2 rounded-full bg-white/70 ring-1 ring-poai-violet-soft/70 backdrop-blur px-3 py-1 text-xs font-medium text-poai-text-dim shadow-[0_2px_8px_-2px_rgba(139,92,246,0.18)]">
+              <span className="inline-flex items-center gap-2 rounded-full bg-white/70 ring-1 ring-poai-violet-soft/70 backdrop-blur px-3 py-1 text-[11px] font-bold tracking-[0.18em] uppercase text-poai-magenta shadow-[0_2px_8px_-2px_rgba(139,92,246,0.18)]">
                 <Sparkles className="h-3.5 w-3.5 text-poai-magenta" />
-                Buchprojekt 2026 &middot; Köln-Edition
+                Unkopierbar im KI-Zeitalter
               </span>
             </FadeIn>
 
@@ -196,18 +197,25 @@ function Hero({ onCTA }: { onCTA: () => void }) {
                     aria-hidden
                     className="pointer-events-none absolute -inset-3 -z-10 bg-gradient-to-br from-poai-magenta/15 via-transparent to-poai-turquoise/15 blur-2xl"
                   />
-                </span>{' '}
-                deiner&nbsp;Stadt.
+                </span>
+                .
               </h1>
             </FadeIn>
 
             <FadeIn delay={0.12}>
-              <p className="mt-7 max-w-xl text-lg md:text-xl text-poai-text-dim leading-relaxed">
+              <p className="mt-7 max-w-xl text-2xl md:text-3xl text-poai-text font-semibold leading-tight tracking-tight">
+                77 Mittelstand-Unternehmer.
+              </p>
+              <p className="mt-3 max-w-xl text-sm md:text-base text-poai-text-mute font-mono tracking-[0.15em] uppercase">
+                Premiere &middot; The Power of AI &middot; 2026
+              </p>
+              <p className="mt-6 max-w-xl text-base md:text-lg text-poai-text-dim leading-relaxed">
+                Ein <strong className="text-poai-text font-semibold">Handbuch des Mittelstands</strong>:
+                77 Persönlichkeiten zeigen, wie sich Unternehmen, Selbstständigkeit und Unternehmertum
+                im KI-Zeitalter verändern.{' '}
                 <strong className="text-poai-text font-semibold">
-                  THE POWER OF AI &mdash; Die 80 Stimmen deiner Stadt.
-                </strong>{' '}
-                Ein Hardcover-Buch für Unternehmer:innen, Coaches und Macher:innen, die im
-                KI-Zeitalter sichtbar werden. Eine Stadt. 80 Stimmen. Einmal pro Jahr.
+                  Im Zeitalter der KI-Perfektion wird Persönlichkeit unbezahlbar.
+                </strong>
               </p>
             </FadeIn>
 
@@ -233,13 +241,13 @@ function Hero({ onCTA }: { onCTA: () => void }) {
             <FadeIn delay={0.28}>
               <div className="mt-12 flex flex-wrap items-center gap-x-7 gap-y-3 text-sm text-poai-text-mute">
                 <span className="inline-flex items-center gap-2">
-                  <ShieldCheck className="h-4 w-4 text-poai-turquoise" /> Verbindliche Anmeldung
+                  <Star className="h-4 w-4 text-poai-gold fill-current" /> Premiere-Edition
                 </span>
                 <span className="inline-flex items-center gap-2">
                   <BookOpen className="h-4 w-4 text-poai-turquoise" /> Hardcover-Qualität
                 </span>
                 <span className="inline-flex items-center gap-2">
-                  <Users className="h-4 w-4 text-poai-turquoise" /> Limitiert auf 80
+                  <Users className="h-4 w-4 text-poai-turquoise" /> Limitiert auf 77
                 </span>
               </div>
             </FadeIn>
@@ -313,21 +321,19 @@ function BookHero() {
               </div>
               <div className="mt-auto">
                 <div className="text-[10px] uppercase tracking-[0.32em] text-white/55 mb-3">
-                  Köln &middot; Edition 2026
+                  Premiere Edition &middot; 2026
                 </div>
                 <div className="font-montserrat text-2xl md:text-3xl font-bold leading-[1.1] text-white">
-                  Eine Stadt.
-                  <br />
-                  80 Stimmen.
+                  77 Persönlichkeiten.
                   <br />
                   <span className="bg-gradient-to-r from-poai-magenta to-poai-turquoise bg-clip-text text-transparent">
-                    Ein Buch.
+                    Ein Werk.
                   </span>
                 </div>
                 <div className="mt-6 flex items-center justify-between text-[11px] text-white/55 border-t border-white/10 pt-4">
-                  <span>Hardcover &middot; DIN A5</span>
+                  <span>Hardcover &middot; DACH</span>
                   <span className="flex items-center gap-1 text-poai-gold">
-                    <Star className="h-3 w-3 fill-current" /> Premium
+                    <Star className="h-3 w-3 fill-current" /> Premiere
                   </span>
                 </div>
               </div>
@@ -346,7 +352,7 @@ function BookHero() {
               className="font-montserrat font-bold text-[10px] tracking-[0.25em] text-white/85 uppercase whitespace-nowrap"
               style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
             >
-              The Power of AI · Köln 2026
+              The Power of AI · Hauptbuch 2026
             </span>
           </div>
 
@@ -388,11 +394,11 @@ function ParticipantStrip() {
               </p>
               <h3 className="mt-1 font-montserrat text-2xl md:text-3xl font-bold tracking-tight">
                 <span className="text-poai-magenta">{PARTICIPANTS.current}</span>
-                <span className="text-poai-text"> / {PARTICIPANTS.target} Autor:innen</span>
+                <span className="text-poai-text"> / {PARTICIPANTS.target} Premiere-Plätze</span>
               </h3>
             </div>
             <p className="text-sm text-poai-text-dim">
-              Bei 80 erfüllten Plätzen geht das Buch in die Produktion.
+              Bis Ende 2026 wird produziert. Premiere-Edition — einmalige Ausgabe.
             </p>
           </div>
 
@@ -425,60 +431,88 @@ function OfferSection({ onCTA }: { onCTA: () => void }) {
     <section id="angebot" className="relative mx-auto max-w-7xl px-5 md:px-8 py-24 md:py-32">
       <SectionHeader
         kicker="Was du bekommst"
-        title="Dein Platz unter den 80."
-        sub="Klar, transparent, ohne Kleingedrucktes."
+        title="Dein Platz unter den 77."
+        sub="Du kannst selbst schreiben oder schreiben lassen."
       />
 
       <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
         <OfferCard
           icon={<BookOpen className="h-5 w-5" />}
-          title="4 Seiten im Buch"
-          text="Eine eigene Doppelseite plus eine Doppelseite Story — DIN A5, Hardcover."
+          title="Eigene Doppelseite"
+          text="Mindestens eine eigene Doppelseite — DIN A5, Hardcover, Vierfarbendruck."
           highlight
         />
         <OfferCard
           icon={<Users className="h-5 w-5" />}
-          title="50 Hardcover-Exemplare"
-          text="50 hochwertig gedruckte Bücher gehen direkt an dich — als Geschenk oder Eyecatcher."
+          title="50–70 Hardcover"
+          text="Hochwertig gedruckte Bücher gehen direkt an dich — als Geschenk oder Verkaufswerkzeug."
         />
         <OfferCard
           icon={<MapPin className="h-5 w-5" />}
-          title="Eine Stadt · 80 Stimmen"
-          text="Du bist Teil einer kuratierten Edition deiner Stadt. Einmal pro Jahr, einmalig."
+          title="Mittelstand-Edition"
+          text="Du bist Teil der Premiere-Edition. 77 Persönlichkeiten aus dem gesamten DACH-Mittelstand, kuratierte Auswahl."
         />
         <OfferCard
           icon={<Sparkles className="h-5 w-5" />}
-          title="Sichtbarkeit & QR"
-          text="Foto, QR-Code und dein Beitrag — mit allem, was Menschen zu dir bringt."
+          title="Foto, Story & QR"
+          text="Portrait-Foto, dein Beitrag und QR-Code — mit allem, was Menschen zu dir bringt."
         />
       </div>
 
-      <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-5">
-        <PriceCard
-          tag="Basispreis"
-          price="500 €"
+      <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-5">
+        <TierCard
+          name="Standard"
+          price="555 €"
+          pages="4 Seiten"
+          spread="1 Doppelseite"
+          perPage="≈ 139 € pro Seite"
           features={[
-            '4 Seiten (DIN A5) im Hardcover-Buch',
-            '50 Exemplare zur eigenen Verwendung',
-            'Lektorat und professionelles Layout',
-            'Foto + QR-Code im Beitrag',
+            '4 Seiten (DIN A5) im Buch',
+            '50 Hardcover-Bücher',
+            'Portrait-Foto im Beitrag',
+            'QR-Code im Buch',
           ]}
           onCTA={onCTA}
-          primary
         />
-        <PriceCard
-          tag="Erweiterung"
-          price="+100 €"
-          subtitle="pro Doppelseite (max. 10 Seiten)"
+        <TierCard
+          name="Business"
+          price="777 €"
+          pages="6 Seiten"
+          spread="1,5 Doppelseiten"
+          perPage="≈ 130 € pro Seite · 7 % Vorteil"
           features={[
-            'Mehr Raum für deine Geschichte',
-            'Bis zu 3 zusätzliche Doppelseiten',
-            'Bilder, Zitate, Listen — du gestaltest mit',
-            'Ideal für Speaker:innen mit ausführlichem Profil',
+            '6 Seiten (DIN A5) im Buch',
+            '60 Hardcover-Bücher',
+            'Portrait-Foto im Beitrag',
+            'Cover-Foto am Kapitelanfang',
+            'QR-Code im Buch',
+          ]}
+          onCTA={onCTA}
+          featured
+        />
+        <TierCard
+          name="Premium"
+          price="999 €"
+          pages="8 Seiten"
+          spread="2 Doppelseiten"
+          perPage="≈ 125 € pro Seite · 10 % Vorteil"
+          features={[
+            '8 Seiten (DIN A5) im Buch',
+            '70 Hardcover-Bücher',
+            'Portrait-Foto im Beitrag',
+            'Cover-Foto am Kapitelanfang',
+            'Reportage-Foto im Beitrag',
+            'Premium-Platzierung im vorderen Buchteil',
+            'QR-Code im Buch',
           ]}
           onCTA={onCTA}
         />
       </div>
+
+      <p className="mt-6 text-center text-sm text-poai-text-mute max-w-2xl mx-auto leading-relaxed">
+        Vierfarbendruck im Innenteil. Einzelne Seiten ggf. schwarzweiß, je nach eingereichtem Bildmaterial.
+        Alle Preise zzgl. MwSt. Rechnung vor Produktionsbeginn.
+      </p>
     </section>
   );
 }
@@ -522,19 +556,23 @@ function OfferCard({
   );
 }
 
-function PriceCard({
-  tag,
+function TierCard({
+  name,
   price,
-  subtitle,
+  pages,
+  spread,
+  perPage,
   features,
-  primary,
+  featured,
   onCTA,
 }: {
-  tag: string;
+  name: string;
   price: string;
-  subtitle?: string;
+  pages: string;
+  spread: string;
+  perPage: string;
   features: string[];
-  primary?: boolean;
+  featured?: boolean;
   onCTA: () => void;
 }) {
   return (
@@ -543,25 +581,29 @@ function PriceCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.5 }}
-      className={`poai-glass rounded-3xl p-9 ${primary ? 'poai-glass-tinted' : ''}`}
+      className={`poai-glass rounded-3xl p-9 ${featured ? 'poai-glass-tinted' : ''}`}
     >
-      {primary && (
+      {featured && (
         <span className="absolute -top-3 left-9 inline-flex items-center gap-1 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] text-white bg-gradient-to-r from-poai-magenta to-poai-magenta-2 shadow-md shadow-poai-magenta/30">
-          <Star className="h-3 w-3 fill-current" /> Empfohlen
+          <Star className="h-3 w-3 fill-current" /> Meistgewählt
         </span>
       )}
       <span className="inline-block text-[11px] tracking-[0.25em] uppercase text-poai-turquoise font-mono font-semibold">
-        {tag}
+        {name}
       </span>
-      <div className="mt-3 flex items-baseline gap-2">
+      <div className="mt-2 text-sm text-poai-text">
+        <span className="font-semibold">{pages}</span>
+        <span className="text-poai-text-mute"> · {spread}</span>
+      </div>
+      <div className="mt-4 flex items-baseline gap-2">
         <span className="font-montserrat text-5xl md:text-6xl font-bold text-poai-text tracking-tight">
           {price}
         </span>
-        {subtitle && <span className="text-sm text-poai-text-mute">{subtitle}</span>}
       </div>
+      <p className="mt-1 text-xs text-poai-text-mute">{perPage}</p>
       <ul className="mt-7 space-y-3">
         {features.map((f, i) => (
-          <li key={i} className="flex items-start gap-2.5 text-[15px]">
+          <li key={i} className="flex items-start gap-2.5 text-[14.5px]">
             <span className="mt-0.5 inline-flex h-5 w-5 flex-none items-center justify-center rounded-full bg-poai-turquoise-soft">
               <Check className="h-3.5 w-3.5 text-poai-turquoise-2" />
             </span>
@@ -572,12 +614,12 @@ function PriceCard({
       <button
         onClick={onCTA}
         className={`mt-8 w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-full font-semibold transition ${
-          primary
+          featured
             ? 'bg-gradient-to-r from-poai-magenta to-poai-magenta-2 text-white shadow-lg shadow-poai-magenta/25 hover:shadow-xl hover:shadow-poai-magenta/35'
             : 'bg-poai-bg-3 hover:bg-poai-line text-poai-text'
         }`}
       >
-        {primary ? 'Platz reservieren' : 'Erweiterung dazubuchen'}
+        Platz reservieren
         <ArrowRight className="h-4 w-4" />
       </button>
     </motion.div>
@@ -590,26 +632,37 @@ function PriceCard({
 function WhyBookSection() {
   const items = [
     {
-      icon: <Sparkles className="h-5 w-5" />,
-      title: 'Sichtbarkeit',
-      text: 'Du erscheinst nicht in einem flüchtigen Posting, sondern in einem Buch, das in Regalen, Studios und auf Bühnen liegt.',
-      tint: 'from-poai-magenta-soft via-white to-white',
+      icon: <Star className="h-5 w-5" />,
+      number: '01',
+      title: 'Autorität',
+      lead: 'Du positionierst dich als Experte in deinem Thema.',
+      text: 'Posts vergisst der Algorithmus in 48 Stunden. Bücher zitiert man noch in zehn Jahren.',
     },
     {
       icon: <ShieldCheck className="h-5 w-5" />,
-      title: 'Vertrauen',
-      text: 'Ein Hardcover ist eine Visitenkarte mit Gewicht. Wer es liest, kennt deine Geschichte.',
-      tint: 'from-poai-turquoise-soft via-white to-white',
+      number: '02',
+      title: 'Vertrieb',
+      lead: 'Dein Buch wird zu deinem stärksten Verkaufsinstrument.',
+      text: 'Eine Visitenkarte landet im Müll. Ein Buch landet im Regal, neben den Standardwerken deiner Branche.',
     },
     {
-      icon: <Star className="h-5 w-5" />,
-      title: 'Autorität',
-      text: 'Du wirst Teil einer kuratierten Auswahl von 80 Menschen, die im KI-Zeitalter den Ton setzen.',
-      tint: 'from-poai-gold-soft via-white to-white',
+      icon: <Sparkles className="h-5 w-5" />,
+      number: '03',
+      title: 'Zukunft',
+      lead: 'Du zeigst, wie du dich im KI-Zeitalter unverwechselbar positionierst.',
+      text: 'Die nächsten Jahre werden Texte und Posts massenhaft generieren. Was bleibt unverwechselbar? Eine echte Geschichte, ein echter Name, ein echtes Foto. Auf echtem Papier.',
     },
   ];
   return (
     <section className="relative mx-auto max-w-6xl px-5 md:px-8 py-12">
+      <div className="text-center max-w-2xl mx-auto mb-10">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-poai-magenta font-mono">
+          Drei Gründe
+        </p>
+        <h2 className="mt-3 font-montserrat text-2xl md:text-3xl font-bold tracking-tight text-poai-text leading-tight">
+          Eine Maschine liefert Inhalte. <span className="text-poai-text-dim">Ein Mensch schafft Verbindung.</span>
+        </h2>
+      </div>
       <div className="grid md:grid-cols-3 gap-5">
         {items.map((it, i) => (
           <motion.div
@@ -620,10 +673,16 @@ function WhyBookSection() {
             transition={{ duration: 0.5, delay: i * 0.06 }}
             className="poai-glass rounded-3xl p-7"
           >
-            <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-white ring-1 ring-poai-line shadow-sm text-poai-magenta">
-              {it.icon}
+            <div className="flex items-center justify-between">
+              <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-white ring-1 ring-poai-line shadow-sm text-poai-magenta">
+                {it.icon}
+              </div>
+              <span className="font-mono text-xs font-semibold text-poai-magenta tracking-widest">
+                {it.number}
+              </span>
             </div>
             <h3 className="mt-5 font-montserrat font-bold text-lg tracking-tight">{it.title}</h3>
+            <p className="mt-2 text-[15px] font-semibold text-poai-text leading-snug">{it.lead}</p>
             <p className="mt-2 text-sm text-poai-text-dim leading-relaxed">{it.text}</p>
           </motion.div>
         ))}
@@ -638,9 +697,14 @@ function WhyBookSection() {
 function MechanikSection() {
   const steps = [
     { title: 'Du meldest dich an', text: 'Verbindlich, mit deinem Beitrag, Foto und QR-Code.' },
-    { title: 'Wir warten auf 80', text: 'Sobald 80 Plätze gefüllt sind, startet die Produktion.' },
+    { title: 'Wir warten auf 77', text: 'Bis Ende 2026 wird produziert. Premiere-Edition, einmalige Ausgabe.' },
     { title: 'Du bekommst die Rechnung', text: 'Die Rechnung wird vor Produktionsbeginn gestellt.' },
-    { title: 'Buch in der Hand', text: '50 Hardcover gehen direkt an dich — bereit für deine Welt.' },
+    { title: 'Buch in der Hand', text: '50–70 Hardcover gehen direkt an dich — je nach Tier.' },
+  ];
+  const team = [
+    { role: 'Visionär', name: 'Ronny Barthel', org: 'The Power of AI · Strategische Leitung' },
+    { role: 'Ansprechpartnerin', name: 'Claudia Conen', org: 'Buch-Ideengeberin · Direkter Draht' },
+    { role: 'Buchverlag', name: 'Arno Müller', org: 'One World Distribution · Lektorat, ISBN, Vertrieb' },
   ];
   return (
     <section id="mechanik" className="relative mx-auto max-w-6xl px-5 md:px-8 py-24 md:py-32">
@@ -667,6 +731,31 @@ function MechanikSection() {
           </motion.li>
         ))}
       </ol>
+
+      {/* Hinter dem Buch — Team-Bullets innerhalb der Mechanik-Sektion */}
+      <div className="mt-12 max-w-4xl mx-auto">
+        <p className="text-center text-[11px] font-semibold uppercase tracking-[0.3em] text-poai-magenta font-mono mb-5">
+          Hinter dem Buch
+        </p>
+        <ul className="grid grid-cols-1 md:grid-cols-3 gap-3">
+          {team.map((t, i) => (
+            <motion.li
+              key={i}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: i * 0.05 }}
+              className="poai-glass rounded-2xl px-5 py-4 text-center"
+            >
+              <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-poai-turquoise-2 font-mono">
+                {t.role}
+              </p>
+              <p className="mt-1.5 font-montserrat font-bold text-base text-poai-text">{t.name}</p>
+              <p className="mt-1 text-xs text-poai-text-mute leading-snug">{t.org}</p>
+            </motion.li>
+          ))}
+        </ul>
+      </div>
     </section>
   );
 }
@@ -713,11 +802,12 @@ function CountdownSection({
               <span className="bg-gradient-to-r from-poai-magenta to-poai-turquoise bg-clip-text text-transparent">
                 {remaining.days} Tage
               </span>
-              <br className="hidden md:block" /> bis Buchstart.
+              <br className="hidden md:block" /> bis Bewerbungsschluss.
             </h3>
             <p className="mt-4 text-poai-text-dim leading-relaxed">
-              Wir sammeln 6 Wochen lang Stimmen aus Köln. Danach geht das Buch in die Produktion —
-              egal, ob die 80 dann erreicht sind oder die nächste Edition kommt.
+              Wir nehmen Bewerbungen für die Premiere-Edition entgegen.
+              Produktion bis Ende 2026 — Auslieferung an alle Autor:innen und in den Buchhandel.
+              Stadt-Editionen folgen ab 2027.
             </p>
             <button
               onClick={onCTA}
@@ -760,11 +850,11 @@ function CitiesSection() {
   return (
     <section id="staedte" className="relative mx-auto max-w-6xl px-5 md:px-8 py-24 md:py-32">
       <SectionHeader
-        kicker="Roadmap"
-        title="Eine Stadt nach der anderen."
-        sub="Köln macht den Anfang. Weitere Städte folgen — Schritt für Schritt, mit derselben Sorgfalt."
+        kicker="Die Reihe"
+        title="Hauptbuch zuerst. Die Städte folgen."
+        sub="Das Hauptbuch ist der Auftakt der Reihe. Die Stadt-Editionen sind Erweiterungen, keine Wiederholungen. Wer hier dabei ist, ist Tag eins."
       />
-      <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
         {CITIES.map((c, i) => (
           <motion.div
             key={c.name}
@@ -801,52 +891,36 @@ function CitiesSection() {
  * Social Proof
  * ============================================================ */
 function SocialProofSection() {
-  const quotes = [
-    {
-      role: 'Coach &middot; Köln',
-      text: 'Ein Buch, in dem dein Name steht — bleibt. In Regalen, in Köpfen, auf Tischen.',
-    },
-    {
-      role: 'Speaker &middot; Köln',
-      text: 'Echte Stimmen, echte Geschichten — kuratiert, hochwertig gedruckt, einmalig.',
-    },
-    {
-      role: 'Unternehmer:in &middot; Köln',
-      text: 'Ein Buch, das in den Händen deiner Wunschkund:innen landet. Nicht in einem Stream.',
-    },
-  ];
   return (
-    <section className="relative mx-auto max-w-6xl px-5 md:px-8 py-12">
+    <section className="relative mx-auto max-w-4xl px-5 md:px-8 py-12">
       <SectionHeader
-        kicker="Stimmen"
-        title="80 Plätze. 80 Geschichten."
-        sub="Hier erscheint, wer mutig genug ist, sich zu zeigen."
+        kicker="Die Idee"
+        title="77 Persönlichkeiten. Ein Werk."
       />
-      <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-5">
-        {quotes.map((q, i) => (
-          <motion.figure
-            key={i}
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.06 }}
-            className="poai-glass rounded-3xl p-7"
-          >
-            <Quote className="h-6 w-6 text-poai-magenta" />
-            <blockquote className="mt-3 text-poai-text leading-relaxed">{q.text}</blockquote>
-            <figcaption className="mt-6 flex items-center gap-3">
-              <div className="h-10 w-10 rounded-full bg-gradient-to-br from-poai-magenta-soft via-white to-poai-turquoise-soft ring-1 ring-poai-line" />
-              <div>
-                <div className="text-sm font-semibold text-poai-text">Wird hier sichtbar</div>
-                <div
-                  className="text-xs text-poai-text-mute"
-                  dangerouslySetInnerHTML={{ __html: q.role }}
-                />
-              </div>
-            </figcaption>
-          </motion.figure>
-        ))}
-      </div>
+      <motion.figure
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="poai-glass rounded-3xl p-8 md:p-12 mt-12 text-center"
+      >
+        <Quote className="h-7 w-7 text-poai-magenta mx-auto" />
+        <blockquote className="mt-6 font-montserrat text-xl md:text-3xl font-bold tracking-tight text-poai-text leading-snug">
+          Eine Maschine kann Inhalte generieren.
+          <br />
+          Aber sie kann dir nicht zuhören.
+          <br />
+          Nicht zwischen den Zeilen lesen.
+          <br />
+          Nicht fühlen, was dich wirklich ausmacht.
+        </blockquote>
+        <p className="mt-6 text-base md:text-lg text-poai-text-dim leading-relaxed">
+          Genau deshalb braucht es dich. <strong className="text-poai-text">Deine Geschichte. Deine Perspektive.</strong>
+        </p>
+        <p className="mt-8 inline-block px-5 py-2 rounded-full bg-poai-magenta-soft text-poai-magenta-2 text-sm font-semibold tracking-wide">
+          Perfektion ist klickbar. Persönlichkeit bleibt.
+        </p>
+      </motion.figure>
     </section>
   );
 }
@@ -857,69 +931,129 @@ function SocialProofSection() {
 function UpsellSection({ onCTA }: { onCTA: () => void }) {
   return (
     <section className="relative mx-auto max-w-6xl px-5 md:px-8 py-12">
-      <div className="poai-glass rounded-3xl overflow-hidden">
-        <span
-          aria-hidden
-          className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-poai-gold/15 blur-3xl"
-        />
-        <div className="relative grid md:grid-cols-2 items-center">
-          <div className="p-8 md:p-14">
-            <span className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.25em] text-poai-gold font-mono">
-              <Sparkles className="h-4 w-4" /> Optional
+      <SectionHeader
+        kicker="Optional dazubuchen"
+        title="Manche schreiben selbst. Andere lassen schreiben."
+        sub="Zwei Wege zu deinem fertigen Beitrag im Buch. Beide buchbar zusammen mit deinem Autorenplatz, beide vom Lektorat des Verlags abgenommen."
+      />
+
+      <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-5">
+        {/* Story-Sparring */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="poai-glass rounded-3xl p-8 md:p-10 flex flex-col"
+        >
+          <div className="flex items-center justify-between">
+            <span className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-poai-magenta font-mono">
+              <Mic className="h-4 w-4" /> Story-Sparring
             </span>
-            <h3 className="mt-3 font-montserrat text-3xl md:text-5xl font-bold tracking-tight leading-tight">
-              Buch-Coaching dazubuchen.
-            </h3>
-            <p className="mt-4 text-poai-text-dim leading-relaxed">
-              Du willst, dass dein Beitrag wirklich sitzt? In einem 1:1-Coaching schreiben wir
-              gemeinsam an deiner Story, deinem Titel und deinem Call-to-Action. Damit dein
-              Kapitel nicht nur Wörter hat — sondern Wirkung.
-            </p>
-            <ul className="mt-6 space-y-2.5 text-[15px]">
-              {[
-                '90-Min-Session mit Claudia Conen',
-                'Gemeinsames Schreiben deines Beitrags',
-                'Feedback zu Foto, Titel und CTA',
-              ].map((f) => (
-                <li key={f} className="flex items-center gap-2.5 text-poai-text">
-                  <span className="inline-flex h-5 w-5 flex-none items-center justify-center rounded-full bg-poai-gold-soft">
-                    <Check className="h-3.5 w-3.5 text-poai-gold" />
-                  </span>
-                  {f}
-                </li>
-              ))}
-            </ul>
-            <button
-              onClick={onCTA}
-              className="mt-8 inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-semibold bg-poai-text text-white hover:bg-poai-text/90 transition shadow-lg"
-            >
-              <GraduationCap className="h-4 w-4" />
-              Coaching dazubuchen
-            </button>
+            <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-poai-text-mute font-mono">
+              2× Live
+            </span>
           </div>
+          <h3 className="mt-4 font-montserrat text-2xl md:text-3xl font-bold tracking-tight leading-tight">
+            Du schreibst. <span className="text-poai-text-dim">Wir schärfen.</span>
+          </h3>
+          <p className="mt-3 text-poai-text-dim leading-relaxed text-sm md:text-base">
+            Für alle, die selbst formulieren wollen, aber ein Gegenüber brauchen.
+          </p>
+          <ul className="mt-6 space-y-2.5 text-[14.5px] flex-grow">
+            {[
+              '2 × 60 Min Live-Sparring via Zoom',
+              'Schärfung von Thema, Aufbau und Haltung',
+              'Manuskript-Lektorat deines Beitrags',
+              'Sprachstil-Feedback in Magazin-Tonalität',
+            ].map((f) => (
+              <li key={f} className="flex items-start gap-2.5 text-poai-text-dim">
+                <span className="mt-0.5 inline-flex h-5 w-5 flex-none items-center justify-center rounded-full bg-poai-turquoise-soft">
+                  <Check className="h-3.5 w-3.5 text-poai-turquoise-2" />
+                </span>
+                {f}
+              </li>
+            ))}
+          </ul>
+          <div className="mt-7 pt-5 border-t border-poai-line/70 flex items-baseline justify-between">
+            <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-poai-text-mute font-mono">
+              Einmalig
+            </span>
+            <span className="font-montserrat text-4xl font-bold text-poai-text tracking-tight">
+              333 €
+            </span>
+          </div>
+          <button
+            onClick={onCTA}
+            className="mt-6 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full font-semibold bg-poai-bg-3 hover:bg-poai-line text-poai-text transition"
+          >
+            Im Bewerbungsformular dazubuchen
+            <ArrowRight className="h-4 w-4" />
+          </button>
+        </motion.div>
 
-          <div className="relative h-full min-h-[280px] bg-gradient-to-br from-poai-magenta-soft via-white to-poai-turquoise-soft flex items-center justify-center p-8">
-            <div className="grid grid-cols-2 gap-4 max-w-xs w-full">
-              <FeatureChip icon={<Mic className="h-5 w-5 text-poai-magenta" />} title="Stimme" sub="die im Text trägt" />
-              <FeatureChip icon={<BookOpen className="h-5 w-5 text-poai-turquoise" />} title="Story" sub="die im Kopf bleibt" />
-              <div className="col-span-2">
-                <FeatureChip icon={<Star className="h-5 w-5 text-poai-gold" />} title="Call-to-Action" sub="der dich findbar macht" />
-              </div>
-            </div>
+        {/* Persönlicher Chronist */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.06 }}
+          className="poai-glass poai-glass-tinted rounded-3xl p-8 md:p-10 flex flex-col"
+        >
+          <div className="flex items-center justify-between">
+            <span className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-poai-magenta font-mono">
+              <GraduationCap className="h-4 w-4" /> Persönlicher Chronist
+            </span>
+            <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-poai-gold font-mono">
+              1:1
+            </span>
           </div>
-        </div>
+          <h3 className="mt-4 font-montserrat text-2xl md:text-3xl font-bold tracking-tight leading-tight">
+            Du erzählst. <span className="text-poai-text-dim">Wir schreiben.</span>
+          </h3>
+          <p className="mt-3 text-poai-text-dim leading-relaxed text-sm md:text-base">
+            Persönlichkeit weckt Vertrauen. Perfektion auf Mausklick nicht. Für alle, die ihre
+            Geschichte haben, aber das Schreiben jemand anderem überlassen wollen.
+          </p>
+          <ul className="mt-6 space-y-2.5 text-[14.5px] flex-grow">
+            {[
+              '3 × 60 Min Story-Interviews, immer 1:1',
+              'Recherche aus Webseite, LinkedIn und Sprachstil',
+              'Vollständiger Beitrags-Entwurf in deiner Tone of Voice',
+              'Eigenes Zitat oder Kernsatz in deiner Stimme',
+              'Lektorat eingeschlossen, durch den Verlag',
+              '2 Korrektur-Runden mit dir',
+            ].map((f) => (
+              <li key={f} className="flex items-start gap-2.5 text-poai-text-dim">
+                <span className="mt-0.5 inline-flex h-5 w-5 flex-none items-center justify-center rounded-full bg-poai-turquoise-soft">
+                  <Check className="h-3.5 w-3.5 text-poai-turquoise-2" />
+                </span>
+                {f}
+              </li>
+            ))}
+          </ul>
+          <div className="mt-7 pt-5 border-t border-poai-violet-soft/60 flex items-baseline justify-between">
+            <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-poai-text-mute font-mono">
+              Einmalig
+            </span>
+            <span className="font-montserrat text-4xl font-bold text-poai-text tracking-tight">
+              1.555 €
+            </span>
+          </div>
+          <button
+            onClick={onCTA}
+            className="mt-6 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full font-semibold bg-gradient-to-r from-poai-magenta to-poai-magenta-2 text-white shadow-lg shadow-poai-magenta/25 hover:shadow-xl hover:shadow-poai-magenta/35 transition"
+          >
+            Im Bewerbungsformular dazubuchen
+            <ArrowRight className="h-4 w-4" />
+          </button>
+        </motion.div>
       </div>
-    </section>
-  );
-}
 
-function FeatureChip({ icon, title, sub }: { icon: React.ReactNode; title: string; sub: string }) {
-  return (
-    <div className="poai-glass rounded-2xl p-4">
-      {icon}
-      <p className="mt-2 font-semibold text-poai-text">{title}</p>
-      <p className="text-xs text-poai-text-mute">{sub}</p>
-    </div>
+      <p className="mt-6 text-center text-sm text-poai-text-mute">
+        Beide Angebote sind unabhängig vom Buchpreis. Buchung als Checkbox im Bewerbungsformular.
+      </p>
+    </section>
   );
 }
 
@@ -929,24 +1063,16 @@ function FeatureChip({ icon, title, sub }: { icon: React.ReactNode; title: strin
 function FAQSection() {
   const faqs = [
     {
-      q: 'Was passiert, wenn die 80 Plätze nicht voll werden?',
-      a: 'Dann produzieren wir nicht und du bezahlst nichts. Die Rechnung kommt erst, wenn die Edition fix steht.',
-    },
-    {
       q: 'Wann erscheint das Buch?',
-      a: 'Sobald die 80 Plätze gefüllt sind. Wir starten mit Köln. Pro Stadt erscheint ein Buch pro Jahr.',
+      a: 'Das Hauptbuch wird bis Ende 2026 produziert. Ab dann beginnen wir mit der Auslieferung an alle Autor:innen und in den Buchhandel. Stadt-Editionen starten ab 2027.',
     },
     {
-      q: 'Kann ich mehr als 4 Seiten buchen?',
-      a: 'Ja — pro zusätzlicher Doppelseite zahlst du 100 €. Maximal sind 10 Seiten möglich.',
+      q: 'Bekomme ich mein Geld zurück?',
+      a: 'Nein. Mit der Buchung sicherst du verbindlich einen der 77 Premiere-Plätze. Dafür reservieren wir dir Layout, Druckkapazität und einen Slot in der Marketing-Kampagne der Reihe.',
     },
     {
-      q: 'Was bekomme ich gedruckt?',
-      a: '50 hochwertige Hardcover-Bücher gehen direkt an dich. Du kannst sie verschenken, verkaufen oder bei Events einsetzen.',
-    },
-    {
-      q: 'Wie läuft die Bezahlung?',
-      a: 'Nach deiner verbindlichen Anmeldung erhältst du die Rechnung. Dein Platz ist gesichert, sobald die Zahlung eingegangen ist.',
+      q: 'Lohnt sich das Hauptbuch, wenn meine Stadt später folgt?',
+      a: 'Business ist heute übergreifend, die Online-Welt zeigt täglich, dass Sichtbarkeit längst nicht mehr an der Stadtgrenze endet. Das Hauptbuch versammelt 77 Persönlichkeiten aus dem gesamten DACH-Mittelstand und ist gleichzeitig ein hochwertiges Sammlerstück, das du als Geschenk an Schlüsselkund:innen weitergibst. Wer auf beiden Bühnen sichtbar sein will, bucht beides.',
     },
   ];
   const [openIdx, setOpenIdx] = useState<number | null>(0);
@@ -1010,15 +1136,15 @@ function FinalCTASection({ onCTA }: { onCTA: () => void }) {
         />
 
         <div className="relative z-10">
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 ring-1 ring-white/15 backdrop-blur text-[11px] uppercase tracking-[0.25em] text-white/80 font-mono">
-            <Sparkles className="h-3.5 w-3.5 text-poai-turquoise" /> Buch-Edition Köln 2026
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 ring-1 ring-white/15 backdrop-blur text-[11px] uppercase tracking-[0.25em] text-white/85 font-mono">
+            <Star className="h-3.5 w-3.5 text-poai-gold fill-current" /> Einmalige Ausgabe · Erstedition
           </span>
           <h3 className="mt-6 font-montserrat text-4xl md:text-6xl lg:text-7xl font-bold text-white tracking-[-0.02em] leading-[1]">
             Sei eine{' '}
             <span className="bg-gradient-to-r from-poai-magenta to-poai-turquoise bg-clip-text text-transparent">
-              der 80
+              der 77
             </span>
-            <br /> Stimmen.
+            <br /> Persönlichkeiten.
           </h3>
           <p className="mt-6 text-white/85 max-w-2xl mx-auto text-lg leading-relaxed">
             Wenn du fühlst, dass du da reingehörst — du tust es vermutlich. Trag dich verbindlich

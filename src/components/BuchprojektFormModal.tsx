@@ -16,7 +16,24 @@ interface BuchprojektFormModalProps {
   onClose: () => void;
 }
 
-type PageOption = '4' | '6' | '8';
+type TierKey = 'standard' | 'business' | 'premium';
+
+interface TierConfig {
+  key: TierKey;
+  name: string;
+  price: number;
+  pages: string;
+  books: string;
+}
+
+const TIERS: TierConfig[] = [
+  { key: 'standard', name: 'Standard', price: 555, pages: '4 Seiten', books: '50 Bücher' },
+  { key: 'business', name: 'Business', price: 777, pages: '6 Seiten', books: '60 Bücher' },
+  { key: 'premium', name: 'Premium', price: 999, pages: '8 Seiten', books: '70 Bücher' },
+];
+
+const ADDON_SPARRING = { id: 'sparring', label: 'Story-Sparring', price: 333 } as const;
+const ADDON_CHRONIST = { id: 'chronist', label: 'Persönlicher Chronist', price: 1555 } as const;
 
 interface TextFieldConfig {
   key:
@@ -44,7 +61,7 @@ const TEXT_FIELDS: TextFieldConfig[] = [
     label: 'Deine Story',
     placeholder:
       'Wer bist du und wofür stehst du? Was war dein Wendepunkt? Erzähle so, wie du es einer Freundin erzählen würdest.',
-    max: 2000,
+    max: 1500,
     rows: 6,
   },
   {
@@ -52,7 +69,7 @@ const TEXT_FIELDS: TextFieldConfig[] = [
     label: 'Deine KI-Erfahrung',
     placeholder:
       'Wie nutzt du KI in deinem Business? Was hat sich für dich verändert?',
-    max: 2000,
+    max: 1500,
     rows: 5,
   },
   {
@@ -60,15 +77,15 @@ const TEXT_FIELDS: TextFieldConfig[] = [
     label: 'Deine Learnings',
     placeholder:
       'Was darf der Leser aus deiner Geschichte mitnehmen? Welche Stolpersteine, welche Erkenntnisse?',
-    max: 2000,
+    max: 1000,
     rows: 5,
   },
   {
     key: 'zukunft',
     label: 'Deine Zukunft & Positionierung',
     placeholder:
-      'Wo siehst du dich in 3 Jahren? Wofür möchtest du in deiner Stadt bekannt sein?',
-    max: 1500,
+      'Wo siehst du dich in 3 Jahren? Wofür möchtest du im Mittelstand bekannt sein?',
+    max: 1000,
     rows: 4,
   },
   {
@@ -76,18 +93,10 @@ const TEXT_FIELDS: TextFieldConfig[] = [
     label: 'Dein Call-to-Action',
     placeholder:
       'Wie können Leser dich erreichen? Welchen nächsten Schritt sollen sie gehen?',
-    max: 500,
+    max: 380,
     rows: 3,
   },
 ];
-
-const PAGE_OPTIONS: { value: PageOption; label: string; sub: string; price: number }[] = [
-  { value: '4', label: '4 Seiten', sub: 'inklusive', price: 0 },
-  { value: '6', label: '+2 Seiten', sub: '1 Doppelseite extra', price: 100 },
-  { value: '8', label: '+4 Seiten', sub: '2 Doppelseiten extra', price: 200 },
-];
-
-const BASE_PRICE = 500;
 
 export default function BuchprojektFormModal({ isOpen, onClose }: BuchprojektFormModalProps) {
   const [formData, setFormData] = useState({
@@ -103,7 +112,9 @@ export default function BuchprojektFormModal({ isOpen, onClose }: BuchprojektFor
     zukunft: '',
     cta: '',
   });
-  const [pages, setPages] = useState<PageOption>('4');
+  const [tier, setTier] = useState<TierKey>('business');
+  const [addonSparring, setAddonSparring] = useState(false);
+  const [addonChronist, setAddonChronist] = useState(false);
   const [photoFile, setPhotoFile] = useState<File | null>(null);
   const [qrFile, setQrFile] = useState<File | null>(null);
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
@@ -138,8 +149,11 @@ export default function BuchprojektFormModal({ isOpen, onClose }: BuchprojektFor
     }
   }, [isOpen]);
 
+  const tierConfig = TIERS.find((t) => t.key === tier) ?? TIERS[0];
   const totalPrice =
-    BASE_PRICE + (PAGE_OPTIONS.find((p) => p.value === pages)?.price ?? 0);
+    tierConfig.price +
+    (addonSparring ? ADDON_SPARRING.price : 0) +
+    (addonChronist ? ADDON_CHRONIST.price : 0);
 
   const isValid =
     formData.name.trim().length > 1 &&
@@ -147,6 +161,7 @@ export default function BuchprojektFormModal({ isOpen, onClose }: BuchprojektFor
     formData.stadt.trim().length > 1 &&
     formData.beitragstitel.trim().length > 0 &&
     formData.story.trim().length > 0 &&
+    !!photoFile &&
     confirmBooking &&
     confirmThreshold;
 
@@ -179,7 +194,11 @@ export default function BuchprojektFormModal({ isOpen, onClose }: BuchprojektFor
       //   Aktuell: Submission wird geloggt + Success-Screen.
       const submission = {
         ...formData,
-        pages,
+        tier,
+        tierName: tierConfig.name,
+        tierPrice: tierConfig.price,
+        addonSparring,
+        addonChronist,
         totalPrice,
         photo: photoFile?.name ?? null,
         qr: qrFile?.name ?? null,
@@ -309,12 +328,12 @@ export default function BuchprojektFormModal({ isOpen, onClose }: BuchprojektFor
               {/* Section: Uploads */}
               <Section
                 title="Foto & QR-Code"
-                subtitle="Persönliches Bild und ein QR-Code, der zu dir führt (Website, Linktree, …)."
+                subtitle="Portrait-Foto (JPG/PNG, min. 1200×1200) und optional ein QR-Code, der zu dir führt (Website, Linktree, …)."
               >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <FileUpload
                     icon={<ImageIcon className="h-5 w-5" />}
-                    label="Foto hochladen"
+                    label="Portrait-Foto * (JPG/PNG, min. 1200×1200)"
                     accept="image/*"
                     file={photoFile}
                     preview={photoPreview}
@@ -328,7 +347,7 @@ export default function BuchprojektFormModal({ isOpen, onClose }: BuchprojektFor
                   />
                   <FileUpload
                     icon={<QrCode className="h-5 w-5" />}
-                    label="QR-Code hochladen"
+                    label="QR-Code (optional, SVG/PNG)"
                     accept="image/*"
                     file={qrFile}
                     preview={qrPreview}
@@ -343,16 +362,19 @@ export default function BuchprojektFormModal({ isOpen, onClose }: BuchprojektFor
                 </div>
               </Section>
 
-              {/* Section: Seitenwahl */}
-              <Section title="Wie viele Seiten möchtest du?" subtitle="Du kannst dein Kapitel jederzeit erweitern, max. 10 Seiten.">
+              {/* Section: Tier-Wahl */}
+              <Section
+                title="Wähle dein Tier"
+                subtitle="Drei Stufen, drei Schnapszahlen. Je mehr Seiten, desto mehr Hardcover bekommst du als Geschäftswerkzeug."
+              >
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                  {PAGE_OPTIONS.map((opt) => {
-                    const active = pages === opt.value;
+                  {TIERS.map((opt) => {
+                    const active = tier === opt.key;
                     return (
                       <button
-                        key={opt.value}
+                        key={opt.key}
                         type="button"
-                        onClick={() => setPages(opt.value)}
+                        onClick={() => setTier(opt.key)}
                         className={`poai-glass relative rounded-2xl p-4 text-left transition-all ${
                           active
                             ? 'poai-glass-tinted !border-poai-magenta/70 !shadow-[0_0_0_3px_rgba(214,56,143,0.18),0_18px_50px_-18px_rgba(124,58,237,0.32)]'
@@ -360,26 +382,54 @@ export default function BuchprojektFormModal({ isOpen, onClose }: BuchprojektFor
                         }`}
                       >
                         <div className="flex items-center justify-between">
-                          <span className="font-semibold text-poai-text">{opt.label}</span>
-                          {active && (
-                            <CheckCircle2 className="h-5 w-5 text-poai-magenta" />
-                          )}
+                          <span className="text-[10px] font-semibold uppercase tracking-[0.18em] font-mono text-poai-text-mute">
+                            {opt.name}
+                          </span>
+                          {active && <CheckCircle2 className="h-5 w-5 text-poai-magenta" />}
                         </div>
-                        <p className="text-sm text-poai-text-mute mt-1">{opt.sub}</p>
-                        <p className="text-sm font-mono text-poai-turquoise-2 mt-3 font-semibold">
-                          {opt.price === 0 ? 'inklusive' : `+ ${opt.price} €`}
+                        <p className="font-montserrat text-2xl font-bold text-poai-text mt-2 tracking-tight">
+                          {opt.price} €
+                        </p>
+                        <p className="text-xs text-poai-text-mute mt-1">
+                          {opt.pages} · {opt.books}
                         </p>
                       </button>
                     );
                   })}
                 </div>
+              </Section>
+
+              {/* Section: Add-Ons */}
+              <Section
+                title="Optional dazubuchen"
+                subtitle="Manche schreiben selbst. Andere lassen schreiben."
+              >
+                <div className="space-y-3">
+                  <AddonRow
+                    checked={addonSparring}
+                    onChange={setAddonSparring}
+                    title="Story-Sparring"
+                    sub="Du schreibst, wir schärfen. 2 × 60 Min Live-Sparring + Lektorat."
+                    price={ADDON_SPARRING.price}
+                  />
+                  <AddonRow
+                    checked={addonChronist}
+                    onChange={setAddonChronist}
+                    title="Persönlicher Chronist"
+                    sub="Du erzählst, wir schreiben. 3 × 60 Min Story-Interviews + Beitrags-Entwurf + 2 Korrektur-Runden."
+                    price={ADDON_CHRONIST.price}
+                  />
+                </div>
 
                 <div className="poai-glass poai-glass-tinted mt-5 rounded-xl px-5 py-4 flex items-center justify-between !border-poai-gold/40">
                   <span className="text-poai-text font-semibold">Dein Gesamtpreis</span>
                   <span className="font-montserrat text-2xl font-bold text-poai-gold">
-                    {totalPrice} €
+                    {totalPrice.toLocaleString('de-DE')} €
                   </span>
                 </div>
+                <p className="mt-2 text-xs text-poai-text-mute">
+                  Alle Preise zzgl. MwSt. Rechnung vor Produktionsbeginn.
+                </p>
               </Section>
 
               {/* Confirmations */}
@@ -401,7 +451,7 @@ export default function BuchprojektFormModal({ isOpen, onClose }: BuchprojektFor
                     onChange={setConfirmThreshold}
                     label={
                       <>
-                        Mir ist bewusst, dass das Buch <strong>erst bei 80 Teilnehmer:innen</strong>{' '}
+                        Mir ist bewusst, dass das <strong>Hauptbuch bis Ende 2026</strong>{' '}
                         produziert wird.
                       </>
                     }
@@ -432,7 +482,7 @@ export default function BuchprojektFormModal({ isOpen, onClose }: BuchprojektFor
                   className="group relative px-6 py-4 rounded-2xl font-semibold text-white bg-gradient-to-r from-poai-magenta to-poai-magenta-2 shadow-lg shadow-poai-magenta/40 hover:shadow-poai-magenta/60 disabled:opacity-40 disabled:cursor-not-allowed transition-all ring-1 ring-poai-turquoise/40"
                 >
                   <span className="flex items-center gap-2">
-                    {isSubmitting ? 'Wird gesendet …' : 'Verbindlich anmelden'}
+                    {isSubmitting ? 'Wird gesendet …' : 'Platz reservieren und Rechnung anfordern'}
                     <Send className="h-4 w-4 transition group-hover:translate-x-0.5" />
                   </span>
                 </button>
@@ -599,6 +649,51 @@ function FileUpload({
   );
 }
 
+function AddonRow({
+  checked,
+  onChange,
+  title,
+  sub,
+  price,
+}: {
+  checked: boolean;
+  onChange: (v: boolean) => void;
+  title: string;
+  sub: string;
+  price: number;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={() => onChange(!checked)}
+      className={`poai-glass w-full rounded-2xl p-4 text-left transition-all flex items-start gap-3 ${
+        checked
+          ? 'poai-glass-tinted !border-poai-magenta/70 !shadow-[0_0_0_3px_rgba(214,56,143,0.18),0_18px_50px_-18px_rgba(124,58,237,0.32)]'
+          : ''
+      }`}
+    >
+      <span
+        className={`mt-0.5 flex h-5 w-5 flex-none items-center justify-center rounded-md border-2 transition ${
+          checked
+            ? 'bg-poai-magenta border-poai-magenta shadow-[0_2px_8px_-2px_rgba(214,56,143,0.4)]'
+            : 'bg-white border-poai-violet-soft'
+        }`}
+      >
+        {checked && <CheckCircle2 className="h-3.5 w-3.5 text-white" />}
+      </span>
+      <div className="flex-1 min-w-0">
+        <div className="flex items-baseline justify-between gap-3">
+          <span className="font-semibold text-poai-text">{title}</span>
+          <span className="font-mono text-sm font-bold text-poai-magenta-2 tabular-nums">
+            +{price.toLocaleString('de-DE')} €
+          </span>
+        </div>
+        <p className="text-xs text-poai-text-mute mt-1 leading-snug">{sub}</p>
+      </div>
+    </button>
+  );
+}
+
 function Checkbox({
   checked,
   onChange,
@@ -642,11 +737,12 @@ function SuccessView({ onClose }: { onClose: () => void }) {
         <CheckCircle2 className="h-8 w-8 text-white" />
       </div>
       <h3 className="font-montserrat text-2xl font-bold text-poai-text mb-3">
-        Willkommen im Kreis der 80!
+        Willkommen im Kreis der 77!
       </h3>
       <p className="text-poai-text-dim max-w-md mx-auto leading-relaxed">
-        Wir haben deine Anmeldung erhalten. In den nächsten Werktagen bekommst du deine
-        Rechnung per E-Mail. Sobald die 80 Plätze gefüllt sind, beginnt die Produktion.
+        Wir haben deine Bewerbung erhalten und lesen sie persönlich. Innerhalb von 24 Stunden
+        bekommst du deine Rechnung per E-Mail. Dein Platz ist gesichert, sobald die Zahlung
+        eingegangen ist.
       </p>
       <button
         onClick={onClose}

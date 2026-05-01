@@ -22,6 +22,7 @@ const staticPages = [
   { path: '/wissensmagazin', priority: '0.8', changefreq: 'weekly' },
   { path: '/blog', priority: '0.8', changefreq: 'weekly' },
   { path: '/newsletter', priority: '0.7', changefreq: 'monthly' },
+  { path: '/buchprojekt', priority: '0.9', changefreq: 'weekly' },
 
   { path: '/mentoring-gold', priority: '0.9', changefreq: 'monthly' },
   { path: '/mentoring-transformation', priority: '0.9', changefreq: 'monthly' },

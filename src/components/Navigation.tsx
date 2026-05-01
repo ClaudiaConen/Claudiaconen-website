@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown, Calendar } from 'lucide-react';
+import { Menu, X, ChevronDown, Calendar, BookOpen } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { megaMenuItems } from '../lib/megaMenuData';
 import MegaMenuPanel from './mega-menu/MegaMenuPanel';
@@ -136,7 +136,14 @@ export default function Navigation() {
             ))}
           </ul>
 
-          <div className="hidden xl:flex items-center">
+          <div className="hidden xl:flex items-center gap-3">
+            <button
+              onClick={() => { navigate('/buchprojekt'); closeMegaMenu(); }}
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full font-montserrat font-bold text-[0.78rem] uppercase tracking-[0.08em] whitespace-nowrap border-2 border-[rgba(212,175,55,0.55)] text-[#F7E7CE] hover:text-white hover:bg-[rgba(212,175,55,0.12)] hover:border-[#D4AF37] hover:-translate-y-0.5 transition-all duration-300"
+            >
+              <BookOpen size={15} />
+              Buchprojekt
+            </button>
             <button
               onClick={handleCtaClick}
               className="mega-nav-cta"

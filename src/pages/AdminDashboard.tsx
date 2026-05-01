@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { checkAdminAuth } from '../lib/adminAuth';
 import AdminNavigation from '../components/AdminNavigation';
-import { Calendar, Video, MessageSquare, ArrowRight, BarChart, Brain, GraduationCap, Mail, Users, FileDown, ChevronDown, ChevronUp } from 'lucide-react';
+import { Calendar, Video, MessageSquare, ArrowRight, BarChart, Brain, BookOpen, GraduationCap, Mail, Users, FileDown, ChevronDown, ChevronUp } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
 export default function AdminDashboard() {
@@ -13,6 +13,7 @@ export default function AdminDashboard() {
     stepMedia: 0,
     testimonials: 0,
     kiManagerBookings: 0,
+    buchprojektAnmeldungen: 0,
     students: 0,
     courses: 0
   });
@@ -44,11 +45,12 @@ export default function AdminDashboard() {
 
   const loadStats = async () => {
     try {
-      const [doorsResult, mediaResult, testimonialsResult, kiManagerResult, studentsResult, coursesResult] = await Promise.all([
+      const [doorsResult, mediaResult, testimonialsResult, kiManagerResult, buchprojektResult, studentsResult, coursesResult] = await Promise.all([
         supabase.from('advent_doors').select('id', { count: 'exact', head: true }),
         supabase.from('step_media').select('id', { count: 'exact', head: true }),
         supabase.from('testimonials').select('id', { count: 'exact', head: true }),
         supabase.from('ki_manager_bookings').select('id', { count: 'exact', head: true }),
+        supabase.from('buchprojekt_anmeldungen').select('id', { count: 'exact', head: true }),
         supabase.from('member_students').select('id', { count: 'exact', head: true }),
         supabase.from('member_courses').select('id', { count: 'exact', head: true })
       ]);
@@ -58,6 +60,7 @@ export default function AdminDashboard() {
         stepMedia: mediaResult.count || 0,
         testimonials: testimonialsResult.count || 0,
         kiManagerBookings: kiManagerResult.count || 0,
+        buchprojektAnmeldungen: buchprojektResult.count || 0,
         students: studentsResult.count || 0,
         courses: coursesResult.count || 0
       });
@@ -209,6 +212,15 @@ export default function AdminDashboard() {
       color: 'from-orange-500 to-red-600',
       stat: `${stats.kiManagerBookings} Anmeldungen`,
       features: ['Anmeldungen verwalten', 'Emails exportieren', 'Nach Paketen filtern', 'Suchfunktion']
+    },
+    {
+      title: 'Buchprojekt-Anmeldungen',
+      description: 'Bewerbungen zum Hauptbuch 2026 (Premiere Edition) — Tier, Add-Ons, Foto, QR-Code, Status',
+      icon: BookOpen,
+      link: '/admin/buchprojekt',
+      color: 'from-fuchsia-500 to-pink-600',
+      stat: `${stats.buchprojektAnmeldungen} Anmeldungen`,
+      features: ['Bewerbungen sichten', 'Status & Notizen', 'Foto + QR ansehen', 'CSV-Export']
     },
     {
       title: 'Member-Bereich',

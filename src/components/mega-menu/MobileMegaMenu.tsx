@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, ChevronRight, Calendar } from 'lucide-react';
+import { ChevronDown, ChevronRight, Calendar, BookOpen } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { megaMenuItems } from '../../lib/megaMenuData';
 
@@ -115,8 +115,16 @@ export default function MobileMegaMenu({ onClose }: MobileMegaMenuProps) {
         ))}
 
         <button
+          onClick={() => handleTileClick('/buchprojekt')}
+          className="flex items-center justify-center gap-2 w-full px-6 py-3 mt-4 rounded-full font-bold text-[0.8rem] uppercase tracking-wider border-2 border-[rgba(212,175,55,0.55)] text-[#F7E7CE] hover:text-white hover:bg-[rgba(212,175,55,0.1)] hover:border-[#D4AF37] transition-all duration-200"
+        >
+          <BookOpen size={16} />
+          Buchprojekt
+        </button>
+
+        <button
           onClick={() => handleTileClick('/#contact')}
-          className="flex items-center justify-center gap-2 w-full px-6 py-3 mt-4 rounded-full font-bold text-[0.8rem] uppercase tracking-wider"
+          className="flex items-center justify-center gap-2 w-full px-6 py-3 mt-2 rounded-full font-bold text-[0.8rem] uppercase tracking-wider"
           style={{
             background: 'linear-gradient(135deg, #D4AF37 0%, #C9A961 100%)',
             color: '#0A1F44',

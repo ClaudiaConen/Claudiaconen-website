@@ -17,6 +17,7 @@ import {
   ChevronDown,
 } from 'lucide-react';
 import BuchprojektFormModal from '../components/BuchprojektFormModal';
+import { supabase } from '../lib/supabase';
 
 /* --------------------------------------------------------------------------
  * THE POWER OF AI – Die 80 Stimmen deiner Stadt
@@ -25,12 +26,17 @@ import BuchprojektFormModal from '../components/BuchprojektFormModal';
 
 const LAUNCH_DEADLINE = (() => {
   const d = new Date();
-  d.setDate(d.getDate() + 42); // 6 Wochen
+  d.setDate(d.getDate() + 62); // ~ 9 Wochen Bewerbungsfenster
   d.setHours(23, 59, 59, 999);
   return d;
 })();
 
-const PARTICIPANTS = { current: 36, target: 77 };
+// Aktueller Stand wird live aus Supabase berechnet:
+//   PARTICIPANTS_BASE  = bereits außerhalb des Systems verbindlich gebuchte Plätze
+//   + dbCount          = via /buchprojekt eingegangene Anmeldungen (Tabelle buchprojekt_anmeldungen)
+//   = angezeigte „current"
+const PARTICIPANTS_BASE = 26;
+const PARTICIPANTS_TARGET = 77;
 
 const CITIES = [
   { name: 'Hauptbuch 2026', status: 'start', meta: 'DACH · Premiere Edition' },
@@ -376,7 +382,26 @@ function BookHero() {
  * Participant Strip — Apple-style sticky info bar feel
  * ============================================================ */
 function ParticipantStrip() {
-  const pct = Math.min(100, Math.round((PARTICIPANTS.current / PARTICIPANTS.target) * 100));
+  const [current, setCurrent] = useState(PARTICIPANTS_BASE);
+
+  // Live-Count: Basis (vorgebuchte Plätze) + tatsächliche Anmeldungen aus der DB
+  useEffect(() => {
+    let cancelled = false;
+    supabase
+      .from('buchprojekt_anmeldungen')
+      .select('id', { count: 'exact', head: true })
+      .then(({ count, error }) => {
+        if (cancelled || error) return;
+        if (typeof count === 'number') {
+          setCurrent(Math.min(PARTICIPANTS_TARGET, PARTICIPANTS_BASE + count));
+        }
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const pct = Math.min(100, Math.round((current / PARTICIPANTS_TARGET) * 100));
   return (
     <section className="relative mt-8 lg:-mt-8 mb-16 z-20">
       <div className="mx-auto max-w-5xl px-5 md:px-8">
@@ -393,8 +418,8 @@ function ParticipantStrip() {
                 Live · Aktueller Stand
               </p>
               <h3 className="mt-1 font-montserrat text-2xl md:text-3xl font-bold tracking-tight">
-                <span className="text-poai-magenta">{PARTICIPANTS.current}</span>
-                <span className="text-poai-text"> / {PARTICIPANTS.target} Premiere-Plätze</span>
+                <span className="text-poai-magenta">{current}</span>
+                <span className="text-poai-text"> / {PARTICIPANTS_TARGET} Premiere-Plätze</span>
               </h3>
             </div>
             <p className="text-sm text-poai-text-dim">

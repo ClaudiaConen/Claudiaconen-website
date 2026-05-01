@@ -364,7 +364,7 @@ export default function BuchprojektFormModal({ isOpen, onClose }: BuchprojektFor
 
               {/* Section: Tier-Wahl */}
               <Section
-                title="Wähle dein Tier"
+                title="Wähle dein Produkt"
                 subtitle="Drei Stufen, drei Schnapszahlen. Je mehr Seiten, desto mehr Hardcover bekommst du als Geschäftswerkzeug."
               >
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">

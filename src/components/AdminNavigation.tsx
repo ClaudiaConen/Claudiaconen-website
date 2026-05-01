@@ -150,6 +150,12 @@ export default function AdminNavigation() {
           icon: Brain,
           label: 'KI-Manager',
           description: 'Ausbildung Anmeldungen'
+        },
+        {
+          to: '/admin/buchprojekt',
+          icon: BookOpen,
+          label: 'Buchprojekt',
+          description: 'Hauptbuch-Anmeldungen'
         }
       ]
     },

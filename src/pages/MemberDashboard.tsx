@@ -358,7 +358,7 @@ export default function MemberDashboard() {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           <Link
             to="/member/courses"
             className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition group"
@@ -406,6 +406,26 @@ export default function MemberDashboard() {
             </p>
             <div className="flex items-center text-amber-600 font-medium">
               <span>Ansehen</span>
+              <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition" />
+            </div>
+          </Link>
+
+          <Link
+            to="/member/buchprojekt"
+            className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition group relative overflow-hidden"
+          >
+            <div className="absolute top-3 right-3 inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-pink-100 text-pink-700 text-[10px] font-bold uppercase tracking-wider">
+              Premiere
+            </div>
+            <div className="bg-pink-100 rounded-full p-4 w-fit mb-4 group-hover:scale-110 transition">
+              <BookOpen className="w-8 h-8 text-pink-600" />
+            </div>
+            <h3 className="font-bold text-slate-900 mb-2">Mein Buchprojekt</h3>
+            <p className="text-slate-600 text-sm mb-4">
+              Status meiner Hauptbuch-Anmeldung
+            </p>
+            <div className="flex items-center text-pink-600 font-medium">
+              <span>Anzeigen</span>
               <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition" />
             </div>
           </Link>

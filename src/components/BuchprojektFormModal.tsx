@@ -10,6 +10,30 @@ import {
   QrCode,
   BookOpen,
 } from 'lucide-react';
+import { supabase } from '../lib/supabase';
+
+const STORAGE_BUCKET = 'buchprojekt-files';
+
+function safeFilename(name: string) {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9._-]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 80);
+}
+
+async function uploadAsset(file: File, emailFolder: string, kind: 'portrait' | 'qr'): Promise<string> {
+  const ext = (file.name.split('.').pop() || 'bin').toLowerCase();
+  const path = `${emailFolder}/${Date.now()}-${kind}-${safeFilename(file.name)}.${ext}`;
+  const { error } = await supabase.storage.from(STORAGE_BUCKET).upload(path, file, {
+    cacheControl: '3600',
+    upsert: false,
+    contentType: file.type || undefined,
+  });
+  if (error) throw new Error(`${kind === 'portrait' ? 'Foto' : 'QR-Code'}-Upload fehlgeschlagen: ${error.message}`);
+  const { data } = supabase.storage.from(STORAGE_BUCKET).getPublicUrl(path);
+  return data.publicUrl;
+}
 
 interface BuchprojektFormModalProps {
   isOpen: boolean;
@@ -189,24 +213,42 @@ export default function BuchprojektFormModal({ isOpen, onClose }: BuchprojektFor
     setError(null);
 
     try {
-      // TODO Backend: in eine neue Supabase-Tabelle 'buchprojekt_anmeldungen'
-      //   speichern + Edge Function für Rechnungserstellung triggern.
-      //   Aktuell: Submission wird geloggt + Success-Screen.
-      const submission = {
-        ...formData,
-        tier,
-        tierName: tierConfig.name,
-        tierPrice: tierConfig.price,
-        addonSparring,
-        addonChronist,
-        totalPrice,
-        photo: photoFile?.name ?? null,
-        qr: qrFile?.name ?? null,
-        submittedAt: new Date().toISOString(),
-      };
-      console.info('[Buchprojekt-Anmeldung]', submission);
+      // 1) Foto-Upload (Pflicht — durch isValid bereits geprüft)
+      const emailFolder = safeFilename(formData.email) || 'unknown';
+      const photoUrl = photoFile ? await uploadAsset(photoFile, emailFolder, 'portrait') : null;
 
-      await new Promise((r) => setTimeout(r, 700));
+      // 2) QR-Upload (optional)
+      const qrUrl = qrFile ? await uploadAsset(qrFile, emailFolder, 'qr') : null;
+
+      // 3) Anmeldung in Supabase speichern
+      const { error: insertError } = await supabase
+        .from('buchprojekt_anmeldungen')
+        .insert({
+          name: formData.name.trim(),
+          unternehmen: formData.unternehmen.trim() || null,
+          stadt: formData.stadt.trim() || null,
+          email: formData.email.trim().toLowerCase(),
+          telefon: formData.telefon.trim() || null,
+          beitragstitel: formData.beitragstitel.trim() || null,
+          story: formData.story.trim() || null,
+          ki_erfahrung: formData.kiErfahrung.trim() || null,
+          learnings: formData.learnings.trim() || null,
+          zukunft: formData.zukunft.trim() || null,
+          cta: formData.cta.trim() || null,
+          tier,
+          tier_price: tierConfig.price,
+          addon_sparring: addonSparring,
+          addon_chronist: addonChronist,
+          total_price: totalPrice,
+          photo_url: photoUrl,
+          qr_url: qrUrl,
+          status: 'pending',
+        });
+
+      if (insertError) {
+        throw new Error(`Anmeldung konnte nicht gespeichert werden: ${insertError.message}`);
+      }
+
       setIsSuccess(true);
     } catch (err) {
       setError(

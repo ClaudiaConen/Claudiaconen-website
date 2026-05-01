@@ -79,6 +79,7 @@ import Datenschutz from './pages/Datenschutz';
 import AGB from './pages/AGB';
 import VonSchattenZuLicht from './pages/VonSchattenZuLicht';
 import Buchprojekt from './pages/Buchprojekt';
+import AdminBuchprojektDashboard from './pages/AdminBuchprojektDashboard';
 import WorkbookGenerator from './pages/WorkbookGenerator';
 import QuizGenerator from './pages/QuizGenerator';
 import WirkungskraftQuiz from './pages/WirkungskraftQuiz';
@@ -97,6 +98,7 @@ import MeinePlaene from './pages/MeinePlaene';
 import { StudentAuthProvider } from './contexts/StudentAuthContext';
 import MemberLogin from './pages/MemberLogin';
 import MemberDashboard from './pages/MemberDashboard';
+import MemberBuchprojekt from './pages/MemberBuchprojekt';
 import MemberCourseSelection from './pages/MemberCourseSelection';
 import MemberCourses from './pages/MemberCourses';
 import MemberLesson from './pages/MemberLesson';
@@ -213,6 +215,7 @@ function App() {
         <Route path="/member/profile" element={<MemberProtectedRoute><MemberProfile /></MemberProtectedRoute>} />
         <Route path="/member/achievements" element={<MemberProtectedRoute><MemberAchievements /></MemberProtectedRoute>} />
         <Route path="/member/forum" element={<MemberProtectedRoute><MemberForum /></MemberProtectedRoute>} />
+        <Route path="/member/buchprojekt" element={<MemberProtectedRoute><MemberBuchprojekt /></MemberProtectedRoute>} />
         <Route path="/member/sessions" element={<MemberProtectedRoute><MemberSessions /></MemberProtectedRoute>} />
 
         <Route path="/admin/login" element={<AdminLogin />} />
@@ -231,6 +234,7 @@ function App() {
         <Route path="/admin/termintypen" element={<ProtectedRoute><AdminBookingTypes /></ProtectedRoute>} />
         <Route path="/admin/verfuegbarkeit" element={<ProtectedRoute><AdminAvailability /></ProtectedRoute>} />
         <Route path="/admin/ki-manager-anmeldungen" element={<ProtectedRoute><AdminKIManagerBookings /></ProtectedRoute>} />
+        <Route path="/admin/buchprojekt" element={<ProtectedRoute><AdminBuchprojektDashboard /></ProtectedRoute>} />
         <Route path="/admin/content-uploads" element={<ProtectedRoute><AdminContentUploads /></ProtectedRoute>} />
         <Route path="/admin/content-plaene" element={<ProtectedRoute><AdminContentPlans /></ProtectedRoute>} />
         <Route path="/admin/member-studenten" element={<ProtectedRoute><AdminMemberStudents /></ProtectedRoute>} />

@@ -489,7 +489,7 @@ function OfferSection({ onCTA }: { onCTA: () => void }) {
           name="Standard"
           price="555 €"
           pages="4 Seiten"
-          spread="1 Doppelseite"
+          spread="2 Doppelseiten"
           perPage="≈ 139 € pro Seite"
           features={[
             '4 Seiten (DIN A5) im Buch',
@@ -503,7 +503,7 @@ function OfferSection({ onCTA }: { onCTA: () => void }) {
           name="Business"
           price="777 €"
           pages="6 Seiten"
-          spread="1,5 Doppelseiten"
+          spread="3 Doppelseiten"
           perPage="≈ 130 € pro Seite · 7 % Vorteil"
           features={[
             '6 Seiten (DIN A5) im Buch',
@@ -519,7 +519,7 @@ function OfferSection({ onCTA }: { onCTA: () => void }) {
           name="Premium"
           price="999 €"
           pages="8 Seiten"
-          spread="2 Doppelseiten"
+          spread="4 Doppelseiten"
           perPage="≈ 125 € pro Seite · 10 % Vorteil"
           features={[
             '8 Seiten (DIN A5) im Buch',

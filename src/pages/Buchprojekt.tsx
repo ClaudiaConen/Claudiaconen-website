@@ -301,11 +301,16 @@ function BookHero() {
             style={{ transform: 'translateZ(14px)', backfaceVisibility: 'hidden' }}
           >
             <img
-              src="/buchprojekt-cover.png"
+              src="/buchprojekt-cover.jpg"
               alt="THE POWER OF AI – Unverwechselbar – Wie KI unseren Mittelstand verändert"
               className="w-full h-full object-cover select-none"
               draggable={false}
               loading="eager"
+              decoding="async"
+              // @ts-ignore - fetchPriority wird von TS noch nicht ge­kannt
+              fetchpriority="high"
+              width={1200}
+              height={1633}
             />
             {/* Foil-Sweep über das Cover */}
             <div

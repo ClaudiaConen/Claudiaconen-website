@@ -820,7 +820,7 @@ export default function KIManagerAusbildung() {
                 Alle Preise zzgl. gesetzlicher Mehrwertsteuer
               </p>
               <div className="max-w-3xl mx-auto">
-                <CountdownTimer targetDate="2026-02-15T23:59:59" />
+                <CountdownTimer targetDate="2026-06-15T23:59:59" />
                 <p className="text-sm text-gray-600 mt-4">
                   Einführungspreis endet am 15.06.2026
                 </p>

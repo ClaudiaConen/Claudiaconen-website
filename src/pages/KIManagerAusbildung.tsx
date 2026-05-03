@@ -180,7 +180,7 @@ export default function KIManagerAusbildung() {
     <>
       <SEO
         title="KI Manager Ausbildung – Mensch & KI im Einklang | Claudia Conen"
-        description="Mit Persönlichkeit aus der Masse hervorstechen. KI als Abkürzung im Alltag souverän nutzen. 3 Monate Online-Ausbildung mit Claudia Conen. Start: 01.03.2026"
+        description="Mit Persönlichkeit aus der Masse hervorstechen. KI als Abkürzung im Alltag souverän nutzen. 3 Monate Online-Ausbildung mit Claudia Conen. Start: 01.07.2026"
         keywords={['KI Manager Ausbildung', 'KI Weiterbildung', 'Data Literacy', 'KI im Business', 'Künstliche Intelligenz lernen', 'KI Zertifizierung', 'Claudia Conen']}
       />
 
@@ -196,7 +196,7 @@ export default function KIManagerAusbildung() {
                 transition={{ duration: 0.6 }}
               >
                 <div className="inline-block px-6 py-2 bg-gradient-to-r from-luxury-gold to-bright-gold text-white rounded-full mb-6 text-sm font-bold shadow-lg">
-                  Start: 01.03.2026
+                  Start: 01.07.2026
                 </div>
 
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-midnight-blue mb-6 leading-tight">
@@ -469,7 +469,7 @@ export default function KIManagerAusbildung() {
                     <div className="flex items-center gap-4">
                       <Calendar className="text-luxury-gold" size={24} />
                       <div>
-                        <div className="font-bold text-midnight-blue">Start: 01.03.2026</div>
+                        <div className="font-bold text-midnight-blue">Start: 01.07.2026</div>
                         <div className="text-sm text-gray-600">Sei von Anfang an dabei</div>
                       </div>
                     </div>
@@ -925,7 +925,7 @@ export default function KIManagerAusbildung() {
                   <strong className="text-white">Du sicherst dir jetzt deinen Platz und meldest dich verbindlich an.</strong>
                 </p>
                 <p className="text-white">
-                  Die Ausbildung beginnt am 01.03.2026.
+                  Die Ausbildung beginnt am 01.07.2026.
                 </p>
                 <p className="text-white">
                   Wer sich bis zum 15.02.2026 anmeldet oder bezahlt, erhält automatisch den Einführungspreis (bei Einmalzahlung oder Early-Bird-Ratenzahlung).

@@ -56,10 +56,19 @@ Deno.serve(async (req: Request) => {
       );
     }
 
-    const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
+    // Whitespace + non-ASCII strippen — manchmal landet beim Paste in Supabase
+    // Secrets ein Zero-Width-Space oder ein Newline mit, was Header-Construct
+    // mit "Invalid ByteString" sprengt.
+    const RAW_KEY = Deno.env.get("RESEND_API_KEY") ?? "";
+    const RESEND_API_KEY = RAW_KEY.replace(/[^\x21-\x7E]/g, "");
     if (!RESEND_API_KEY) {
-      console.error("RESEND_API_KEY not configured");
+      console.error("RESEND_API_KEY not configured (raw length:", RAW_KEY.length, ")");
       throw new Error("E-Mail-Service nicht konfiguriert");
+    }
+    if (RESEND_API_KEY.length !== RAW_KEY.length) {
+      console.warn(
+        `RESEND_API_KEY enthielt ${RAW_KEY.length - RESEND_API_KEY.length} unsichtbare Zeichen — wurden entfernt.`,
+      );
     }
 
     const tierLabel = TIER_LABEL[body.tier] ?? body.tier;

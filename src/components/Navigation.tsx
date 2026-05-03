@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown, Calendar, BookOpen } from 'lucide-react';
+import { Menu, X, ChevronDown, Calendar } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { megaMenuItems } from '../lib/megaMenuData';
 import MegaMenuPanel from './mega-menu/MegaMenuPanel';
@@ -137,13 +137,21 @@ export default function Navigation() {
           </ul>
 
           <div className="hidden xl:flex items-center gap-3">
-            <button
-              onClick={() => { navigate('/buchprojekt'); closeMegaMenu(); }}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full font-montserrat font-bold text-[0.78rem] uppercase tracking-[0.08em] whitespace-nowrap border-2 border-[rgba(212,175,55,0.55)] text-[#F7E7CE] hover:text-white hover:bg-[rgba(212,175,55,0.12)] hover:border-[#D4AF37] hover:-translate-y-0.5 transition-all duration-300"
+            <a
+              href="https://the-power-of-ai.team"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="The Power of AI – Klick für Chancen"
+              className="inline-flex h-11 overflow-hidden rounded-xl ring-1 ring-[rgba(212,175,55,0.35)] hover:ring-[rgba(212,175,55,0.7)] hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(212,175,55,0.25)] transition-all duration-300"
             >
-              <BookOpen size={15} />
-              Buchprojekt
-            </button>
+              <img
+                src="/power-of-ai-banner.jpg"
+                alt="The Power of AI – Klick für Chancen"
+                className="h-full w-auto block"
+                loading="eager"
+                decoding="async"
+              />
+            </a>
             <button
               onClick={handleCtaClick}
               className="mega-nav-cta"

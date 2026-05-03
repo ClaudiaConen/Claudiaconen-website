@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, ChevronRight, Calendar, BookOpen } from 'lucide-react';
+import { ChevronDown, ChevronRight, Calendar } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { megaMenuItems } from '../../lib/megaMenuData';
 
@@ -114,17 +114,26 @@ export default function MobileMegaMenu({ onClose }: MobileMegaMenuProps) {
           </div>
         ))}
 
-        <button
-          onClick={() => handleTileClick('/buchprojekt')}
-          className="flex items-center justify-center gap-2 w-full px-6 py-3 mt-4 rounded-full font-bold text-[0.8rem] uppercase tracking-wider border-2 border-[rgba(212,175,55,0.55)] text-[#F7E7CE] hover:text-white hover:bg-[rgba(212,175,55,0.1)] hover:border-[#D4AF37] transition-all duration-200"
+        <a
+          href="https://the-power-of-ai.team"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={onClose}
+          aria-label="The Power of AI – Klick für Chancen"
+          className="flex items-center justify-center w-full mt-4 rounded-2xl overflow-hidden ring-1 ring-[rgba(212,175,55,0.4)] hover:ring-[rgba(212,175,55,0.7)] hover:shadow-[0_6px_20px_rgba(212,175,55,0.25)] transition-all duration-200"
         >
-          <BookOpen size={16} />
-          Buchprojekt
-        </button>
+          <img
+            src="/power-of-ai-banner.jpg"
+            alt="The Power of AI – Klick für Chancen"
+            className="block w-full h-auto"
+            loading="eager"
+            decoding="async"
+          />
+        </a>
 
         <button
           onClick={() => handleTileClick('/#contact')}
-          className="flex items-center justify-center gap-2 w-full px-6 py-3 mt-2 rounded-full font-bold text-[0.8rem] uppercase tracking-wider"
+          className="flex items-center justify-center gap-2 w-full px-6 py-3 mt-3 rounded-full font-bold text-[0.8rem] uppercase tracking-wider"
           style={{
             background: 'linear-gradient(135deg, #D4AF37 0%, #C9A961 100%)',
             color: '#0A1F44',

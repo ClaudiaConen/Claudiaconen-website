@@ -6,7 +6,10 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Client-Info, Apikey",
 };
 
-const ADMIN_RECIPIENT = "claudiaconen@umsatzstimme.de";
+const ADMIN_RECIPIENTS = [
+  "claudiaconen@umsatzstimme.de",
+  "kontakt@the-power-of-ai.team",
+];
 
 interface RequestBody {
   name: string;

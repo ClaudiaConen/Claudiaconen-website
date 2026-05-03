@@ -13,7 +13,7 @@ import {
   Truck,
   Receipt,
 } from 'lucide-react';
-import { supabase } from '../lib/supabase';
+import { supabaseBuchprojekt as supabase } from '../lib/supabaseBuchprojekt';
 import { useStudentAuth } from '../contexts/StudentAuthContext';
 import MemberNavigation from '../components/MemberNavigation';
 

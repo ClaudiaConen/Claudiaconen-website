@@ -17,7 +17,7 @@ import {
   ChevronDown,
 } from 'lucide-react';
 import BuchprojektFormModal from '../components/BuchprojektFormModal';
-import { supabase } from '../lib/supabase';
+import { supabaseBuchprojekt as supabase } from '../lib/supabaseBuchprojekt';
 
 /* --------------------------------------------------------------------------
  * THE POWER OF AI – Die 80 Stimmen deiner Stadt

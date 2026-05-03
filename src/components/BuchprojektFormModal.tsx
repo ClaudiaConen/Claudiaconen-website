@@ -10,7 +10,7 @@ import {
   QrCode,
   BookOpen,
 } from 'lucide-react';
-import { supabase } from '../lib/supabase';
+import { supabaseBuchprojekt as supabase } from '../lib/supabaseBuchprojekt';
 
 const STORAGE_BUCKET = 'buchprojekt-files';
 

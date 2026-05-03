@@ -4,6 +4,7 @@ import { checkAdminAuth } from '../lib/adminAuth';
 import AdminNavigation from '../components/AdminNavigation';
 import { Calendar, Video, MessageSquare, ArrowRight, BarChart, Brain, BookOpen, GraduationCap, Mail, Users, FileDown, ChevronDown, ChevronUp } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import { supabaseBuchprojekt } from '../lib/supabaseBuchprojekt';
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
@@ -50,7 +51,7 @@ export default function AdminDashboard() {
         supabase.from('step_media').select('id', { count: 'exact', head: true }),
         supabase.from('testimonials').select('id', { count: 'exact', head: true }),
         supabase.from('ki_manager_bookings').select('id', { count: 'exact', head: true }),
-        supabase.from('buchprojekt_anmeldungen').select('id', { count: 'exact', head: true }),
+        supabaseBuchprojekt.from('buchprojekt_anmeldungen').select('id', { count: 'exact', head: true }),
         supabase.from('member_students').select('id', { count: 'exact', head: true }),
         supabase.from('member_courses').select('id', { count: 'exact', head: true })
       ]);

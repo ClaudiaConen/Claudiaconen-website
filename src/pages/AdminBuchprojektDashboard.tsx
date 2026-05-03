@@ -15,7 +15,7 @@ import {
   Star,
   Download,
 } from 'lucide-react';
-import { supabase } from '../lib/supabase';
+import { supabaseBuchprojekt as supabase } from '../lib/supabaseBuchprojekt';
 import { checkAdminAuth } from '../lib/adminAuth';
 import AdminNavigation from '../components/AdminNavigation';
 

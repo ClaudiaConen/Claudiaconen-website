@@ -20,21 +20,21 @@ export default function BetaBanner() {
   if (!isVisible || location.pathname.startsWith('/member/') || location.pathname.startsWith('/admin/')) return null;
 
   return (
-    <div className="fixed top-0 left-0 w-full bg-[#f5c400] text-black overflow-hidden z-[9999] py-1.5 flex items-center justify-between">
-      <div className="inline-block whitespace-nowrap animate-scroll-left text-base tracking-wide">
-        🛈 Dies ist die Betaversion der Webseite, Änderungen finden täglich statt.
+    <div className="fixed top-0 left-0 w-full bg-[#f5c400] text-black overflow-hidden z-[9999] py-0.5 flex items-center justify-between">
+      <div className="inline-block whitespace-nowrap animate-scroll-left text-xs tracking-wide">
+        🛈 Webseite ist noch im Aufbau. Wir arbeiten momentan noch an den Inhalten.
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        🛈 Dies ist die Betaversion der Webseite, Änderungen finden täglich statt.
+        🛈 Webseite ist noch im Aufbau. Wir arbeiten momentan noch an den Inhalten.
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        🛈 Dies ist die Betaversion der Webseite, Änderungen finden täglich statt.
+        🛈 Webseite ist noch im Aufbau. Wir arbeiten momentan noch an den Inhalten.
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        🛈 Dies ist die Betaversion der Webseite, Änderungen finden täglich statt.
+        🛈 Webseite ist noch im Aufbau. Wir arbeiten momentan noch an den Inhalten.
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        🛈 Dies ist die Betaversion der Webseite, Änderungen finden täglich statt.
+        🛈 Webseite ist noch im Aufbau. Wir arbeiten momentan noch an den Inhalten.
       </div>
       <button
         onClick={handleClose}
-        className="bg-transparent border-none text-black text-xl cursor-pointer mr-4 transition-all duration-200 hover:scale-110 hover:opacity-80"
+        className="bg-transparent border-none text-black text-sm leading-none cursor-pointer mr-3 transition-all duration-200 hover:scale-110 hover:opacity-80"
         aria-label="Banner schließen"
       >
         ✕
@@ -57,14 +57,14 @@ export default function BetaBanner() {
         @media (max-width: 768px) {
           .animate-scroll-left {
             animation-duration: 70s;
-            font-size: 0.9rem;
+            font-size: 0.7rem;
           }
         }
 
         @media (max-width: 480px) {
           .animate-scroll-left {
             animation-duration: 80s;
-            font-size: 0.8rem;
+            font-size: 0.65rem;
           }
         }
       `}</style>

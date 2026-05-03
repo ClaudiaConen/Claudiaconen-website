@@ -20,7 +20,7 @@ export default function ServiceCards() {
       title: 'Du willst dein Team stärken',
       tags: 'KI | Führung | Storytelling',
       description: 'KI ist die Abkürzung – dein Team macht den Unterschied. Kommunikation, die verkauft.',
-      link: '/unternehmen-leadership',
+      link: '/ki-manager-ausbildung',
       footer: 'KI-Manager Ausbildung',
       icon: Users,
       gradient: 'from-[#DAA520] to-[#B8860B]',

@@ -109,7 +109,7 @@ export default function KIManagerAusbildung() {
       name: 'Early Bird Einmalzahlung',
       priceNet: 1200,
       priceGross: 1428,
-      validUntil: '15.02.2026',
+      validUntil: '15.06.2026',
       saving: 350,
       payment: 'Einmalig',
       highlight: true,
@@ -127,7 +127,7 @@ export default function KIManagerAusbildung() {
       name: 'Early Bird Ratenzahlung',
       priceNet: 1320,
       priceGross: 1570.80,
-      validUntil: '15.02.2026',
+      validUntil: '15.06.2026',
       saving: 385,
       payment: '6× 220€ zzgl. MwSt.',
       highlight: false,
@@ -145,7 +145,7 @@ export default function KIManagerAusbildung() {
       name: 'Regulär Einmalzahlung',
       priceNet: 1550,
       priceGross: 1844.50,
-      validFrom: '16.02.2026',
+      validFrom: '16.06.2026',
       payment: 'Einmalig',
       highlight: false,
       features: [
@@ -161,7 +161,7 @@ export default function KIManagerAusbildung() {
       name: 'Regulär Ratenzahlung',
       priceNet: 1705,
       priceGross: 2028.95,
-      validFrom: '16.02.2026',
+      validFrom: '16.06.2026',
       payment: '6× 284,17€ zzgl. MwSt.',
       highlight: false,
       features: [
@@ -822,7 +822,7 @@ export default function KIManagerAusbildung() {
               <div className="max-w-3xl mx-auto">
                 <CountdownTimer targetDate="2026-02-15T23:59:59" />
                 <p className="text-sm text-gray-600 mt-4">
-                  Einführungspreis endet am 15.02.2026
+                  Einführungspreis endet am 15.06.2026
                 </p>
               </div>
             </motion.div>
@@ -928,7 +928,7 @@ export default function KIManagerAusbildung() {
                   Die Ausbildung beginnt am 01.07.2026.
                 </p>
                 <p className="text-white">
-                  Wer sich bis zum 15.02.2026 anmeldet oder bezahlt, erhält automatisch den Einführungspreis (bei Einmalzahlung oder Early-Bird-Ratenzahlung).
+                  Wer sich bis zum 15.06.2026 anmeldet oder bezahlt, erhält automatisch den Einführungspreis (bei Einmalzahlung oder Early-Bird-Ratenzahlung).
                 </p>
                 <p className="text-bright-gold font-semibold">
                   Das ist seriös, fair und transparent.

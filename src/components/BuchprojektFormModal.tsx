@@ -249,27 +249,8 @@ export default function BuchprojektFormModal({ isOpen, onClose }: BuchprojektFor
         throw new Error(`Anmeldung konnte nicht gespeichert werden: ${insertError.message}`);
       }
 
-      // 4) Admin-Benachrichtigung per Mail (best-effort — Fehler hier blockiert
-      //    den Erfolgs-Screen nicht, da die Anmeldung bereits in der DB steht)
-      try {
-        await supabase.functions.invoke('send-buchprojekt-notification', {
-          body: {
-            name: formData.name.trim(),
-            email: formData.email.trim().toLowerCase(),
-            telefon: formData.telefon.trim() || null,
-            unternehmen: formData.unternehmen.trim() || null,
-            stadt: formData.stadt.trim() || null,
-            tier,
-            tierPrice: tierConfig.price,
-            addonSparring,
-            addonChronist,
-            totalPrice,
-            beitragstitel: formData.beitragstitel.trim() || null,
-          },
-        });
-      } catch (mailErr) {
-        console.warn('Admin-Mail-Versand fehlgeschlagen (Anmeldung trotzdem gespeichert):', mailErr);
-      }
+      // 4) Admin-Benachrichtigung läuft serverseitig per Postgres-Trigger
+      //    `notify_buchprojekt_admin_mail` (pg_net + Resend). Kein Frontend-Call nötig.
 
       setIsSuccess(true);
     } catch (err) {

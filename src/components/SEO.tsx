@@ -8,6 +8,7 @@ interface SEOProps {
   ogImage?: string;
   ogType?: string;
   path?: string;
+  noindex?: boolean;
   article?: {
     publishedTime?: string;
     author?: string;
@@ -39,6 +40,7 @@ export default function SEO({
   ogImage = 'https://claudia-conen-expert-platform.bolt.host/og-image.jpg',
   ogType = 'website',
   path,
+  noindex = false,
   article
 }: SEOProps) {
   const location = useLocation();
@@ -177,7 +179,7 @@ export default function SEO({
       { name: 'twitter:description', content: description },
       { name: 'twitter:image', content: ogImage },
       { name: 'author', content: 'Claudia Conen' },
-      { name: 'robots', content: 'index, follow' },
+      { name: 'robots', content: noindex ? 'noindex, nofollow' : 'index, follow' },
     ];
 
     metaTags.forEach(({ name, property, content }) => {
@@ -209,7 +211,7 @@ export default function SEO({
       document.head.appendChild(scriptTag);
     }
     scriptTag.textContent = JSON.stringify(structuredData);
-  }, [fullTitle, description, canonicalUrl, ogImage, ogType, allKeywordsString, title, articleTagsString, article?.publishedTime, article?.author, article?.readingTime]);
+  }, [fullTitle, description, canonicalUrl, ogImage, ogType, allKeywordsString, title, articleTagsString, article?.publishedTime, article?.author, article?.readingTime, noindex]);
 
   return null;
 }

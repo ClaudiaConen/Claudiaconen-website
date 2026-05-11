@@ -360,7 +360,7 @@ export default function SpanienRetreat() {
           >
             <p className="text-sm uppercase tracking-[0.3em] font-bold text-[#C97AAF] mb-4">Kein Workshop. Echtes Bauen.</p>
             <h2 className="font-montserrat font-black text-3xl md:text-5xl text-[#2A1F3D] leading-tight">
-              Theorie kannst du überall hören.<br />
+              Aus Theorie{' '}
               <span
                 style={{
                   background: 'linear-gradient(135deg, #D4AF37 0%, #C97AAF 100%)',
@@ -369,7 +369,7 @@ export default function SpanienRetreat() {
                   backgroundClip: 'text',
                 }}
               >
-                Bei uns wird umgesetzt.
+                wird Praxis.
               </span>
             </h2>
             <p className="mt-6 text-lg text-[#4A3F5C] leading-relaxed">

@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   Sun,
@@ -88,66 +89,130 @@ const faqItems = [
   },
   {
     q: 'Wo genau in Spanien findet die Workshop-Woche statt?',
-    a: 'Den genauen Ort und das empfohlene Hotel verraten wir nach erfolgreicher Bewerbung. So bleibt die Gruppe übersichtlich und wir können alles persönlich abstimmen.',
+    a: 'Den genauen Ort und das empfohlene Hotel verraten wir nach erfolgreicher Buchung. So bleibt die Gruppe übersichtlich und wir können alles persönlich abstimmen.',
   },
   {
     q: 'Wie viele Plätze gibt es?',
     a: 'Insgesamt nur 12 Plätze. Diese kleine Gruppengröße ist uns wichtig, damit jede:r ein echtes AHA-Erlebnis bekommt und persönlich begleitet wird.',
   },
   {
-    q: 'Wie läuft die Anmeldung ab?',
-    a: 'Über das Bewerbungsformular ganz unten. Wir melden uns persönlich bei dir, wir lernen uns kurz kennen — und entscheiden gemeinsam, ob es passt.',
+    q: 'Wie läuft die Buchung ab?',
+    a: 'Über das Buchungsformular ganz unten auf der Seite. Du erhältst sofort eine Bestätigung per E-Mail. Innerhalb von 1–2 Werktagen schicken wir dir die Rechnung. Mit Zahlungseingang ist dein Platz endgültig gesichert.',
   },
 ];
 
 export default function SpanienRetreat() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: '',
+    vorname: '',
+    nachname: '',
+    firma: '',
     email: '',
-    phone: '',
-    goal: '',
-    message: '',
+    telefon: '',
+    strasse: '',
+    plz: '',
+    ort: '',
+    land: 'Deutschland',
+    ustIdNr: '',
+    nachricht: '',
+    agbAccepted: false,
+    privacyAccepted: false,
   });
   const [submitting, setSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   const seatBadge = useMemo(() => `Nur ${TOTAL_SEATS} Plätze · klein, fein, persönlich`, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value, type } = e.target;
+    const checked = (e.target as HTMLInputElement).checked;
+    setFormData({ ...formData, [name]: type === 'checkbox' ? checked : value });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
-    setSubmitStatus('idle');
+    setSubmitError(null);
+
+    const fullName = `${formData.vorname} ${formData.nachname}`.trim();
+    const messageBlocks = [
+      `[SPANIEN-WORKSHOP-WOCHE VERBINDLICHE BUCHUNG]`,
+      ``,
+      `Rechnungsdaten:`,
+      `${fullName}`,
+      formData.firma ? formData.firma : null,
+      `${formData.strasse}`,
+      `${formData.plz} ${formData.ort}`,
+      `${formData.land}`,
+      formData.ustIdNr ? `USt-IdNr.: ${formData.ustIdNr}` : null,
+      ``,
+      `E-Mail: ${formData.email}`,
+      formData.telefon ? `Telefon: ${formData.telefon}` : null,
+      ``,
+      `Gebuchte Leistung: KI-Workshop-Woche Spanien · 28.06. – 05.07.2026`,
+      `Preis: ${TOTAL_PRICE.toLocaleString('de-DE')} € netto (zzgl. gesetzlicher MwSt.)`,
+      `AGB akzeptiert: ja`,
+      `Datenschutz akzeptiert: ja`,
+      formData.nachricht ? `\nNachricht:\n${formData.nachricht}` : null,
+    ].filter(Boolean).join('\n');
+
     try {
-      const composedMessage =
-        `[SPANIEN-WORKSHOP-WOCHE BEWERBUNG]\n` +
-        `Ziel: ${formData.goal || '—'}\n\n` +
-        `Nachricht:\n${formData.message}`;
-      const { error } = await supabase.from('contact_inquiries').insert([
+      // 1) In Datenbank speichern (immer — auch wenn die Mail-Function fehlschlägt)
+      const { error: dbError } = await supabase.from('contact_inquiries').insert([
         {
-          name: formData.name,
+          name: fullName,
           email: formData.email,
-          phone: formData.phone || null,
-          message: composedMessage,
+          phone: formData.telefon || null,
+          message: messageBlocks,
         },
       ]);
-      if (error) throw error;
-      setSubmitStatus('success');
-      setFormData({ name: '', email: '', phone: '', goal: '', message: '' });
+      if (dbError) throw dbError;
+
+      // 2) E-Mail-Benachrichtigung via Edge Function (an claudiaconen@umsatzstimme.de + Kunden-Bestätigung)
+      try {
+        const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string;
+        const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string;
+        await fetch(`${supabaseUrl}/functions/v1/send-spanien-booking-notification`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${supabaseAnonKey}`,
+          },
+          body: JSON.stringify({
+            vorname: formData.vorname,
+            nachname: formData.nachname,
+            email: formData.email,
+            telefon: formData.telefon || null,
+            firma: formData.firma || null,
+            strasse: formData.strasse,
+            plz: formData.plz,
+            ort: formData.ort,
+            land: formData.land,
+            ustIdNr: formData.ustIdNr || null,
+            nachricht: formData.nachricht || null,
+            totalPriceNetto: TOTAL_PRICE,
+            agbAccepted: formData.agbAccepted,
+            privacyAccepted: formData.privacyAccepted,
+          }),
+        });
+      } catch (mailErr) {
+        // Mail-Fehler dürfen den Buchungsfluss nicht blockieren — Daten sind in der DB.
+        console.error('Mail-Notification fehlgeschlagen (Buchung gespeichert):', mailErr);
+      }
+
+      // 3) Zur Danke-Seite navigieren
+      navigate('/spanien-ki-workshop/danke');
     } catch (err) {
-      console.error('Spanien-Workshop-Woche form error:', err);
-      setSubmitStatus('error');
+      console.error('Spanien-Buchung Fehler:', err);
+      setSubmitError('Etwas ist schiefgegangen beim Speichern deiner Buchung. Bitte versuche es noch einmal oder schreib uns direkt.');
     } finally {
       setSubmitting(false);
     }
   };
 
   const scrollToForm = () => {
-    document.getElementById('bewerbung')?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('buchung')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -244,7 +309,7 @@ export default function SpanienRetreat() {
                   }}
                 >
                   <Send size={18} />
-                  Jetzt bewerben
+                  Jetzt verbindlich buchen
                 </button>
                 <a
                   href="#programm"
@@ -261,7 +326,7 @@ export default function SpanienRetreat() {
                 transition={{ duration: 0.6, delay: 0.35 }}
                 className="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-sm text-[#4A3F5C]"
               >
-                <span className="inline-flex items-center gap-2"><MapPin size={16} className="text-[#C97AAF]" /> Spanien · genauer Ort nach Bewerbung</span>
+                <span className="inline-flex items-center gap-2"><MapPin size={16} className="text-[#C97AAF]" /> Spanien · genauer Ort nach Buchung</span>
                 <span className="inline-flex items-center gap-2"><Calendar size={16} className="text-[#D4AF37]" /> Anreise: So, 28.06. · Workshop-Start: Mo, 29.06.2026</span>
                 <span className="inline-flex items-center gap-2"><Clock size={16} className="text-[#C97AAF]" /> Lernzeit: 9–13 &amp; 16–18 Uhr · Sa frei</span>
                 <span className="inline-flex items-center gap-2"><Users size={16} className="text-[#D4AF37]" /> max. {TOTAL_SEATS} Teilnehmer:innen</span>
@@ -790,9 +855,9 @@ export default function SpanienRetreat() {
         </div>
       </section>
 
-      {/* === BEWERBUNGSFORMULAR === */}
+      {/* === VERBINDLICHE BUCHUNG === */}
       <section
-        id="bewerbung"
+        id="buchung"
         className="relative py-20 md:py-28 bg-gradient-to-br from-[#FDE8F2] via-[#FBF7F0] to-[#FBF1D8]"
       >
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -803,19 +868,20 @@ export default function SpanienRetreat() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.5 }}
             >
-              <p className="text-sm uppercase tracking-[0.3em] font-bold text-[#C97AAF] mb-4">Bewerbung</p>
+              <p className="text-sm uppercase tracking-[0.3em] font-bold text-[#C97AAF] mb-4">Buchung</p>
               <h2 className="font-montserrat font-black text-4xl md:text-5xl text-[#2A1F3D] leading-tight">
-                Bewirb dich für deinen Platz.
+                Hier verbindlich buchen.
               </h2>
               <p className="mt-5 text-lg text-[#4A3F5C] leading-relaxed">
-                Wir vergeben die {TOTAL_SEATS} Plätze persönlich. Schreib uns kurz, wer du bist und was du dir
-                von dieser Woche erhoffst. Wir melden uns innerhalb von 48 Stunden bei dir.
+                Sichere dir einen der nur {TOTAL_SEATS} Plätze. Mit dem Klick auf <em>„Verbindlich buchen"</em> kommt
+                ein kostenpflichtiger Vertrag zustande. Du bekommst innerhalb von 1–2 Werktagen eine{' '}
+                <strong className="text-[#2A1F3D]">Rechnung per E-Mail</strong> über {TOTAL_PRICE.toLocaleString('de-DE')} € netto (zzgl. MwSt.).
               </p>
               <div className="mt-8 space-y-4">
                 {[
-                  'Du bekommst eine persönliche Antwort von uns — kein Auto-Reply.',
-                  'Wir lernen uns in einem kurzen Gespräch kennen.',
-                  'Erst dann fließt Geld — und nur, wenn es für beide Seiten passt.',
+                  'Wir bestätigen deine Buchung sofort per E-Mail.',
+                  'Du bekommst innerhalb von 1–2 Werktagen die Rechnung per E-Mail.',
+                  'Mit Zahlungseingang ist dein Platz endgültig gesichert.',
                 ].map((t) => (
                   <div key={t} className="flex items-start gap-3">
                     <CheckCircle2 size={20} className="text-[#D4AF37] mt-1 flex-shrink-0" />
@@ -825,8 +891,8 @@ export default function SpanienRetreat() {
               </div>
               <div className="mt-8 p-5 rounded-2xl bg-white/70 backdrop-blur border border-[#E8B4C8]/40">
                 <p className="text-sm text-[#6B5F7A]">
-                  <strong className="text-[#2A1F3D]">Direkter Kontakt:</strong><br />
-                  E-Mail: <a className="text-[#C97AAF] underline" href="mailto:info@claudiaconen-akademie.de">info@claudiaconen-akademie.de</a><br />
+                  <strong className="text-[#2A1F3D]">Fragen vor der Buchung?</strong><br />
+                  E-Mail: <a className="text-[#C97AAF] underline" href="mailto:claudiaconen@umsatzstimme.de">claudiaconen@umsatzstimme.de</a><br />
                   WhatsApp: <a className="text-[#C97AAF] underline" href="https://wa.me/4916093102073" target="_blank" rel="noopener noreferrer">+49 160 93102073</a>
                 </p>
               </div>
@@ -840,94 +906,126 @@ export default function SpanienRetreat() {
               transition={{ duration: 0.5 }}
               className="rounded-3xl bg-white border border-[#D4AF37]/30 p-7 md:p-9 shadow-[0_30px_80px_-20px_rgba(212,175,55,0.4)] space-y-5"
             >
-              {submitStatus === 'success' && (
-                <div className="p-4 rounded-xl bg-[#FBF1D8] border border-[#D4AF37]/40 flex items-start gap-3">
-                  <CheckCircle2 size={22} className="text-[#A8801F] mt-0.5" />
-                  <div>
-                    <p className="font-bold text-[#2A1F3D]">Danke! Deine Bewerbung ist bei uns angekommen.</p>
-                    <p className="text-sm text-[#6B5F7A] mt-1">Wir melden uns innerhalb von 48 Stunden bei dir.</p>
-                  </div>
-                </div>
-              )}
-              {submitStatus === 'error' && (
-                <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-red-800">
-                  Etwas ist schiefgegangen. Bitte versuche es erneut oder schreib uns direkt.
+              {submitError && (
+                <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-red-800 text-sm">
+                  {submitError}
                 </div>
               )}
 
-              <div>
-                <label className="block text-sm font-bold text-[#2A1F3D] mb-2">Dein Name *</label>
-                <input
-                  type="text"
-                  name="name"
-                  required
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl border border-[#E8B4C8]/50 bg-[#FBF7F0]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all"
-                  placeholder="Max Musterfrau"
-                />
+              <div className="rounded-2xl bg-gradient-to-br from-[#FBF1D8] to-[#FDE8F2] border border-[#D4AF37]/30 p-4 text-center">
+                <p className="text-[10px] uppercase tracking-wider font-bold text-[#C97AAF]">Gebuchte Leistung</p>
+                <p className="font-montserrat font-bold text-[#2A1F3D] mt-1">KI-Workshop-Woche Spanien · 28.06. – 05.07.2026</p>
+                <p className="text-2xl font-black text-[#2A1F3D] mt-2">
+                  {TOTAL_PRICE.toLocaleString('de-DE')} €
+                  <span className="text-sm font-semibold text-[#6B5F7A] ml-2">netto · zzgl. MwSt.</span>
+                </p>
+              </div>
+
+              <p className="text-xs uppercase tracking-wider font-bold text-[#C97AAF]">Persönliche Daten</p>
+
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-bold text-[#2A1F3D] mb-2">Vorname *</label>
+                  <input type="text" name="vorname" required value={formData.vorname} onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-xl border border-[#E8B4C8]/50 bg-[#FBF7F0]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all"
+                    placeholder="Max" />
+                </div>
+                <div>
+                  <label className="block text-sm font-bold text-[#2A1F3D] mb-2">Nachname *</label>
+                  <input type="text" name="nachname" required value={formData.nachname} onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-xl border border-[#E8B4C8]/50 bg-[#FBF7F0]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all"
+                    placeholder="Musterfrau" />
+                </div>
               </div>
 
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-bold text-[#2A1F3D] mb-2">E-Mail *</label>
-                  <input
-                    type="email"
-                    name="email"
-                    required
-                    value={formData.email}
-                    onChange={handleChange}
+                  <input type="email" name="email" required value={formData.email} onChange={handleChange}
                     className="w-full px-4 py-3 rounded-xl border border-[#E8B4C8]/50 bg-[#FBF7F0]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all"
-                    placeholder="du@beispiel.de"
-                  />
+                    placeholder="du@beispiel.de" />
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-[#2A1F3D] mb-2">Telefon (optional)</label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
+                  <input type="tel" name="telefon" value={formData.telefon} onChange={handleChange}
                     className="w-full px-4 py-3 rounded-xl border border-[#E8B4C8]/50 bg-[#FBF7F0]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all"
-                    placeholder="+49 ..."
-                  />
+                    placeholder="+49 ..." />
+                </div>
+              </div>
+
+              <p className="text-xs uppercase tracking-wider font-bold text-[#C97AAF] pt-2">Rechnungsadresse</p>
+
+              <div>
+                <label className="block text-sm font-bold text-[#2A1F3D] mb-2">Firma (optional)</label>
+                <input type="text" name="firma" value={formData.firma} onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-xl border border-[#E8B4C8]/50 bg-[#FBF7F0]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all"
+                  placeholder="Musterfrau GmbH" />
+              </div>
+
+              <div>
+                <label className="block text-sm font-bold text-[#2A1F3D] mb-2">Straße & Hausnummer *</label>
+                <input type="text" name="strasse" required value={formData.strasse} onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-xl border border-[#E8B4C8]/50 bg-[#FBF7F0]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all"
+                  placeholder="Musterstraße 12" />
+              </div>
+
+              <div className="grid grid-cols-3 gap-4">
+                <div>
+                  <label className="block text-sm font-bold text-[#2A1F3D] mb-2">PLZ *</label>
+                  <input type="text" name="plz" required value={formData.plz} onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-xl border border-[#E8B4C8]/50 bg-[#FBF7F0]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all"
+                    placeholder="50667" />
+                </div>
+                <div className="col-span-2">
+                  <label className="block text-sm font-bold text-[#2A1F3D] mb-2">Ort *</label>
+                  <input type="text" name="ort" required value={formData.ort} onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-xl border border-[#E8B4C8]/50 bg-[#FBF7F0]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all"
+                    placeholder="Köln" />
+                </div>
+              </div>
+
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-bold text-[#2A1F3D] mb-2">Land *</label>
+                  <input type="text" name="land" required value={formData.land} onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-xl border border-[#E8B4C8]/50 bg-[#FBF7F0]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all"
+                    placeholder="Deutschland" />
+                </div>
+                <div>
+                  <label className="block text-sm font-bold text-[#2A1F3D] mb-2">USt-IdNr. (optional)</label>
+                  <input type="text" name="ustIdNr" value={formData.ustIdNr} onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-xl border border-[#E8B4C8]/50 bg-[#FBF7F0]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all"
+                    placeholder="DE123456789" />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-bold text-[#2A1F3D] mb-2">Was ist dein Ziel? *</label>
-                <select
-                  name="goal"
-                  required
-                  value={formData.goal}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl border border-[#E8B4C8]/50 bg-[#FBF7F0]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all"
-                >
-                  <option value="">Bitte wählen ...</option>
-                  <option value="Mit KI starten">Mit KI starten — endlich Klarheit gewinnen</option>
-                  <option value="KI-Skills vertiefen">Meine KI-Skills vertiefen (Claude, Agenten, Workflows)</option>
-                  <option value="Sichtbarkeit & Landingpage">Sichtbarkeit gewinnen — eigene KI-Landingpage</option>
-                  <option value="Positionierung & Angebot">Positionierung &amp; Angebot schärfen</option>
-                  <option value="Auszeit + Wachstum">Auszeit nehmen &amp; gleichzeitig wachsen</option>
-                </select>
+                <label className="block text-sm font-bold text-[#2A1F3D] mb-2">Nachricht an uns (optional)</label>
+                <textarea name="nachricht" rows={3} value={formData.nachricht} onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-xl border border-[#E8B4C8]/50 bg-[#FBF7F0]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all resize-none"
+                  placeholder="Allergien, besondere Wünsche, oder einfach 'Hallo!'" />
               </div>
 
-              <div>
-                <label className="block text-sm font-bold text-[#2A1F3D] mb-2">Erzähl uns kurz von dir *</label>
-                <textarea
-                  name="message"
-                  required
-                  rows={5}
-                  value={formData.message}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl border border-[#E8B4C8]/50 bg-[#FBF7F0]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all resize-none"
-                  placeholder="Was machst du heute? Was würde sich für dich nach dieser Woche verändert haben?"
-                />
+              <div className="space-y-3 pt-2">
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input type="checkbox" name="privacyAccepted" required checked={formData.privacyAccepted} onChange={handleChange}
+                    className="mt-1 w-5 h-5 rounded border-[#E8B4C8] text-[#D4AF37] focus:ring-[#D4AF37]" />
+                  <span className="text-sm text-[#4A3F5C] leading-relaxed">
+                    Ich habe die <a href="/datenschutz" target="_blank" rel="noopener noreferrer" className="text-[#C97AAF] underline">Datenschutzerklärung</a> gelesen und akzeptiert. *
+                  </span>
+                </label>
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input type="checkbox" name="agbAccepted" required checked={formData.agbAccepted} onChange={handleChange}
+                    className="mt-1 w-5 h-5 rounded border-[#E8B4C8] text-[#D4AF37] focus:ring-[#D4AF37]" />
+                  <span className="text-sm text-[#4A3F5C] leading-relaxed">
+                    Ich habe die <a href="/agb" target="_blank" rel="noopener noreferrer" className="text-[#C97AAF] underline">AGB</a> gelesen und akzeptiert. Mir ist bewusst, dass mit dem Absenden eine <strong>verbindliche, kostenpflichtige Buchung</strong> über {TOTAL_PRICE.toLocaleString('de-DE')} € netto (zzgl. MwSt.) zustande kommt. *
+                  </span>
+                </label>
               </div>
 
               <button
                 type="submit"
-                disabled={submitting}
+                disabled={submitting || !formData.agbAccepted || !formData.privacyAccepted}
                 className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full font-bold tracking-wide shadow-[0_12px_32px_rgba(212,175,55,0.4)] hover:translate-y-[-2px] transition-all disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0"
                 style={{
                   background: 'linear-gradient(135deg, #D4AF37 0%, #E8B4C8 100%)',
@@ -942,13 +1040,12 @@ export default function SpanienRetreat() {
                 ) : (
                   <>
                     <Send size={18} />
-                    Bewerbung absenden
+                    Verbindlich buchen — {TOTAL_PRICE.toLocaleString('de-DE')} € netto
                   </>
                 )}
               </button>
               <p className="text-xs text-center text-[#6B5F7A]">
-                Mit dem Absenden stimmst du unserer{' '}
-                <a href="/datenschutz" className="underline">Datenschutzerklärung</a> zu.
+                Du erhältst direkt eine Bestätigungs-E-Mail. Die Rechnung folgt innerhalb von 1–2 Werktagen.
               </p>
             </motion.form>
           </div>

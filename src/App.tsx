@@ -70,6 +70,7 @@ import AdminKIManagerBookings from './pages/AdminKIManagerBookings';
 
 import Events from './pages/Events';
 import SpanienRetreat from './pages/SpanienRetreat';
+import SpanienBookingDanke from './pages/SpanienBookingDanke';
 import Blog from './pages/Blog';
 import BlogKI from './pages/BlogKI';
 import BlogWirkung from './pages/BlogWirkung';
@@ -265,6 +266,7 @@ function App() {
 
         <Route path="/events" element={<Events />} />
         <Route path="/spanien-ki-workshop" element={<SpanienRetreat />} />
+        <Route path="/spanien-ki-workshop/danke" element={<SpanienBookingDanke />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog-ki" element={<BlogKI />} />
         <Route path="/blog-wirkung" element={<BlogWirkung />} />

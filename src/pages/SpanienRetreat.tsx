@@ -31,9 +31,9 @@ import SEO from '../components/SEO';
 import { supabase } from '../lib/supabase';
 
 const TOTAL_SEATS = 12;
-const HOURS_PER_DAY = 5;
-const DAYS = 6;
-const PRICE_PER_HOUR = 27;
+const HOURS_PER_DAY = 6;
+const DAYS = 5;
+const PRICE_PER_HOUR = 33;
 const TOTAL_PRICE = PRICE_PER_HOUR * HOURS_PER_DAY * DAYS;
 const RETREAT_DATE_SHORT = '28.06. – 05.07.2026';
 const RETREAT_DATE_LONG = '28. Juni bis 5. Juli 2026';
@@ -53,19 +53,22 @@ const learnTopics = [
   { icon: Heart, title: 'AHA-Erlebnisse garantiert', desc: 'Wir kreieren alles vor Ort und gemeinsam. Du schaust uns über die Schulter.' },
 ];
 
+const LEARN_SLOT_MORNING = '09:00 – 13:00 Uhr';
+const LEARN_SLOT_AFTERNOON = '16:00 – 18:00 Uhr';
+
 const weekPlan = [
-  { day: 'Tag 1', title: 'Ankommen & Klarheit', desc: 'Kennenlernen, deine Position finden, dein Angebot schärfen — der Boden für die ganze Woche.' },
-  { day: 'Tag 2', title: 'Claude & Claude Code Live', desc: 'Mit Claude umgehen lernen, erste Skills nutzen, Claude Code als Werkzeug entdecken.' },
-  { day: 'Tag 3', title: 'KI-Agenten & Workflows', desc: 'Wir bauen gemeinsam einen Agenten, automatisieren Workflows, kombinieren Tools sinnvoll.' },
-  { day: 'Tag 4', title: 'Deine KI-Landingpage', desc: 'Eine Landingpage entsteht vor deinen Augen — du baust mit, du verstehst jeden Schritt.' },
-  { day: 'Tag 5', title: 'Sichtbarkeit & Content', desc: 'Bei Google gefunden werden, Content-Strategie mit KI, Lead-Magnet bauen.' },
-  { day: 'Tag 6', title: 'Integration & nächste Schritte', desc: 'Alles zusammenführen, dein 30-Tage-Plan, gemeinsamer Abschluss in der Sonne.' },
+  { day: 'Mo · Tag 1', title: 'Ankommen, Klarheit & Positionierung', desc: 'Kennenlernen, deine Position finden, dein Angebot schärfen — der Boden für die ganze Woche.', type: 'learn' as const },
+  { day: 'Di · Tag 2', title: 'Claude & Claude Code Live', desc: 'Mit Claude umgehen lernen, erste Skills nutzen, Claude Code als Werkzeug entdecken — auch ohne Programmiererfahrung.', type: 'learn' as const },
+  { day: 'Mi · Tag 3', title: 'KI-Agenten & Workflows', desc: 'Wir bauen gemeinsam einen Agenten, automatisieren Workflows, kombinieren Tools sinnvoll.', type: 'learn' as const },
+  { day: 'Do · Tag 4', title: 'Deine KI-Landingpage', desc: 'Eine Landingpage entsteht vor deinen Augen — du baust mit, du verstehst jeden Schritt.', type: 'learn' as const },
+  { day: 'Fr · Tag 5', title: 'Content, Sichtbarkeit & 30-Tage-Plan', desc: 'Bei Google gefunden werden, Content-Strategie mit KI, Lead-Magnet bauen — und ein klarer Plan für die Wochen danach.', type: 'learn' as const },
+  { day: 'Sa · Tag 6', title: 'Aktivitäten & Freizeit', desc: 'Auszeit zum Wochenausklang — frei zur individuellen Verfügung. Strand, Pool, Ausflug, Siesta, in Ruhe das Gelernte sacken lassen.', type: 'free' as const },
 ];
 
 const faqItems = [
   {
     q: 'Wann genau findet die Workshop-Woche statt?',
-    a: `Vom ${RETREAT_DATE_LONG}. Anreisetag ist Sonntag, der 28.06.2026 — komm in Ruhe an, lerne den Ort und die Gruppe kennen. Der Workshop beginnt am Montag, dem 29.06.2026, und läuft an 6 vollen Tagen (Mo–Sa) gemeinsam mit Claudia & Gabi. Abreisetag ist Sonntag, der 05.07.2026.`,
+    a: `Vom ${RETREAT_DATE_LONG}. Anreisetag ist Sonntag, der 28.06.2026 — komm in Ruhe an, lerne den Ort und die Gruppe kennen. Die Lerntage sind Montag bis Freitag (29.06. – 03.07.2026), Samstag (04.07.) ist Aktivitäten- und Freizeit-Tag. Abreisetag ist Sonntag, der 05.07.2026. An jedem Lerntag lernen wir von 09:00 – 13:00 Uhr und von 16:00 – 18:00 Uhr (6 Stunden) gemeinsam mit Claudia & Gabi.`,
   },
   {
     q: 'Brauche ich KI-Vorkenntnisse?',
@@ -73,15 +76,15 @@ const faqItems = [
   },
   {
     q: 'Was ist im Preis enthalten?',
-    a: 'Im Preis enthalten sind 6 Tage × 5 Stunden Lernzeit (insgesamt 30 Stunden) gemeinsam mit Claudia Conen & Gabi Lindemann. Alle Preise verstehen sich netto, zzgl. gesetzlicher MwSt. Anreise, Unterkunft und Verpflegung organisierst du selbst — das gibt dir maximale Freiheit beim Komfort und Budget.',
+    a: 'Im Preis enthalten sind 5 Lerntage × 6 Stunden Lernzeit (insgesamt 30 Stunden) gemeinsam mit Claudia Conen & Gabi Lindemann — plus 1 Aktivitäten-/Freizeit-Tag mittendrin. Alle Preise verstehen sich netto, zzgl. gesetzlicher MwSt. Anreise, Unterkunft und Verpflegung organisierst du selbst — das gibt dir maximale Freiheit beim Komfort und Budget.',
   },
   {
     q: 'Wie viele Stunden muss ich mindestens dabei sein?',
-    a: 'Die Mindestteilnahme sind 4 Stunden pro Tag. Wir empfehlen aber dringend, alle 5 Stunden mitzumachen — denn jede Einheit baut auf der vorigen auf.',
+    a: 'An jedem Lerntag lernen wir von 09:00 – 13:00 Uhr und von 16:00 – 18:00 Uhr — insgesamt 6 Stunden. Die Mindestteilnahme sind 4 Stunden pro Lerntag. Wir empfehlen aber dringend, alle 6 Stunden mitzumachen — denn jede Einheit baut auf der vorigen auf.',
   },
   {
     q: 'Was passiert nach den Lernstunden?',
-    a: 'Danach ist Freizeit zur freien Verfügung. Pool, Strand, Siesta, gemeinsames Abendessen, ausschlafen — du entscheidest. Genau diese Mischung macht diese Woche aus.',
+    a: 'Danach ist Freizeit zur freien Verfügung. Pool, Strand, Siesta, gemeinsames Abendessen, ausschlafen — du entscheidest. Dazu kommt 1 kompletter Aktivitäten-/Freizeit-Tag mittendrin in der Woche. Genau diese Mischung macht diese Woche aus.',
   },
   {
     q: 'Wo genau in Spanien findet die Workshop-Woche statt?',
@@ -151,7 +154,7 @@ export default function SpanienRetreat() {
     <div className="min-h-screen bg-[#FBF7F0] text-[#2A1F3D] font-inter antialiased selection:bg-[#E8B4C8] selection:text-[#2A1F3D]">
       <SEO
         title="KI-Workshop-Woche in Spanien — Umsetzung & Wachstum unter der spanischen Sonne | Claudia Conen"
-        description="Eine KI-Workshop-Woche in Spanien mit Claudia Conen & Gabi Lindemann. 6 Tage × 5 Stunden Lernzeit, danach Freizeit. Nur 12 Plätze. Bewirb dich jetzt."
+        description="Eine KI-Workshop-Woche in Spanien mit Claudia Conen & Gabi Lindemann. 5 Lerntage × 6 Stunden Lernzeit + 1 Aktivitäten-Tag. Nur 12 Plätze. Bewirb dich jetzt."
         noindex
       />
       <Navigation />
@@ -260,7 +263,7 @@ export default function SpanienRetreat() {
               >
                 <span className="inline-flex items-center gap-2"><MapPin size={16} className="text-[#C97AAF]" /> Spanien · genauer Ort nach Bewerbung</span>
                 <span className="inline-flex items-center gap-2"><Calendar size={16} className="text-[#D4AF37]" /> Anreise: So, 28.06. · Workshop-Start: Mo, 29.06.2026</span>
-                <span className="inline-flex items-center gap-2"><Clock size={16} className="text-[#C97AAF]" /> {HOURS_PER_DAY} h Lernzeit pro Tag</span>
+                <span className="inline-flex items-center gap-2"><Clock size={16} className="text-[#C97AAF]" /> Lernzeit: 9–13 &amp; 16–18 Uhr · Sa frei</span>
                 <span className="inline-flex items-center gap-2"><Users size={16} className="text-[#D4AF37]" /> max. {TOTAL_SEATS} Teilnehmer:innen</span>
               </motion.div>
             </div>
@@ -464,38 +467,81 @@ export default function SpanienRetreat() {
           >
             <p className="text-sm uppercase tracking-[0.3em] font-bold text-[#C97AAF] mb-4">Der Wochenplan</p>
             <h2 className="font-montserrat font-black text-3xl md:text-5xl text-[#2A1F3D] leading-tight">
-              6 Tage. 30 Stunden Lernzeit.<br />
+              5 Lerntage. 1 Auszeit-Tag.<br />
               <span style={{ background: 'linear-gradient(135deg, #D4AF37 0%, #C97AAF 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                Und jede Menge Spanien drumherum.
+                30 Stunden Lernzeit — und jede Menge Spanien drumherum.
               </span>
             </h2>
             <p className="mt-5 text-lg text-[#4A3F5C]">
-              Vormittags &amp; früher Nachmittag: 5 Stunden Lernzeit (Mindestteilnahme: 4 Stunden).
-              Danach gehört der Tag dir.
+              An jedem Lerntag (Mo–Fr) lernen wir in zwei Slots: <strong className="text-[#2A1F3D]">{LEARN_SLOT_MORNING}</strong> und{' '}
+              <strong className="text-[#2A1F3D]">{LEARN_SLOT_AFTERNOON}</strong> — insgesamt 6 Stunden Lernzeit pro Tag (Mindestteilnahme: 4 Stunden).
+              Dazwischen ist Siesta. <strong className="text-[#2A1F3D]">Samstag</strong> ist komplett frei für Aktivitäten &amp; Freizeit.
             </p>
+
+            <div className="mt-7 grid sm:grid-cols-2 gap-3 max-w-2xl mx-auto">
+              <div className="flex items-center gap-3 px-5 py-3 rounded-xl bg-white border border-[#D4AF37]/30 shadow-sm">
+                <Clock size={18} className="text-[#D4AF37]" />
+                <div className="text-left">
+                  <div className="text-[10px] uppercase tracking-wider font-bold text-[#C97AAF]">Vormittags-Slot</div>
+                  <div className="font-bold text-[#2A1F3D]">{LEARN_SLOT_MORNING}</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 px-5 py-3 rounded-xl bg-white border border-[#D4AF37]/30 shadow-sm">
+                <Clock size={18} className="text-[#D4AF37]" />
+                <div className="text-left">
+                  <div className="text-[10px] uppercase tracking-wider font-bold text-[#C97AAF]">Nachmittags-Slot</div>
+                  <div className="font-bold text-[#2A1F3D]">{LEARN_SLOT_AFTERNOON}</div>
+                </div>
+              </div>
+            </div>
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-6">
-            {weekPlan.map((d, i) => (
-              <motion.div
-                key={d.day}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.5, delay: i * 0.06 }}
-                className="rounded-2xl bg-white border border-[#E8B4C8]/30 p-7 shadow-sm hover:shadow-lg transition-all"
-              >
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-black text-sm"
-                       style={{ background: 'linear-gradient(135deg, #D4AF37 0%, #C97AAF 100%)' }}>
-                    {i + 1}
+            {weekPlan.map((d, i) => {
+              const isFree = d.type === 'free';
+              return (
+                <motion.div
+                  key={d.day}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.5, delay: i * 0.06 }}
+                  className={
+                    isFree
+                      ? 'rounded-2xl bg-gradient-to-br from-[#FDE8F2] to-[#FBF1D8] border-2 border-dashed border-[#C97AAF]/50 p-7 shadow-sm hover:shadow-lg transition-all'
+                      : 'rounded-2xl bg-white border border-[#E8B4C8]/30 p-7 shadow-sm hover:shadow-lg transition-all'
+                  }
+                >
+                  <div className="flex items-center gap-3 mb-3">
+                    <div
+                      className="w-10 h-10 rounded-full flex items-center justify-center text-white font-black text-sm"
+                      style={{
+                        background: isFree
+                          ? 'linear-gradient(135deg, #C97AAF 0%, #E8B4C8 100%)'
+                          : 'linear-gradient(135deg, #D4AF37 0%, #C97AAF 100%)',
+                      }}
+                    >
+                      {isFree ? <Sun size={18} /> : i + 1}
+                    </div>
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#C97AAF]">
+                      {d.day}{isFree && ' · Auszeit'}
+                    </span>
                   </div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#C97AAF]">{d.day}</span>
-                </div>
-                <h3 className="font-montserrat font-bold text-2xl text-[#2A1F3D] mb-2">{d.title}</h3>
-                <p className="text-[#6B5F7A] leading-relaxed">{d.desc}</p>
-              </motion.div>
-            ))}
+                  <h3 className="font-montserrat font-bold text-2xl text-[#2A1F3D] mb-2">{d.title}</h3>
+                  <p className="text-[#6B5F7A] leading-relaxed">{d.desc}</p>
+                  {!isFree && (
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#FBF1D8] border border-[#D4AF37]/30 text-[11px] font-bold text-[#A8801F]">
+                        <Clock size={11} /> {LEARN_SLOT_MORNING}
+                      </span>
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#FBF1D8] border border-[#D4AF37]/30 text-[11px] font-bold text-[#A8801F]">
+                        <Clock size={11} /> {LEARN_SLOT_AFTERNOON}
+                      </span>
+                    </div>
+                  )}
+                </motion.div>
+              );
+            })}
           </div>
 
           <div className="mt-10 grid sm:grid-cols-3 gap-4">
@@ -665,7 +711,8 @@ export default function SpanienRetreat() {
                   <h4 className="font-montserrat font-bold text-[#2A1F3D]">Im Preis enthalten</h4>
                 </div>
                 <ul className="space-y-2 text-sm text-[#4A3F5C]">
-                  <li>· 30 Stunden Live-Lernzeit (6 × 5 h)</li>
+                  <li>· 30 Stunden Live-Lernzeit (5 Tage × 6 h)</li>
+                  <li>· + 1 kompletter Aktivitäten- & Freizeit-Tag mittendrin</li>
                   <li>· Persönliche Begleitung in einer Mini-Gruppe</li>
                   <li>· Alle Materialien, Prompts &amp; Vorlagen</li>
                   <li>· Live-Bauen von Landingpage, Lead-Magnet, Agent &amp; Workflows</li>

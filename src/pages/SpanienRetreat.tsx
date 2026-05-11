@@ -65,7 +65,7 @@ const weekPlan = [
 const faqItems = [
   {
     q: 'Wann genau findet die Workshop-Woche statt?',
-    a: `Vom ${RETREAT_DATE_LONG}. Anreisetag ist Sonntag, der 28. Juni; Abreisetag ist Sonntag, der 5. Juli. Dazwischen liegen 6 volle Tage Lernzeit (Mo–Sa) — gemeinsam mit Claudia & Gabi.`,
+    a: `Vom ${RETREAT_DATE_LONG}. Anreisetag ist Sonntag, der 28.06.2026 — komm in Ruhe an, lerne den Ort und die Gruppe kennen. Der Workshop beginnt am Montag, dem 29.06.2026, und läuft an 6 vollen Tagen (Mo–Sa) gemeinsam mit Claudia & Gabi. Abreisetag ist Sonntag, der 05.07.2026.`,
   },
   {
     q: 'Brauche ich KI-Vorkenntnisse?',
@@ -73,7 +73,7 @@ const faqItems = [
   },
   {
     q: 'Was ist im Preis enthalten?',
-    a: 'Im Preis enthalten sind 6 Tage × 5 Stunden Lernzeit (insgesamt 30 Stunden) gemeinsam mit Claudia Conen & Gabi Lindemann. Anreise, Unterkunft und Verpflegung organisierst du selbst — das gibt dir maximale Freiheit beim Komfort und Budget.',
+    a: 'Im Preis enthalten sind 6 Tage × 5 Stunden Lernzeit (insgesamt 30 Stunden) gemeinsam mit Claudia Conen & Gabi Lindemann. Alle Preise verstehen sich netto, zzgl. gesetzlicher MwSt. Anreise, Unterkunft und Verpflegung organisierst du selbst — das gibt dir maximale Freiheit beim Komfort und Budget.',
   },
   {
     q: 'Wie viele Stunden muss ich mindestens dabei sein?',
@@ -259,7 +259,7 @@ export default function SpanienRetreat() {
                 className="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-sm text-[#4A3F5C]"
               >
                 <span className="inline-flex items-center gap-2"><MapPin size={16} className="text-[#C97AAF]" /> Spanien · genauer Ort nach Bewerbung</span>
-                <span className="inline-flex items-center gap-2"><Calendar size={16} className="text-[#D4AF37]" /> {RETREAT_DATE_SHORT} · 6 Lerntage</span>
+                <span className="inline-flex items-center gap-2"><Calendar size={16} className="text-[#D4AF37]" /> Anreise: So, 28.06. · Workshop-Start: Mo, 29.06.2026</span>
                 <span className="inline-flex items-center gap-2"><Clock size={16} className="text-[#C97AAF]" /> {HOURS_PER_DAY} h Lernzeit pro Tag</span>
                 <span className="inline-flex items-center gap-2"><Users size={16} className="text-[#D4AF37]" /> max. {TOTAL_SEATS} Teilnehmer:innen</span>
               </motion.div>
@@ -277,9 +277,16 @@ export default function SpanienRetreat() {
                   Premiere Edition
                 </div>
 
-                <div className="mb-5 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#FDE8F2] border border-[#C97AAF]/30">
-                  <Calendar size={14} className="text-[#C97AAF]" />
-                  <span className="text-xs font-bold text-[#C97AAF] tracking-wide">{RETREAT_DATE_SHORT}</span>
+                <div className="mb-5 rounded-2xl bg-[#FDE8F2] border border-[#C97AAF]/30 px-4 py-3">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Calendar size={14} className="text-[#C97AAF]" />
+                    <span className="text-xs font-bold text-[#C97AAF] tracking-wide uppercase">{RETREAT_DATE_SHORT}</span>
+                  </div>
+                  <ul className="space-y-1 text-[12px] text-[#4A3F5C] leading-snug">
+                    <li><strong className="text-[#2A1F3D]">So, 28.06.2026</strong> · Anreisetag</li>
+                    <li><strong className="text-[#2A1F3D]">Mo, 29.06.2026</strong> · Workshop-Beginn</li>
+                    <li><strong className="text-[#2A1F3D]">So, 05.07.2026</strong> · Abreisetag</li>
+                  </ul>
                 </div>
 
                 <div className="flex items-start gap-3">
@@ -288,9 +295,10 @@ export default function SpanienRetreat() {
                     <p className="text-sm font-semibold uppercase tracking-wider text-[#C97AAF]">Investition</p>
                     <p className="font-montserrat text-4xl md:text-5xl font-black text-[#2A1F3D] mt-1">
                       {TOTAL_PRICE.toLocaleString('de-DE')} €
+                      <span className="text-sm font-semibold text-[#6B5F7A] ml-2">zzgl. MwSt.</span>
                     </p>
                     <p className="text-sm text-[#6B5F7A] mt-1">
-                      pro Teilnehmer:in · {DAYS} Tage × {HOURS_PER_DAY} Std. Lernzeit · {PRICE_PER_HOUR} € / Std.
+                      pro Teilnehmer:in · {DAYS} Tage × {HOURS_PER_DAY} Std. Lernzeit · {PRICE_PER_HOUR} € / Std. netto
                     </p>
                   </div>
                 </div>
@@ -640,9 +648,12 @@ export default function SpanienRetreat() {
                 <span className="text-[#2A1F3D] block text-lg md:text-xl font-semibold mt-3">
                   pro Teilnehmer:in · für die Lernzeit
                 </span>
+                <span className="block text-sm font-semibold text-[#C97AAF] mt-2">
+                  Alle Preise verstehen sich netto · zzgl. gesetzlicher MwSt.
+                </span>
               </h2>
               <p className="mt-4 text-[#4A3F5C]">
-                Das ergibt sich aus <strong>{DAYS} Tagen × {HOURS_PER_DAY} Stunden × {PRICE_PER_HOUR} €</strong> — also 30 Stunden Live-Begleitung mit Claudia &amp; Gabi.
+                Das ergibt sich aus <strong>{DAYS} Tagen × {HOURS_PER_DAY} Stunden × {PRICE_PER_HOUR} € netto</strong> — also 30 Stunden Live-Begleitung mit Claudia &amp; Gabi.
                 Mindestteilnahme: 4 Stunden pro Tag.
               </p>
             </div>

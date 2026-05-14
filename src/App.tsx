@@ -71,6 +71,8 @@ import AdminKIManagerBookings from './pages/AdminKIManagerBookings';
 import Events from './pages/Events';
 import SpanienRetreat from './pages/SpanienRetreat';
 import SpanienBookingDanke from './pages/SpanienBookingDanke';
+import KIWorkshopUnverwechselbar from './pages/KIWorkshopUnverwechselbar';
+import KIWorkshopUnverwechselbarDanke from './pages/KIWorkshopUnverwechselbarDanke';
 import Blog from './pages/Blog';
 import BlogKI from './pages/BlogKI';
 import BlogWirkung from './pages/BlogWirkung';
@@ -267,6 +269,8 @@ function App() {
         <Route path="/events" element={<Events />} />
         <Route path="/spanien-ki-workshop" element={<SpanienRetreat />} />
         <Route path="/spanien-ki-workshop/danke" element={<SpanienBookingDanke />} />
+        <Route path="/ki-workshop-unverwechselbar" element={<KIWorkshopUnverwechselbar />} />
+        <Route path="/ki-workshop-unverwechselbar/danke" element={<KIWorkshopUnverwechselbarDanke />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog-ki" element={<BlogKI />} />
         <Route path="/blog-wirkung" element={<BlogWirkung />} />

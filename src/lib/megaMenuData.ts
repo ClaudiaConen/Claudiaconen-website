@@ -3,7 +3,7 @@ import {
   Globe, RefreshCw, Compass, GraduationCap, Award, MessageSquare,
   BookOpen, Wrench, Gift, Monitor, Send, Brain,
   ChevronsRight, User, Eye, Sun, TrendingUp, Shield, Newspaper,
-  Mail, Video, Activity, Building2, Bot
+  Mail, Video, Activity, Building2, Bot, Sparkles
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
@@ -238,6 +238,7 @@ export const megaMenuItems: MegaMenuItem[] = [
         panelTitle: 'Events & Termine',
         panelSubtitle: 'Erlebe Claudia Conen live',
         tiles: [
+          { name: 'KI-Workshop "Die Unverwechselbaren"', desc: '2 Tage live · 3 Coaches · Sichtbar werden im KI-Zeitalter', href: '/ki-workshop-unverwechselbar', icon: Sparkles, fullWidth: true },
           { name: 'Kommende Events', desc: 'Alle Termine auf einen Blick', href: '/events', icon: Calendar },
           { name: 'Online-Webinare', desc: 'Live & kostenlos dabei sein', href: '/wissen-webinare', icon: Monitor },
           { name: 'Claudia als Rednerin buchen', desc: 'Keynote-Anfragen für deine Veranstaltung', href: '/#contact', icon: Star, fullWidth: true },

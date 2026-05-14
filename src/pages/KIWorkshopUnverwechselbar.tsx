@@ -430,9 +430,9 @@ export default function KIWorkshopUnverwechselbar() {
       </div>
 
       {/* === PROMISE === */}
-      <section className="relative py-20 md:py-28 bg-[#FFF1D3] text-[#0A1428]">
+      <section className="relative py-20 md:py-28 bg-[#FFF8E8] text-[#0A1428]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-xs uppercase tracking-[0.3em] font-bold text-[#E5A500] mb-5">Das Versprechen</div>
+          <div className="text-xs uppercase tracking-[0.3em] font-bold text-[#8B5A0A] mb-5">Das Versprechen</div>
           <div className="grid lg:grid-cols-12 gap-10 items-start">
             <motion.h2
               initial={{ opacity: 0, y: 16 }}
@@ -456,7 +456,7 @@ export default function KIWorkshopUnverwechselbar() {
             >
               <p>Die meisten <span className="text-[#E91E63] font-semibold">KI-Workshops</span> sind <strong>Tool-Paraden</strong>. Du lernst zehn Plattformen kennen und setzt am Ende keine davon ein. Wir machen das Gegenteil.</p>
               <p>An Tag 1 entsteht deine <strong>Klarheit</strong>. An Tag 2 entsteht dein <strong>sichtbares Ergebnis</strong>. Keine offenen Baustellen. Kein „mache ich dann zuhause". Du gehst mit etwas raus, das online und benutzbar ist.</p>
-              <p className="pt-2 italic text-[#E5A500] font-medium">
+              <p className="pt-2 italic text-[#8B5A0A] font-medium">
                 Echt. Persönlich. Authentisch. <span className="text-[#0A1428]/70 not-italic">Statt perfekt auf Mausklick.</span>
               </p>
             </motion.div>
@@ -675,7 +675,7 @@ export default function KIWorkshopUnverwechselbar() {
       </section>
 
       {/* === AUDIENCE === */}
-      <section className="relative py-20 md:py-28 bg-[#FFF1D3] text-[#0A1428]">
+      <section className="relative py-20 md:py-28 bg-[#FFF8E8] text-[#0A1428]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -684,7 +684,7 @@ export default function KIWorkshopUnverwechselbar() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <div className="text-xs uppercase tracking-[0.3em] font-bold text-[#E5A500] mb-4">Für wen — und für wen nicht</div>
+            <div className="text-xs uppercase tracking-[0.3em] font-bold text-[#8B5A0A] mb-4">Für wen — und für wen nicht</div>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium leading-tight" style={{ fontFamily: 'Cormorant Garamond, Georgia, serif' }}>
               Ehrliche Antwort:<br />
               Nicht für <em style={{ fontStyle: 'italic' }}>jeden</em>.
@@ -706,7 +706,7 @@ export default function KIWorkshopUnverwechselbar() {
               <ul className="space-y-3 text-[#0A1428]/80">
                 {audienceYes.map((y) => (
                   <li key={y} className="flex items-start gap-3">
-                    <CheckCircle2 size={18} className="text-[#E5A500] mt-0.5 flex-shrink-0" />
+                    <CheckCircle2 size={18} className="text-[#8B5A0A] mt-0.5 flex-shrink-0" />
                     <span>{y}</span>
                   </li>
                 ))}
@@ -791,7 +791,7 @@ export default function KIWorkshopUnverwechselbar() {
       </section>
 
       {/* === PRICING === */}
-      <section id="anmelden" className="relative py-20 md:py-28 bg-[#FFF1D3] text-[#0A1428]">
+      <section id="anmelden" className="relative py-20 md:py-28 bg-[#FFF8E8] text-[#0A1428]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -800,7 +800,7 @@ export default function KIWorkshopUnverwechselbar() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <div className="text-xs uppercase tracking-[0.3em] font-bold text-[#E5A500] mb-4">Anmeldung</div>
+            <div className="text-xs uppercase tracking-[0.3em] font-bold text-[#8B5A0A] mb-4">Anmeldung</div>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium leading-tight mb-5" style={{ fontFamily: 'Cormorant Garamond, Georgia, serif' }}>
               Drei Wege rein.<br />
               Ein <em style={{ fontStyle: 'italic' }}>fertiges Ergebnis</em>.
@@ -830,7 +830,7 @@ export default function KIWorkshopUnverwechselbar() {
                     Empfohlen
                   </div>
                 )}
-                <div className={`text-xs uppercase tracking-wider font-bold mb-2 ${t.featured ? 'text-[#FFE066]' : 'text-[#E5A500]'}`}>{t.name}</div>
+                <div className={`text-xs uppercase tracking-wider font-bold mb-2 ${t.featured ? 'text-[#FFE066]' : 'text-[#8B5A0A]'}`}>{t.name}</div>
                 <p className={`text-sm mb-5 ${t.featured ? 'text-white/70' : 'text-[#0A1428]/70'}`}>{t.desc}</p>
                 <div className="font-black text-5xl mb-1" style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', fontWeight: 600 }}>
                   {TIER_PRICES[t.id]}
@@ -842,7 +842,7 @@ export default function KIWorkshopUnverwechselbar() {
                 <ul className="space-y-2 mb-7">
                   {t.features.map((f) => (
                     <li key={f} className="flex items-start gap-2 text-sm">
-                      <CheckCircle2 size={16} className={`${t.featured ? 'text-[#FFE066]' : 'text-[#E5A500]'} mt-0.5 flex-shrink-0`} />
+                      <CheckCircle2 size={16} className={`${t.featured ? 'text-[#FFE066]' : 'text-[#8B5A0A]'} mt-0.5 flex-shrink-0`} />
                       <span className={t.featured ? 'text-white/85' : 'text-[#0A1428]/85'}>{f}</span>
                     </li>
                   ))}

@@ -25,7 +25,7 @@ export default function KIWorkshopUnverwechselbarDanke() {
   const price = state.tierPriceNetto;
 
   return (
-    <div className="min-h-screen bg-[#0A1428] text-[#FDFCFA] font-inter antialiased selection:bg-[#FF3FA1] selection:text-[#FDFCFA]">
+    <div className="themed-page min-h-screen bg-[#0A1428] text-[#FDFCFA] font-inter antialiased selection:bg-[#FF3FA1] selection:text-[#FDFCFA]">
       <SEO
         title="Anmeldung eingegangen — KI-Workshop Die Unverwechselbaren | Claudia Conen"
         description="Deine Anmeldung zum KI-Workshop ist bei uns eingegangen. So geht es weiter."

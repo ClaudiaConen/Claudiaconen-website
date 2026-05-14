@@ -1363,3 +1363,16 @@ html, body { cursor: auto; }
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee { animation: none; }
 }
+
+/* ===== themed-page: globale h1/h2/p-Farb- und Margin-Regeln neutralisieren,
+   damit Tailwind-utilities und der Wrapper die Textfarbe bestimmen können ===== */
+.themed-page h1,
+.themed-page h2,
+.themed-page h3,
+.themed-page h4,
+.themed-page h5,
+.themed-page h6,
+.themed-page p {
+  color: inherit;
+  margin-bottom: 0;
+}

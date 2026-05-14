@@ -262,7 +262,7 @@ export default function KIWorkshopUnverwechselbar() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0A1428] text-[#FDFCFA] font-inter antialiased selection:bg-[#FF3FA1] selection:text-[#FDFCFA]">
+    <div className="themed-page min-h-screen bg-[#0A1428] text-[#FDFCFA] font-inter antialiased selection:bg-[#FF3FA1] selection:text-[#FDFCFA]">
       <SEO
         title="KI-Workshop · Die Unverwechselbaren — Sichtbar werden im KI-Zeitalter | Claudia Conen"
         description="In zwei Tagen zu klarer Positionierung, fertiger Landingpage und einem KI-System in deiner Sprache. Mit Claudia Conen, Gabi Lindemann und Ann-Kathrin Andresen."

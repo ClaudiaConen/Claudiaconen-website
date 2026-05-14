@@ -105,7 +105,7 @@ export default function KIWorkshopUnverwechselbarDanke() {
             >
               <div className="text-xs uppercase tracking-wider font-bold text-[#FFCE3D] mb-1">Deine Buchung</div>
               <div className="font-bold text-lg">
-                Tier {TIER_LABEL[tier] ?? tier}
+                Paket {TIER_LABEL[tier] ?? tier}
                 <span className="text-white/70 font-normal"> · {price.toLocaleString('de-DE')} € netto (zzgl. MwSt.)</span>
               </div>
             </motion.div>

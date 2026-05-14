@@ -193,7 +193,7 @@ export default function KIWorkshopUnverwechselbar() {
     const messageBlocks = [
       `[KI-WORKSHOP UNVERWECHSELBAR — VERBINDLICHE BUCHUNG]`,
       ``,
-      `Tier: ${TIER_LABELS[selectedTier]} — ${tierPrice.toLocaleString('de-DE')} € netto (zzgl. MwSt.)`,
+      `Paket: ${TIER_LABELS[selectedTier]} — ${tierPrice.toLocaleString('de-DE')} € netto (zzgl. MwSt.)`,
       ``,
       `Rechnungsdaten:`,
       fullName,
@@ -962,7 +962,7 @@ export default function KIWorkshopUnverwechselbar() {
 
               {/* Tier-Auswahl */}
               <div>
-                <label className="block text-xs uppercase tracking-wider font-bold text-[#FF6BB8] mb-3">Dein Tier *</label>
+                <label className="block text-xs uppercase tracking-wider font-bold text-[#FF6BB8] mb-3">Deine Auswahl *</label>
                 <div className="grid grid-cols-3 gap-2">
                   {tiers.map((t) => (
                     <button
@@ -984,7 +984,7 @@ export default function KIWorkshopUnverwechselbar() {
                 </div>
                 <div className="mt-3 rounded-xl bg-gradient-to-r from-[#FFCE3D]/10 to-[#FF3FA1]/10 border border-[#FFCE3D]/30 p-4 text-center">
                   <div className="text-[10px] uppercase tracking-wider font-bold text-[#FF6BB8]">Gebuchte Leistung</div>
-                  <div className="font-bold text-white mt-1">KI-Workshop · Die Unverwechselbaren · Tier {TIER_LABELS[selectedTier]}</div>
+                  <div className="font-bold text-white mt-1">KI-Workshop · Die Unverwechselbaren · Paket {TIER_LABELS[selectedTier]}</div>
                   <div className="text-2xl font-black text-[#FFE066] mt-2">
                     {tierPrice.toLocaleString('de-DE')} €
                     <span className="text-sm font-semibold text-white/60 ml-2">netto · zzgl. MwSt.</span>

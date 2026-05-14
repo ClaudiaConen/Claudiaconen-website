@@ -158,7 +158,7 @@ Deno.serve(async (req: Request) => {
       <h2 style="margin:0 0 12px;font-size:13px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(253,252,250,0.7);">Gebuchte Leistung</h2>
       <div style="background:rgba(255,206,61,0.08);border:1px solid rgba(255,206,61,0.3);border-radius:14px;padding:16px 20px;">
         <div style="display:flex;justify-content:space-between;align-items:baseline;">
-          <strong style="color:#FFCE3D;font-size:15px;">KI-Workshop · Tier ${safeTierLabel}</strong>
+          <strong style="color:#FFCE3D;font-size:15px;">KI-Workshop · Paket ${safeTierLabel}</strong>
           <span style="font-family:'SFMono-Regular',Menlo,monospace;font-weight:900;font-size:20px;color:#FFCE3D;">${priceFmt} €</span>
         </div>
         <div style="margin-top:6px;font-size:12px;color:rgba(253,252,250,0.7);">netto · zzgl. gesetzlicher MwSt.</div>
@@ -193,7 +193,7 @@ Deno.serve(async (req: Request) => {
 
 Bitte Rechnung über ${priceFmt} € netto (zzgl. MwSt.) erstellen.
 
-Gebuchter Tier: ${tierLabel}
+Gebuchtes Paket: ${tierLabel}
 Preis: ${priceFmt} € netto
 
 Name: ${fullName}${body.firma ? `\nFirma: ${body.firma}` : ""}
@@ -234,7 +234,7 @@ Datenschutz akzeptiert: ja${body.nachricht ? `\n\nNachricht:\n${body.nachricht}`
       <div style="background:rgba(255,206,61,0.08);border:1px solid rgba(255,206,61,0.3);border-radius:14px;padding:18px 22px;margin-top:16px;">
         <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#FFCE3D;font-weight:700;">Deine Buchung</div>
         <div style="margin-top:8px;font-size:15px;color:#FDFCFA;">
-          <strong>Tier ${safeTierLabel}</strong> · ${priceFmt} € netto (zzgl. MwSt.)
+          <strong>Paket ${safeTierLabel}</strong> · ${priceFmt} € netto (zzgl. MwSt.)
         </div>
       </div>
 
@@ -265,7 +265,7 @@ Datenschutz akzeptiert: ja${body.nachricht ? `\n\nNachricht:\n${body.nachricht}`
 deine verbindliche Buchung des KI-Workshops „Die Unverwechselbaren" ist bei uns eingegangen.
 
 Deine Buchung:
-- Tier: ${tierLabel}
+- Paket: ${tierLabel}
 - Preis: ${priceFmt} € netto (zzgl. MwSt.)
 
 So geht es weiter:

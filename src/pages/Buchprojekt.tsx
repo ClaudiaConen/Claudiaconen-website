@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import BuchprojektFormModal from '../components/BuchprojektFormModal';
 import { supabaseBuchprojekt as supabase } from '../lib/supabaseBuchprojekt';
+import SEO from '../components/SEO';
 
 /* --------------------------------------------------------------------------
  * THE POWER OF AI – Die 80 Stimmen deiner Stadt
@@ -50,6 +51,13 @@ export default function Buchprojekt() {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
+    <>
+      <SEO
+        title="Buchprojekt – Schreib dich ins Gedächtnis | The Power of AI"
+        description="Werde Co-Autor & unverwechselbar im KI-Zeitalter. Jetzt Platz sichern im einzigartigen Sammelwerk."
+        ogImage="/buchprojekt-og.jpg"
+        canonicalUrl="https://claudiaconen.com/buchprojekt"
+      />
     <div className="min-h-screen bg-poai-bg text-poai-text font-inter selection:bg-poai-magenta selection:text-white antialiased">
       <AuroraBackdrop />
       <PageProgress />
@@ -73,6 +81,7 @@ export default function Buchprojekt() {
       <FloatingCTA onCTA={() => setModalOpen(true)} />
       <BuchprojektFormModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
     </div>
+    </>
   );
 }
 

@@ -54,8 +54,8 @@ export default function Impressum() {
                 </h2>
                 <p className="leading-relaxed">
                   Claudia Conen<br />
-                  Nibelungenweg 58<br />
-                  50996 Köln
+                  Beisenweg 20<br />
+                  58452 Witten
                 </p>
               </section>
 

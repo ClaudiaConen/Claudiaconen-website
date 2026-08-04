@@ -91,18 +91,12 @@ export default function Navigation() {
             onClick={(e) => { e.preventDefault(); navigate('/'); closeMegaMenu(); }}
             className="flex-shrink-0 hover:opacity-80 transition-opacity duration-300"
           >
-            <span
-              className="font-montserrat font-black text-[1.55rem] tracking-tight whitespace-nowrap"
-              style={{
-                background: 'linear-gradient(135deg, #D4AF37 0%, #F7E7CE 50%, #C9A961 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-                filter: 'drop-shadow(0 0 10px rgba(212,175,55,0.3))',
-              }}
-            >
-              CLAUDIA CONEN
-            </span>
+            <img
+              src="/logo-claudia-neu.jpg"
+              alt="Claudia Conen – KI & Mensch"
+              className="h-12 w-12 rounded-full object-cover"
+              style={{ filter: 'drop-shadow(0 0 8px rgba(212,175,55,0.4))' }}
+            />
           </a>
 
           <ul className="hidden xl:flex items-center gap-1 list-none">

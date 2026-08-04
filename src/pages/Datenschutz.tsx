@@ -19,7 +19,7 @@ export default function Datenschutz() {
 
             <div className="space-y-8 text-gray-900">
               <p className="leading-relaxed">
-                Wir freuen uns über dein Interesse an unserer Website. Der Schutz deiner personenbezogenen Daten ist uns wichtig. Nachfolgend informieren wir über die Erhebung und Verwendung personenbezogener Daten gemäß der Datenschutzgrundverordnung (DSGVO) und des Telekommunikation-Telemedien-Datenschutzgesetzes (TTDSG).
+                Wir freuen uns über dein Interesse an unserer Website. Der Schutz deiner personenbezogenen Daten ist uns wichtig. Nachfolgend informieren wir über die Erhebung und Verwendung personenbezogener Daten gemäß der Datenschutzgrundverordnung (DSGVO) und des Telekommunikation-Digitale-Dienste-Datenschutz-Gesetzes (TDDDG).
               </p>
 
               <section>

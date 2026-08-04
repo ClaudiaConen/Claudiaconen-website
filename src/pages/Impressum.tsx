@@ -20,7 +20,7 @@ export default function Impressum() {
             <div className="space-y-8 text-gray-900">
               <section>
                 <h2 className="text-xl font-montserrat font-semibold text-bright-gold mb-3">
-                  Angaben gemäß § 5 TMG:
+                  Angaben gemäß § 5 DDG:
                 </h2>
                 <p className="leading-relaxed">
                   Claudia Conen<br />
@@ -50,7 +50,7 @@ export default function Impressum() {
 
               <section>
                 <h2 className="text-xl font-montserrat font-semibold text-bright-gold mb-3">
-                  Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV:
+                  Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV:
                 </h2>
                 <p className="leading-relaxed">
                   Claudia Conen<br />
@@ -73,7 +73,7 @@ export default function Impressum() {
                   Haftung für Inhalte
                 </h2>
                 <p className="leading-relaxed">
-                  Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten verantwortlich. Nach §§ 8 bis 10 TMG sind wir jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich.
+                  Als Diensteanbieter sind wir gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten verantwortlich. Nach §§ 8 bis 10 DDG sind wir jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich.
                 </p>
               </section>
 
@@ -100,7 +100,7 @@ export default function Impressum() {
                   Hosting & technische Umsetzung:
                 </h2>
                 <p className="leading-relaxed">
-                  Diese Website wird über <strong>Cloudflare</strong> gehostet. Technische Umsetzung: <strong>Bolt.new</strong>
+                  Diese Website wird über <strong>Netlify</strong> gehostet. DNS und CDN: <strong>Cloudflare</strong>.
                 </p>
               </section>
             </div>

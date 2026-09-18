@@ -1460,3 +1460,50 @@ html, body { cursor: auto; }
   .tuer-karte::before { animation: none; }
   .tuer-karte { transition: none; }
 }
+
+
+/* ---- Laufendes Logo-Band ---------------------------------------------- */
+/* Uebernommen aus dem Prototyp hautpseite26. Die weichen Raender links und
+   rechts entstehen durch eine Maske, damit die Logos nicht hart abgeschnitten
+   wirken, sondern auslaufen. */
+.logo-band {
+  overflow: hidden;
+  width: 100%;
+  -webkit-mask: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  mask: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+
+.logo-band-track {
+  display: flex;
+  align-items: center;
+  gap: 58px;
+  width: max-content;
+  animation: logoBand 125s linear infinite;
+}
+
+.logo-band-track img {
+  height: 30px;
+  width: auto;
+  max-width: 150px;
+  object-fit: contain;
+  display: block;
+  opacity: 0.74;
+  filter: grayscale(0.82);
+  transition: opacity 0.4s, filter 0.4s;
+}
+
+.logo-band-track img:hover {
+  opacity: 1;
+  filter: none;
+}
+
+@keyframes logoBand {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Steht still, wenn Bewegung abgeschaltet ist. Die Logos bleiben sichtbar. */
+@media (prefers-reduced-motion: reduce) {
+  .logo-band-track { animation: none; flex-wrap: wrap; width: 100%; justify-content: center; gap: 34px; }
+  .logo-band { -webkit-mask: none; mask: none; }
+}

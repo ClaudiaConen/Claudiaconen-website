@@ -162,7 +162,7 @@ export const megaMenuItems: MegaMenuItem[] = [
         panelSubtitle: 'Warum du unersetzlich bist — heute mehr denn je',
         tiles: [
           { name: 'Was KI nicht kann', desc: 'Unverwechselbarkeit als Wettbewerbsvorteil', href: '/blog-ki', icon: Brain },
-          { name: 'Neurowissenschaft & KI', desc: '180ms Emotion — was kein Algorithmus ersetzt', href: '/blog-neuro', icon: Activity },
+          { name: 'Neurowissenschaft & KI', desc: 'Was kein Algorithmus ersetzt', href: '/blog-neuro', icon: Activity },
           { name: 'Deine Stimme vs. KI-Stimme', desc: 'Das wertvollste Marketinginstrument', href: '/blog-wirkung', icon: Mic },
           { name: 'Blog: Mensch & KI', desc: 'Aktuelle Artikel & Impulse', href: '/blog-ki', icon: Edit3 },
         ],

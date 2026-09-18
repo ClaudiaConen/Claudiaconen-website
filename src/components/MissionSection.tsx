@@ -62,10 +62,10 @@ export default function MissionSection() {
 
               <div className="bg-gradient-to-r from-[#D4AF37]/10 to-[#FFD700]/10 rounded-xl p-6 my-6">
                 <p className="text-2xl md:text-3xl font-bold text-midnight-blue mb-2">
-                  180 Millisekunden
+                  Der erste Moment
                 </p>
                 <p className="text-lg">
-                  Deine Chance. Emotional zu berühren, noch bevor der Verstand deiner Zuhörer reagiert.
+                  Deine Chance. Emotional zu berühren, bevor der Verstand deiner Zuhörer nachzieht.
                 </p>
               </div>
 

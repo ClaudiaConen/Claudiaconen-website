@@ -52,7 +52,7 @@ const CAROUSEL_CARDS: CarouselCard[] = [
   },
   {
     title: 'GESCHICHTEN SCHAFFEN GÄNSEHAUT',
-    subtitle: 'Bilder wirken 60.000x schneller als Fakten\n\nStorytelling • Emotional Selling • Elevator Pitch',
+    subtitle: 'Menschen merken sich Bilder, nicht Aufzählungen\n\nStorytelling • Emotional Selling • Elevator Pitch',
     icon: Headphones,
     link: '/speaker-storytelling',
     gradient: 'from-[#B8860B] via-[#D4AF37] to-[#FFD700]',

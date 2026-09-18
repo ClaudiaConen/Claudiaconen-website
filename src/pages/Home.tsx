@@ -28,7 +28,7 @@ export default function Home() {
     <div className="relative">
       <SEO
         title="Claudia Conen | Voice-to-Brain® Expert Köln | Der Türöffner ins Kundengehirn"
-        description="In nur 180ms entscheidet sich alles. Claudia Conen aus Köln zeigt dir, wie du mit Voice-to-Brain® deine Persönlichkeit zum unkopierbaren Erfolgsgarant machst. Jetzt mehr erfahren!"
+        description="Der erste Eindruck entsteht, bevor der erste Satz zu Ende ist. Claudia Conen aus Köln zeigt dir, wie deine Persönlichkeit zu dem wird, was keine KI kopieren kann."
         keywords={SEO_KEYWORDS}
       />
       <a href="#main" className="visually-hidden focusable">

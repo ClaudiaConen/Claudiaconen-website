@@ -35,7 +35,7 @@ export default function Offers() {
         '12 wöchentliche Live-Sessions',
         '7 Schritte der Voice-to-Brain™ Methode',
         'WhatsApp-Support & Peer-Learning',
-        '180ms Neurowissenschaft nutzen',
+        'Wirkung verstehen und gezielt einsetzen',
       ],
       buttonText: 'Hier weitere Informationen',
       buttonColor: 'from-[#D4AF37] to-[#FFD700]',

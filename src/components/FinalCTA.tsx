@@ -20,8 +20,8 @@ export default function FinalCTA() {
           </h2>
 
           <p className="text-base md:text-xl text-midnight-blue/80 max-w-2xl mx-auto leading-relaxed">
-            In nur 180ms entscheidet sich, ob du Vertrauen gewinnst oder austauschbar bleibst.
-            Lass uns gemeinsam sicherstellen, dass du die ersten 180ms gewinnst.
+            Ob du Vertrauen gewinnst oder austauschbar bleibst, entscheidet sich früher, als
+            der Verstand mitkommt. Lass uns dafür sorgen, dass dieser Moment dir gehört.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 items-center justify-center pt-2 md:pt-4">

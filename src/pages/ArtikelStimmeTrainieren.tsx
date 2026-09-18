@@ -22,6 +22,8 @@ const INHALT: ArtikelInhalt = {
   vorspann:
     'Stimme ist kein Talent, sondern Gewohnheit. Und Gewohnheiten ändern sich nicht durch Wissen, sondern durch Wiederholung an der richtigen Stelle.',
 
+  motiv: 'Später hier: Mikrofon und Aufnahmesituation, ruhig und nah.',
+
   abschnitte: [
     {
       titel: 'Warum die Aufnahme der wichtigste Teil ist',

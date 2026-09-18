@@ -21,6 +21,8 @@ const INHALT: ArtikelInhalt = {
   vorspann:
     'Die Spanne ist groß, und das hat Gründe, die sich benennen lassen. Wer sie kennt, kann ein Angebot einordnen, statt nur auf die Zahl am Ende zu schauen.',
 
+  motiv: 'Später hier: Claudia auf der Bühne, Totale mit Publikum.',
+
   abschnitte: [
     {
       titel: 'Was den Preis wirklich bestimmt',

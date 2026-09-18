@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import Navigation from './Navigation';
 import Footer from './Footer';
 import SEO from './SEO';
+import ArtikelBild from './ArtikelBild';
 
 /**
  * Geruest fuer Artikel, die eine echte Frage beantworten.
@@ -32,6 +33,7 @@ export type ArtikelInhalt = {
   vorspann: string;
   bereich: string;
   aktualisiert: string;
+  motiv?: string;
   abschnitte: Abschnitt[];
   fragen: { frage: string; antwort: string }[];
   weiter: { text: string; knopf: string; ziel: string };
@@ -99,6 +101,8 @@ export default function ArtikelSeite({ inhalt }: { inhalt: ArtikelInhalt }) {
           <p className="mt-8 font-inter text-lg leading-relaxed text-midnight-blue/75">
             {inhalt.vorspann}
           </p>
+
+          <ArtikelBild bereich={inhalt.bereich} motiv={inhalt.motiv} />
 
           {inhalt.abschnitte.map((a) => (
             <section key={a.titel} className="mt-12">

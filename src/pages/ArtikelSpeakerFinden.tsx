@@ -21,6 +21,8 @@ const INHALT: ArtikelInhalt = {
   vorspann:
     'Die meisten Entscheidungen fallen falsch, weil zuerst nach Themen gesucht wird. Das Thema ist aber austauschbar. Die Wirkung im Raum ist es nicht.',
 
+  motiv: 'Später hier: der Blick von der Bühne in einen vollen Saal.',
+
   abschnitte: [
     {
       titel: 'Frage eins: Was soll sich danach verändert haben?',

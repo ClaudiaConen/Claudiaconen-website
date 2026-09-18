@@ -1376,3 +1376,89 @@ html, body { cursor: auto; }
   color: inherit;
   margin-bottom: 0;
 }
+
+
+/* ---- Die vier Tueren auf der Startseite ------------------------------- */
+/* Weniger transparent als die Hero-Kacheln (Wunsch vom 18.09.2026: "das
+   Blau nicht so transparent"), darueber ein weisser Schimmer und ein Goldrand,
+   der langsam wandert. Alles sehr langsam: Was sich schnell bewegt, stoert
+   beim Lesen, und schwer Lesbares wirkt nicht hochwertig, sondern
+   unglaubwuerdig. */
+.tuer-karte {
+  position: relative;
+  overflow: hidden;
+  background: rgba(20, 33, 58, 0.9);
+  backdrop-filter: blur(18px) saturate(1.15);
+  -webkit-backdrop-filter: blur(18px) saturate(1.15);
+  border: 1px solid rgba(218, 165, 32, 0.38);
+  box-shadow:
+    0 18px 50px -12px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: border-color 0.6s ease, box-shadow 0.6s ease, transform 0.6s ease;
+}
+
+/* Der weisse Schimmer. Wandert einmal alle neun Sekunden durch die Kachel. */
+.tuer-karte::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.07) 50%,
+    transparent 65%
+  );
+  transform: translateX(-100%);
+  animation: tuerSchimmer 9s ease-in-out infinite;
+}
+
+/* Der Goldrand, der ein wenig atmet. */
+.tuer-karte::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  pointer-events: none;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    120deg,
+    rgba(218, 165, 32, 0.15),
+    rgba(244, 208, 63, 0.55),
+    rgba(218, 165, 32, 0.15)
+  );
+  background-size: 220% 220%;
+  animation: tuerGoldrand 12s ease-in-out infinite;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.tuer-karte:hover {
+  border-color: rgba(218, 165, 32, 0.6);
+  box-shadow:
+    0 22px 60px -12px rgba(0, 0, 0, 0.68),
+    0 0 38px -10px rgba(218, 165, 32, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+@keyframes tuerSchimmer {
+  0% { transform: translateX(-100%); }
+  55% { transform: translateX(100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes tuerGoldrand {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Wer Bewegung im Betriebssystem abgeschaltet hat, bekommt eine ruhige
+   Kachel. Der Goldrand bleibt, er steht dann nur still. */
+@media (prefers-reduced-motion: reduce) {
+  .tuer-karte::after { animation: none; opacity: 0; }
+  .tuer-karte::before { animation: none; }
+  .tuer-karte { transition: none; }
+}

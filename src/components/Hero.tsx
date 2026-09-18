@@ -124,7 +124,7 @@ export default function Hero() {
               <h1 id="hero-headline" className="font-montserrat font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight">
                 <span className="headline-line1">Würdest du DIR selbst zuhören?</span>
                 <span className="headline-line2 text-xl sm:text-2xl md:text-3xl lg:text-4xl mb-6 block">
-                  Im Herz berühren, um im Kopf zu bleiben.
+                  Berühre das Herz. Bleib im Kopf.
                 </span>
               </h1>
 
@@ -135,12 +135,21 @@ export default function Hero() {
                 transition={{ duration: 0.2 }}
               >
                 <span className="subline-part1">
-                  In einer Welt, wo <span className="keyword-highlight">KI Perfektion</span> auf Mausklick liefert, wird deine <span className="keyword-highlight">Unverwechselbarkeit</span> zur Währung.
+                  KI liefert <span className="keyword-highlight">Perfektion</span> auf Mausklick.
                 </span>
                 <span className="subline-part2">
-                  <span className="keyword-highlight">Entdecke</span>, wie du beides <span className="keyword-highlight">gewinnbringend</span> nutzt.
+                  Deine <span className="keyword-highlight">Unverwechselbarkeit</span> schafft <span className="keyword-highlight">Vertrauen</span>.
                 </span>
               </motion.div>
+
+              {/* Hauchzart, damit klar ist: beides ist moeglich, mit KI und ohne. */}
+              <p className="mt-5 font-inter text-xs sm:text-sm font-light tracking-[0.22em] text-pearl-white/45">
+                mit und ohne KI
+              </p>
+
+              <p className="mt-6 font-montserrat text-xs sm:text-sm font-semibold uppercase tracking-[0.18em] text-pearl-white/60">
+                Rhetorik · Storytelling · Performance · Wirkung
+              </p>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-3">

@@ -98,7 +98,7 @@ const TUEREN: Tuer[] = [
 
 export default function Tueren() {
   return (
-    <section className="relative bg-midnight-blue" aria-labelledby="tueren-titel">
+    <section className="relative bg-midnight-blue" aria-label="Wofür bist du hier?">
       {/* Platz fuer ein spaeteres Hintergrundvideo. Bis dahin ein ruhiger Verlauf. */}
       <div
         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-royal-navy/70 via-midnight-blue to-midnight-blue"
@@ -106,36 +106,10 @@ export default function Tueren() {
       />
 
       <div className="relative mx-auto max-w-5xl px-6 py-20 sm:py-28">
-        <header className="max-w-3xl">
-          <h2
-            id="tueren-titel"
-            className="font-montserrat text-3xl font-bold leading-[1.1] tracking-tight text-pearl-white sm:text-5xl"
-          >
-            Würdest du DIR selbst zuhören?
-          </h2>
-
-          <p className="mt-5 font-montserrat text-xl font-semibold text-luxury-gold sm:text-2xl">
-            Berühre Menschen. Bleib im Kopf.
-          </p>
-
-          <p className="mt-6 font-inter text-lg leading-relaxed text-pearl-white/75">
-            KI liefert Perfektion auf Mausklick.
-            <br />
-            <span className="font-semibold text-pearl-white">
-              Deine Unverwechselbarkeit schafft Vertrauen.
-            </span>
-          </p>
-
-          <p className="mt-3 font-inter text-base italic text-pearl-white/60">mit und ohne KI</p>
-
-          <p className="mt-7 font-montserrat text-sm font-semibold uppercase tracking-[0.18em] text-pearl-white/55">
-            Rhetorik · Storytelling · Performance · Wirkung
-          </p>
-        </header>
 
         {/* Gestapelte Kacheln. Der wachsende Abstand nach oben laesst sie beim
             Scrollen uebereinander gleiten, die Skalierung gibt die Tiefe. */}
-        <div className="mt-16 flex flex-col">
+        <div className="flex flex-col">
           {TUEREN.map((t, i) => (
             <div
               key={t.ziel}
@@ -143,7 +117,7 @@ export default function Tueren() {
               style={{ top: `${72 + i * 18}px`, zIndex: i + 1 }}
             >
               <article
-                className="rounded-xl border border-white/15 bg-white/[0.08] px-7 py-8 shadow-[0_18px_50px_-12px_rgba(0,0,0,0.65),0_0_0_1px_rgba(218,165,32,0.08)] backdrop-blur-xl transition duration-500 hover:border-luxury-gold/45 hover:shadow-[0_22px_60px_-12px_rgba(0,0,0,0.7),0_0_34px_-8px_rgba(218,165,32,0.35)] motion-reduce:transform-none motion-reduce:transition-none sm:px-10 sm:py-11"
+                className="tuer-karte rounded-xl px-7 py-8 motion-reduce:transform-none sm:px-10 sm:py-11"
                 style={{ transform: `scale(${1 - (TUEREN.length - 1 - i) * 0.012})` }}
               >
                 <h3 className="font-montserrat text-xs font-semibold uppercase tracking-[0.2em] text-luxury-gold">
@@ -166,7 +140,7 @@ export default function Tueren() {
                   {t.stichworte.map((s) => (
                     <li
                       key={s}
-                      className="rounded-full border border-white/15 bg-white/[0.04] px-3 py-1 font-inter text-sm text-pearl-white/85"
+                      className="rounded-full border border-luxury-gold/25 bg-white/[0.07] px-3 py-1 font-inter text-sm text-pearl-white/90"
                     >
                       {s}
                     </li>

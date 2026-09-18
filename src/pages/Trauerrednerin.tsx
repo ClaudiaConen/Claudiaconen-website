@@ -21,6 +21,7 @@ const INHALT: ZielgruppenInhalt = {
   pfad: '/trauerrede',
   stimmung: 'ruhig',
   wer: 'Trauerrede',
+  zurueck: { text: 'Freie Rednerin', ziel: '/freie-rednerin' },
   frage: 'Wer spricht, wenn die Worte fehlen?',
   vorspann:
     'Eine Trauerrede ist keine Rede über einen Verstorbenen. Sie ist das, was von ihm bleibt, gesagt vor den Menschen, die ihn gekannt haben.',

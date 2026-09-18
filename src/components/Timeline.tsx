@@ -14,6 +14,7 @@ export default function Timeline() {
   const steps = [
     {
       number: 1,
+      kurz: 'Sie berechnet blitzschnell – du berührst bleibend.',
       icon: Ear,
       title: 'KI spart Zeit. Du schenkst Bedeutung - denn Maschinen rechnen – Menschen berühren.',
       description: 'Sie berechnet blitzschnell – du berührst bleibend.\nSie schenkt dir Zeit – damit du sie mit Menschen teilst.\nKI kann Daten verarbeiten – du kannst Verbindung schaffen.\nUnd genau darin liegt Wirkungskraft:\nPerfektion klickt. Persönlichkeit bleibt.',
@@ -21,13 +22,15 @@ export default function Timeline() {
     },
     {
       number: 2,
+      kurz: 'Verstehen, was Menschen bewegt – bevor sie entscheiden.',
       icon: Mic,
       title: 'Entdecke was Menschen bewegt – bevor sie entscheiden.',
-      description: 'Verstehen, was Menschen bewegt – bevor sie entscheiden.\nDas Gehirn reagiert in 180 Millisekunden emotional – lange bevor der Verstand folgt.\nWenn du weißt, wie Vertrauen entsteht, berührst du Menschen tiefer, als Worte je können.',
+      description: 'Verstehen, was Menschen bewegt – bevor sie entscheiden.\nDas Gefühl ist da, bevor der Gedanke es einholt.\nWenn du weißt, wie Vertrauen entsteht, berührst du Menschen tiefer, als Worte je können.',
       side: 'right',
     },
     {
       number: 3,
+      kurz: 'Selbsterkenntnis ist der Schlüssel zu Wirkungskraft.',
       icon: Shield,
       title: 'Jede Wirkung beginnt mit einer Geschichte – deiner.',
       description: 'Selbsterkenntnis ist der Schlüssel zu Wirkungskraft.\nWer seine Berufung lebt und seine Persönlichkeit klar positioniert, wird unverwechselbar – im Business und im Leben. Nutze deine Einzigartigkeit.',
@@ -35,13 +38,15 @@ export default function Timeline() {
     },
     {
       number: 4,
+      kurz: 'Der Elevator Pitch zeigt, wer du bist – und warum Menschen dir zuhören.',
       icon: MessageSquare,
       title: 'Klarheit verkauft. Storytelling verbindet.',
-      description: 'Der Elevator Pitch zeigt, wer du bist – und warum Menschen dir zuhören.\nStorytelling wirkt 60 000 × schneller als Fakten,\nweil Bilder Emotionen auslösen und im Gedächtnis bleiben.\nOb auf Social Media, im Kundengespräch oder live auf der Bühne:\nFrag dich: Welche Emotion willst du wecken – und was sollen Menschen fühlen, denken oder tun?',
+      description: 'Der Elevator Pitch zeigt, wer du bist – und warum Menschen dir zuhören.\nEine Geschichte erreicht Menschen schneller als eine Aufzählung,\nweil Bilder Emotionen auslösen und im Gedächtnis bleiben.\nOb auf Social Media, im Kundengespräch oder live auf der Bühne:\nFrag dich: Welche Emotion willst du wecken – und was sollen Menschen fühlen, denken oder tun?',
       side: 'right',
     },
     {
       number: 5,
+      kurz: 'Deine Geschichte, dein Erlebtes – sie sind dein unverwechselbarer Klang.',
       icon: Sparkles,
       title: 'Du wirkst, bevor du sprichst.\nVon Selbsterkenntnis zu Wirkungskraft – durch Haltung, Persönlichkeit, Stimme und Blick.',
       description: 'Deine Geschichte, dein Erlebtes – sie sind dein unverwechselbarer Klang.\nRhetorik ist nicht das Spiel mit Worten, sondern die Kunst, echt zu wirken.\nWenn Stimme, Körpersprache und Worte dieselbe Sprache sprechen,\nentsteht Charisma – und die unsichtbare Brücke vom Ohr, über den Kopf, direkt ins Herz',
@@ -49,6 +54,7 @@ export default function Timeline() {
     },
     {
       number: 6,
+      kurz: 'Menschen entscheiden mit dem Herzen, lange bevor der Verstand folgt.',
       icon: Target,
       title: 'Werde zum Privatdetektiv deiner Wirkung.\nWorte sind unaufhaltbar. Beobachte, was du im anderen auslöst – und welche Energie du sendest, wenn du sprichst.',
       description: 'Menschen sind emotionale Wesen – sie entscheiden mit dem Herzen, lange bevor der Verstand folgt.\nDeine Worte können begeistern, motivieren, trösten, faszinieren oder verletzen.\nSie können Vertrauen schaffen – oder zerstören.\nNutze die unsichtbare Brücke:\nvom Ohr über den Kopf direkt ins Herz.',
@@ -56,6 +62,7 @@ export default function Timeline() {
     },
     {
       number: 7,
+      kurz: 'Bleib das, was kein Algorithmus je sein kann – ein Original.',
       icon: Heart,
       title: 'Unverwechselbar DU. Nicht ersetzbar.',
       description: 'Bleib das, was kein Algorithmus je sein kann – ein Original.\nNutze die 7 Schritte zu echter Wirkung.\nPerfektion klickt. Persönlichkeit bleibt.',
@@ -95,7 +102,7 @@ export default function Timeline() {
             />
           </div>
 
-          <div className="space-y-12 md:space-y-24">
+          <div className="space-y-10 md:space-y-16">
             {steps.map((step, index) => {
               const Icon = step.icon;
               const isLeft = step.side === 'left';
@@ -144,7 +151,21 @@ export default function Timeline() {
                           </h3>
                         </div>
                       </div>
-                      <p className="text-pearl-white/80 leading-relaxed">{step.description}</p>
+                      {/* Immer sichtbar: ein Satz. Der Rest steht im
+                          Quelltext und ist damit fuer Suchmaschinen und KI
+                          vollstaendig lesbar, nur eingeklappt. */}
+                      <p className="font-inter text-pearl-white/85 leading-relaxed">{step.kurz}</p>
+
+                      <details className="cc-mehr mt-4">
+                        <summary className="inline-flex items-center gap-2 font-montserrat text-sm font-semibold text-bright-gold transition-colors hover:text-luxury-gold">
+                          <span className="cc-mehr-zu">Mehr dazu</span>
+                          <span className="cc-mehr-auf">Weniger</span>
+                          <span aria-hidden="true" className="cc-mehr-pfeil">&#8964;</span>
+                        </summary>
+                        <p className="mt-3 whitespace-pre-line font-inter leading-relaxed text-pearl-white/75">
+                          {step.description}
+                        </p>
+                      </details>
                     </motion.div>
                   </div>
 

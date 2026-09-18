@@ -8,6 +8,11 @@ const Unverwechselbare = lazy(() => import('./pages/Unverwechselbare'));
 const Hoeren = lazy(() => import('./pages/Hoeren'));
 const Trauerrednerin = lazy(() => import('./pages/Trauerrednerin'));
 const Hochzeitsrednerin = lazy(() => import('./pages/Hochzeitsrednerin'));
+const FreieRednerin = lazy(() => import('./pages/FreieRednerin'));
+const FreieRednerAusbildung = lazy(() => import('./pages/FreieRednerAusbildung'));
+const TrauerrednerAusbildung = lazy(() => import('./pages/TrauerrednerAusbildung'));
+const HochzeitsrednerAusbildung = lazy(() => import('./pages/HochzeitsrednerAusbildung'));
+const SpeakerAusbildung = lazy(() => import('./pages/SpeakerAusbildung'));
 const ArtikelKeynotePreis = lazy(() => import('./pages/ArtikelKeynotePreis'));
 const ArtikelSpeakerFinden = lazy(() => import('./pages/ArtikelSpeakerFinden'));
 const ArtikelStimmeTrainieren = lazy(() => import('./pages/ArtikelStimmeTrainieren'));
@@ -166,6 +171,11 @@ function App() {
         <Route path="/hoeren" element={<Hoeren />} />
         <Route path="/trauerrede" element={<Trauerrednerin />} />
         <Route path="/freie-trauung" element={<Hochzeitsrednerin />} />
+        <Route path="/freie-rednerin" element={<FreieRednerin />} />
+        <Route path="/freie-redner-ausbildung" element={<FreieRednerAusbildung />} />
+        <Route path="/trauerredner-ausbildung" element={<TrauerrednerAusbildung />} />
+        <Route path="/hochzeitsredner-ausbildung" element={<HochzeitsrednerAusbildung />} />
+        <Route path="/speaker-ausbildung" element={<SpeakerAusbildung />} />
         <Route path="/wissen/was-kostet-ein-keynote-speaker" element={<ArtikelKeynotePreis />} />
         <Route path="/wissen/keynote-speaker-finden" element={<ArtikelSpeakerFinden />} />
         <Route path="/wissen/stimme-trainieren" element={<ArtikelStimmeTrainieren />} />

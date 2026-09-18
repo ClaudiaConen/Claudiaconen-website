@@ -51,6 +51,9 @@ export type ZielgruppenInhalt = {
   seoText: string;
   /** dunkel = Standard, hell = festlich mit mehr Gold, ruhig = zurueckhaltend */
   stimmung?: 'dunkel' | 'hell' | 'ruhig';
+  /** Rueckweg zur Dachseite. Wichtig bei Seiten, die ueber einen QR-Code
+   *  geoeffnet werden: ohne ihn ist die Seite eine Sackgasse. */
+  zurueck?: { text: string; ziel: string };
 };
 
 
@@ -138,6 +141,14 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
         style={{ background: s.kopf }}
       >
         <div className="mx-auto max-w-4xl px-6">
+          {inhalt.zurueck && (
+            <Link
+              to={inhalt.zurueck.ziel}
+              className={`mb-7 inline-block font-inter text-sm underline-offset-4 hover:underline ${s.kopfLeise}`}
+            >
+              &larr; {inhalt.zurueck.text}
+            </Link>
+          )}
           <p className={`font-montserrat text-xs font-semibold uppercase tracking-[0.2em] ${s.marke}`}>
             {inhalt.wer}
           </p>

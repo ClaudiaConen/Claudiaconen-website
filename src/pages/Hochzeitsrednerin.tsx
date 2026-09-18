@@ -18,6 +18,7 @@ const INHALT: ZielgruppenInhalt = {
   pfad: '/freie-trauung',
   stimmung: 'hell',
   wer: 'Freie Trauung',
+  zurueck: { text: 'Freie Rednerin', ziel: '/freie-rednerin' },
   frage: 'Wer erzählt eure Geschichte, wenn ihr vor euren Menschen steht?',
   vorspann:
     'Eine freie Trauung ist kein Programmpunkt zwischen Sekt und Fotos. Sie ist der Moment, an den sich alle erinnern, auch in zwanzig Jahren.',

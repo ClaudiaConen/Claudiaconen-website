@@ -699,28 +699,20 @@ html, body { cursor: auto; }
   }
 }
 
+/* Gold auf hellem Grund: eine Farbe, keine Animation, kein Halo.
+   Vorher lag hier ein wanderndes Verlaufsgold auf durchsichtiger Schrift,
+   dazu ein pulsierender Lichtkreis dahinter. Drei Effekte auf einem Wort.
+   Durchsichtige Schrift mit Verlauf wird auf hellem Untergrund an den Kanten
+   grau und flimmert beim Wandern - genau das Unsaubere, das Claudia am
+   18.09.2026 um 22:43 gemeldet hat. Derselbe Fehler, der vorher schon bei der
+   Kopfzeile behoben werden musste. #B8860B ist das dunkle Markengold und
+   steht sauber auf Creme. */
 .cc-glow-word {
-  background: linear-gradient(135deg, #DAA520, #FFD700, #DAA520);
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: ccShimmer 4s ease-in-out infinite;
+  color: #B8860B;
 }
 
 .cc-glow-word-halo {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 120%;
-  height: 120%;
-  background: radial-gradient(circle, rgba(218, 165, 32, 0.3) 0%, transparent 70%);
-  opacity: 0;
-  animation: ccGlowPulse 3s ease-in-out infinite;
-  pointer-events: none;
-  z-index: -1;
+  display: none;
 }
 
 @keyframes ccShimmer {
@@ -1572,4 +1564,116 @@ html, body { cursor: auto; }
 
 @media (prefers-reduced-motion: reduce) {
   .tuer-marke-puls { animation: none; }
+}
+
+/* Aufklappbarer Text bei den sieben Schritten.
+   Als <details> gebaut, nicht mit JavaScript: So steht der ganze Text im
+   ausgelieferten Quelltext und bleibt fuer Suchmaschinen und KI lesbar,
+   auch solange er eingeklappt ist. */
+.cc-mehr > summary {
+  list-style: none;
+  cursor: pointer;
+}
+.cc-mehr > summary::-webkit-details-marker {
+  display: none;
+}
+.cc-mehr > summary .cc-mehr-auf {
+  display: none;
+}
+.cc-mehr[open] > summary .cc-mehr-zu {
+  display: none;
+}
+.cc-mehr[open] > summary .cc-mehr-auf {
+  display: inline;
+}
+.cc-mehr-pfeil {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+.cc-mehr[open] > summary .cc-mehr-pfeil {
+  transform: rotate(180deg);
+}
+
+/* ------------------------------------------------------------------
+   Kippkarte: 3D card tilt hover.
+   Die Bewegung selbst setzt KippKarte.tsx ueber vier CSS-Variablen.
+   Hier steht nur, was der Browser daraus macht.
+
+   Warum der Glanz ein eigenes Element ist und kein Pseudoelement: Er
+   darf nicht mit dem Inhalt mitkippen, sonst wandert das Licht mit der
+   Flaeche statt darueber - und genau das Wandern ist der Effekt.
+   ------------------------------------------------------------------ */
+.cc-kipp-buehne {
+  perspective: 1100px;
+}
+
+.cc-kipp {
+  --rx: 0deg;
+  --ry: 0deg;
+  --mx: 50%;
+  --my: 50%;
+  position: relative;
+  transform: rotateX(var(--rx)) rotateY(var(--ry));
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 0.3s ease, box-shadow 0.4s ease;
+  will-change: transform;
+}
+
+.cc-kipp:hover {
+  box-shadow: 0 26px 60px -24px rgba(0, 0, 0, 0.55);
+}
+
+.cc-kipp-glanz {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background: radial-gradient(
+    420px circle at var(--mx) var(--my),
+    rgba(255, 255, 255, 0.16),
+    rgba(255, 255, 255, 0.04) 35%,
+    transparent 60%
+  );
+}
+
+.cc-kipp:hover .cc-kipp-glanz {
+  opacity: 1;
+}
+
+/* Der Inhalt steht ein Stueck vor der Flaeche. Das ist der Unterschied
+   zwischen "das Bild kippt" und "die Karte hat Tiefe". */
+.cc-kipp-inhalt {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  transform: translateZ(22px);
+}
+
+/* Kippende Flaechen loesen bei manchen Menschen Schwindel aus. */
+@media (prefers-reduced-motion: reduce) {
+  .cc-kipp,
+  .cc-kipp-inhalt {
+    transform: none !important;
+    transition: none;
+  }
+  .cc-kipp-glanz {
+    display: none;
+  }
+}
+
+/* Ohne Maus gibt es kein Darueberfahren. Auf dem Telefon bleibt die
+   Karte still - ein Effekt, der beim Tippen zuckt, wirkt kaputt. */
+@media (pointer: coarse) {
+  .cc-kipp,
+  .cc-kipp-inhalt {
+    transform: none !important;
+  }
+  .cc-kipp-glanz {
+    display: none;
+  }
 }

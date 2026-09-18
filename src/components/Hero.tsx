@@ -109,8 +109,11 @@ export default function Hero() {
       />
       <div
         className="absolute inset-0"
-        style={{ background: 'linear-gradient(180deg, #0A1628 0%, #0F1F3A 50%, #0A1628 100%)' }}
-        style={{ opacity: 0.9, zIndex: 1 }}
+        style={{
+          background: 'linear-gradient(180deg, #0A1628 0%, #0F1F3A 50%, #0A1628 100%)',
+          opacity: 0.9,
+          zIndex: 1,
+        }}
       />
       <div className="relative max-w-7xl mx-auto" style={{ zIndex: 10 }}>
         <div className="grid lg:grid-cols-[1fr_auto] gap-8 items-start">

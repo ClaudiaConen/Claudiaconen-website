@@ -194,7 +194,7 @@ export default function UeberMich() {
               id="weiter"
               className="font-cormorant text-3xl italic leading-snug text-pearl-white sm:text-4xl"
             >
-              Lesen kannst du überall. Hören nur hier.
+              So klingt das, wovon diese Seite handelt.
             </h2>
             <p className="mt-5 font-inter text-lg leading-relaxed text-pearl-white/75">
               Wenn du wissen willst, wie das klingt, wovon diese Seite handelt: Auf der Hören-Seite

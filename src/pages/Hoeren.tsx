@@ -154,11 +154,10 @@ export default function Hoeren() {
             Hören
           </p>
           <h1 className="mt-5 font-montserrat text-3xl font-bold leading-[1.15] tracking-tight text-pearl-white sm:text-5xl">
-            Lesen kannst du überall. Hier kannst du hören.
+            Sieben Gedanken. In meiner Stimme.
           </h1>
           <p className="mt-6 max-w-2xl font-inter text-lg leading-relaxed text-pearl-white/75">
-            Sieben Gedanken, die meine Arbeit tragen. Jeder davon in einem Satz, einer kurzen
-            Geschichte und in meiner Stimme.
+            Jeder davon in einem Satz, einer kurzen Geschichte und zum Anhören.
           </p>
         </div>
       </header>

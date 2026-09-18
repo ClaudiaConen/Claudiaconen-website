@@ -35,14 +35,14 @@ const INHALT: ArtikelInhalt = {
       titel: 'Frage zwei: Wer sitzt im Saal?',
       absaetze: [
         'Ein Vortrag vor der Geschäftsführung funktioniert anders als einer vor der Belegschaft. Ein Saal, der freiwillig da ist, ist ein anderer als eine Pflichtveranstaltung am Freitagnachmittag.',
-        'Sagt das offen, bevor ihr anfragt. Ein guter Speaker fragt ohnehin danach, und wer nicht fragt, hält seinen Vortrag so, wie er ihn immer hält.',
+        'Sagt das offen, bevor ihr anfragt. Wer danach fragt, kann sich darauf einstellen. Wer nicht danach fragt, kann es nicht.',
       ],
     },
     {
       titel: 'Frage drei: Gibt es ein Video von einem echten Auftritt?',
       absaetze: [
         'Nicht der gefilmte Werbespot, sondern ein Mitschnitt vor Publikum. Achtet weniger auf die Person und mehr auf den Saal: Sitzen die Leute vorgebeugt oder am Telefon?',
-        'Wer kein einziges Video eines echten Auftritts hat, war entweder selten auf einer Bühne oder es gibt einen Grund, warum es nicht gezeigt wird. Beides ist eine Information.',
+        'Wenn es kein Video eines echten Auftritts gibt, fragt danach. Oft gibt es eines, es steht nur nicht öffentlich.',
       ],
     },
     {

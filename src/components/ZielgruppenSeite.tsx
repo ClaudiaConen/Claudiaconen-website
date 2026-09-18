@@ -49,9 +49,52 @@ export type ZielgruppenInhalt = {
   bildAlt?: string;
   seoTitel: string;
   seoText: string;
+  /** dunkel = Standard, hell = festlich mit mehr Gold, ruhig = zurueckhaltend */
+  stimmung?: 'dunkel' | 'hell' | 'ruhig';
 };
 
+
+/** Die drei Stimmungen. Werte aus der Marken-Referenz, nur anders gewichtet.
+ *  hell:  festlich, viel Gold, warme helle Flaechen. Fuer Hochzeiten.
+ *  ruhig: gedeckt, wenig Gold, viel Weissraum. Fuer Trauerfeiern. Kitsch
+ *         entsteht durch Ueberschmueckung, deshalb hier bewusst weniger.
+ *  dunkel: der Standard fuer Geschaeftsseiten.
+ */
+const STIMMUNG = {
+  dunkel: {
+    kopf: 'linear-gradient(180deg, #0A1628 0%, #0F1F3A 50%, #0A1628 100%)',
+    kopfText: 'text-pearl-white',
+    kopfLeise: 'text-pearl-white/75',
+    marke: 'text-luxury-gold',
+    fuss: 'linear-gradient(180deg, #0A1628 0%, #0F1F3A 50%, #0A1628 100%)',
+    fussText: 'text-pearl-white',
+    fussLeise: 'text-pearl-white/75',
+    knopf: 'bg-luxury-gold text-midnight-blue hover:bg-bright-gold',
+  },
+  hell: {
+    kopf: 'linear-gradient(180deg, #FFFEF9 0%, #F7F3EB 60%, #F2E8D5 100%)',
+    kopfText: 'text-midnight-blue',
+    kopfLeise: 'text-midnight-blue/70',
+    marke: 'text-dark-gold',
+    fuss: 'linear-gradient(180deg, #F7F3EB 0%, #F2E8D5 100%)',
+    fussText: 'text-midnight-blue',
+    fussLeise: 'text-midnight-blue/70',
+    knopf: 'bg-midnight-blue text-pearl-white hover:bg-royal-navy',
+  },
+  ruhig: {
+    kopf: 'linear-gradient(180deg, #FDFBF7 0%, #F4F1EC 100%)',
+    kopfText: 'text-midnight-blue',
+    kopfLeise: 'text-midnight-blue/65',
+    marke: 'text-midnight-blue/45',
+    fuss: 'linear-gradient(180deg, #F4F1EC 0%, #EDE9E3 100%)',
+    fussText: 'text-midnight-blue',
+    fussLeise: 'text-midnight-blue/65',
+    knopf: 'bg-midnight-blue text-pearl-white hover:bg-royal-navy',
+  },
+} as const;
+
 export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt }) {
+  const s = STIMMUNG[inhalt.stimmung ?? 'dunkel'];
   const strukturierteDaten = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -92,16 +135,16 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
       {/* 1. Die Frage */}
       <header
         className="relative pt-36 pb-16 sm:pt-44 sm:pb-24"
-        style={{ background: 'linear-gradient(180deg, #0A1628 0%, #0F1F3A 50%, #0A1628 100%)' }}
+        style={{ background: s.kopf }}
       >
         <div className="mx-auto max-w-4xl px-6">
-          <p className="font-montserrat text-xs font-semibold uppercase tracking-[0.2em] text-luxury-gold">
+          <p className={`font-montserrat text-xs font-semibold uppercase tracking-[0.2em] ${s.marke}`}>
             {inhalt.wer}
           </p>
-          <h1 className="mt-5 font-montserrat text-3xl font-bold leading-[1.15] tracking-tight text-pearl-white sm:text-5xl">
+          <h1 className={`mt-5 font-montserrat text-3xl font-bold leading-[1.15] tracking-tight sm:text-5xl ${s.kopfText}`}>
             {inhalt.frage}
           </h1>
-          <p className="mt-6 max-w-2xl font-inter text-lg leading-relaxed text-pearl-white/75">
+          <p className={`mt-6 max-w-2xl font-inter text-lg leading-relaxed ${s.kopfLeise}`}>
             {inhalt.vorspann}
           </p>
         </div>
@@ -222,22 +265,22 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
         {/* 6. Ein nächster Schritt */}
         <section
           className="py-16 sm:py-24"
-          style={{ background: 'linear-gradient(180deg, #0A1628 0%, #0F1F3A 50%, #0A1628 100%)' }}
+          style={{ background: s.fuss }}
           aria-labelledby="schritt"
         >
           <div className="mx-auto max-w-3xl px-6">
             <h2
               id="schritt"
-              className="font-montserrat text-2xl font-bold text-pearl-white sm:text-3xl"
+              className={`font-montserrat text-2xl font-bold sm:text-3xl ${s.fussText}`}
             >
               {inhalt.schrittTitel}
             </h2>
-            <p className="mt-4 max-w-2xl font-inter text-lg leading-relaxed text-pearl-white/75">
+            <p className={`mt-4 max-w-2xl font-inter text-lg leading-relaxed ${s.fussLeise}`}>
               {inhalt.schrittText}
             </p>
             <Link
               to={inhalt.schrittZiel}
-              className="mt-8 inline-block rounded-sm bg-luxury-gold px-8 py-4 font-montserrat text-base font-semibold text-midnight-blue transition-colors hover:bg-bright-gold"
+              className={`mt-8 inline-block rounded-sm px-8 py-4 font-montserrat text-base font-semibold transition-colors ${s.knopf}`}
             >
               {inhalt.schrittKnopf}
             </Link>

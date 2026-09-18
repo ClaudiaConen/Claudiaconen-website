@@ -6,6 +6,8 @@ const ClaudiaAIBeta = lazy(() => import('./pages/ClaudiaAIBeta'));
 const Newsletter = lazy(() => import('./pages/Newsletter'));
 const Unverwechselbare = lazy(() => import('./pages/Unverwechselbare'));
 const Hoeren = lazy(() => import('./pages/Hoeren'));
+const Trauerrednerin = lazy(() => import('./pages/Trauerrednerin'));
+const Hochzeitsrednerin = lazy(() => import('./pages/Hochzeitsrednerin'));
 const ArtikelKeynotePreis = lazy(() => import('./pages/ArtikelKeynotePreis'));
 const ArtikelSpeakerFinden = lazy(() => import('./pages/ArtikelSpeakerFinden'));
 const ArtikelStimmeTrainieren = lazy(() => import('./pages/ArtikelStimmeTrainieren'));
@@ -162,6 +164,8 @@ function App() {
         <Route path="/newsletter" element={<Newsletter />} />
         <Route path="/unverwechselbare" element={<Unverwechselbare />} />
         <Route path="/hoeren" element={<Hoeren />} />
+        <Route path="/trauerrede" element={<Trauerrednerin />} />
+        <Route path="/freie-trauung" element={<Hochzeitsrednerin />} />
         <Route path="/wissen/was-kostet-ein-keynote-speaker" element={<ArtikelKeynotePreis />} />
         <Route path="/wissen/keynote-speaker-finden" element={<ArtikelSpeakerFinden />} />
         <Route path="/wissen/stimme-trainieren" element={<ArtikelStimmeTrainieren />} />

@@ -37,7 +37,7 @@ export default function SEO({
   title,
   description,
   keywords = [],
-  ogImage = 'https://claudia-conen-expert-platform.bolt.host/og-image.jpg',
+  ogImage = 'https://claudiaconen.com/og-image.jpg',
   ogType = 'website',
   path,
   noindex = false,
@@ -53,8 +53,8 @@ export default function SEO({
 
   const canonicalUrl = useMemo(
     () => path
-      ? `https://claudia-conen-expert-platform.bolt.host${path}`
-      : `https://claudia-conen-expert-platform.bolt.host${location.pathname}`,
+      ? `https://claudiaconen.com${path}`
+      : `https://claudiaconen.com${location.pathname}`,
     [path, location.pathname]
   );
 
@@ -91,7 +91,7 @@ export default function SEO({
         author: {
           '@type': 'Person',
           name: article.author || 'Claudia Conen',
-          url: 'https://claudia-conen-expert-platform.bolt.host/ueber-mich',
+          url: 'https://claudiaconen.com/ueber-mich',
           jobTitle: 'Speaker, Coach & Mentor',
           description: 'Die Umsatzstimme - 35 Jahre Expertise in emotionaler Wirkungskraft'
         },
@@ -100,7 +100,7 @@ export default function SEO({
           name: 'Claudia Conen - Die Umsatzstimme',
           logo: {
             '@type': 'ImageObject',
-            url: 'https://claudia-conen-expert-platform.bolt.host/og-image.jpg'
+            url: 'https://claudiaconen.com/og-image.jpg'
           }
         },
         mainEntityOfPage: {
@@ -121,9 +121,9 @@ export default function SEO({
         '@context': 'https://schema.org',
         '@type': 'LocalBusiness',
         name: 'Claudia Conen - Die Umsatzstimme',
-        image: 'https://claudia-conen-expert-platform.bolt.host/og-image.jpg',
-        '@id': 'https://claudia-conen-expert-platform.bolt.host/',
-        url: 'https://claudia-conen-expert-platform.bolt.host/',
+        image: 'https://claudiaconen.com/og-image.jpg',
+        '@id': 'https://claudiaconen.com/',
+        url: 'https://claudiaconen.com/',
         telephone: '+49-160-99142208',
         email: 'info@claudiaconen-akademie.de',
         address: {

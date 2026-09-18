@@ -5,7 +5,7 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 
-const SITE_URL = 'https://claudia-conen-expert-platform.bolt.host';
+const SITE_URL = 'https://claudiaconen.com';
 
 const supabaseUrl = process.env.VITE_SUPABASE_URL || '';
 const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY || '';

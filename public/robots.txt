@@ -3,7 +3,7 @@ Allow: /
 Disallow: /api/
 Disallow: /_redirects
 
-Sitemap: https://claudia-conen-expert-platform.bolt.host/sitemap.xml
+Sitemap: https://claudiaconen.com/sitemap.xml
 
 # Google-Bot speziell erlauben
 User-agent: Googlebot

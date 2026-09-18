@@ -108,7 +108,8 @@ export default function Hero() {
         }}
       />
       <div
-        className="absolute inset-0 bg-gradient-to-b from-midnight-blue via-royal-navy to-midnight-blue"
+        className="absolute inset-0"
+        style={{ background: 'linear-gradient(180deg, #0A1628 0%, #0F1F3A 50%, #0A1628 100%)' }}
         style={{ opacity: 0.9, zIndex: 1 }}
       />
       <div className="relative max-w-7xl mx-auto" style={{ zIndex: 10 }}>

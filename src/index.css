@@ -1306,23 +1306,31 @@ html, body { cursor: auto; }
 ======================================== */
 
 .keyword-highlight {
-  color: #FFFFFF;
+  /* Exakt wie .gold-text-animated auf community.claudiaconen.com:
+     durchgaengig metallischer Verlauf, nur die Position wandert, fuenf
+     Sekunden, kein Leuchten und keine Groessenaenderung. Vorher begann und
+     endete der Verlauf in reinem Weiss und der Text pulsierte zusaetzlich
+     mit drei Leuchtschatten und einer Vergroesserung auf 102 Prozent — das
+     war das Unruhige daran. */
   font-weight: 700;
   background: linear-gradient(135deg,
-    #FFFFFF 0%,
-    #D4AF37 25%,
-    #F7E7CE 50%,
-    #C9A961 75%,
-    #FFFFFF 100%);
+    #D4AF37 0%,
+    #F7E7CE 25%,
+    #C9A961 50%,
+    #F7E7CE 75%,
+    #D4AF37 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: keywordPulse 4s ease-in-out infinite;
-  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.7))
-    drop-shadow(0 0 24px rgba(212, 175, 55, 0.4));
+  animation: goldShimmerRuhig 5s ease-in-out infinite;
   position: relative;
   z-index: 10;
+}
+
+@keyframes goldShimmerRuhig {
+  0%, 100% { background-position: 0% center; }
+  50% { background-position: 200% center; }
 }
 
 @keyframes keywordPulse {

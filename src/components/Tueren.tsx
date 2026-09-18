@@ -98,11 +98,11 @@ const TUEREN: Tuer[] = [
 
 export default function Tueren() {
   return (
-    <section className="relative bg-midnight-blue" aria-label="Wofür bist du hier?">
+    <section className="relative bg-pearl-white" aria-label="Wofür bist du hier?">
       {/* Platz fuer ein spaeteres Hintergrundvideo. Bis dahin ein ruhiger Verlauf. */}
       <div
         className="pointer-events-none absolute inset-0"
-        style={{ background: 'linear-gradient(180deg, #0A1628, #0F1F3A, #0A1628)' }}
+        style={{ background: 'linear-gradient(180deg, #FDFBF7 0%, #F7F3EB 100%)' }}
         aria-hidden="true"
       />
 
@@ -121,19 +121,19 @@ export default function Tueren() {
                 className="tuer-karte rounded-xl px-7 py-8 motion-reduce:transform-none sm:px-10 sm:py-11"
                 style={{ transform: `scale(${1 - (TUEREN.length - 1 - i) * 0.012})` }}
               >
-                <h3 className="font-montserrat text-xs font-semibold uppercase tracking-[0.2em] text-luxury-gold">
+                <h3 className="font-montserrat text-xs font-semibold uppercase tracking-[0.2em] text-dark-gold">
                   {t.wer}
                 </h3>
 
-                <p className="mt-4 font-montserrat text-xl font-bold leading-snug text-pearl-white sm:text-2xl">
+                <p className="mt-4 font-montserrat text-xl font-bold leading-snug text-midnight-blue sm:text-2xl">
                   {t.frage}
                 </p>
 
-                <p className="mt-4 max-w-2xl font-inter text-base leading-relaxed text-pearl-white/70">
+                <p className="mt-4 max-w-2xl font-inter text-base leading-relaxed text-midnight-blue/70">
                   {t.problem}
                 </p>
 
-                <p className="mt-6 font-montserrat text-sm font-semibold text-pearl-white">
+                <p className="mt-6 font-montserrat text-sm font-semibold text-midnight-blue">
                   {t.vorspann}
                 </p>
 
@@ -141,7 +141,7 @@ export default function Tueren() {
                   {t.stichworte.map((s) => (
                     <li
                       key={s}
-                      className="rounded-full border border-luxury-gold/25 bg-white/[0.07] px-3 py-1 font-inter text-sm text-pearl-white/90"
+                      className="rounded-full border border-luxury-gold/35 bg-white/70 px-3 py-1 font-inter text-sm text-midnight-blue/80"
                     >
                       {s}
                     </li>
@@ -150,7 +150,7 @@ export default function Tueren() {
 
                 <Link
                   to={t.ziel}
-                  className="mt-7 inline-block font-montserrat text-base font-semibold text-luxury-gold underline decoration-luxury-gold/40 underline-offset-4 transition-colors hover:decoration-luxury-gold"
+                  className="mt-7 inline-block font-montserrat text-base font-semibold text-dark-gold underline decoration-dark-gold/40 underline-offset-4 transition-colors hover:decoration-dark-gold"
                 >
                   {t.knopf} →
                 </Link>

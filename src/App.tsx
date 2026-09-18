@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import ClaudiaAIBeta from './pages/ClaudiaAIBeta';
 import Newsletter from './pages/Newsletter';
 import Unverwechselbare from './pages/Unverwechselbare';
+import Hoeren from './pages/Hoeren';
 import ArtikelKeynotePreis from './pages/ArtikelKeynotePreis';
 import ArtikelSpeakerFinden from './pages/ArtikelSpeakerFinden';
 import ArtikelStimmeTrainieren from './pages/ArtikelStimmeTrainieren';
@@ -158,6 +159,7 @@ function App() {
         <Route path="/claudia-ai" element={<ClaudiaAIBeta />} />
         <Route path="/newsletter" element={<Newsletter />} />
         <Route path="/unverwechselbare" element={<Unverwechselbare />} />
+        <Route path="/hoeren" element={<Hoeren />} />
         <Route path="/wissen/was-kostet-ein-keynote-speaker" element={<ArtikelKeynotePreis />} />
         <Route path="/wissen/keynote-speaker-finden" element={<ArtikelSpeakerFinden />} />
         <Route path="/wissen/stimme-trainieren" element={<ArtikelStimmeTrainieren />} />

@@ -4,14 +4,12 @@ import { supabase } from '../lib/supabase';
 /**
  * Eintragungsseite "Die Unverwechselbaren".
  *
- * Text Wort fuer Wort aus dem Umsetzungsplan vom 12.09.2026: eine Ueberschrift,
- * ein Versprechen, der Termin, ein Feld. Kein Preis, kein Funktionsumfang,
- * keine Plattformbeschreibung — in dieser Phase ist alles davon verfrueht.
- *
- * Eine bewusste Abweichung: Neben der E-Mail steht ein Namensfeld. Die Tabelle
- * beta_waitlist verlangt first_name und last_name (NOT NULL), und die Nachfass-
- * nachricht nach dem Event soll persoenlich sein. Eine Liste ohne Namen zwingt
- * zu dreissig Mal "Hallo".
+ * Alle Worte stammen aus Claudias eigenem Umsetzungsplan vom 12.09.2026,
+ * einschliesslich des Satzes ueber die Gespraeche, den sie am Eventtag von der
+ * Buehne sagt. Die Regeln dieses Plans gelten hier: kein Preis, kein
+ * Funktionsumfang, keine Plattformbeschreibung. Was die Seite trotzdem tragen
+ * darf, ist ihr Gesicht und ihr Ton — leer wirken heisst nicht zurueckhaltend
+ * wirken, sondern unfertig.
  */
 export default function Unverwechselbare() {
   const [name, setName] = useState('');
@@ -35,8 +33,6 @@ export default function Unverwechselbare() {
     }
 
     setLaeuft(true);
-    // Die Tabelle trennt Vor- und Nachname. Wer nur einen Namen eintraegt,
-    // soll nicht scheitern: der Rest wandert in last_name, sonst ein Punkt.
     const teile = sauber.split(/\s+/);
     const vorname = teile[0];
     const nachname = teile.slice(1).join(' ') || '.';
@@ -55,7 +51,6 @@ export default function Unverwechselbare() {
       ]);
 
       if (error) {
-        // 23505 = unique violation: die Adresse steht schon auf der Liste.
         if (error.code === '23505') {
           setFertig(true);
           return;
@@ -72,77 +67,110 @@ export default function Unverwechselbare() {
 
   return (
     <main className="min-h-screen bg-pearl-white text-midnight-blue">
-      <div className="mx-auto flex max-w-2xl flex-col gap-10 px-6 py-20 sm:py-28">
-        <header>
-          <h1 className="font-montserrat text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
-            Die Unverwechselbaren
-          </h1>
-          <div className="mt-6 h-0.5 w-16 bg-luxury-gold" aria-hidden="true" />
-        </header>
-
-        <p className="font-inter text-2xl leading-snug sm:text-3xl">
-          Ein Ort für Menschen, die sich nicht vergleichbar machen lassen wollen.
-        </p>
-
-        <p className="font-inter text-lg text-midnight-blue/70">
-          Wir treffen uns einmal im Monat. Erstes Treffen:{' '}
-          <span className="font-semibold text-midnight-blue">12. November</span>
-        </p>
-
-        {fertig ? (
-          <div className="border-l-4 border-luxury-gold bg-warm px-5 py-6">
-            <p className="font-montserrat text-lg font-semibold">Du stehst auf der Liste.</p>
-            <p className="mt-2 font-inter text-midnight-blue/70">
-              Die Einladung zum 12. November kommt per E-Mail. Bis dahin passiert nichts weiter.
-            </p>
-          </div>
-        ) : (
-          <form onSubmit={absenden} className="flex flex-col gap-3" noValidate>
-            <label
-              htmlFor="cc-name"
-              className="font-montserrat text-xs font-semibold uppercase tracking-widest text-midnight-blue/60"
-            >
-              Trag dich ein, dann bekommst du die Einladung
-            </label>
-
-            <div className="flex flex-col gap-3 sm:flex-row">
-              <input
-                id="cc-name"
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Dein Name"
-                autoComplete="name"
-                className="w-full rounded-sm border border-midnight-blue/20 bg-white px-4 py-3.5 font-inter text-base outline-none focus:border-luxury-gold focus:ring-2 focus:ring-luxury-gold/25 sm:w-2/5"
-              />
-              <input
-                id="cc-mail"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="deine@adresse.de"
-                autoComplete="email"
-                className="w-full rounded-sm border border-midnight-blue/20 bg-white px-4 py-3.5 font-inter text-base outline-none focus:border-luxury-gold focus:ring-2 focus:ring-luxury-gold/25"
-              />
+      <div className="mx-auto max-w-6xl px-6 py-16 sm:py-24">
+        <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_1fr] lg:gap-20">
+          {/* Wort */}
+          <div className="flex flex-col gap-8 order-2 lg:order-1">
+            <div>
+              <p className="font-montserrat text-xs font-semibold uppercase tracking-[0.2em] text-luxury-gold">
+                Erstes Treffen am 12. November
+              </p>
+              <h1 className="mt-4 font-montserrat text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
+                Die Unverwechselbaren
+              </h1>
+              <div className="mt-6 h-0.5 w-16 bg-luxury-gold" aria-hidden="true" />
             </div>
 
-            <button
-              type="submit"
-              disabled={laeuft}
-              className="self-start rounded-sm bg-midnight-blue px-7 py-3.5 font-montserrat text-base font-semibold text-pearl-white transition-colors hover:bg-luxury-gold hover:text-midnight-blue disabled:opacity-60"
-            >
-              {laeuft ? 'Einen Moment…' : 'Einladung bekommen'}
-            </button>
+            <p className="font-inter text-2xl leading-snug sm:text-3xl">
+              Ein Ort für Menschen, die sich nicht vergleichbar machen lassen wollen.
+            </p>
 
-            {fehler && (
-              <p role="alert" className="border-l-4 border-luxury-gold bg-warm px-4 py-3 font-inter text-sm">
-                {fehler}
-              </p>
+            <p className="max-w-xl font-inter text-lg leading-relaxed text-midnight-blue/70">
+              Das, was du mitnimmst, steht in keinem Programmheft. Es steht in den Gesprächen,
+              die du führst. Wir treffen uns einmal im Monat, und was daraus wird, machen wir
+              gemeinsam.
+            </p>
+
+            {fertig ? (
+              <div className="max-w-xl border-l-4 border-luxury-gold bg-warm px-6 py-7">
+                <p className="font-montserrat text-lg font-semibold">Du stehst auf der Liste.</p>
+                <p className="mt-2 font-inter text-midnight-blue/70">
+                  Die Einladung zum 12. November kommt per E-Mail. Bis dahin passiert nichts weiter.
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={absenden} className="flex max-w-xl flex-col gap-3" noValidate>
+                <label
+                  htmlFor="cc-name"
+                  className="font-montserrat text-xs font-semibold uppercase tracking-[0.15em] text-midnight-blue/60"
+                >
+                  Trag dich ein, dann bekommst du die Einladung
+                </label>
+
+                <div className="flex flex-col gap-3 sm:flex-row">
+                  <input
+                    id="cc-name"
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Dein Name"
+                    autoComplete="name"
+                    className="w-full rounded-sm border border-midnight-blue/20 bg-white px-4 py-3.5 font-inter text-base outline-none transition focus:border-luxury-gold focus:ring-2 focus:ring-luxury-gold/25 sm:w-2/5"
+                  />
+                  <input
+                    id="cc-mail"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="deine@adresse.de"
+                    autoComplete="email"
+                    className="w-full rounded-sm border border-midnight-blue/20 bg-white px-4 py-3.5 font-inter text-base outline-none transition focus:border-luxury-gold focus:ring-2 focus:ring-luxury-gold/25"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={laeuft}
+                  className="self-start rounded-sm bg-midnight-blue px-8 py-3.5 font-montserrat text-base font-semibold text-pearl-white transition-colors hover:bg-luxury-gold hover:text-midnight-blue disabled:opacity-60"
+                >
+                  {laeuft ? 'Einen Moment…' : 'Einladung bekommen'}
+                </button>
+
+                {fehler && (
+                  <p
+                    role="alert"
+                    className="border-l-4 border-luxury-gold bg-warm px-4 py-3 font-inter text-sm"
+                  >
+                    {fehler}
+                  </p>
+                )}
+              </form>
             )}
-          </form>
-        )}
 
-        <p className="font-inter text-lg italic text-midnight-blue/60">Alles kann, nichts muss.</p>
+            <p className="font-inter text-xl italic text-midnight-blue/60">
+              Alles kann, nichts muss.
+            </p>
+          </div>
+
+          {/* Bild */}
+          <div className="order-1 lg:order-2">
+            <figure className="relative mx-auto max-w-sm lg:max-w-none">
+              <div
+                className="absolute -bottom-4 -right-4 hidden h-full w-full border border-luxury-gold/40 lg:block"
+                aria-hidden="true"
+              />
+              <img
+                src="/claudiaconen.jpg"
+                alt="Claudia Conen"
+                loading="eager"
+                className="relative w-full object-cover shadow-xl"
+              />
+              <figcaption className="relative mt-5 font-inter text-sm text-midnight-blue/60">
+                Claudia Conen lädt ein. Kein Programm, keine Bühne, ein Kreis.
+              </figcaption>
+            </figure>
+          </div>
+        </div>
       </div>
     </main>
   );

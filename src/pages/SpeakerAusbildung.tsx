@@ -20,6 +20,7 @@ import ZielgruppenSeite, { ZielgruppenInhalt } from '../components/ZielgruppenSe
 const INHALT: ZielgruppenInhalt = {
   pfad: '/speaker-ausbildung',
   stimmung: 'dunkel',
+  welle: true,
   wer: 'Ausbildung',
   zurueck: { text: 'Freie Rednerin', ziel: '/freie-rednerin' },
   frage: 'Sie haben etwas zu sagen. Warum steht dann jemand anderes auf der Bühne?',

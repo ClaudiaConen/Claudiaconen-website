@@ -15,6 +15,7 @@ import ClaudiaAI from '../components/ClaudiaAI';
 import Offers from '../components/Offers';
 import FrequentQuestions from '../components/FrequentQuestions';
 import ContactSection from '../components/ContactSection';
+import Impressionen from '../components/Impressionen';
 import FinalCTA from '../components/FinalCTA';
 import Footer from '../components/Footer';
 import WhatsAppButton from '../components/WhatsAppButton';
@@ -54,6 +55,7 @@ export default function Home() {
         <Offers />
         <FrequentQuestions />
         <ContactSection />
+        <Impressionen />
         <FinalCTA />
       </main>
       <Footer />

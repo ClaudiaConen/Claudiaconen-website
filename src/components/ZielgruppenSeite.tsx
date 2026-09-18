@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import Navigation from './Navigation';
 import Footer from './Footer';
 import SEO from './SEO';
+import Stimmwelle from './Stimmwelle';
 
 /**
  * Gemeinsames Geruest fuer die vier Zielgruppen-Seiten hinter den Tueren.
@@ -54,6 +55,9 @@ export type ZielgruppenInhalt = {
   /** Rueckweg zur Dachseite. Wichtig bei Seiten, die ueber einen QR-Code
    *  geoeffnet werden: ohne ihn ist die Seite eine Sackgasse. */
   zurueck?: { text: string; ziel: string };
+  /** Goldene Klangwellen im Kopf. Nur fuer dunkle Stimmung gedacht -
+   *  auf hellem Grund verschwindet Gold auf Creme. */
+  welle?: boolean;
 };
 
 
@@ -140,7 +144,15 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
         className="relative pt-36 pb-16 sm:pt-44 sm:pb-24"
         style={{ background: s.kopf }}
       >
-        <div className="mx-auto max-w-4xl px-6">
+        {inhalt.welle && (
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-56 opacity-70 sm:h-72"
+          >
+            <Stimmwelle />
+          </div>
+        )}
+        <div className="relative z-10 mx-auto max-w-4xl px-6">
           {inhalt.zurueck && (
             <Link
               to={inhalt.zurueck.ziel}

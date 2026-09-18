@@ -1507,3 +1507,43 @@ html, body { cursor: auto; }
   .logo-band-track { animation: none; flex-wrap: wrap; width: 100%; justify-content: center; gap: 34px; }
   .logo-band { -webkit-mask: none; mask: none; }
 }
+
+
+/* ---- Laufendes Band der Situationen ----------------------------------- */
+/* Aus dem Prototyp hautpseite26 (.tickerbar.top). Sehr langsam: 190 Sekunden
+   fuer einen Durchlauf. Ein schnelles Band liest niemand, es flackert nur. */
+.sit-band {
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 11px 0;
+  background: linear-gradient(90deg, #FFFEF9, #FDFBF7);
+  border-top: 1px solid rgba(10, 22, 40, 0.08);
+  border-bottom: 1px solid rgba(10, 22, 40, 0.08);
+}
+
+.sit-track {
+  display: inline-block;
+  animation: sitLauf 190s linear infinite;
+  font-family: Montserrat, Inter, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #0A1628;
+}
+
+.sit-wort { margin: 0 4px; }
+
+.sit-punkt {
+  color: #DAA520;
+  margin: 0 14px;
+  opacity: 0.7;
+}
+
+@keyframes sitLauf {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sit-track { animation: none; }
+  .sit-band { white-space: normal; text-align: center; padding: 14px 18px; }
+}

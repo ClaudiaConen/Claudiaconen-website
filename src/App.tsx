@@ -4,6 +4,9 @@ import Home from './pages/Home';
 import ClaudiaAIBeta from './pages/ClaudiaAIBeta';
 import Newsletter from './pages/Newsletter';
 import Unverwechselbare from './pages/Unverwechselbare';
+import ArtikelKeynotePreis from './pages/ArtikelKeynotePreis';
+import ArtikelSpeakerFinden from './pages/ArtikelSpeakerFinden';
+import ArtikelStimmeTrainieren from './pages/ArtikelStimmeTrainieren';
 import MarkeUndPositionierung from './pages/MarkeUndPositionierung';
 import KeynoteUndBuehnenperformance from './pages/KeynoteUndBuehnenperformance';
 import EinsZuEinsMentoring from './pages/EinsZuEinsMentoring';
@@ -155,6 +158,9 @@ function App() {
         <Route path="/claudia-ai" element={<ClaudiaAIBeta />} />
         <Route path="/newsletter" element={<Newsletter />} />
         <Route path="/unverwechselbare" element={<Unverwechselbare />} />
+        <Route path="/wissen/was-kostet-ein-keynote-speaker" element={<ArtikelKeynotePreis />} />
+        <Route path="/wissen/keynote-speaker-finden" element={<ArtikelSpeakerFinden />} />
+        <Route path="/wissen/stimme-trainieren" element={<ArtikelStimmeTrainieren />} />
         <Route path="/marke-und-positionierung" element={<MarkeUndPositionierung />} />
         <Route path="/keynote-und-buehnenperformance" element={<KeynoteUndBuehnenperformance />} />
         <Route path="/1-zu-1-mentoring" element={<EinsZuEinsMentoring />} />

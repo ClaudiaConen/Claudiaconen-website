@@ -1,95 +1,103 @@
-import { motion } from 'framer-motion';
-import { Heart, Star, Sparkles } from 'lucide-react';
-import Navigation from '../components/Navigation';
-import Footer from '../components/Footer';
+import ZielgruppenSeite, { ZielgruppenInhalt } from '../components/ZielgruppenSeite';
+
+/**
+ * Tuer 2: Speaker und freie Redner.
+ *
+ * Preis bewusst OFFEN gelassen. Die Angebotstreppe nennt fuer den Workshop
+ * einen Entwurf von 690 bis 990 Euro, also keine gesetzte Zahl. Eine Spanne
+ * aus einem internen Entwurf oeffentlich als Preis auszugeben waere geraten,
+ * nicht belegt. Claudia setzt die Zahl, danach steht sie hier.
+ *
+ * Freie Redner stehen hier mit drin, weil Claudia es am 18.09.2026 so
+ * entschieden hat. Das FUNDAMENT haelt Trauer- und Hochzeitsreden aus dem
+ * Schaufenster heraus; die AUSBILDUNG fuer freie Redner ist etwas anderes
+ * als das eigene Anbieten dieser Reden.
+ */
+const INHALT: ZielgruppenInhalt = {
+  pfad: '/redner-ausbildungen',
+  wer: 'Speaker & freie Redner',
+  frage: 'Wie bleibt deine Botschaft im Kopf, wenn du längst aufgehört hast zu sprechen?',
+  vorspann:
+    'Eine gute Rede reicht nicht, wenn Story, Persönlichkeit und Performance keinen bleibenden Eindruck hinterlassen.',
+
+  problemTitel: 'Gut vorbereitet ist nicht dasselbe wie unvergesslich',
+  problemAbsaetze: [
+    'Der Inhalt stimmt. Die Struktur steht. Und trotzdem erinnert sich am nächsten Tag niemand an den einen Satz, für den du auf der Bühne standest.',
+    'Das liegt selten am Thema. Es liegt daran, dass Inhalt bis zur ersten Reihe trägt und alles dahinter von deiner Präsenz entschieden wird. Von deiner Stimme, deinem Körper, deinem Mut zur Pause.',
+    'Wer das nicht geübt hat, merkt es genau dann, wenn es zählt: wenn der Saal größer ist als gedacht, wenn die Technik klemmt, wenn der erste Zwischenruf kommt.',
+  ],
+
+  angebotName: 'Der Workshop, an einem Tag',
+  angebotZeile:
+    'Ein Tag in kleiner Gruppe, höchstens zwölf Menschen. Du arbeitest an deiner eigenen Rede, nicht an einer Übungsaufgabe.',
+  angebotPreis: 'Preis auf Anfrage',
+  angebotPreisHinweis:
+    'Die Termine liegen einmal im Quartal. Schreib kurz, dann bekommst du Datum und Preis.',
+  angebotPunkte: [
+    'Höchstens zwölf Teilnehmende, damit jeder mehrfach auf die Bühne kommt',
+    'Deine eigene Rede oder dein eigener Pitch als Arbeitsmaterial',
+    'Aufnahme und Rückmeldung, damit du hörst, was andere hören',
+    'Die sieben Schlüssel der Voice-to-Brain-Methode als roter Faden',
+  ],
+
+  ablaufTitel: 'So läuft der Tag',
+  ablauf: [
+    {
+      schritt: 'Vorher',
+      text:
+        'Du schickst deine Rede oder dein Thema. So steht am Tag selbst nichts Fremdes auf der Bühne.',
+    },
+    {
+      schritt: 'Erkennen',
+      text:
+        'Klarheit und Geschichte. Was willst du wirklich sagen, und warum ausgerechnet du.',
+    },
+    {
+      schritt: 'Formen',
+      text:
+        'Botschaft, Stimme, Präsenz. Hier wird geübt, nicht erklärt. Mehrfach, vor Publikum.',
+    },
+    {
+      schritt: 'Wirken',
+      text:
+        'Was beim Gegenüber ankommt. Du hörst deine eigene Aufnahme, und zum ersten Mal hörst du dich so, wie andere dich hören.',
+    },
+  ],
+
+  fragen: [
+    {
+      frage: 'Ich bin freier Redner, keine Bühnen-Speakerin. Passt das trotzdem?',
+      antwort:
+        'Ja. Trauerrede, Hochzeitsrede, Moderation und Keynote unterscheiden sich im Anlass, nicht im Handwerk. Es geht immer darum, dass Menschen dir zuhören und behalten, was du gesagt hast.',
+    },
+    {
+      frage: 'Muss ich schon Bühnenerfahrung haben?',
+      antwort:
+        'Nein. Es hilft, wenn du eine eigene Rede oder ein eigenes Thema mitbringst, auch als Rohfassung. Ohne Vorerfahrung funktioniert der Tag genauso, nur arbeitest du an anderen Stellen.',
+    },
+    {
+      frage: 'Wird gefilmt?',
+      antwort:
+        'Es wird aufgenommen, damit du dich hören und sehen kannst. Die Aufnahmen gehören dir und werden nicht weitergegeben. Wer das nicht möchte, sagt es und wird nicht aufgenommen.',
+    },
+    {
+      frage: 'Gibt es das auch einzeln statt in der Gruppe?',
+      antwort:
+        'Ja, als Einzelbegleitung über zwölf Wochen. Das ist ein anderes Format mit anderem Umfang, dazu gern ein Gespräch.',
+    },
+  ],
+
+  schrittTitel: 'Schreib kurz, worum es bei dir geht',
+  schrittText:
+    'Ein, zwei Sätze genügen. Du bekommst die nächsten Termine, den Preis und eine ehrliche Einschätzung, ob der Tag für dich der richtige ist oder etwas anderes besser passt.',
+  schrittKnopf: 'Termin ansehen',
+  schrittZiel: '/termin-buchen',
+
+  seoTitel: 'Workshop für Speaker und freie Redner | Claudia Conen',
+  seoText:
+    'Ein Tag in kleiner Gruppe für Menschen, die auf der Bühne stehen: Storytelling, Präsenz, Performance und hörbare Persönlichkeit.',
+};
 
 export default function RednerAusbildungen() {
-  return (
-    <div className="min-h-screen bg-midnight-blue text-pearl-white">
-      <Navigation />
-
-      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <div className="inline-block p-4 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-3xl mb-6">
-              <Heart size={64} className="text-white" />
-            </div>
-            <h1 className="font-montserrat font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl mb-6 leading-tight">
-              <span className="bg-gradient-to-r from-[#B8860B] via-[#D4AF37] to-[#FFD700] bg-clip-text text-transparent">
-                DEINE BERUFUNG.<br/>
-                DEINE GESCHICHTE.<br/>
-                DEINE MARKE.
-              </span>
-            </h1>
-            <p className="text-lg sm:text-xl md:text-2xl text-pearl-white/70 max-w-3xl mx-auto">
-              Die Keynote-Ausbildung für Menschen, die etwas bewegen wollen.
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-            {[
-              {
-                icon: Heart,
-                title: 'Deine Berufung finden',
-                description: 'Entdecke, was dich wirklich antreibt und wozu du berufen bist.',
-              },
-              {
-                icon: Star,
-                title: 'Deine Geschichte entwickeln',
-                description: 'Forme deine persönliche Geschichte zu einer kraftvollen Botschaft.',
-              },
-              {
-                icon: Sparkles,
-                title: 'Deine Marke aufbauen',
-                description: 'Werde zur unverwechselbaren Marke, die Menschen bewegt.',
-              },
-            ].map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="bg-royal-navy/30 backdrop-blur-sm rounded-2xl p-8 border border-luxury-gold/10 hover:border-luxury-gold/30 transition-all duration-300"
-                >
-                  <Icon size={48} className="text-bright-gold mb-4" />
-                  <h3 className="font-montserrat font-bold text-xl mb-3">{item.title}</h3>
-                  <p className="text-pearl-white/70">{item.description}</p>
-                </motion.div>
-              );
-            })}
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="bg-gradient-to-br from-royal-navy/50 to-midnight-blue/50 backdrop-blur-sm rounded-3xl p-8 lg:p-12 border border-luxury-gold/20"
-          >
-            <h2 className="font-montserrat font-bold text-2xl sm:text-3xl md:text-4xl mb-6">
-              Die Keynote-Ausbildung, die dein Leben verändert
-            </h2>
-            <p className="text-pearl-white/80 text-base sm:text-lg md:text-xl leading-relaxed mb-6">
-              Diese Ausbildung ist für Menschen, die spüren, dass mehr in ihnen steckt. Die eine Botschaft haben,
-              die gehört werden muss. Die nicht nur reden wollen, sondern Menschen wirklich bewegen möchten.
-              In dieser Ausbildung findest du deine Berufung, formst deine authentische Geschichte und baust
-              daraus eine Marke, die wirkt.
-            </p>
-            <p className="text-pearl-white/80 text-base sm:text-lg md:text-xl leading-relaxed">
-              Du lernst nicht nur sprechen – du lernst, wie du mit deiner einzigartigen Geschichte Menschen
-              berührst, inspirierst und zum Handeln bewegst. Werde zur Stimme, die bleibt.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      <Footer />
-    </div>
-  );
+  return <ZielgruppenSeite inhalt={INHALT} />;
 }

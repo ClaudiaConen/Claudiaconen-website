@@ -1,95 +1,100 @@
-import { motion } from 'framer-motion';
-import { Compass, ArrowRight, Sparkles, MessageSquare, Monitor, BookOpen, CheckCircle } from 'lucide-react';
-import Navigation from '../components/Navigation';
-import Footer from '../components/Footer';
-import SEO from '../components/SEO';
-import ContactSection from '../components/ContactSection';
+import ZielgruppenSeite, { ZielgruppenInhalt } from '../components/ZielgruppenSeite';
+
+/**
+ * Tuer 4: KI-Einsteiger und Neugierige.
+ *
+ * Claudia hat die Zielgruppe am 18.09.2026 selbst von "Einsteiger ab 50" in
+ * "KI-Einsteiger & Neugierige" umbenannt. Das ist die klaerere Wahl: Niemand
+ * wird gern auf sein Alter reduziert, und die Angst vor der ersten Frage hat
+ * mit dem Geburtsjahr wenig zu tun.
+ *
+ * Preis 89 Euro fuer den Online-Kurs stammt aus der Angebotstreppe und ist
+ * dort als gesetzt gefuehrt, nicht als Entwurf. Deshalb steht er hier.
+ */
+const INHALT: ZielgruppenInhalt = {
+  pfad: '/ki-einsteiger-coaching',
+  wer: 'KI-Einsteiger & Neugierige',
+  frage: 'Wie nutzt du KI als Abkürzung – und bleibst trotzdem unverwechselbar?',
+  vorspann:
+    'KI kann Zeit schenken, Ideen beschleunigen und Arbeit erleichtern. Entscheidend ist, zu verstehen, was wirklich zu dir und deinem Business passt.',
+
+  problemTitel: 'Das Problem ist nicht die Technik. Es ist die Scham.',
+  problemAbsaetze: [
+    'Alle reden davon, als wäre es selbstverständlich. Und genau deshalb fragt niemand mehr nach. Wer nicht fragt, probiert heimlich, gibt auf und sagt nichts.',
+    'Dazu kommt die zweite Sorge, und die ist berechtigt: Wenn alle dieselben Werkzeuge benutzen, klingen am Ende alle gleich. Dann hast du Zeit gespart und dich selbst verloren.',
+    'Beides lässt sich lösen. Aber nicht mit tausend Werkzeugen, sondern mit drei, die zu dir passen, und mit der Erlaubnis, jede Frage zu stellen.',
+  ],
+
+  angebotName: 'Der Online-Kurs Unverwechselbar',
+  angebotZeile:
+    'Der Einstieg in deinem Tempo. Ohne Fachbegriffe, ohne Eile, ohne dass dir jemand über die Schulter schaut.',
+  angebotPreis: '89 €',
+  angebotPreisHinweis: 'Einmalig. Du arbeitest ihn durch, wann du willst, und so oft du willst.',
+  angebotPunkte: [
+    'Die ersten Schritte, erklärt für Menschen, die noch nie damit gearbeitet haben',
+    'Drei Werkzeuge, die wirklich etwas sparen, statt einer Liste mit dreißig',
+    'Wie du KI nutzt, ohne dass deine Texte nach KI klingen',
+    'Was du besser selbst machst, weil es sonst austauschbar wird',
+  ],
+
+  ablaufTitel: 'Was dich erwartet',
+  ablauf: [
+    {
+      schritt: 'Verstehen',
+      text:
+        'Was diese Werkzeuge tun und was nicht. In normaler Sprache, ohne dass du vorher etwas wissen musst.',
+    },
+    {
+      schritt: 'Sicher anwenden',
+      text:
+        'Die ersten eigenen Versuche, an deinen echten Aufgaben. Nicht an erfundenen Beispielen.',
+    },
+    {
+      schritt: 'Zeit gewinnen',
+      text:
+        'Wo sich wirklich Stunden sparen lassen. Und was mit der gewonnenen Zeit passieren sollte, damit sie nicht gleich wieder verschwindet.',
+    },
+    {
+      schritt: 'Unverwechselbar bleiben',
+      text:
+        'Der wichtigste Teil. Wie deine Persönlichkeit im Ergebnis sichtbar bleibt, statt zwischen tausend ähnlichen Texten zu verschwinden.',
+    },
+  ],
+
+  fragen: [
+    {
+      frage: 'Ich bin nicht technikbegeistert. Ist das trotzdem etwas für mich?',
+      antwort:
+        'Ja, genau dafür ist es gemacht. Es wird nichts vorausgesetzt außer der Bereitschaft, etwas auszuprobieren. Fragen sind ausdrücklich erwünscht, auch die, die du dir woanders nicht traust.',
+    },
+    {
+      frage: 'Gibt es das auch mit einem Menschen statt als Kurs?',
+      antwort:
+        'Ja. Es gibt Einzelbegleitung und Workshops für Gruppen und Teams. Für viele ist der Kurs der richtige Anfang, weil er nichts kostet außer 89 Euro und niemand zuschaut.',
+    },
+    {
+      frage: 'Werde ich danach ersetzt?',
+      antwort:
+        'Nein, und das ist der Kern. Was sich ersetzen lässt, ist das Wiederholbare. Was du mitbringst, deine Erfahrung, deine Art zu sprechen, dein Urteil, lässt sich nicht auf Knopfdruck erzeugen. Der Kurs zeigt dir, wo die Grenze verläuft.',
+    },
+    {
+      frage: 'Wie lange brauche ich dafür?',
+      antwort:
+        'So lange du willst. Es gibt keinen Zeitplan und keine Gruppe, die auf dich wartet. Die meisten arbeiten ihn über zwei, drei Abende durch.',
+    },
+  ],
+
+  schrittTitel: 'Fang klein an',
+  schrittText:
+    'Der Kurs ist der Einstieg mit dem geringsten Risiko. Wenn du lieber erst reden möchtest, geht das auch. Eine Frage zu stellen kostet hier nichts.',
+  schrittKnopf: 'Einfach mit KI starten',
+  schrittZiel: '/termin-buchen',
+
+  seoTitel: 'KI für Einsteiger, ohne Fachchinesisch | Claudia Conen',
+  seoText:
+    'Der Einstieg in KI für Menschen ohne Vorkenntnisse. Verstehen, sicher anwenden, Zeit gewinnen und dabei unverwechselbar bleiben.',
+};
 
 export default function KIEinsteigerCoaching() {
-  const features = [
-    { icon: Compass, title: 'Sanfter Einstieg', desc: 'Keine Vorkenntnisse noetig -- wir starten genau da, wo du stehst' },
-    { icon: MessageSquare, title: 'ChatGPT & Co.', desc: 'Lerne die wichtigsten KI-Tools kennen und richtig einzusetzen' },
-    { icon: Monitor, title: 'Praxisnah & sofort anwendbar', desc: 'Uebungen und Beispiele aus deinem Alltag' },
-    { icon: BookOpen, title: 'Prompting lernen', desc: 'Die Kunst, KI die richtigen Fragen zu stellen' },
-    { icon: Sparkles, title: 'Persoenlichkeit bewahren', desc: 'KI als Verstaerker deiner Staerken, nicht als Ersatz' },
-    { icon: CheckCircle, title: 'Sicherheit gewinnen', desc: 'Nach dem Coaching nutzt du KI mit Selbstvertrauen und Freude' },
-  ];
-
-  return (
-    <>
-      <SEO
-        title="KI Einsteiger Coaching | Claudia Conen"
-        description="Dein sanfter Einstieg in die KI-Welt. Persoenliches Coaching fuer Einsteiger, die KI selbstbewusst nutzen wollen."
-      />
-      <Navigation />
-
-      <main className="min-h-screen bg-midnight-blue pt-40 pb-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[rgba(212,175,55,0.1)] border border-[rgba(212,175,55,0.2)] mb-6">
-              <Compass size={16} className="text-[#D4AF37]" />
-              <span className="text-[#D4AF37] text-sm font-medium">KI & Mensch</span>
-            </div>
-            <h1 className="font-montserrat text-4xl md:text-5xl lg:text-6xl font-black mb-6" style={{ color: 'white' }}>
-              <span className="headline-line2">KI Einsteiger</span>
-              <br />
-              <span className="text-white text-3xl md:text-4xl">Coaching</span>
-            </h1>
-            <p className="text-xl text-white/70 max-w-3xl mx-auto leading-relaxed" style={{ color: 'rgba(255,255,255,0.7)', fontSize: '1.15rem' }}>
-              Dein sanfter Einstieg in die KI-Welt -- persoenlich, praxisnah und ohne Ueberforderung.
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
-            {features.map((f, i) => {
-              const Icon = f.icon;
-              return (
-                <motion.div
-                  key={f.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                  className="glass-card p-6 hover:border-[#D4AF37]/30 transition-all duration-300"
-                >
-                  <div className="w-12 h-12 rounded-xl bg-[rgba(212,175,55,0.1)] flex items-center justify-center mb-4">
-                    <Icon size={22} className="text-[#D4AF37]" />
-                  </div>
-                  <h3 className="font-montserrat font-bold text-lg text-white mb-2">{f.title}</h3>
-                  <p className="text-white/60 text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>{f.desc}</p>
-                </motion.div>
-              );
-            })}
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="text-center"
-          >
-            <a
-              href="/#contact"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-sm uppercase tracking-wider transition-all duration-300 hover:translate-y-[-2px]"
-              style={{
-                background: 'linear-gradient(135deg, #D4AF37 0%, #C9A961 100%)',
-                color: '#0A1F44',
-                boxShadow: '0 4px 15px rgba(212,175,55,0.3)',
-              }}
-            >
-              Jetzt anfragen
-              <ArrowRight size={18} />
-            </a>
-          </motion.div>
-        </div>
-      </main>
-
-      <ContactSection />
-      <Footer />
-    </>
-  );
+  return <ZielgruppenSeite inhalt={INHALT} />;
 }

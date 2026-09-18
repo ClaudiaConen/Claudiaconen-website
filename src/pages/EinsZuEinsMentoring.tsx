@@ -1,93 +1,104 @@
-import { motion } from 'framer-motion';
-import { Star, Target, Zap, Award } from 'lucide-react';
-import Navigation from '../components/Navigation';
-import Footer from '../components/Footer';
+import ZielgruppenSeite, { ZielgruppenInhalt } from '../components/ZielgruppenSeite';
+
+/**
+ * Tuer 3: Coaches und Trainer. Das 1:1 ist laut Strategie das
+ * Referenzprodukt und liefert die Geschichten, die Motor A auf der Buehne
+ * verkauft.
+ *
+ * Preis bewusst OFFEN. Die Marketingstrategie sagt dazu ausdruecklich "von
+ * Claudia zu setzen", die Angebotstreppe nennt nur einen Entwurf von 5.000
+ * bis 7.500 Euro. Bei einem Betrag dieser Groesse ist eine geratene Zahl
+ * auf einer oeffentlichen Seite nicht vertretbar.
+ *
+ * Der Kritiker-Check verlangt fuer dieses Format ein messbares oder
+ * sichtbares Ergebnis. Deshalb steht am Ende ein Ergebnis, das man vorzeigen
+ * kann, und nicht nur ein Gefuehl.
+ */
+const INHALT: ZielgruppenInhalt = {
+  pfad: '/1-zu-1-mentoring',
+  wer: 'Coaches & Trainer',
+  frage: 'Warum sollte man dich buchen – und nicht den nächsten Experten?',
+  vorspann:
+    'Kompetenz allein macht noch keine unverwechselbare Marke. Entscheidend ist, ob Menschen erkennen, wofür du stehst, dir vertrauen und dich im Kopf behalten.',
+
+  problemTitel: 'Dein Problem ist nicht Können. Es ist Vergleichbarkeit.',
+  problemAbsaetze: [
+    'Du bist gut in dem, was du tust. Das bestreitet niemand. Nur steht neben dir jemand, der dasselbe verspricht, und für den, der bucht, sieht beides gleich aus.',
+    'Je mehr Texte, Bilder und Angebote auf Knopfdruck entstehen, desto ähnlicher wird alles. Perfektion ist klickbar geworden. Was nicht klickbar ist, bist du.',
+    'Die Frage ist also nicht, wie du besser wirst. Sie lautet, woran man dich erkennt, wenn dein Name nicht danebensteht.',
+  ],
+
+  angebotName: 'Voice-to-Brain® Intensiv, zwölf Wochen',
+  angebotZeile:
+    'Eine Einzelbegleitung über zwölf Wochen. Am Ende steht kein gutes Gefühl, sondern etwas, das du vorzeigen kannst.',
+  angebotPreis: 'Preis im Erstgespräch',
+  angebotPreisHinweis:
+    'Der Umfang wird vorher gemeinsam festgelegt. Ohne Gespräch wäre jede Zahl geraten.',
+  angebotPunkte: [
+    'Zwölf Wochen, feste Termine, dazwischen Arbeit an deinen echten Auftritten',
+    'Die drei Phasen der Methode: erkennen, formen, wirken',
+    'Am Ende ein vorzeigbares Ergebnis: eine fertige Keynote, ein sitzender Pitch oder ein Kameraauftritt',
+    'Deine Positionierung in einem Satz, den du selbst überzeugend sagen kannst',
+  ],
+
+  ablaufTitel: 'Die drei Phasen',
+  ablauf: [
+    {
+      schritt: 'Erkennen',
+      text:
+        'Klarheit und Geschichte. Woher dein Wert kommt, und welche deiner Erfahrungen dafür tragen. Das ist der unbequemste Teil und der wichtigste.',
+    },
+    {
+      schritt: 'Formen',
+      text:
+        'Botschaft, Stimme, Präsenz. Aus dem, was du erkannt hast, wird etwas, das andere hören und behalten.',
+    },
+    {
+      schritt: 'Wirken',
+      text:
+        'Brücke und Wirkung. Wie du KI nutzt, ohne austauschbar zu werden, und woran du merkst, dass es ankommt.',
+    },
+    {
+      schritt: 'Danach',
+      text:
+        'Du hast ein fertiges Stück Arbeit in der Hand. Kein Zertifikat, sondern etwas, das du buchstäblich vorzeigen kannst.',
+    },
+  ],
+
+  fragen: [
+    {
+      frage: 'Was kostet das?',
+      antwort:
+        'Das wird im Erstgespräch festgelegt, weil der Umfang sich unterscheidet. Es handelt sich um eine Begleitung über zwölf Wochen im vierstelligen Bereich, nicht um ein Paket von der Stange. Wer eine schnelle günstige Lösung sucht, ist mit dem Online-Kurs oder einem Workshoptag besser bedient.',
+    },
+    {
+      frage: 'Ist das Stimmtraining?',
+      antwort:
+        'Nein. Die Stimme ist der Zugang, die Persönlichkeit ist das Ergebnis. Über die Stimme wird erkennbar, wie jemand zu sich steht. Daran wird gearbeitet, nicht an Tonhöhe und Atemtechnik allein.',
+    },
+    {
+      frage: 'Woher weiß ich, dass die Methode wissenschaftlich fundiert ist?',
+      antwort:
+        'Sie ist Erfahrungswissen aus über fünfunddreißig Jahren Arbeit mit Stimme, Bühne und Menschen. Wissenschaftliche Versprechen werden hier keine gemacht. Was zählt, ist, ob sich dein Auftritt messbar verändert, und das siehst du selbst in Woche zwölf.',
+    },
+    {
+      frage: 'Ich habe wenig Zeit. Wie viel muss ich einplanen?',
+      antwort:
+        'Feste Termine über zwölf Wochen, dazwischen Arbeit an Auftritten, die du ohnehin hast. Es kommt also nichts zusätzlich auf den Kalender, es wird anders vorbereitet.',
+    },
+  ],
+
+  schrittTitel: 'Erst reden, dann entscheiden',
+  schrittText:
+    'Ein Gespräch, in dem geklärt wird, woran es bei dir wirklich hakt. Wenn etwas anderes besser passt als zwölf Wochen Einzelbegleitung, hörst du das auch.',
+  schrittKnopf: 'Erstgespräch vereinbaren',
+  schrittZiel: '/termin-buchen',
+
+  seoTitel: 'Voice-to-Brain Intensiv für Coaches und Trainer | Claudia Conen',
+  seoText:
+    'Einzelbegleitung über zwölf Wochen für Coaches und Trainer, die unverwechselbar werden wollen. Positionierung, Persönlichkeit, Vertrauen, Kundengewinnung.',
+};
 
 export default function EinsZuEinsMentoring() {
-  return (
-    <div className="min-h-screen bg-midnight-blue text-pearl-white">
-      <Navigation />
-
-      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <div className="inline-block p-4 bg-gradient-to-br from-purple-500 to-violet-400 rounded-3xl mb-6">
-              <Star size={64} className="text-white" />
-            </div>
-            <h1 className="font-montserrat font-bold text-4xl sm:text-5xl lg:text-6xl mb-6">
-              1:1{' '}
-              <span className="bg-gradient-to-r from-[#B8860B] via-[#D4AF37] to-[#FFD700] bg-clip-text text-transparent">
-                Mentoring
-              </span>
-            </h1>
-            <p className="text-xl text-pearl-white/70 max-w-3xl mx-auto">
-              Vom Hören zur Wirkung – dein persönlicher Durchbruch.
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-            {[
-              {
-                icon: Target,
-                title: 'Individuelle Begleitung',
-                description: 'Maßgeschneidertes Coaching, das exakt auf deine Bedürfnisse zugeschnitten ist.',
-              },
-              {
-                icon: Zap,
-                title: 'Schnelle Ergebnisse',
-                description: 'Intensive Sessions, die dich direkt weiterbringen und transformieren.',
-              },
-              {
-                icon: Award,
-                title: 'Persönlicher Durchbruch',
-                description: 'Erreiche das nächste Level in deiner persönlichen und beruflichen Entwicklung.',
-              },
-            ].map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="bg-royal-navy/30 backdrop-blur-sm rounded-2xl p-8 border border-luxury-gold/10 hover:border-luxury-gold/30 transition-all duration-300"
-                >
-                  <Icon size={48} className="text-bright-gold mb-4" />
-                  <h3 className="font-montserrat font-bold text-xl mb-3">{item.title}</h3>
-                  <p className="text-pearl-white/70">{item.description}</p>
-                </motion.div>
-              );
-            })}
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="bg-gradient-to-br from-royal-navy/50 to-midnight-blue/50 backdrop-blur-sm rounded-3xl p-8 lg:p-12 border border-luxury-gold/20"
-          >
-            <h2 className="font-montserrat font-bold text-3xl mb-6">
-              Dein persönlicher Weg zur Wirkung
-            </h2>
-            <p className="text-pearl-white/80 text-lg leading-relaxed mb-6">
-              Im 1:1 Mentoring arbeiten wir intensiv an deinen individuellen Herausforderungen und Zielen.
-              Ob es um deine Stimme, deine Präsenz oder deine gesamte Kommunikationsstrategie geht –
-              ich begleite dich persönlich auf jedem Schritt deines Weges.
-            </p>
-            <p className="text-pearl-white/80 text-lg leading-relaxed">
-              Mit meiner Erfahrung aus über tausenden Coachings weiß ich genau, wo die Hebel liegen,
-              um deine Wirkung zu maximieren. Lass uns gemeinsam deinen Durchbruch schaffen.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      <Footer />
-    </div>
-  );
+  return <ZielgruppenSeite inhalt={INHALT} />;
 }

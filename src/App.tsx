@@ -3,6 +3,7 @@ import BetaBanner from './components/BetaBanner';
 import Home from './pages/Home';
 import ClaudiaAIBeta from './pages/ClaudiaAIBeta';
 import Newsletter from './pages/Newsletter';
+import Unverwechselbare from './pages/Unverwechselbare';
 import MarkeUndPositionierung from './pages/MarkeUndPositionierung';
 import KeynoteUndBuehnenperformance from './pages/KeynoteUndBuehnenperformance';
 import EinsZuEinsMentoring from './pages/EinsZuEinsMentoring';
@@ -153,6 +154,7 @@ function App() {
           <Route path="/" element={<Home />} />
         <Route path="/claudia-ai" element={<ClaudiaAIBeta />} />
         <Route path="/newsletter" element={<Newsletter />} />
+        <Route path="/unverwechselbare" element={<Unverwechselbare />} />
         <Route path="/marke-und-positionierung" element={<MarkeUndPositionierung />} />
         <Route path="/keynote-und-buehnenperformance" element={<KeynoteUndBuehnenperformance />} />
         <Route path="/1-zu-1-mentoring" element={<EinsZuEinsMentoring />} />

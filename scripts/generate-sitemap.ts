@@ -27,7 +27,7 @@ const staticPages = [
   { path: '/mentoring-gold', priority: '0.9', changefreq: 'monthly' },
   { path: '/mentoring-transformation', priority: '0.9', changefreq: 'monthly' },
   { path: '/mentoring-online', priority: '0.9', changefreq: 'monthly' },
-  { path: '/eins-zu-eins-mentoring', priority: '0.9', changefreq: 'monthly' },
+  { path: '/1-zu-1-mentoring', priority: '0.9', changefreq: 'monthly' },
 
   { path: '/speaker-training', priority: '0.9', changefreq: 'monthly' },
   { path: '/speaker-positionierung', priority: '0.8', changefreq: 'monthly' },
@@ -67,11 +67,37 @@ const staticPages = [
   { path: '/workbook-generator', priority: '0.7', changefreq: 'monthly' },
   { path: '/quiz-generator', priority: '0.7', changefreq: 'monthly' },
 
-  { path: '/blog/ki', priority: '0.7', changefreq: 'weekly' },
-  { path: '/blog/neuro', priority: '0.7', changefreq: 'weekly' },
-  { path: '/blog/wirkung', priority: '0.7', changefreq: 'weekly' },
+  { path: '/blog-ki', priority: '0.7', changefreq: 'weekly' },
+  { path: '/blog-neuro', priority: '0.7', changefreq: 'weekly' },
+  { path: '/blog-wirkung', priority: '0.7', changefreq: 'weekly' },
 
-  { path: '/claudia-ai-beta', priority: '0.6', changefreq: 'monthly' },
+  { path: '/claudia-ai', priority: '0.6', changefreq: 'monthly' },
+
+  // Freie Rednerin: Dachseite, Anlaesse, Ausbildungen (18.09.2026)
+  { path: '/freie-rednerin', priority: '0.9', changefreq: 'monthly' },
+  { path: '/trauerrede', priority: '0.8', changefreq: 'monthly' },
+  { path: '/freie-trauung', priority: '0.8', changefreq: 'monthly' },
+  { path: '/speaker-ausbildung', priority: '0.9', changefreq: 'monthly' },
+  { path: '/freie-redner-ausbildung', priority: '0.9', changefreq: 'monthly' },
+  { path: '/trauerredner-ausbildung', priority: '0.8', changefreq: 'monthly' },
+  { path: '/hochzeitsredner-ausbildung', priority: '0.8', changefreq: 'monthly' },
+
+  { path: '/hoeren', priority: '0.8', changefreq: 'monthly' },
+  { path: '/unverwechselbare', priority: '0.8', changefreq: 'monthly' },
+
+  { path: '/wissen/was-kostet-ein-keynote-speaker', priority: '0.8', changefreq: 'monthly' },
+  { path: '/wissen/keynote-speaker-finden', priority: '0.8', changefreq: 'monthly' },
+  { path: '/wissen/stimme-trainieren', priority: '0.8', changefreq: 'monthly' },
+
+  // Vorhandene Seiten, die bisher in keiner Sitemap standen (18.09.2026)
+  { path: '/premiumangebote', priority: '0.9', changefreq: 'monthly' },
+  { path: '/termin-buchen', priority: '0.8', changefreq: 'monthly' },
+  { path: '/events', priority: '0.8', changefreq: 'weekly' },
+  { path: '/experten', priority: '0.7', changefreq: 'monthly' },
+  { path: '/wirkungskraft-quiz', priority: '0.7', changefreq: 'monthly' },
+  { path: '/ki-workshop-unverwechselbar', priority: '0.8', changefreq: 'monthly' },
+  { path: '/spanien-ki-workshop', priority: '0.7', changefreq: 'monthly' },
+  { path: '/ki-einsteiger-coaching', priority: '0.7', changefreq: 'monthly' },
 
   { path: '/impressum', priority: '0.3', changefreq: 'yearly' },
   { path: '/datenschutz', priority: '0.3', changefreq: 'yearly' },

@@ -1,5 +1,6 @@
 import Navigation from '../components/Navigation';
 import Hero from '../components/Hero';
+import Tueren from '../components/Tueren';
 import MissionSection from '../components/MissionSection';
 import ThemenCarousel from '../components/ThemenCarousel';
 import ServiceCards from '../components/ServiceCards';
@@ -35,6 +36,7 @@ export default function Home() {
       </header>
       <main id="main">
         <Hero />
+        <Tueren />
         <ThemenCarousel />
         <ServiceCards />
         <HeroBrainSection />

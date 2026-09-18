@@ -1416,9 +1416,9 @@ html, body { cursor: auto; }
   pointer-events: none;
   background: linear-gradient(
     105deg,
-    transparent 35%,
-    rgba(218, 165, 32, 0.10) 50%,
-    transparent 65%
+    transparent 30%,
+    rgba(255, 255, 255, 0.55) 50%,
+    transparent 70%
   );
   transform: translateX(-100%);
   animation: tuerSchimmer 9s ease-in-out infinite;
@@ -1556,4 +1556,20 @@ html, body { cursor: auto; }
 @media (prefers-reduced-motion: reduce) {
   .sit-track { animation: none; }
   .sit-band { white-space: normal; text-align: center; padding: 14px 18px; }
+}
+
+
+/* Nur die erste Tuer atmet. Vier pulsierende Kacheln waeren Unruhe, eine ist
+   ein Hinweis: Hier faengst du an. */
+.tuer-marke-puls {
+  animation: tuerMarkePuls 3.2s ease-in-out infinite;
+}
+
+@keyframes tuerMarkePuls {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(218, 165, 32, 0.45); }
+  60% { box-shadow: 0 0 0 10px rgba(218, 165, 32, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tuer-marke-puls { animation: none; }
 }

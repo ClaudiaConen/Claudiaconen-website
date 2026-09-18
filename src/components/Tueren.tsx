@@ -121,15 +121,22 @@ export default function Tueren() {
                 className="tuer-karte rounded-xl px-7 py-8 motion-reduce:transform-none sm:px-10 sm:py-11"
                 style={{ transform: `scale(${1 - (TUEREN.length - 1 - i) * 0.012})` }}
               >
-                <h3 className="font-montserrat text-xs font-semibold uppercase tracking-[0.2em] text-dark-gold">
-                  {t.wer}
+                <h3>
+                  <span
+                    className={
+                      'inline-block rounded-sm bg-midnight-blue px-4 py-2 font-montserrat text-sm font-bold uppercase tracking-[0.12em] text-pearl-white sm:text-base' +
+                      (i === 0 ? ' tuer-marke-puls' : '')
+                    }
+                  >
+                    {t.wer}
+                  </span>
                 </h3>
 
-                <p className="mt-4 font-montserrat text-xl font-bold leading-snug text-midnight-blue sm:text-2xl">
+                <p className="mt-5 font-montserrat text-2xl font-bold leading-[1.15] text-midnight-blue sm:text-3xl">
                   {t.frage}
                 </p>
 
-                <p className="mt-4 max-w-2xl font-inter text-base leading-relaxed text-midnight-blue/70">
+                <p className="mt-4 max-w-2xl font-inter text-sm leading-relaxed text-midnight-blue/65 sm:text-base">
                   {t.problem}
                 </p>
 

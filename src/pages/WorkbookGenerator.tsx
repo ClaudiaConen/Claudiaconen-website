@@ -50,10 +50,20 @@ export default function WorkbookGenerator() {
   };
 
   const handleGeneratePDF = async () => {
+    // Die PDF-Bibliothek haengt nicht mehr global in index.html, wo sie
+    // jeden Besucher 242 KB gekostet hat. Sie wird hier bei Bedarf geladen.
     if (!window.html2pdf) {
-      alert('PDF-Bibliothek wird geladen. Bitte versuchen Sie es erneut.');
-      return;
+      await new Promise<void>((fertig, fehler) => {
+        const s = document.createElement('script');
+        s.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+        s.onload = () => fertig();
+        s.onerror = () => fehler(new Error('html2pdf konnte nicht geladen werden'));
+        document.head.appendChild(s);
+      }).catch(() => {
+        alert('Die PDF-Funktion konnte nicht geladen werden. Bitte Seite neu laden.');
+      });
     }
+    if (!window.html2pdf) return;
 
     setIsGenerating(true);
     const element = pagesContainerRef.current;

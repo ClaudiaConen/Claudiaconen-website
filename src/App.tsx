@@ -1,149 +1,150 @@
+import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import BetaBanner from './components/BetaBanner';
-import Home from './pages/Home';
-import ClaudiaAIBeta from './pages/ClaudiaAIBeta';
-import Newsletter from './pages/Newsletter';
-import Unverwechselbare from './pages/Unverwechselbare';
-import Hoeren from './pages/Hoeren';
-import ArtikelKeynotePreis from './pages/ArtikelKeynotePreis';
-import ArtikelSpeakerFinden from './pages/ArtikelSpeakerFinden';
-import ArtikelStimmeTrainieren from './pages/ArtikelStimmeTrainieren';
-import MarkeUndPositionierung from './pages/MarkeUndPositionierung';
-import KeynoteUndBuehnenperformance from './pages/KeynoteUndBuehnenperformance';
-import EinsZuEinsMentoring from './pages/EinsZuEinsMentoring';
-import RednerAusbildungen from './pages/RednerAusbildungen';
-import WissenToGo from './pages/WissenToGo';
-import SocialMediaWirkung from './pages/SocialMediaWirkung';
-import ImmerDaWoDuBist from './pages/ImmerDaWoDuBist';
+const Home = lazy(() => import('./pages/Home'));
+const ClaudiaAIBeta = lazy(() => import('./pages/ClaudiaAIBeta'));
+const Newsletter = lazy(() => import('./pages/Newsletter'));
+const Unverwechselbare = lazy(() => import('./pages/Unverwechselbare'));
+const Hoeren = lazy(() => import('./pages/Hoeren'));
+const ArtikelKeynotePreis = lazy(() => import('./pages/ArtikelKeynotePreis'));
+const ArtikelSpeakerFinden = lazy(() => import('./pages/ArtikelSpeakerFinden'));
+const ArtikelStimmeTrainieren = lazy(() => import('./pages/ArtikelStimmeTrainieren'));
+const MarkeUndPositionierung = lazy(() => import('./pages/MarkeUndPositionierung'));
+const KeynoteUndBuehnenperformance = lazy(() => import('./pages/KeynoteUndBuehnenperformance'));
+const EinsZuEinsMentoring = lazy(() => import('./pages/EinsZuEinsMentoring'));
+const RednerAusbildungen = lazy(() => import('./pages/RednerAusbildungen'));
+const WissenToGo = lazy(() => import('./pages/WissenToGo'));
+const SocialMediaWirkung = lazy(() => import('./pages/SocialMediaWirkung'));
+const ImmerDaWoDuBist = lazy(() => import('./pages/ImmerDaWoDuBist'));
 
-import UnternehmenKeynotes from './pages/UnternehmenKeynotes';
-import UnternehmenLeadership from './pages/UnternehmenLeadership';
-import UnternehmenSelling from './pages/UnternehmenSelling';
-import UnternehmenEvents from './pages/UnternehmenEvents';
+const UnternehmenKeynotes = lazy(() => import('./pages/UnternehmenKeynotes'));
+const UnternehmenLeadership = lazy(() => import('./pages/UnternehmenLeadership'));
+const UnternehmenSelling = lazy(() => import('./pages/UnternehmenSelling'));
+const UnternehmenEvents = lazy(() => import('./pages/UnternehmenEvents'));
 
-import SpeakerPositionierung from './pages/SpeakerPositionierung';
-import SpeakerStorytelling from './pages/SpeakerStorytelling';
-import SpeakerBuehne from './pages/SpeakerBuehne';
-import SpeakerSocial from './pages/SpeakerSocial';
-import SpeakerTraining from './pages/SpeakerTraining';
+const SpeakerPositionierung = lazy(() => import('./pages/SpeakerPositionierung'));
+const SpeakerStorytelling = lazy(() => import('./pages/SpeakerStorytelling'));
+const SpeakerBuehne = lazy(() => import('./pages/SpeakerBuehne'));
+const SpeakerSocial = lazy(() => import('./pages/SpeakerSocial'));
+const SpeakerTraining = lazy(() => import('./pages/SpeakerTraining'));
 
-import MentoringTransformation from './pages/MentoringTransformation';
-import MentoringGold from './pages/MentoringGold';
-import MentoringOnline from './pages/MentoringOnline';
+const MentoringTransformation = lazy(() => import('./pages/MentoringTransformation'));
+const MentoringGold = lazy(() => import('./pages/MentoringGold'));
+const MentoringOnline = lazy(() => import('./pages/MentoringOnline'));
 
-import AusbildungBeruf from './pages/AusbildungBeruf';
-import AusbildungZertifizierung from './pages/AusbildungZertifizierung';
+const AusbildungBeruf = lazy(() => import('./pages/AusbildungBeruf'));
+const AusbildungZertifizierung = lazy(() => import('./pages/AusbildungZertifizierung'));
 
-import StimmeKeynote from './pages/StimmeKeynote';
-import StimmeHochzeit from './pages/StimmeHochzeit';
-import StimmeTrauer from './pages/StimmeTrauer';
-import StimmeVoiceover from './pages/StimmeVoiceover';
+const StimmeKeynote = lazy(() => import('./pages/StimmeKeynote'));
+const StimmeHochzeit = lazy(() => import('./pages/StimmeHochzeit'));
+const StimmeTrauer = lazy(() => import('./pages/StimmeTrauer'));
+const StimmeVoiceover = lazy(() => import('./pages/StimmeVoiceover'));
 
-import Wissensbibliothek from './pages/Wissensbibliothek';
-import Experten from './pages/Experten';
-import ChecklistBestaetigung from './pages/ChecklistBestaetigung';
-import LinkedInFreebie from './pages/LinkedInFreebie';
-import LinkedInFreebieConfirmed from './pages/LinkedInFreebieConfirmed';
-import WissenCommunity from './pages/WissenCommunity';
-import WissenWebinare from './pages/WissenWebinare';
-import WissenTelegram from './pages/WissenTelegram';
-import WissenWhatsapp from './pages/WissenWhatsapp';
+const Wissensbibliothek = lazy(() => import('./pages/Wissensbibliothek'));
+const Experten = lazy(() => import('./pages/Experten'));
+const ChecklistBestaetigung = lazy(() => import('./pages/ChecklistBestaetigung'));
+const LinkedInFreebie = lazy(() => import('./pages/LinkedInFreebie'));
+const LinkedInFreebieConfirmed = lazy(() => import('./pages/LinkedInFreebieConfirmed'));
+const WissenCommunity = lazy(() => import('./pages/WissenCommunity'));
+const WissenWebinare = lazy(() => import('./pages/WissenWebinare'));
+const WissenTelegram = lazy(() => import('./pages/WissenTelegram'));
+const WissenWhatsapp = lazy(() => import('./pages/WissenWhatsapp'));
 
-import AdventLanding from './pages/AdventLanding';
-import AdventCalendar from './pages/AdventCalendar';
-import AdventDoor from './pages/AdventDoor';
+const AdventLanding = lazy(() => import('./pages/AdventLanding'));
+const AdventCalendar = lazy(() => import('./pages/AdventCalendar'));
+const AdventDoor = lazy(() => import('./pages/AdventDoor'));
 
-import AdminLogin from './pages/AdminLogin';
-import AdminPasswordResetRequest from './pages/AdminPasswordResetRequest';
-import AdminPasswordReset from './pages/AdminPasswordReset';
-import AdminUserManagement from './pages/AdminUserManagement';
-import AdminDashboard from './pages/AdminDashboard';
-import AdminAdventDashboard from './pages/AdminAdventDashboard';
-import AdminAdventDoorEdit from './pages/AdminAdventDoorEdit';
-import AdminStepMedia from './pages/AdminStepMedia';
-import AdminTestimonials from './pages/AdminTestimonials';
-import AdminContentUploads from './pages/AdminContentUploads';
-import AdminContentPlans from './pages/AdminContentPlans';
+const AdminLogin = lazy(() => import('./pages/AdminLogin'));
+const AdminPasswordResetRequest = lazy(() => import('./pages/AdminPasswordResetRequest'));
+const AdminPasswordReset = lazy(() => import('./pages/AdminPasswordReset'));
+const AdminUserManagement = lazy(() => import('./pages/AdminUserManagement'));
+const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
+const AdminAdventDashboard = lazy(() => import('./pages/AdminAdventDashboard'));
+const AdminAdventDoorEdit = lazy(() => import('./pages/AdminAdventDoorEdit'));
+const AdminStepMedia = lazy(() => import('./pages/AdminStepMedia'));
+const AdminTestimonials = lazy(() => import('./pages/AdminTestimonials'));
+const AdminContentUploads = lazy(() => import('./pages/AdminContentUploads'));
+const AdminContentPlans = lazy(() => import('./pages/AdminContentPlans'));
 import ProtectedRoute from './components/ProtectedRoute';
 
-import BookingCalendar from './pages/BookingCalendar';
-import BookingPage from './pages/BookingPage';
-import AdminBookingDashboard from './pages/AdminBookingDashboard';
-import AdminBookingTypes from './pages/AdminBookingTypes';
-import AdminAvailability from './pages/AdminAvailability';
-import AdminKIManagerBookings from './pages/AdminKIManagerBookings';
+const BookingCalendar = lazy(() => import('./pages/BookingCalendar'));
+const BookingPage = lazy(() => import('./pages/BookingPage'));
+const AdminBookingDashboard = lazy(() => import('./pages/AdminBookingDashboard'));
+const AdminBookingTypes = lazy(() => import('./pages/AdminBookingTypes'));
+const AdminAvailability = lazy(() => import('./pages/AdminAvailability'));
+const AdminKIManagerBookings = lazy(() => import('./pages/AdminKIManagerBookings'));
 
-import Events from './pages/Events';
-import SpanienRetreat from './pages/SpanienRetreat';
-import SpanienBookingDanke from './pages/SpanienBookingDanke';
-import KIWorkshopUnverwechselbar from './pages/KIWorkshopUnverwechselbar';
-import KIWorkshopUnverwechselbarDanke from './pages/KIWorkshopUnverwechselbarDanke';
-import Blog from './pages/Blog';
-import BlogKI from './pages/BlogKI';
-import BlogWirkung from './pages/BlogWirkung';
-import BlogNeuro from './pages/BlogNeuro';
-import UeberMich from './pages/UeberMich';
-import Impressum from './pages/Impressum';
-import Datenschutz from './pages/Datenschutz';
-import AGB from './pages/AGB';
-import VonSchattenZuLicht from './pages/VonSchattenZuLicht';
-import Buchprojekt from './pages/Buchprojekt';
-import AdminBuchprojektDashboard from './pages/AdminBuchprojektDashboard';
-import WorkbookGenerator from './pages/WorkbookGenerator';
-import QuizGenerator from './pages/QuizGenerator';
-import WirkungskraftQuiz from './pages/WirkungskraftQuiz';
-import KarussellGenerator from './pages/KarussellGenerator';
-import Generatoren from './pages/Generatoren';
-import Abkuerzung1zu1 from './pages/Abkuerzung1zu1';
-import KIManagerAusbildung from './pages/KIManagerAusbildung';
-import KIHeyGenKurs from './pages/KIHeyGenKurs';
-import KIWebseiteErlebnis from './pages/KIWebseiteErlebnis';
-import KIEinsteigerCoaching from './pages/KIEinsteigerCoaching';
-import KI1zu1 from './pages/KI1zu1';
-import PremiumAngebote from './pages/PremiumAngebote';
-import JahresContentplan from './pages/JahresContentplan';
-import MeinePlaene from './pages/MeinePlaene';
+const Events = lazy(() => import('./pages/Events'));
+const SpanienRetreat = lazy(() => import('./pages/SpanienRetreat'));
+const SpanienBookingDanke = lazy(() => import('./pages/SpanienBookingDanke'));
+const KIWorkshopUnverwechselbar = lazy(() => import('./pages/KIWorkshopUnverwechselbar'));
+const KIWorkshopUnverwechselbarDanke = lazy(() => import('./pages/KIWorkshopUnverwechselbarDanke'));
+const Blog = lazy(() => import('./pages/Blog'));
+const BlogKI = lazy(() => import('./pages/BlogKI'));
+const BlogWirkung = lazy(() => import('./pages/BlogWirkung'));
+const BlogNeuro = lazy(() => import('./pages/BlogNeuro'));
+const UeberMich = lazy(() => import('./pages/UeberMich'));
+const Impressum = lazy(() => import('./pages/Impressum'));
+const Datenschutz = lazy(() => import('./pages/Datenschutz'));
+const AGB = lazy(() => import('./pages/AGB'));
+const VonSchattenZuLicht = lazy(() => import('./pages/VonSchattenZuLicht'));
+const Buchprojekt = lazy(() => import('./pages/Buchprojekt'));
+const AdminBuchprojektDashboard = lazy(() => import('./pages/AdminBuchprojektDashboard'));
+const WorkbookGenerator = lazy(() => import('./pages/WorkbookGenerator'));
+const QuizGenerator = lazy(() => import('./pages/QuizGenerator'));
+const WirkungskraftQuiz = lazy(() => import('./pages/WirkungskraftQuiz'));
+const KarussellGenerator = lazy(() => import('./pages/KarussellGenerator'));
+const Generatoren = lazy(() => import('./pages/Generatoren'));
+const Abkuerzung1zu1 = lazy(() => import('./pages/Abkuerzung1zu1'));
+const KIManagerAusbildung = lazy(() => import('./pages/KIManagerAusbildung'));
+const KIHeyGenKurs = lazy(() => import('./pages/KIHeyGenKurs'));
+const KIWebseiteErlebnis = lazy(() => import('./pages/KIWebseiteErlebnis'));
+const KIEinsteigerCoaching = lazy(() => import('./pages/KIEinsteigerCoaching'));
+const KI1zu1 = lazy(() => import('./pages/KI1zu1'));
+const PremiumAngebote = lazy(() => import('./pages/PremiumAngebote'));
+const JahresContentplan = lazy(() => import('./pages/JahresContentplan'));
+const MeinePlaene = lazy(() => import('./pages/MeinePlaene'));
 
 import { StudentAuthProvider } from './contexts/StudentAuthContext';
-import MemberLogin from './pages/MemberLogin';
-import MemberDashboard from './pages/MemberDashboard';
-import MemberBuchprojekt from './pages/MemberBuchprojekt';
-import MemberCourseSelection from './pages/MemberCourseSelection';
-import MemberCourses from './pages/MemberCourses';
-import MemberLesson from './pages/MemberLesson';
-import MemberQuiz from './pages/MemberQuiz';
-import MemberQuizResult from './pages/MemberQuizResult';
-import MemberFlashcards from './pages/MemberFlashcards';
-import MemberFlashcardTrainer from './pages/MemberFlashcardTrainer';
-import MemberProfile from './pages/MemberProfile';
-import MemberAchievements from './pages/MemberAchievements';
-import MemberForum from './pages/MemberForum';
-import MemberSessions from './pages/MemberSessions';
+const MemberLogin = lazy(() => import('./pages/MemberLogin'));
+const MemberDashboard = lazy(() => import('./pages/MemberDashboard'));
+const MemberBuchprojekt = lazy(() => import('./pages/MemberBuchprojekt'));
+const MemberCourseSelection = lazy(() => import('./pages/MemberCourseSelection'));
+const MemberCourses = lazy(() => import('./pages/MemberCourses'));
+const MemberLesson = lazy(() => import('./pages/MemberLesson'));
+const MemberQuiz = lazy(() => import('./pages/MemberQuiz'));
+const MemberQuizResult = lazy(() => import('./pages/MemberQuizResult'));
+const MemberFlashcards = lazy(() => import('./pages/MemberFlashcards'));
+const MemberFlashcardTrainer = lazy(() => import('./pages/MemberFlashcardTrainer'));
+const MemberProfile = lazy(() => import('./pages/MemberProfile'));
+const MemberAchievements = lazy(() => import('./pages/MemberAchievements'));
+const MemberForum = lazy(() => import('./pages/MemberForum'));
+const MemberSessions = lazy(() => import('./pages/MemberSessions'));
 import MemberProtectedRoute from './components/MemberProtectedRoute';
-import AdminMemberCoursesList from './pages/AdminMemberCoursesList';
-import AdminCourseWelcome from './pages/AdminCourseWelcome';
-import AdminMemberCourses from './pages/AdminMemberCourses';
-import AdminModuleEdit from './pages/AdminModuleEdit';
-import AdminLessonEdit from './pages/AdminLessonEdit';
-import AdminQuizEdit from './pages/AdminQuizEdit';
-import AdminFlashcardEdit from './pages/AdminFlashcardEdit';
-import AdminMemberStudents from './pages/AdminMemberStudents';
-import AdminWelcomeContent from './pages/AdminWelcomeContent';
-import AdminRecommendations from './pages/AdminRecommendations';
-import AdminEvents from './pages/AdminEvents';
-import AdminMentoring from './pages/AdminMentoring';
-import AdminSiteContent from './pages/AdminSiteContent';
-import MemberCertificate from './pages/MemberCertificate';
-import AdminModuleBonusEdit from './pages/AdminModuleBonusEdit';
-import AdminQuizList from './pages/AdminQuizList';
-import AdminFlashcardList from './pages/AdminFlashcardList';
-import AdminTakeawayList from './pages/AdminTakeawayList';
-import AdminTakeawayEdit from './pages/AdminTakeawayEdit';
-import AdminMiniTaskList from './pages/AdminMiniTaskList';
-import AdminMiniTaskEdit from './pages/AdminMiniTaskEdit';
-import AdminGapTextList from './pages/AdminGapTextList';
-import AdminGapTextEdit from './pages/AdminGapTextEdit';
-import NotFound from './pages/NotFound';
+const AdminMemberCoursesList = lazy(() => import('./pages/AdminMemberCoursesList'));
+const AdminCourseWelcome = lazy(() => import('./pages/AdminCourseWelcome'));
+const AdminMemberCourses = lazy(() => import('./pages/AdminMemberCourses'));
+const AdminModuleEdit = lazy(() => import('./pages/AdminModuleEdit'));
+const AdminLessonEdit = lazy(() => import('./pages/AdminLessonEdit'));
+const AdminQuizEdit = lazy(() => import('./pages/AdminQuizEdit'));
+const AdminFlashcardEdit = lazy(() => import('./pages/AdminFlashcardEdit'));
+const AdminMemberStudents = lazy(() => import('./pages/AdminMemberStudents'));
+const AdminWelcomeContent = lazy(() => import('./pages/AdminWelcomeContent'));
+const AdminRecommendations = lazy(() => import('./pages/AdminRecommendations'));
+const AdminEvents = lazy(() => import('./pages/AdminEvents'));
+const AdminMentoring = lazy(() => import('./pages/AdminMentoring'));
+const AdminSiteContent = lazy(() => import('./pages/AdminSiteContent'));
+const MemberCertificate = lazy(() => import('./pages/MemberCertificate'));
+const AdminModuleBonusEdit = lazy(() => import('./pages/AdminModuleBonusEdit'));
+const AdminQuizList = lazy(() => import('./pages/AdminQuizList'));
+const AdminFlashcardList = lazy(() => import('./pages/AdminFlashcardList'));
+const AdminTakeawayList = lazy(() => import('./pages/AdminTakeawayList'));
+const AdminTakeawayEdit = lazy(() => import('./pages/AdminTakeawayEdit'));
+const AdminMiniTaskList = lazy(() => import('./pages/AdminMiniTaskList'));
+const AdminMiniTaskEdit = lazy(() => import('./pages/AdminMiniTaskEdit'));
+const AdminGapTextList = lazy(() => import('./pages/AdminGapTextList'));
+const AdminGapTextEdit = lazy(() => import('./pages/AdminGapTextEdit'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 import CustomCursor from './components/CustomCursor';
 import ScrollToTop from './components/ScrollToTop';
 
@@ -154,7 +155,8 @@ function App() {
         <ScrollToTop />
         <CustomCursor />
         <BetaBanner />
-        <Routes>
+        <Suspense fallback={<div style={{ minHeight: '60vh' }} aria-busy="true" />}>
+      <Routes>
           <Route path="/" element={<Home />} />
         <Route path="/claudia-ai" element={<ClaudiaAIBeta />} />
         <Route path="/newsletter" element={<Newsletter />} />
@@ -303,6 +305,7 @@ function App() {
 
         <Route path="*" element={<NotFound />} />
       </Routes>
+      </Suspense>
     </Router>
     </StudentAuthProvider>
   );

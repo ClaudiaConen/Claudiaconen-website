@@ -67,7 +67,18 @@ export default function Unverwechselbare() {
 
   return (
     <main className="min-h-screen bg-pearl-white text-midnight-blue">
-      <div className="mx-auto max-w-6xl px-6 py-16 sm:py-24">
+      {/* Rueckweg. Die Seite hatte zuerst keinen, und wer sie direkt aufrief,
+          sass in einer Sackgasse: kein Menue, kein Weg zur Startseite. */}
+      <div className="mx-auto max-w-6xl px-6 pt-8">
+        <a
+          href="/"
+          className="font-montserrat text-sm font-semibold tracking-wide text-midnight-blue/70 transition-colors hover:text-luxury-gold"
+        >
+          ← Claudia Conen
+        </a>
+      </div>
+
+      <div className="mx-auto max-w-6xl px-6 py-12 sm:py-20">
         <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_1fr] lg:gap-20">
           {/* Wort */}
           <div className="flex flex-col gap-8 order-2 lg:order-1">

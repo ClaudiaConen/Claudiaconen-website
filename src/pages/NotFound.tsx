@@ -7,7 +7,7 @@ export default function NotFound() {
   return (
     <>
       <Navigation />
-      <div className="min-h-screen bg-gradient-to-b from-midnight-blue via-royal-navy to-midnight-blue flex items-center justify-center px-4 pt-32 pb-20">
+      <div className="min-h-screen bg-gradient-to-b from-[#0A1628] via-[#0F1F3A] to-[#0A1628] flex items-center justify-center px-4 pt-32 pb-20">
         <div className="text-center max-w-xl">
           <h1 className="text-8xl md:text-9xl font-montserrat font-bold bg-gradient-to-r from-[#B8860B] via-[#D4AF37] to-[#FFD700] bg-clip-text text-transparent mb-4">
             404

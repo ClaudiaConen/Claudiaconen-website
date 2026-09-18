@@ -3,7 +3,7 @@ import { Mail, Sparkles } from 'lucide-react';
 
 export default function Newsletter() {
   return (
-    <section className="py-16 bg-gradient-to-b from-midnight-blue via-royal-navy to-midnight-blue relative overflow-hidden" aria-labelledby="newsletter-headline">
+    <section className="py-16 bg-gradient-to-b from-[#0A1628] via-[#0F1F3A] to-[#0A1628] relative overflow-hidden" aria-labelledby="newsletter-headline">
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
           backgroundImage: 'radial-gradient(circle at 2px 2px, #D4AF37 1px, transparent 0)',

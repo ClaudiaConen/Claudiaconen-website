@@ -16,7 +16,7 @@ export default function Newsletter() {
       />
       <Navigation />
 
-      <section className="min-h-screen py-24 bg-gradient-to-b from-midnight-blue via-royal-navy to-midnight-blue relative overflow-hidden">
+      <section className="min-h-screen py-24 bg-gradient-to-b from-[#0A1628] via-[#0F1F3A] to-[#0A1628] relative overflow-hidden">
         <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0" style={{
             backgroundImage: 'radial-gradient(circle at 2px 2px, #D4AF37 1px, transparent 0)',

@@ -8,7 +8,7 @@ export default function AGB() {
         title="Allgemeine Geschäftsbedingungen (AGB) - Claudia Conen"
         description="Allgemeine Geschäftsbedingungen von Claudia Conen für Coachings, Mentorings, Kurse und Vorträge."
       />
-      <div className="min-h-screen bg-gradient-to-b from-midnight-blue via-royal-navy to-midnight-blue pt-32 pb-20">
+      <div className="min-h-screen bg-gradient-to-b from-[#0A1628] via-[#0F1F3A] to-[#0A1628] pt-32 pb-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white/95 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-luxury-gold/20 shadow-2xl">
             <h1 className="text-4xl md:text-5xl font-montserrat font-bold bg-gradient-to-r from-[#B8860B] via-[#D4AF37] to-[#FFD700] bg-clip-text text-transparent mb-8">

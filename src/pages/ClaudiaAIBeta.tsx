@@ -61,7 +61,7 @@ export default function ClaudiaAIBeta() {
 
   if (isSuccess) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-midnight-blue via-royal-navy to-midnight-blue flex items-center justify-center px-4">
+      <div className="min-h-screen bg-gradient-to-b from-[#0A1628] via-[#0F1F3A] to-[#0A1628] flex items-center justify-center px-4">
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -127,7 +127,7 @@ export default function ClaudiaAIBeta() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-midnight-blue via-royal-navy to-midnight-blue">
+    <div className="min-h-screen bg-gradient-to-b from-[#0A1628] via-[#0F1F3A] to-[#0A1628]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <motion.button
           initial={{ opacity: 0, x: -20 }}

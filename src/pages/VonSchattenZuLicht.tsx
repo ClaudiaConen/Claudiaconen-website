@@ -59,7 +59,7 @@ export default function VonSchattenZuLicht() {
         title="Von Schatten zu Licht - Workshop & Buchprojekt | Claudia Conen"
         description="Verwandle deine Geschichte in eine kraftvolle Botschaft. Workshop für unverwechselbare Wirkung mit Claudia Conen - Die Umsatzstimme mit Herz."
       />
-      <div className="min-h-screen bg-gradient-to-b from-midnight-blue via-royal-navy to-midnight-blue">
+      <div className="min-h-screen bg-gradient-to-b from-[#0A1628] via-[#0F1F3A] to-[#0A1628]">
         <Navigation />
 
         <section className="pt-32 pb-16 px-4 sm:px-6 lg:px-8">

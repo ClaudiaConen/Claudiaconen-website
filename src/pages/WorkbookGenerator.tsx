@@ -287,7 +287,7 @@ export default function WorkbookGenerator() {
               <div ref={pagesContainerRef} className="flex flex-col gap-6 items-center">
                 {/* Page 1: Cover */}
                 <div className="workbook-page w-[210mm] min-h-[297mm] bg-cream shadow-2xl relative overflow-hidden" style={{fontSize: '11px', lineHeight: 1.6, color: '#2C3E50'}}>
-                  <div className="bg-gradient-to-br from-midnight-blue via-royal-navy to-midnight-blue text-white h-full flex flex-col">
+                  <div className="bg-gradient-to-br from-[#0A1628] via-[#0F1F3A] to-[#0A1628] text-white h-full flex flex-col">
                     <div className="bg-bright-gold text-midnight-blue text-center py-2 text-[8px] font-semibold tracking-[2.5px] uppercase">
                       <div contentEditable suppressContentEditableWarning className="outline-none hover:bg-black/5 focus:bg-black/10 transition-colors px-2">
                         Wirkungskraft Mensch im KI-Zeitalter
@@ -1012,7 +1012,7 @@ export default function WorkbookGenerator() {
 
                 {/* Page 11: Back Cover */}
                 <div className="workbook-page w-[210mm] min-h-[297mm] bg-cream shadow-2xl relative overflow-hidden" style={{fontSize: '11px', lineHeight: 1.6, color: '#2C3E50'}}>
-                  <div className="bg-gradient-to-br from-midnight-blue via-royal-navy to-midnight-blue text-white h-full flex flex-col">
+                  <div className="bg-gradient-to-br from-[#0A1628] via-[#0F1F3A] to-[#0A1628] text-white h-full flex flex-col">
                     <div className="flex-1 p-8 md:p-12 text-center">
                       <h2 className="font-serif text-2xl text-bright-gold mb-5" contentEditable suppressContentEditableWarning>
                         Über den Autor

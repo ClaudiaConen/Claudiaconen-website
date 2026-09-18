@@ -69,7 +69,7 @@ export default function Timeline() {
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: "url('/WhatsApp Image 2025-10-18 at 09.35.25.jpeg')" }}
       ></div>
-      <div className="absolute inset-0 bg-gradient-to-b from-midnight-blue via-royal-navy to-midnight-blue opacity-90"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0A1628] via-[#0F1F3A] to-[#0A1628] opacity-90"></div>
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

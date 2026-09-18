@@ -42,7 +42,7 @@ export default function SubpageTemplate({
       />
       <Navigation />
 
-      <section className="relative pt-32 pb-20 bg-gradient-to-br from-midnight-blue via-royal-navy to-midnight-blue overflow-hidden">
+      <section className="relative pt-32 pb-20 bg-gradient-to-br from-[#0A1628] via-[#0F1F3A] to-[#0A1628] overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{
             backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255, 215, 77, 0.15) 1px, transparent 0)',
@@ -86,7 +86,7 @@ export default function SubpageTemplate({
         </div>
       </section>
 
-      <section className="py-20 bg-gradient-to-br from-midnight-blue via-royal-navy to-midnight-blue">
+      <section className="py-20 bg-gradient-to-br from-[#0A1628] via-[#0F1F3A] to-[#0A1628]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

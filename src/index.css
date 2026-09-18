@@ -1208,10 +1208,11 @@ html, body { cursor: auto; }
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  filter: drop-shadow(0 4px 12px rgba(201, 169, 97, 0.5))
-    drop-shadow(0 8px 24px rgba(201, 169, 97, 0.3))
-    drop-shadow(0 0 40px rgba(212, 175, 55, 0.2));
-  animation: goldShimmer 5s ease-in-out infinite, subtleFloat 8s ease-in-out infinite;
+  /* Kein Leuchten und kein Schweben mehr. Vorher lagen hier drei gestapelte
+     Leuchtschatten bis 40 Pixel, und subtleFloat liess die Kopfzeile
+     dauerhaft auf und ab wandern. Die Community-Seite bewegt nur die
+     Position des Verlaufs. Genau das bleibt. */
+  animation: goldShimmer 5s ease-in-out infinite;
   position: relative;
 }
 

@@ -268,7 +268,7 @@ export default function KIManagerAusbildung() {
           </div>
         </section>
 
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-midnight-blue via-royal-navy to-midnight-blue">
+        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#0A1628] via-[#0F1F3A] to-[#0A1628]">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -949,7 +949,7 @@ export default function KIManagerAusbildung() {
           </div>
         </section>
 
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-midnight-blue via-royal-navy to-midnight-blue text-pearl-white">
+        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#0A1628] via-[#0F1F3A] to-[#0A1628] text-pearl-white">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}

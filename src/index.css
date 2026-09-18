@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -1387,7 +1388,7 @@ html, body { cursor: auto; }
 .tuer-karte {
   position: relative;
   overflow: hidden;
-  background: rgba(20, 33, 58, 0.9);
+  background: rgba(26, 43, 76, 0.92); /* royal-navy #1A2B4C */
   backdrop-filter: blur(18px) saturate(1.15);
   -webkit-backdrop-filter: blur(18px) saturate(1.15);
   border: 1px solid rgba(218, 165, 32, 0.38);
@@ -1421,12 +1422,9 @@ html, body { cursor: auto; }
   pointer-events: none;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(
-    120deg,
-    rgba(218, 165, 32, 0.15),
-    rgba(244, 208, 63, 0.55),
-    rgba(218, 165, 32, 0.15)
-  );
+  /* Gold-Schimmer exakt nach Marken-Referenz: #DAA520, #FFD700, #DAA520 */
+  background: linear-gradient(90deg, #DAA520, #FFD700, #DAA520);
+  opacity: 0.55;
   background-size: 220% 220%;
   animation: tuerGoldrand 12s ease-in-out infinite;
   -webkit-mask:

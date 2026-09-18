@@ -101,7 +101,8 @@ export default function Tueren() {
     <section className="relative bg-midnight-blue" aria-label="Wofür bist du hier?">
       {/* Platz fuer ein spaeteres Hintergrundvideo. Bis dahin ein ruhiger Verlauf. */}
       <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-royal-navy/70 via-midnight-blue to-midnight-blue"
+        className="pointer-events-none absolute inset-0"
+        style={{ background: 'linear-gradient(180deg, #0A1628, #0F1F3A, #0A1628)' }}
         aria-hidden="true"
       />
 

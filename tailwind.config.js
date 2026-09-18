@@ -6,10 +6,16 @@ export default {
       fontFamily: {
         'montserrat': ['Montserrat', 'sans-serif'],
         'inter': ['Inter', 'sans-serif'],
+        'cormorant': ['Cormorant Garamond', 'Georgia', 'serif'],
+        'script': ['Great Vibes', 'cursive'],
+        'jakarta': ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
       },
       colors: {
         'luxury-gold': '#DAA520',
         'bright-gold': '#F4D03F',
+        'dark-gold': '#B8860B',
+        'mid-gold': '#D4AF37',
+        'light-gold': '#C9A961',
         'midnight-blue': '#0A1628',
         'royal-navy': '#1A2B4C',
         'pearl-white': '#FDFBF7',

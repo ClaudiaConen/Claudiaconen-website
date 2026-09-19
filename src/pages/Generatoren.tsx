@@ -205,7 +205,7 @@ export default function Generatoren() {
                       {tool.available && tool.path ? (
                         <Link
                           to={tool.path}
-                          className="flex items-center justify-center gap-2 bg-gradient-to-r from-[#C9A227] to-[#D4AF37] text-white font-semibold px-4 py-2.5 rounded-full hover:shadow-lg transition-all text-sm group mt-auto"
+                          className="flex items-center justify-center gap-2 bg-gradient-to-r from-[#C9A227] to-[#DAA520] text-white font-semibold px-4 py-2.5 rounded-full hover:shadow-lg transition-all text-sm group mt-auto"
                         >
                           <span>Jetzt erstellen</span>
                           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -275,7 +275,7 @@ export default function Generatoren() {
             <div className="flex flex-wrap gap-4 justify-center">
               <Link
                 to="/workbook-generator"
-                className="bg-gradient-to-r from-[#C9A227] to-[#D4AF37] text-white font-semibold px-8 py-4 rounded-full hover:shadow-lg transition-all"
+                className="bg-gradient-to-r from-[#C9A227] to-[#DAA520] text-white font-semibold px-8 py-4 rounded-full hover:shadow-lg transition-all"
               >
                 Workbook erstellen
               </Link>

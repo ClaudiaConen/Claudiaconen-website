@@ -42,7 +42,7 @@ export default function WorkshopCTA() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.2 }}
-                  className="inline-block px-4 py-2 bg-gradient-to-r from-[#D4AF37]/20 to-[#FFD700]/20 rounded-full border border-luxury-gold/30"
+                  className="inline-block px-4 py-2 bg-gradient-to-r from-[#DAA520]/20 to-[#F4D03F]/20 rounded-full border border-luxury-gold/30"
                 >
                   <span className="text-luxury-gold font-semibold">Von Schatten zu Licht</span>
                 </motion.div>
@@ -86,7 +86,7 @@ export default function WorkshopCTA() {
                 href="https://claudiaconen-akademie.de/von-schatten-ins-licht"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg"
               >
                 Zur Workshop-Anmeldung
                 <ArrowRight size={20} />

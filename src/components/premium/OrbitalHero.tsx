@@ -4,7 +4,7 @@ import { ArrowRight, Sparkles } from 'lucide-react';
 const RINGS = [
   { size: 520, className: 'orbital-ring-1', borderStyle: 'border-t-[#DAA520] border-r-[#DAA520]/40 border-b-transparent border-l-transparent', nodes: [0, 120, 240] },
   { size: 400, className: 'orbital-ring-2', borderStyle: 'border-t-transparent border-r-[#F4D03F]/50 border-b-[#F4D03F] border-l-transparent', nodes: [60, 200] },
-  { size: 280, className: 'orbital-ring-3', borderStyle: 'border-t-[#FFD700]/60 border-r-transparent border-b-transparent border-l-[#FFD700]/30', nodes: [30, 170, 310] },
+  { size: 280, className: 'orbital-ring-3', borderStyle: 'border-t-[#F4D03F]/60 border-r-transparent border-b-transparent border-l-[#F4D03F]/30', nodes: [30, 170, 310] },
   { size: 160, className: 'orbital-ring-4', borderStyle: 'border-t-transparent border-r-transparent border-b-[#DAA520]/40 border-l-[#DAA520]/60', nodes: [90, 270] },
 ];
 
@@ -68,7 +68,7 @@ export default function OrbitalHero() {
                   height: '15%',
                   top: '42.5%',
                   left: '42.5%',
-                  background: 'radial-gradient(circle, #FFD700 0%, #DAA520 60%, #B8860B 100%)',
+                  background: 'radial-gradient(circle, #F4D03F 0%, #DAA520 60%, #B8860B 100%)',
                 }}
               />
 
@@ -111,7 +111,7 @@ export default function OrbitalHero() {
             >
               Die Stimme zwischen
               <br />
-              <span className="bg-gradient-to-r from-[#B8860B] via-[#DAA520] to-[#FFD700] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#B8860B] via-[#DAA520] to-[#F4D03F] bg-clip-text text-transparent">
                 Mensch & Maschine
               </span>
             </motion.h1>

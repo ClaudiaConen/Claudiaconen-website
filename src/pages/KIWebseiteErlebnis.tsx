@@ -30,9 +30,9 @@ export default function KIWebseiteErlebnis() {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[rgba(212,175,55,0.1)] border border-[rgba(212,175,55,0.2)] mb-6">
-              <Globe size={16} className="text-[#D4AF37]" />
-              <span className="text-[#D4AF37] text-sm font-medium">KI & Mensch</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[rgba(218,165,32,0.1)] border border-[rgba(218,165,32,0.2)] mb-6">
+              <Globe size={16} className="text-[#DAA520]" />
+              <span className="text-[#DAA520] text-sm font-medium">KI & Mensch</span>
             </div>
             <h1 className="font-montserrat text-4xl md:text-5xl lg:text-6xl font-black mb-6" style={{ color: 'white' }}>
               <span className="headline-line2">KI Webseite</span>
@@ -53,10 +53,10 @@ export default function KIWebseiteErlebnis() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
-                  className="glass-card p-6 hover:border-[#D4AF37]/30 transition-all duration-300"
+                  className="glass-card p-6 hover:border-[#DAA520]/30 transition-all duration-300"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-[rgba(212,175,55,0.1)] flex items-center justify-center mb-4">
-                    <Icon size={22} className="text-[#D4AF37]" />
+                  <div className="w-12 h-12 rounded-xl bg-[rgba(218,165,32,0.1)] flex items-center justify-center mb-4">
+                    <Icon size={22} className="text-[#DAA520]" />
                   </div>
                   <h3 className="font-montserrat font-bold text-lg text-white mb-2">{f.title}</h3>
                   <p className="text-white/60 text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>{f.desc}</p>
@@ -75,9 +75,9 @@ export default function KIWebseiteErlebnis() {
               href="/#contact"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-sm uppercase tracking-wider transition-all duration-300 hover:translate-y-[-2px]"
               style={{
-                background: 'linear-gradient(135deg, #D4AF37 0%, #C9A961 100%)',
+                background: 'linear-gradient(135deg, #DAA520 0%, #C9A961 100%)',
                 color: '#0A1F44',
-                boxShadow: '0 4px 15px rgba(212,175,55,0.3)',
+                boxShadow: '0 4px 15px rgba(218,165,32,0.3)',
               }}
             >
               Jetzt anfragen

@@ -37,7 +37,7 @@ export default function PremiumUnlockModal({ isOpen, onClose, featureName }: Pre
               onClick={(e) => e.stopPropagation()}
               className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
             >
-              <div className="sticky top-0 bg-gradient-to-r from-[#1a2744] to-[#2a3f5f] text-white px-8 py-6 rounded-t-2xl z-10">
+              <div className="sticky top-0 bg-gradient-to-r from-[#1a2744] to-[#1A2B4C] text-white px-8 py-6 rounded-t-2xl z-10">
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-3">
                     <div className="w-12 h-12 bg-[#e8b84a] rounded-full flex items-center justify-center">

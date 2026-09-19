@@ -21,7 +21,7 @@ export default function MarkeUndPositionierung() {
             </div>
             <h1 className="font-montserrat font-bold text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl mb-6 leading-tight">
               DU + KI ={' '}
-              <span className="bg-gradient-to-r from-[#B8860B] via-[#D4AF37] to-[#FFD700] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#B8860B] via-[#DAA520] to-[#F4D03F] bg-clip-text text-transparent">
                 UNSCHLAGBAR
               </span>
             </h1>

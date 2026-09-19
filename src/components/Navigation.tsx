@@ -82,7 +82,7 @@ export default function Navigation() {
           ? 'mega-nav-scrolled'
           : 'mega-nav-default'
       }`}
-      style={{ borderBottom: '1px solid rgba(212,175,55,0.2)' }}
+      style={{ borderBottom: '1px solid rgba(218,165,32,0.2)' }}
     >
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-[72px]">
@@ -95,7 +95,7 @@ export default function Navigation() {
               src="/logo-claudia-neu.jpg"
               alt="Claudia Conen – KI & Mensch"
               className="h-12 w-12 rounded-full object-cover"
-              style={{ filter: 'drop-shadow(0 0 8px rgba(212,175,55,0.4))' }}
+              style={{ filter: 'drop-shadow(0 0 8px rgba(218,165,32,0.4))' }}
             />
           </a>
 
@@ -136,7 +136,7 @@ export default function Navigation() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="The Power of AI – Klick für Chancen"
-              className="inline-flex h-11 overflow-hidden rounded-xl ring-1 ring-[rgba(212,175,55,0.35)] hover:ring-[rgba(212,175,55,0.7)] hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(212,175,55,0.25)] transition-all duration-300"
+              className="inline-flex h-11 overflow-hidden rounded-xl ring-1 ring-[rgba(218,165,32,0.35)] hover:ring-[rgba(218,165,32,0.7)] hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(218,165,32,0.25)] transition-all duration-300"
             >
               <img
                 src="/power-of-ai-banner.jpg"
@@ -157,7 +157,7 @@ export default function Navigation() {
 
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="xl:hidden text-pearl-white p-2 hover:text-[#D4AF37] transition-colors"
+            className="xl:hidden text-pearl-white p-2 hover:text-[#DAA520] transition-colors"
           >
             {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>

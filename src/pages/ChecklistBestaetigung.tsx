@@ -134,7 +134,7 @@ export default function ChecklistBestaetigung() {
     }
 
     .header {
-      background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
+      background: linear-gradient(135deg, #DAA520 0%, #F4D03F 100%);
       padding: 50px 40px;
       text-align: center;
       position: relative;
@@ -185,7 +185,7 @@ export default function ChecklistBestaetigung() {
       font-weight: bold;
       margin-bottom: 30px;
       padding-bottom: 15px;
-      border-bottom: 3px solid #D4AF37;
+      border-bottom: 3px solid #DAA520;
     }
 
     .checklist {
@@ -200,7 +200,7 @@ export default function ChecklistBestaetigung() {
       margin-bottom: 15px;
       background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
       border-radius: 12px;
-      border-left: 4px solid #D4AF37;
+      border-left: 4px solid #DAA520;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
       transition: transform 0.2s, box-shadow 0.2s;
     }
@@ -213,7 +213,7 @@ export default function ChecklistBestaetigung() {
     .checkbox {
       width: 24px;
       height: 24px;
-      border: 2px solid #D4AF37;
+      border: 2px solid #DAA520;
       border-radius: 6px;
       margin-right: 15px;
       flex-shrink: 0;
@@ -228,7 +228,7 @@ export default function ChecklistBestaetigung() {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      color: #D4AF37;
+      color: #DAA520;
       font-size: 16px;
       font-weight: bold;
       opacity: 0.3;
@@ -251,7 +251,7 @@ export default function ChecklistBestaetigung() {
     .footer-logo {
       font-size: 28px;
       font-weight: bold;
-      background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
+      background: linear-gradient(135deg, #DAA520 0%, #F4D03F 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -265,7 +265,7 @@ export default function ChecklistBestaetigung() {
     }
 
     .footer-link {
-      color: #FFD700;
+      color: #F4D03F;
       text-decoration: none;
       font-weight: 600;
       font-size: 16px;
@@ -275,7 +275,7 @@ export default function ChecklistBestaetigung() {
 
     .divider {
       height: 2px;
-      background: linear-gradient(90deg, transparent 0%, #D4AF37 50%, transparent 100%);
+      background: linear-gradient(90deg, transparent 0%, #DAA520 50%, transparent 100%);
       margin: 30px 0;
     }
 
@@ -367,7 +367,7 @@ export default function ChecklistBestaetigung() {
               animate={{ opacity: 1, y: 0 }}
               className="bg-white rounded-2xl shadow-xl p-8 text-center"
             >
-              <div className="inline-block animate-spin rounded-full h-16 w-16 border-4 border-[#D4AF37] border-t-transparent mb-6"></div>
+              <div className="inline-block animate-spin rounded-full h-16 w-16 border-4 border-[#DAA520] border-t-transparent mb-6"></div>
               <h1 className="text-2xl font-bold text-[#1a1a2e] mb-3">
                 Bestätigung wird verarbeitet...
               </h1>
@@ -404,7 +404,7 @@ export default function ChecklistBestaetigung() {
 
               <button
                 onClick={generateAndDownloadChecklist}
-                className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-[#1a1a2e] font-bold text-lg rounded-full hover:scale-105 transition-transform shadow-lg mb-6"
+                className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-[#1a1a2e] font-bold text-lg rounded-full hover:scale-105 transition-transform shadow-lg mb-6"
               >
                 <Download size={24} />
                 Checkliste jetzt herunterladen
@@ -416,7 +416,7 @@ export default function ChecklistBestaetigung() {
 
               <button
                 onClick={() => navigate('/wissensbibliothek')}
-                className="text-[#D4AF37] hover:text-[#FFD700] font-semibold transition-colors"
+                className="text-[#DAA520] hover:text-[#F4D03F] font-semibold transition-colors"
               >
                 Zurück zur Wissensbibliothek
               </button>
@@ -440,7 +440,7 @@ export default function ChecklistBestaetigung() {
               </p>
               <button
                 onClick={() => navigate('/wissensbibliothek')}
-                className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-[#1a1a2e] font-bold rounded-full hover:scale-105 transition-transform"
+                className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-[#1a1a2e] font-bold rounded-full hover:scale-105 transition-transform"
               >
                 Zur Wissensbibliothek
               </button>
@@ -464,7 +464,7 @@ export default function ChecklistBestaetigung() {
               </p>
               <button
                 onClick={() => navigate('/wissensbibliothek')}
-                className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-[#1a1a2e] font-bold rounded-full hover:scale-105 transition-transform"
+                className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-[#1a1a2e] font-bold rounded-full hover:scale-105 transition-transform"
               >
                 Zur Wissensbibliothek
               </button>

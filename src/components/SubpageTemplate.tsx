@@ -98,7 +98,7 @@ export default function SubpageTemplate({
             </h2>
             <button
               onClick={() => setIsContactFormOpen(true)}
-              className="inline-flex items-center gap-2 px-10 py-4 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-midnight-blue font-bold rounded-full hover:scale-105 transition-transform duration-300 shadow-xl text-lg"
+              className="inline-flex items-center gap-2 px-10 py-4 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue font-bold rounded-full hover:scale-105 transition-transform duration-300 shadow-xl text-lg"
             >
               Kontakt aufnehmen
             </button>

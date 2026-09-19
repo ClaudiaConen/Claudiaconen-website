@@ -202,7 +202,7 @@ export default function CoachingInquiryForm({ isOpen, onClose }: CoachingInquiry
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full px-6 py-4 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-midnight-blue font-bold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2"
+                      className="w-full px-6 py-4 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue font-bold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2"
                     >
                       {isSubmitting ? (
                         <>

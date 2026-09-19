@@ -13,7 +13,7 @@ export default function Blog() {
       icon: Sparkles,
       image: 'https://images.pexels.com/photos/6476776/pexels-photo-6476776.jpeg?auto=compress&cs=tinysrgb&w=800',
       path: '/blog-ki',
-      gradient: 'from-[#B8860B] via-[#D4AF37] to-[#FFD700]',
+      gradient: 'from-[#B8860B] via-[#DAA520] to-[#F4D03F]',
       topics: [
         'Neurowissenschaft trifft KI',
         'Vertrauen im digitalen Zeitalter',
@@ -28,7 +28,7 @@ export default function Blog() {
       icon: Lightbulb,
       image: 'https://images.pexels.com/photos/8761542/pexels-photo-8761542.jpeg?auto=compress&cs=tinysrgb&w=800',
       path: '/blog-wirkung',
-      gradient: 'from-[#B8860B] via-[#D4AF37] to-[#FFD700]',
+      gradient: 'from-[#B8860B] via-[#DAA520] to-[#F4D03F]',
       topics: [
         'Authentische Präsenz',
         'Die Macht der Verletzlichkeit',
@@ -43,7 +43,7 @@ export default function Blog() {
       icon: Brain,
       image: 'https://images.pexels.com/photos/17483868/pexels-photo-17483868.jpeg?auto=compress&cs=tinysrgb&w=800',
       path: '/blog-neuro',
-      gradient: 'from-[#B8860B] via-[#D4AF37] to-[#FFD700]',
+      gradient: 'from-[#B8860B] via-[#DAA520] to-[#F4D03F]',
       topics: [
         'Das emotionale Gehirn',
         'Spiegelneuronen im Verkauf',
@@ -66,7 +66,7 @@ export default function Blog() {
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
               <h1 className="font-montserrat font-bold text-5xl md:text-6xl lg:text-7xl text-midnight-blue mb-6">
-                Blog & <span className="bg-gradient-to-r from-[#D4AF37] to-[#FFD700] bg-clip-text text-transparent">Aktuelles</span>
+                Blog & <span className="bg-gradient-to-r from-[#DAA520] to-[#F4D03F] bg-clip-text text-transparent">Aktuelles</span>
               </h1>
               <p className="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
                 Inspirierende Artikel, praktische Tipps und wissenschaftliche Erkenntnisse für Ihre persönliche und berufliche Entwicklung
@@ -135,7 +135,7 @@ export default function Blog() {
               </p>
               <Link
                 to="/newsletter"
-                className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-midnight-blue font-bold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg"
+                className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue font-bold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg"
               >
                 Newsletter abonnieren
                 <ArrowRight size={20} />

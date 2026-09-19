@@ -23,7 +23,7 @@ export default function SpanienBookingDanke() {
             style={{
               background:
                 'radial-gradient(900px 500px at 20% 0%, rgba(244,194,215,0.45) 0%, transparent 60%),' +
-                'radial-gradient(700px 400px at 90% 30%, rgba(212,175,55,0.35) 0%, transparent 60%),' +
+                'radial-gradient(700px 400px at 90% 30%, rgba(218,165,32,0.35) 0%, transparent 60%),' +
                 'linear-gradient(180deg, #FFFBF3 0%, #FBF7F0 60%, #F7E7CE 100%)',
             }}
           />
@@ -34,8 +34,8 @@ export default function SpanienBookingDanke() {
             initial={{ scale: 0.6, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.6, type: 'spring' }}
-            className="inline-flex items-center justify-center w-20 h-20 rounded-full mb-6 shadow-[0_12px_32px_rgba(212,175,55,0.4)]"
-            style={{ background: 'linear-gradient(135deg, #D4AF37 0%, #E8B4C8 100%)' }}
+            className="inline-flex items-center justify-center w-20 h-20 rounded-full mb-6 shadow-[0_12px_32px_rgba(218,165,32,0.4)]"
+            style={{ background: 'linear-gradient(135deg, #DAA520 0%, #E8B4C8 100%)' }}
           >
             <CheckCircle2 size={42} className="text-white" />
           </motion.div>
@@ -46,7 +46,7 @@ export default function SpanienBookingDanke() {
             transition={{ duration: 0.5, delay: 0.15 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/70 backdrop-blur border border-[#E8B4C8]/50 shadow-sm mb-5"
           >
-            <Sun size={16} className="text-[#D4AF37]" />
+            <Sun size={16} className="text-[#DAA520]" />
             <span className="text-sm font-semibold text-[#2A1F3D]">Buchung eingegangen</span>
           </motion.div>
 
@@ -59,7 +59,7 @@ export default function SpanienBookingDanke() {
             <span className="text-[#2A1F3D]">Wir freuen uns </span>
             <span
               style={{
-                background: 'linear-gradient(135deg, #D4AF37 0%, #C97AAF 100%)',
+                background: 'linear-gradient(135deg, #DAA520 0%, #C97AAF 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -127,7 +127,7 @@ export default function SpanienBookingDanke() {
                 >
                   <div
                     className="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center font-black text-white"
-                    style={{ background: 'linear-gradient(135deg, #D4AF37 0%, #C97AAF 100%)' }}
+                    style={{ background: 'linear-gradient(135deg, #DAA520 0%, #C97AAF 100%)' }}
                   >
                     <Icon size={22} />
                   </div>
@@ -153,7 +153,7 @@ export default function SpanienBookingDanke() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.5 }}
-            className="rounded-3xl bg-white border border-[#D4AF37]/30 p-8 md:p-10 shadow-[0_30px_80px_-20px_rgba(212,175,55,0.4)]"
+            className="rounded-3xl bg-white border border-[#DAA520]/30 p-8 md:p-10 shadow-[0_30px_80px_-20px_rgba(218,165,32,0.4)]"
           >
             <div className="text-center mb-7">
               <p className="text-sm uppercase tracking-[0.3em] font-bold text-[#C97AAF] mb-3">Deine Termine</p>
@@ -169,7 +169,7 @@ export default function SpanienBookingDanke() {
                 { day: 'So, 05.07.2026', label: 'Abreisetag' },
               ].map((t) => (
                 <li key={t.day + t.label} className="flex items-start gap-3 px-4 py-3 rounded-xl bg-[#FBF7F0] border border-[#E8B4C8]/30">
-                  <Clock size={18} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
+                  <Clock size={18} className="text-[#DAA520] mt-0.5 flex-shrink-0" />
                   <div>
                     <strong className="text-[#2A1F3D]">{t.day}</strong>
                     <span className="text-[#6B5F7A]"> · {t.label}</span>
@@ -219,7 +219,7 @@ export default function SpanienBookingDanke() {
             <div className="mt-10">
               <Link
                 to="/"
-                className="inline-flex items-center gap-2 px-7 py-3 rounded-full font-semibold text-sm bg-white/80 backdrop-blur border border-[#D4AF37]/40 text-[#2A1F3D] hover:bg-white hover:border-[#D4AF37] transition-all"
+                className="inline-flex items-center gap-2 px-7 py-3 rounded-full font-semibold text-sm bg-white/80 backdrop-blur border border-[#DAA520]/40 text-[#2A1F3D] hover:bg-white hover:border-[#DAA520] transition-all"
               >
                 <ArrowLeft size={16} />
                 Zurück zur Startseite

@@ -9,7 +9,7 @@ export default function NotFound() {
       <Navigation />
       <div className="min-h-screen bg-gradient-to-b from-[#0A1628] via-[#0F1F3A] to-[#0A1628] flex items-center justify-center px-4 pt-32 pb-20">
         <div className="text-center max-w-xl">
-          <h1 className="text-8xl md:text-9xl font-montserrat font-bold bg-gradient-to-r from-[#B8860B] via-[#D4AF37] to-[#FFD700] bg-clip-text text-transparent mb-4">
+          <h1 className="text-8xl md:text-9xl font-montserrat font-bold bg-gradient-to-r from-[#B8860B] via-[#DAA520] to-[#F4D03F] bg-clip-text text-transparent mb-4">
             404
           </h1>
           <h2 className="text-2xl md:text-3xl font-montserrat font-semibold text-pearl-white mb-4">
@@ -21,7 +21,7 @@ export default function NotFound() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               to="/"
-              className="flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-midnight-blue font-bold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg"
+              className="flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue font-bold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg"
             >
               <Home size={18} />
               Zur Startseite

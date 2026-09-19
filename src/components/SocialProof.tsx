@@ -49,7 +49,7 @@ export default function SocialProof() {
   };
 
   return (
-    <section id="social-proof" className="py-12 md:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-midnight-blue via-[#2a3f5f]/60 to-white" aria-labelledby="testimonials-headline">
+    <section id="social-proof" className="py-12 md:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-midnight-blue via-[#1A2B4C]/60 to-white" aria-labelledby="testimonials-headline">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

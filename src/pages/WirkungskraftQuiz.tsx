@@ -342,7 +342,7 @@ export default function WirkungskraftQuiz() {
           <div className="min-h-screen flex items-center justify-center p-4 pt-24">
             <div className="max-w-2xl w-full">
               <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 text-center border border-[#C9A227]/10 animate-fade-in">
-                <div className="w-20 h-20 rounded-full bg-gradient-to-r from-[#C9A227] to-[#D4AF37] flex items-center justify-center text-3xl mx-auto mb-6">
+                <div className="w-20 h-20 rounded-full bg-gradient-to-r from-[#C9A227] to-[#DAA520] flex items-center justify-center text-3xl mx-auto mb-6">
                   💎
                 </div>
 
@@ -420,7 +420,7 @@ export default function WirkungskraftQuiz() {
                 <div className="flex gap-4 justify-center flex-wrap">
                   <button
                     onClick={restartFlashcards}
-                    className="bg-gradient-to-r from-[#C9A227] to-[#D4AF37] text-white font-semibold px-8 py-4 rounded-full hover:shadow-lg transition-all"
+                    className="bg-gradient-to-r from-[#C9A227] to-[#DAA520] text-white font-semibold px-8 py-4 rounded-full hover:shadow-lg transition-all"
                   >
                     🔄 Nochmal durchgehen
                   </button>
@@ -461,7 +461,7 @@ export default function WirkungskraftQuiz() {
 
                 <div className="h-2 bg-gray-200 rounded-full mt-4 overflow-hidden">
                   <div
-                    className="h-full bg-gradient-to-r from-[#C9A227] to-[#D4AF37] rounded-full transition-all duration-500"
+                    className="h-full bg-gradient-to-r from-[#C9A227] to-[#DAA520] rounded-full transition-all duration-500"
                     style={{ width: `${((currentCard + 1) / flashcards.length) * 100}%` }}
                   />
                 </div>
@@ -491,7 +491,7 @@ export default function WirkungskraftQuiz() {
                     <p className="text-gray-400 mt-4 text-sm">Tippe zum Umdrehen</p>
                   </div>
                   <div
-                    className="absolute w-full h-full bg-gradient-to-br from-[#C9A227] to-[#D4AF37] rounded-3xl shadow-2xl flex flex-col items-center justify-center p-8 text-center text-white"
+                    className="absolute w-full h-full bg-gradient-to-br from-[#C9A227] to-[#DAA520] rounded-3xl shadow-2xl flex flex-col items-center justify-center p-8 text-center text-white"
                     style={{
                       backfaceVisibility: 'hidden',
                       WebkitBackfaceVisibility: 'hidden',
@@ -513,7 +513,7 @@ export default function WirkungskraftQuiz() {
                 </button>
                 <button
                   onClick={markKnown}
-                  className="bg-gradient-to-r from-[#C9A227] to-[#D4AF37] text-white font-semibold px-6 py-3 rounded-full hover:shadow-lg transition-all flex items-center gap-2"
+                  className="bg-gradient-to-r from-[#C9A227] to-[#DAA520] text-white font-semibold px-6 py-3 rounded-full hover:shadow-lg transition-all flex items-center gap-2"
                 >
                   ✓ Gewusst!
                 </button>
@@ -566,7 +566,7 @@ export default function WirkungskraftQuiz() {
               <div className="flex gap-4 justify-center flex-wrap">
                 <button
                   onClick={restartQuiz}
-                  className="bg-gradient-to-r from-[#C9A227] to-[#D4AF37] text-white font-semibold px-8 py-4 rounded-full hover:shadow-lg transition-all"
+                  className="bg-gradient-to-r from-[#C9A227] to-[#DAA520] text-white font-semibold px-8 py-4 rounded-full hover:shadow-lg transition-all"
                 >
                   🔄 Nochmal spielen
                 </button>
@@ -630,7 +630,7 @@ export default function WirkungskraftQuiz() {
 
               <div className="h-2 bg-gray-100 rounded-full mb-6 overflow-hidden">
                 <div
-                  className="h-full bg-gradient-to-r from-[#C9A227] to-[#D4AF37] rounded-full transition-all duration-500"
+                  className="h-full bg-gradient-to-r from-[#C9A227] to-[#DAA520] rounded-full transition-all duration-500"
                   style={{ width: `${((currentQ + 1) / quizData.length) * 100}%` }}
                 />
               </div>
@@ -681,7 +681,7 @@ export default function WirkungskraftQuiz() {
               {showResult && (
                 <button
                   onClick={nextQuestion}
-                  className="w-full bg-gradient-to-r from-[#C9A227] to-[#D4AF37] text-white font-semibold py-4 rounded-full hover:shadow-lg transition-all"
+                  className="w-full bg-gradient-to-r from-[#C9A227] to-[#DAA520] text-white font-semibold py-4 rounded-full hover:shadow-lg transition-all"
                 >
                   {currentQ < quizData.length - 1 ? 'Nächste Frage →' : 'Ergebnis ansehen →'}
                 </button>

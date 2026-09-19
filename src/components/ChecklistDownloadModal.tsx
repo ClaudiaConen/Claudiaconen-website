@@ -119,7 +119,7 @@ export default function ChecklistDownloadModal({
           ) : (
             <>
               <div className="text-center mb-6">
-                <div className="mx-auto w-16 h-16 bg-gradient-to-br from-[#D4AF37] to-[#FFD700] rounded-full flex items-center justify-center mb-4">
+                <div className="mx-auto w-16 h-16 bg-gradient-to-br from-[#DAA520] to-[#F4D03F] rounded-full flex items-center justify-center mb-4">
                   <Mail className="text-white" size={32} />
                 </div>
                 <h3 className="text-2xl font-bold text-[#1a1a2e] mb-2">
@@ -141,7 +141,7 @@ export default function ChecklistDownloadModal({
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#DAA520] focus:border-transparent transition-all"
                     placeholder="ihre@email.de"
                   />
                 </div>
@@ -153,7 +153,7 @@ export default function ChecklistDownloadModal({
                     checked={consent}
                     onChange={(e) => setConsent(e.target.checked)}
                     required
-                    className="mt-1 w-4 h-4 text-[#D4AF37] border-gray-300 rounded focus:ring-[#D4AF37]"
+                    className="mt-1 w-4 h-4 text-[#DAA520] border-gray-300 rounded focus:ring-[#DAA520]"
                   />
                   <label htmlFor="consent" className="text-sm text-gray-600">
                     Ich stimme zu, dass meine E-Mail-Adresse gespeichert wird, um mir die Checkliste
@@ -171,7 +171,7 @@ export default function ChecklistDownloadModal({
                 <button
                   type="submit"
                   disabled={isSubmitting || !consent}
-                  className="w-full px-6 py-3 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-white font-bold rounded-lg hover:scale-105 transition-transform duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                  className="w-full px-6 py-3 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-white font-bold rounded-lg hover:scale-105 transition-transform duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                 >
                   {isSubmitting ? 'Wird versendet...' : 'Bestätigungsmail anfordern'}
                 </button>

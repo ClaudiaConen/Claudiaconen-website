@@ -180,7 +180,7 @@ export default function Wissensbibliothek() {
 
             <div className="text-center">
               <h1 className="font-montserrat font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-midnight-blue mb-4 sm:mb-6 px-2">
-                <span className="bg-gradient-to-r from-[#D4AF37] to-[#FFD700] bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[#DAA520] to-[#F4D03F] bg-clip-text text-transparent">
                   Wissensbibliothek
                 </span>
               </h1>
@@ -250,7 +250,7 @@ export default function Wissensbibliothek() {
                       whileTap={{ scale: 0.98 }}
                       className={`p-4 rounded-xl font-semibold transition-all text-left ${
                         isSelected
-                          ? 'bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-midnight-blue shadow-lg'
+                          ? 'bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue shadow-lg'
                           : 'bg-gradient-to-br from-gray-50 to-gray-100 text-gray-700 hover:from-gray-100 hover:to-gray-200 border-2 border-gray-200'
                       }`}
                     >
@@ -315,7 +315,7 @@ export default function Wissensbibliothek() {
                             className="w-full h-full object-cover object-center hover:scale-110 transition-transform duration-500"
                           />
                           {article.category && (
-                            <div className="absolute top-4 left-4 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-midnight-blue px-3 py-1 rounded-full text-xs font-bold">
+                            <div className="absolute top-4 left-4 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue px-3 py-1 rounded-full text-xs font-bold">
                               {article.category}
                             </div>
                           )}
@@ -350,7 +350,7 @@ export default function Wissensbibliothek() {
                               ))}
                             </div>
                           )}
-                          <button className="w-full px-4 sm:px-6 py-2 sm:py-2.5 text-sm sm:text-base bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform">
+                          <button className="w-full px-4 sm:px-6 py-2 sm:py-2.5 text-sm sm:text-base bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform">
                             Artikel lesen
                           </button>
                         </div>
@@ -403,7 +403,7 @@ export default function Wissensbibliothek() {
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 sm:p-6 md:p-8">
                     <div className="flex items-center gap-2 sm:gap-3 text-white/80 text-xs sm:text-sm mb-2 sm:mb-3 flex-wrap">
                       {selectedArticle.category && (
-                        <span className="bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-midnight-blue px-2 sm:px-3 py-0.5 sm:py-1 rounded-full font-bold text-xs sm:text-sm">
+                        <span className="bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue px-2 sm:px-3 py-0.5 sm:py-1 rounded-full font-bold text-xs sm:text-sm">
                           {selectedArticle.category}
                         </span>
                       )}
@@ -575,7 +575,7 @@ export default function Wissensbibliothek() {
                               <a
                                 key={idx}
                                 href={link.href}
-                                className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 text-sm sm:text-base bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform shadow-md"
+                                className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 text-sm sm:text-base bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform shadow-md"
                               >
                                 {link.text}
                                 <ArrowRight size={16} />

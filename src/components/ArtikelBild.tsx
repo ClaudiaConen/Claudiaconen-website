@@ -34,7 +34,7 @@ export default function ArtikelBild({ bereich, motiv }: { bereich: string; motiv
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-x-0 bottom-0 h-px"
-          style={{ background: 'linear-gradient(90deg, #DAA520, #FFD700, #DAA520)' }}
+          style={{ background: 'linear-gradient(90deg, #DAA520, #F4D03F, #DAA520)' }}
         />
         <div className="relative px-7 py-7 sm:px-10 sm:py-9">
           <p className="font-montserrat text-xs font-semibold uppercase tracking-[0.22em] text-luxury-gold">

@@ -91,7 +91,7 @@ export default function Impressionen() {
                 <div
                   aria-hidden="true"
                   className="pointer-events-none absolute inset-x-0 bottom-0 h-px"
-                  style={{ background: 'linear-gradient(90deg, #DAA520, #FFD700, #DAA520)' }}
+                  style={{ background: 'linear-gradient(90deg, #DAA520, #F4D03F, #DAA520)' }}
                 />
                 <figcaption className="relative px-5 py-5">
                   <p className="font-montserrat text-xs font-semibold uppercase tracking-[0.2em] text-luxury-gold">

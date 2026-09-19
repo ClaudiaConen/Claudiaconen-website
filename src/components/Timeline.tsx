@@ -85,7 +85,7 @@ export default function Timeline() {
           transition={{ duration: 0.2 }}
           className="text-center mb-12 md:mb-20"
         >
-          <div className="inline-block mb-4 px-6 py-2 bg-gradient-to-r from-[#D4AF37]/20 to-[#FFD700]/20 rounded-full border border-luxury-gold/30">
+          <div className="inline-block mb-4 px-6 py-2 bg-gradient-to-r from-[#DAA520]/20 to-[#F4D03F]/20 rounded-full border border-luxury-gold/30">
             <span className="text-bright-gold font-semibold">Die Voice-to-Brain™ Methode</span>
           </div>
           <h2 id="timeline-headline" className="font-montserrat font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-4 md:mb-6">
@@ -98,7 +98,7 @@ export default function Timeline() {
           <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-luxury-gold/20 -translate-x-1/2">
             <motion.div
               style={{ height: lineHeight }}
-              className="w-full bg-gradient-to-b from-[#D4AF37] to-[#FFD700]"
+              className="w-full bg-gradient-to-b from-[#DAA520] to-[#F4D03F]"
             />
           </div>
 
@@ -132,13 +132,13 @@ export default function Timeline() {
                         <motion.div
                           animate={{
                             boxShadow: [
-                              '0 0 20px rgba(212, 175, 55, 0.3)',
-                              '0 0 30px rgba(212, 175, 55, 0.5)',
-                              '0 0 20px rgba(212, 175, 55, 0.3)',
+                              '0 0 20px rgba(218, 165, 32, 0.3)',
+                              '0 0 30px rgba(218, 165, 32, 0.5)',
+                              '0 0 20px rgba(218, 165, 32, 0.3)',
                             ],
                           }}
                           transition={{ duration: 2, repeat: Infinity }}
-                          className="w-16 h-16 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#FFD700] flex items-center justify-center flex-shrink-0"
+                          className="w-16 h-16 rounded-full bg-gradient-to-r from-[#DAA520] to-[#F4D03F] flex items-center justify-center flex-shrink-0"
                         >
                           <Icon size={28} className="text-midnight-blue" />
                         </motion.div>
@@ -191,7 +191,7 @@ export default function Timeline() {
                           transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
                           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full border-2 border-luxury-gold/30 z-10"
                         />
-                        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#FFD700] flex items-center justify-center font-montserrat font-bold text-midnight-blue text-xl z-20">
+                        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-gradient-to-r from-[#DAA520] to-[#F4D03F] flex items-center justify-center font-montserrat font-bold text-midnight-blue text-xl z-20">
                           {step.number}
                         </div>
                       </div>
@@ -199,7 +199,7 @@ export default function Timeline() {
                   </div>
 
                   <div className="lg:hidden flex justify-center">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#FFD700] flex items-center justify-center font-montserrat font-bold text-midnight-blue text-xl">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-[#DAA520] to-[#F4D03F] flex items-center justify-center font-montserrat font-bold text-midnight-blue text-xl">
                       {step.number}
                     </div>
                   </div>
@@ -218,13 +218,13 @@ export default function Timeline() {
             <motion.div
               animate={{
                 boxShadow: [
-                  '0 0 30px rgba(212, 175, 55, 0.4)',
-                  '0 0 50px rgba(212, 175, 55, 0.7)',
-                  '0 0 30px rgba(212, 175, 55, 0.4)',
+                  '0 0 30px rgba(218, 165, 32, 0.4)',
+                  '0 0 50px rgba(218, 165, 32, 0.7)',
+                  '0 0 30px rgba(218, 165, 32, 0.4)',
                 ],
               }}
               transition={{ duration: 3, repeat: Infinity }}
-              className="w-20 h-20 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#FFD700] flex items-center justify-center"
+              className="w-20 h-20 rounded-full bg-gradient-to-r from-[#DAA520] to-[#F4D03F] flex items-center justify-center"
             >
               <Sparkles size={40} className="text-midnight-blue" />
             </motion.div>
@@ -243,7 +243,7 @@ export default function Timeline() {
           </p>
           <a
             href="#offers"
-            className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg"
+            className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg"
           >
             Sprich mit mir
           </a>

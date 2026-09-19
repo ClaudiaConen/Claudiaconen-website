@@ -100,7 +100,7 @@ export default function LinkedInFreebieConfirmed() {
               </p>
               <Link
                 to="/linkedin-freebie"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-midnight-blue font-bold rounded-full hover:scale-105 transition-transform"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue font-bold rounded-full hover:scale-105 transition-transform"
               >
                 Zurück zur Anmeldung
                 <ArrowRight size={20} />
@@ -140,7 +140,7 @@ export default function LinkedInFreebieConfirmed() {
               </p>
               <Link
                 to="/linkedin-freebie"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-midnight-blue font-bold rounded-full hover:scale-105 transition-transform"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue font-bold rounded-full hover:scale-105 transition-transform"
               >
                 Neue Anfrage stellen
                 <ArrowRight size={20} />
@@ -185,7 +185,7 @@ export default function LinkedInFreebieConfirmed() {
 
             <button
               onClick={handleDownload}
-              className="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-midnight-blue font-bold rounded-full hover:scale-105 transition-transform text-lg shadow-xl mb-8"
+              className="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue font-bold rounded-full hover:scale-105 transition-transform text-lg shadow-xl mb-8"
             >
               <Download size={24} />
               <span>Workbook jetzt herunterladen</span>

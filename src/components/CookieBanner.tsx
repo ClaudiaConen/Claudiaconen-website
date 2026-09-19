@@ -46,7 +46,7 @@ export default function CookieBanner() {
               </button>
               <button
                 onClick={handleAccept}
-                className="px-6 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300"
+                className="px-6 py-2 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300"
               >
                 Akzeptieren
               </button>

@@ -63,7 +63,7 @@ export default function Footer() {
               href="https://claudiaconen.com/termin-buchen"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300"
+              className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300"
             >
               <Calendar size={18} />
               Kostenloses Gespräch buchen
@@ -78,7 +78,7 @@ export default function Footer() {
                 src="/logo-claudia-neu.jpg"
                 alt="Claudia Conen – KI & Mensch"
                 className="h-16 w-16 rounded-full object-cover flex-shrink-0"
-                style={{ filter: 'drop-shadow(0 0 8px rgba(212,175,55,0.4))' }}
+                style={{ filter: 'drop-shadow(0 0 8px rgba(218,165,32,0.4))' }}
               />
               <div>
                 <h3 className="text-2xl font-montserrat font-bold text-bright-gold mb-2">
@@ -186,7 +186,7 @@ export default function Footer() {
           </p>
           <button
             onClick={scrollToTop}
-            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg"
+            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg"
             aria-label="Nach oben scrollen"
           >
             <ArrowUp size={18} />

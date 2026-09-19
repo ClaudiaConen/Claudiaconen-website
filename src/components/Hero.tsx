@@ -179,7 +179,7 @@ export default function Hero() {
                     }}
                   >
                     <div className="flex flex-col items-center text-center gap-2">
-                      <div className="p-2 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#FFD700] group-hover:scale-110 transition-transform duration-300">
+                      <div className="p-2 rounded-full bg-gradient-to-r from-[#DAA520] to-[#F4D03F] group-hover:scale-110 transition-transform duration-300">
                         <Icon size={20} className="text-midnight-blue" />
                       </div>
                       <div>
@@ -212,7 +212,7 @@ export default function Hero() {
             >
               <a
                 href="#schritt1"
-                className="flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg whitespace-nowrap"
+                className="flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg whitespace-nowrap"
                 onClick={(e) => {
                   e.preventDefault();
                   const target = document.querySelector('#schritt1');
@@ -243,7 +243,7 @@ export default function Hero() {
             transition={{ duration: 0.2 }}
             className="relative group w-full lg:w-[400px] xl:w-[450px] video-nebel"
           >
-            <div className="absolute -inset-1 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+            <div className="absolute -inset-1 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
             <div className="relative rounded-2xl overflow-hidden border-2 border-luxury-gold/30" style={{ aspectRatio: '16/9' }}>
               <iframe
                 src="https://player.vimeo.com/video/1143907515"

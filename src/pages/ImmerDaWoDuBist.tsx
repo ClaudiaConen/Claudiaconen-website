@@ -21,7 +21,7 @@ export default function ImmerDaWoDuBist() {
             </div>
             <h1 className="font-montserrat font-bold text-4xl sm:text-5xl lg:text-6xl mb-6">
               Immer da{' '}
-              <span className="bg-gradient-to-r from-[#B8860B] via-[#D4AF37] to-[#FFD700] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#B8860B] via-[#DAA520] to-[#F4D03F] bg-clip-text text-transparent">
                 wo du bist
               </span>
             </h1>

@@ -87,6 +87,24 @@ const INHALT: ZielgruppenInhalt = {
     },
   ],
 
+  weitere: [
+    {
+      titel: 'Speakerin werden',
+      text: 'Der ganze Weg auf die Bühne.',
+      ziel: '/speaker-ausbildung',
+    },
+    {
+      titel: 'Elevator-Pitch-Kurs',
+      text: 'Der eine Satz, der sitzt.',
+      ziel: '/elevator-pitch-kurs',
+    },
+    {
+      titel: 'Storytelling-Kurs',
+      text: 'Drei Geschichten, die Sie wirklich erzählen.',
+      ziel: '/storytelling-kurs',
+    },
+  ],
+
   schrittTitel: 'Schreib kurz, worum es bei dir geht',
   schrittText:
     'Ein, zwei Sätze genügen. Du bekommst die nächsten Termine, den Preis und eine ehrliche Einschätzung, ob der Tag für dich der richtige ist oder etwas anderes besser passt.',

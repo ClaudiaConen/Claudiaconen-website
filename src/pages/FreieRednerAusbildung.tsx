@@ -109,6 +109,24 @@ const INHALT: ZielgruppenInhalt = {
     },
   ],
 
+  weitere: [
+    {
+      titel: 'Trauerrednerin werden',
+      text: 'Der vertiefende Weg für Abschiede.',
+      ziel: '/trauerredner-ausbildung',
+    },
+    {
+      titel: 'Hochzeitsrednerin werden',
+      text: 'Der vertiefende Weg für freie Trauungen.',
+      ziel: '/hochzeitsredner-ausbildung',
+    },
+    {
+      titel: 'Speakerin werden',
+      text: 'Wenn es auf die Bühne gehen soll.',
+      ziel: '/speaker-ausbildung',
+    },
+  ],
+
   schrittTitel: 'Reden wir, bevor Sie sich entscheiden',
   schrittText:
     'Ein Vorgespräch kostet nichts und verpflichtet zu nichts. Danach wissen Sie, ob das Ihr Weg ist — und ich weiß, ob ich die Richtige dafür bin.',

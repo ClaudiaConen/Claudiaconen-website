@@ -106,6 +106,24 @@ const INHALT: ZielgruppenInhalt = {
     },
   ],
 
+  weitere: [
+    {
+      titel: 'Elevator-Pitch-Kurs',
+      text: 'Der eine Satz auf die Frage, was Sie tun.',
+      ziel: '/elevator-pitch-kurs',
+    },
+    {
+      titel: 'Storytelling-Kurs',
+      text: 'Geschichten, die jemand weitererzählt.',
+      ziel: '/storytelling-kurs',
+    },
+    {
+      titel: 'Workshop an einem Tag',
+      text: 'Der kleinere Anfang, in kleiner Gruppe.',
+      ziel: '/redner-ausbildungen',
+    },
+  ],
+
   schrittTitel: 'Erzählen Sie mir Ihr Thema',
   schrittText:
     'Ein Vorgespräch, ohne Verpflichtung. Wenn ich nach zwanzig Minuten den Eindruck habe, dass Sie mich nicht brauchen, sage ich Ihnen das.',

@@ -13,6 +13,8 @@ const FreieRednerAusbildung = lazy(() => import('./pages/FreieRednerAusbildung')
 const TrauerrednerAusbildung = lazy(() => import('./pages/TrauerrednerAusbildung'));
 const HochzeitsrednerAusbildung = lazy(() => import('./pages/HochzeitsrednerAusbildung'));
 const SpeakerAusbildung = lazy(() => import('./pages/SpeakerAusbildung'));
+const ElevatorPitchKurs = lazy(() => import('./pages/ElevatorPitchKurs'));
+const StorytellingKurs = lazy(() => import('./pages/StorytellingKurs'));
 const ArtikelKeynotePreis = lazy(() => import('./pages/ArtikelKeynotePreis'));
 const ArtikelSpeakerFinden = lazy(() => import('./pages/ArtikelSpeakerFinden'));
 const ArtikelStimmeTrainieren = lazy(() => import('./pages/ArtikelStimmeTrainieren'));
@@ -176,6 +178,8 @@ function App() {
         <Route path="/trauerredner-ausbildung" element={<TrauerrednerAusbildung />} />
         <Route path="/hochzeitsredner-ausbildung" element={<HochzeitsrednerAusbildung />} />
         <Route path="/speaker-ausbildung" element={<SpeakerAusbildung />} />
+        <Route path="/elevator-pitch-kurs" element={<ElevatorPitchKurs />} />
+        <Route path="/storytelling-kurs" element={<StorytellingKurs />} />
         <Route path="/wissen/was-kostet-ein-keynote-speaker" element={<ArtikelKeynotePreis />} />
         <Route path="/wissen/keynote-speaker-finden" element={<ArtikelSpeakerFinden />} />
         <Route path="/wissen/stimme-trainieren" element={<ArtikelStimmeTrainieren />} />

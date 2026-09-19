@@ -58,6 +58,9 @@ export type ZielgruppenInhalt = {
   /** Goldene Klangwellen im Kopf. Nur fuer dunkle Stimmung gedacht -
    *  auf hellem Grund verschwindet Gold auf Creme. */
   welle?: boolean;
+  /** Verwandte Seiten. Stehen VOR dem letzten Schritt, damit sie niemanden
+   *  ablenken, der schon auf dem Weg zum Knopf ist. */
+  weitere?: { titel: string; text: string; ziel: string }[];
 };
 
 
@@ -284,6 +287,39 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
             </dl>
           </div>
         </section>
+
+        {/* 5b. Passt dazu */}
+        {inhalt.weitere && inhalt.weitere.length > 0 && (
+          <section className="bg-pearl-white py-16 sm:py-20" aria-labelledby="weitere">
+            <div className="mx-auto max-w-4xl px-6">
+              <h2
+                id="weitere"
+                className="font-montserrat text-xs font-semibold uppercase tracking-[0.2em] text-dark-gold"
+              >
+                Passt dazu
+              </h2>
+              <div className="mt-8 grid gap-5 sm:grid-cols-3">
+                {inhalt.weitere.map((w) => (
+                  <Link
+                    key={w.ziel}
+                    to={w.ziel}
+                    className="group flex flex-col border border-midnight-blue/10 bg-white p-6 transition-all hover:border-luxury-gold hover:shadow-lg"
+                  >
+                    <p className="font-montserrat text-base font-semibold text-midnight-blue">
+                      {w.titel}
+                    </p>
+                    <p className="mt-2 flex-1 font-inter text-sm leading-relaxed text-midnight-blue/65">
+                      {w.text}
+                    </p>
+                    <span className="mt-4 font-montserrat text-sm font-semibold text-dark-gold underline-offset-4 group-hover:underline">
+                      Ansehen &rarr;
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* 6. Ein nächster Schritt */}
         <section

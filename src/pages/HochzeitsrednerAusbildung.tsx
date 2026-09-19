@@ -102,6 +102,24 @@ const INHALT: ZielgruppenInhalt = {
     },
   ],
 
+  weitere: [
+    {
+      titel: 'Freie Rednerin werden',
+      text: 'Das Dach über allen Anlässen.',
+      ziel: '/freie-redner-ausbildung',
+    },
+    {
+      titel: 'Trauerrednerin werden',
+      text: 'Der Anlass, der das Winterhalbjahr füllt.',
+      ziel: '/trauerredner-ausbildung',
+    },
+    {
+      titel: 'Storytelling-Kurs',
+      text: 'Bewegend erzählen, ohne kitschig zu werden.',
+      ziel: '/storytelling-kurs',
+    },
+  ],
+
   schrittTitel: 'Lernen Sie mich kennen, bevor Sie sich entscheiden',
   schrittText:
     'Ein Vorgespräch kostet nichts. Danach wissen Sie, ob das Ihr Weg ist — und ob ich die Richtige bin, um Sie darauf zu begleiten.',

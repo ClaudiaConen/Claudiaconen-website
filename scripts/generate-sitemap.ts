@@ -78,6 +78,8 @@ const staticPages = [
   { path: '/trauerrede', priority: '0.8', changefreq: 'monthly' },
   { path: '/freie-trauung', priority: '0.8', changefreq: 'monthly' },
   { path: '/speaker-ausbildung', priority: '0.9', changefreq: 'monthly' },
+  { path: '/elevator-pitch-kurs', priority: '0.8', changefreq: 'monthly' },
+  { path: '/storytelling-kurs', priority: '0.8', changefreq: 'monthly' },
   { path: '/freie-redner-ausbildung', priority: '0.9', changefreq: 'monthly' },
   { path: '/trauerredner-ausbildung', priority: '0.8', changefreq: 'monthly' },
   { path: '/hochzeitsredner-ausbildung', priority: '0.8', changefreq: 'monthly' },

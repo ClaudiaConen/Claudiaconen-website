@@ -150,6 +150,38 @@ async function main() {
   fs.rmSync(path.resolve('dist-vorrender'), { recursive: true, force: true });
 
   console.log(`> Vorrendern fertig: ${fertig} Seiten, ${uebersprungen} uebersprungen`);
+
+  // NOTBREMSE 1: Die Startseite darf nicht fehlen.
+  // Am 19.09.2026 wurde sie mit "supabaseUrl is required" uebersprungen
+  // und der Bau meldete trotzdem Erfolg - ausgeliefert worden waere eine
+  // leere Huelle. Fehlende Umgebungswerte sind die haeufigste Ursache:
+  //   set -a; . /opt/vinci/secrets/supabase.env; set +a
+  const start = path.join(DIST, 'index.html');
+  const startGross = fs.existsSync(start) ? fs.statSync(start).size : 0;
+  if (startGross < 20000) {
+    console.error('');
+    console.error(`! ABBRUCH: dist/index.html ist nur ${startGross} Byte gross.`);
+    console.error('! Die Startseite wurde nicht vorgerendert - vermutlich fehlen');
+    console.error('! VITE_SUPABASE_URL und VITE_SUPABASE_ANON_KEY in der Umgebung.');
+    console.error('! Ein Livegang damit waere eine leere Startseite.');
+    process.exit(1);
+  }
+
+  // NOTBREMSE 2: Eine Seite ohne interne Verweise ist eine Sackgasse.
+  // Das Aufklappmenue ist aus Knoepfen gebaut und hat keine href-Angaben;
+  // ohne die Seitenuebersicht kommt ein Suchprogramm von der Startseite
+  // aus nirgendwo hin. Byte-Zahl allein beweist das nicht.
+  const verweise = new Set(
+    (fs.readFileSync(start, 'utf8').match(/href="\/[a-z0-9/-]*"/g) || [])
+  );
+  if (verweise.size < 20) {
+    console.error('');
+    console.error(`! ABBRUCH: Die Startseite hat nur ${verweise.size} interne Verweise.`);
+    console.error('! Ohne Verweisnetz findet kein Suchprogramm die Unterseiten.');
+    console.error('! Steht <Seitenuebersicht /> noch im Vorrender-Einstieg?');
+    process.exit(1);
+  }
+  console.log(`> Startseite: ${startGross} Byte, ${verweise.size} interne Verweise`);
 }
 
 main().catch((e) => {

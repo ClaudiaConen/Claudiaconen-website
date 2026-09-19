@@ -90,6 +90,8 @@ const staticPages = [
   { path: '/wissen/keynote-speaker-finden', priority: '0.8', changefreq: 'monthly' },
   { path: '/wissen/stimme-trainieren', priority: '0.8', changefreq: 'monthly' },
   { path: '/wissen/lampenfieber', priority: '0.8', changefreq: 'monthly' },
+  { path: '/wissen/charisma-lernen', priority: '0.8', changefreq: 'monthly' },
+  { path: '/wissen/vier-ohren-modell', priority: '0.8', changefreq: 'monthly' },
   { path: '/wissen/keynote-aufbauen', priority: '0.8', changefreq: 'monthly' },
 
   // Vorhandene Seiten, die bisher in keiner Sitemap standen (18.09.2026)

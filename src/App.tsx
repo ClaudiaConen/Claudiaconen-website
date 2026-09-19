@@ -18,6 +18,8 @@ const ArtikelKeynotePreis = lazy(() => import('./pages/ArtikelKeynotePreis'));
 const ArtikelSpeakerFinden = lazy(() => import('./pages/ArtikelSpeakerFinden'));
 const ArtikelStimmeTrainieren = lazy(() => import('./pages/ArtikelStimmeTrainieren'));
 const ArtikelLampenfieber = lazy(() => import('./pages/ArtikelLampenfieber'));
+const ArtikelCharisma = lazy(() => import('./pages/ArtikelCharisma'));
+const ArtikelVierOhren = lazy(() => import('./pages/ArtikelVierOhren'));
 const ArtikelKeynoteAufbauen = lazy(() => import('./pages/ArtikelKeynoteAufbauen'));
 const MarkeUndPositionierung = lazy(() => import('./pages/MarkeUndPositionierung'));
 const KeynoteUndBuehnenperformance = lazy(() => import('./pages/KeynoteUndBuehnenperformance'));
@@ -185,6 +187,8 @@ function App() {
         <Route path="/wissen/keynote-speaker-finden" element={<ArtikelSpeakerFinden />} />
         <Route path="/wissen/stimme-trainieren" element={<ArtikelStimmeTrainieren />} />
         <Route path="/wissen/lampenfieber" element={<ArtikelLampenfieber />} />
+        <Route path="/wissen/charisma-lernen" element={<ArtikelCharisma />} />
+        <Route path="/wissen/vier-ohren-modell" element={<ArtikelVierOhren />} />
         <Route path="/wissen/keynote-aufbauen" element={<ArtikelKeynoteAufbauen />} />
         <Route path="/marke-und-positionierung" element={<MarkeUndPositionierung />} />
         <Route path="/keynote-und-buehnenperformance" element={<KeynoteUndBuehnenperformance />} />

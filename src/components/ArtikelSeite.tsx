@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import Navigation from './Navigation';
 import Footer from './Footer';
 import SEO from './SEO';
+import ArtikelQuiz, { QuizFrage } from './ArtikelQuiz';
 import ArtikelBild from './ArtikelBild';
 
 /**
@@ -37,6 +38,7 @@ export type ArtikelInhalt = {
   abschnitte: Abschnitt[];
   fragen: { frage: string; antwort: string }[];
   weiter: { text: string; knopf: string; ziel: string };
+  quiz?: QuizFrage[];
   seoText: string;
 };
 
@@ -159,6 +161,8 @@ export default function ArtikelSeite({ inhalt }: { inhalt: ArtikelInhalt }) {
               {inhalt.weiter.knopf} →
             </Link>
           </aside>
+
+          {inhalt.quiz && inhalt.quiz.length > 0 && <ArtikelQuiz fragen={inhalt.quiz} />}
 
           <footer className="mt-14 border-t border-midnight-blue/10 pt-6">
             <p className="font-inter text-sm text-midnight-blue/60">

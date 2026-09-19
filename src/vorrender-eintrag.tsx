@@ -38,6 +38,7 @@ export const SEITEN: { pfad: string; laden: () => Promise<any> }[] = [
   { pfad: '/wissen/stimme-trainieren', laden: () => import('./pages/ArtikelStimmeTrainieren') },
   { pfad: '/wissen/lampenfieber', laden: () => import('./pages/ArtikelLampenfieber') },
   { pfad: '/wissen/charisma-lernen', laden: () => import('./pages/ArtikelCharisma') },
+  { pfad: '/wissen/thema-finden-speaker', laden: () => import('./pages/ArtikelThemaFinden') },
   { pfad: '/wissen/vier-ohren-modell', laden: () => import('./pages/ArtikelVierOhren') },
   { pfad: '/wissen/keynote-aufbauen', laden: () => import('./pages/ArtikelKeynoteAufbauen') },
 ];

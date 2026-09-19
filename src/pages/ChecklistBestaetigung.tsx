@@ -356,6 +356,7 @@ export default function ChecklistBestaetigung() {
       <SEO
         title="E-Mail-Bestätigung"
         description="Bestätige deine E-Mail-Adresse für den Checklisten-Download"
+        noindex
       />
       <Navigation />
 

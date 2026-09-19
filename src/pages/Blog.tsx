@@ -39,7 +39,7 @@ export default function Blog() {
     {
       id: 'neuro',
       title: 'Neurowissenschaft & Verkauf',
-      description: 'Wissenschaftlich fundierte Erkenntnisse über Kaufentscheidungen und ethisches Verkaufen.',
+      description: 'Wie Menschen zu einer Entscheidung kommen — und wie man verkauft, ohne jemanden zu überreden.',
       icon: Brain,
       image: 'https://images.pexels.com/photos/17483868/pexels-photo-17483868.jpeg?auto=compress&cs=tinysrgb&w=800',
       path: '/blog-neuro',
@@ -69,7 +69,7 @@ export default function Blog() {
                 Blog & <span className="bg-gradient-to-r from-[#DAA520] to-[#F4D03F] bg-clip-text text-transparent">Aktuelles</span>
               </h1>
               <p className="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-                Inspirierende Artikel, praktische Tipps und wissenschaftliche Erkenntnisse für Ihre persönliche und berufliche Entwicklung
+                Artikel und praktische Hinweise aus siebenunddreißig Jahren Arbeit mit Stimme, Bühne und Menschen
               </p>
             </div>
 

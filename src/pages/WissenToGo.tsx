@@ -1,11 +1,17 @@
 import { motion } from 'framer-motion';
 import { Headphones, Podcast, Radio, Smartphone } from 'lucide-react';
+import SEO from '../components/SEO';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 
 export default function WissenToGo() {
   return (
     <div className="min-h-screen bg-midnight-blue text-pearl-white">
+      <SEO
+        title="Wissen to go — Impulse für unterwegs"
+        description="Audio-Impulse, Telegram und WhatsApp, Webinare und die Wissensbibliothek. Kostenlos und ohne Anmeldung."
+        path="/wissen-to-go"
+      />
       <Navigation />
 
       <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">

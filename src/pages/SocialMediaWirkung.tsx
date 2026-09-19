@@ -1,11 +1,17 @@
 import { motion } from 'framer-motion';
 import { Smartphone, Video, TrendingUp, MessageCircle } from 'lucide-react';
+import SEO from '../components/SEO';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 
 export default function SocialMediaWirkung() {
   return (
     <div className="min-h-screen bg-midnight-blue text-pearl-white">
+      <SEO
+        title="Social Media Wirkung — vor der Kamera sprechen"
+        description="Wie Sie in kurzen Videos zur Sache kommen und dabei Sie selbst bleiben. Video, Reichweite und Auftritt."
+        path="/social-media-wirkung"
+      />
       <Navigation />
 
       <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">

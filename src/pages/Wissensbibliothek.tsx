@@ -201,7 +201,7 @@ export default function Wissensbibliothek() {
                 </span>
                 <span className="flex items-center gap-1.5 sm:gap-2">
                   <Brain size={14} className="text-bright-gold flex-shrink-0" />
-                  <span className="whitespace-nowrap">Wissenschaftlich fundiert</span>
+                  <span className="whitespace-nowrap">37 Jahre Praxis</span>
                 </span>
               </div>
             </div>
@@ -453,7 +453,7 @@ export default function Wissensbibliothek() {
                       <div className="flex items-start gap-2 sm:gap-3">
                         <Brain className="text-purple-600 flex-shrink-0 mt-1" size={20} />
                         <div className="flex-1">
-                          <h3 className="font-bold text-purple-900 text-base sm:text-lg mb-2">Wissenschaftlicher Hintergrund</h3>
+                          <h3 className="font-bold text-purple-900 text-base sm:text-lg mb-2">Hintergrund und Quellen</h3>
                           {selectedArticle.scientific_source && (
                             <p className="text-xs sm:text-sm text-purple-700 mb-3">
                               <strong>Quelle:</strong> {selectedArticle.scientific_source}

@@ -9,7 +9,7 @@ export default function BlogNeuro() {
         </h2>
         <p className="text-lg text-gray-700 leading-relaxed">
           Verstehen Sie, was in den Köpfen Ihrer Kunden vorgeht! In diesem Blog-Bereich teile ich
-          wissenschaftlich fundierte Erkenntnisse darüber, wie unser Gehirn Kaufentscheidungen trifft
+          was in Gesprächen tatsächlich passiert, bevor jemand sich entscheidet
           und wie Sie dieses Wissen für ethisches und effektives Verkaufen nutzen können.
         </p>
       </div>
@@ -51,7 +51,7 @@ export default function BlogNeuro() {
     <SubpageTemplate
       title="Neurowissenschaft & Verkauf"
       subtitle="Blog & Aktuelles"
-      introText="Wissenschaftlich fundierte Erkenntnisse über Kaufentscheidungen und ethisches Verkaufen. Verstehen Sie, was in den Köpfen Ihrer Kunden vorgeht."
+      introText="Wie Menschen zu einer Entscheidung kommen — und wie man verkauft, ohne jemanden zu überreden."
       bodyContent={bodyContent}
       ctaText="Interessiert an mehr Insights?"
       topic="Neurowissenschaft & Verkauf Blog"

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import SEO from '../components/SEO';
 import { motion } from 'framer-motion';
 import { MessageSquare, Target, Lightbulb, Sparkles, ArrowLeft, User, Mail, Briefcase, CheckCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -128,6 +129,11 @@ export default function ClaudiaAIBeta() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0A1628] via-[#0F1F3A] to-[#0A1628]">
+      <SEO
+        title="ClaudiaAI — Story-Coach in der Beta"
+        description="Ein KI-Assistent für Positionierung, Storytelling und Pitch, gebaut auf Claudia Conens Arbeitsweise. Derzeit in der Beta."
+        path="/claudia-ai"
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <motion.button
           initial={{ opacity: 0, x: -20 }}

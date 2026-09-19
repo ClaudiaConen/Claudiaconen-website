@@ -30,7 +30,7 @@ export default function Wissensmagazin() {
       content: (
         <div className="space-y-6">
           <p className="text-lg text-gray-700 leading-relaxed">
-            In einer Welt, in der Stimme, Persönlichkeit und Marke untrennbar zusammengehören, stellt sich eine zentrale Frage: Was unterscheidet Menschen mit Ausstrahlung von denen, die gehört — aber nicht erinnert werden? Unter Anwendung neurowissenschaftlicher Erkenntnisse entwickelt dieses Modell sieben „A-Fragen", die Ihre Wirkung auf ein neues Niveau heben — weit über Perfektion hinaus, hinein in Unverwechselbarkeit.
+            In einer Welt, in der Stimme, Persönlichkeit und Marke untrennbar zusammengehören, stellt sich eine zentrale Frage: Was unterscheidet Menschen mit Ausstrahlung von denen, die gehört — aber nicht erinnert werden? Dieses Arbeitsmodell stellt sieben „A-Fragen", die Ihre Wirkung auf ein neues Niveau heben — weit über Perfektion hinaus, hinein in Unverwechselbarkeit.
           </p>
 
           <div className="space-y-8 mt-8">

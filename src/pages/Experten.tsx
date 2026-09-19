@@ -16,8 +16,8 @@ const experts: Expert[] = [
   {
     name: 'Dr. Karsten Brocke',
     expertise: 'Neurowissenschaften & Kommunikation',
-    description: 'Experte für neurowissenschaftliche Grundlagen der Kommunikation und Wirkung. Seine Forschung zur 180-Millisekunden-Regel prägt das Verständnis für authentische Kommunikation.',
-    website: 'https://www.example.com'
+    description: 'Arbeitet zu den neurowissenschaftlichen Grundlagen von Kommunikation und Wirkung.',
+    website: ''
   },
   {
     name: 'Alexander Christiani',
@@ -118,15 +118,17 @@ export default function Experten() {
                     {expert.description}
                   </p>
 
-                  <a
-                    href={expert.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold transition-colors group"
-                  >
-                    <span>Website besuchen</span>
-                    <ExternalLink size={16} className="group-hover:translate-x-1 transition-transform" />
-                  </a>
+                  {expert.website && (
+                    <a
+                      href={expert.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold transition-colors group"
+                    >
+                      <span>Website besuchen</span>
+                      <ExternalLink size={16} className="group-hover:translate-x-1 transition-transform" />
+                    </a>
+                  )}
                 </div>
               </motion.div>
             ))}

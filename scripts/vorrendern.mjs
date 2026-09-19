@@ -51,6 +51,16 @@ function kopfSetzen(html, seo) {
     html = ersetzen(html, /<meta name="twitter:description" content="[^"]*"/,
       `<meta name="twitter:description" content="${maskieren(seo.description)}"`);
   }
+  // Die Robots-Angabe. Sie fehlte bis zum 19.09.2026: Zwei Danke-Seiten
+  // setzen noindex, und in der ausgelieferten Datei stand trotzdem
+  // "index, follow". Die SEO-Komponente setzt es erst im Browser - was
+  // Google sieht, die meisten KI-Crawler aber nicht.
+  // follow bleibt auch bei noindex: die Seite soll nicht in den Index,
+  // ihre Verweise duerfen aber weiterverfolgt werden.
+  if (seo.noindex) {
+    html = ersetzen(html, /<meta name="robots" content="[^"]*"/,
+      '<meta name="robots" content="noindex, follow"');
+  }
   if (seo.canonicalUrl) {
     html = ersetzen(html, /<link rel="canonical" href="[^"]*"/,
       `<link rel="canonical" href="${maskieren(seo.canonicalUrl)}"`);

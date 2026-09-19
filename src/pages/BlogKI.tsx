@@ -60,7 +60,7 @@ export default function BlogKI() {
         </h3>
         <p className="text-lg text-gray-700 leading-relaxed mb-4">
           Wer Vertrauen aufbauen will, muss verstehen, wie das Gehirn reagiert.
-          Neurowissenschaftlich basierte Kommunikation folgt dabei sieben Prinzipien, den sogenannten 7 A's – sie stehen für Aufmerksamkeit, Aktivierung, Anziehung, Authentizität, Anerkennung, Anpassung und Abschluss.
+          Claudia Conens Arbeitsmodell fasst das in sieben Prinzipien, die 7 A's – sie stehen für Aufmerksamkeit, Aktivierung, Anziehung, Authentizität, Anerkennung, Anpassung und Abschluss.
         </p>
         <p className="text-lg text-gray-700 leading-relaxed">
           Diese Prinzipien sind kein starres Modell, sondern eine Haltung:

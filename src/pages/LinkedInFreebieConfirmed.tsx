@@ -61,6 +61,12 @@ export default function LinkedInFreebieConfirmed() {
   if (status === 'loading') {
     return (
       <div className="min-h-screen bg-gradient-to-b from-pearl-white to-white">
+        <SEO
+          title="Bestätigung | LinkedIn Freebie"
+          description="Deine E-Mail-Adresse wird bestätigt."
+          path="/linkedin-freebie-confirmed"
+          noindex
+        />
         <Navigation />
         <main className="pt-40 pb-20">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -80,6 +86,7 @@ export default function LinkedInFreebieConfirmed() {
           title="Fehler | LinkedIn Freebie"
           description="Ein Fehler ist aufgetreten."
           path="/linkedin-freebie-confirmed"
+          noindex
         />
         <Navigation />
         <main className="pt-40 pb-20">
@@ -120,6 +127,7 @@ export default function LinkedInFreebieConfirmed() {
           title="Link abgelaufen | LinkedIn Freebie"
           description="Dein Bestätigungslink ist abgelaufen."
           path="/linkedin-freebie-confirmed"
+          noindex
         />
         <Navigation />
         <main className="pt-40 pb-20">
@@ -159,6 +167,7 @@ export default function LinkedInFreebieConfirmed() {
         title="Vielen Dank! Dein Workbook wartet | LinkedIn Freebie"
         description="Deine E-Mail wurde bestätigt. Lade jetzt dein kostenloses Workbook herunter."
         path="/linkedin-freebie-confirmed"
+        noindex
       />
       <Navigation />
 

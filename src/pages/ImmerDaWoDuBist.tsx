@@ -1,11 +1,17 @@
 import { motion } from 'framer-motion';
 import { MapPin, Globe, Phone, Video } from 'lucide-react';
+import SEO from '../components/SEO';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 
 export default function ImmerDaWoDuBist() {
   return (
     <div className="min-h-screen bg-midnight-blue text-pearl-white">
+      <SEO
+        title="Vor Ort, online oder am Telefon"
+        description="Dieselbe Arbeit, verschiedene Wege: persönliche Treffen, Online-Sitzungen, Live-Begleitung. Sie wählen, was passt."
+        path="/immer-da-wo-du-bist"
+      />
       <Navigation />
 
       <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">

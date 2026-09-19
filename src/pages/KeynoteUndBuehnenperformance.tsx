@@ -1,11 +1,17 @@
 import { motion } from 'framer-motion';
 import { Target, TrendingUp, Zap } from 'lucide-react';
+import SEO from '../components/SEO';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 
 export default function KeynoteUndBuehnenperformance() {
   return (
     <div className="min-h-screen bg-midnight-blue text-pearl-white">
+      <SEO
+        title="Keynote und Bühnenperformance"
+        description="Positionierung, Persönlichkeit, Performance und Stimmwirkung — Coaching, Mentoring, Workshops und Vorträge von Claudia Conen."
+        path="/keynote-und-buehnenperformance"
+      />
       <Navigation />
 
       <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">

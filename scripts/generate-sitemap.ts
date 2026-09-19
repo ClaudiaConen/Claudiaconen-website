@@ -111,7 +111,59 @@ const staticPages = [
   { path: '/agb', priority: '0.3', changefreq: 'yearly' },
 ];
 
+/**
+ * Seiten, die ABSICHTLICH nicht in die Sitemap gehoeren.
+ * Die vier Bestaetigungsseiten tragen noindex: Wer ueber die Suche auf
+ * "Vielen Dank, dein Workbook wartet" landet, ohne das Formular
+ * ausgefuellt zu haben, findet dort nichts.
+ * /wissensmagazin ist dieselbe Seite wie /wissensbibliothek unter einer
+ * zweiten Adresse - zwei Adressen fuer einen Inhalt schwaechen beide.
+ */
+const NICHT_IN_DIE_SITEMAP = new Set([
+  '/checklist-bestaetigung',
+  '/linkedin-freebie-confirmed',
+  '/spanien-ki-workshop/danke',
+  '/ki-workshop-unverwechselbar/danke',
+  '/wissensmagazin',
+  // Nicht oeffentlich, obwohl die Adresse es nicht verraet: diese drei
+  // pruefen eine Anmeldung oder eine hinterlegte E-Mail und zeigen ohne
+  // sie gar nichts. Sie werden auch nicht vorgerendert.
+  '/meine-plaene',
+  '/jahres-contentplan',
+  '/adventskalender/kalender',
+]);
+
+/**
+ * Was vorgerendert wird, gehoert auch in die Sitemap. Die Liste der
+ * vorgerenderten Seiten ist die eine Wahrheit; diese Funktion holt sich
+ * von dort, was in der Aufzaehlung oben noch fehlt.
+ */
+function fehlendeErgaenzen() {
+  const quelle = path.resolve('src/vorrender-eintrag.tsx');
+  if (!fs.existsSync(quelle)) return;
+
+  const text = fs.readFileSync(quelle, 'utf8');
+  const vorhanden = new Set(staticPages.map(s => s.path));
+  const ergaenzt: string[] = [];
+
+  for (const treffer of text.matchAll(/pfad: '([^']+)'/g)) {
+    const pfad = treffer[1];
+    if (vorhanden.has(pfad) || NICHT_IN_DIE_SITEMAP.has(pfad)) continue;
+    staticPages.push({ path: pfad, priority: '0.6', changefreq: 'monthly' });
+    vorhanden.add(pfad);
+    ergaenzt.push(pfad);
+  }
+
+  if (ergaenzt.length > 0) {
+    console.log(`  ! ${ergaenzt.length} Seiten fehlten in der Sitemap und wurden mit Prioritaet 0.6 ergaenzt:`);
+    ergaenzt.forEach(p => console.log(`      ${p}`));
+    console.log('    Wenn eine davon wichtiger ist, gehoert sie mit eigener Prioritaet nach oben.');
+  }
+}
+
 async function generateSitemap() {
+  fehlendeErgaenzen();
+
   console.log('🚀 Generiere Sitemap...');
 
   let articles = [];

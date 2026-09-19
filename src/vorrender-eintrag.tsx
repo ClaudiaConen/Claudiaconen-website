@@ -9,6 +9,7 @@
  */
 import { renderToStaticMarkup } from 'react-dom/server';
 import { StaticRouter } from 'react-router';
+import Seitenuebersicht from './components/Seitenuebersicht';
 import React from 'react';
 
 /** Adresse -> Seite. Von Hand gepflegt, weil App.tsx die Zuordnung nur
@@ -69,7 +70,15 @@ export async function rendern(pfad: string) {
     React.createElement(
       StaticRouter as any,
       { location: pfad },
-      React.createElement(Seite)
+      React.createElement(
+        React.Fragment,
+        null,
+        React.createElement(Seite),
+        // Die Uebersicht muss mit in die Datei. Ohne sie hat die
+        // Startseite null interne Verweise und ein Suchprogramm kommt
+        // von dort nirgendwo hin.
+        React.createElement(Seitenuebersicht)
+      )
     )
   );
 

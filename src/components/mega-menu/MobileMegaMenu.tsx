@@ -102,6 +102,15 @@ export default function MobileMegaMenu({ onClose }: MobileMegaMenuProps) {
                                   <span className="text-[0.8rem]">{tile.name}</span>
                                 </button>
                               ))}
+                              {cat.uebersicht && (
+                                <button
+                                  onClick={() => handleTileClick(cat.uebersicht!.href)}
+                                  className="mt-1 flex w-full items-center gap-2 border-t border-[rgba(218,165,32,0.22)] px-3 py-2.5 text-left text-white/70 transition-colors duration-200 hover:text-[#DAA520]"
+                                >
+                                  <span className="text-[0.78rem]">{cat.uebersicht.name}</span>
+                                  <ChevronRight size={12} className="flex-shrink-0 text-[#DAA520]/60" />
+                                </button>
+                              )}
                             </motion.div>
                           )}
                         </AnimatePresence>

@@ -84,6 +84,15 @@ export default function MegaMenuPanel({ item, onClose }: MegaMenuPanelProps) {
                 );
               })}
             </div>
+            {activeCategory.uebersicht && (
+              <button
+                className="mega-menu-uebersicht"
+                onClick={() => handleTileClick(activeCategory.uebersicht!.href)}
+              >
+                <span>{activeCategory.uebersicht.name}</span>
+                <ChevronRight size={14} />
+              </button>
+            )}
           </div>
         )}
       </div>

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import Seitenuebersicht from './Seitenuebersicht';
 import { Mail, Linkedin, Phone, Calendar, Instagram, ArrowUp } from 'lucide-react';
 
 export default function Footer() {
@@ -45,6 +46,8 @@ export default function Footer() {
   };
 
   return (
+    <>
+      <Seitenuebersicht />
     <footer className="bg-midnight-blue border-t border-luxury-gold/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="py-8 border-b border-luxury-gold/20">
@@ -206,5 +209,6 @@ export default function Footer() {
         </div>
       </div>
     </footer>
+    </>
   );
 }

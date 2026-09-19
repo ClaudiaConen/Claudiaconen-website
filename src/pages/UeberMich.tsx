@@ -125,6 +125,22 @@ export default function UeberMich() {
               Dieses kleine Mädchen steckt heute noch in mir.
             </p>
 
+            {/* Claudias eigene Vorgabe vom 19.09.2026, 06:01: Es darf nirgends
+                nach Mitleid aussehen, und sie stellt sich nicht als Opfer dar.
+                Ihre Formulierung: "Es war eine Entscheidung, der Vergangenheit
+                nicht die Macht zu geben, mich zu zerstoeren, und stattdessen das
+                Beste daraus zu entwickeln, weil es meine Berufung ist."
+                Bewusst NICHT geschrieben: "Ich bin kein Opfer." Wer das
+                ausspricht, ruft den Gedanken erst auf. Handlungsfaehigkeit zeigt
+                man, indem man die Entscheidung benennt, nicht ihr Gegenteil. */}
+            <div className="mt-8 border-l-4 border-luxury-gold pl-6">
+              <p className="font-inter text-lg leading-relaxed text-midnight-blue/85">
+                Irgendwann war es eine Entscheidung. Der Vergangenheit nicht die Macht zu geben,
+                mich zu zerstören — sondern das Beste daraus zu entwickeln. Daraus ist
+                meine Berufung geworden.
+              </p>
+            </div>
+
             <div className="mt-10 overflow-hidden rounded-lg bg-midnight-blue">
               <div className="relative w-full" style={{ paddingTop: '56.25%' }}>
                 <iframe

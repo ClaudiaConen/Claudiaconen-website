@@ -497,7 +497,6 @@ export default function Events() {
       <SEO
         title="Events & Veranstaltungen"
         description="Zoom-Calls, Workshops, Meetups und Vorträge – Entdecke kommende Events im Kalender."
-        canonical="/events"
       />
       <Navigation />
       <div className="min-h-screen pt-24 pb-16 relative" style={{ background: 'linear-gradient(180deg, #0A1628 0%, #1A2B4C 200px, #0A1628 500px)' }}>

@@ -96,6 +96,13 @@ const INHALT: ZielgruppenInhalt = {
     },
   ],
 
+  nichtFuer: [
+    'Sie brauchen ein IHK-Zertifikat. Mehrere Anbieter vergeben eines, ich nicht. Im Vorgespräch nenne ich Ihnen die Adressen.',
+    'Sie wollen den Beruf ausprobieren, ohne vor Menschen zu sprechen. Hier wird ab dem ersten Tag laut gesprochen.',
+    'Sie erwarten eine feste Zahl von Aufträgen danach. Die hängt von Ihrer Region und Ihrer Sichtbarkeit ab — eine Zahl zu nennen, die ich nicht kenne, wäre ein Versprechen ohne Deckung.',
+    'Fremde Lebensgeschichten interessieren Sie nicht wirklich. Das ist der einzige Teil, den ich nicht beibringen kann.',
+  ],
+
   fragen: [
     {
       frage: 'Bekomme ich ein Zertifikat?',

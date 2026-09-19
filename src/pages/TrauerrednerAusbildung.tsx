@@ -88,6 +88,13 @@ const INHALT: ZielgruppenInhalt = {
     },
   ],
 
+  nichtFuer: [
+    'Ihr eigener Verlust ist noch frisch. Dann wird jede Feier zur eigenen. Das hilft niemandem, Ihnen am wenigsten.',
+    'Sie suchen ein ruhiges Nebeneinkommen. Die Arbeit ist emotional fordernd, und die Termine kommen mit drei bis sieben Tagen Vorlauf.',
+    'Sie möchten Vorlagen, die sich anpassen lassen. Es gibt sie, und sie sind der Grund, warum Angehörige hinterher sagen, es habe nicht gepasst.',
+    'Sie wollen nicht über sich selbst sprechen. Der Umgang mit dem, was die Arbeit mit einem macht, ist hier Teil der Ausbildung und nicht optional.',
+  ],
+
   fragen: [
     {
       frage: 'Ich habe selbst jemanden verloren. Spricht das gegen mich?',

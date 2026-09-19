@@ -89,6 +89,13 @@ const INHALT: ZielgruppenInhalt = {
     },
   ],
 
+  nichtFuer: [
+    'Sie rechnen mit einem vollen Kalender. Die Saison liegt zwischen Mai und September, vor allem samstags — das sind etwa zweiundzwanzig mögliche Termine im Jahr.',
+    'Sie möchten nur schreiben. Der Tag selbst ist Handwerk: Technik, Wetter, Ablauf, Menschen, die weinen.',
+    'Sie halten Paargespräche für Formsache. Genau dort entsteht der Unterschied zwischen einer Rede, die passt, und einer, die auf jedes Paar passen würde.',
+    'Sie brauchen das Einkommen sofort. Trauungen werden neun bis achtzehn Monate im Voraus gebucht.',
+  ],
+
   fragen: [
     {
       frage: 'Was verdient man als Hochzeitsrednerin?',

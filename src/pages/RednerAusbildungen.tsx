@@ -167,6 +167,12 @@ const INHALT: ZielgruppenInhalt = {
     },
   ],
 
+  nichtFuer: [
+    'Sie erwarten einen fertigen Vortrag zum Mitnehmen. Sie bringen Ihren eigenen mit und arbeiten daran.',
+    'Sie möchten zuhören statt sprechen. An diesem Tag steht jede und jeder mehrfach vorn.',
+    'Sie wollen nicht aufgenommen werden. Die Aufnahme ist der Teil, an dem die meisten am meisten lernen — ohne sie fehlt der halbe Tag.',
+  ],
+
   fragen: [
     {
       frage: 'Braucht man eine Ausbildung, um Speaker zu werden?',

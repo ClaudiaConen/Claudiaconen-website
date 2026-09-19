@@ -93,6 +93,13 @@ const INHALT: ZielgruppenInhalt = {
     },
   ],
 
+  nichtFuer: [
+    'Sie suchen einen Titel oder ein Zertifikat. Ich vergebe keins, und bei diesem Beruf gibt es auch keins, das jemand verlangen würde.',
+    'Sie wollen schnell viel verdienen. Die ersten Honorare liegen im Markt zwischen 500 und 2.000 Euro, und bis dahin dauert es.',
+    'Sie möchten einen fertigen Vortrag kaufen. Ich schreibe Ihnen keinen — Sie schreiben ihn, ich arbeite daran mit.',
+    'Ihr Thema soll unangetastet bleiben. Genau daran arbeiten wir zuerst, und das ist der unbequemste Teil.',
+  ],
+
   fragen: [
     {
       frage: 'Braucht man eine Ausbildung, um Keynote Speaker zu sein?',

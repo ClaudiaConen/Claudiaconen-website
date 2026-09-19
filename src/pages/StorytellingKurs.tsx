@@ -70,6 +70,12 @@ const INHALT: ZielgruppenInhalt = {
     },
   ],
 
+  nichtFuer: [
+    'Sie wollen Geschichten erfinden, die gut klingen. Wir arbeiten ausschließlich mit Erlebtem — alles andere fliegt irgendwann auf, meistens bei jemandem, der dabei war.',
+    'Sie möchten Privates nicht preisgeben. Das müssen Sie auch nicht, aber ganz ohne Nähe entsteht keine Geschichte. Die Grenze legen wir vorher gemeinsam fest.',
+    'Sie suchen Vorlagen zum Ausfüllen. Die gibt es hier nicht; Sie bringen Ihr eigenes Material mit.',
+  ],
+
   fragen: [
     {
       frage: 'Ich habe nichts Spannendes erlebt.',

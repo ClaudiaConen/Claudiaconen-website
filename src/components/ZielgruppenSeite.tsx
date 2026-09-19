@@ -78,6 +78,11 @@ export type ZielgruppenInhalt = {
   belegeVorspann?: string;
   /** Platzhalter fuer Fotos, die noch fehlen. Jeder sagt, was dorthin gehoert. */
   bilder?: { bereich: string; motiv: string }[];
+  /** "Nicht fuer dich, wenn ..." - Claudias eigene Gliederung aus
+   *  ihrem Produktdokument, Teil C2. Ein Angebot, das jemanden
+   *  wegschickt, wirkt wie eine Einschaetzung statt wie Werbung. */
+  nichtFuer?: string[];
+  nichtFuerTitel?: string;
 };
 
 
@@ -306,7 +311,7 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
                 {inhalt.belege.map((b) => (
                   <div
                     key={b.aussage}
-                    className="border border-pearl-white/15 bg-white/[0.04] px-6 py-6"
+                    className="glas px-6 py-6"
                   >
                     <p className="font-montserrat text-3xl font-bold text-luxury-gold">{b.zahl}</p>
                     <p className="mt-2 font-inter text-base leading-relaxed text-pearl-white/80">
@@ -404,6 +409,36 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
           </div>
         </section>
 
+        {/* 4b. Fuer wen das nicht ist */}
+        {inhalt.nichtFuer && inhalt.nichtFuer.length > 0 && (
+          <section className="bg-warm py-16 sm:py-20" aria-labelledby="nichtfuer">
+            <div className="mx-auto max-w-3xl px-6">
+              <h2
+                id="nichtfuer"
+                className="font-montserrat text-2xl font-bold text-midnight-blue sm:text-3xl"
+              >
+                {inhalt.nichtFuerTitel ?? 'Nicht für Sie, wenn'}
+              </h2>
+              <ul className="mt-7 flex flex-col gap-4">
+                {inhalt.nichtFuer.map((n) => (
+                  <li key={n.slice(0, 26)} className="flex gap-3">
+                    <span aria-hidden="true" className="mt-1 text-dark-gold">
+                      &mdash;
+                    </span>
+                    <span className="font-inter text-base leading-relaxed text-midnight-blue/75">
+                      {n}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-7 font-inter text-sm leading-relaxed text-midnight-blue/55">
+                Das steht hier, weil es stimmt. Wenn einer dieser Punkte auf Sie zutrifft, sagen
+                Sie es im Vorgespräch — dann sparen wir uns beide die Zeit.
+              </p>
+            </div>
+          </section>
+        )}
+
         {/* 5. Häufige Fragen */}
         <section className="bg-warm py-16 sm:py-24" aria-labelledby="fragen">
           <div className="mx-auto max-w-3xl px-6">
@@ -420,7 +455,7 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
               {inhalt.fragen.map((f) => (
                 <div
                   key={f.frage}
-                  className="flex flex-col border border-midnight-blue/10 bg-white p-6 transition-shadow hover:shadow-lg"
+                  className="glas-hell glas-heben flex flex-col p-6"
                 >
                   <dt className="font-montserrat text-base font-semibold leading-snug text-midnight-blue">
                     {f.frage}
@@ -451,7 +486,7 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
                   <Link
                     key={w.ziel}
                     to={w.ziel}
-                    className="group flex flex-col border border-midnight-blue/10 bg-white p-6 transition-all hover:border-luxury-gold hover:shadow-lg"
+                    className="glas-hell glas-heben group flex flex-col p-6"
                   >
                     <p className="font-montserrat text-base font-semibold text-midnight-blue">
                       {w.titel}

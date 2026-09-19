@@ -68,6 +68,12 @@ const INHALT: ZielgruppenInhalt = {
     },
   ],
 
+  nichtFuer: [
+    'Sie wollen einen Satz, den ich Ihnen schreibe. Ein Satz von mir klingt nach mir, und Ihr Gegenüber hört das.',
+    'Sie möchten alle Ihre Angebote in einem Satz unterbringen. Das geht nicht, und der Versuch ist der häufigste Grund, warum Pitches nicht sitzen.',
+    'Sie erwarten, dass es nach einem Tag sitzt. Der Satz entsteht an einem halben Tag; bis er sitzt, braucht er zehn bis zwanzig echte Situationen.',
+  ],
+
   fragen: [
     {
       frage: 'Ist ein Elevator Pitch nicht längst abgenutzt?',

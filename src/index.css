@@ -1713,3 +1713,86 @@ html, body { cursor: auto; }
     opacity: 0.25;
   }
 }
+
+/* ---------------------------------------------------------------
+   Glas (Glassmorphism) - Claudia am 19.09.2026 ausdruecklich gewuenscht.
+   Nur auf dunklem Grund verwenden. Auf hellem Grund wird daraus ein
+   grauer Fleck; dort stattdessen .glas-hell.
+   --------------------------------------------------------------- */
+.glas {
+  position: relative;
+  background: rgba(255, 254, 249, 0.055);
+  border: 1px solid rgba(218, 165, 32, 0.22);
+  box-shadow:
+    0 1px 0 0 rgba(255, 254, 249, 0.07) inset,
+    0 18px 50px -24px rgba(0, 0, 0, 0.6);
+}
+
+/* Der Lichtsaum an der Oberkante. Apple setzt ihn auf jede Glasflaeche:
+   echtes Glas hat eine Kante, die Licht faengt. Ohne ihn wirkt die
+   Flaeche wie ein halbdurchsichtiges Rechteck. */
+.glas::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(247, 231, 206, 0.5) 22%,
+    rgba(247, 231, 206, 0.5) 78%,
+    transparent
+  );
+  pointer-events: none;
+}
+
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .glas {
+    background: rgba(255, 254, 249, 0.045);
+    -webkit-backdrop-filter: blur(16px) saturate(1.3);
+    backdrop-filter: blur(16px) saturate(1.3);
+  }
+}
+
+/* Auf hellem Grund: kein Weichzeichner, nur Tiefe und Goldkante. */
+.glas-hell {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(218, 165, 32, 0.26);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.9) inset,
+    0 14px 40px -22px rgba(26, 43, 76, 0.34);
+}
+
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .glas-hell {
+    background: rgba(255, 255, 255, 0.6);
+    -webkit-backdrop-filter: blur(14px) saturate(1.15);
+    backdrop-filter: blur(14px) saturate(1.15);
+  }
+}
+
+/* Das Anheben bei Maus darueber. Steht bewusst hier und nicht als
+   hover:shadow-lg im Markup: .glas-hell setzt box-shadow in derselben
+   Datei und wuerde eine Hilfsklasse ueberschreiben. */
+.glas-heben {
+  transition:
+    transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.32s ease;
+}
+
+.glas-heben:hover {
+  transform: translateY(-3px);
+  border-color: rgba(218, 165, 32, 0.5);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.9) inset,
+    0 22px 52px -20px rgba(26, 43, 76, 0.42);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glas-heben,
+  .glas-heben:hover {
+    transform: none;
+    transition: border-color 0.2s ease;
+  }
+}

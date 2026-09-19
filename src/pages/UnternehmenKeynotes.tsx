@@ -169,6 +169,12 @@ const INHALT: ZielgruppenInhalt = {
     },
   ],
 
+  nichtFuer: [
+    'Sie brauchen eine Schulung für ein bestimmtes Werkzeug. Dann empfehle ich Ihnen jemanden — ich arbeite an Kommunikation, nicht an Software.',
+    'Es soll nach der Veranstaltung erledigt sein. Ein Tag verändert, wie gesprochen wird, nicht die Struktur, die das Schweigen erzeugt hat.',
+    'Die eigentliche Lage darf nicht angesprochen werden. Wenn ich im Vorgespräch nicht erfahre, was wirklich los ist, halte ich einen freundlichen Vortrag — und der wirkt nicht.',
+  ],
+
   fragen: [
     {
       frage: 'Ist das ein KI-Training?',

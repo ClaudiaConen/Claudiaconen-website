@@ -166,7 +166,7 @@ export default function ThemenCarousel() {
                 <Link
                   key={index}
                   to={card.link}
-                  className="flex-shrink-0 w-[160px] sm:w-[200px] lg:w-[220px] group"
+                  className="flex-shrink-0 w-[200px] sm:w-[240px] lg:w-[270px] group"
                   onPointerEnter={(e) => {
                     if (e.pointerType === 'mouse') setVideoKarte(index);
                   }}
@@ -176,10 +176,13 @@ export default function ThemenCarousel() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.2 }}
-                    className="relative rounded-xl overflow-hidden"
-                    style={{ aspectRatio: '9/16' }}
+                    className="relative flex flex-col overflow-hidden rounded-xl border border-luxury-gold/25 transition-colors group-hover:border-luxury-gold/60"
+                    style={{ background: 'linear-gradient(180deg, #0F1F3A 0%, #0A1628 100%)' }}
                   >
-                    <div className="absolute inset-0">
+                    {/* Bildfenster im Format der Bilder selbst. Vorher lagen
+                        Querbilder (640x360) in hohen Karten - davon blieben
+                        rechnerisch 32 Prozent der Breite sichtbar. */}
+                    <div className="relative w-full overflow-hidden" style={{ aspectRatio: '16/9' }}>
                       {card.hoverVideo ? (
                         <div className="absolute inset-0 overflow-hidden bg-black">
                           {/* Zuerst nur das Bild. Das Video entsteht erst,
@@ -216,19 +219,24 @@ export default function ThemenCarousel() {
                           </div>
                         </div>
                       )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/25 to-transparent" />
                     </div>
 
-                    <div className="relative h-full flex flex-col justify-end p-2 sm:p-3 lg:p-4 z-10">
-                      <p className="text-white/80 text-[8px] sm:text-[9px] lg:text-[10px] font-semibold tracking-wider mb-1">
-                        CLAUDIA CONEN
-                      </p>
-                      <h3 className="font-montserrat font-bold text-[10px] sm:text-xs lg:text-sm text-white mb-0.5 sm:mb-1 leading-tight whitespace-pre-line">
+                    <div className="flex flex-col p-3 lg:p-4">
+                      {/* Groesser als vorher. Die Schrift stand bisher auf dem
+                          Bild und musste klein bleiben; jetzt hat sie eine
+                          eigene Flaeche. "CLAUDIA CONEN" auf jeder Karte ist
+                          entfallen - auf ihrer eigenen Seite sagt das nichts. */}
+                      <h3 className="font-montserrat text-[13px] font-bold leading-tight text-white lg:text-[15px]">
                         {card.title}
                       </h3>
-                      <p className="text-white/90 text-[8px] sm:text-[9px] lg:text-[10px] leading-snug whitespace-pre-line line-clamp-3">
+                      <p className="mt-1.5 whitespace-pre-line text-[11px] leading-snug text-white/65 line-clamp-3 lg:text-xs">
                         {card.subtitle}
                       </p>
+                      <span className="mt-3 inline-flex items-center gap-1 font-montserrat text-[11px] font-semibold text-luxury-gold">
+                        Ansehen
+                        <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">&rarr;</span>
+                      </span>
                     </div>
 
                     <div className="absolute inset-0 border-2 border-white/0 group-hover:border-white/30 rounded-xl transition-all duration-300" />

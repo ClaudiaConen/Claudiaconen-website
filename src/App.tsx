@@ -1,6 +1,5 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import BetaBanner from './components/BetaBanner';
 const Home = lazy(() => import('./pages/Home'));
 const ClaudiaAIBeta = lazy(() => import('./pages/ClaudiaAIBeta'));
 const Newsletter = lazy(() => import('./pages/Newsletter'));
@@ -163,7 +162,6 @@ function App() {
       <Router>
         <ScrollToTop />
         <CustomCursor />
-        <BetaBanner />
         <Suspense fallback={<div style={{ minHeight: '60vh' }} aria-busy="true" />}>
       <Routes>
           <Route path="/" element={<Home />} />

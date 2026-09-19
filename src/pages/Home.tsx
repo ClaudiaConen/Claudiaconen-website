@@ -2,7 +2,6 @@ import Navigation from '../components/Navigation';
 import Hero from '../components/Hero';
 import SituationsBand from '../components/SituationsBand';
 import Tueren from '../components/Tueren';
-import HinweisRednerin from '../components/HinweisRednerin';
 import LogoBand from '../components/LogoBand';
 import MissionSection from '../components/MissionSection';
 import ThemenCarousel from '../components/ThemenCarousel';
@@ -42,7 +41,6 @@ export default function Home() {
         <Hero />
         <SituationsBand />
         <Tueren />
-        <HinweisRednerin />
         <LogoBand />
         <ThemenCarousel />
         <ServiceCards />

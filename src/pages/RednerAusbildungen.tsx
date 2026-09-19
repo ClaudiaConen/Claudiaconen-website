@@ -16,6 +16,7 @@ import ZielgruppenSeite, { ZielgruppenInhalt } from '../components/ZielgruppenSe
 const INHALT: ZielgruppenInhalt = {
   pfad: '/redner-ausbildungen',
   wer: 'Speaker & freie Redner',
+  hinweisRednerin: true,
   frage: 'Wie bleibt deine Botschaft im Kopf, wenn du längst aufgehört hast zu sprechen?',
   vorspann:
     'Eine gute Rede reicht nicht, wenn Story, Persönlichkeit und Performance keinen bleibenden Eindruck hinterlassen.',

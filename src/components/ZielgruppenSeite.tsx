@@ -3,6 +3,7 @@ import Navigation from './Navigation';
 import Footer from './Footer';
 import SEO from './SEO';
 import Stimmwelle from './Stimmwelle';
+import HinweisRednerin from './HinweisRednerin';
 
 /**
  * Gemeinsames Geruest fuer die vier Zielgruppen-Seiten hinter den Tueren.
@@ -61,6 +62,11 @@ export type ZielgruppenInhalt = {
   /** Verwandte Seiten. Stehen VOR dem letzten Schritt, damit sie niemanden
    *  ablenken, der schon auf dem Weg zum Knopf ist. */
   weitere?: { titel: string; text: string; ziel: string }[];
+  /** Das schmale Band zur Dachseite "Freie Rednerin". Steht bewusst NUR
+   *  hinter Tuer 2 und nicht auf der Startseite: Ein Unternehmen, das eine
+   *  Keynote sucht, soll Trauerfeier und Trauung nicht im Schaufenster
+   *  sehen. Claudias Entscheidung vom 19.09.2026. */
+  hinweisRednerin?: boolean;
 };
 
 
@@ -287,6 +293,8 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
             </dl>
           </div>
         </section>
+
+        {inhalt.hinweisRednerin && <HinweisRednerin />}
 
         {/* 5b. Passt dazu */}
         {inhalt.weitere && inhalt.weitere.length > 0 && (

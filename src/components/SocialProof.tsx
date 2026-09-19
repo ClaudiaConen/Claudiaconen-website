@@ -105,12 +105,12 @@ export default function SocialProof() {
                       className="w-full h-full object-cover"
                     />
                   ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-royal-navy/50 to-midnight-blue/50 flex items-center justify-center">
-                      <Play className="w-12 h-12 text-luxury-gold/50" />
+                    <div className="w-full h-full bg-gradient-to-br from-[#F7F3EB] via-[#F2E8D5] to-[#E8DCC4] flex items-center justify-center">
+                      <Play className="w-12 h-12 text-dark-gold/60" />
                     </div>
                   )}
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-100 group-hover:opacity-90 transition-opacity" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/5 to-transparent opacity-100 group-hover:opacity-60 transition-opacity" />
 
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="w-16 h-16 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center transform group-hover:scale-110 transition-transform shadow-xl">

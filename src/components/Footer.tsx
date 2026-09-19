@@ -88,7 +88,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-pearl-white/70 mb-4 leading-relaxed">
-              35 Jahre Expertise in Persönlichkeitsentwicklung und Storytelling.
+              37 Jahre Expertise in Persönlichkeitsentwicklung und Storytelling.
               Voice-to-Brain™ - Die Methode für unverwechselbare Wirkung.
             </p>
             <p className="text-pearl-white/70 mb-4 leading-relaxed">

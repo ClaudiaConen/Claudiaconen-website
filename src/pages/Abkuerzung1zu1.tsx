@@ -55,7 +55,7 @@ export default function Abkuerzung1zu1() {
     { title: 'Rede & Keynote', desc: 'Von der Idee bis zur Bühne', icon: Megaphone },
     { title: 'Elevator Pitch', desc: 'Dein Satz, der im Kopf bleibt', icon: TrendingUp },
     { title: 'Stimme & Wirkung', desc: 'Dein stärkstes Marketing-Instrument', icon: Mic },
-    { title: '35 Jahre Praxiserfahrung', desc: 'Wissen, das in keinem Kurs steht', icon: Award }
+    { title: '37 Jahre Praxiserfahrung', desc: 'Wissen, das in keinem Kurs steht', icon: Award }
   ];
 
   const targetGroups = [
@@ -69,7 +69,7 @@ export default function Abkuerzung1zu1() {
   const processSteps = [
     'Buchung nur im Dezember 2025',
     '12 Monate Zeit für deinen Termin',
-    'Thema frei wählbar (24 Türen + 35 Jahre Praxis)',
+    'Thema frei wählbar (24 Türen + 37 Jahre Praxis)',
     'Persönlicher Zoom-Call',
     'Terminbuchung per Link nach dem Kauf'
   ];
@@ -212,7 +212,7 @@ export default function Abkuerzung1zu1() {
                 Dein Thema. Meine volle Aufmerksamkeit.
               </h2>
               <p className="text-lg text-[#666666] max-w-3xl mx-auto">
-                Du wählst dein Thema frei – aus allen 24 Adventskalender-Türen PLUS 35 Jahren Praxiserfahrung.
+                Du wählst dein Thema frei – aus allen 24 Adventskalender-Türen PLUS 37 Jahren Praxiserfahrung.
               </p>
             </motion.div>
 

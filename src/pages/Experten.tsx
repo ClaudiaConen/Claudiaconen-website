@@ -78,7 +78,7 @@ export default function Experten() {
               </span>
             </h1>
             <p className="text-lg sm:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed px-2">
-              Mein Wissen basiert auf 35+ Jahren eigener Erfahrung und der Expertise dieser außergewöhnlichen Menschen.
+              Mein Wissen basiert auf 37 Jahren eigener Erfahrung und der Expertise dieser außergewöhnlichen Menschen.
               Diese Experten empfehle ich mit gutem Gewissen weiter.
             </p>
           </motion.div>
@@ -148,7 +148,7 @@ export default function Experten() {
                 </h2>
                 <p className="text-gray-700 leading-relaxed mb-4">
                   Die Wissensbibliothek auf dieser Website wurde mit KI-Unterstützung erstellt. Sie kombiniert meine
-                  <strong> 35+ Jahre praktische Erfahrung</strong> mit über <strong>2.100 Kunden</strong> und dem Wissen
+                  <strong> 37 Jahre praktische Erfahrung</strong> mit über <strong>2.100 Kunden</strong> und dem Wissen
                   dieser herausragenden Experten.
                 </p>
                 <p className="text-gray-700 leading-relaxed mb-4">

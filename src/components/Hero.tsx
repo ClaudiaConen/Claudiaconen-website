@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Lightbulb, MessageCircle, BookOpen, Mic2, Eye, Sparkles, Heart, Calendar, Star } from 'lucide-react';
+import { Lightbulb, MessageCircle, BookOpen, Mic2, Eye, Sparkles, Heart, Calendar } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import AudioButton from './AudioButton';
 import VideoButton from './VideoButton';
@@ -203,20 +203,6 @@ export default function Hero() {
                 );
               })}
             </div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 bg-royal-navy/50 backdrop-blur-sm rounded-full border border-luxury-gold/20"
-            >
-              <div className="flex gap-1">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={16} className="fill-[#FFD700] text-[#FFD700]" />
-                ))}
-              </div>
-              <span className="text-pearl-white/90 text-sm">Über 3000 Transformationen</span>
-            </motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}

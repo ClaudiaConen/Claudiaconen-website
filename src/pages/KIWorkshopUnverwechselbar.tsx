@@ -50,7 +50,7 @@ const coaches = [
     role: 'Performance Coach · Die Umsatzstimme',
     badge: 'Performance · Stimme',
     initials: 'CC',
-    bio: 'Damit du wirkst, bevor das System überhaupt anfängt zu denken. 35 Jahre Erfahrung, 2.100+ Kunden, Voice-to-Brain®-Methodik. Co-Autorin „Brainset".',
+    bio: 'Damit du wirkst, bevor das System überhaupt anfängt zu denken. 37 Jahre Erfahrung, 2.100+ Kunden, Voice-to-Brain®-Methodik. Co-Autorin „Brainset".',
     specialty: 'Positionierung · Storytelling · 180-ms-Wirkung',
     ki: false,
   },

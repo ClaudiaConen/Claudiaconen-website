@@ -171,7 +171,7 @@ export default function UeberMich() {
 
             <div className="mt-6 flex flex-col gap-5 font-inter text-lg leading-relaxed text-midnight-blue/80">
               <p>
-                Aus dem Zuhören wurde ein Beruf. Über fünfunddreißig Jahre Arbeit mit Stimme,
+                Aus dem Zuhören wurde ein Beruf. Über siebenunddreißig Jahre Arbeit mit Stimme,
                 Bühne und Menschen. Kein Studium hat das hervorgebracht, sondern Übung, jeden Tag,
                 seit dem roten Buch.
               </p>

@@ -36,7 +36,7 @@ export default function ClaudiaAIBeta() {
 
   const benefits = [
     {
-      title: '35 Jahre Expertise',
+      title: '37 Jahre Expertise',
       description: 'Claudias gesammeltes Wissen in einem KI-Coach',
     },
     {
@@ -168,7 +168,7 @@ export default function ClaudiaAIBeta() {
             transition={{ delay: 0.2 }}
             className="text-xl text-pearl-white/80 max-w-3xl mx-auto"
           >
-            35 Jahre Expertise × KI-Power = Deine neue Dimension
+            37 Jahre Expertise × KI-Power = Deine neue Dimension
           </motion.p>
         </div>
 
@@ -233,11 +233,11 @@ export default function ClaudiaAIBeta() {
                 </motion.div>
                 <div>
                   <h4 className="font-bold text-lg">Claudia Conen</h4>
-                  <p className="text-pearl-white/60 text-sm">35 Jahre Expertise • 300+ Kunden • 5★</p>
+                  <p className="text-pearl-white/60 text-sm">37 Jahre Expertise</p>
                 </div>
               </div>
               <p className="text-pearl-white/80 italic">
-                "ClaudiaAI bringt meine 35 Jahre Erfahrung in Persönlichkeitsentwicklung und Storytelling
+                "ClaudiaAI bringt meine 37 Jahre Erfahrung in Persönlichkeitsentwicklung und Storytelling
                 zu dir - wann immer du sie brauchst. 24/7 verfügbar, immer persönlich."
               </p>
             </div>

@@ -93,7 +93,7 @@ export default function SEO({
           name: article.author || 'Claudia Conen',
           url: 'https://claudiaconen.com/ueber-mich',
           jobTitle: 'Speaker, Coach & Mentor',
-          description: 'Die Umsatzstimme - 35 Jahre Expertise in emotionaler Wirkungskraft'
+          description: 'Die Umsatzstimme - 37 Jahre Expertise in emotionaler Wirkungskraft'
         },
         publisher: {
           '@type': 'Organization',
@@ -156,7 +156,7 @@ export default function SEO({
           '@type': 'Person',
           name: 'Claudia Conen',
           jobTitle: 'Speaker, Coach & Mentor',
-          description: 'Die Umsatzstimme - 35 Jahre Expertise in Persönlichkeitsentwicklung und Storytelling'
+          description: 'Die Umsatzstimme - 37 Jahre Expertise in Persönlichkeitsentwicklung und Storytelling'
         }
       };
     }

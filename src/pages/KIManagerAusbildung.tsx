@@ -770,7 +770,7 @@ export default function KIManagerAusbildung() {
                   <div className="space-y-3">
                     <div className="flex items-start gap-3">
                       <Award className="text-luxury-gold flex-shrink-0 mt-1" size={24} />
-                      <span>Performance-Coach seit über 35 Jahren</span>
+                      <span>Performance-Coach seit über 37 Jahren</span>
                     </div>
                     <div className="flex items-start gap-3">
                       <Brain className="text-luxury-gold flex-shrink-0 mt-1" size={24} />

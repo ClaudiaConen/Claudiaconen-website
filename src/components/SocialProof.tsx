@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Star, Play } from 'lucide-react';
+import { Play } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
 import VideoModal from './VideoModal';
@@ -132,29 +132,6 @@ export default function SocialProof() {
           </div>
         )}
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.2 }}
-          className="text-center mt-10 md:mt-16 p-6 md:p-8 bg-gradient-to-r from-royal-navy/50 to-midnight-blue/50 rounded-2xl border border-luxury-gold/20"
-        >
-          <div className="flex justify-center gap-1 mb-4">
-            {[...Array(5)].map((_, i) => (
-              <Star key={i} size={32} className="fill-[#FFD700] text-[#FFD700]" />
-            ))}
-          </div>
-          <p className="text-xl md:text-2xl font-semibold mb-2">5.0 von 5 Sternen</p>
-          <p className="text-pearl-white/70 mb-6">Basierend auf 300+ Kundenbewertungen</p>
-          <a
-            href="https://www.provenexpert.com/de-de/conen/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block px-8 py-3 bg-gradient-to-r from-[#B8860B] via-[#D4AF37] to-[#FFD700] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300"
-          >
-            Alle Bewertungen auf ProvenExpert ansehen
-          </a>
-        </motion.div>
       </div>
 
       {selectedVideo && (

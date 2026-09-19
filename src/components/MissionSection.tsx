@@ -124,7 +124,7 @@ export default function MissionSection() {
 
               <p>
                 Seit über{' '}
-                <span className="font-bold text-luxury-gold">35 Jahren</span>{' '}
+                <span className="font-bold text-luxury-gold">37 Jahren</span>{' '}
                 beschäftige ich mich mit Sprechwirkungsforschung, Neurowissenschaft, Rhetorik, Storytelling, emotionalem Verkauf.
               </p>
 

@@ -149,7 +149,7 @@ export default function ClaudiaAI() {
             <div className="text-center mb-12">
               <p className="text-xl font-semibold">
                 <span className="bg-gradient-to-r from-[#E6B800] via-[#FFA500] to-[#FF8C00] bg-clip-text text-transparent">
-                  35 Jahre Expertise × KI-Power
+                  37 Jahre Expertise × KI-Power
                 </span>
               </p>
             </div>

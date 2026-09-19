@@ -128,7 +128,7 @@ const FRAGEN = [
   {
     frage: 'Gibt es bei Ihnen ein IHK-Zertifikat?',
     antwort:
-      'Nein. Mehrere Anbieter im Markt vergeben eines, ich nicht. Was Sie bei mir bekommen, ist Arbeit an Stimme, Wirkung und Handwerk aus fünfunddreißig Jahren Praxis. Wenn ein Zertifikat für Sie entscheidend ist, sagen Sie es im Gespräch — dann nenne ich Ihnen die Anbieter, die eines ausstellen.',
+      'Nein. Mehrere Anbieter im Markt vergeben eines, ich nicht. Was Sie bei mir bekommen, ist Arbeit an Stimme, Wirkung und Handwerk aus siebenunddreißig Jahren Praxis. Wenn ein Zertifikat für Sie entscheidend ist, sagen Sie es im Gespräch — dann nenne ich Ihnen die Anbieter, die eines ausstellen.',
   },
   {
     frage: 'Was kostet die Ausbildung?',

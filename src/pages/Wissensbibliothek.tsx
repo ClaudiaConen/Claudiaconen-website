@@ -145,7 +145,7 @@ export default function Wissensbibliothek() {
     <div className="min-h-screen bg-gradient-to-b from-pearl-white to-white">
       <SEO
         title="Wissensbibliothek | Themen zu Kommunikation & Wirkung"
-        description="Die komplette Wissensbibliothek zu Kommunikation & Wirkung. Fundiertes Wissen basierend auf 35 Jahren Erfahrung und über 2.100 Kunden."
+        description="Die komplette Wissensbibliothek zu Kommunikation & Wirkung. Fundiertes Wissen basierend auf 37 Jahren Erfahrung und über 2.100 Kunden."
         path="/wissensbibliothek"
       />
       <Navigation />
@@ -168,7 +168,7 @@ export default function Wissensbibliothek() {
                     Diese Wissensbibliothek wurde mit KI-Unterstützung erstellt
                   </h3>
                   <p className="text-sm text-gray-700 leading-relaxed">
-                    Sie basiert auf <strong>35+ Jahren Expertise</strong> und dem Wissen folgender Experten, von denen ich lernen durfte:{' '}
+                    Sie basiert auf <strong>37 Jahren Expertise</strong> und dem Wissen folgender Experten, von denen ich lernen durfte:{' '}
                     <a href="/experten" className="text-blue-700 font-semibold hover:underline">
                       Zur Expertenliste
                     </a>
@@ -193,7 +193,7 @@ export default function Wissensbibliothek() {
               <div className="flex flex-wrap justify-center gap-3 sm:gap-4 text-xs sm:text-sm text-gray-600 px-2">
                 <span className="flex items-center gap-1.5 sm:gap-2">
                   <BookOpen size={14} className="text-bright-gold flex-shrink-0" />
-                  <span className="whitespace-nowrap">35 Jahre Erfahrung</span>
+                  <span className="whitespace-nowrap">37 Jahre Erfahrung</span>
                 </span>
                 <span className="flex items-center gap-1.5 sm:gap-2">
                   <CheckCircle size={14} className="text-bright-gold flex-shrink-0" />

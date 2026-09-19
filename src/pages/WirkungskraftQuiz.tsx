@@ -21,9 +21,9 @@ const quizData: Question[] = [
   {
     level: 1,
     question: "Wie schnell entsteht der erste Eindruck, den Menschen von dir haben?",
-    options: ["In etwa 3 Sekunden", "In nur 180 Millisekunden – schneller als ein Wimpernschlag", "Nach ungefähr einer Minute", "Erst nach 5 Sekunden bewusster Wahrnehmung"],
+    options: ["In etwa 3 Sekunden", "In ein- bis zweihundert Millisekunden – schneller als ein Wimpernschlag", "Nach ungefähr einer Minute", "Erst nach 5 Sekunden bewusster Wahrnehmung"],
     correct: 1,
-    insight: "Unglaublich aber wahr: In nur 180 Millisekunden entsteht die erste unbewusste Emotion über dich – noch bevor der Verstand überhaupt einschaltet!"
+    insight: "Emotionale Reize verarbeitet das Gehirn in etwa ein- bis zweihundert Millisekunden – bevor der Verstand nachkommt. Was daraus wird, ob Vertrauen oder Zweifel, entscheidet sich langsamer."
   },
   {
     level: 1,
@@ -48,10 +48,10 @@ const quizData: Question[] = [
   },
   {
     level: 1,
-    question: "Wie viel schneller verarbeitet unser Gehirn Bilder und Geschichten im Vergleich zu reinen Daten?",
-    options: ["Etwa 60.000-mal schneller – Geschichten sind Gehirnnahrung", "Ungefähr 100-mal schneller", "Rund 1.000-mal schneller", "Nur etwa 10-mal schneller"],
+    question: "Warum bleibt eine Geschichte besser hängen als eine Aufzählung?",
+    options: ["Weil sie Bilder erzeugt, an die man sich erinnert – und einen Grund, weiterzuhören", "Weil Geschichten immer kürzer sind", "Weil Zahlen grundsätzlich unwichtig sind", "Weil das Publikum Aufzählungen nicht versteht"],
     correct: 0,
-    insight: "Bilder und Geschichten werden 60.000-mal schneller verarbeitet als Text und Fakten! Deshalb ist Storytelling so kraftvoll."
+    insight: "Eine Aufzählung muss man behalten, eine Geschichte erlebt man mit. Deshalb sind Zahlen nicht wertlos – sie brauchen nur eine Szene, in der sie vorkommen."
   },
   {
     level: 1,
@@ -86,7 +86,7 @@ const quizData: Question[] = [
     question: "In welcher Reihenfolge reagieren wir neurologisch auf neue Reize?",
     options: ["Verstand → Gefühl → Emotion", "Emotion (unbewusst) → Gefühl → Verstand", "Gefühl → Verstand → Emotion", "Verstand → Emotion → Gefühl"],
     correct: 1,
-    insight: "Erst Emotion (180ms), dann Gefühl, dann Verstand! Deshalb sind erste Eindrücke so mächtig – und so schwer zu korrigieren."
+    insight: "Erst spüren, dann einordnen, dann begründen. Deshalb sind erste Eindrücke so hartnäckig – der Verstand kommt später und sucht Gründe für das, was schon da ist."
   },
   {
     level: 2,
@@ -210,18 +210,18 @@ const quizData: Question[] = [
 ];
 
 const flashcards: Flashcard[] = [
-  { front: "Wie schnell entsteht der erste Eindruck?", back: "180 Millisekunden – schneller als ein Wimpernschlag, noch bevor der Verstand einschaltet." },
+  { front: "Wie schnell entsteht der erste Eindruck?", back: "Emotionale Reize verarbeitet das Gehirn in etwa ein- bis zweihundert Millisekunden. Was daraus wird, entscheidet sich langsamer." },
   { front: "Wie viel Prozent unserer Entscheidungen sind unbewusst?", back: "90% – Das Unterbewusstsein steuert den Großteil unseres Verhaltens." },
   { front: "Was macht deine Stimme einzigartig?", back: "Sie existiert weltweit wahrscheinlich nur ein einziges Mal – wie ein akustischer Fingerabdruck." },
   { front: "Was ist das 'Gelbe Ente'-Prinzip?", back: "Unverwechselbarkeit hebt dich aus der Masse heraus – sei einzigartig, nicht perfekt." },
-  { front: "Wie viel schneller verarbeitet das Gehirn Bilder vs. Daten?", back: "60.000-mal schneller! Deshalb ist Storytelling so kraftvoll." },
+  { front: "Warum bleibt eine Geschichte besser hängen als eine Aufzählung?", back: "Sie erzeugt Bilder und gibt einen Grund weiterzuhören. Zahlen brauchen eine Szene, in der sie vorkommen." },
   { front: "Was kann KI nicht authentisch übertragen?", back: "Echte Emotionen über Spiegelneuronen – KI kann simulieren, aber nicht fühlen." },
   { front: "Was bedeutet 'Authentizität'?", back: "Kongruenz: Stimme, Verhalten, Körpersprache und Worte stimmen überein." },
   { front: "Wer prägte die '7 A' der Neurokommunikation?", back: "Neurowissenschaftler Karsten Brocke." },
   { front: "Warum wird der Mensch zur 'Mogelpackung'?", back: "Wenn sein KI-Agent perfekt agiert, er selbst aber anders auftritt – Erwartungsenttäuschung." },
   { front: "Wann ist jeder Ort deine Bühne?", back: "Sobald du den Mund aufmachst – egal ob Telefon, Video, Netzwerkevent oder Meeting." },
   { front: "Was ist die Kernfrage vor jeder Präsentation?", back: "Welches Problem löse ich? Welche Abkürzung bin ich für den anderen?" },
-  { front: "In welcher Reihenfolge reagieren wir neurologisch?", back: "1. Emotion (180ms) → 2. Gefühl → 3. Verstand" },
+  { front: "In welcher Reihenfolge reagieren wir?", back: "1. Spüren → 2. Einordnen → 3. Begründen" },
   { front: "Was entscheidet, wem wir vertrauen?", back: "Die übertragene Emotion und Kongruenz von Worten, Stimme und Körpersprache." },
   { front: "Wer sagte: 'Worte sind die mächtigste Droge'?", back: "Rudyard Kipling – aber es ist die Emotion, die das Wort trägt, die wirklich wirkt." },
   { front: "Was ist die Wahrheit über Verkaufen?", back: "Du kannst niemandem etwas verkaufen – du kannst nur zum Kaufen anregen." },

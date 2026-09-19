@@ -335,7 +335,7 @@ export default function WorkbookGenerator() {
                         <div className="grid grid-cols-2 gap-3">
                           <div className="flex items-center text-[10px] text-white/85">
                             <span className="text-bright-gold font-bold mr-2 text-[9px]">01</span>
-                            <span contentEditable suppressContentEditableWarning>Warum 180 Millisekunden über alles entscheiden</span>
+                            <span contentEditable suppressContentEditableWarning>Warum der erste Eindruck vor dem ersten Satz entsteht</span>
                           </div>
                           <div className="flex items-center text-[10px] text-white/85">
                             <span className="text-bright-gold font-bold mr-2 text-[9px]">02</span>
@@ -451,18 +451,18 @@ export default function WorkbookGenerator() {
                   </div>
                 </div>
 
-                {/* Page 3: 180 Milliseconds */}
+                {/* Seite 3: Der erste Eindruck */}
                 <div className="workbook-page w-[210mm] min-h-[297mm] bg-cream shadow-2xl relative" style={{fontSize: '11px', lineHeight: 1.6, color: '#2C3E50'}}>
                   <div className="flex justify-between px-8 py-2 bg-[#F7F3EB] text-[8px] text-gray-500 uppercase tracking-wider">
-                    <div contentEditable suppressContentEditableWarning>Die Wissenschaft der Wirkung</div>
+                    <div contentEditable suppressContentEditableWarning>Wie Wirkung entsteht</div>
                     <div>03</div>
                   </div>
                   <div className="p-8">
                     <h1 className="font-serif text-3xl text-midnight-blue mb-1 font-normal" contentEditable suppressContentEditableWarning>
-                      180 Millisekunden
+                      Der erste Eindruck
                     </h1>
                     <p className="text-xs text-bright-gold italic mb-4" contentEditable suppressContentEditableWarning>
-                      Der Augenblick, der alles entscheidet
+                      Er entsteht, bevor der Verstand nachkommt
                     </p>
 
                     <div className="bg-gradient-to-r from-midnight-blue to-royal-navy text-white p-4 rounded-lg my-3">
@@ -473,23 +473,23 @@ export default function WorkbookGenerator() {
                     </div>
 
                     <p className="text-xs leading-relaxed mb-3 text-midnight-blue" contentEditable suppressContentEditableWarning>
-                      Bevor du deinen ersten Satz beendet hast, hat dein Gegenüber bereits entschieden:
-                      <span className="bg-gradient-to-b from-transparent from-60% to-bright-gold/30 to-60% px-0.5">Vertrauen oder Skepsis</span>. Das ist messbare Wissenschaft.
+                      Bevor du deinen ersten Satz beendet hast, hat dein Gegenüber schon etwas
+                      <span className="bg-gradient-to-b from-transparent from-60% to-bright-gold/30 to-60% px-0.5">gespürt</span>. Entschieden ist damit noch nichts — aber die Richtung steht.
                     </p>
 
                     <div className="grid grid-cols-2 gap-3 my-4">
                       <div className="bg-midnight-blue text-white p-4 rounded-lg text-center">
-                        <div className="text-4xl font-bold text-bright-gold" contentEditable suppressContentEditableWarning>180</div>
+                        <div className="text-4xl font-bold text-bright-gold" contentEditable suppressContentEditableWarning>100–200</div>
                         <div className="text-[10px] text-bright-gold mb-1.5" contentEditable suppressContentEditableWarning>Millisekunden</div>
                         <p className="text-[9px] leading-tight opacity-90" contentEditable suppressContentEditableWarning>
-                          In dieser Zeit entsteht die erste Emotion – noch bevor der Verstand eingreift.
+                          So lange braucht das Gehirn für einen emotionalen Reiz. Was daraus wird, entscheidet sich langsamer.
                         </p>
                       </div>
                       <div className="bg-midnight-blue text-white p-4 rounded-lg text-center">
-                        <div className="text-4xl font-bold text-bright-gold" contentEditable suppressContentEditableWarning>60.000×</div>
-                        <div className="text-[10px] text-bright-gold mb-1.5" contentEditable suppressContentEditableWarning>schneller</div>
+                        <div className="text-4xl font-bold text-bright-gold" contentEditable suppressContentEditableWarning>Zuerst</div>
+                        <div className="text-[10px] text-bright-gold mb-1.5" contentEditable suppressContentEditableWarning>das Gefühl</div>
                         <p className="text-[9px] leading-tight opacity-90" contentEditable suppressContentEditableWarning>
-                          verarbeitet das Gehirn Bilder und Emotionen als Zahlen und Fakten.
+                          Die Begründung liefert der Verstand hinterher — für das, was längst entschieden ist.
                         </p>
                       </div>
                     </div>
@@ -693,7 +693,7 @@ export default function WorkbookGenerator() {
 
                     <div className="space-y-2.5">
                       {[
-                        { title: 'Die ersten Momente meistern', text: '180 Millisekunden entscheiden. Nutze sie für ein Gefühl, nicht für Fakten.' },
+                        { title: 'Die ersten Momente meistern', text: 'Der erste Eindruck entsteht vor dem ersten Argument. Nutze ihn für ein Gefühl, nicht für Fakten.' },
                         { title: 'Dich selbst kennen und lieben', text: 'Deine Persönlichkeit ist einzigartig. Du bist dein wichtigstes Instrument.' },
                         { title: 'Deine Geschichte erzählen', text: 'Warum tust du, was du tust? Die Wendepunkte machen dich interessant.' },
                         { title: 'Den Nutzen klar benennen', text: 'Welches Problem löst du? Sprich über den Unterschied, den du machst.' },

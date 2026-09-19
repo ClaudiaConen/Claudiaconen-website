@@ -100,9 +100,16 @@ async function main() {
       if (pfad === '/') {
         startseite = html;
       } else {
-        const ordner = path.join(DIST, pfad.replace(/^\//, ''));
-        fs.mkdirSync(ordner, { recursive: true });
-        fs.writeFileSync(path.join(ordner, 'index.html'), html, 'utf-8');
+        // WICHTIG: als <adresse>.html ablegen, NICHT als <adresse>/index.html.
+        // Gemessen am 19.09.2026: Bei einem Ordner mit index.html antwortet
+        // Netlify auf /speaker-ausbildung mit einer 301-Umleitung auf
+        // /speaker-ausbildung/ - erst der zweite Abruf liefert die Seite.
+        // Das kostet einen Umweg, es passt nicht zu den Adressen im
+        // Seitenverzeichnis und nicht zu der kanonischen Adresse in der Seite
+        // selbst. Bei einer flachen Datei entfaellt die Umleitung.
+        const datei = path.join(DIST, pfad.replace(/^\//, '') + '.html');
+        fs.mkdirSync(path.dirname(datei), { recursive: true });
+        fs.writeFileSync(datei, html, 'utf-8');
       }
       fertig++;
       console.log(`  + ${pfad.padEnd(42)} ${String(textLaenge).padStart(5)} Zeichen Text`);

@@ -13,7 +13,7 @@ export default function Footer() {
       links: [
         { label: 'Über mich', href: '/ueber-mich' },
         { label: 'Methode', href: '#solution' },
-        { label: 'Erfolgsgeschichten', href: '#social-proof' },
+        { label: 'Menschen, mit denen ich gearbeitet habe', href: '#social-proof' },
       ],
     },
     offers: {

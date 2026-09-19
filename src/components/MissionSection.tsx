@@ -19,7 +19,7 @@ export default function MissionSection() {
         >
           <h2 className="font-montserrat font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight text-midnight-blue mb-6">
             Wir machen deine{' '}
-            <span className="bg-gradient-to-r from-[#B8860B] via-[#D4AF37] to-[#FFD700] bg-clip-text text-transparent">
+            <span className="text-dark-gold">
               Wirkungskraft
             </span>
             <br />
@@ -75,7 +75,7 @@ export default function MissionSection() {
 
               <p>
                 Perfektion kann bald jeder. Mit KI kostet es nichts. Aber die unsichtbare Brücke – vom Ohr ins Herz? Die Bedürfnisse deines Gesprächspartners wahrnehmen, das ist{' '}
-                <span className="font-semibold bg-gradient-to-r from-[#B8860B] via-[#D4AF37] to-[#FFD700] bg-clip-text text-transparent">
+                <span className="font-semibold text-dark-gold">
                   Goldwert
                 </span>{' '}
                 in einer Zeit, wo Menschlichkeit zur seltenen Währung wird.

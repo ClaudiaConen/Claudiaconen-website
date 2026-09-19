@@ -26,7 +26,7 @@ export default function Newsletter() {
 
           <h2 id="newsletter-headline" className="text-3xl md:text-4xl font-montserrat font-bold text-pearl-white mb-4">
             Bleib auf dem{' '}
-            <span className="bg-gradient-to-r from-[#B8860B] via-[#D4AF37] to-[#FFD700] bg-clip-text text-transparent">
+            <span className="text-bright-gold">
               neuesten Stand
             </span>
           </h2>

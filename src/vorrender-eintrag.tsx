@@ -31,6 +31,7 @@ export const SEITEN: { pfad: string; laden: () => Promise<any> }[] = [
   { pfad: '/elevator-pitch-kurs', laden: () => import('./pages/ElevatorPitchKurs') },
   { pfad: '/storytelling-kurs', laden: () => import('./pages/StorytellingKurs') },
   { pfad: '/redner-ausbildungen', laden: () => import('./pages/RednerAusbildungen') },
+  { pfad: '/unternehmen-keynotes', laden: () => import('./pages/UnternehmenKeynotes') },
 
   { pfad: '/wissen/was-kostet-ein-keynote-speaker', laden: () => import('./pages/ArtikelKeynotePreis') },
   { pfad: '/wissen/keynote-speaker-finden', laden: () => import('./pages/ArtikelSpeakerFinden') },

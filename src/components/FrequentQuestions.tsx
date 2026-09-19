@@ -67,7 +67,7 @@ export default function FrequentQuestions() {
           className="text-center mb-12"
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-midnight-blue mb-4">
-            <span className="bg-gradient-to-r from-[#D4AF37] to-[#FFD700] bg-clip-text text-transparent">
+            <span className="text-dark-gold">
               Häufige Fragen
             </span>
           </h2>

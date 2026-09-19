@@ -62,7 +62,7 @@ export default function About() {
               </div>
               <h2 id="about-claudia" className="font-montserrat font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-4 md:mb-6">
                 <span className="text-white">Wer ist </span>
-                <span className="bg-gradient-to-r from-[#B8860B] via-[#D4AF37] to-[#FFD700] bg-clip-text text-transparent">
+                <span className="text-bright-gold">
                   Claudia Conen
                 </span>
               </h2>
@@ -90,7 +90,7 @@ export default function About() {
               <p className="text-white">
                 In einer Zeit, in der Technologie rasanter wächst als je zuvor, bleibt eines konstant: Der Mensch ist – und bleibt – einzigartig und unverwechselbar auf der Welt.
               </p>
-              <p className="font-semibold bg-gradient-to-r from-[#B8860B] via-[#D4AF37] to-[#FFD700] bg-clip-text text-transparent">
+              <p className="font-semibold text-bright-gold">
                 Perfektion klickt. Persönlichkeit bleibt.
               </p>
             </article>

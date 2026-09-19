@@ -5,7 +5,6 @@ import Tueren from '../components/Tueren';
 import LogoBand from '../components/LogoBand';
 import MissionSection from '../components/MissionSection';
 import ThemenCarousel from '../components/ThemenCarousel';
-import ServiceCards from '../components/ServiceCards';
 import HeroBrainSection from '../components/HeroBrainSection';
 import Timeline from '../components/Timeline';
 import About from '../components/About';
@@ -42,7 +41,6 @@ export default function Home() {
         <Tueren />
         <LogoBand />
         <ThemenCarousel />
-        <ServiceCards />
         <HeroBrainSection />
         <MissionSection />
         <Timeline />

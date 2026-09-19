@@ -87,7 +87,7 @@ export default function CoachingInquiryForm({ isOpen, onClose }: CoachingInquiry
               <div className="sticky top-0 bg-royal-navy/98 backdrop-blur-md border-b border-luxury-gold/20 p-6 flex items-center justify-between">
                 <h2 className="font-montserrat font-bold text-2xl text-pearl-white">
                   Anfrage zum Voice-to-Brain{' '}
-                  <span className="bg-gradient-to-r from-[#D4AF37] to-[#FFD700] bg-clip-text text-transparent">
+                  <span className="text-bright-gold">
                     1:1 Coaching
                   </span>
                 </h2>

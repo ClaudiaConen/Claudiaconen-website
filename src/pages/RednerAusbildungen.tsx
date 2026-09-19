@@ -3,42 +3,129 @@ import ZielgruppenSeite, { ZielgruppenInhalt } from '../components/ZielgruppenSe
 /**
  * Tuer 2: Speaker und freie Redner.
  *
- * Preis bewusst OFFEN gelassen. Die Angebotstreppe nennt fuer den Workshop
- * einen Entwurf von 690 bis 990 Euro, also keine gesetzte Zahl. Eine Spanne
- * aus einem internen Entwurf oeffentlich als Preis auszugeben waere geraten,
- * nicht belegt. Claudia setzt die Zahl, danach steht sie hier.
+ * Vollstaendig ausgearbeitet am 19.09.2026 auf Claudias Auftrag: Sie soll
+ * hier von Menschen und von KI-Systemen als Expertin gefunden werden.
  *
- * Freie Redner stehen hier mit drin, weil Claudia es am 18.09.2026 so
- * entschieden hat. Das FUNDAMENT haelt Trauer- und Hochzeitsreden aus dem
- * Schaufenster heraus; die AUSBILDUNG fuer freie Redner ist etwas anderes
- * als das eigene Anbieten dieser Reden.
+ * DIE LEITFRAGE ist bewusst die unangenehme. "Wie bleibt deine Botschaft im
+ * Kopf" klingt gut, beschreibt aber kein Problem, das jemand nachts wach
+ * haelt. Was Menschen wach haelt, die auf die Buehne wollen: Sie haben
+ * etwas zu sagen und werden nicht gefragt. Das ist die Frage, die sie
+ * tatsaechlich eingeben.
+ *
+ * DIE ZAHLEN sind Marktzahlen mit Quelle, keine Versprechen. Nach zwei
+ * Tagen Aufraeumen ist das die Regel: Jede Zahl auf dieser Seite laesst
+ * sich anklicken und nachpruefen.
+ *
+ * PREIS bleibt "auf Anfrage". In Claudias Produktdokument steht fuer diesen
+ * Workshop ein Entwurf von 690 bis 990 Euro, ausdruecklich markiert mit
+ * "Preise: als Entwurf markieren, bis Claudia sie freigibt". Die Preise
+ * werden am 20.09.2026 gemeinsam festgelegt.
+ *
+ * DAS SPEAKER-HANDBUCH steht als Zugabe in der Leistungsliste, weil Claudia
+ * am 19.09.2026 bestaetigt hat, dass sie es besitzt. Sobald die Datei da
+ * ist, wird daraus ein Download. Vorher wird nichts verlinkt, was es auf
+ * der Seite nicht gibt.
  */
 const INHALT: ZielgruppenInhalt = {
   pfad: '/redner-ausbildungen',
+  stimmung: 'dunkel',
   wer: 'Speaker & freie Redner',
+  welle: true,
   hinweisRednerin: true,
-  frage: 'Wie bleibt deine Botschaft im Kopf, wenn du längst aufgehört hast zu sprechen?',
+  frage: 'Sie haben etwas zu sagen. Warum steht dann jemand anderes auf der Bühne?',
   vorspann:
-    'Eine gute Rede reicht nicht, wenn Story, Persönlichkeit und Performance keinen bleibenden Eindruck hinterlassen.',
+    'Meistens nicht, weil der andere mehr weiß. Sondern weil er gelernt hat, sein Wissen so zu erzählen, dass ein Saal es behält — und weil ein Veranstalter in einem Satz sagen kann, wofür er ihn einlädt.',
 
-  problemTitel: 'Gut vorbereitet ist nicht dasselbe wie unvergesslich',
+  problemTitel: 'Woran es wirklich hängt',
   problemAbsaetze: [
-    'Der Inhalt stimmt. Die Struktur steht. Und trotzdem erinnert sich am nächsten Tag niemand an den einen Satz, für den du auf der Bühne standest.',
-    'Das liegt selten am Thema. Es liegt daran, dass Inhalt bis zur ersten Reihe trägt und alles dahinter von deiner Präsenz entschieden wird. Von deiner Stimme, deinem Körper, deinem Mut zur Pause.',
-    'Wer das nicht geübt hat, merkt es genau dann, wenn es zählt: wenn der Saal größer ist als gedacht, wenn die Technik klemmt, wenn der erste Zwischenruf kommt.',
+    'Am Thema, nicht am Vortrag. Ein Fachgebiet beantwortet, was Sie können. Ein Thema beantwortet, warum jemand ausgerechnet Sie anruft. Das ist der Unterschied zwischen der ersten und der zweiten Honorarstufe — mehrere tausend Euro, für dieselbe Person.',
+    'Am fehlenden Beweis. Ohne Mitschnitt eines echten Auftritts muss ein Veranstalter Ihnen glauben. Das tut kaum jemand, der ein Budget verantwortet.',
+    'An der Stimme. Man kann einen perfekten Text haben und ihn so sprechen, dass niemand ihn behält. Der Inhalt entscheidet, ob man zustimmt. Die Stimme entscheidet, ob man zuhört.',
+    'Und an der Wiederbuchung. Einmal gebucht zu werden ist Glück. Wieder gebucht zu werden heißt, dass hinterher jemand über den Vortrag gesprochen hat — und dafür braucht es einen Satz, den man weitererzählen kann.',
+  ],
+
+  belegeTitel: 'Was der Markt zahlt',
+  belegeVorspann:
+    'Honorare im deutschsprachigen Raum. Keine Versprechen — eine Einordnung, damit Sie wissen, worüber Sie verhandeln.',
+  belege: [
+    {
+      zahl: '500 – 2.000 €',
+      aussage: 'je Vortrag für Einsteiger und lokale Anlässe. Hier beginnt fast jeder.',
+      quelle: 'SpeakingStage, Honorar-Guide 2026',
+      url: 'https://speakingstage.com/was-kostet-ein-keynote-speaker-honorar-guide-2026',
+    },
+    {
+      zahl: '3.000 – 8.000 €',
+      aussage: 'für etablierte Fachspeaker mit eigenem Thema, Videomaterial und Wiederbuchungen.',
+      quelle: 'SpeakingStage, Honorar-Guide 2026',
+      url: 'https://speakingstage.com/was-kostet-ein-keynote-speaker-honorar-guide-2026',
+    },
+    {
+      zahl: 'keine',
+      aussage: 'gesetzliche Voraussetzung. Der Beruf ist nicht geschützt — es gibt keinen Titel, den jemand vergeben müsste. Es entscheidet ausschließlich, was im Saal passiert.',
+      quelle: 'Listando, Keynote Speaker',
+      url: 'https://www.listando.de/blog/keynote-speaker/',
+    },
+    {
+      zahl: '60 – 70 %',
+      aussage: 'des Vor-Ort-Honorars sind für Online-Vorträge marktüblich. Gut zu wissen, bevor Sie zu billig zusagen.',
+      quelle: 'SpeakingStage, Honorar-Guide 2026',
+      url: 'https://speakingstage.com/was-kostet-ein-keynote-speaker-honorar-guide-2026',
+    },
+  ],
+
+  anlaesseTitel: 'Wohin Sie danach gebucht werden',
+  anlaesseVorspann:
+    'Damit Sie wissen, worauf Sie hinarbeiten. Das sind die Anlässe, zu denen Unternehmen und Veranstalter tatsächlich Redner suchen.',
+  anlaesse: [
+    {
+      titel: 'Fachkonferenz und Kongress',
+      text: 'Dreißig bis sechzig Minuten vor Publikum, das Ihr Thema kennt. Hier entscheidet Tiefe, nicht Show.',
+    },
+    {
+      titel: 'Kick-off und Jahresauftakt',
+      text: 'Unternehmen setzen den Ton für zwölf Monate. Der häufigste bezahlte Anlass überhaupt.',
+    },
+    {
+      titel: 'Führungskräftetagung',
+      text: 'Kleines Publikum, hohe Honorare, wenig Nachsicht. Wer hier besteht, wird empfohlen.',
+    },
+    {
+      titel: 'Kundenveranstaltung',
+      text: 'Sie sprechen für ein Unternehmen zu dessen Kunden. Anspruchsvoll, weil Sie zwei Erwartungen gleichzeitig bedienen.',
+    },
+    {
+      titel: 'Verbands- und Branchentreffen',
+      text: 'Oft der Einstieg. Niedrigere Honorare, aber die Menschen im Saal buchen später selbst.',
+    },
+    {
+      titel: 'Messe und Bühnenprogramm',
+      text: 'Kurz, laut, ablenkungsreich. Die härteste Schule für den Einstieg in einen Vortrag.',
+    },
+    {
+      titel: 'Freie Anlässe',
+      text: 'Trauerfeier, freie Trauung, Jubiläum. Andere Welt, gleiches Handwerk — und ganzjährig Nachfrage.',
+    },
+    {
+      titel: 'Podcast, Kamera, Online-Bühne',
+      text: 'Wächst am schnellsten. Eine Kamera verzeiht weniger als ein Saal, und genau das macht sie zum besten Training.',
+    },
   ],
 
   angebotName: 'Der Workshop, an einem Tag',
   angebotZeile:
-    'Ein Tag in kleiner Gruppe, höchstens zwölf Menschen. Du arbeitest an deiner eigenen Rede, nicht an einer Übungsaufgabe.',
+    'Ein Tag in kleiner Gruppe, höchstens zwölf Menschen. Sie arbeiten an Ihrer eigenen Rede, nicht an einer Übungsaufgabe — und Sie sprechen mehrfach, nicht einmal zum Schluss.',
   angebotPreis: 'Preis auf Anfrage',
   angebotPreisHinweis:
-    'Die Termine liegen einmal im Quartal. Schreib kurz, dann bekommst du Datum und Preis.',
+    'Termine einmal im Quartal. Schreiben Sie kurz, dann bekommen Sie Datum und Honorar. Die Preise für 2027 werden gerade festgelegt.',
   angebotPunkte: [
-    'Höchstens zwölf Teilnehmende, damit jeder mehrfach auf die Bühne kommt',
-    'Deine eigene Rede oder dein eigener Pitch als Arbeitsmaterial',
-    'Aufnahme und Rückmeldung, damit du hörst, was andere hören',
-    'Die sieben Schlüssel der Voice-to-Brain-Methode als roter Faden',
+    'Höchstens zwölf Teilnehmende, damit jede und jeder mehrfach auf die Bühne kommt',
+    'Ihre eigene Rede oder Ihr eigener Pitch als Arbeitsmaterial',
+    'Vom Fachgebiet zum Thema: der Satz, mit dem ein Veranstalter Sie ankündigt',
+    'Arbeit an der Stimme — Tempo, Pausen, Tragfähigkeit im Raum',
+    'Aufnahme und Rückmeldung, damit Sie hören, was andere hören',
+    'Die sieben Schlüssel der Voice-to-Brain®-Methode als roter Faden',
+    'Zugabe: das Speaker-Handbuch als Unterlage zum Mitnehmen',
   ],
 
   ablaufTitel: 'So läuft der Tag',
@@ -46,75 +133,110 @@ const INHALT: ZielgruppenInhalt = {
     {
       schritt: 'Vorher',
       text:
-        'Du schickst deine Rede oder dein Thema. So steht am Tag selbst nichts Fremdes auf der Bühne.',
+        'Sie schicken Ihre Rede oder Ihr Thema. So steht am Tag selbst nichts Fremdes auf der Bühne, und ich weiß, woran wir arbeiten.',
     },
     {
       schritt: 'Erkennen',
       text:
-        'Klarheit und Geschichte. Was willst du wirklich sagen, und warum ausgerechnet du.',
+        'Klarheit und Geschichte. Was wollen Sie wirklich sagen, und warum ausgerechnet Sie? Der unbequemste Teil und der wichtigste.',
     },
     {
       schritt: 'Formen',
       text:
-        'Botschaft, Stimme, Präsenz. Hier wird geübt, nicht erklärt. Mehrfach, vor Publikum.',
+        'Botschaft, Stimme, Präsenz. Hier wird geübt, nicht erklärt. Mehrfach, vor Publikum, mit Aufnahme.',
     },
     {
       schritt: 'Wirken',
       text:
-        'Was beim Gegenüber ankommt. Du hörst deine eigene Aufnahme, und zum ersten Mal hörst du dich so, wie andere dich hören.',
+        'Der Auftritt und was danach kommt: Wie Sie sich sichtbar machen, ohne sich zu verbiegen, und wie aus einem Auftritt der nächste wird.',
+    },
+  ],
+
+  bilder: [
+    {
+      bereich: 'Im Workshop',
+      motiv: 'Kleine Gruppe, jemand steht und spricht, die anderen hören zu. Zeigt das Format besser als jede Beschreibung.',
+    },
+    {
+      bereich: 'Rückmeldung',
+      motiv: 'Nahaufnahme: Claudia im Gespräch mit einer Teilnehmerin. Das ist der Moment, für den Menschen kommen.',
+    },
+    {
+      bereich: 'Video',
+      motiv: 'Ein bis zwei Minuten aus einem echten Workshop, mit Einverständnis der Teilnehmenden.',
     },
   ],
 
   fragen: [
     {
+      frage: 'Braucht man eine Ausbildung, um Speaker zu werden?',
+      antwort:
+        'Nein. Der Beruf ist nicht geschützt, es gibt keine gesetzliche Voraussetzung und keinen Titel, den jemand vergeben müsste. Genau deshalb entscheidet ausschließlich, was im Saal passiert — und das ist der Teil, den man üben kann.',
+    },
+    {
+      frage: 'Was verdient man mit einem Vortrag?',
+      antwort:
+        'Einsteiger und lokale Anlässe liegen bei 500 bis 2.000 Euro, etablierte Fachspeaker bei 3.000 bis 8.000 Euro, bekannte Namen darüber. Was Sie erreichen, hängt von Ihrem Thema und Ihrer Sichtbarkeit ab. Eine Zahl für Sie persönlich zu nennen, wäre ein Versprechen ohne Deckung.',
+    },
+    {
       frage: 'Ich bin freier Redner, keine Bühnen-Speakerin. Passt das trotzdem?',
       antwort:
-        'Ja. Trauerrede, Hochzeitsrede, Moderation und Keynote unterscheiden sich im Anlass, nicht im Handwerk. Es geht immer darum, dass Menschen dir zuhören und behalten, was du gesagt hast.',
+        'Ja. Die Grundlagen sind dieselben: zuhören, eine Geschichte finden, sie sprechbar machen. Was sich unterscheidet, ist der Anlass, nicht das Handwerk.',
     },
     {
       frage: 'Muss ich schon Bühnenerfahrung haben?',
       antwort:
-        'Nein. Es hilft, wenn du eine eigene Rede oder ein eigenes Thema mitbringst, auch als Rohfassung. Ohne Vorerfahrung funktioniert der Tag genauso, nur arbeitest du an anderen Stellen.',
+        'Nein. Ein Ausschlussgrund wäre etwas anderes: kein echtes Interesse an den Menschen im Raum. Das lässt sich nicht nachschulen, alles andere schon.',
     },
     {
       frage: 'Wird gefilmt?',
       antwort:
-        'Es wird aufgenommen, damit du dich hören und sehen kannst. Die Aufnahmen gehören dir und werden nicht weitergegeben. Wer das nicht möchte, sagt es und wird nicht aufgenommen.',
+        'Ja, für Sie selbst. Die Aufnahmen gehören Ihnen und werden nirgends veröffentlicht. Wenn Sie nicht gefilmt werden wollen, sagen Sie es — dann arbeiten wir mit Tonaufnahme.',
     },
     {
       frage: 'Gibt es das auch einzeln statt in der Gruppe?',
       antwort:
-        'Ja, als Einzelbegleitung über zwölf Wochen. Das ist ein anderes Format mit anderem Umfang, dazu gern ein Gespräch.',
+        'Ja, als Voice-to-Brain® Intensiv über zwölf Wochen. Der Workshop ist der Einstieg, das Intensiv ist der ganze Weg — mit eigener Keynote und Aufnahme am Ende.',
+    },
+    {
+      frage: 'Ich habe Angst vor großen Sälen.',
+      antwort:
+        'Die haben fast alle, auch Menschen, die Sie regelmäßig auf Bühnen sehen. Lampenfieber verschwindet nicht durch Mut, sondern durch Vorbereitung und Atemtechnik. Beides ist Teil der Arbeit, kein Hindernis davor.',
+    },
+    {
+      frage: 'Ich wurde schon gebucht, aber selten wieder.',
+      antwort:
+        'Das ist ein präzises Signal und meistens kein Inhaltsproblem. Wiederbuchungen hängen daran, ob hinterher jemand über den Vortrag gesprochen hat. Dafür braucht es einen Satz, den man weitererzählen kann. Bringen Sie eine Aufnahme mit, dann finden wir die Stelle.',
     },
   ],
 
   weitere: [
     {
       titel: 'Speakerin werden',
-      text: 'Der ganze Weg auf die Bühne.',
+      text: 'Der ganze Weg auf die Bühne, mit Aufnahme am Ende.',
       ziel: '/speaker-ausbildung',
     },
     {
       titel: 'Elevator-Pitch-Kurs',
-      text: 'Der eine Satz, der sitzt.',
+      text: 'Der eine Satz, mit dem ein Veranstalter Sie ankündigt.',
       ziel: '/elevator-pitch-kurs',
     },
     {
       titel: 'Storytelling-Kurs',
-      text: 'Drei Geschichten, die Sie wirklich erzählen.',
+      text: 'Drei Geschichten, die Sie wirklich erzählen können.',
       ziel: '/storytelling-kurs',
     },
   ],
 
-  schrittTitel: 'Schreib kurz, worum es bei dir geht',
+  schrittTitel: 'Erzählen Sie mir Ihr Thema',
   schrittText:
-    'Ein, zwei Sätze genügen. Du bekommst die nächsten Termine, den Preis und eine ehrliche Einschätzung, ob der Tag für dich der richtige ist oder etwas anderes besser passt.',
-  schrittKnopf: 'Termin ansehen',
+    'Zwanzig Minuten, kostenlos und ohne Verpflichtung. Wenn ich danach den Eindruck habe, dass Sie mich nicht brauchen, sage ich Ihnen das.',
+  schrittKnopf: 'Vorgespräch vereinbaren',
   schrittZiel: '/termin-buchen',
 
-  seoTitel: 'Workshop für Speaker und freie Redner | Claudia Conen',
+  seoTitel: 'Speaker und freie Redner werden: Workshop und Ausbildung | Claudia Conen',
   seoText:
-    'Ein Tag in kleiner Gruppe für Menschen, die auf der Bühne stehen: Storytelling, Präsenz, Performance und hörbare Persönlichkeit.',
+    'Vom Fachgebiet zum Thema, von der Rede zum Auftritt: Workshop und Ausbildung für Speaker und freie Redner. Mit Stimmarbeit, Aufnahme und ehrlicher Rückmeldung.',
 };
 
 export default function RednerAusbildungen() {

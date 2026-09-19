@@ -81,7 +81,7 @@ export default function Footer() {
                 style={{ filter: 'drop-shadow(0 0 8px rgba(212,175,55,0.4))' }}
               />
               <div>
-                <h3 className="text-2xl font-montserrat font-bold bg-gradient-to-r from-[#B8860B] via-[#D4AF37] to-[#FFD700] bg-clip-text text-transparent mb-2">
+                <h3 className="text-2xl font-montserrat font-bold text-bright-gold mb-2">
                   Claudia Conen
                 </h3>
                 <p className="text-pearl-white/60">Die Umsatzstimme</p>

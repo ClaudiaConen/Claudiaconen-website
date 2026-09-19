@@ -154,6 +154,7 @@ const AdminGapTextList = lazy(() => import('./pages/AdminGapTextList'));
 const AdminGapTextEdit = lazy(() => import('./pages/AdminGapTextEdit'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 import CustomCursor from './components/CustomCursor';
+import Umbauhinweis from './components/Umbauhinweis';
 import ScrollToTop from './components/ScrollToTop';
 
 function App() {
@@ -322,6 +323,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
       </Suspense>
+      <Umbauhinweis />
     </Router>
     </StudentAuthProvider>
   );

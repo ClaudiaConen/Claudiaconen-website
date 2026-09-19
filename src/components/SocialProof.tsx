@@ -59,7 +59,7 @@ export default function SocialProof() {
           className="text-center mb-10 md:mb-16"
         >
           <h2 id="testimonials-headline" className="font-montserrat font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-4 md:mb-6">
-            <span className="bg-gradient-to-r from-[#B8860B] via-[#D4AF37] to-[#FFD700] bg-clip-text text-transparent">
+            <span className="text-bright-gold">
               Echte Stimmen unserer Kunden –
             </span>
             <span className="text-white"> Echte Wirkung</span>

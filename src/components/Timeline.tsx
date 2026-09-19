@@ -90,7 +90,7 @@ export default function Timeline() {
           </div>
           <h2 id="timeline-headline" className="font-montserrat font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-4 md:mb-6">
             <span className="text-pearl-white">KI spart Zeit. Du schenkst Bedeutung - denn </span>
-            <span className="bg-gradient-to-r from-[#B8860B] via-[#D4AF37] to-[#FFD700] bg-clip-text text-transparent">Maschinen rechnen – Menschen berühren.</span>
+            <span className="text-bright-gold">Maschinen rechnen – Menschen berühren.</span>
           </h2>
         </motion.div>
 
@@ -239,13 +239,13 @@ export default function Timeline() {
           className="text-center mt-16 md:mt-32"
         >
           <p className="text-base md:text-xl text-pearl-white/80 mb-4 md:mb-6">
-            Bereit, diese 7 Schritte zu gehen?
+            Bereit, diese sieben Schritte zu gehen?
           </p>
           <a
             href="#offers"
             className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg"
           >
-            Starte deine Transformation
+            Sprich mit mir
           </a>
         </motion.div>
       </div>

@@ -13,9 +13,9 @@ export default function FinalCTA() {
           className="space-y-6 md:space-y-8"
         >
           <h2 className="font-montserrat font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
-            <span className="text-midnight-blue">Bereit für deine </span>
-            <span className="bg-gradient-to-r from-[#B8860B] via-[#D4AF37] to-[#FFD700] bg-clip-text text-transparent">
-              Transformation?
+            <span className="text-midnight-blue">Bereit, gehört zu </span>
+            <span className="text-dark-gold">
+              werden?
             </span>
           </h2>
 

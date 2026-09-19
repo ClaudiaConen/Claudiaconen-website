@@ -67,6 +67,17 @@ export type ZielgruppenInhalt = {
    *  Keynote sucht, soll Trauerfeier und Trauung nicht im Schaufenster
    *  sehen. Claudias Entscheidung vom 19.09.2026. */
   hinweisRednerin?: boolean;
+  /** "Wofuer buchen Unternehmen eine Rednerin" - die Frage, die Einkaeufer
+   *  wirklich eingeben. Jeder Eintrag ist eine zitierfaehige Einheit. */
+  anlaesse?: { titel: string; text: string }[];
+  anlaesseTitel?: string;
+  anlaesseVorspann?: string;
+  /** Zahlen MIT Quelle. Ohne Quelle kommt hier nichts hinein. */
+  belege?: { zahl: string; aussage: string; quelle: string; url: string }[];
+  belegeTitel?: string;
+  belegeVorspann?: string;
+  /** Platzhalter fuer Fotos, die noch fehlen. Jeder sagt, was dorthin gehoert. */
+  bilder?: { bereich: string; motiv: string }[];
 };
 
 
@@ -238,6 +249,129 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
           </div>
         </section>
 
+        {/* 3b. Wofuer gebucht wird */}
+        {inhalt.anlaesse && inhalt.anlaesse.length > 0 && (
+          <section className="bg-pearl-white py-16 sm:py-24" aria-labelledby="anlaesse">
+            <div className="mx-auto max-w-4xl px-6">
+              <h2
+                id="anlaesse"
+                className="font-montserrat text-2xl font-bold text-midnight-blue sm:text-3xl"
+              >
+                {inhalt.anlaesseTitel ?? 'Wofür Unternehmen eine Rednerin buchen'}
+              </h2>
+              {inhalt.anlaesseVorspann && (
+                <p className="mt-4 max-w-2xl font-inter text-lg leading-relaxed text-midnight-blue/70">
+                  {inhalt.anlaesseVorspann}
+                </p>
+              )}
+              <div className="mt-10 grid gap-5 sm:grid-cols-2">
+                {inhalt.anlaesse.map((a) => (
+                  <div
+                    key={a.titel}
+                    className="border-l-4 border-luxury-gold bg-warm px-6 py-5"
+                  >
+                    <h3 className="font-montserrat text-base font-semibold text-midnight-blue">
+                      {a.titel}
+                    </h3>
+                    <p className="mt-2 font-inter text-sm leading-relaxed text-midnight-blue/70">
+                      {a.text}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* 3c. Belegte Zahlen */}
+        {inhalt.belege && inhalt.belege.length > 0 && (
+          <section
+            className="py-16 sm:py-24"
+            style={{ background: 'linear-gradient(180deg, #0A1628 0%, #0F1F3A 55%, #0A1628 100%)' }}
+            aria-labelledby="belege"
+          >
+            <div className="mx-auto max-w-4xl px-6">
+              <h2
+                id="belege"
+                className="font-montserrat text-2xl font-bold text-pearl-white sm:text-3xl"
+              >
+                {inhalt.belegeTitel ?? 'Woran sich das messen lässt'}
+              </h2>
+              {inhalt.belegeVorspann && (
+                <p className="mt-4 max-w-2xl font-inter text-lg leading-relaxed text-pearl-white/70">
+                  {inhalt.belegeVorspann}
+                </p>
+              )}
+              <div className="mt-10 grid gap-5 sm:grid-cols-2">
+                {inhalt.belege.map((b) => (
+                  <div
+                    key={b.aussage}
+                    className="border border-pearl-white/15 bg-white/[0.04] px-6 py-6"
+                  >
+                    <p className="font-montserrat text-3xl font-bold text-luxury-gold">{b.zahl}</p>
+                    <p className="mt-2 font-inter text-base leading-relaxed text-pearl-white/80">
+                      {b.aussage}
+                    </p>
+                    <a
+                      href={b.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-3 inline-block font-inter text-xs text-pearl-white/45 underline-offset-4 hover:text-luxury-gold hover:underline"
+                    >
+                      Quelle: {b.quelle}
+                    </a>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* 3d. Bildplaetze. Claudias Vorgabe: immer Platzhalter lassen,
+            und jeder sagt, welches Foto dorthin gehoert. */}
+        {inhalt.bilder && inhalt.bilder.length > 0 && (
+          <section className="bg-warm py-16 sm:py-20" aria-label="Bildplätze">
+            <div className="mx-auto max-w-4xl px-6">
+              <div className="grid gap-5 sm:grid-cols-3">
+                {inhalt.bilder.map((b) => (
+                  <figure key={b.bereich} className="flex flex-col">
+                    <div
+                      className="relative flex aspect-[4/3] items-end overflow-hidden rounded-lg border border-midnight-blue/10"
+                      style={{
+                        background:
+                          'linear-gradient(135deg, #0F1F3A 0%, #16294A 55%, #1A2B4C 100%)',
+                      }}
+                    >
+                      <div
+                        aria-hidden="true"
+                        className="pointer-events-none absolute inset-0"
+                        style={{
+                          background:
+                            'radial-gradient(60% 70% at 20% 15%, rgba(218,165,32,0.20), transparent 70%)',
+                        }}
+                      />
+                      <div
+                        aria-hidden="true"
+                        className="pointer-events-none absolute inset-x-0 bottom-0 h-px"
+                        style={{ background: 'linear-gradient(90deg, #DAA520, #FFD700, #DAA520)' }}
+                      />
+                      <figcaption className="relative px-5 py-4">
+                        <p className="font-montserrat text-xs font-semibold uppercase tracking-[0.18em] text-luxury-gold">
+                          {b.bereich}
+                        </p>
+                        <p className="mt-2 font-inter text-xs leading-relaxed text-pearl-white/60">
+                          {b.motiv}
+                        </p>
+                      </figcaption>
+                    </div>
+                    <p className="mt-2 font-inter text-[11px] text-midnight-blue/40">Platzhalter</p>
+                  </figure>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* 4. Der Ablauf */}
         <section className="bg-pearl-white py-16 sm:py-24" aria-labelledby="ablauf">
           <div className="mx-auto max-w-3xl px-6">
@@ -279,13 +413,19 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
             >
               Häufige Fragen
             </h2>
-            <dl className="mt-8 flex flex-col gap-8">
+            {/* Pinnwand statt Liste. Die Antworten bleiben sichtbar im Text:
+                Eingeklappt waere es fuer Menschen bequemer, aber Claudia will
+                sie lesbar haben - fuer Suchmaschinen und fuer KI-Systeme. */}
+            <dl className="mt-10 grid gap-5 sm:grid-cols-2">
               {inhalt.fragen.map((f) => (
-                <div key={f.frage}>
-                  <dt className="font-montserrat text-lg font-semibold text-midnight-blue">
+                <div
+                  key={f.frage}
+                  className="flex flex-col border border-midnight-blue/10 bg-white p-6 transition-shadow hover:shadow-lg"
+                >
+                  <dt className="font-montserrat text-base font-semibold leading-snug text-midnight-blue">
                     {f.frage}
                   </dt>
-                  <dd className="mt-2 font-inter text-base leading-relaxed text-midnight-blue/75">
+                  <dd className="mt-3 font-inter text-sm leading-relaxed text-midnight-blue/75">
                     {f.antwort}
                   </dd>
                 </div>

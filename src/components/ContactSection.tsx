@@ -98,7 +98,7 @@ export default function ContactSection() {
             className="font-montserrat font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-4"
           >
             <span className="text-midnight-blue">Lass uns </span>
-            <span className="bg-gradient-to-r from-[#B8860B] via-[#D4AF37] to-[#FFD700] bg-clip-text text-transparent">
+            <span className="text-dark-gold">
               sprechen
             </span>
           </h2>

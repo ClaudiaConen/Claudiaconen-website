@@ -139,7 +139,7 @@ export default function ThemenCarousel() {
           <div>
             <h2 className="font-montserrat font-bold text-3xl sm:text-5xl md:text-6xl lg:text-7xl mb-3">
               <span className="text-midnight-blue">Entdecke deine </span>
-              <span className="bg-gradient-to-r from-[#B8860B] via-[#D4AF37] to-[#FFD700] bg-clip-text text-transparent">
+              <span className="text-dark-gold">
                 Möglichkeiten
               </span>
             </h2>

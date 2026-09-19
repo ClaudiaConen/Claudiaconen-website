@@ -74,7 +74,7 @@ export default function TestimonialsSection() {
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             Was unsere Kunden sagen
           </h2>
-          <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold bg-gradient-to-r from-[#B8860B] via-[#D4AF37] to-[#FFD700] bg-clip-text text-transparent max-w-4xl mx-auto leading-relaxed tracking-wide">
+          <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-dark-gold max-w-4xl mx-auto leading-relaxed tracking-wide">
             Echte Erfahrungen von Menschen, die ihre Stimme und Wirkung transformiert haben
           </h3>
         </div>

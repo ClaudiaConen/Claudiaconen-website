@@ -53,8 +53,9 @@ export default function UeberMich() {
               Ich höre, wie Menschen sprechen.
             </h1>
             <p className="mt-7 max-w-xl font-inter text-lg leading-relaxed text-midnight-blue/75">
-              Nicht was sie sagen. Wie. Das ist keine Fähigkeit, die ich mir ausgesucht habe. Sie
-              ist mir zugewachsen, in einem Alter, in dem andere Kinder Fahrradfahren lernen.
+              Das Wie ist mein Handwerk: Tempo, Pausen, der Moment, in dem eine Stimme fest wird
+              oder nachgibt. Das ist keine Fähigkeit, die ich mir ausgesucht habe. Sie ist mir
+              zugewachsen, in einem Alter, in dem andere Kinder Fahrradfahren lernen.
             </p>
             <p className="mt-4 max-w-xl font-inter text-lg leading-relaxed text-midnight-blue/75">
               Heute lebe ich davon. Auf Bühnen, in Unternehmen, mit Menschen, die etwas zu sagen

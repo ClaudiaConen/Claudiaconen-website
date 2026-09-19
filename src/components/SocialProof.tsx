@@ -60,19 +60,13 @@ export default function SocialProof() {
         >
           <h2 id="testimonials-headline" className="font-montserrat font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-4 md:mb-6">
             <span className="text-bright-gold">
-              Echte Stimmen unserer Kunden –
+              Menschen, mit denen ich
             </span>
-            <span className="text-white"> Echte Wirkung</span>
+            <span className="text-white"> gearbeitet habe</span>
           </h2>
-          <p className="text-base md:text-xl text-white/80 max-w-7xl mx-auto leading-relaxed text-justify">
-            Erfahrungen, Bewertungen und ehrliche Worte von Menschen, die Claudia Conen live erlebt haben – auf der Bühne, im Coaching, in Unternehmen oder bei freien Reden.
-            Hier finden Sie authentische Feedbacks, persönliche Erfahrungsberichte, Videostimmen, O-Töne und Textnachrichten, die zeigen, was Wirkung wirklich bedeutet.
-            <span className="block mt-3">
-              Ob als Speakerin, Coach oder freie Rednerin – jede Stimme erzählt eine eigene Geschichte über Vertrauen, Emotion, Persönlichkeit und Wirkungskraft.
-            </span>
-            <span className="block mt-3">
-              Diese echten Erfahrungen machen spürbar, was keine künstliche Intelligenz ersetzen kann: Menschliche Verbindung – vom Ohr über den Kopf direkt ins Herz.
-            </span>
+          <p className="text-base md:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
+            Keine ausgedachten Zitate. Menschen, die mit mir gearbeitet haben, und die
+            selbst erzählen, was sich verändert hat.
           </p>
         </motion.div>
 
@@ -97,7 +91,7 @@ export default function SocialProof() {
                 onClick={() => setSelectedVideo(testimonial.vimeo_url)}
                 className="group relative cursor-pointer"
               >
-                <div className="relative aspect-[9/16] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-luxury-gold/10 hover:border-luxury-gold/30">
+                <div className="relative aspect-[9/16] rounded-2xl overflow-hidden shadow-lg transition-all duration-300 border border-luxury-gold/30 hover:border-luxury-gold/70 hover:shadow-[0_18px_40px_-18px_rgba(218,165,32,0.45)]">
                   {testimonial.thumbnail_path ? (
                     <img
                       src={getThumbnailUrl(testimonial.thumbnail_path) || ''}
@@ -110,11 +104,18 @@ export default function SocialProof() {
                     </div>
                   )}
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/5 to-transparent opacity-100 group-hover:opacity-60 transition-opacity" />
+                  <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/60 via-black/25 to-transparent transition-opacity group-hover:opacity-80" />
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-x-0 bottom-0 h-px"
+                    style={{ background: 'linear-gradient(90deg, transparent, #DAA520, transparent)' }}
+                  />
 
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-16 h-16 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center transform group-hover:scale-110 transition-transform shadow-xl">
-                      <Play className="w-8 h-8 text-luxury-gold ml-1" />
+                  {/* Oben rechts statt mittig: der Knopf sass vorher genau
+                      auf dem Gesicht. Claudias Hinweis vom 19.09.2026. */}
+                  <div className="absolute right-2.5 top-2.5">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full border border-luxury-gold/40 bg-midnight-blue/70 backdrop-blur-sm transition-transform group-hover:scale-110">
+                      <Play className="ml-0.5 h-4 w-4 text-luxury-gold" />
                     </div>
                   </div>
 

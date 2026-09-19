@@ -213,5 +213,23 @@ export default function SEO({
     scriptTag.textContent = JSON.stringify(structuredData);
   }, [fullTitle, description, canonicalUrl, ogImage, ogType, allKeywordsString, title, articleTagsString, article?.publishedTime, article?.author, article?.readingTime, noindex]);
 
-  return null;
+  // Beim Vorrendern laeuft kein useEffect. Damit Titel, Beschreibung und
+  // kanonische Adresse auch dort ankommen, werden sie zusaetzlich als
+  // inertes JSON-Paket ausgegeben. Das Bauskript scripts/vorrendern.tsx
+  // macht daraus echte Kopfzeilen und entfernt das Paket wieder.
+  return (
+    <script
+      type="application/json"
+      data-cc-seo=""
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          title: fullTitle,
+          description,
+          canonicalUrl,
+          ogImage,
+          noindex: Boolean(noindex),
+        }),
+      }}
+    />
+  );
 }

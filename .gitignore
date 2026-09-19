@@ -27,3 +27,4 @@ advent-contacts.csv
 .netlify/
 supabase/.temp/
 bun.lock
+dist-vorrender

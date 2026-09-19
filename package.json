@@ -5,11 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run generate-sitemap && vite build",
+    "build": "npm run generate-sitemap && vite build && npm run vorrendern",
     "generate-sitemap": "tsx scripts/generate-sitemap.ts",
     "lint": "eslint .",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit -p tsconfig.app.json"
+    "typecheck": "tsc --noEmit -p tsconfig.app.json",
+    "vorrender-buendel": "vite build --ssr src/vorrender-eintrag.tsx --outDir dist-vorrender --logLevel warn",
+    "vorrendern": "npm run vorrender-buendel && node scripts/vorrendern.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",

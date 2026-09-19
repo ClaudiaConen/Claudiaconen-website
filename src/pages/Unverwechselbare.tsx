@@ -1,5 +1,6 @@
 import { useState, FormEvent } from 'react';
 import { supabase } from '../lib/supabase';
+import SEO from '../components/SEO';
 
 /**
  * Eintragungsseite "Die Unverwechselbaren".
@@ -67,6 +68,11 @@ export default function Unverwechselbare() {
 
   return (
     <main className="min-h-screen bg-pearl-white text-midnight-blue">
+      <SEO
+        title="Die Unverwechselbaren"
+        description="Ein Ort für Menschen, die sich nicht vergleichbar machen lassen wollen. Einmal im Monat, und was daraus wird, machen wir gemeinsam. Trag dich ein, dann erfährst du als Erste davon."
+        path="/unverwechselbare"
+      />
       {/* Rueckweg. Die Seite hatte zuerst keinen, und wer sie direkt aufrief,
           sass in einer Sackgasse: kein Menue, kein Weg zur Startseite. */}
       <div className="mx-auto max-w-6xl px-6 pt-8">

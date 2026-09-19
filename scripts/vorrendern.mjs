@@ -103,6 +103,18 @@ async function main() {
         throw new Error(`nur ${textLaenge} Zeichen Text`);
       }
 
+      // Warnen, wenn eine Seite keine eigenen Kopfangaben mitbringt. Dann
+      // erbt sie Titel, Beschreibung und kanonische Adresse der Huelle - und
+      // erklaert sich damit selbst zur Startseite. Genau das war am
+      // 19.09.2026 bei /unverwechselbare der Fall, und es faellt sonst
+      // niemandem auf, weil die Seite ja funktioniert.
+      const erwartet = `https://claudiaconen.com${pfad === '/' ? '/' : pfad}`;
+      if (!seo.canonicalUrl) {
+        console.log(`  ! ${pfad.padEnd(42)} ohne eigene Kopfangaben - erbt die der Huelle`);
+      } else if (seo.canonicalUrl !== erwartet) {
+        console.log(`  ! ${pfad.padEnd(42)} kanonisch ${seo.canonicalUrl} statt ${erwartet}`);
+      }
+
       let html = huelle.replace('<div id="root"></div>', `<div id="root">${markup}</div>`);
       html = kopfSetzen(html, seo);
 

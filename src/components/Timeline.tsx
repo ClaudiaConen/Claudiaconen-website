@@ -90,7 +90,7 @@ export default function Timeline() {
           </div>
           <h2 id="timeline-headline" className="font-montserrat font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-4 md:mb-6">
             <span className="text-pearl-white">KI spart Zeit. Du schenkst Bedeutung - denn </span>
-            <span className="text-bright-gold">Maschinen rechnen – Menschen berühren.</span>
+            <span className="gold-text-animated">Maschinen rechnen – Menschen berühren.</span>
           </h2>
         </motion.div>
 

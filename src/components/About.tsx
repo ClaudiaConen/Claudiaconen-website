@@ -62,7 +62,7 @@ export default function About() {
               </div>
               <h2 id="about-claudia" className="font-montserrat font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-4 md:mb-6">
                 <span className="text-white">Wer ist </span>
-                <span className="text-bright-gold">
+                <span className="gold-text-animated">
                   Claudia Conen
                 </span>
               </h2>

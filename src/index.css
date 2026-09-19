@@ -1298,7 +1298,11 @@ html, body { cursor: auto; }
    KEYWORD HIGHLIGHT - Premium Puls-Effekt
 ======================================== */
 
-.keyword-highlight {
+/* Zwei Namen, eine Regel: .keyword-highlight gab es hier schon,
+   .gold-text-animated heisst sie auf der Community-Seite. Damit passt
+   beides zusammen, ohne die Deklaration zu verdoppeln. */
+.keyword-highlight,
+.gold-text-animated {
   /* Exakt wie .gold-text-animated auf community.claudiaconen.com:
      durchgaengig metallischer Verlauf, nur die Position wandert, fuenf
      Sekunden, kein Leuchten und keine Groessenaenderung. Vorher begann und
@@ -1343,7 +1347,8 @@ html, body { cursor: auto; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .keyword-highlight {
+  .keyword-highlight,
+  .gold-text-animated {
     animation: none;
     background: linear-gradient(135deg, #DAA520, #F4D03F);
     background-size: 100% 100%;

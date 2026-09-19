@@ -26,7 +26,7 @@ export default function Newsletter() {
 
           <h2 id="newsletter-headline" className="text-3xl md:text-4xl font-montserrat font-bold text-pearl-white mb-4">
             Bleib auf dem{' '}
-            <span className="text-bright-gold">
+            <span className="gold-text-animated">
               neuesten Stand
             </span>
           </h2>

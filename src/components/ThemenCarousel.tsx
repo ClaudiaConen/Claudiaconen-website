@@ -80,6 +80,9 @@ const CAROUSEL_CARDS: CarouselCard[] = [
 ];
 
 export default function ThemenCarousel() {
+  // Welche Karte darf ein Video laden? Nur die, ueber der die Maus steht.
+  // Vorher liefen alle sieben von Anfang an.
+  const [videoKarte, setVideoKarte] = useState<number | null>(null);
   const [scrollPosition, setScrollPosition] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number>();
@@ -164,6 +167,10 @@ export default function ThemenCarousel() {
                   key={index}
                   to={card.link}
                   className="flex-shrink-0 w-[160px] sm:w-[200px] lg:w-[220px] group"
+                  onPointerEnter={(e) => {
+                    if (e.pointerType === 'mouse') setVideoKarte(index);
+                  }}
+                  onPointerLeave={() => setVideoKarte(null)}
                 >
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -175,19 +182,30 @@ export default function ThemenCarousel() {
                     <div className="absolute inset-0">
                       {card.hoverVideo ? (
                         <div className="absolute inset-0 overflow-hidden bg-black">
-                          <iframe
-                            src={`${card.hoverVideo}&autoplay=1&quality=360p`}
-                            className="absolute inset-0 w-full h-full object-cover"
-                            style={{
-                              width: '100%',
-                              height: '100%',
-                              objectFit: 'cover',
-                            }}
-                            frameBorder="0"
-                            allow="autoplay; fullscreen; picture-in-picture"
+                          {/* Zuerst nur das Bild. Das Video entsteht erst,
+                              wenn die Maus auf der Karte steht. */}
+                          <img
+                            src={card.thumbnail}
+                            alt=""
+                            aria-hidden="true"
                             loading="lazy"
-                            title={card.title}
+                            decoding="async"
+                            className="absolute inset-0 h-full w-full object-cover"
                           />
+                          {videoKarte === index && (
+                            <iframe
+                              src={`${card.hoverVideo}&autoplay=1&quality=360p`}
+                              className="absolute inset-0 w-full h-full object-cover"
+                              style={{
+                                width: '100%',
+                                height: '100%',
+                                objectFit: 'cover',
+                              }}
+                              frameBorder="0"
+                              allow="autoplay; fullscreen; picture-in-picture"
+                              title={card.title}
+                            />
+                          )}
                         </div>
                       ) : (
                         <div className={`w-full h-full bg-gradient-to-br ${card.gradient} relative overflow-hidden`}>
@@ -198,7 +216,7 @@ export default function ThemenCarousel() {
                           </div>
                         </div>
                       )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
                     </div>
 
                     <div className="relative h-full flex flex-col justify-end p-2 sm:p-3 lg:p-4 z-10">

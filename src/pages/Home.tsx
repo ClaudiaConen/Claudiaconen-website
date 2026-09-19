@@ -11,7 +11,6 @@ import Timeline from '../components/Timeline';
 import About from '../components/About';
 import SocialProof from '../components/SocialProof';
 import ClaudiaAI from '../components/ClaudiaAI';
-import Offers from '../components/Offers';
 import FrequentQuestions from '../components/FrequentQuestions';
 import ContactSection from '../components/ContactSection';
 import Impressionen from '../components/Impressionen';
@@ -50,7 +49,6 @@ export default function Home() {
         <About />
         <SocialProof />
         <ClaudiaAI />
-        <Offers />
         <FrequentQuestions />
         <ContactSection />
         <Impressionen />

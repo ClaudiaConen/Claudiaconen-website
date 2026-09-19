@@ -8,8 +8,8 @@ export default function SpeakerStorytelling() {
           Geschichten schaffen Gänsehaut
         </h2>
         <p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed">
-          Bilder wirken 60.000x schneller als Fakten. Während Zahlen und Daten vergessen werden,
-          brennen sich Geschichten ins Gedächtnis ein. Sie schaffen Gänsehaut, öffnen Herzen und
+          Zahlen überzeugen im Moment. Geschichten bleiben danach. Was Menschen vor sich sehen,
+          können sie weitererzählen – eine Aufzählung nicht. Sie schaffen Gänsehaut, öffnen Herzen und
           bewegen Menschen zum Handeln. Ob beim Storytelling, Emotional Selling oder im perfekten
           Elevator Pitch – ich zeige dir, wie du mit der Kraft von Geschichten wirklich überzeugst.
         </p>
@@ -55,9 +55,9 @@ export default function SpeakerStorytelling() {
             </p>
           </div>
           <div className="p-6 bg-gradient-to-br from-bright-gold/20 to-luxury-gold/30 border-2 border-bright-gold rounded-xl">
-            <h4 className="font-bold text-lg sm:text-xl text-midnight-blue mb-3">Bilder wirken 60.000x schneller</h4>
+            <h4 className="font-bold text-lg sm:text-xl text-midnight-blue mb-3">Bilder bleiben, Aufzählungen nicht</h4>
             <p className="text-gray-700 text-base sm:text-lg">
-              Geschichten erzeugen Bilder. Bilder bleiben. 65-70% emotionaler Geschichten brennen sich ein.
+              Geschichten erzeugen Bilder. Bilder bleiben. Und was jemand vor sich sieht, erzählt er weiter.
             </p>
           </div>
         </div>
@@ -107,7 +107,7 @@ export default function SpeakerStorytelling() {
   return (
     <SubpageTemplate
       title="GESCHICHTEN SCHAFFEN GÄNSEHAUT"
-      subtitle="Bilder wirken 60.000x schneller als Fakten"
+      subtitle="Was Menschen vor sich sehen, erzählen sie weiter"
       introText="Storytelling • Emotional Selling • Elevator Pitch – Lerne, wie du mit Geschichten überzeugst und im Gedächtnis bleibst."
       bodyContent={bodyContent}
       ctaText="Bereit für Geschichten, die wirken?"

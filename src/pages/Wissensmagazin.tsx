@@ -38,7 +38,7 @@ export default function Wissensmagazin() {
               <h2 className="text-2xl font-bold mb-4"><span className="bg-gradient-to-r from-[#D4AF37] to-[#FFD700] bg-clip-text text-transparent">1. „Ankommen?" – Kommen Sie beim Gegenüber an?</span></h2>
               <div className="bg-gradient-to-r from-bright-gold/10 to-luxury-gold/5 border-l-4 border-bright-gold p-6 rounded-lg">
                 <p className="text-gray-700 leading-relaxed">
-                  Bevor Sie ein Wort sprechen, registriert das Gehirn Ihres Gegenübers bereits Wirkmechanismen. In ca. 180 Millisekunden entscheidet sich: Bin ich bereit zuzuhören oder bereits abgeschaltet? Ihre Präsenz, Klangfarbe, Haltung – all das wirkt. Wenn Sie bewusst „ankommen", öffnet sich der Raum für Wirkung.
+                  Bevor Sie ein Wort sprechen, hat Ihr Gegenüber sich schon ein Bild gemacht. Noch bevor der erste Satz zu Ende ist, entscheidet sich: Bin ich bereit zuzuhören oder schon abgeschaltet? Ihre Präsenz, Klangfarbe, Haltung – all das wirkt. Wenn Sie bewusst „ankommen", öffnet sich der Raum für Wirkung.
                 </p>
               </div>
             </section>

@@ -22,7 +22,7 @@ export default function BlogKI() {
           Menschen kaufen nicht, weil sie überzeugt werden – sie kaufen, weil sie sich verstanden fühlen.
         </p>
         <p className="text-lg text-gray-700 leading-relaxed mb-4">
-          Im limbischen System, also dort, wo Emotionen entstehen, fällt jede Entscheidung – 180 Millisekunden, bevor der Verstand sie überhaupt registriert.
+          Die erste Regung entsteht dort, wo Gefühle sitzen – bevor der Verstand sie einholt.
           Das bedeutet: Vertrauen und Sympathie entstehen, lange bevor ein Argument ausgesprochen ist.
         </p>
         <p className="text-lg text-gray-700 leading-relaxed">

@@ -256,8 +256,8 @@ export default function VonSchattenZuLicht() {
                 },
                 {
                   icon: Heart,
-                  title: 'Neurowissenschaftlich belegt',
-                  text: 'Storytelling wird 60.000-mal schneller im Gehirn verarbeitet als Fakten, und in nur 180 Millisekunden entsteht die erste Emotion.'
+                  title: 'Warum Geschichten bleiben',
+                  text: 'Menschen erinnern sich an Szenen, nicht an Aufzählungen. Was jemand vor sich sieht, kann er weitererzählen.'
                 },
                 {
                   icon: Users,

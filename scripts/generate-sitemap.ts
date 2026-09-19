@@ -89,6 +89,8 @@ const staticPages = [
   { path: '/wissen/was-kostet-ein-keynote-speaker', priority: '0.8', changefreq: 'monthly' },
   { path: '/wissen/keynote-speaker-finden', priority: '0.8', changefreq: 'monthly' },
   { path: '/wissen/stimme-trainieren', priority: '0.8', changefreq: 'monthly' },
+  { path: '/wissen/lampenfieber', priority: '0.8', changefreq: 'monthly' },
+  { path: '/wissen/keynote-aufbauen', priority: '0.8', changefreq: 'monthly' },
 
   // Vorhandene Seiten, die bisher in keiner Sitemap standen (18.09.2026)
   { path: '/premiumangebote', priority: '0.9', changefreq: 'monthly' },

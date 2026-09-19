@@ -36,6 +36,8 @@ export const SEITEN: { pfad: string; laden: () => Promise<any> }[] = [
   { pfad: '/wissen/was-kostet-ein-keynote-speaker', laden: () => import('./pages/ArtikelKeynotePreis') },
   { pfad: '/wissen/keynote-speaker-finden', laden: () => import('./pages/ArtikelSpeakerFinden') },
   { pfad: '/wissen/stimme-trainieren', laden: () => import('./pages/ArtikelStimmeTrainieren') },
+  { pfad: '/wissen/lampenfieber', laden: () => import('./pages/ArtikelLampenfieber') },
+  { pfad: '/wissen/keynote-aufbauen', laden: () => import('./pages/ArtikelKeynoteAufbauen') },
 ];
 
 export type SeoPaket = {

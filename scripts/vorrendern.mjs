@@ -78,6 +78,15 @@ async function main() {
     return;
   }
 
+  // WICHTIG, sonst entsteht ein stiller Schaden: Die Startseite wird am Ende
+  // nach dist/index.html geschrieben. Genau diese Datei ist aber auch das
+  // Auffangnetz fuer alle Adressen ohne eigene Datei (_redirects: /* -> ...).
+  // Ohne Gegenmassnahme wuerden rund 120 Adressen im Quelltext behaupten, sie
+  // seien die Startseite - mitsamt deren Titel und deren kanonischer Adresse.
+  // Deshalb bekommt das Auffangnetz eine eigene, unveraenderte Datei.
+  fs.writeFileSync(path.join(DIST, 'app.html'), huelle, 'utf-8');
+  console.log('  + Auffangnetz nach dist/app.html gesichert');
+
   const mod = await import(pathToFileURL(BUENDEL).href);
   let fertig = 0;
   let uebersprungen = 0;

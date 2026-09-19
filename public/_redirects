@@ -1,1 +1,5 @@
-/*    /index.html   200
+# Das Auffangnetz zeigt bewusst auf app.html, NICHT auf index.html.
+# index.html ist seit dem Vorrendern die fertige Startseite. Wuerde sie auch
+# als Auffangnetz dienen, wuerden alle Adressen ohne eigene Datei im
+# Quelltext behaupten, sie seien die Startseite.
+/*    /app.html   200

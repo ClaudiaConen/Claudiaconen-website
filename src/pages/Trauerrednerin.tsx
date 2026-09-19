@@ -70,6 +70,17 @@ const INHALT: ZielgruppenInhalt = {
     },
   ],
 
+  bilder: [
+    {
+      bereich: 'Stille',
+      motiv: 'Ein ruhiger Raum, weiches Licht, keine Menschen. Zurückhaltend.',
+    },
+    {
+      bereich: 'Ein Leben in Worten',
+      motiv: 'Nah: aufgeschlagenes Notizbuch, Handschrift. Kein Gesicht, keine Trauerkleidung.',
+    },
+  ],
+
   fragen: [
     {
       frage: 'Wie kurzfristig geht das?',

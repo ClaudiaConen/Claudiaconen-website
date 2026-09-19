@@ -92,6 +92,7 @@ const staticPages = [
   { path: '/wissen/lampenfieber', priority: '0.8', changefreq: 'monthly' },
   { path: '/wissen/charisma-lernen', priority: '0.8', changefreq: 'monthly' },
   { path: '/wissen/thema-finden-speaker', priority: '0.8', changefreq: 'monthly' },
+  { path: '/wissen/sprechpausen', priority: '0.8', changefreq: 'monthly' },
   { path: '/wissen/vier-ohren-modell', priority: '0.8', changefreq: 'monthly' },
   { path: '/wissen/keynote-aufbauen', priority: '0.8', changefreq: 'monthly' },
 

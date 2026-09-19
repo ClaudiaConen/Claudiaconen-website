@@ -78,6 +78,21 @@ const INHALT: ZielgruppenInhalt = {
     },
   ],
 
+  bilder: [
+    {
+      bereich: 'Auf der Bühne',
+      motiv: 'Querformat, du am Mikrofon, Publikum im Bild. Wer Speaker werden will, muss sehen, wohin der Weg führt.',
+    },
+    {
+      bereich: 'Die Arbeit davor',
+      motiv: 'Kleine Gruppe, jemand steht und spricht, du hörst zu. Zeigt, dass hier geübt und nicht doziert wird.',
+    },
+    {
+      bereich: 'Video',
+      motiv: 'Zwei Minuten aus einer echten Keynote. Ohne Video glaubt niemand, dass der Weg funktioniert.',
+    },
+  ],
+
   fragen: [
     {
       frage: 'Braucht man eine Ausbildung, um Keynote Speaker zu sein?',

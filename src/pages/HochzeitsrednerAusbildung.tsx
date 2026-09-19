@@ -74,6 +74,21 @@ const INHALT: ZielgruppenInhalt = {
     },
   ],
 
+  bilder: [
+    {
+      bereich: 'Zeremonie im Freien',
+      motiv: 'Querformat, Paar und Gäste, Tageslicht. Warm, aber ohne Kitsch.',
+    },
+    {
+      bereich: 'Das Paargespräch',
+      motiv: 'Drei Menschen an einem Tisch, entspannt. Hier entsteht die Rede.',
+    },
+    {
+      bereich: 'Technik am Tag',
+      motiv: 'Mikrofon, Kabel, Wind. Das, woran es scheitert, und worüber niemand spricht.',
+    },
+  ],
+
   fragen: [
     {
       frage: 'Was verdient man als Hochzeitsrednerin?',

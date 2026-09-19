@@ -68,6 +68,17 @@ const INHALT: ZielgruppenInhalt = {
     },
   ],
 
+  bilder: [
+    {
+      bereich: 'Der Moment',
+      motiv: 'Das Paar während der Zeremonie, du im Anschnitt. Querformat, Tageslicht.',
+    },
+    {
+      bereich: 'Die Gäste',
+      motiv: 'Zuhörende Gesichter, echte Reaktionen. Der Beleg, dass die Rede ankommt.',
+    },
+  ],
+
   fragen: [
     {
       frage: 'Wie früh sollten wir anfragen?',

@@ -20,6 +20,7 @@ const ArtikelStimmeTrainieren = lazy(() => import('./pages/ArtikelStimmeTrainier
 const ArtikelLampenfieber = lazy(() => import('./pages/ArtikelLampenfieber'));
 const ArtikelCharisma = lazy(() => import('./pages/ArtikelCharisma'));
 const ArtikelThemaFinden = lazy(() => import('./pages/ArtikelThemaFinden'));
+const ArtikelSprechpausen = lazy(() => import('./pages/ArtikelSprechpausen'));
 const ArtikelVierOhren = lazy(() => import('./pages/ArtikelVierOhren'));
 const ArtikelKeynoteAufbauen = lazy(() => import('./pages/ArtikelKeynoteAufbauen'));
 const MarkeUndPositionierung = lazy(() => import('./pages/MarkeUndPositionierung'));
@@ -190,6 +191,7 @@ function App() {
         <Route path="/wissen/lampenfieber" element={<ArtikelLampenfieber />} />
         <Route path="/wissen/charisma-lernen" element={<ArtikelCharisma />} />
         <Route path="/wissen/thema-finden-speaker" element={<ArtikelThemaFinden />} />
+        <Route path="/wissen/sprechpausen" element={<ArtikelSprechpausen />} />
         <Route path="/wissen/vier-ohren-modell" element={<ArtikelVierOhren />} />
         <Route path="/wissen/keynote-aufbauen" element={<ArtikelKeynoteAufbauen />} />
         <Route path="/marke-und-positionierung" element={<MarkeUndPositionierung />} />

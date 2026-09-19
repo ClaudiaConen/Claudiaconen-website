@@ -81,6 +81,21 @@ const INHALT: ZielgruppenInhalt = {
     },
   ],
 
+  bilder: [
+    {
+      bereich: 'Im Seminar',
+      motiv: 'Teilnehmende im Halbkreis, eine Person spricht. Querformat, echtes Licht, nicht gestellt.',
+    },
+    {
+      bereich: 'Rückmeldung',
+      motiv: 'Nah: du im Gespräch mit einer Teilnehmerin. Das ist der Moment, für den Menschen kommen.',
+    },
+    {
+      bereich: 'Der erste Auftritt',
+      motiv: 'Jemand aus der Ausbildung bei einer echten Feier — mit Einverständnis. Der stärkste Beleg, den es gibt.',
+    },
+  ],
+
   fragen: [
     {
       frage: 'Bekomme ich ein Zertifikat?',

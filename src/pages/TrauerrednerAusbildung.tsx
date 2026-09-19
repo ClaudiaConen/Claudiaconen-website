@@ -73,6 +73,21 @@ const INHALT: ZielgruppenInhalt = {
     },
   ],
 
+  bilder: [
+    {
+      bereich: 'Das Gespräch',
+      motiv: 'Zwei Menschen am Tisch, gedämpftes Licht, keine Gesichter nötig. Hände, Kaffeetassen, ein Notizbuch.',
+    },
+    {
+      bereich: 'Der Raum',
+      motiv: 'Leerer Trauerraum vor der Feier. Ruhig, hell, ohne Symbolik.',
+    },
+    {
+      bereich: 'Nachbereitung',
+      motiv: 'Etwas Kleines: ein Notizbuch, eine geschriebene Seite. Zeigt das Handwerk ohne Pathos.',
+    },
+  ],
+
   fragen: [
     {
       frage: 'Ich habe selbst jemanden verloren. Spricht das gegen mich?',

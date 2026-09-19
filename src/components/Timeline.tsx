@@ -16,7 +16,7 @@ export default function Timeline() {
       number: 1,
       kurz: 'Sie berechnet blitzschnell – du berührst bleibend.',
       icon: Ear,
-      title: 'KI spart Zeit. Du schenkst Bedeutung - denn Maschinen rechnen – Menschen berühren.',
+      title: 'KI spart Zeit. Du gibst ihr Bedeutung.',
       description: 'Sie berechnet blitzschnell – du berührst bleibend.\nSie schenkt dir Zeit – damit du sie mit Menschen teilst.\nKI kann Daten verarbeiten – du kannst Verbindung schaffen.\nUnd genau darin liegt Wirkungskraft:\nPerfektion klickt. Persönlichkeit bleibt.',
       side: 'left',
     },
@@ -48,16 +48,16 @@ export default function Timeline() {
       number: 5,
       kurz: 'Deine Geschichte, dein Erlebtes – sie sind dein unverwechselbarer Klang.',
       icon: Sparkles,
-      title: 'Du wirkst, bevor du sprichst.\nVon Selbsterkenntnis zu Wirkungskraft – durch Haltung, Persönlichkeit, Stimme und Blick.',
-      description: 'Deine Geschichte, dein Erlebtes – sie sind dein unverwechselbarer Klang.\nRhetorik ist nicht das Spiel mit Worten, sondern die Kunst, echt zu wirken.\nWenn Stimme, Körpersprache und Worte dieselbe Sprache sprechen,\nentsteht Charisma – und die unsichtbare Brücke vom Ohr, über den Kopf, direkt ins Herz',
+      title: 'Du wirkst, bevor du sprichst.',
+      description: 'Von Selbsterkenntnis zu Wirkungskraft – durch Haltung, Persönlichkeit, Stimme und Blick.\nDeine Geschichte, dein Erlebtes – sie sind dein unverwechselbarer Klang.\nRhetorik ist nicht das Spiel mit Worten, sondern die Kunst, echt zu wirken.\nWenn Stimme, Körpersprache und Worte dieselbe Sprache sprechen,\nentsteht Charisma – und die unsichtbare Brücke vom Ohr, über den Kopf, direkt ins Herz',
       side: 'left',
     },
     {
       number: 6,
       kurz: 'Menschen entscheiden mit dem Herzen, lange bevor der Verstand folgt.',
       icon: Target,
-      title: 'Werde zum Privatdetektiv deiner Wirkung.\nWorte sind unaufhaltbar. Beobachte, was du im anderen auslöst – und welche Energie du sendest, wenn du sprichst.',
-      description: 'Menschen sind emotionale Wesen – sie entscheiden mit dem Herzen, lange bevor der Verstand folgt.\nDeine Worte können begeistern, motivieren, trösten, faszinieren oder verletzen.\nSie können Vertrauen schaffen – oder zerstören.\nNutze die unsichtbare Brücke:\nvom Ohr über den Kopf direkt ins Herz.',
+      title: 'Werde zum Privatdetektiv deiner Wirkung.',
+      description: 'Worte sind unaufhaltbar. Beobachte, was du im anderen auslöst – und welche Energie du sendest, wenn du sprichst.\nMenschen sind emotionale Wesen – sie entscheiden mit dem Herzen, lange bevor der Verstand folgt.\nDeine Worte können begeistern, motivieren, trösten, faszinieren oder verletzen.\nSie können Vertrauen schaffen – oder zerstören.\nNutze die unsichtbare Brücke:\nvom Ohr über den Kopf direkt ins Herz.',
       side: 'right',
     },
     {
@@ -83,15 +83,21 @@ export default function Timeline() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.2 }}
-          className="text-center mb-12 md:mb-20"
+          className="text-center mb-16 md:mb-28"
         >
           <div className="inline-block mb-4 px-6 py-2 bg-gradient-to-r from-[#DAA520]/20 to-[#F4D03F]/20 rounded-full border border-luxury-gold/30">
             <span className="text-bright-gold font-semibold">Die Voice-to-Brain™ Methode</span>
           </div>
-          <h2 id="timeline-headline" className="font-montserrat font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-4 md:mb-6">
-            <span className="text-pearl-white">KI spart Zeit. Du schenkst Bedeutung - denn </span>
-            <span className="gold-text-animated">Maschinen rechnen – Menschen berühren.</span>
+          <h2
+            id="timeline-headline"
+            className="font-montserrat text-3xl font-bold leading-[1.1] tracking-tight sm:text-4xl md:text-5xl lg:text-6xl"
+          >
+            <span className="block text-pearl-white">Maschinen rechnen.</span>
+            <span className="mt-1 block gold-text-animated">Menschen berühren.</span>
           </h2>
+          <p className="mx-auto mt-7 max-w-xl font-inter text-base leading-relaxed text-pearl-white/60 sm:text-lg">
+            KI spart Zeit. Was du daraus machst, entscheidet, ob man sich an dich erinnert.
+          </p>
         </motion.div>
 
         <div ref={containerRef} className="relative">

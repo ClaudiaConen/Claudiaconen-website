@@ -73,15 +73,42 @@ export interface MegaMenuItem {
   categories: SidebarCategory[];
 }
 
+/**
+ * DIE GLIEDERUNG FOLGT DEM, WAS DIE SEITEN UEBER SICH SELBST SAGEN.
+ *
+ * Claudia am 20.09.2026: "die Sortierung ist nicht richtig. Da steht so
+ * unter Unternehmen auf einmal Keynote Speaker, das passt nicht."
+ *
+ * Sie hatte recht, und der Grund war strukturell. Fast jede Seite
+ * traegt ganz oben eine Zeile, die ihre Zielgruppe nennt:
+ *   "Fuer Unternehmen"              -> unternehmen-*
+ *   "Fuer Speaker & Selbststaendige" -> speaker-*
+ *   "Die Stimme fuer Ihre Botschaft" -> stimme-*
+ *   "Mentoring & Coaching"           -> mentoring-*
+ * Das ist die Gliederung, die die Seite selbst behauptet. Stand eine
+ * Seite im Menue woanders, klickte jemand auf "Keynotes" und landete
+ * auf einer Seite, die "Fuer Speaker & Selbststaendige" ueber sich
+ * schreibt. Genau das hat Claudia gesehen: /stimme-keynote stand unter
+ * "Keynotes" UND unter "Rednerin buchen".
+ *
+ * Die Bereichs-Kennungen heissen deshalb wie die Selbstbezeichnungen.
+ * scratchpad/menue_stimmig.py vergleicht beides und meldet jede
+ * Abweichung - nach jeder Menueaenderung laufen lassen.
+ *
+ * KEIN ZIEL STEHT ZWEIMAL. Eine Ausnahme sind die Uebersichtszeilen
+ * unten im Feld ("Alle vier im Vergleich"), die bewusst auf dieselbe
+ * Seite fuehren wie eine Kachel - das ist ein Weg, keine Dublette.
+ */
 export const megaMenuItems: MegaMenuItem[] = [
-  // ------------------------------------------------ 1. Unternehmen
+  // ============================================ 1. Fuer Unternehmen
+  // Ausschliesslich Seiten, die "Fuer Unternehmen" ueber sich schreiben.
   {
-    label: 'Keynotes',
-    id: 'keynotes',
+    label: 'Für Unternehmen',
+    id: 'unternehmen',
     categories: [
       {
-        id: 'keynote-buchen',
-        label: 'Keynote Speaker buchen',
+        id: 'keynotes',
+        label: 'Keynotes & Vorträge',
         icon: Star,
         panelTitle: 'Keynote Speaker buchen',
         panelSubtitle: 'Ein Vortrag, der nach dem Applaus noch etwas verändert',
@@ -95,35 +122,23 @@ export const megaMenuItems: MegaMenuItem[] = [
         },
         tiles: [
           { name: 'Keynote für Ihr Unternehmen', desc: 'Auch zum Thema Mensch und KI', href: '/unternehmen-keynotes', icon: Star },
-          { name: 'Keynote & Bühnenperformance', desc: 'Positionierung, Präsenz, Stimmwirkung', href: '/keynote-und-buehnenperformance', icon: Flag },
-          { name: 'Eventmoderation', desc: 'Durch den Tag führen, nicht nur ansagen', href: '/stimme-keynote', icon: Mic },
-          { name: 'Interne Events', desc: 'Jahresauftakt, Kickoff, Jubiläum', href: '/unternehmen-events', icon: Calendar },
-        ],
-        uebersicht: { name: 'Alles für Unternehmen und Teams', href: '/unternehmen-keynotes' },
-      },
-      {
-        id: 'teams',
-        label: 'Für Teams & Führung',
-        icon: Users,
-        panelTitle: 'Für Teams & Führungskräfte',
-        panelSubtitle: 'Wenn eingeführt wurde, was keiner benutzt — und keiner es sagt',
-        tiles: [
           { name: 'Führung & Kommunikation', desc: 'Wie Führungskräfte gehört werden', href: '/unternehmen-leadership', icon: Users },
           { name: 'Verkauf & Auftreten', desc: 'Emotional Selling im Vertrieb', href: '/unternehmen-selling', icon: Handshake },
-          { name: 'Marke & Positionierung', desc: 'Erkennbar bleiben im KI-Zeitalter', href: '/marke-und-positionierung', icon: Target },
+          { name: 'Interne Events & Moderation', desc: 'Jahresauftakt, Kickoff, Jubiläum', href: '/unternehmen-events', icon: Calendar },
         ],
       },
     ],
   },
 
-  // ------------------------------------------------ 2. Redner werden
+  // ============================================ 2. Redner werden
+  // Ausschliesslich Seiten fuer Speaker und Selbststaendige.
   {
-    label: 'Ausbildungen',
-    id: 'ausbildungen',
+    label: 'Redner werden',
+    id: 'redner-werden',
     categories: [
       {
-        id: 'redner-werden',
-        label: 'Redner werden',
+        id: 'ausbildungen',
+        label: 'Die vier Ausbildungen',
         icon: GraduationCap,
         panelTitle: 'Redner werden — vier Wege',
         panelSubtitle: 'Sie sprechen ab dem ersten Tag selbst. Nicht zuhören, sprechen.',
@@ -141,7 +156,7 @@ export const megaMenuItems: MegaMenuItem[] = [
           { name: 'Trauredner werden', desc: 'Hochzeitsredner für die freie Trauung', href: '/hochzeitsredner-ausbildung', icon: Heart },
           { name: 'Trauerredner werden', desc: 'Auch der Umgang mit dem, was bleibt', href: '/trauerredner-ausbildung', icon: Shield },
         ],
-        uebersicht: { name: 'Alle vier Ausbildungen im Vergleich', href: '/redner-ausbildungen' },
+        uebersicht: { name: 'Alle vier im Vergleich', href: '/redner-ausbildungen' },
       },
       {
         id: 'kurse',
@@ -155,13 +170,15 @@ export const megaMenuItems: MegaMenuItem[] = [
           { name: 'Bühnenwirkung & Auftritt', desc: 'Stand, Blick, Pausen', href: '/speaker-buehne', icon: Flag },
           { name: 'Positionierung', desc: 'Wofür Sie stehen, in einem Satz', href: '/speaker-positionierung', icon: Target },
           { name: 'Reden auf Social Media', desc: 'Vor der Kamera sprechen', href: '/speaker-social', icon: Share2 },
+          { name: 'Keynote & Bühnenperformance', desc: 'Das Gesamtpaket aus Coaching und Workshops', href: '/keynote-und-buehnenperformance', icon: Sparkles },
         ],
-        uebersicht: { name: 'Speaker & freie Redner — Übersicht', href: '/redner-ausbildungen' },
       },
     ],
   },
 
-  // ------------------------------------------------ 3. Anlaesse
+  // ============================================ 3. Rednerin buchen
+  // Ausschliesslich Seiten, die "Die Stimme fuer Ihre Botschaft"
+  // ueber sich schreiben - also Claudia selbst am Mikrofon.
   {
     label: 'Rednerin buchen',
     id: 'rednerin',
@@ -183,22 +200,24 @@ export const megaMenuItems: MegaMenuItem[] = [
         tiles: [
           { name: 'Trauerrede', desc: 'Ein Leben in Worten, keine Vorlage', href: '/trauerrede', icon: Shield },
           { name: 'Freie Trauung', desc: 'Die Zeremonie gehört dem Paar', href: '/freie-trauung', icon: Heart },
-          { name: 'Moderation', desc: 'Bühne und Ablauf in einer Hand', href: '/stimme-keynote', icon: Flag },
-          { name: 'Sprecherin für Voice Over', desc: 'Stimme für Aufnahmen und Podcast', href: '/stimme-voiceover', icon: Mic },
+          { name: 'Keynote & Eventmoderation', desc: 'Bühne und Ablauf in einer Hand', href: '/stimme-keynote', icon: Flag },
+          { name: 'Voice-Over & Podcast', desc: 'Stimme für Aufnahmen', href: '/stimme-voiceover', icon: Mic },
         ],
         uebersicht: { name: 'Freie Rednerin — alle Anlässe', href: '/freie-rednerin' },
       },
     ],
   },
 
-  // ------------------------------------------------ 4. Einzelarbeit
+  // ============================================ 4. Mentoring
+  // Ausschliesslich Seiten, die "Mentoring & Coaching" ueber sich
+  // schreiben, plus das 1:1-Mentoring.
   {
-    label: 'Mentoring & KI',
+    label: 'Mentoring',
     id: 'mentoring',
     categories: [
       {
-        id: 'einzeln',
-        label: 'Einzelarbeit',
+        id: 'einzelarbeit',
+        label: 'Zu zweit',
         icon: Compass,
         panelTitle: 'Zu zweit an Ihrer Sache',
         panelSubtitle: 'Wenn es nicht um ein Format geht, sondern um Sie',
@@ -214,13 +233,21 @@ export const megaMenuItems: MegaMenuItem[] = [
           { name: '1:1 Mentoring', desc: 'Über mehrere Monate begleitet', href: '/1-zu-1-mentoring', icon: Compass },
           { name: 'Gold-Training (90 Minuten)', desc: 'Eine Sitzung, ein Anliegen', href: '/mentoring-gold', icon: Star },
           { name: 'Marke & eigene Sprache', desc: 'Was Sie sagen, wenn niemand vorgibt wie', href: '/mentoring-transformation', icon: Sun },
-          { name: 'Online, wo immer Sie sind', desc: 'Dieselbe Arbeit über Bildschirm', href: '/mentoring-online', icon: Globe },
+          { name: 'Wo immer Sie sind', desc: 'Dieselbe Arbeit über Bildschirm', href: '/mentoring-online', icon: Globe },
         ],
       },
+    ],
+  },
+
+  // ============================================ 5. KI & Mensch
+  {
+    label: 'KI & Mensch',
+    id: 'ki',
+    categories: [
       {
-        id: 'ki',
-        label: 'KI & Mensch',
-        icon: Brain,
+        id: 'ki-angebote',
+        label: 'Lernen & Begleitung',
+        icon: Monitor,
         panelTitle: 'KI & Mensch',
         panelSubtitle: 'Die Technik bedienen, ohne die eigene Sprache zu verlieren',
         columns: 3,
@@ -230,13 +257,26 @@ export const megaMenuItems: MegaMenuItem[] = [
           { name: 'KI 1:1', href: '/ki-1zu1', icon: Users },
           { name: 'HeyGen Kurs', href: '/ki-heygen-kurs', icon: Video },
           { name: 'KI-Abkürzungen', href: '/1zu1-abkuerzung-dezember', icon: ChevronsRight },
-          { name: 'Was KI nicht kann', href: '/blog-ki', icon: Brain },
+          { name: 'Marke im KI-Zeitalter', href: '/marke-und-positionierung', icon: Target },
+        ],
+      },
+      {
+        id: 'ki-lesen',
+        label: 'Zum Lesen & Ausprobieren',
+        icon: Brain,
+        panelTitle: 'Zum Lesen und Ausprobieren',
+        panelSubtitle: 'Was die Maschine übernimmt — und was sie nicht kann',
+        tiles: [
+          { name: 'Was KI nicht kann', desc: 'Und warum das Ihr Vorteil ist', href: '/blog-ki', icon: Brain },
+          { name: 'Webseite als Erlebnis', desc: 'Technik trifft Menschlichkeit', href: '/ki-webseite-erlebnis', icon: Globe },
+          { name: 'ClaudiaAI', desc: 'Story-Coach, in Vorbereitung', href: '/claudia-ai', icon: Bot },
+          { name: 'ChatGPT-Assistent', desc: 'Zum Ausprobieren', href: 'https://claudia-conen-gpt-sa-m812.bolt.host/', icon: Bot, external: true },
         ],
       },
     ],
   },
 
-  // ------------------------------------------------ 5. Wissen
+  // ============================================ 6. Wissen
   {
     label: 'Wissen',
     id: 'wissen',
@@ -247,6 +287,7 @@ export const megaMenuItems: MegaMenuItem[] = [
         icon: Mic,
         panelTitle: 'Fragen zum Reden',
         panelSubtitle: 'Ausführlich beantwortet — kostenlos, ohne Anmeldung',
+        columns: 3,
         hinweis: {
           marke: 'Kostenlos',
           titel: 'Neun Fragen, ausführlich beantwortet',
@@ -255,7 +296,6 @@ export const megaMenuItems: MegaMenuItem[] = [
           href: '/wissensbibliothek',
           bildMotiv: 'Schreibtisch mit Notizen, Detailaufnahme',
         },
-        columns: 3,
         tiles: [
           { name: 'Wie baue ich eine Keynote auf?', href: '/wissen/keynote-aufbauen', icon: Flag },
           { name: 'Wie finde ich mein Thema?', href: '/wissen/thema-finden-speaker', icon: Target },
@@ -264,7 +304,6 @@ export const megaMenuItems: MegaMenuItem[] = [
           { name: 'Wie trainiere ich meine Stimme?', href: '/wissen/stimme-trainieren', icon: Mic },
           { name: 'Kann man Charisma lernen?', href: '/wissen/charisma-lernen', icon: Star },
         ],
-        uebersicht: { name: 'Alle Artikel in der Wissensbibliothek', href: '/wissensbibliothek' },
       },
       {
         id: 'fragen-buchen',
@@ -311,10 +350,10 @@ export const megaMenuItems: MegaMenuItem[] = [
     ],
   },
 
-  // ------------------------------------------------ 6. Die Person
+  // ============================================ 7. Ueber Claudia
   {
     label: 'Über Claudia',
-    id: 'ueber-claudia',
+    id: 'ueber',
     categories: [
       {
         id: 'person',
@@ -333,20 +372,8 @@ export const megaMenuItems: MegaMenuItem[] = [
         tiles: [
           { name: 'Über mich', desc: 'Weg, Arbeitsweise, Haltung', href: '/ueber-mich', icon: Eye },
           { name: 'Von Schatten zu Licht', desc: 'Das Buchprojekt', href: '/von-schatten-zu-licht', icon: Sun },
-          { name: 'Presse & Interviews', desc: 'Claudia in Medien', href: '/blog', icon: Newspaper },
+          { name: 'Presse & Interviews', desc: 'Claudia in Medien', href: '/buchprojekt', icon: Newspaper },
           { name: 'Kontakt', desc: 'Direkt schreiben', href: '/#contact', icon: MessageSquare },
-        ],
-      },
-      {
-        id: 'werkzeuge',
-        label: 'Zum Ausprobieren',
-        icon: Bot,
-        panelTitle: 'Zum Ausprobieren',
-        panelSubtitle: 'Was Claudia mit KI gebaut hat',
-        tiles: [
-          { name: 'ClaudiaAI', desc: 'Story-Coach, in Vorbereitung', href: '/claudia-ai', icon: Bot },
-          { name: 'ChatGPT-Assistent', desc: 'Zum Ausprobieren', href: 'https://claudia-conen-gpt-sa-m812.bolt.host/', icon: Bot, external: true },
-          { name: 'Webseite als Erlebnis', desc: 'Technik trifft Menschlichkeit', href: '/ki-webseite-erlebnis', icon: Globe },
         ],
       },
     ],

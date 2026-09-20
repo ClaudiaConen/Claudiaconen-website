@@ -101,6 +101,8 @@ export default function Navigation() {
           <a
             href="/"
             onClick={(e) => { e.preventDefault(); navigate('/'); closeMegaMenu(); }}
+            title="Zur Startseite"
+            aria-label="Zur Startseite"
             className="flex-shrink-0 hover:opacity-80 transition-opacity duration-300"
           >
             {/* 192 Pixel statt 1254. Angezeigt werden 48 - das reicht

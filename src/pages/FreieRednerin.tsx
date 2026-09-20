@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
+import Brotkrumen from '../components/Brotkrumen';
 import KippKarte from '../components/KippKarte';
 
 /**
@@ -199,6 +200,9 @@ export default function FreieRednerin() {
         style={{ background: 'linear-gradient(180deg, #FFFEF9 0%, #F8F5EF 55%, #F3EDE2 100%)' }}
       >
         <div className="mx-auto max-w-5xl px-6">
+          <div className="mb-7 text-midnight-blue">
+            <Brotkrumen krumen={[{ name: 'Freie Rednerin' }]} />
+          </div>
           <p className="font-montserrat text-xs font-semibold uppercase tracking-[0.22em] text-dark-gold">
             Freie Rednerin
           </p>
@@ -211,56 +215,77 @@ export default function FreieRednerin() {
         </div>
 
         {/* Die Gabelung. Steht bewusst vor allem anderen. */}
-        <div className="mx-auto mt-14 grid max-w-5xl gap-5 px-6 sm:grid-cols-2">
-          <a
-            href="#anlaesse"
-            className="group block border border-luxury-gold/40 bg-white px-7 py-8 transition-all hover:border-luxury-gold hover:shadow-lg"
-          >
-            <p className="font-montserrat text-xs font-semibold uppercase tracking-[0.18em] text-dark-gold">
-              Ich suche eine Rednerin
-            </p>
-            <p className="mt-4 font-cormorant text-3xl italic leading-tight text-midnight-blue">
-              Für unseren Anlass
-            </p>
-            <p className="mt-3 font-inter text-base leading-relaxed text-midnight-blue/65">
-              Trauerfeier, freie Trauung, Jubiläum. Sie buchen mich als Rednerin.
-            </p>
-            <span className="mt-5 inline-block font-montserrat text-sm font-semibold text-midnight-blue underline-offset-4 group-hover:underline">
-              Anlässe ansehen ↓
-            </span>
-          </a>
+        {/* DIE GABELUNG. Sie steht vor allem anderen, und die Farbe ist
+            der Wegweiser: hell heisst "Claudia spricht", dunkel heisst
+            "Sie lernen". Derselbe Karteneffekt wie bei den vier
+            Ausbildungskacheln weiter unten - Claudia am 20.09.2026:
+            "dieser Effekt sollte auch ganz oben sein und klarer." */}
+        <div className="mx-auto mt-14 max-w-5xl px-6">
+          <p className="text-center font-montserrat text-xs font-semibold uppercase tracking-[0.2em] text-midnight-blue/45">
+            Zwei Wege — wählen Sie Ihren
+          </p>
 
-          <a
-            href="#ausbildung"
-            className="group block border border-midnight-blue/15 bg-midnight-blue px-7 py-8 transition-all hover:border-luxury-gold hover:shadow-lg"
-          >
-            <p className="font-montserrat text-xs font-semibold uppercase tracking-[0.18em] text-luxury-gold">
-              Ich möchte Rednerin werden
-            </p>
-            <p className="mt-4 font-cormorant text-3xl italic leading-tight text-pearl-white">
-              Für meinen Weg
-            </p>
-            <p className="mt-3 font-inter text-base leading-relaxed text-pearl-white/70">
-              Die Ausbildung für alle, die selbst vor Menschen sprechen wollen.
-            </p>
-            <span className="mt-5 inline-block font-montserrat text-sm font-semibold text-luxury-gold underline-offset-4 group-hover:underline">
-              Zur Ausbildung ↓
-            </span>
-          </a>
+          <div className="mt-6 grid gap-5 sm:grid-cols-2">
+            <KippKarte
+              href="#engagieren"
+              className="glas-licht group p-8 sm:p-9"
+            >
+              <p className="font-montserrat text-[0.68rem] font-bold uppercase tracking-[0.2em] text-dark-gold">
+                Ich suche eine Rednerin
+              </p>
+              <p className="mt-4 font-cormorant text-4xl italic leading-[1.1] text-midnight-blue">
+                Claudia Conen engagieren
+              </p>
+              <p className="mt-4 font-inter text-base leading-relaxed text-midnight-blue/70">
+                Trauerfeier, freie Trauung, Jubiläum, Moderation. Sie buchen mich — ich lerne
+                die Menschen kennen, bevor ich über sie spreche.
+              </p>
+              <span className="mt-7 inline-flex items-center gap-2 self-start rounded-sm border border-midnight-blue/20 bg-white px-5 py-3 font-montserrat text-sm font-semibold text-midnight-blue transition-colors group-hover:border-luxury-gold group-hover:text-dark-gold">
+                Anlässe ansehen
+                <span aria-hidden="true">↓</span>
+              </span>
+            </KippKarte>
+
+            <KippKarte
+              href="#ausbildung"
+              className="group border border-pearl-white/15 bg-midnight-blue p-8 backdrop-blur-sm hover:border-luxury-gold/60 sm:p-9"
+            >
+              <p className="font-montserrat text-[0.68rem] font-bold uppercase tracking-[0.2em] text-luxury-gold">
+                Ich möchte selbst sprechen
+              </p>
+              <p className="mt-4 font-cormorant text-4xl italic leading-[1.1] text-pearl-white">
+                Redner werden
+              </p>
+              <p className="mt-4 font-inter text-base leading-relaxed text-pearl-white/70">
+                Speaker, freie Rednerin, Trauredner, Trauerrednerin. Vier Wege, und Sie sprechen
+                ab dem ersten Tag selbst.
+              </p>
+              <span className="mt-7 inline-flex items-center gap-2 self-start rounded-sm bg-luxury-gold px-5 py-3 font-montserrat text-sm font-semibold text-midnight-blue transition-colors group-hover:bg-bright-gold">
+                Die vier Wege ansehen
+                <span aria-hidden="true">↓</span>
+              </span>
+            </KippKarte>
+          </div>
         </div>
       </header>
 
       <main>
         {/* TEIL 1 — buchen */}
-        <section id="anlaesse" className="scroll-mt-24 bg-pearl-white py-20 sm:py-28" aria-labelledby="anlaesse-titel">
+        {/* TEIL 1 - HELL. Hier spricht Claudia. Der Farbcode ist die
+            ganze Orientierung: helle Glaskarten mit weissem Wischer
+            heissen "engagieren", dunkle weiter unten heissen "lernen". */}
+        <section id="engagieren" className="scroll-mt-24 bg-pearl-white py-20 sm:py-28" aria-labelledby="anlaesse-titel">
           <div className="mx-auto max-w-5xl px-6">
+            <p className="font-montserrat text-xs font-semibold uppercase tracking-[0.2em] text-dark-gold">
+              Claudia Conen engagieren
+            </p>
             <h2
               id="anlaesse-titel"
-              className="font-montserrat text-2xl font-bold text-midnight-blue sm:text-3xl"
+              className="mt-5 font-cormorant text-4xl italic leading-tight text-midnight-blue sm:text-5xl"
             >
-              Verschiedene Anlässe
+              Die Stimme fürs Herz
             </h2>
-            <p className="mt-4 max-w-2xl font-inter text-lg leading-relaxed text-midnight-blue/70">
+            <p className="mt-5 max-w-2xl font-inter text-lg leading-relaxed text-midnight-blue/70">
               Die Bühne ist da, wo jemand den Mund aufmacht. Das ist mal ein Saal mit dreihundert
               Gästen und mal ein Raum mit elf Menschen, die geweint haben.
             </p>
@@ -269,7 +294,7 @@ export default function FreieRednerin() {
               {ANLAESSE.map((a) => (
                 <article
                   key={a.titel}
-                  className="flex flex-col border border-midnight-blue/10 bg-white p-7 transition-shadow hover:shadow-lg"
+                  className="glas-licht flex flex-col p-7"
                 >
                   <p className="font-montserrat text-xs font-semibold uppercase tracking-[0.16em] text-dark-gold">
                     {a.zeile}
@@ -310,8 +335,8 @@ export default function FreieRednerin() {
           aria-labelledby="ausbildung-titel"
         >
           <div className="mx-auto max-w-5xl px-6">
-            <p className="font-montserrat text-xs font-semibold uppercase tracking-[0.22em] text-luxury-gold">
-              Rednerin werden
+            <p className="font-montserrat text-xs font-semibold uppercase tracking-[0.2em] text-luxury-gold">
+              Redner werden — Ihr eigener Weg
             </p>
             <h2
               id="ausbildung-titel"

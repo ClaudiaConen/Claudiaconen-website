@@ -29,14 +29,20 @@ import { useRef, type ReactNode } from 'react';
 export default function KippKarte({
   children,
   className = '',
+  href,
 }: {
   children: ReactNode;
   className?: string;
+  /** Macht die ganze Karte zu einem echten Verweis. Ein <div> mit
+   *  onClick haette kein Ziel: kein Suchprogramm sieht es, die mittlere
+   *  Maustaste oeffnet nichts, und mit der Tastatur kommt man nicht
+   *  hin. Mit href wird daraus ein <a>. */
+  href?: string;
 }) {
-  const karte = useRef<HTMLDivElement>(null);
+  const karte = useRef<HTMLAnchorElement & HTMLDivElement>(null);
   const bild = useRef<number | null>(null);
 
-  function bewege(e: React.PointerEvent<HTMLDivElement>) {
+  function bewege(e: React.PointerEvent<HTMLElement>) {
     if (e.pointerType !== 'mouse') return;
     const el = karte.current;
     if (!el || bild.current !== null) return;
@@ -61,17 +67,35 @@ export default function KippKarte({
     el.style.setProperty('--ry', '0deg');
   }
 
+  const inhalt = (
+    <>
+      <span aria-hidden="true" className="cc-kipp-glanz" />
+      <div className="cc-kipp-inhalt">{children}</div>
+    </>
+  );
+
   return (
     <div className="cc-kipp-buehne h-full">
-      <div
-        ref={karte}
-        onPointerMove={bewege}
-        onPointerLeave={ruhe}
-        className={`cc-kipp h-full ${className}`}
-      >
-        <span aria-hidden="true" className="cc-kipp-glanz" />
-        <div className="cc-kipp-inhalt">{children}</div>
-      </div>
+      {href ? (
+        <a
+          ref={karte}
+          href={href}
+          onPointerMove={bewege}
+          onPointerLeave={ruhe}
+          className={`cc-kipp block h-full ${className}`}
+        >
+          {inhalt}
+        </a>
+      ) : (
+        <div
+          ref={karte}
+          onPointerMove={bewege}
+          onPointerLeave={ruhe}
+          className={`cc-kipp h-full ${className}`}
+        >
+          {inhalt}
+        </div>
+      )}
     </div>
   );
 }

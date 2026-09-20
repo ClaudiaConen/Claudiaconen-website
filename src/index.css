@@ -2189,3 +2189,114 @@ html, body { cursor: auto; }
     overscroll-behavior-x: contain;
   }
 }
+
+/* =====================================================================
+   DIE HELLE GLASKARTE
+   ---------------------------------------------------------------------
+   Claudia am 20.09.2026: "wo ich die Rednerin bin, sind die Karten in
+   hell, aber in der gleichen Art und Weise, die Glaskacheln mit dem
+   weißen Schimmer, nur eben in hell."
+
+   Das ist ein Farbcode, und er ist die eigentliche Idee an der Sache:
+     HELL  = Claudia Conen engagieren. Sie spricht.
+     DUNKEL = Ihr eigener Weg. Sie lernen.
+   Wer das einmal begriffen hat, muss auf keiner Seite mehr lesen, um zu
+   wissen, wo er ist.
+
+   Der weiße Schimmer wandert nur EINMAL bei Berührung durch die Karte,
+   nicht in Dauerschleife. Eine Karte, die ununterbrochen glitzert, ist
+   Weihnachtsdeko; eine, die auf Berührung antwortet, ist Apple.
+   ===================================================================== */
+.glas-licht {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(218, 165, 32, 0.28);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.9) inset,
+    0 14px 40px -22px rgba(26, 43, 76, 0.3);
+}
+
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .glas-licht {
+    background: rgba(255, 255, 255, 0.6);
+    -webkit-backdrop-filter: blur(14px) saturate(1.15);
+    backdrop-filter: blur(14px) saturate(1.15);
+  }
+}
+
+/* Die Lichtkante oben - dieselbe wie bei der dunklen Karte, nur heller. */
+.glas-licht::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.95) 22%,
+    rgba(255, 255, 255, 0.95) 78%,
+    transparent
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Der weiße Schimmer, der bei Berührung einmal durchwandert. */
+.glas-licht::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -60%;
+  width: 45%;
+  background: linear-gradient(
+    105deg,
+    transparent,
+    rgba(255, 255, 255, 0.85) 45%,
+    rgba(255, 255, 255, 0.95) 55%,
+    transparent
+  );
+  transform: skewX(-18deg);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.glas-licht:hover::after,
+.glas-licht:focus-within::after {
+  animation: lichtWischer 0.85s cubic-bezier(0.25, 0.6, 0.35, 1);
+}
+
+@keyframes lichtWischer {
+  0% {
+    left: -60%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.9;
+  }
+  85% {
+    opacity: 0.9;
+  }
+  100% {
+    left: 130%;
+    opacity: 0;
+  }
+}
+
+.glas-licht:hover {
+  border-color: rgba(218, 165, 32, 0.6);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.95) inset,
+    0 22px 52px -20px rgba(26, 43, 76, 0.4);
+}
+
+/* Wer Bewegung abgeschaltet hat, bekommt keinen Wischer - nur die
+   Goldkante als Rueckmeldung. */
+@media (prefers-reduced-motion: reduce) {
+  .glas-licht:hover::after,
+  .glas-licht:focus-within::after {
+    animation: none;
+  }
+}

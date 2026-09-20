@@ -24,11 +24,17 @@ import { megaMenuItems } from '../lib/megaMenuData';
  */
 export default function Seitenuebersicht() {
   // Nur die Hauptwege, einer je Bereich - nicht jede einzelne Seite.
-  const wege = megaMenuItems.flatMap((bereich) =>
-    bereich.categories
-      .filter((kat) => kat.uebersicht)
-      .map((kat) => ({ titel: kat.label, ...kat.uebersicht! }))
-  );
+  const wege = [
+    // Die Startseite zuerst. Sie fehlte hier, und im Menue heisst kein
+    // Eintrag "Start" - Claudia hat am 20.09.2026 zweimal gefragt, wo
+    // die Startseite hin sei. Sie war nie weg, nur unbeschriftet.
+    { titel: 'Startseite', name: 'Startseite', href: '/' },
+    ...megaMenuItems.flatMap((bereich) =>
+      bereich.categories
+        .filter((kat) => kat.uebersicht)
+        .map((kat) => ({ titel: kat.label, ...kat.uebersicht! }))
+    ),
+  ];
 
   if (wege.length === 0) return null;
 

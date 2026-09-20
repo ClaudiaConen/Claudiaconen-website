@@ -167,6 +167,8 @@ export default function Navigation() {
             >
               <img
                 src="/power-of-ai-banner.jpg"
+                width={300}
+                height={100}
                 alt="The Power of AI – Klick für Chancen"
                 className="h-full w-auto block"
                 loading="eager"

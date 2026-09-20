@@ -41,6 +41,8 @@ export default function About() {
               <div className="aspect-[3/4] rounded-3xl overflow-hidden border-2 border-luxury-gold/30">
                 <img
                   src="/claudiaconen.webp"
+                  width={853}
+                  height={1280}
                   alt="Claudia Conen - Die Umsatzstimme"
                   className="w-full h-full object-cover"
                   loading="lazy"

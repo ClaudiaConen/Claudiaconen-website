@@ -133,6 +133,8 @@ export default function MobileMegaMenu({ onClose }: MobileMegaMenuProps) {
         >
           <img
             src="/power-of-ai-banner.jpg"
+            width={300}
+            height={100}
             alt="The Power of AI – Klick für Chancen"
             className="block w-full h-auto"
             loading="eager"

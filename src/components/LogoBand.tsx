@@ -17,21 +17,25 @@
  * doppelt vorgelesen werden.
  */
 
-type Marke = { datei: string; name: string };
+type Marke = { datei: string; name: string   /** Aus der Bilddatei ausgelesen. Ohne Groessenangabe haelt der
+   *  Browser keinen Platz frei und die Seite springt beim Laden. */
+  breite: number;
+  hoehe: number;
+};
 
 const MARKEN: Marke[] = [
-  { datei: 'sat1.png', name: 'Sat.1' },
-  { datei: 'rtl.svg', name: 'RTL' },
-  { datei: 'dometic.png', name: 'Dometic' },
-  { datei: 'gsa.png', name: 'German Speakers Association' },
-  { datei: 'erde-dna.png', name: 'MRS. B' },
-  { datei: 'greator.png', name: 'Greator' },
-  { datei: 'speakerstars.png', name: 'Speakerstars' },
-  { datei: 'powerofai.png', name: 'The Power of AI' },
-  { datei: 'blickwinkel.png', name: 'Eine Frage, 7 Blickwinkel' },
-  { datei: 'karrierebibel.svg', name: 'Karrierebibel' },
-  { datei: 'erfolg.png', name: 'ERFOLG Magazin' },
-  { datei: 'charisma.png', name: 'Charisma Kongress' },
+  { datei: 'sat1.png', name: 'Sat.1' , breite: 60, hoehe: 60 },
+  { datei: 'rtl.svg', name: 'RTL' , breite: 120, hoehe: 40 },
+  { datei: 'dometic.png', name: 'Dometic' , breite: 462, hoehe: 60 },
+  { datei: 'gsa.png', name: 'German Speakers Association' , breite: 194, hoehe: 56 },
+  { datei: 'erde-dna.png', name: 'MRS. B' , breite: 60, hoehe: 60 },
+  { datei: 'greator.png', name: 'Greator' , breite: 222, hoehe: 60 },
+  { datei: 'speakerstars.png', name: 'Speakerstars' , breite: 265, hoehe: 60 },
+  { datei: 'powerofai.png', name: 'The Power of AI' , breite: 60, hoehe: 60 },
+  { datei: 'blickwinkel.png', name: 'Eine Frage, 7 Blickwinkel' , breite: 185, hoehe: 60 },
+  { datei: 'karrierebibel.svg', name: 'Karrierebibel' , breite: 120, hoehe: 40 },
+  { datei: 'erfolg.png', name: 'ERFOLG Magazin' , breite: 330, hoehe: 60 },
+  { datei: 'charisma.png', name: 'Charisma Kongress' , breite: 60, hoehe: 60 },
 ];
 
 export default function LogoBand() {
@@ -48,6 +52,8 @@ export default function LogoBand() {
               key={m.datei}
               src={`/logos/${m.datei}`}
               alt={m.name}
+              width={m.breite}
+              height={m.hoehe}
               loading="lazy"
               decoding="async"
             />
@@ -56,6 +62,8 @@ export default function LogoBand() {
             <img
               key={`${m.datei}-2`}
               src={`/logos/${m.datei}`}
+              width={m.breite}
+              height={m.hoehe}
               alt=""
               aria-hidden="true"
               loading="lazy"

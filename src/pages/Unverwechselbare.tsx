@@ -178,6 +178,8 @@ export default function Unverwechselbare() {
               />
               <img
                 src="/claudiaconen.webp"
+                width={853}
+                height={1280}
                 alt="Claudia Conen"
                 loading="eager"
                 className="relative w-full object-cover shadow-xl"

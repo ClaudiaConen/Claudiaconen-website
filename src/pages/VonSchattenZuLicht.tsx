@@ -102,6 +102,8 @@ export default function VonSchattenZuLicht() {
                   <div className="relative w-full max-w-[350px] aspect-[3/4] rounded-2xl overflow-hidden shadow-xl">
                     <img
                       src="/claudiaconen3_(1).webp"
+                      width={1366}
+                      height={768}
                       alt="Von Schatten zu Licht - Workshop und Buchprojekt"
                       className="w-full h-full object-cover"
                     />

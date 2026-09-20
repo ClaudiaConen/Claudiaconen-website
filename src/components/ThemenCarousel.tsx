@@ -189,6 +189,8 @@ export default function ThemenCarousel() {
                               wenn die Maus auf der Karte steht. */}
                           <img
                             src={card.thumbnail}
+                            width={640}
+                            height={360}
                             alt=""
                             aria-hidden="true"
                             loading="lazy"

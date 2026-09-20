@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import Navigation from './Navigation';
 import Footer from './Footer';
 import SEO from './SEO';
+import Brotkrumen from './Brotkrumen';
 import ArtikelQuiz, { QuizFrage } from './ArtikelQuiz';
 import ArtikelBild from './ArtikelBild';
 
@@ -89,6 +90,14 @@ export default function ArtikelSeite({ inhalt }: { inhalt: ArtikelInhalt }) {
             {inhalt.bereich}
           </p>
 
+          <div className="mb-6 text-midnight-blue">
+            <Brotkrumen
+              krumen={[
+                { name: 'Wissen', ziel: '/wissensbibliothek' },
+                { name: inhalt.frage },
+              ]}
+            />
+          </div>
           <h1 className="mt-5 font-montserrat text-3xl font-bold leading-[1.15] tracking-tight text-midnight-blue sm:text-4xl">
             {inhalt.frage}
           </h1>

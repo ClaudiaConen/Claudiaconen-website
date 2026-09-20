@@ -3,6 +3,7 @@ import Navigation from './Navigation';
 import Footer from './Footer';
 import SEO from './SEO';
 import Stimmwelle from './Stimmwelle';
+import Brotkrumen from './Brotkrumen';
 import HinweisRednerin from './HinweisRednerin';
 
 /**
@@ -56,6 +57,10 @@ export type ZielgruppenInhalt = {
   /** Rueckweg zur Dachseite. Wichtig bei Seiten, die ueber einen QR-Code
    *  geoeffnet werden: ohne ihn ist die Seite eine Sackgasse. */
   zurueck?: { text: string; ziel: string };
+  /** Der Pfad von der Startseite bis hierher, ohne "Start".
+   *  Ausdruecklich und nicht abgeleitet: Der Zurueck-Verweis sagt,
+   *  wo man herkam, nicht, was ueber dieser Seite steht. */
+  brotkrumen?: { name: string; ziel?: string }[];
   /** Goldene Klangwellen im Kopf. Nur fuer dunkle Stimmung gedacht -
    *  auf hellem Grund verschwindet Gold auf Creme. */
   welle?: boolean;
@@ -178,14 +183,22 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
           </div>
         )}
         <div className="relative z-10 mx-auto max-w-4xl px-6">
-          {inhalt.zurueck && (
-            <Link
-              to={inhalt.zurueck.ziel}
-              className={`mb-7 inline-block font-inter text-sm underline-offset-4 hover:underline ${s.kopfLeise}`}
-            >
-              &larr; {inhalt.zurueck.text}
-            </Link>
-          )}
+          {/* Der Pfad von der Startseite bis hierher. Er ersetzt den
+              frueheren Zurueck-Verweis: derselbe Weg, aber vollstaendig
+              und mit den Daten, aus denen Google den Pfad im
+              Suchergebnis baut. */}
+          <div className={`mb-7 ${s.kopfLeise}`}>
+            <Brotkrumen
+              krumen={
+                inhalt.brotkrumen ?? [
+                  ...(inhalt.zurueck
+                    ? [{ name: inhalt.zurueck.text, ziel: inhalt.zurueck.ziel }]
+                    : []),
+                  { name: inhalt.wer },
+                ]
+              }
+            />
+          </div>
           <p className={`font-montserrat text-xs font-semibold uppercase tracking-[0.2em] ${s.marke}`}>
             {inhalt.wer}
           </p>

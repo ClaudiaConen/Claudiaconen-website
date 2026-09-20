@@ -175,6 +175,10 @@ const INHALT: ZielgruppenInhalt = {
     'Die eigentliche Lage darf nicht angesprochen werden. Wenn ich im Vorgespräch nicht erfahre, was wirklich los ist, halte ich einen freundlichen Vortrag — und der wirkt nicht.',
   ],
 
+  brotkrumen: [
+    { name: 'Für Unternehmen' },
+  ],
+
   fragen: [
     {
       frage: 'Ist das ein KI-Training?',

@@ -100,6 +100,11 @@ const INHALT: ZielgruppenInhalt = {
     'Ihr Thema soll unangetastet bleiben. Genau daran arbeiten wir zuerst, und das ist der unbequemste Teil.',
   ],
 
+  brotkrumen: [
+    { name: 'Ausbildungen', ziel: '/redner-ausbildungen' },
+    { name: 'Speaker werden' },
+  ],
+
   fragen: [
     {
       frage: 'Braucht man eine Ausbildung, um Keynote Speaker zu sein?',

@@ -65,6 +65,10 @@ const INHALT: ZielgruppenInhalt = {
     },
   ],
 
+  brotkrumen: [
+    { name: 'Mentoring' },
+  ],
+
   fragen: [
     {
       frage: 'Was kostet das?',

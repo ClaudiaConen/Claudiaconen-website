@@ -96,6 +96,11 @@ const INHALT: ZielgruppenInhalt = {
     'Sie brauchen das Einkommen sofort. Trauungen werden neun bis achtzehn Monate im Voraus gebucht.',
   ],
 
+  brotkrumen: [
+    { name: 'Ausbildungen', ziel: '/redner-ausbildungen' },
+    { name: 'Hochzeitsredner werden' },
+  ],
+
   fragen: [
     {
       frage: 'Was verdient man als Hochzeitsrednerin?',

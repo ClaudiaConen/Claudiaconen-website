@@ -74,6 +74,11 @@ const INHALT: ZielgruppenInhalt = {
     'Sie erwarten, dass es nach einem Tag sitzt. Der Satz entsteht an einem halben Tag; bis er sitzt, braucht er zehn bis zwanzig echte Situationen.',
   ],
 
+  brotkrumen: [
+    { name: 'Ausbildungen', ziel: '/redner-ausbildungen' },
+    { name: 'Elevator-Pitch-Kurs' },
+  ],
+
   fragen: [
     {
       frage: 'Ist ein Elevator Pitch nicht längst abgenutzt?',

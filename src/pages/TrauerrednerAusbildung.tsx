@@ -95,6 +95,11 @@ const INHALT: ZielgruppenInhalt = {
     'Sie wollen nicht über sich selbst sprechen. Der Umgang mit dem, was die Arbeit mit einem macht, ist hier Teil der Ausbildung und nicht optional.',
   ],
 
+  brotkrumen: [
+    { name: 'Ausbildungen', ziel: '/redner-ausbildungen' },
+    { name: 'Trauerredner werden' },
+  ],
+
   fragen: [
     {
       frage: 'Ich habe selbst jemanden verloren. Spricht das gegen mich?',

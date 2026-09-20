@@ -103,6 +103,11 @@ const INHALT: ZielgruppenInhalt = {
     'Fremde Lebensgeschichten interessieren Sie nicht wirklich. Das ist der einzige Teil, den ich nicht beibringen kann.',
   ],
 
+  brotkrumen: [
+    { name: 'Ausbildungen', ziel: '/redner-ausbildungen' },
+    { name: 'Freier Redner werden' },
+  ],
+
   fragen: [
     {
       frage: 'Bekomme ich ein Zertifikat?',

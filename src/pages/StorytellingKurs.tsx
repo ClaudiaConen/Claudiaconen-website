@@ -76,6 +76,11 @@ const INHALT: ZielgruppenInhalt = {
     'Sie suchen Vorlagen zum Ausfüllen. Die gibt es hier nicht; Sie bringen Ihr eigenes Material mit.',
   ],
 
+  brotkrumen: [
+    { name: 'Ausbildungen', ziel: '/redner-ausbildungen' },
+    { name: 'Storytelling-Kurs' },
+  ],
+
   fragen: [
     {
       frage: 'Ich habe nichts Spannendes erlebt.',

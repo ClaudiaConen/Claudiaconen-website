@@ -173,6 +173,10 @@ const INHALT: ZielgruppenInhalt = {
     'Sie wollen nicht aufgenommen werden. Die Aufnahme ist der Teil, an dem die meisten am meisten lernen — ohne sie fehlt der halbe Tag.',
   ],
 
+  brotkrumen: [
+    { name: 'Ausbildungen' },
+  ],
+
   fragen: [
     {
       frage: 'Braucht man eine Ausbildung, um Speaker zu werden?',

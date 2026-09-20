@@ -81,6 +81,11 @@ const INHALT: ZielgruppenInhalt = {
     },
   ],
 
+  brotkrumen: [
+    { name: 'Freie Rednerin', ziel: '/freie-rednerin' },
+    { name: 'Trauerrede' },
+  ],
+
   fragen: [
     {
       frage: 'Wie kurzfristig geht das?',

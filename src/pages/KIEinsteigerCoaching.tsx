@@ -61,6 +61,11 @@ const INHALT: ZielgruppenInhalt = {
     },
   ],
 
+  brotkrumen: [
+    { name: 'KI & Mensch' },
+    { name: 'KI-Einsteiger-Coaching' },
+  ],
+
   fragen: [
     {
       frage: 'Ich bin nicht technikbegeistert. Ist das trotzdem etwas für mich?',

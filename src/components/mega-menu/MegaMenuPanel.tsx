@@ -127,10 +127,33 @@ export default function MegaMenuPanel({ item, onClose }: MegaMenuPanelProps) {
               <span className="mega-menu-panel-title">{cat.panelTitle}</span>
               <span className="mega-menu-panel-subtitle">{cat.panelSubtitle}</span>
             </div>
-            <div className={`mega-menu-tile-grid ${cat.columns === 3 ? 'cols-3' : ''}`}>
-              {cat.tiles.map((tile) => (
-                <Kachel key={tile.name} tile={tile} />
-              ))}
+            <div className="mega-menu-panel-koerper">
+              <div className={`mega-menu-tile-grid ${cat.columns === 3 ? 'cols-3' : ''}`}>
+                {cat.tiles.map((tile) => (
+                  <Kachel key={tile.name} tile={tile} />
+                ))}
+              </div>
+
+              {/* Die hervorgehobene Kachel rechts. Sie macht aus einer
+                  Liste eine Empfehlung - eine je Bereich, nie zwei. */}
+              {cat.hinweis && (
+                <Link to={cat.hinweis.href} className="mega-menu-hinweis" onClick={onClose}>
+                  <div
+                    className="mega-menu-hinweis-bild"
+                    role="img"
+                    aria-label={`Bildplatz: ${cat.hinweis.bildMotiv}`}
+                  >
+                    <span>{cat.hinweis.bildMotiv}</span>
+                  </div>
+                  <span className="mega-menu-hinweis-marke">{cat.hinweis.marke}</span>
+                  <span className="mega-menu-hinweis-titel">{cat.hinweis.titel}</span>
+                  <span className="mega-menu-hinweis-text">{cat.hinweis.text}</span>
+                  <span className="mega-menu-hinweis-knopf">
+                    {cat.hinweis.knopf}
+                    <ChevronRight size={13} />
+                  </span>
+                </Link>
+              )}
             </div>
             {cat.uebersicht && (
               <Link

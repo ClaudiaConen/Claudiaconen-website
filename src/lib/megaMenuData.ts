@@ -53,6 +53,18 @@ export interface SidebarCategory {
   tiles: TileItem[];
   /** Die Zeile unten im Feld: "Alles dazu auf einer Seite". */
   uebersicht?: { name: string; href: string };
+  /** Die hervorgehobene Kachel rechts im Feld - eine je Bereich.
+   *  Zwei Empfehlungen nebeneinander sind keine Empfehlung.
+   *  bildMotiv beschreibt, was fuer ein Foto dorthin gehoert,
+   *  solange keines da ist. */
+  hinweis?: {
+    marke: string;
+    titel: string;
+    text: string;
+    knopf: string;
+    href: string;
+    bildMotiv: string;
+  };
 }
 
 export interface MegaMenuItem {
@@ -73,6 +85,14 @@ export const megaMenuItems: MegaMenuItem[] = [
         icon: Star,
         panelTitle: 'Keynote Speaker buchen',
         panelSubtitle: 'Ein Vortrag, der nach dem Applaus noch etwas verändert',
+        hinweis: {
+          marke: 'Am häufigsten gefragt',
+          titel: 'Sie haben KI eingeführt. Warum benutzt sie kaum jemand?',
+          text: 'Ein Vortrag über das, worüber im Unternehmen niemand spricht — und was es kostet.',
+          knopf: 'Zur Keynote',
+          href: '/unternehmen-keynotes',
+          bildMotiv: 'Claudia auf der Bühne, Publikum im Bild',
+        },
         tiles: [
           { name: 'Keynote für Ihr Unternehmen', desc: 'Auch zum Thema Mensch und KI', href: '/unternehmen-keynotes', icon: Star },
           { name: 'Keynote & Bühnenperformance', desc: 'Positionierung, Präsenz, Stimmwirkung', href: '/keynote-und-buehnenperformance', icon: Flag },
@@ -107,6 +127,14 @@ export const megaMenuItems: MegaMenuItem[] = [
         icon: GraduationCap,
         panelTitle: 'Redner werden — vier Wege',
         panelSubtitle: 'Sie sprechen ab dem ersten Tag selbst. Nicht zuhören, sprechen.',
+        hinweis: {
+          marke: 'Wenn Sie unsicher sind',
+          titel: 'Welche der vier passt zu Ihnen?',
+          text: 'Die Übersicht stellt sie nebeneinander — mit dem, was jede verlangt, und für wen sie nicht ist.',
+          knopf: 'Alle vier vergleichen',
+          href: '/redner-ausbildungen',
+          bildMotiv: 'Teilnehmerin spricht vor kleiner Gruppe',
+        },
         tiles: [
           { name: 'Speaker werden', desc: 'Thema finden, Vortrag bauen, Honorar verlangen', href: '/speaker-ausbildung', icon: Star },
           { name: 'Freier Redner werden', desc: 'Der Beruf mit allen Anlässen', href: '/freie-redner-ausbildung', icon: MessageSquare },
@@ -144,6 +172,14 @@ export const megaMenuItems: MegaMenuItem[] = [
         icon: MessageSquare,
         panelTitle: 'Claudia Conen als Rednerin',
         panelSubtitle: 'Sie lernt die Menschen kennen, bevor sie über sie spricht',
+        hinweis: {
+          marke: 'Vorher wissen',
+          titel: 'Was eine gute Rede von einer Vorlage unterscheidet',
+          text: 'Claudia lernt die Menschen kennen, bevor sie über sie spricht. Das ist der ganze Unterschied.',
+          knopf: 'Freie Rednerin',
+          href: '/freie-rednerin',
+          bildMotiv: 'Claudia im Gespräch, nah, warmes Licht',
+        },
         tiles: [
           { name: 'Trauerrede', desc: 'Ein Leben in Worten, keine Vorlage', href: '/trauerrede', icon: Shield },
           { name: 'Freie Trauung', desc: 'Die Zeremonie gehört dem Paar', href: '/freie-trauung', icon: Heart },
@@ -166,6 +202,14 @@ export const megaMenuItems: MegaMenuItem[] = [
         icon: Compass,
         panelTitle: 'Zu zweit an Ihrer Sache',
         panelSubtitle: 'Wenn es nicht um ein Format geht, sondern um Sie',
+        hinweis: {
+          marke: 'Zu zweit',
+          titel: 'Neunzig Minuten, ein Anliegen',
+          text: 'Wenn es nicht um ein Format geht, sondern um den einen Auftritt, der ansteht.',
+          knopf: 'Gold-Training',
+          href: '/mentoring-gold',
+          bildMotiv: 'Zwei Personen im Gespräch, Seitenlicht',
+        },
         tiles: [
           { name: '1:1 Mentoring', desc: 'Über mehrere Monate begleitet', href: '/1-zu-1-mentoring', icon: Compass },
           { name: 'Gold-Training (90 Minuten)', desc: 'Eine Sitzung, ein Anliegen', href: '/mentoring-gold', icon: Star },
@@ -203,6 +247,14 @@ export const megaMenuItems: MegaMenuItem[] = [
         icon: Mic,
         panelTitle: 'Fragen zum Reden',
         panelSubtitle: 'Ausführlich beantwortet — kostenlos, ohne Anmeldung',
+        hinweis: {
+          marke: 'Kostenlos',
+          titel: 'Neun Fragen, ausführlich beantwortet',
+          text: 'Keine Anmeldung, kein Newsletter. Lesen, mitnehmen, ausprobieren.',
+          knopf: 'Zur Wissensbibliothek',
+          href: '/wissensbibliothek',
+          bildMotiv: 'Schreibtisch mit Notizen, Detailaufnahme',
+        },
         columns: 3,
         tiles: [
           { name: 'Wie baue ich eine Keynote auf?', href: '/wissen/keynote-aufbauen', icon: Flag },
@@ -270,6 +322,14 @@ export const megaMenuItems: MegaMenuItem[] = [
         icon: Eye,
         panelTitle: 'Claudia Conen',
         panelSubtitle: 'Wer hier spricht — und warum',
+        hinweis: {
+          marke: 'Seit 37 Jahren',
+          titel: 'Wer hier spricht',
+          text: 'Der Weg, die Arbeitsweise, die Haltung — und was sie nicht verspricht.',
+          knopf: 'Über Claudia',
+          href: '/ueber-mich',
+          bildMotiv: 'Porträt, ruhig, direkter Blick',
+        },
         tiles: [
           { name: 'Über mich', desc: 'Weg, Arbeitsweise, Haltung', href: '/ueber-mich', icon: Eye },
           { name: 'Von Schatten zu Licht', desc: 'Das Buchprojekt', href: '/von-schatten-zu-licht', icon: Sun },

@@ -102,7 +102,7 @@ export default function SpanienBookingDanke() {
               {
                 icon: Mail,
                 title: 'Rechnung per E-Mail',
-                desc: 'In den nächsten 1–2 Werktagen bekommst du von uns eine Rechnung per E-Mail über 990 € netto (zzgl. gesetzlicher MwSt.) an die von dir angegebene Anschrift.',
+                desc: 'Wir melden uns bei dir, sobald Termin und Preis der nächsten Auflage feststehen — mit allen Angaben, die du für deine Entscheidung brauchst.',
               },
               {
                 icon: Sparkles,
@@ -157,16 +157,16 @@ export default function SpanienBookingDanke() {
           >
             <div className="text-center mb-7">
               <p className="text-sm uppercase tracking-[0.3em] font-bold text-[#C97AAF] mb-3">Deine Termine</p>
-              <h2 className="font-montserrat font-black text-3xl text-[#2A1F3D]">28.06. – 05.07.2026</h2>
+              <h2 className="font-montserrat font-black text-3xl text-[#2A1F3D]">Termin folgt</h2>
             </div>
 
             <ul className="space-y-3 text-[#2A1F3D]">
               {[
-                { day: 'So, 28.06.2026', label: 'Anreisetag' },
-                { day: 'Mo, 29.06.2026', label: 'Workshop-Beginn' },
+                { day: 'Sonntag', label: 'Anreisetag' },
+                { day: 'Montag', label: 'Workshop-Beginn' },
                 { day: 'Mo – Fr', label: 'Lernzeit 09:00 – 13:00 & 16:00 – 18:00 Uhr' },
-                { day: 'Sa, 04.07.2026', label: 'Aktivitäten- & Freizeit-Tag' },
-                { day: 'So, 05.07.2026', label: 'Abreisetag' },
+                { day: 'Samstag', label: 'Aktivitäten- & Freizeit-Tag' },
+                { day: 'Sonntag darauf', label: 'Abreisetag' },
               ].map((t) => (
                 <li key={t.day + t.label} className="flex items-start gap-3 px-4 py-3 rounded-xl bg-[#FBF7F0] border border-[#E8B4C8]/30">
                   <Clock size={18} className="text-[#DAA520] mt-0.5 flex-shrink-0" />

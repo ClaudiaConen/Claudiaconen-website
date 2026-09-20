@@ -103,7 +103,7 @@ export default function ClaudiaAIBeta() {
               <div className="flex items-start gap-3">
                 <CheckCircle size={24} className="text-bright-gold flex-shrink-0 mt-1" />
                 <p className="text-pearl-white/80">
-                  Wir informieren dich über den Beta-Start (01.11.2025)
+                  Wir sagen dir Bescheid, sobald die Beta öffnet
                 </p>
               </div>
               <div className="flex items-start gap-3">
@@ -152,7 +152,7 @@ export default function ClaudiaAIBeta() {
             className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#DAA520]/20 to-[#DAA520]/20 rounded-full border border-[#DAA520]/30 mb-6"
           >
             <Sparkles size={20} className="text-[#DAA520]" />
-            <span className="text-[#DAA520] font-semibold">Beta verfügbar ab 01.11.2025</span>
+            <span className="text-[#DAA520] font-semibold">Beta in Vorbereitung</span>
           </motion.div>
 
           <motion.h1

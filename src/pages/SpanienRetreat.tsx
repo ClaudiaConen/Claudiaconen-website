@@ -36,8 +36,9 @@ const HOURS_PER_DAY = 6;
 const DAYS = 5;
 const PRICE_PER_HOUR = 33;
 const TOTAL_PRICE = PRICE_PER_HOUR * HOURS_PER_DAY * DAYS;
-const RETREAT_DATE_SHORT = '28.06. – 05.07.2026';
-const RETREAT_DATE_LONG = '28. Juni bis 5. Juli 2026';
+// Die naechste Auflage hat noch keinen Termin. Bis er feststeht,
+// steht hier kein Datum - ein falsches waere schlimmer als keins.
+const RETREAT_DATE_SHORT = 'Termin auf Anfrage';
 
 const learnTopics = [
   { icon: Target, title: 'Positionierung & Angebot', desc: 'Klar werden, wofür du stehst — und ein Angebot bauen, das wirklich verkauft.' },
@@ -69,7 +70,7 @@ const weekPlan = [
 const faqItems = [
   {
     q: 'Wann genau findet die Workshop-Woche statt?',
-    a: `Vom ${RETREAT_DATE_LONG}. Anreisetag ist Sonntag, der 28.06.2026 — komm in Ruhe an, lerne den Ort und die Gruppe kennen. Die Lerntage sind Montag bis Freitag (29.06. – 03.07.2026), Samstag (04.07.) ist Aktivitäten- und Freizeit-Tag. Abreisetag ist Sonntag, der 05.07.2026. An jedem Lerntag lernen wir von 09:00 – 13:00 Uhr und von 16:00 – 18:00 Uhr (6 Stunden) gemeinsam mit Claudia & Gabi.`,
+    a: `Der Termin der nächsten Auflage wird gerade geplant — trag dich ein, dann erfährst du ihn als Erste. Der Ablauf steht: Anreise am Sonntag, Lerntage Montag bis Freitag, Samstag frei für Aktivitäten, Abreise am Sonntag. An jedem Lerntag lernen wir von 09:00 – 13:00 Uhr und von 16:00 – 18:00 Uhr, sechs Stunden gemeinsam mit Claudia & Gabi.`,
   },
   {
     q: 'Brauche ich KI-Vorkenntnisse?',
@@ -150,8 +151,7 @@ export default function SpanienRetreat() {
       `E-Mail: ${formData.email}`,
       formData.telefon ? `Telefon: ${formData.telefon}` : null,
       ``,
-      `Gebuchte Leistung: KI-Workshop-Woche Spanien · 28.06. – 05.07.2026`,
-      `Preis: ${TOTAL_PRICE.toLocaleString('de-DE')} € netto (zzgl. gesetzlicher MwSt.)`,
+      `Vormerkung: KI-Workshop-Woche Spanien, naechste Auflage (Termin offen)`,
       `AGB akzeptiert: ja`,
       `Datenschutz akzeptiert: ja`,
       formData.nachricht ? `\nNachricht:\n${formData.nachricht}` : null,
@@ -309,7 +309,7 @@ export default function SpanienRetreat() {
                   }}
                 >
                   <Send size={18} />
-                  Jetzt verbindlich buchen
+                  Platz vormerken
                 </button>
                 <a
                   href="#programm"
@@ -327,7 +327,7 @@ export default function SpanienRetreat() {
                 className="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-sm text-[#4A3F5C]"
               >
                 <span className="inline-flex items-center gap-2"><MapPin size={16} className="text-[#C97AAF]" /> Spanien · genauer Ort nach Buchung</span>
-                <span className="inline-flex items-center gap-2"><Calendar size={16} className="text-[#DAA520]" /> Anreise: So, 28.06. · Workshop-Start: Mo, 29.06.2026</span>
+                <span className="inline-flex items-center gap-2"><Calendar size={16} className="text-[#DAA520]" /> Anreise sonntags · Workshop-Start montags</span>
                 <span className="inline-flex items-center gap-2"><Clock size={16} className="text-[#C97AAF]" /> Lernzeit: 9–13 &amp; 16–18 Uhr · Sa frei</span>
                 <span className="inline-flex items-center gap-2"><Users size={16} className="text-[#DAA520]" /> max. {TOTAL_SEATS} Teilnehmer:innen</span>
               </motion.div>
@@ -351,9 +351,9 @@ export default function SpanienRetreat() {
                     <span className="text-xs font-bold text-[#C97AAF] tracking-wide uppercase">{RETREAT_DATE_SHORT}</span>
                   </div>
                   <ul className="space-y-1 text-[12px] text-[#4A3F5C] leading-snug">
-                    <li><strong className="text-[#2A1F3D]">So, 28.06.2026</strong> · Anreisetag</li>
-                    <li><strong className="text-[#2A1F3D]">Mo, 29.06.2026</strong> · Workshop-Beginn</li>
-                    <li><strong className="text-[#2A1F3D]">So, 05.07.2026</strong> · Abreisetag</li>
+                    <li><strong className="text-[#2A1F3D]">Sonntag</strong> · Anreisetag</li>
+                    <li><strong className="text-[#2A1F3D]">Montag bis Freitag</strong> · Lerntage</li>
+                    <li><strong className="text-[#2A1F3D]">Sonntag darauf</strong> · Abreisetag</li>
                   </ul>
                 </div>
 
@@ -361,12 +361,11 @@ export default function SpanienRetreat() {
                   <Sparkles size={24} className="text-[#DAA520] mt-1" />
                   <div>
                     <p className="text-sm font-semibold uppercase tracking-wider text-[#C97AAF]">Investition</p>
-                    <p className="font-montserrat text-4xl md:text-5xl font-black text-[#2A1F3D] mt-1">
-                      {TOTAL_PRICE.toLocaleString('de-DE')} €
-                      <span className="text-sm font-semibold text-[#6B5F7A] ml-2">zzgl. MwSt.</span>
+                    <p className="font-montserrat text-3xl md:text-4xl font-black text-[#2A1F3D] mt-1">
+                      Auf Anfrage
                     </p>
                     <p className="text-sm text-[#6B5F7A] mt-1">
-                      pro Teilnehmer:in · {DAYS} Tage × {HOURS_PER_DAY} Std. Lernzeit · {PRICE_PER_HOUR} € / Std. netto
+                      pro Teilnehmer:in · {DAYS} Tage × {HOURS_PER_DAY} Std. Lernzeit
                     </p>
                   </div>
                 </div>
@@ -754,7 +753,7 @@ export default function SpanienRetreat() {
               <p className="text-sm uppercase tracking-[0.3em] font-bold text-[#C97AAF] mb-4">Deine Investition</p>
               <h2 className="font-montserrat font-black text-4xl md:text-6xl text-[#2A1F3D] leading-tight">
                 <span style={{ background: 'linear-gradient(135deg, #DAA520 0%, #C97AAF 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                  {TOTAL_PRICE.toLocaleString('de-DE')} €
+                  Auf Anfrage
                 </span>
                 <span className="text-[#2A1F3D] block text-lg md:text-xl font-semibold mt-3">
                   pro Teilnehmer:in · für die Lernzeit
@@ -764,8 +763,8 @@ export default function SpanienRetreat() {
                 </span>
               </h2>
               <p className="mt-4 text-[#4A3F5C]">
-                Das ergibt sich aus <strong>{DAYS} Tagen × {HOURS_PER_DAY} Stunden × {PRICE_PER_HOUR} € netto</strong> — also 30 Stunden Live-Begleitung mit Claudia &amp; Gabi.
-                Mindestteilnahme: 4 Stunden pro Tag.
+                Der Preis richtet sich nach der Lernzeit: <strong>{DAYS} Tage × {HOURS_PER_DAY} Stunden</strong> — also 30 Stunden Live-Begleitung
+                mit Claudia &amp; Gabi. Die genaue Summe bekommst du mit dem Termin. Mindestteilnahme: 4 Stunden pro Tag.
               </p>
             </div>
 
@@ -870,12 +869,12 @@ export default function SpanienRetreat() {
             >
               <p className="text-sm uppercase tracking-[0.3em] font-bold text-[#C97AAF] mb-4">Buchung</p>
               <h2 className="font-montserrat font-black text-4xl md:text-5xl text-[#2A1F3D] leading-tight">
-                Hier verbindlich buchen.
+                Hier den Platz vormerken.
               </h2>
               <p className="mt-5 text-lg text-[#4A3F5C] leading-relaxed">
-                Sichere dir einen der nur {TOTAL_SEATS} Plätze. Mit dem Klick auf <em>„Verbindlich buchen"</em> kommt
-                ein kostenpflichtiger Vertrag zustande. Du bekommst innerhalb von 1–2 Werktagen eine{' '}
-                <strong className="text-[#2A1F3D]">Rechnung per E-Mail</strong> über {TOTAL_PRICE.toLocaleString('de-DE')} € netto (zzgl. MwSt.).
+                Es gibt nur {TOTAL_SEATS} Plätze. Trag dich ein, und du bekommst Termin und Preis als Erste —
+                mit der Möglichkeit, dann verbindlich zuzusagen. <strong className="text-[#2A1F3D]">Mit dem
+                Eintrag entsteht noch keine Zahlungspflicht.</strong>
               </p>
               <div className="mt-8 space-y-4">
                 {[
@@ -913,11 +912,10 @@ export default function SpanienRetreat() {
               )}
 
               <div className="rounded-2xl bg-gradient-to-br from-[#FBF1D8] to-[#FDE8F2] border border-[#DAA520]/30 p-4 text-center">
-                <p className="text-[10px] uppercase tracking-wider font-bold text-[#C97AAF]">Gebuchte Leistung</p>
-                <p className="font-montserrat font-bold text-[#2A1F3D] mt-1">KI-Workshop-Woche Spanien · 28.06. – 05.07.2026</p>
-                <p className="text-2xl font-black text-[#2A1F3D] mt-2">
-                  {TOTAL_PRICE.toLocaleString('de-DE')} €
-                  <span className="text-sm font-semibold text-[#6B5F7A] ml-2">netto · zzgl. MwSt.</span>
+                <p className="text-[10px] uppercase tracking-wider font-bold text-[#C97AAF]">Vorgemerkt für</p>
+                <p className="font-montserrat font-bold text-[#2A1F3D] mt-1">KI-Workshop-Woche Spanien · nächste Auflage</p>
+                <p className="text-xl font-black text-[#2A1F3D] mt-2">
+                  Termin und Preis folgen
                 </p>
               </div>
 
@@ -1018,7 +1016,7 @@ export default function SpanienRetreat() {
                   <input type="checkbox" name="agbAccepted" required checked={formData.agbAccepted} onChange={handleChange}
                     className="mt-1 w-5 h-5 rounded border-[#E8B4C8] text-[#DAA520] focus:ring-[#DAA520]" />
                   <span className="text-sm text-[#4A3F5C] leading-relaxed">
-                    Ich habe die <a href="/agb" target="_blank" rel="noopener noreferrer" className="text-[#C97AAF] underline">AGB</a> gelesen und akzeptiert. Mir ist bewusst, dass mit dem Absenden eine <strong>verbindliche, kostenpflichtige Buchung</strong> über {TOTAL_PRICE.toLocaleString('de-DE')} € netto (zzgl. MwSt.) zustande kommt. *
+                    Ich habe die <a href="/agb" target="_blank" rel="noopener noreferrer" className="text-[#C97AAF] underline">AGB</a> gelesen und akzeptiert. Mir ist bewusst, dass mit dem Absenden <strong>noch keine Zahlungspflicht</strong> entsteht — ich werde zuerst über Termin und Preis informiert. *
                   </span>
                 </label>
               </div>
@@ -1040,7 +1038,7 @@ export default function SpanienRetreat() {
                 ) : (
                   <>
                     <Send size={18} />
-                    Verbindlich buchen — {TOTAL_PRICE.toLocaleString('de-DE')} € netto
+                    Platz vormerken
                   </>
                 )}
               </button>

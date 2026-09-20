@@ -94,7 +94,7 @@ export default function AdventLanding() {
               <div className="inline-flex items-center gap-2 px-4 py-3 bg-blue-100 border-2 border-blue-300 rounded-xl mb-8">
                 <Calendar className="text-blue-600" size={20} />
                 <p className="text-sm font-semibold text-blue-800">
-                  Die Türchen öffnen sich täglich ab dem 1. Dezember 2025
+                  Ab dem 1. Dezember öffnet sich täglich ein Türchen
                 </p>
               </div>
 
@@ -146,7 +146,7 @@ export default function AdventLanding() {
                   ✨ Keine Zahlungsdaten erforderlich • Jederzeit abmeldbar
                 </p>
                 <p className="text-xs text-gray-400">
-                  📅 Start: 1. Dezember 2025 • Täglich ein neues Türchen
+                  📅 Start: 1. Dezember • Täglich ein neues Türchen
                 </p>
               </div>
             </div>

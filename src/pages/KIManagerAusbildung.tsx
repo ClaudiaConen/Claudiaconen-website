@@ -9,7 +9,6 @@ import {
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
-import CountdownTimer from '../components/CountdownTimer';
 import WhatsAppButton from '../components/WhatsAppButton';
 import KIManagerBookingModal from '../components/KIManagerBookingModal';
 
@@ -104,50 +103,15 @@ export default function KIManagerAusbildung() {
     'Angestellte mit Weiterbildungswunsch'
   ];
 
+  // Ohne Preise unterscheiden sich Early Bird und Regulaer in nichts -
+  // deshalb zwei Pakete statt vier. Die Preise stehen im Shop, nicht
+  // hier: eine Zahl auf zwei Seiten laeuft frueher oder spaeter
+  // auseinander, und dann stimmt eine von beiden nicht.
   const packages = [
     {
-      name: 'Early Bird Einmalzahlung',
-      priceNet: 1200,
-      priceGross: 1428,
-      validUntil: '15.06.2026',
-      saving: 350,
-      payment: 'Einmalig',
+      name: 'Einmalzahlung',
+      payment: 'Ein Betrag zum Start',
       highlight: true,
-      features: [
-        '3 Monate Ausbildung',
-        'Selbstlern-Module',
-        '8 Live-Sessions pro Monat',
-        'Community-Zugang',
-        'Aufzeichnungen',
-        'Zertifizierung',
-        'Ersparnis: 350€ zzgl. MwSt.'
-      ]
-    },
-    {
-      name: 'Early Bird Ratenzahlung',
-      priceNet: 1320,
-      priceGross: 1570.80,
-      validUntil: '15.06.2026',
-      saving: 385,
-      payment: '6× 220€ zzgl. MwSt.',
-      highlight: false,
-      features: [
-        '3 Monate Ausbildung',
-        'Selbstlern-Module',
-        '8 Live-Sessions pro Monat',
-        'Community-Zugang',
-        'Aufzeichnungen',
-        'Zertifizierung',
-        'Ersparnis: 385€ zzgl. MwSt.'
-      ]
-    },
-    {
-      name: 'Regulär Einmalzahlung',
-      priceNet: 1550,
-      priceGross: 1844.50,
-      validFrom: '16.06.2026',
-      payment: 'Einmalig',
-      highlight: false,
       features: [
         '3 Monate Ausbildung',
         'Selbstlern-Module',
@@ -158,11 +122,8 @@ export default function KIManagerAusbildung() {
       ]
     },
     {
-      name: 'Regulär Ratenzahlung',
-      priceNet: 1705,
-      priceGross: 2028.95,
-      validFrom: '16.06.2026',
-      payment: '6× 284,17€ zzgl. MwSt.',
+      name: 'Ratenzahlung',
+      payment: 'In sechs Raten',
       highlight: false,
       features: [
         '3 Monate Ausbildung',
@@ -170,8 +131,7 @@ export default function KIManagerAusbildung() {
         '8 Live-Sessions pro Monat',
         'Community-Zugang',
         'Aufzeichnungen',
-        'Zertifizierung',
-        '10% Flexibilitätsaufschlag'
+        'Zertifizierung'
       ]
     }
   ];
@@ -180,7 +140,7 @@ export default function KIManagerAusbildung() {
     <>
       <SEO
         title="KI Manager Ausbildung – Mensch & KI im Einklang | Claudia Conen"
-        description="Mit Persönlichkeit aus der Masse hervorstechen. KI als Abkürzung im Alltag souverän nutzen. 3 Monate Online-Ausbildung mit Claudia Conen. Start: 01.07.2026"
+        description="Mit Persönlichkeit aus der Masse hervorstechen. KI als Abkürzung im Alltag souverän nutzen. 3 Monate Online-Ausbildung mit Claudia Conen."
         keywords={['KI Manager Ausbildung', 'KI Weiterbildung', 'Data Literacy', 'KI im Business', 'Künstliche Intelligenz lernen', 'KI Zertifizierung', 'Claudia Conen']}
       />
 
@@ -196,7 +156,7 @@ export default function KIManagerAusbildung() {
                 transition={{ duration: 0.6 }}
               >
                 <div className="inline-block px-6 py-2 bg-gradient-to-r from-luxury-gold to-bright-gold text-white rounded-full mb-6 text-sm font-bold shadow-lg">
-                  Start: 01.07.2026
+                  Nächster Start auf Anfrage
                 </div>
 
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-midnight-blue mb-6 leading-tight">
@@ -469,8 +429,8 @@ export default function KIManagerAusbildung() {
                     <div className="flex items-center gap-4">
                       <Calendar className="text-luxury-gold" size={24} />
                       <div>
-                        <div className="font-bold text-midnight-blue">Start: 01.07.2026</div>
-                        <div className="text-sm text-gray-600">Sei von Anfang an dabei</div>
+                        <div className="font-bold text-midnight-blue">Nächster Start auf Anfrage</div>
+                        <div className="text-sm text-gray-600">Sagen Sie Bescheid, dann melde ich mich mit dem Termin</div>
                       </div>
                     </div>
                   </div>
@@ -820,9 +780,9 @@ export default function KIManagerAusbildung() {
                 Alle Preise zzgl. gesetzlicher Mehrwertsteuer
               </p>
               <div className="max-w-3xl mx-auto">
-                <CountdownTimer targetDate="2026-06-15T23:59:59" />
-                <p className="text-sm text-gray-600 mt-4">
-                  Einführungspreis endet am 15.06.2026
+                <p className="text-base text-gray-700">
+                  Die nächste Runde wird gerade geplant. Schreiben Sie mir — dann bekommen Sie
+                  Termin und Preis, sobald beides steht.
                 </p>
               </div>
             </motion.div>
@@ -849,37 +809,10 @@ export default function KIManagerAusbildung() {
 
                   <div className="text-center mb-6">
                     <h3 className="text-xl font-bold text-midnight-blue mb-3">{pkg.name}</h3>
-                    {pkg.validUntil && (
-                      <div className="inline-block px-3 py-1 bg-green-50 border-2 border-green-200 rounded-lg mb-3">
-                        <p className="text-xs text-green-700 font-semibold">
-                          Gültig bis {pkg.validUntil}
-                        </p>
-                      </div>
-                    )}
-                    {pkg.validFrom && (
-                      <div className="inline-block px-3 py-1 bg-gray-50 border-2 border-gray-200 rounded-lg mb-3">
-                        <p className="text-xs text-gray-700 font-semibold">
-                          Ab {pkg.validFrom}
-                        </p>
-                      </div>
-                    )}
                     <div className="mb-4">
-                      <div className="flex items-baseline justify-center gap-2">
-                        <span className="text-4xl font-bold text-luxury-gold">{pkg.priceNet}€</span>
-                      </div>
-                      <p className="text-sm text-gray-600">zzgl. MwSt.</p>
-                      <p className="text-xs text-gray-500 mt-1">
-                        (inkl. MwSt: {pkg.priceGross}€)
-                      </p>
+                      <span className="text-2xl font-bold text-luxury-gold">Preis auf Anfrage</span>
                     </div>
                     <p className="text-sm text-midnight-blue font-semibold mb-3">{pkg.payment}</p>
-                    {pkg.saving && (
-                      <div className="inline-block px-4 py-2 bg-green-50 border-2 border-green-200 rounded-xl">
-                        <p className="text-green-700 font-bold text-sm">
-                          Spare {pkg.saving}€ zzgl. MwSt.
-                        </p>
-                      </div>
-                    )}
                   </div>
 
                   <div className="space-y-2 mb-6">
@@ -907,7 +840,7 @@ export default function KIManagerAusbildung() {
                         : 'bg-midnight-blue text-white hover:bg-royal-navy'
                     }`}
                   >
-                    Jetzt buchen
+                    Zum Buchungsformular
                   </motion.button>
                 </motion.div>
               ))}
@@ -925,10 +858,7 @@ export default function KIManagerAusbildung() {
                   <strong className="text-white">Du sicherst dir jetzt deinen Platz und meldest dich verbindlich an.</strong>
                 </p>
                 <p className="text-white">
-                  Die Ausbildung beginnt am 01.07.2026.
-                </p>
-                <p className="text-white">
-                  Wer sich bis zum 15.06.2026 anmeldet oder bezahlt, erhält automatisch den Einführungspreis (bei Einmalzahlung oder Early-Bird-Ratenzahlung).
+                  Den Termin der nächsten Runde erfahren Sie, sobald er steht — und zwar vor allen anderen.
                 </p>
                 <p className="text-bright-gold font-semibold">
                   Das ist seriös, fair und transparent.
@@ -963,7 +893,7 @@ export default function KIManagerAusbildung() {
                 was Vertrauen entstehen lässt.
               </h2>
               <p className="text-xl mb-10 text-pearl-white/80">
-                Sichere dir jetzt deinen Platz in der KI Manager Ausbildung und profitiere vom Einführungspreis.
+                Melde dich für die nächste Runde der KI Manager Ausbildung — dann bekommst du Termin und Preis als Erste.
               </p>
               <motion.button
                 onClick={scrollToPricing}

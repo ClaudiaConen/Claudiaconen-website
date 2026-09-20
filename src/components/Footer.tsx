@@ -77,12 +77,17 @@ export default function Footer() {
         <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
           <div className="lg:col-span-2">
             <div className="mb-4 flex items-center gap-4">
-              <img
-                src="/logo-claudia-neu.jpg"
-                alt="Claudia Conen – KI & Mensch"
-                className="h-16 w-16 rounded-full object-cover flex-shrink-0"
-                style={{ filter: 'drop-shadow(0 0 8px rgba(218,165,32,0.4))' }}
-              />
+              <picture>
+                <source srcSet="/logo-192.webp" type="image/webp" />
+                <img
+                  src="/logo-192.jpg"
+                  alt="Claudia Conen – KI & Mensch"
+                  width={64}
+                  height={64}
+                  className="h-16 w-16 rounded-full object-cover flex-shrink-0"
+                  style={{ filter: 'drop-shadow(0 0 8px rgba(218,165,32,0.4))' }}
+                />
+              </picture>
               <div>
                 <h3 className="text-2xl font-montserrat font-bold text-bright-gold mb-2">
                   Claudia Conen

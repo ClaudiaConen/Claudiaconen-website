@@ -103,12 +103,21 @@ export default function Navigation() {
             onClick={(e) => { e.preventDefault(); navigate('/'); closeMegaMenu(); }}
             className="flex-shrink-0 hover:opacity-80 transition-opacity duration-300"
           >
-            <img
-              src="/logo-claudia-neu.jpg"
-              alt="Claudia Conen – KI & Mensch"
-              className="h-12 w-12 rounded-full object-cover"
-              style={{ filter: 'drop-shadow(0 0 8px rgba(218,165,32,0.4))' }}
-            />
+            {/* 192 Pixel statt 1254. Angezeigt werden 48 - das reicht
+                auch bei dreifacher Bildschirmdichte. Das Logo laedt auf
+                JEDER Seite, deshalb zaehlt hier jedes Kilobyte:
+                7 statt 112 KB. */}
+            <picture>
+              <source srcSet="/logo-192.webp" type="image/webp" />
+              <img
+                src="/logo-192.jpg"
+                alt="Claudia Conen – KI & Mensch"
+                width={48}
+                height={48}
+                className="h-12 w-12 rounded-full object-cover"
+                style={{ filter: 'drop-shadow(0 0 8px rgba(218,165,32,0.4))' }}
+              />
+            </picture>
           </a>
 
           <ul className="hidden xl:flex items-center gap-1 list-none">

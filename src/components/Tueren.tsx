@@ -98,7 +98,7 @@ const TUEREN: Tuer[] = [
 
 export default function Tueren() {
   return (
-    <section className="relative bg-pearl-white" aria-label="Wofür bist du hier?">
+    <section className="relative bg-pearl-white" aria-labelledby="tueren-frage">
       {/* Platz fuer ein spaeteres Hintergrundvideo. Bis dahin ein ruhiger Verlauf. */}
       <div
         className="pointer-events-none absolute inset-0"
@@ -107,6 +107,25 @@ export default function Tueren() {
       />
 
       <div className="relative mx-auto max-w-5xl px-6 py-20 sm:py-28">
+
+        {/* Die Frage stand bisher NUR im aria-label des Abschnitts - also
+            fuer Vorleseprogramme da und fuer sonst niemanden. Im
+            sichtbaren Text kam sie null mal vor.
+
+            Beim Vergleich mit yvonnedebark.de aufgefallen: Dort steht
+            direkt unter der Ueberschrift "Was suchst du:" und darunter
+            sechs benannte Tueren. Das ist ihr eigentliches
+            Klarheitswerkzeug - eine direkte Frage, die sortiert, bevor
+            jemand lesen muss.
+
+            Eine Frage, kein Slogan. Sie trifft den Moment: Jemand ist
+            gelandet und weiss noch nicht, wo er hingehoert. */}
+        <h2
+          id="tueren-frage"
+          className="mb-10 font-montserrat text-xl font-bold text-midnight-blue sm:mb-14 sm:text-3xl"
+        >
+          Wofür bist du hier?
+        </h2>
 
         {/* Gestapelte Kacheln. Der wachsende Abstand nach oben laesst sie beim
             Scrollen uebereinander gleiten, die Skalierung gibt die Tiefe. */}

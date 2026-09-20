@@ -131,6 +131,13 @@ const NICHT_IN_DIE_SITEMAP = new Set([
   '/meine-plaene',
   '/jahres-contentplan',
   '/adventskalender/kalender',
+  // Diese vier zeigen mit ihrer kanonischen Angabe auf eine andere
+  // Seite - sie sind aeltere Schablonenfassungen desselben Themas. Eine
+  // Sitemap, die sie auffuehrt, widerspricht der kanonischen Angabe.
+  '/stimme-trauer',
+  '/stimme-hochzeit',
+  '/ausbildung-beruf',
+  '/speaker-storytelling',
 ]);
 
 /**

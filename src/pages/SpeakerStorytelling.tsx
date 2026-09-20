@@ -106,6 +106,8 @@ export default function SpeakerStorytelling() {
 
   return (
     <SubpageTemplate
+      kanonischPfad="/storytelling-kurs"
+      seoTitle="Storytelling lernen für Speaker | Claudia Conen"
       title="GESCHICHTEN SCHAFFEN GÄNSEHAUT"
       subtitle="Was Menschen vor sich sehen, erzählen sie weiter"
       introText="Storytelling • Emotional Selling • Elevator Pitch – Lerne, wie du mit Geschichten überzeugst und im Gedächtnis bleibst."

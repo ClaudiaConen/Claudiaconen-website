@@ -17,6 +17,9 @@ interface SubpageTemplateProps {
   keywords?: string[];
   seoTitle?: string;
   seoDescription?: string;
+  /** Zeigt auf die massgebliche Seite, wenn diese hier nur eine
+   *  zweite Adresse desselben Inhalts ist. */
+  kanonischPfad?: string;
 }
 
 export default function SubpageTemplate({
@@ -29,7 +32,8 @@ export default function SubpageTemplate({
   topic,
   keywords = [],
   seoTitle,
-  seoDescription
+  seoDescription,
+  kanonischPfad
 }: SubpageTemplateProps) {
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
 
@@ -39,6 +43,7 @@ export default function SubpageTemplate({
         title={seoTitle || title}
         description={seoDescription || introText}
         keywords={keywords}
+        kanonischPfad={kanonischPfad}
       />
       <Navigation />
 

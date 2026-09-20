@@ -49,6 +49,8 @@ export default function StimmeHochzeit() {
 
   return (
     <SubpageTemplate
+      kanonischPfad="/freie-trauung"
+      seoTitle="Hochzeitsrede und freie Trauung | Claudia Conen"
       title="VOM OHR INS HERZ"
       subtitle="Für unvergessliche Momente und Botschaften"
       introText="Freie Rednerin • Hochzeiten • Trauerfeiern • Events – Worte, die berühren und bleiben."

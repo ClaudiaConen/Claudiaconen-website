@@ -45,6 +45,8 @@ export default function StimmeTrauer() {
 
   return (
     <SubpageTemplate
+      kanonischPfad="/trauerrede"
+      seoTitle="Trauerrede halten lassen | Claudia Conen"
       title="Trauerreden"
       subtitle="Die Stimme für Ihre Botschaft"
       introText="Würdevolle Worte für den Abschied. Individuelle Trauerreden mit Empathie und Würde."

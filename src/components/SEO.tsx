@@ -8,6 +8,9 @@ interface SEOProps {
   ogImage?: string;
   ogType?: string;
   path?: string;
+  /** Zeigt auf die massgebliche Seite, wenn zwei Adressen denselben
+   *  Inhalt haben. Ohne Angabe ist die Seite selbst massgeblich. */
+  kanonischPfad?: string;
   noindex?: boolean;
   article?: {
     publishedTime?: string;
@@ -40,6 +43,7 @@ export default function SEO({
   ogImage = 'https://claudiaconen.com/og-image.jpg',
   ogType = 'website',
   path,
+  kanonischPfad,
   noindex = false,
   article
 }: SEOProps) {
@@ -52,10 +56,14 @@ export default function SEO({
   );
 
   const canonicalUrl = useMemo(
-    () => path
-      ? `https://claudiaconen.com${path}`
-      : `https://claudiaconen.com${location.pathname}`,
-    [path, location.pathname]
+    () => {
+      // kanonischPfad schlaegt alles: Er zeigt auf die massgebliche
+      // Seite, wenn diese hier nur eine zweite Adresse desselben
+      // Inhalts ist.
+      const ziel = kanonischPfad ?? path ?? location.pathname;
+      return `https://claudiaconen.com${ziel}`;
+    },
+    [kanonischPfad, path, location.pathname]
   );
 
   const keywordsString = useMemo(

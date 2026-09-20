@@ -59,6 +59,8 @@ export default function AusbildungBeruf() {
 
   return (
     <SubpageTemplate
+      kanonischPfad="/speaker-ausbildung"
+      seoTitle="Redner werden als Beruf | Claudia Conen"
       title="Redner als Beruf"
       subtitle="Redner-Ausbildungen"
       introText="Die komplette Ausbildung für alle, die Speaker als Beruf ausüben wollen. Von der Positionierung bis zum Business-Aufbau."

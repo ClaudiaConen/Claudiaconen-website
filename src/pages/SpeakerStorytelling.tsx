@@ -51,7 +51,7 @@ export default function SpeakerStorytelling() {
           <div className="p-6 bg-pearl-white border-2 border-bright-gold/30 rounded-xl">
             <h4 className="font-bold text-lg sm:text-xl text-midnight-blue mb-3">Fakten werden vergessen</h4>
             <p className="text-gray-600 text-base sm:text-lg">
-              Zahlen und Daten verschwinden aus dem Gedächtnis. Menschen erinnern sich an nur 5-10% davon.
+              Zahlen und Daten verschwinden aus dem Gedächtnis. Eine Geschichte bleibt — weil man sie miterlebt hat.
             </p>
           </div>
           <div className="p-6 bg-gradient-to-br from-bright-gold/20 to-luxury-gold/30 border-2 border-bright-gold rounded-xl">

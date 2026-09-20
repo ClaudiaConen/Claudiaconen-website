@@ -482,7 +482,7 @@ export default function WorkbookGenerator() {
                         <div className="text-4xl font-bold text-bright-gold" contentEditable suppressContentEditableWarning>100–200</div>
                         <div className="text-[10px] text-bright-gold mb-1.5" contentEditable suppressContentEditableWarning>Millisekunden</div>
                         <p className="text-[9px] leading-tight opacity-90" contentEditable suppressContentEditableWarning>
-                          So lange braucht das Gehirn für einen emotionalen Reiz. Was daraus wird, entscheidet sich langsamer.
+                          Laut Willis &amp; Todorov (Princeton, 2006) entstehen erste Urteile in dieser Spanne. Was daraus wird, entscheidet sich langsamer.
                         </p>
                       </div>
                       <div className="bg-midnight-blue text-white p-4 rounded-lg text-center">

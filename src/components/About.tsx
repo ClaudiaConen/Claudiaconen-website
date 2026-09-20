@@ -1,27 +1,39 @@
 import { motion } from 'framer-motion';
-import { Users, Clock, Star, Award } from 'lucide-react';
+import { Users, Clock, BookOpen, Award } from 'lucide-react';
 
 export default function About() {
+  // Vier Angaben, die jeder nachzaehlen kann.
+  //
+  // Vorher standen hier: "300+ Erfolgreiche Kunden" (widersprach den
+  // "2.100 Kunden" an vier anderen Stellen derselben Seite),
+  // "35 Jahre Expertise" (Claudia hat am 18.09.2026 auf 37 korrigiert,
+  // ueberall sonst steht 37), "5.0 Durchschnittsbewertung" (das
+  // verlinkte Profil hatte null Bewertungen - dieselbe Angabe wurde
+  // deshalb schon aus den Kundenstimmen entfernt) und "47% Avg.
+  // Umsatzsteigerung" (ohne jede Grundlage).
+  //
+  // Die Kundenzahl fehlt bewusst, bis geklaert ist, welche stimmt.
+  // Eine falsche Zahl ist schlimmer als keine.
   const stats = [
     {
-      icon: Users,
-      value: '300+',
-      label: 'Erfolgreiche Kunden',
-    },
-    {
       icon: Clock,
-      value: '35',
-      label: 'Jahre Expertise',
-    },
-    {
-      icon: Star,
-      value: '5.0',
-      label: 'Durchschnittsbewertung',
+      value: '37',
+      label: 'Jahre Erfahrung',
     },
     {
       icon: Award,
-      value: '47%',
-      label: 'Avg. Umsatzsteigerung',
+      value: '4',
+      label: 'Wege zum Rednerberuf',
+    },
+    {
+      icon: BookOpen,
+      value: '85',
+      label: 'Artikel, kostenlos lesbar',
+    },
+    {
+      icon: Users,
+      value: '0 €',
+      label: 'Erstgespräch',
     },
   ];
 

@@ -168,8 +168,33 @@ function fehlendeErgaenzen() {
   }
 }
 
+/**
+ * Ausschliessen, was ausdruecklich nicht hineingehoert.
+ *
+ * Diese Funktion fehlte beim ersten Versuch: Die Ausnahmeliste wurde
+ * nur beim ERGAENZEN geprueft, nicht bei dem, was von Hand oben in
+ * staticPages steht. Die vier kanonisch umgeleiteten Seiten standen
+ * dort - und blieben trotz Ausnahme in der Sitemap.
+ *
+ * Gefunden durch Nachzaehlen im fertigen Ergebnis, nicht durch Lesen
+ * des Codes.
+ */
+function ausgeschlosseneEntfernen() {
+  const vorher = staticPages.length;
+  for (let i = staticPages.length - 1; i >= 0; i--) {
+    if (NICHT_IN_DIE_SITEMAP.has(staticPages[i].path)) {
+      staticPages.splice(i, 1);
+    }
+  }
+  const weg = vorher - staticPages.length;
+  if (weg > 0) {
+    console.log(`  ! ${weg} Seiten aus der Sitemap genommen (noindex oder kanonisch auf eine andere Seite)`);
+  }
+}
+
 async function generateSitemap() {
   fehlendeErgaenzen();
+  ausgeschlosseneEntfernen();
 
   console.log('🚀 Generiere Sitemap...');
 

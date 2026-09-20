@@ -126,7 +126,7 @@ export default function SpeakerTraining() {
       ctaText="Bereit für Ihre Transformation?"
       topic="Voice-to-Impact® Intensivtraining"
       seoTitle="Voice-to-Impact® Intensivtraining Köln | 2-3 Tage Speaker Training | Claudia Conen"
-      seoDescription="Maximiere deine Bühnenwirkung! Das Voice-to-Impact® Intensivtraining in Köln verwandelt dich in 2-3 Tagen zum professionellen Speaker. Stimmtraining, Präsenz & Storytelling für messbaren Erfolg. Jetzt Platz sichern!"
+      seoDescription="Zwei bis drei Tage Intensivtraining in Köln: Stimme, Präsenz und Storytelling an Ihrem eigenen Vortrag. Sie sprechen ab dem ersten Tag selbst."
       keywords={['Speaker Training', 'Voice-to-Impact', 'Intensivtraining', 'Köln', 'Stimmtraining', 'Bühnenpräsenz', 'Storytelling', 'Claudia Conen', 'Präsentationstraining', 'Performance Coaching']}
     />
   );

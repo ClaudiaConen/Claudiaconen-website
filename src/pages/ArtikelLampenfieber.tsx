@@ -18,7 +18,7 @@ const INHALT: ArtikelInhalt = {
   frage: 'Was hilft gegen Lampenfieber?',
 
   kurzantwort:
-    'Drei Dinge, und keines davon ist Mut. Erstens: langsamer ausatmen als einatmen — das beruhigt den Körper messbar und ist in einer Minute zu machen. Zweitens: die ersten beiden Sätze auswendig können, damit der Anfang nicht gedacht werden muss. Drittens: vorher laut sprechen, nicht nur im Kopf durchgehen. Lampenfieber verschwindet nicht, aber es wird kleiner als die Aufgabe.',
+    'Drei Dinge, und keines davon ist Mut. Erstens: langsamer ausatmen als einatmen — das bremst den Körper aus und ist in einer Minute zu machen. Zweitens: die ersten beiden Sätze auswendig können, damit der Anfang nicht gedacht werden muss. Drittens: vorher laut sprechen, nicht nur im Kopf durchgehen. Lampenfieber verschwindet nicht, aber es wird kleiner als die Aufgabe.',
 
   vorspann:
     'Fast jeder Mensch, den Sie auf einer Bühne sehen, hat Lampenfieber. Der Unterschied ist nicht, dass es weg ist. Der Unterschied ist, dass es nichts mehr verhindert.',

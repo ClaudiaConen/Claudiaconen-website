@@ -83,7 +83,7 @@ const INHALT: ZielgruppenInhalt = {
     {
       frage: 'Woher weiß ich, dass die Methode wissenschaftlich fundiert ist?',
       antwort:
-        'Sie ist Erfahrungswissen aus über siebenunddreißig Jahren Arbeit mit Stimme, Bühne und Menschen. Wissenschaftliche Versprechen werden hier keine gemacht. Was zählt, ist, ob sich dein Auftritt messbar verändert, und das siehst du selbst in Woche zwölf.',
+        'Sie ist Erfahrungswissen aus über siebenunddreißig Jahren Arbeit mit Stimme, Bühne und Menschen. Wissenschaftliche Versprechen werden hier keine gemacht. Was zählt, ist, ob sich dein Auftritt verändert — und das hörst du selbst, wenn du deine Aufnahme aus Woche eins neben die aus Woche zwölf legst.',
     },
     {
       frage: 'Ich habe wenig Zeit. Wie viel muss ich einplanen?',

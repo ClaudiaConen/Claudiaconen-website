@@ -103,7 +103,7 @@ export default function BlogKI() {
         </p>
         <p className="text-lg text-gray-700 leading-relaxed font-semibold">
           Deshalb ist Persönlichkeit kein weiches Thema.
-          Sie ist neurobiologisch messbarer Wettbewerbsvorteil.
+          Sie ist das Einzige, was sich nicht nachbauen lässt.
         </p>
       </div>
 

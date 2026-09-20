@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronDown, Calendar } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { megaMenuItems } from '../lib/megaMenuData';
 import MegaMenuPanel from './mega-menu/MegaMenuPanel';
 import MobileMegaMenu from './mega-menu/MobileMegaMenu';
@@ -13,6 +13,18 @@ export default function Navigation() {
   const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const openTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  // In welchem Menuebereich liegt die Seite, auf der wir gerade sind?
+  // Gesucht wird in allen Kacheln und Uebersichtszielen - der erste
+  // Bereich, der die Adresse kennt, gewinnt.
+  const hierBereich = megaMenuItems.find((bereich) =>
+    bereich.categories.some(
+      (kat) =>
+        kat.tiles.some((t) => !t.external && t.href === pathname) ||
+        kat.uebersicht?.href === pathname
+    )
+  )?.id;
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -108,7 +120,10 @@ export default function Navigation() {
                 onMouseLeave={handleMenuLeave}
               >
                 <button
-                  className={`mega-nav-link ${activeMenuId === item.id ? 'active' : ''}`}
+                  className={`mega-nav-link ${activeMenuId === item.id ? 'active' : ''} ${
+                    hierBereich === item.id ? 'hier' : ''
+                  }`}
+                  aria-current={hierBereich === item.id ? 'true' : undefined}
                 >
                   {item.label}
                   <ChevronDown

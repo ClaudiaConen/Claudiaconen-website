@@ -1839,3 +1839,21 @@ html, body { cursor: auto; }
 .mega-menu-container.zu {
   display: none;
 }
+
+/* Der Bereich, in dem man gerade ist. Bewusst nur eine feine Linie in
+   Gold - eine volle Hervorhebung wuerde mit dem aufgeklappten Zustand
+   konkurrieren, und man haette zwei Markierungen nebeneinander. */
+.mega-nav-link.hier::after {
+  content: '';
+  position: absolute;
+  left: 0.9rem;
+  right: 0.9rem;
+  bottom: 0.35rem;
+  height: 1.5px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent, #daa520 25%, #daa520 75%, transparent);
+}
+
+.mega-nav-link {
+  position: relative;
+}

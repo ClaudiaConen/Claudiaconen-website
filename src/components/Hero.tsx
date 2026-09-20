@@ -121,9 +121,9 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.2 }}
-            className="space-y-6"
+            className="space-y-5 sm:space-y-6"
           >
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               <div className="accent-line"></div>
               <h1 id="hero-headline" className="font-montserrat font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight">
                 <span className="headline-line1">Würdest du DIR selbst zuhören?</span>
@@ -133,7 +133,7 @@ export default function Hero() {
               </h1>
 
               <motion.div
-                className="subline text-lg sm:text-xl md:text-2xl mt-6"
+                className="subline text-base sm:text-xl md:text-2xl mt-4 sm:mt-6"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.2 }}
@@ -147,16 +147,16 @@ export default function Hero() {
               </motion.div>
 
               {/* Hauchzart, damit klar ist: beides ist moeglich, mit KI und ohne. */}
-              <p className="mt-5 font-inter text-xs sm:text-sm font-light tracking-[0.22em] text-pearl-white/45">
+              <p className="mt-3 sm:mt-5 font-inter text-xs sm:text-sm font-light tracking-[0.22em] text-pearl-white/45">
                 mit und ohne KI
               </p>
 
-              <p className="mt-6 font-montserrat text-xs sm:text-sm font-semibold uppercase tracking-[0.18em] text-pearl-white/60">
+              <p className="mt-4 sm:mt-6 font-montserrat text-xs sm:text-sm font-semibold uppercase tracking-[0.18em] text-pearl-white/60">
                 Rhetorik · Storytelling · Performance · Wirkung
               </p>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-3">
+            <div className="hero-kacheln flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 sm:grid sm:grid-cols-3 sm:gap-3 sm:overflow-visible lg:grid-cols-7">
               {keyPoints.map((point, index) => {
                 const Icon = point.icon;
                 const media = stepMediaData[point.stepNumber];
@@ -167,7 +167,7 @@ export default function Hero() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.2 }}
-                    className="hero-glass-card p-4 rounded-xl group"
+                    className="hero-glass-card group w-[8.5rem] flex-shrink-0 snap-start rounded-xl p-3 sm:w-auto sm:flex-shrink sm:p-4"
                     onClick={(e) => {
                       e.preventDefault();
                       const target = document.querySelector(point.href);

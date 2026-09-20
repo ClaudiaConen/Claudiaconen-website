@@ -34,7 +34,7 @@ export default function Umbauhinweis() {
   return (
     <div
       role="status"
-      className="fixed bottom-4 left-4 z-40 max-w-[17rem] rounded-lg border border-luxury-gold/40 bg-midnight-blue/95 px-4 py-3 shadow-xl backdrop-blur-sm"
+      className="fixed bottom-3 left-3 right-20 z-30 max-w-[15rem] rounded-lg border border-luxury-gold/40 bg-midnight-blue/95 px-3 py-2 shadow-xl backdrop-blur-sm sm:bottom-4 sm:left-4 sm:right-auto sm:max-w-[17rem] sm:px-4 sm:py-3"
     >
       <p className="font-montserrat text-[11px] font-semibold uppercase tracking-[0.16em] text-luxury-gold">
         Hier wird gerade gebaut

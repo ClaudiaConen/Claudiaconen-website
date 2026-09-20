@@ -1197,12 +1197,19 @@ html, body { cursor: auto; }
   color: #C9A961;
   display: block;
   font-weight: 700;
+  /* #d4af37 an den Enden, NICHT #DAA520. Zeichengleich mit
+     .gold-text-animated auf community.claudiaconen.com, abgerufen am
+     20.09.2026. Diese Zeile wurde schon einmal versehentlich
+     ueberschrieben - von meinem eigenen Farb-Normalisierungsskript am
+     19.09.2026, das site-weit #D4AF37 -> #DAA520 abbildete. Wer so ein
+     Skript nochmal laufen laesst, nimmt diese Stellen aus.
+     Gegenprobe: scratchpad/gold_pruefen.py */
   background: linear-gradient(135deg,
-    #DAA520 0%,
-    #F7E7CE 25%,
-    #C9A961 50%,
-    #F7E7CE 75%,
-    #DAA520 100%);
+    #d4af37 0%,
+    #f7e7ce 25%,
+    #c9a961 50%,
+    #f7e7ce 75%,
+    #d4af37 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1317,12 +1324,19 @@ html, body { cursor: auto; }
      mit drei Leuchtschatten und einer Vergroesserung auf 102 Prozent — das
      war das Unruhige daran. */
   font-weight: 700;
+  /* #d4af37 an den Enden, NICHT #DAA520. Zeichengleich mit
+     .gold-text-animated auf community.claudiaconen.com, abgerufen am
+     20.09.2026. Diese Zeile wurde schon einmal versehentlich
+     ueberschrieben - von meinem eigenen Farb-Normalisierungsskript am
+     19.09.2026, das site-weit #D4AF37 -> #DAA520 abbildete. Wer so ein
+     Skript nochmal laufen laesst, nimmt diese Stellen aus.
+     Gegenprobe: scratchpad/gold_pruefen.py */
   background: linear-gradient(135deg,
-    #DAA520 0%,
-    #F7E7CE 25%,
-    #C9A961 50%,
-    #F7E7CE 75%,
-    #DAA520 100%);
+    #d4af37 0%,
+    #f7e7ce 25%,
+    #c9a961 50%,
+    #f7e7ce 75%,
+    #d4af37 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -2146,5 +2160,32 @@ html, body { cursor: auto; }
   .mega-menu-hinweis,
   .mega-menu-hinweis:hover {
     transform: none;
+  }
+}
+
+/* Die Kachelreihe im Kopfbereich, auf dem Telefon zum Wischen.
+   Claudia am 20.09.2026: "ohne dass es beim Handy so lange und
+   langweilig aussieht." Sieben Kacheln in zwei Spalten waren vier
+   Reihen hoher Karten - jetzt eine Reihe, die man seitlich wischt.
+
+   Die Bildlaufleiste wird ausgeblendet: Auf einem Telefon gibt es
+   ohnehin keine, und auf dem Schreibtisch ist die Reihe ein Raster. */
+.hero-kacheln {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  /* Damit die erste und letzte Karte nicht am Rand kleben. */
+  scroll-padding-left: 0.25rem;
+}
+
+.hero-kacheln::-webkit-scrollbar {
+  display: none;
+}
+
+/* Auf Geraeten ohne Maus bekommt die Reihe etwas Schwung, damit sich
+   das Wischen richtig anfuehlt. */
+@media (pointer: coarse) {
+  .hero-kacheln {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
   }
 }

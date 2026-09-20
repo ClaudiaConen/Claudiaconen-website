@@ -99,19 +99,39 @@ export default function Hero() {
   ];
 
   return (
-    <section className="relative pt-40 md:pt-40 lg:pt-44 pb-6 md:pb-8 lg:pb-10 px-4 sm:px-6 lg:px-8" style={{ minHeight: '85vh' }} aria-labelledby="hero-headline">
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: 'url(/photo_2025-07-09%2016.44.30.jpeg)',
-          zIndex: 0
-        }}
-      />
+    <section
+      className="relative px-4 pb-10 pt-28 sm:px-6 sm:pt-32 lg:px-8 lg:pt-36"
+      aria-labelledby="hero-headline"
+    >
+      {/* Vorher lag hier ein Hintergrundfoto mit einem Schleier von 90
+          Prozent Deckkraft darueber. Das Foto
+          ("/photo_2025-07-09 16.44.30.jpeg") EXISTIERT NICHT - der
+          Abruf antwortet mit HTTP 200, liefert aber die Auffangseite.
+          Uebrig blieb ein fast undurchsichtiger Schleier ueber nichts:
+          genau das "riesige dunkle Feld".
+
+          Solange kein Buehnenfoto da ist, entsteht die Tiefe aus zwei
+          weichen Lichtquellen statt aus einer flachen Flaeche. Das ist
+          der Griff, mit dem Apple Tiefe ohne Bild erzeugt - nicht
+          heller machen, sondern ungleichmaessig. */}
       <div
         className="absolute inset-0"
         style={{
-          background: 'linear-gradient(180deg, #0A1628 0%, #0F1F3A 50%, #0A1628 100%)',
-          opacity: 0.9,
+          background:
+            'radial-gradient(120% 85% at 12% 0%, rgba(26,43,76,0.95) 0%, rgba(10,22,40,0) 62%),' +
+            'radial-gradient(90% 70% at 88% 18%, rgba(218,165,32,0.14) 0%, rgba(10,22,40,0) 58%),' +
+            'linear-gradient(175deg, #0B1B33 0%, #0A1628 48%, #0C1E38 100%)',
+          zIndex: 0,
+        }}
+      />
+      {/* Die Kante nach unten: kein harter Schnitt, sondern ein
+          Auslaufen. Ein Block, der abrupt endet, wirkt wie ein Kasten;
+          einer, der ausblendet, wie eine Seite. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-28"
+        style={{
+          background: 'linear-gradient(180deg, rgba(10,22,40,0) 0%, rgba(255,254,249,0.06) 100%)',
           zIndex: 1,
         }}
       />
@@ -167,7 +187,7 @@ export default function Hero() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.2 }}
-                    className="hero-glass-card group w-[8.5rem] flex-shrink-0 snap-start rounded-xl p-3 sm:w-auto sm:flex-shrink sm:p-4"
+                    className="hero-glass-card group w-[11rem] flex-shrink-0 snap-start rounded-xl p-3.5 sm:w-auto sm:flex-shrink"
                     onClick={(e) => {
                       e.preventDefault();
                       const target = document.querySelector(point.href);
@@ -178,16 +198,28 @@ export default function Hero() {
                       }
                     }}
                   >
-                    <div className="flex flex-col items-center text-center gap-2">
-                      <div className="p-2 rounded-full bg-gradient-to-r from-[#DAA520] to-[#F4D03F] group-hover:scale-110 transition-transform duration-300">
-                        <Icon size={20} className="text-midnight-blue" />
-                      </div>
-                      <div>
-                        <p className="text-sm font-bold text-pearl-white">{point.title}</p>
-                        <p className="text-xs text-pearl-white/70">{point.subtitle}</p>
+                    {/* Titel links, Abspielknopf rechts auf gleicher Hoehe.
+                        Vorher waren es vier gestapelte Ebenen je Kachel -
+                        goldener Kreis, Titel, Unterzeile, Knopf - und das
+                        siebenmal nebeneinander. Sieben goldene Kreise sind
+                        sieben Betonungen, und sieben Betonungen sind keine.
+                        Das Gold bleibt jetzt dort, wo etwas passiert: am
+                        Abspielknopf. */}
+                    <div className="flex items-start gap-2.5 text-left">
+                      <Icon
+                        size={16}
+                        className="mt-0.5 flex-shrink-0 text-[#DAA520]/70 transition-colors duration-300 group-hover:text-[#DAA520]"
+                      />
+                      <div className="min-w-0 flex-1">
+                        <p className="text-[0.82rem] font-semibold leading-snug text-pearl-white">
+                          {point.title}
+                        </p>
+                        <p className="mt-0.5 text-[0.7rem] leading-snug text-pearl-white/60">
+                          {point.subtitle}
+                        </p>
                       </div>
                       {media && (
-                        <div className="mt-1" onClick={(e) => e.stopPropagation()}>
+                        <div className="flex-shrink-0" onClick={(e) => e.stopPropagation()}>
                           {media.media_type === 'audio' ? (
                             <AudioButton audioUrl={media.media_url} ariaLabel={`Play ${point.title} audio`} />
                           ) : media.media_type === 'video' && media.platform ? (
@@ -243,15 +275,27 @@ export default function Hero() {
             transition={{ duration: 0.2 }}
             className="relative group w-full lg:w-[400px] xl:w-[450px] video-nebel"
           >
-            <div className="absolute -inset-1 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
-            <div className="relative rounded-2xl overflow-hidden border-2 border-luxury-gold/30" style={{ aspectRatio: '16/9' }}>
+            {/* Vorher lag hinter dem Rahmen ein weichgezeichneter
+                Goldverlauf, der bei Maus darueber auf doppelte Staerke
+                ging. Claudias Gestaltungsvorgabe vom 18.09.2026: "keine
+                unnoetigen Glow-, Neon-, Gold- oder Effektwelten". Eine
+                Haarlinie und ein ruhiger Schatten sagen dasselbe, ohne
+                zu leuchten. */}
+            <div
+              className="relative overflow-hidden rounded-2xl border border-luxury-gold/25"
+              style={{
+                aspectRatio: '16/9',
+                boxShadow: '0 24px 60px -24px rgba(0,0,0,0.65)',
+              }}
+            >
               <iframe
                 src="https://player.vimeo.com/video/1143907515"
-                className="w-full h-full"
+                className="h-full w-full"
                 frameBorder="0"
-                allow="autoplay; fullscreen; picture-in-picture"
+                loading="lazy"
+                allow="fullscreen; picture-in-picture"
                 allowFullScreen
-                title="Claudia Conen Video"
+                title="Claudia Conen im Video"
               ></iframe>
             </div>
           </motion.div>

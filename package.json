@@ -5,13 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run generate-sitemap && vite build && npm run vorrendern && npm run llms",
+    "build": "npm run stimmen && npm run generate-sitemap && vite build && npm run vorrendern && npm run llms",
     "generate-sitemap": "tsx scripts/generate-sitemap.ts",
     "lint": "eslint .",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit -p tsconfig.app.json",
     "vorrender-buendel": "vite build --ssr src/vorrender-eintrag.tsx --outDir dist-vorrender --logLevel warn",
     "llms": "node scripts/llms-erzeugen.mjs",
+    "stimmen": "node scripts/stimmen-holen.mjs",
     "vorrendern": "npm run vorrender-buendel && node scripts/vorrendern.mjs"
   },
   "dependencies": {

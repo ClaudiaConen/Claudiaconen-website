@@ -13,9 +13,26 @@ interface Testimonial {
   display_order: number;
 }
 
+/**
+ * Der Anfangsstand, beim Bauen aus Supabase geholt
+ * (scripts/stimmen-holen.mjs, Ergebnis in public/stimmen.json).
+ *
+ * Damit stehen die Stimmen schon im ausgelieferten HTML - vorher stand
+ * dort nur "Testimonials werden geladen…", und eine KI sah keine
+ * einzige. Im Browser wird trotzdem nachgeladen, damit nichts
+ * veraltet.
+ *
+ * Es sind nur Stimmen MIT ECHTEM NAMEN dabei. Am 20.09.2026 trugen
+ * alle zehn als Namen die Abschnittsueberschrift plus eine Nummer;
+ * die im Quelltext zu haben waere schlechter als nichts gewesen.
+ */
+import stimmenAnfang from '../../public/stimmen.json';
+
 export default function SocialProof() {
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>(
+    stimmenAnfang as Testimonial[]
+  );
+  const [loading, setLoading] = useState((stimmenAnfang as Testimonial[]).length === 0);
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
 
   useEffect(() => {

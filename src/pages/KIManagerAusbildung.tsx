@@ -834,11 +834,19 @@ export default function KIManagerAusbildung() {
 
                   <motion.button
                     onClick={() => {
-                      if (index <= 1) {
-                        window.open('https://umsatzstimme-claudiaconen.tentary.com/p/ki-manager-ausbildung', '_blank');
-                      } else {
-                        window.open('https://umsatzstimme-claudiaconen.tentary.com/p/ki-manager-ausbildungregulaer', '_blank');
-                      }
+                      // Die alte Weiche hiess "index <= 1" und traf, solange
+                      // es vier Pakete gab: 0 und 1 waren Early Bird
+                      // (1.200 Euro), 2 und 3 regulaer (1.550 Euro).
+                      //
+                      // Seit die vier auf zwei zusammengelegt sind, haben
+                      // BEIDE einen Index unter 2 - und beide fuehrten zum
+                      // Early-Bird-Produkt. Dessen Frist lief am 15.06.2026
+                      // ab; jede Buchung waere 350 Euro unter dem regulaeren
+                      // Preis gelaufen.
+                      //
+                      // Nach Claudias eigener Angabe auf dieser Seite gilt
+                      // seit dem 16.06.2026 der regulaere Preis.
+                      window.open('https://umsatzstimme-claudiaconen.tentary.com/p/ki-manager-ausbildungregulaer', '_blank');
                     }}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}

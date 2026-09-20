@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { Clock, Euro, Check, ArrowRight, Mail, Phone, User } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import SEO from '../components/SEO';
+import Navigation from '../components/Navigation';
+import Footer from '../components/Footer';
 
 interface AppointmentType {
   id: string;
@@ -243,6 +245,11 @@ export default function BookingCalendar() {
   }
 
   return (
+    <>
+      {/* Navigation und Fusszeile fehlten. Die Seite hatte vier
+          Verweise und KEIN Impressum - eine Sackgasse, und das
+          Impressum muss von jeder Seite erreichbar sein. */}
+      <Navigation />
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 pt-24 pb-12">
       <SEO
         title="Termin bei Claudia Conen buchen — Erstgespräch kostenlos"
@@ -589,5 +596,7 @@ export default function BookingCalendar() {
         )}
       </div>
     </div>
+    <Footer />
+    </>
   );
 }

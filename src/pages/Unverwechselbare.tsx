@@ -1,6 +1,8 @@
 import { useState, FormEvent } from 'react';
 import { supabase } from '../lib/supabase';
 import SEO from '../components/SEO';
+import Navigation from '../components/Navigation';
+import Footer from '../components/Footer';
 
 /**
  * Eintragungsseite "Die Unverwechselbaren".
@@ -67,6 +69,12 @@ export default function Unverwechselbare() {
   };
 
   return (
+    <>
+      {/* Navigation und Fusszeile fehlten. Die Seite hatte vier
+          Verweise und KEIN Impressum - wer hier ueber eine Suche
+          landete, kam nirgendwo hin, und das Impressum muss in
+          Deutschland von jeder Seite erreichbar sein. */}
+      <Navigation />
     <main className="min-h-screen bg-pearl-white text-midnight-blue">
       <SEO
         title="Die Unverwechselbaren"
@@ -192,5 +200,7 @@ export default function Unverwechselbare() {
         </div>
       </div>
     </main>
+    <Footer />
+    </>
   );
 }

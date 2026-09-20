@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SEO from '../components/SEO';
 import Navigation from '../components/Navigation';
+import Footer from '../components/Footer';
 import { supabaseCms, type WebsiteEvent } from '../lib/supabaseCms';
 import {
   ChevronLeft,
@@ -681,6 +682,9 @@ export default function Events() {
           </motion.div>
         </div>
       </div>
+      {/* Die Fusszeile fehlte - damit war das Impressum von
+          dieser Seite aus nicht erreichbar. */}
+      <Footer />
     </>
   );
 }

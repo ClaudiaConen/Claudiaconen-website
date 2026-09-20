@@ -1,11 +1,38 @@
 import {
-  Star, Users, Heart, Calendar, Target, Edit3, Flag, Share2, Mic,
-  Globe, Compass, GraduationCap, MessageSquare,
-  BookOpen, Wrench, Gift, Monitor, Send, Brain,
-  ChevronsRight, Eye, Sun, Shield, Newspaper,
-  Mail, Video, Activity, Building2, Bot, Sparkles, Pause, Ear
+  BookOpen, Bot, Brain, Calendar, ChevronsRight, Compass, Ear, Edit3, Eye, Flag, Gift, Globe, GraduationCap, Handshake, Heart, Mail, MessageSquare, Mic, Monitor, Newspaper, Pause, Send, Share2, Shield, Sparkles, Star, Sun, Target, Users, Video, Wrench
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
+
+/**
+ * Die Menuestruktur.
+ *
+ * Stand 20.09.2026, nach Claudias Ansage: "lege das Menü oben neu an,
+ * denke auch an die verschiedenen Zielkunden, quasi die Produkte - so
+ * wie wir es auf der Startseite haben. Recherchiere, wie die Titel sein
+ * sollen, dass sie am meisten ranken und gefunden werden."
+ *
+ * ZWEI REGELN, nach denen die obersten sechs Woerter gewaehlt sind:
+ *
+ * 1. Jedes ist ein Wort, nach dem Menschen SUCHEN. Recherchiert am
+ *    20.09.2026 an den Seitentiteln, die den Markt besetzen:
+ *    "Keynote Speaker buchen" ist die haeufigste Form auf der
+ *    Firmenseite; bei den Ausbildungen heisst es durchgehend
+ *    "Trauerredner Ausbildung", "Trauredner werden",
+ *    "Ausbildung freier Redner". Deshalb "Keynotes", "Ausbildungen",
+ *    "Rednerin buchen" - und nicht "Dienstleistungen", "Antworten",
+ *    "Aktuelles", nach denen niemand sucht.
+ *
+ * 2. Die Gliederung folgt den ZIELGRUPPEN, wie die vier Tueren auf der
+ *    Startseite: Unternehmen, Redner in spe, Anlaesse, Einzelarbeit.
+ *    Wer sich dort wiedererkannt hat, findet im Menue dasselbe Wort.
+ *
+ * Sechs oberste Punkte. Die Faustregel aus der Navigationsliteratur ist
+ * fuenf bis neun; Greator hat fuenf. Sechs lassen jede Zielgruppe ein
+ * eigenes Wort haben, ohne dass man suchen muss.
+ *
+ * MERKE: "Trauredner" und "Hochzeitsredner" werden BEIDE gesucht,
+ * "Trauredner" sogar oefter. Deshalb steht beides im Kacheltext.
+ */
 
 export interface TileItem {
   name: string;
@@ -24,9 +51,7 @@ export interface SidebarCategory {
   panelSubtitle: string;
   columns?: 3;
   tiles: TileItem[];
-  /** Die Zeile unten im Feld: "Alles dazu auf einer Seite". Claudia am
-   *  19.09.2026: das Menue soll uebersichtlich bleiben, Einzelheiten
-   *  gehoeren auf die Unterseite und nicht ins aufklappende Feld. */
+  /** Die Zeile unten im Feld: "Alles dazu auf einer Seite". */
   uebersicht?: { name: string; href: string };
 }
 
@@ -37,85 +62,176 @@ export interface MegaMenuItem {
 }
 
 export const megaMenuItems: MegaMenuItem[] = [
+  // ------------------------------------------------ 1. Unternehmen
   {
-    label: 'Dienstleistungen',
-    id: 'dienstleistungen',
+    label: 'Keynotes',
+    id: 'keynotes',
     categories: [
       {
-        id: 'unternehmen',
-        label: 'Für Unternehmen',
-        icon: Building2,
-        panelTitle: 'Für Unternehmen',
-        panelSubtitle: 'Vorträge und Trainings für Teams und Führungskräfte',
+        id: 'keynote-buchen',
+        label: 'Keynote Speaker buchen',
+        icon: Star,
+        panelTitle: 'Keynote Speaker buchen',
+        panelSubtitle: 'Ein Vortrag, der nach dem Applaus noch etwas verändert',
         tiles: [
-          { name: 'Keynotes & Firmenvorträge', desc: 'Auch zum Thema Mensch und KI', href: '/unternehmen-keynotes', icon: Star },
-          { name: 'Führung & Kommunikation', desc: 'Wie Führungskräfte gehört werden', href: '/unternehmen-leadership', icon: Users },
-          { name: 'Verkauf & Auftreten', desc: 'Emotional Selling im Vertrieb', href: '/unternehmen-selling', icon: Heart },
-          { name: 'Interne Events & Moderation', desc: 'Durch den Tag führen', href: '/unternehmen-events', icon: Calendar },
+          { name: 'Keynote für Ihr Unternehmen', desc: 'Auch zum Thema Mensch und KI', href: '/unternehmen-keynotes', icon: Star },
+          { name: 'Keynote & Bühnenperformance', desc: 'Positionierung, Präsenz, Stimmwirkung', href: '/keynote-und-buehnenperformance', icon: Flag },
+          { name: 'Eventmoderation', desc: 'Durch den Tag führen, nicht nur ansagen', href: '/stimme-keynote', icon: Mic },
+          { name: 'Interne Events', desc: 'Jahresauftakt, Kickoff, Jubiläum', href: '/unternehmen-events', icon: Calendar },
         ],
         uebersicht: { name: 'Alles für Unternehmen und Teams', href: '/unternehmen-keynotes' },
       },
       {
-        id: 'rednerin',
-        label: 'Claudia als Rednerin buchen',
-        icon: MessageSquare,
-        panelTitle: 'Claudia als Rednerin buchen',
-        panelSubtitle: 'Wenn jemand sprechen soll, der die Menschen vorher kennenlernt',
+        id: 'teams',
+        label: 'Für Teams & Führung',
+        icon: Users,
+        panelTitle: 'Für Teams & Führungskräfte',
+        panelSubtitle: 'Wenn eingeführt wurde, was keiner benutzt — und keiner es sagt',
         tiles: [
-          { name: 'Trauerrede', desc: 'Ein Leben in Worten, nicht eine Vorlage', href: '/trauerrede', icon: Shield },
-          { name: 'Freie Trauung', desc: 'Die Zeremonie gehört dem Paar', href: '/freie-trauung', icon: Heart },
-          { name: 'Keynote & Eventmoderation', desc: 'Bühne und Ablauf in einer Hand', href: '/stimme-keynote', icon: Flag },
-          { name: 'Sprecherin für Voice Over & Podcast', desc: 'Stimme für Aufnahmen', href: '/stimme-voiceover', icon: Mic },
+          { name: 'Führung & Kommunikation', desc: 'Wie Führungskräfte gehört werden', href: '/unternehmen-leadership', icon: Users },
+          { name: 'Verkauf & Auftreten', desc: 'Emotional Selling im Vertrieb', href: '/unternehmen-selling', icon: Handshake },
+          { name: 'Marke & Positionierung', desc: 'Erkennbar bleiben im KI-Zeitalter', href: '/marke-und-positionierung', icon: Target },
         ],
-        uebersicht: { name: 'Freie Rednerin — alle Anlässe auf einer Seite', href: '/freie-rednerin' },
       },
+    ],
+  },
+
+  // ------------------------------------------------ 2. Redner werden
+  {
+    label: 'Ausbildungen',
+    id: 'ausbildungen',
+    categories: [
       {
-        id: 'ausbildung',
-        label: 'Redner-Ausbildungen',
+        id: 'redner-werden',
+        label: 'Redner werden',
         icon: GraduationCap,
-        panelTitle: 'Redner-Ausbildungen',
-        panelSubtitle: 'Vier Wege. Sie sprechen ab dem ersten Tag selbst.',
+        panelTitle: 'Redner werden — vier Wege',
+        panelSubtitle: 'Sie sprechen ab dem ersten Tag selbst. Nicht zuhören, sprechen.',
         tiles: [
-          { name: 'Speaker werden', desc: 'Thema, Vortrag, Honorar', href: '/speaker-ausbildung', icon: Star },
+          { name: 'Speaker werden', desc: 'Thema finden, Vortrag bauen, Honorar verlangen', href: '/speaker-ausbildung', icon: Star },
           { name: 'Freier Redner werden', desc: 'Der Beruf mit allen Anlässen', href: '/freie-redner-ausbildung', icon: MessageSquare },
-          { name: 'Hochzeitsredner werden', desc: 'Paargespräch, Zeremonie, Tag', href: '/hochzeitsredner-ausbildung', icon: Heart },
+          { name: 'Trauredner werden', desc: 'Hochzeitsredner für die freie Trauung', href: '/hochzeitsredner-ausbildung', icon: Heart },
           { name: 'Trauerredner werden', desc: 'Auch der Umgang mit dem, was bleibt', href: '/trauerredner-ausbildung', icon: Shield },
         ],
         uebersicht: { name: 'Alle vier Ausbildungen im Vergleich', href: '/redner-ausbildungen' },
       },
       {
-        id: 'speaker',
-        label: 'Für Speaker & Selbständige',
-        icon: Mic,
-        panelTitle: 'Für Speaker & Selbständige',
-        panelSubtitle: 'Einzelne Bausteine, wenn keine ganze Ausbildung nötig ist',
+        id: 'kurse',
+        label: 'Einzelne Kurse',
+        icon: ChevronsRight,
+        panelTitle: 'Einzelne Kurse',
+        panelSubtitle: 'Wenn keine ganze Ausbildung nötig ist, sondern ein Baustein',
         tiles: [
           { name: 'Storytelling-Kurs', desc: 'Aus Erlebtem wird eine Geschichte', href: '/storytelling-kurs', icon: Edit3 },
           { name: 'Elevator-Pitch-Kurs', desc: 'Ein Satz, der bei Ihnen bleibt', href: '/elevator-pitch-kurs', icon: ChevronsRight },
-          { name: 'Positionierung', desc: 'Wofür stehen Sie, in einem Satz', href: '/speaker-positionierung', icon: Target },
           { name: 'Bühnenwirkung & Auftritt', desc: 'Stand, Blick, Pausen', href: '/speaker-buehne', icon: Flag },
+          { name: 'Positionierung', desc: 'Wofür Sie stehen, in einem Satz', href: '/speaker-positionierung', icon: Target },
           { name: 'Reden auf Social Media', desc: 'Vor der Kamera sprechen', href: '/speaker-social', icon: Share2 },
         ],
         uebersicht: { name: 'Speaker & freie Redner — Übersicht', href: '/redner-ausbildungen' },
       },
+    ],
+  },
+
+  // ------------------------------------------------ 3. Anlaesse
+  {
+    label: 'Rednerin buchen',
+    id: 'rednerin',
+    categories: [
       {
-        id: 'mentoring',
-        label: 'Mentoring & Einzelarbeit',
-        icon: Compass,
-        panelTitle: 'Mentoring & Einzelarbeit',
-        panelSubtitle: 'Zu zweit, wenn es um Ihre eigene Sache geht',
+        id: 'anlaesse',
+        label: 'Für Ihren Anlass',
+        icon: MessageSquare,
+        panelTitle: 'Claudia Conen als Rednerin',
+        panelSubtitle: 'Sie lernt die Menschen kennen, bevor sie über sie spricht',
         tiles: [
-          { name: 'Marke & eigene Sprache', desc: 'Was Sie sagen, wenn niemand vorgibt wie', href: '/mentoring-transformation', icon: Sun },
+          { name: 'Trauerrede', desc: 'Ein Leben in Worten, keine Vorlage', href: '/trauerrede', icon: Shield },
+          { name: 'Freie Trauung', desc: 'Die Zeremonie gehört dem Paar', href: '/freie-trauung', icon: Heart },
+          { name: 'Moderation', desc: 'Bühne und Ablauf in einer Hand', href: '/stimme-keynote', icon: Flag },
+          { name: 'Sprecherin für Voice Over', desc: 'Stimme für Aufnahmen und Podcast', href: '/stimme-voiceover', icon: Mic },
+        ],
+        uebersicht: { name: 'Freie Rednerin — alle Anlässe', href: '/freie-rednerin' },
+      },
+    ],
+  },
+
+  // ------------------------------------------------ 4. Einzelarbeit
+  {
+    label: 'Mentoring & KI',
+    id: 'mentoring',
+    categories: [
+      {
+        id: 'einzeln',
+        label: 'Einzelarbeit',
+        icon: Compass,
+        panelTitle: 'Zu zweit an Ihrer Sache',
+        panelSubtitle: 'Wenn es nicht um ein Format geht, sondern um Sie',
+        tiles: [
+          { name: '1:1 Mentoring', desc: 'Über mehrere Monate begleitet', href: '/1-zu-1-mentoring', icon: Compass },
           { name: 'Gold-Training (90 Minuten)', desc: 'Eine Sitzung, ein Anliegen', href: '/mentoring-gold', icon: Star },
+          { name: 'Marke & eigene Sprache', desc: 'Was Sie sagen, wenn niemand vorgibt wie', href: '/mentoring-transformation', icon: Sun },
           { name: 'Online, wo immer Sie sind', desc: 'Dieselbe Arbeit über Bildschirm', href: '/mentoring-online', icon: Globe },
         ],
       },
       {
-        id: 'wissen',
-        label: 'Wissen to Go',
-        icon: BookOpen,
-        panelTitle: 'Wissen to Go',
-        panelSubtitle: 'Kostenlos, ohne Anmeldung, sofort lesbar',
+        id: 'ki',
+        label: 'KI & Mensch',
+        icon: Brain,
+        panelTitle: 'KI & Mensch',
+        panelSubtitle: 'Die Technik bedienen, ohne die eigene Sprache zu verlieren',
+        columns: 3,
+        tiles: [
+          { name: 'KI-Einsteiger-Coaching', href: '/ki-einsteiger-coaching', icon: Compass },
+          { name: 'KI-Manager Ausbildung', href: '/ki-manager-ausbildung', icon: Monitor },
+          { name: 'KI 1:1', href: '/ki-1zu1', icon: Users },
+          { name: 'HeyGen Kurs', href: '/ki-heygen-kurs', icon: Video },
+          { name: 'KI-Abkürzungen', href: '/1zu1-abkuerzung-dezember', icon: ChevronsRight },
+          { name: 'Was KI nicht kann', href: '/blog-ki', icon: Brain },
+        ],
+      },
+    ],
+  },
+
+  // ------------------------------------------------ 5. Wissen
+  {
+    label: 'Wissen',
+    id: 'wissen',
+    categories: [
+      {
+        id: 'fragen-reden',
+        label: 'Fragen zum Reden',
+        icon: Mic,
+        panelTitle: 'Fragen zum Reden',
+        panelSubtitle: 'Ausführlich beantwortet — kostenlos, ohne Anmeldung',
+        columns: 3,
+        tiles: [
+          { name: 'Wie baue ich eine Keynote auf?', href: '/wissen/keynote-aufbauen', icon: Flag },
+          { name: 'Wie finde ich mein Thema?', href: '/wissen/thema-finden-speaker', icon: Target },
+          { name: 'Was hilft gegen Lampenfieber?', href: '/wissen/lampenfieber', icon: Sparkles },
+          { name: 'Wie mache ich richtig Pausen?', href: '/wissen/sprechpausen', icon: Pause },
+          { name: 'Wie trainiere ich meine Stimme?', href: '/wissen/stimme-trainieren', icon: Mic },
+          { name: 'Kann man Charisma lernen?', href: '/wissen/charisma-lernen', icon: Star },
+        ],
+        uebersicht: { name: 'Alle Artikel in der Wissensbibliothek', href: '/wissensbibliothek' },
+      },
+      {
+        id: 'fragen-buchen',
+        label: 'Fragen zum Buchen',
+        icon: Star,
+        panelTitle: 'Fragen zum Buchen',
+        panelSubtitle: 'Was Veranstalter vorher wissen wollen',
+        tiles: [
+          { name: 'Was kostet ein Keynote Speaker?', desc: 'Preisspannen im deutschen Markt', href: '/wissen/was-kostet-ein-keynote-speaker', icon: Star },
+          { name: 'Wie finde ich den passenden Speaker?', desc: 'Woran man vorher erkennt, ob es passt', href: '/wissen/keynote-speaker-finden', icon: Compass },
+          { name: 'Das Vier-Ohren-Modell', desc: 'Warum dasselbe anders ankommt', href: '/wissen/vier-ohren-modell', icon: Ear },
+        ],
+      },
+      {
+        id: 'kostenlos',
+        label: 'Kostenlos mitnehmen',
+        icon: Gift,
+        panelTitle: 'Kostenlos mitnehmen',
+        panelSubtitle: 'Ohne Anmeldung, sofort nutzbar',
         columns: 3,
         tiles: [
           { name: 'Wissensbibliothek A–Z', href: '/wissensbibliothek', icon: BookOpen },
@@ -125,79 +241,25 @@ export const megaMenuItems: MegaMenuItem[] = [
           { name: 'Telegram-Audioimpulse', href: '/wissen-telegram', icon: Send },
           { name: 'Adventskalender', href: '/adventskalender', icon: Gift },
         ],
-        uebersicht: { name: 'Alles im Überblick', href: '/wissen-to-go' },
-      },
-    ],
-  },
-  {
-    label: 'Antworten',
-    id: 'antworten',
-    categories: [
-      {
-        id: 'fragen-reden',
-        label: 'Fragen zum Reden',
-        icon: Mic,
-        panelTitle: 'Fragen zum Reden',
-        panelSubtitle: 'Ausführlich beantwortet — kostenlos und ohne Anmeldung',
-        columns: 3,
-        tiles: [
-          { name: 'Wie baue ich eine Keynote auf?', href: '/wissen/keynote-aufbauen', icon: Flag },
-          { name: 'Wie finde ich mein Thema?', href: '/wissen/thema-finden-speaker', icon: Target },
-          { name: 'Was hilft gegen Lampenfieber?', href: '/wissen/lampenfieber', icon: Activity },
-          { name: 'Wie mache ich richtig Pausen?', href: '/wissen/sprechpausen', icon: Pause },
-          { name: 'Wie trainiere ich meine Stimme?', href: '/wissen/stimme-trainieren', icon: Mic },
-          { name: 'Kann man Charisma lernen?', href: '/wissen/charisma-lernen', icon: Sparkles },
-        ],
-        uebersicht: { name: 'Alle Artikel in der Wissensbibliothek', href: '/wissensbibliothek' },
+        uebersicht: { name: 'Wissen to go — alles im Überblick', href: '/wissen-to-go' },
       },
       {
-        id: 'fragen-buchen',
-        label: 'Fragen zum Buchen',
-        icon: Star,
-        panelTitle: 'Fragen zum Buchen',
-        panelSubtitle: 'Was Veranstalter und Unternehmen vorher wissen wollen',
+        id: 'termine',
+        label: 'Termine & Blog',
+        icon: Calendar,
+        panelTitle: 'Termine & Blog',
+        panelSubtitle: 'Wo Claudia als Nächstes zu erleben ist',
         tiles: [
-          { name: 'Was kostet ein Keynote Speaker?', desc: 'Preisspannen im deutschen Markt', href: '/wissen/was-kostet-ein-keynote-speaker', icon: Star },
-          { name: 'Wie finde ich den passenden Speaker?', desc: 'Woran man vorher erkennt, ob es passt', href: '/wissen/keynote-speaker-finden', icon: Compass },
-          { name: 'Das Vier-Ohren-Modell', desc: 'Warum dasselbe anders ankommt', href: '/wissen/vier-ohren-modell', icon: Ear },
+          { name: 'KI-Workshop „Die Unverwechselbaren"', desc: '2 Tage live · 3 Coaches', href: '/ki-workshop-unverwechselbar', icon: Sparkles, fullWidth: true },
+          { name: 'Kommende Events', desc: 'Alle Termine auf einen Blick', href: '/events', icon: Calendar },
+          { name: 'Blog', desc: 'Neues zuerst hier', href: '/blog', icon: Edit3 },
+          { name: 'Newsletter', desc: 'Impulse ins Postfach', href: '/newsletter', icon: Mail },
         ],
       },
     ],
   },
-  {
-    label: 'KI & Mensch',
-    id: 'ki-mensch',
-    categories: [
-      {
-        id: 'ki-angebote',
-        label: 'KI-Angebote',
-        icon: Monitor,
-        panelTitle: 'KI-Angebote',
-        panelSubtitle: 'Die Technik bedienen, ohne die eigene Sprache zu verlieren',
-        columns: 3,
-        tiles: [
-          { name: 'KI-Manager Ausbildung', href: '/ki-manager-ausbildung', icon: Monitor },
-          { name: 'KI-Einsteiger-Coaching', href: '/ki-einsteiger-coaching', icon: Compass },
-          { name: 'KI 1:1', href: '/ki-1zu1', icon: Users },
-          { name: 'HeyGen Kurs', href: '/ki-heygen-kurs', icon: Video },
-          { name: 'KI-Abkürzungen', href: '/1zu1-abkuerzung-dezember', icon: ChevronsRight },
-          { name: 'Webseite als Erlebnis', href: '/ki-webseite-erlebnis', icon: Globe },
-        ],
-      },
-      {
-        id: 'ki-philosophie',
-        label: 'Mensch und KI',
-        icon: Brain,
-        panelTitle: 'Mensch und KI',
-        panelSubtitle: 'Was die Maschine übernimmt — und was sie nicht kann',
-        tiles: [
-          { name: 'Was KI nicht kann', desc: 'Und warum das Ihr Vorteil ist', href: '/blog-ki', icon: Brain },
-          { name: 'Ihre Stimme und die KI-Stimme', desc: 'Der hörbare Unterschied', href: '/blog-wirkung', icon: Mic },
-          { name: 'ChatGPT-Assistent', desc: 'Mein Assistent zum Ausprobieren', href: 'https://claudia-conen-gpt-sa-m812.bolt.host/', icon: Bot, external: true },
-        ],
-      },
-    ],
-  },
+
+  // ------------------------------------------------ 6. Die Person
   {
     label: 'Über Claudia',
     id: 'ueber-claudia',
@@ -207,7 +269,7 @@ export const megaMenuItems: MegaMenuItem[] = [
         label: 'Die Person',
         icon: Eye,
         panelTitle: 'Claudia Conen',
-        panelSubtitle: 'Wer hier spricht und warum',
+        panelSubtitle: 'Wer hier spricht — und warum',
         tiles: [
           { name: 'Über mich', desc: 'Weg, Arbeitsweise, Haltung', href: '/ueber-mich', icon: Eye },
           { name: 'Von Schatten zu Licht', desc: 'Das Buchprojekt', href: '/von-schatten-zu-licht', icon: Sun },
@@ -215,35 +277,16 @@ export const megaMenuItems: MegaMenuItem[] = [
           { name: 'Kontakt', desc: 'Direkt schreiben', href: '/#contact', icon: MessageSquare },
         ],
       },
-    ],
-  },
-  {
-    label: 'Aktuelles',
-    id: 'aktuelles',
-    categories: [
       {
-        id: 'events',
-        label: 'Events & Termine',
-        icon: Calendar,
-        panelTitle: 'Events & Termine',
-        panelSubtitle: 'Wo Claudia als Nächstes zu erleben ist',
+        id: 'werkzeuge',
+        label: 'Zum Ausprobieren',
+        icon: Bot,
+        panelTitle: 'Zum Ausprobieren',
+        panelSubtitle: 'Was Claudia mit KI gebaut hat',
         tiles: [
-          { name: 'KI-Workshop „Die Unverwechselbaren"', desc: '2 Tage live · 3 Coaches', href: '/ki-workshop-unverwechselbar', icon: Sparkles, fullWidth: true },
-          { name: 'Kommende Events', desc: 'Alle Termine auf einen Blick', href: '/events', icon: Calendar },
-          { name: 'Online-Webinare', desc: 'Live dabei sein, kostenlos', href: '/wissen-webinare', icon: Monitor },
-        ],
-      },
-      {
-        id: 'blog',
-        label: 'Blog & Artikel',
-        icon: Edit3,
-        panelTitle: 'Blog & Artikel',
-        panelSubtitle: 'Neues zuerst hier',
-        tiles: [
-          { name: 'Mensch & KI', href: '/blog-ki', icon: Monitor },
-          { name: 'Wirkung & Persönlichkeit', href: '/blog-wirkung', icon: Star },
-          { name: 'Stimme & Wirkung', href: '/blog', icon: Mic },
-          { name: 'Newsletter', desc: 'Impulse ins Postfach', href: '/newsletter', icon: Mail },
+          { name: 'ClaudiaAI', desc: 'Story-Coach, in Vorbereitung', href: '/claudia-ai', icon: Bot },
+          { name: 'ChatGPT-Assistent', desc: 'Zum Ausprobieren', href: 'https://claudia-conen-gpt-sa-m812.bolt.host/', icon: Bot, external: true },
+          { name: 'Webseite als Erlebnis', desc: 'Technik trifft Menschlichkeit', href: '/ki-webseite-erlebnis', icon: Globe },
         ],
       },
     ],

@@ -42,14 +42,14 @@ export default function MobileMegaMenu({ onClose }: MobileMegaMenuProps) {
       initial={{ opacity: 0, height: 0 }}
       animate={{ opacity: 1, height: 'auto' }}
       exit={{ opacity: 0, height: 0 }}
-      className="xl:hidden bg-[rgba(10,31,68,0.98)] backdrop-blur-xl border-t border-[rgba(218,165,32,0.2)] max-h-[80vh] overflow-y-auto"
+      className="xl:hidden bg-white border-t border-[rgba(26,43,76,0.08)] shadow-[0_20px_50px_-20px_rgba(26,43,76,0.25)] max-h-[80vh] overflow-y-auto"
     >
       <div className="px-4 py-5 space-y-1">
         {megaMenuItems.map((item) => (
           <div key={item.id}>
             <button
               onClick={() => toggleMenu(item.id)}
-              className="flex items-center justify-between w-full py-3 px-4 rounded-xl text-white/90 hover:text-[#F7E7CE] hover:bg-[rgba(218,165,32,0.08)] transition-all duration-200"
+              className="flex items-center justify-between w-full py-3 px-4 rounded-xl text-[#1A2B4C] hover:bg-[rgba(218,165,32,0.08)] transition-all duration-200"
             >
               <span className="font-semibold text-[0.95rem]">{item.label}</span>
               <ChevronDown
@@ -73,9 +73,9 @@ export default function MobileMegaMenu({ onClose }: MobileMegaMenuProps) {
                       <div key={cat.id} className="mb-1">
                         <button
                           onClick={() => toggleCategory(cat.id)}
-                          className="flex items-center gap-3 w-full py-2.5 px-4 rounded-lg text-white/70 hover:text-white hover:bg-[rgba(218,165,32,0.06)] transition-all duration-200"
+                          className="flex items-center gap-3 w-full py-2.5 px-4 rounded-lg text-[rgba(26,43,76,0.78)] hover:text-[#1A2B4C] hover:bg-[rgba(218,165,32,0.07)] transition-all duration-200"
                         >
-                          <CatIcon size={16} className="text-[#DAA520]/50 flex-shrink-0" />
+                          <CatIcon size={16} className="text-[#B8860B]/70 flex-shrink-0" />
                           <span className="text-[0.85rem] font-medium flex-1 text-left">{cat.label}</span>
                           <ChevronDown
                             size={14}
@@ -96,16 +96,16 @@ export default function MobileMegaMenu({ onClose }: MobileMegaMenuProps) {
                                 <button
                                   key={tile.name}
                                   onClick={() => handleTileClick(tile.href, tile.external)}
-                                  className="flex items-center gap-2 w-full py-2 px-3 rounded-lg text-white/60 hover:text-[#F7E7CE] hover:bg-[rgba(218,165,32,0.05)] transition-all duration-200 text-left"
+                                  className="flex items-center gap-2 w-full py-2 px-3 rounded-lg text-[rgba(26,43,76,0.68)] hover:text-[#B8860B] hover:bg-[rgba(218,165,32,0.06)] transition-all duration-200 text-left"
                                 >
-                                  <ChevronRight size={12} className="text-[#DAA520]/40 flex-shrink-0" />
+                                  <ChevronRight size={12} className="text-[#B8860B]/55 flex-shrink-0" />
                                   <span className="text-[0.8rem]">{tile.name}</span>
                                 </button>
                               ))}
                               {cat.uebersicht && (
                                 <button
                                   onClick={() => handleTileClick(cat.uebersicht!.href)}
-                                  className="mt-1 flex w-full items-center gap-2 border-t border-[rgba(218,165,32,0.22)] px-3 py-2.5 text-left text-white/70 transition-colors duration-200 hover:text-[#DAA520]"
+                                  className="mt-1 flex w-full items-center gap-2 border-t border-[rgba(26,43,76,0.09)] px-3 py-2.5 text-left text-[rgba(26,43,76,0.66)] transition-colors duration-200 hover:text-[#B8860B]"
                                 >
                                   <span className="text-[0.78rem]">{cat.uebersicht.name}</span>
                                   <ChevronRight size={12} className="flex-shrink-0 text-[#DAA520]/60" />

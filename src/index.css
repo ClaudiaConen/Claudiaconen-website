@@ -1857,3 +1857,161 @@ html, body { cursor: auto; }
 .mega-nav-link {
   position: relative;
 }
+
+/* =====================================================================
+   DAS MENUE IN HELL
+   ---------------------------------------------------------------------
+   Claudia am 20.09.2026: "ich haette es gerne in hell, sehr hell. Es
+   ist vielleicht am freundlichsten zu lesen."
+
+   Bewusst als eigener Block ganz unten, nicht in die Regeln oben
+   hineingeschrieben. Wer die dunkle Fassung zurueckwill, loescht diesen
+   Block - dann greifen die alten Regeln wieder, unveraendert.
+
+   Was hier anders gedacht ist als in der dunklen Fassung:
+
+   - Die Feldueberschrift war ein Goldverlauf. Auf Weiss ist der kaum
+     lesbar; Gold braucht dunklen Grund, um zu tragen. Sie ist jetzt
+     mitternachtsblau, und das Gold bleibt dort, wo es wirkt: an den
+     Symbolen und Kanten.
+   - Die Kacheln hatten eine 2px-Goldkante. Auf Weiss wirkt das laut.
+     Jetzt eine Haarlinie, und das Gold kommt erst, wenn die Maus
+     darueber ist. Das ist der Apple-Griff: Ruhe im Normalzustand,
+     Reaktion auf Beruehrung.
+   - Die Unterzeile war kursiv. Kursiv auf hellem Grund in kleiner
+     Schrift liest sich schlechter, das faellt nur auf Dunkel nicht auf.
+   ===================================================================== */
+
+.mega-menu-container {
+  background: #ffffff;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  border: 1px solid rgba(26, 43, 76, 0.07);
+  box-shadow:
+    0 2px 4px rgba(26, 43, 76, 0.04),
+    0 12px 28px -8px rgba(26, 43, 76, 0.12),
+    0 40px 80px -24px rgba(26, 43, 76, 0.22);
+}
+
+/* Die Spalte links */
+.mega-menu-sidebar {
+  background: #fbf8f2;
+  border-right: 1px solid rgba(26, 43, 76, 0.07);
+}
+
+.mega-menu-sidebar-header {
+  color: #b8860b;
+}
+
+.mega-menu-sidebar-item:hover,
+.mega-menu-sidebar-item.active {
+  background: #ffffff;
+  border-left-color: #daa520;
+}
+
+.mega-menu-sidebar-item.active {
+  background: #ffffff;
+}
+
+.mega-menu-sidebar-icon {
+  color: rgba(26, 43, 76, 0.35);
+}
+
+.mega-menu-sidebar-item:hover .mega-menu-sidebar-icon,
+.mega-menu-sidebar-item.active .mega-menu-sidebar-icon {
+  color: #daa520;
+}
+
+.mega-menu-sidebar-label {
+  color: rgba(26, 43, 76, 0.7);
+}
+
+.mega-menu-sidebar-item:hover .mega-menu-sidebar-label,
+.mega-menu-sidebar-item.active .mega-menu-sidebar-label {
+  color: #1a2b4c;
+}
+
+/* Die Ueberschrift des Felds: kein Goldverlauf mehr, der auf Weiss
+   verschwindet, sondern klare Schrift mit einem Goldstrich darunter. */
+.mega-menu-panel-title {
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  -webkit-text-fill-color: #1a2b4c;
+  color: #1a2b4c;
+  text-transform: none;
+  font-size: 1.12rem;
+  letter-spacing: -0.01em;
+}
+
+.mega-menu-panel-header {
+  padding-bottom: 0.7rem;
+  margin-bottom: 0.9rem;
+  border-bottom: 1px solid rgba(26, 43, 76, 0.07);
+  position: relative;
+}
+
+.mega-menu-panel-header::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 2.2rem;
+  height: 2px;
+  border-radius: 2px;
+  background: #daa520;
+}
+
+.mega-menu-panel-subtitle {
+  color: rgba(26, 43, 76, 0.55);
+  font-style: normal;
+  margin-top: 0.3rem;
+  font-size: 0.79rem;
+}
+
+/* Die Kacheln */
+.mega-menu-tile {
+  background: #ffffff;
+  border: 1px solid rgba(26, 43, 76, 0.09);
+  box-shadow: 0 1px 2px rgba(26, 43, 76, 0.03);
+}
+
+.mega-menu-tile::before {
+  background: linear-gradient(135deg, rgba(218, 165, 32, 0.07) 0%, transparent 65%);
+}
+
+.mega-menu-tile:hover {
+  background: #ffffff;
+  border-color: rgba(218, 165, 32, 0.55);
+  box-shadow:
+    0 1px 2px rgba(26, 43, 76, 0.04),
+    0 10px 24px -8px rgba(26, 43, 76, 0.16);
+}
+
+.mega-menu-tile-icon {
+  background: rgba(218, 165, 32, 0.1);
+  color: #b8860b;
+}
+
+.mega-menu-tile:hover .mega-menu-tile-icon {
+  background: rgba(218, 165, 32, 0.18);
+  color: #daa520;
+}
+
+.mega-menu-tile-name {
+  color: #1a2b4c;
+}
+
+.mega-menu-tile-desc {
+  color: rgba(26, 43, 76, 0.58);
+}
+
+/* Die Zeile "Alles dazu auf einer Seite" */
+.mega-menu-uebersicht {
+  border-top-color: rgba(26, 43, 76, 0.09);
+  color: rgba(26, 43, 76, 0.62);
+}
+
+.mega-menu-uebersicht:hover {
+  color: #b8860b;
+}

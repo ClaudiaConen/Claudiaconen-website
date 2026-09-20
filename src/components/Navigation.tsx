@@ -117,15 +117,18 @@ export default function Navigation() {
                   />
                 </button>
 
-                {activeMenuId === item.id && (
-                  <div
-                    className="mega-menu-container"
-                    onMouseEnter={handlePanelEnter}
-                    onMouseLeave={handlePanelLeave}
-                  >
-                    <MegaMenuPanel item={item} onClose={closeMegaMenu} />
-                  </div>
-                )}
+                {/* Das Feld steht immer im HTML und wird nur ausgeblendet.
+                    Wuerde es erst beim Oeffnen entstehen, saehe ein
+                    Suchprogramm nie einen einzigen Menuepunkt - es
+                    oeffnet ja kein Menue. */}
+                <div
+                  className={`mega-menu-container ${activeMenuId === item.id ? '' : 'zu'}`}
+                  aria-hidden={activeMenuId !== item.id}
+                  onMouseEnter={handlePanelEnter}
+                  onMouseLeave={handlePanelLeave}
+                >
+                  <MegaMenuPanel item={item} onClose={closeMegaMenu} />
+                </div>
               </li>
             ))}
           </ul>

@@ -994,7 +994,14 @@ html, body { cursor: auto; }
   overflow: hidden;
 }
 
+/* Alle Kategorien stehen im HTML, damit Suchprogramme sie lesen.
+   Sichtbar ist nur die aufgeschlagene - ohne diese Regel laegen sie
+   alle vierzehn uebereinander. */
 .mega-menu-panel {
+  display: none;
+}
+
+.mega-menu-panel.active {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
@@ -1823,4 +1830,12 @@ html, body { cursor: auto; }
 .mega-menu-uebersicht:hover {
   color: #daa520;
   gap: 0.75rem;
+}
+
+/* Das geschlossene Menuefeld. Es steht im HTML, damit Suchprogramme die
+   Verweise finden, nimmt aber keinen Platz ein und faengt keine Maus.
+   display:none und nicht visibility:hidden - sonst laege ein
+   unsichtbarer Block ueber der Seite. */
+.mega-menu-container.zu {
+  display: none;
 }

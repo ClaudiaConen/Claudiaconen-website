@@ -1,32 +1,90 @@
 import { useState } from 'react';
 import { ChevronRight } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
-import type { MegaMenuItem } from '../../lib/megaMenuData';
+import { Link, useNavigate } from 'react-router-dom';
+import type { MegaMenuItem, TileItem } from '../../lib/megaMenuData';
 
 interface MegaMenuPanelProps {
   item: MegaMenuItem;
   onClose: () => void;
 }
 
+/**
+ * Warum hier <Link> und <a> stehen und keine <button>:
+ *
+ * Ein Knopf hat kein Ziel. Ein Suchprogramm, das kein JavaScript
+ * ausfuehrt - und das sind fast alle KI-Crawler - sieht bei einem
+ * <button onClick={navigate}> gar nichts. Genau deshalb hatte die
+ * Startseite am 19.09.2026 null Verweise nach innen, obwohl das Menue
+ * einundsechzig Ziele kennt.
+ *
+ * Mit echten Verweisen sieht ein Programm dieselbe Struktur wie ein
+ * Mensch. Nebenbei funktioniert dann auch, was Besucher erwarten:
+ * mittlere Maustaste oeffnet in neuem Reiter, Rechtsklick bietet
+ * "Adresse kopieren", und die Statuszeile zeigt, wohin es geht.
+ */
 export default function MegaMenuPanel({ item, onClose }: MegaMenuPanelProps) {
   const [activeCategoryId, setActiveCategoryId] = useState(item.categories[0]?.id || '');
   const navigate = useNavigate();
 
   const activeCategory = item.categories.find(c => c.id === activeCategoryId) || item.categories[0];
 
-  const handleTileClick = (href: string, external?: boolean) => {
+  // Sprungmarken auf der Startseite brauchen weiterhin eine eigene
+  // Behandlung: react-router springt bei einem #-Ziel nicht von selbst.
+  const handleHash = (e: React.MouseEvent, href: string) => {
+    e.preventDefault();
     onClose();
-    if (external) {
-      window.open(href, '_blank', 'noopener,noreferrer');
-    } else if (href.startsWith('/#')) {
-      navigate('/');
-      setTimeout(() => {
-        const el = document.querySelector(href.substring(1));
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
-    } else {
-      navigate(href);
+    navigate('/');
+    setTimeout(() => {
+      const el = document.querySelector(href.substring(1));
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  };
+
+  const Kachel = ({ tile }: { tile: TileItem }) => {
+    const TileIcon = tile.icon;
+    const inhalt = (
+      <>
+        <div className="mega-menu-tile-icon">
+          <TileIcon size={16} />
+        </div>
+        <div className="mega-menu-tile-text">
+          <span className="mega-menu-tile-name">{tile.name}</span>
+          {tile.desc && <span className="mega-menu-tile-desc">{tile.desc}</span>}
+        </div>
+        <span className="mega-menu-tile-arrow">
+          <ChevronRight size={14} />
+        </span>
+      </>
+    );
+    const klasse = `mega-menu-tile ${tile.fullWidth ? 'full-width' : ''}`;
+
+    if (tile.external) {
+      return (
+        <a
+          href={tile.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={klasse}
+          onClick={onClose}
+        >
+          {inhalt}
+        </a>
+      );
     }
+
+    if (tile.href.startsWith('/#')) {
+      return (
+        <a href={tile.href} className={klasse} onClick={(e) => handleHash(e, tile.href)}>
+          {inhalt}
+        </a>
+      );
+    }
+
+    return (
+      <Link to={tile.href} className={klasse} onClick={onClose}>
+        {inhalt}
+      </Link>
+    );
   };
 
   return (
@@ -55,46 +113,37 @@ export default function MegaMenuPanel({ item, onClose }: MegaMenuPanelProps) {
       </div>
 
       <div className="mega-menu-panels">
-        {activeCategory && (
-          <div className="mega-menu-panel active">
+        {/* Alle Kategorien stehen im HTML, sichtbar ist die
+            aufgeschlagene. Wuerde nur die aktive gerendert, staenden im
+            Quelltext 41 statt 61 Verweise - ein Suchprogramm blaettert
+            nicht durch die Kategorien. */}
+        {item.categories.map((cat) => (
+          <div
+            key={cat.id}
+            className={`mega-menu-panel ${cat.id === activeCategory?.id ? 'active' : ''}`}
+            aria-hidden={cat.id !== activeCategory?.id}
+          >
             <div className="mega-menu-panel-header">
-              <span className="mega-menu-panel-title">{activeCategory.panelTitle}</span>
-              <span className="mega-menu-panel-subtitle">{activeCategory.panelSubtitle}</span>
+              <span className="mega-menu-panel-title">{cat.panelTitle}</span>
+              <span className="mega-menu-panel-subtitle">{cat.panelSubtitle}</span>
             </div>
-            <div className={`mega-menu-tile-grid ${activeCategory.columns === 3 ? 'cols-3' : ''}`}>
-              {activeCategory.tiles.map((tile) => {
-                const TileIcon = tile.icon;
-                return (
-                  <button
-                    key={tile.name}
-                    className={`mega-menu-tile ${tile.fullWidth ? 'full-width' : ''}`}
-                    onClick={() => handleTileClick(tile.href, tile.external)}
-                  >
-                    <div className="mega-menu-tile-icon">
-                      <TileIcon size={16} />
-                    </div>
-                    <div className="mega-menu-tile-text">
-                      <span className="mega-menu-tile-name">{tile.name}</span>
-                      {tile.desc && <span className="mega-menu-tile-desc">{tile.desc}</span>}
-                    </div>
-                    <span className="mega-menu-tile-arrow">
-                      <ChevronRight size={14} />
-                    </span>
-                  </button>
-                );
-              })}
+            <div className={`mega-menu-tile-grid ${cat.columns === 3 ? 'cols-3' : ''}`}>
+              {cat.tiles.map((tile) => (
+                <Kachel key={tile.name} tile={tile} />
+              ))}
             </div>
-            {activeCategory.uebersicht && (
-              <button
+            {cat.uebersicht && (
+              <Link
+                to={cat.uebersicht.href}
                 className="mega-menu-uebersicht"
-                onClick={() => handleTileClick(activeCategory.uebersicht!.href)}
+                onClick={onClose}
               >
-                <span>{activeCategory.uebersicht.name}</span>
+                <span>{cat.uebersicht.name}</span>
                 <ChevronRight size={14} />
-              </button>
+              </Link>
             )}
           </div>
-        )}
+        ))}
       </div>
     </div>
   );

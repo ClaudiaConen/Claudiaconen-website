@@ -2,62 +2,51 @@ import { Link } from 'react-router-dom';
 import { megaMenuItems } from '../lib/megaMenuData';
 
 /**
- * Die Seitenuebersicht am Fuss jeder Seite.
+ * Die schlanke Wegweiser-Zeile am Fuss jeder Seite.
  *
- * Warum es sie gibt: Die vorgerenderte Startseite hatte am 19.09.2026
- * NULL interne Verweise. Das Aufklappmenue ist aus Knoepfen gebaut, und
- * Knoepfe haben kein href - ein Suchprogramm sieht sie nicht und findet
- * von der Startseite aus keine einzige Unterseite. Der einzige Weg
- * hinein war die sitemap.xml.
+ * Vorgeschichte, damit niemand sie versehentlich wieder aufblaeht:
+ * Am 19.09.2026 stand hier die vollstaendige Liste aller Seiten - vier
+ * Spalten, einundsechzig Verweise. Der Grund war nicht Gestaltung,
+ * sondern Not: Das Aufklappmenue wurde nur gerendert, WENN es offen
+ * ist. Ein Suchprogramm oeffnet kein Menue, also sah es keinen einzigen
+ * Verweis, und die Startseite war eine Sackgasse.
  *
- * Diese Uebersicht ist immer im Text, auf jeder Seite, als echte
- * Verweise. Damit kann jedes Programm die Seite durchlaufen - und ein
- * Mensch, der das Menue nicht mag, findet trotzdem alles.
+ * Claudia am 20.09.2026: "ich find das nicht gut, wenn alles unten in
+ * dem Futter steht." Sie hat recht - eine Notloesung gehoert nicht in
+ * die Gestaltung.
  *
- * Die Liste kommt aus derselben Quelle wie das Menue. Ein neuer Punkt
- * dort steht automatisch auch hier; zwei Listen, die auseinanderlaufen,
- * waeren genau der Fehler, den es hier zu vermeiden gilt.
+ * Die Not ist seit dem 20.09.2026 behoben: Das Menuefeld steht jetzt
+ * immer im HTML und wird nur per CSS ausgeblendet. Damit stehen
+ * einundsechzig Verweise im Quelltext jeder Seite, ohne dass unten
+ * etwas lang wird. Diese Zeile hier ist nur noch das, was sie sein
+ * sollte: ein kurzer Wegweiser fuer Menschen, die nicht ins Menue
+ * wollen.
  */
 export default function Seitenuebersicht() {
-  const spalten = megaMenuItems.flatMap((bereich) =>
-    bereich.categories.map((kat) => ({
-      id: `${bereich.id}-${kat.id}`,
-      titel: kat.label,
-      ziele: [
-        ...kat.tiles
-          .filter((t) => !t.external && !t.href.startsWith('/#'))
-          .map((t) => ({ name: t.name, href: t.href })),
-        ...(kat.uebersicht ? [kat.uebersicht] : []),
-      ],
-    }))
+  // Nur die Hauptwege, einer je Bereich - nicht jede einzelne Seite.
+  const wege = megaMenuItems.flatMap((bereich) =>
+    bereich.categories
+      .filter((kat) => kat.uebersicht)
+      .map((kat) => ({ titel: kat.label, ...kat.uebersicht! }))
   );
 
-  return (
-    <nav aria-label="Seitenübersicht" className="border-t border-dark-gold/15 bg-midnight-blue/95 py-14">
-      <div className="mx-auto max-w-7xl px-6">
-        <h2 className="font-montserrat text-sm font-semibold uppercase tracking-[0.18em] text-dark-gold">
-          Alle Seiten im Überblick
-        </h2>
+  if (wege.length === 0) return null;
 
-        <div className="mt-8 grid gap-x-8 gap-y-9 sm:grid-cols-2 lg:grid-cols-4">
-          {spalten.map((s) => (
-            <div key={s.id}>
-              <h3 className="font-montserrat text-sm font-semibold text-pearl-white/90">{s.titel}</h3>
-              <ul className="mt-3 flex flex-col gap-2">
-                {s.ziele.map((z) => (
-                  <li key={z.href + z.name}>
-                    <Link
-                      to={z.href}
-                      className="font-inter text-[0.82rem] leading-snug text-pearl-white/55 transition-colors duration-200 hover:text-dark-gold"
-                    >
-                      {z.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+  return (
+    <nav aria-label="Schnellwege" className="border-t border-dark-gold/15 bg-midnight-blue/95 py-8">
+      <div className="mx-auto max-w-7xl px-6">
+        <ul className="flex flex-wrap items-center gap-x-7 gap-y-3">
+          {wege.map((w) => (
+            <li key={w.href + w.name}>
+              <Link
+                to={w.href}
+                className="font-inter text-[0.8rem] text-pearl-white/50 transition-colors duration-200 hover:text-dark-gold"
+              >
+                {w.titel}
+              </Link>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </nav>
   );

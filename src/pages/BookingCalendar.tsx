@@ -245,8 +245,9 @@ export default function BookingCalendar() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 pt-24 pb-12">
       <SEO
-        title="Termin buchen - Claudia Conen"
-        description="Buchen Sie einen persönlichen Termin mit Claudia Conen"
+        title="Termin bei Claudia Conen buchen — Erstgespräch kostenlos"
+        description="Vier Termine zur Auswahl: kostenloses Erstgespräch über dreißig Minuten, Einzelcoaching, eine intensive Sitzung und die Buchung für einen Workshop. Online buchen, Bestätigung per E-Mail."
+        path="/termin-buchen"
       />
 
       <div className="max-w-7xl mx-auto px-4">
@@ -256,6 +257,61 @@ export default function BookingCalendar() {
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Wählen Sie Ihren gewünschten Termin und buchen Sie direkt online
+          </p>
+        </div>
+
+        {/* Text vor dem Kalender. Vorher hatte diese Seite 275 Zeichen -
+            ein Kalenderfenster ohne Worte drumherum. Sie steht in der
+            Sitemap, also findet Google sie und sah nichts.
+            Die vier Termine sind nicht erfunden: Sie stehen als aktive
+            Einträge in der Tabelle appointment_types.
+            Die Preise stehen bewusst NICHT hier - sie erscheinen im
+            Kalender, sobald ein Typ gewählt ist, und kommen dort direkt
+            aus der Datenbank. Damit gibt es nur eine Quelle dafür. */}
+        <div className="max-w-3xl mx-auto mb-14">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            Was Sie hier buchen können
+          </h2>
+          <p className="text-gray-700 leading-relaxed mb-6">
+            Vier Möglichkeiten, und die erste kostet nichts. Wenn Sie unsicher sind, welche
+            passt: Nehmen Sie das Erstgespräch. Dreißig Minuten reichen, um zu klären, ob und
+            wie es weitergeht — und wenn ich nicht die Richtige bin, sage ich Ihnen das dort.
+          </p>
+          <dl className="space-y-4 text-gray-700">
+            <div>
+              <dt className="font-semibold text-gray-900">Erstgespräch · 30 Minuten · kostenlos</dt>
+              <dd className="mt-1 leading-relaxed">
+                Kennenlernen. Sie schildern, worum es geht, ich sage Ihnen ehrlich, ob ich helfen
+                kann. Ohne Verpflichtung und ohne Verkaufsgespräch am Ende.
+              </dd>
+            </div>
+            <div>
+              <dt className="font-semibold text-gray-900">Coaching Session · 60 Minuten</dt>
+              <dd className="mt-1 leading-relaxed">
+                Einzelarbeit an einem Thema: ein Auftritt, der ansteht, ein Gespräch, das nicht
+                lief, eine Formulierung, die nicht sitzt.
+              </dd>
+            </div>
+            <div>
+              <dt className="font-semibold text-gray-900">Intensive Session · 90 Minuten</dt>
+              <dd className="mt-1 leading-relaxed">
+                Wenn eine Stunde zu kurz ist — etwa weil Sie mit einem fertigen Vortrag kommen
+                und wir ihn zusammen durchgehen.
+              </dd>
+            </div>
+            <div>
+              <dt className="font-semibold text-gray-900">Workshop · 120 Minuten</dt>
+              <dd className="mt-1 leading-relaxed">
+                Für Gruppen. Vor der Buchung melde ich mich, um den Inhalt abzustimmen — ein
+                Workshop ohne Vorgespräch ist ein Vortrag mit Übungsanteil.
+              </dd>
+            </div>
+          </dl>
+          <p className="text-gray-700 leading-relaxed mt-6">
+            <strong className="text-gray-900">Was nach der Buchung passiert:</strong> Sie bekommen
+            eine Bestätigung per E-Mail mit dem Termin und dem Zugangslink. Wenn Ihnen etwas
+            dazwischenkommt, schreiben Sie mir — verschieben ist kein Problem, solange es nicht in
+            der letzten Stunde passiert.
           </p>
         </div>
 

@@ -177,7 +177,7 @@ export default function Unverwechselbare() {
                 aria-hidden="true"
               />
               <img
-                src="/claudiaconen.jpg"
+                src="/claudiaconen.webp"
                 alt="Claudia Conen"
                 loading="eager"
                 className="relative w-full object-cover shadow-xl"

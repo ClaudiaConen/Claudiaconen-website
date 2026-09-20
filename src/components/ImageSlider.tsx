@@ -3,13 +3,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const images = [
-  '/Claudia11.png',
-  '/Claudia12.png',
-  '/Claudia13.png',
-  '/Claudia14.png',
-  '/Claudia15.png',
-  '/Claudia16.png',
-  '/Claudia17.png'
+  '/Claudia11.webp',
+  '/Claudia12.webp',
+  '/Claudia13.webp',
+  '/Claudia14.webp',
+  '/Claudia15.webp',
+  '/Claudia16.webp',
+  '/Claudia17.webp'
 ];
 
 export default function ImageSlider() {

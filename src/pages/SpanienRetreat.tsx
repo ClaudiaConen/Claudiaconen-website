@@ -647,14 +647,14 @@ export default function SpanienRetreat() {
               {
                 name: 'Claudia Conen',
                 role: 'Marken- & Wirkungs-Mentorin · Speakerin',
-                img: '/claudiaconen.jpg',
+                img: '/claudiaconen.webp',
                 tags: ['Positionierung', 'Content', 'KI als Marken-Verstärker'],
                 bio: 'Claudia bringt 25+ Jahre Erfahrung als Stimme, Speakerin und Marken-Mentorin mit. In Spanien zeigt sie dir, wie du KI nutzt, um deiner Marke und deinem Angebot eine glasklare Bühne zu geben.',
               },
               {
                 name: 'Gabi Lindemann',
                 role: 'KI-Builderin · Claude Code Expertin',
-                img: '/Claudia18.jpeg',
+                img: '/Claudia18.webp',
                 tags: ['Claude & Claude Code', 'KI-Agenten', 'KI-Workflows'],
                 bio: 'Gabi baut mit Claude Code Webseiten, Agenten und Workflows — auch ohne klassische Programmiererfahrung. Sie zeigt dir live, wie aus einer Idee in wenigen Stunden ein echtes Tool wird.',
               },

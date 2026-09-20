@@ -229,9 +229,18 @@ export default function ClaudiaAIBeta() {
                 >
                   <div className="absolute inset-0 rounded-full border-4 border-[#DAA520]"></div>
                   <div className="absolute inset-0 rounded-full overflow-hidden">
+                    {/* Die frueher hier verwiesene Datei
+                        "photo_2025-09-25 23.28.37 (2).jpeg" existiert
+                        nicht und hat nie existiert - das Rund blieb
+                        leer. Aufgefallen ist es erst beim Pruefen des
+                        Inhaltstyps: Der Abruf antwortete mit HTTP 200,
+                        lieferte aber die Auffangseite. Ein Statuscode
+                        allein beweist nichts. */}
                     <img
-                      src="/photo_2025-09-25 23.28.37 (2).jpeg"
+                      src="/claudiaconen.webp"
                       alt="Claudia Conen"
+                      width={64}
+                      height={64}
                       className="w-full h-full object-cover"
                       loading="lazy"
                     />

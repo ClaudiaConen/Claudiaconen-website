@@ -69,7 +69,7 @@ export default function UeberMich() {
               className="absolute -bottom-4 -right-4 hidden h-full w-full border border-luxury-gold/40 lg:block"
             />
             <img
-              src="/claudiaconen.jpg"
+              src="/claudiaconen.webp"
               alt="Claudia Conen"
               loading="eager"
               className="relative w-full object-cover shadow-xl"

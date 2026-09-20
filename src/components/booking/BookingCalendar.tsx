@@ -106,7 +106,7 @@ export default function BookingCalendar({ appointmentType, onSelectDateTime, boo
         <div className="bg-gradient-to-br from-stone-50 to-stone-100 p-8 border-r border-stone-200">
           <div className="flex justify-center mb-6">
             <img
-              src="/claudiaconen_(3).png"
+              src="/claudiaconen_(3).webp"
               alt="Claudia Conen"
               className="w-32 h-32 rounded-full object-cover shadow-lg ring-4 ring-white"
             />

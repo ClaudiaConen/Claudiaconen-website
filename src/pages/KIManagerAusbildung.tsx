@@ -214,7 +214,7 @@ export default function KIManagerAusbildung() {
               >
                 <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-luxury-gold/20">
                   <img
-                    src="/claudiaconen2.jpg"
+                    src="/claudiaconen2.webp"
                     alt="Claudia Conen - KI Manager Ausbildung"
                     className="w-full h-auto object-cover"
                   />
@@ -305,7 +305,7 @@ export default function KIManagerAusbildung() {
                 viewport={{ once: true }}
               >
                 <img
-                  src="/kimanager1.png"
+                  src="/kimanager1.webp"
                   alt="KI Manager Ausbildung"
                   className="w-full h-auto rounded-3xl shadow-2xl border-4 border-luxury-gold/20"
                 />
@@ -689,7 +689,7 @@ export default function KIManagerAusbildung() {
                 viewport={{ once: true }}
               >
                 <img
-                  src="/claudiaconen3_(1).png"
+                  src="/claudiaconen3_(1).webp"
                   alt="Claudia Conen - Zertifizierte KI-Managerin"
                   className="w-full h-auto rounded-3xl shadow-2xl border-4 border-luxury-gold/20"
                 />
@@ -708,7 +708,7 @@ export default function KIManagerAusbildung() {
                 className="order-2 lg:order-1"
               >
                 <img
-                  src="/claudiaconen_(3).png"
+                  src="/claudiaconen_(3).webp"
                   alt="Claudia Conen - Die Umsatzstimme"
                   className="w-full h-auto rounded-3xl shadow-2xl border-4 border-luxury-gold/20"
                 />

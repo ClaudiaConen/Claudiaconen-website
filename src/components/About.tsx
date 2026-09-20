@@ -40,7 +40,7 @@ export default function About() {
             <div className="relative">
               <div className="aspect-[3/4] rounded-3xl overflow-hidden border-2 border-luxury-gold/30">
                 <img
-                  src="/claudiaconen.jpg"
+                  src="/claudiaconen.webp"
                   alt="Claudia Conen - Die Umsatzstimme"
                   className="w-full h-full object-cover"
                   loading="lazy"

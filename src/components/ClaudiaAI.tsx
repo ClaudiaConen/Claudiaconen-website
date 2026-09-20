@@ -120,7 +120,7 @@ export default function ClaudiaAI() {
                 <div className="absolute inset-0 rounded-full border-4 border-[#DAA520]/30"></div>
                 <div className="absolute inset-0 rounded-full overflow-hidden border-4 border-[#DAA520]">
                   <img
-                    src="/claudia20.jpeg"
+                    src="/claudia20.webp"
                     alt="Claudia Conen"
                     className="w-full h-full object-cover"
                     loading="lazy"

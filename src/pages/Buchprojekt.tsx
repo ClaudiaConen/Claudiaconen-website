@@ -309,7 +309,7 @@ function BookHero() {
             style={{ transform: 'translateZ(14px)', backfaceVisibility: 'hidden' }}
           >
             <img
-              src="/buchprojekt-cover.jpg"
+              src="/buchprojekt-cover.webp"
               alt="THE POWER OF AI – Unverwechselbar – Wie KI unseren Mittelstand verändert"
               className="w-full h-full object-cover select-none"
               draggable={false}

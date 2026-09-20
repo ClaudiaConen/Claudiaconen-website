@@ -13,5 +13,24 @@ Allow: /
 User-agent: bingbot
 Allow: /
 
-# Crawl-Delay für alle Bots
-Crawl-delay: 1
+# KI-Crawler ausdruecklich erlaubt. "User-agent: *" deckt sie zwar
+# bereits ab - aber manche Betreiber pruefen auf ihren eigenen Namen,
+# und eine ausdrueckliche Erlaubnis ist eindeutiger als eine
+# stillschweigende.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /

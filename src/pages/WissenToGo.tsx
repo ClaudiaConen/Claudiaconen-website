@@ -1,100 +1,119 @@
-import { motion } from 'framer-motion';
-import { Headphones, Podcast, Radio, Smartphone } from 'lucide-react';
-import SEO from '../components/SEO';
-import Navigation from '../components/Navigation';
-import Footer from '../components/Footer';
+import ZielgruppenSeite, { ZielgruppenInhalt } from '../components/ZielgruppenSeite';
+
+/**
+ * Wissen to go - die Übersicht über alles Kostenlose.
+ *
+ * Diese Seite ist das Ziel der Übersichtszeile im Menü ("Wissen to go —
+ * alles im Überblick"). Vorher stand hier ein Werbetext über
+ * "wertvollen Content aufs Smartphone" und drei Kacheln ohne Verweise.
+ * Wer daraufklickte, kam nirgendwo hin.
+ *
+ * Jetzt steht hier, was es WIRKLICH gibt, mit Verweis und mit dem, was
+ * man dafür hergeben muss - denn "kostenlos" heißt bei den meisten
+ * Anbietern "gegen deine E-Mail-Adresse", und das gehört dazugesagt.
+ *
+ * KEINE ZAHLEN zu Hörerzahlen, Abonnenten oder Downloads. Die kenne ich
+ * nicht, und eine geschätzte wäre eine erfundene.
+ */
+const inhalt: ZielgruppenInhalt = {
+  pfad: '/wissen-to-go',
+  wer: 'Kostenlos',
+  frage: 'Was gibt es hier umsonst — und was kostet es wirklich?',
+  vorspann:
+    'Die zweite Frage stellt selten jemand, und sie ist die wichtigere. Bei den meisten Anbietern heißt „kostenlos" gegen deine E-Mail-Adresse. Hier steht bei jedem Angebot, was du dafür hergibst: manchmal nichts, manchmal deine Adresse, einmal eine Anmeldung.',
+
+  problemTitel: 'Warum es diese Seite gibt',
+  problemAbsaetze: [
+    'Über die Jahre sind viele kostenlose Sachen entstanden: Artikel, Werkzeuge, Webinare, Audioimpulse. Sie lagen an verschiedenen Stellen, und niemand hatte einen Überblick.',
+    'Diese Seite ist der Überblick. Sie nennt alles beim Namen, sagt, was dahintersteckt, und wo eine Anmeldung nötig ist.',
+    'Wenn du nur eines mitnehmen willst: die Wissensbibliothek. Dort stehen die Artikel, sie sind lang, und sie brauchen nichts von dir.',
+  ],
+
+  angebotName: 'Was dich nichts kostet',
+  angebotZeile: 'Alles auf dieser Liste ist ohne Bezahlung zugänglich',
+  angebotPreis: 'Kostenlos',
+  angebotPreisHinweis:
+    'Wo eine E-Mail-Adresse oder eine Anmeldung nötig ist, steht es unten ausdrücklich dabei.',
+  angebotPunkte: [
+    'Wissensbibliothek — Artikel zu Stimme, Auftritt, Reden und Wirkung. Ohne Anmeldung lesbar.',
+    'Neun ausführliche Antworten auf die Fragen, die am häufigsten gestellt werden — je ein eigener Artikel.',
+    'Wirkungskraft-Werkzeuge — kleine Helfer zum Ausprobieren, direkt im Browser.',
+    'Gratis-Webinare — live, mit der Möglichkeit, Fragen zu stellen. Dafür ist eine Anmeldung nötig.',
+    'Telegram-Audioimpulse — kurze gesprochene Gedanken. Du brauchst Telegram, sonst nichts.',
+    'Die Community — Austausch mit anderen, die am selben arbeiten.',
+    'Der Adventskalender — vierundzwanzig Türchen im Dezember.',
+  ],
+
+  ablaufTitel: 'Womit anfangen',
+  ablauf: [
+    { schritt: 'Wenn Sie lesen wollen', text: 'Die Wissensbibliothek. Die Artikel sind ausführlich, nicht angerissen — und sie verlangen keine Adresse.' },
+    { schritt: 'Wenn Sie eine konkrete Frage haben', text: 'Die neun Antwortseiten: Keynote aufbauen, Thema finden, Lampenfieber, Sprechpausen, Stimme trainieren, Charisma, Vier-Ohren-Modell, Speakerhonorare, den passenden Speaker finden.' },
+    { schritt: 'Wenn Sie etwas tun wollen', text: 'Die Wirkungskraft-Werkzeuge. Ausprobieren dauert Minuten und sagt mehr als eine Stunde Lesen.' },
+    { schritt: 'Wenn Sie Fragen stellen wollen', text: 'Ein Gratis-Webinar. Dort geht es hin und her, und Sie hören, wie andere dieselbe Frage anders stellen.' },
+    { schritt: 'Wenn Sie dranbleiben wollen', text: 'Telegram oder die Community. Beides ist regelmäßig, beides ohne Verpflichtung.' },
+  ],
+
+  fragen: [
+    {
+      frage: 'Ist das wirklich kostenlos, oder ist es Werbung?',
+      antwort:
+        'Es ist beides. Die Inhalte sind vollständig und nicht abgeschnitten — es steht nirgends „mehr dazu im Kurs". Und natürlich hofft Claudia Conen, dass jemand, dem das hilft, irgendwann etwas bucht. Beides gleichzeitig zu sagen ist ehrlicher, als eines davon zu verschweigen.',
+    },
+    {
+      frage: 'Wofür brauche ich eine E-Mail-Adresse?',
+      antwort:
+        'Für die Webinare, weil Sie sonst den Zugangslink nicht bekommen. Für die Artikel in der Wissensbibliothek nicht, für die Werkzeuge nicht, für Telegram nicht.',
+    },
+    {
+      frage: 'Wie lang sind die Artikel?',
+      antwort:
+        'Die neun Antwortseiten haben je zwischen fünf und zehn Minuten Lesezeit und beantworten die Frage im ersten Absatz — der Rest ist Begründung und Beispiel. Wer nur die Antwort will, liest drei Sätze und ist fertig.',
+    },
+    {
+      frage: 'Steht in den Artikeln das Übliche über Körpersprache und Millisekunden?',
+      antwort:
+        'Nein, und das ist Absicht. Zahlen wie „93 Prozent Körpersprache" oder „in 180 Millisekunden entscheidet sich Vertrauen" kursieren in der Branche und lassen sich nicht belegen. Sie wurden im September 2026 von dieser Seite entfernt. Wo eine Spanne belegbar ist, steht sie als Spanne.',
+    },
+    {
+      frage: 'Kann ich die Sachen weitergeben?',
+      antwort:
+        'Die Artikel gern verlinken — das hilft beiden Seiten. Die Werkzeuge und Downloads sind für den eigenen Gebrauch gedacht; wenn Sie damit in Ihrer Firma arbeiten wollen, fragen Sie kurz, dann wird es meistens ein Ja.',
+    },
+    {
+      frage: 'Wie oft kommt etwas Neues?',
+      antwort:
+        'Unregelmäßig. Es gibt keinen Redaktionsplan, den ich hier versprechen kann, und ein Versprechen, das nicht gehalten wird, ist schlechter als keines. Wer nichts verpassen will, nimmt Telegram oder den Newsletter.',
+    },
+  ],
+
+  schrittTitel: 'Der einfachste Anfang',
+  schrittText:
+    'Die Wissensbibliothek. Keine Anmeldung, kein Newsletter, nichts einzugeben — einfach lesen.',
+  schrittKnopf: 'Zur Wissensbibliothek',
+  schrittZiel: '/wissensbibliothek',
+
+  brotkrumen: [{ name: 'Wissen', ziel: '/wissensbibliothek' }, { name: 'Wissen to go' }],
+  stimmung: 'hell',
+
+  bilder: [
+    { bereich: 'Kopf der Seite', motiv: 'Telefon in der Hand, Kopfhörer, unterwegs — ohne Gesicht' },
+    { bereich: 'Beim Überblick', motiv: 'Aufgeschlagenes Notizbuch mit handschriftlichen Notizen' },
+  ],
+
+  weitere: [
+    { titel: 'Wissensbibliothek', text: 'Alle Artikel, ohne Anmeldung lesbar.', ziel: '/wissensbibliothek' },
+    { titel: 'Wirkungskraft-Werkzeuge', text: 'Zum Ausprobieren, direkt im Browser.', ziel: '/generatoren' },
+    { titel: 'Gratis-Webinar', text: 'Live dabei sein und Fragen stellen.', ziel: '/wissen-webinare' },
+    { titel: 'Telegram-Audioimpulse', text: 'Kurze gesprochene Gedanken.', ziel: '/wissen-telegram' },
+    { titel: 'Community', text: 'Austausch mit anderen.', ziel: '/wissen-community' },
+    { titel: 'Adventskalender', text: 'Vierundzwanzig Türchen im Dezember.', ziel: '/adventskalender' },
+  ],
+
+  seoTitel: 'Kostenlos: Artikel, Werkzeuge und Webinare | Claudia Conen',
+  seoText:
+    'Was es bei Claudia Conen umsonst gibt — und was es wirklich kostet. Wissensbibliothek und Werkzeuge ohne Anmeldung, Webinare mit. Bei jedem Angebot steht dabei, was Sie dafür hergeben.',
+};
 
 export default function WissenToGo() {
-  return (
-    <div className="min-h-screen bg-midnight-blue text-pearl-white">
-      <SEO
-        title="Wissen to go — Impulse für unterwegs"
-        description="Audio-Impulse, Telegram und WhatsApp, Webinare und die Wissensbibliothek. Kostenlos und ohne Anmeldung."
-        path="/wissen-to-go"
-      />
-      <Navigation />
-
-      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <div className="inline-block p-4 bg-gradient-to-br from-green-500 to-emerald-400 rounded-3xl mb-6">
-              <Headphones size={64} className="text-white" />
-            </div>
-            <h1 className="font-montserrat font-bold text-4xl sm:text-5xl lg:text-6xl mb-6">
-              Wissen{' '}
-              <span className="bg-gradient-to-r from-[#B8860B] via-[#DAA520] to-[#F4D03F] bg-clip-text text-transparent">
-                to go
-              </span>
-            </h1>
-            <p className="text-xl text-pearl-white/70 max-w-3xl mx-auto">
-              Impulse, Routinen, Wissen aus der Hosentasche.
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-            {[
-              {
-                icon: Podcast,
-                title: 'Audio-Impulse',
-                description: 'Tägliche Inspiration und Wissen direkt in dein Ohr – überall und jederzeit.',
-              },
-              {
-                icon: Radio,
-                title: 'Telegram & WhatsApp',
-                description: 'Exklusive Community-Inhalte und direkte Verbindung zu Gleichgesinnten.',
-              },
-              {
-                icon: Smartphone,
-                title: 'Flexibles Lernen',
-                description: 'Lerne in deinem Tempo, wann und wo es dir passt – mobil optimiert.',
-              },
-            ].map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="bg-royal-navy/30 backdrop-blur-sm rounded-2xl p-8 border border-luxury-gold/10 hover:border-luxury-gold/30 transition-all duration-300"
-                >
-                  <Icon size={48} className="text-bright-gold mb-4" />
-                  <h3 className="font-montserrat font-bold text-xl mb-3">{item.title}</h3>
-                  <p className="text-pearl-white/70">{item.description}</p>
-                </motion.div>
-              );
-            })}
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="bg-gradient-to-br from-royal-navy/50 to-midnight-blue/50 backdrop-blur-sm rounded-3xl p-8 lg:p-12 border border-luxury-gold/20"
-          >
-            <h2 className="font-montserrat font-bold text-3xl mb-6">
-              Lerne flexibel und mobil
-            </h2>
-            <p className="text-pearl-white/80 text-lg leading-relaxed mb-6">
-              Mit "Wissen to go" bekommst du wertvollen Content direkt auf dein Smartphone.
-              Ob beim Sport, auf dem Weg zur Arbeit oder in der Mittagspause – nutze jede freie
-              Minute für deine persönliche Weiterentwicklung.
-            </p>
-            <p className="text-pearl-white/80 text-lg leading-relaxed">
-              Erhalte tägliche Impulse, Audio-Trainings und exklusive Einblicke in die Welt der
-              wirkungsvollen Kommunikation. Bleib connected mit unserer Community und profitiere
-              vom kontinuierlichen Austausch.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      <Footer />
-    </div>
-  );
+  return <ZielgruppenSeite inhalt={inhalt} />;
 }

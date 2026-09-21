@@ -28,6 +28,36 @@ interface Testimonial {
  */
 import stimmenAnfang from '../../public/stimmen.json';
 
+/**
+ * Vorschaubilder, die es in einer eigenen, aufgehellten Fassung gibt
+ * (public/kundenstimmen/<id>.webp).
+ *
+ * Gemessen am 21.09.2026: Die zehn Bilder im Speicher "testimonial-thumbnails"
+ * sind 1080x1920-PNGs mit zusammen 13,1 MB - und in JEDES ist ein dunkler
+ * Schleier fest eingerechnet (rund zwei Drittel Deckkraft, Helligkeit 53 bis 76
+ * von 255; das Originalvideo zu Nr. 9 liegt bei 128). Deshalb halfen hellere
+ * Filter im Code nichts: Das Dunkel steckt in den Dateien. Und weil die Bilder
+ * ohne loading="lazy" eingebunden waren, lud jeder Besucher der Startseite
+ * diese 13 MB mit.
+ *
+ * Die eigenen Fassungen sind der herausgerechnete Schleier (Werte an Nr. 9
+ * gegen das Originalvideo bestimmt), 540x960, WebP, zusammen 293 KB.
+ * Kommt im Adminbereich eine neue Stimme dazu, greift fuer sie wie bisher das
+ * Bild aus dem Speicher - bitte dann ein HELLES Bild hochladen.
+ */
+const AUFGEHELLT = new Set<string>([
+  '08454326-b1e9-4ff6-8d83-ad919a77f471',
+  '14e3877b-1e92-412b-b8a7-2efa39b84b0e',
+  '50715858-3031-4425-8699-390ef9ccfd09',
+  '591c6945-460f-4e6a-8ae6-567bdd3f3024',
+  '7558459a-a382-4f80-8516-fa693a79d6b0',
+  '8a1870dc-1b72-4eec-a206-5ecc93a12568',
+  'c84ef2dd-bfc5-4fba-af01-693552fc0918',
+  'e24ec4f8-58df-4622-b0a3-f2498fa7dae9',
+  'e64fb9d8-f655-4f6c-a8b6-9a07fb398980',
+  'f5bf13c7-0387-45ed-aaec-18a91a0b318f',
+]);
+
 export default function SocialProof() {
   const [testimonials, setTestimonials] = useState<Testimonial[]>(
     stimmenAnfang as Testimonial[]
@@ -57,7 +87,9 @@ export default function SocialProof() {
     }
   };
 
-  const getThumbnailUrl = (path: string | null) => {
+  const getThumbnailUrl = (path: string | null, id?: string) => {
+    // Eigene, aufgehellte Fassung zuerst - siehe AUFGEHELLT oben.
+    if (id && AUFGEHELLT.has(id)) return `/kundenstimmen/${id}.webp`;
     if (!path) return null;
     const { data } = supabase.storage
       .from('testimonial-thumbnails')
@@ -111,8 +143,12 @@ export default function SocialProof() {
                 <div className="relative aspect-[9/16] rounded-2xl overflow-hidden shadow-lg transition-all duration-300 border border-luxury-gold/30 hover:border-luxury-gold/70 hover:shadow-[0_18px_40px_-18px_rgba(218,165,32,0.45)]">
                   {testimonial.thumbnail_path ? (
                     <img
-                      src={getThumbnailUrl(testimonial.thumbnail_path) || ''}
+                      src={getThumbnailUrl(testimonial.thumbnail_path, testimonial.id) || ''}
                       alt={testimonial.name}
+                      width={540}
+                      height={960}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover"
                     />
                   ) : (

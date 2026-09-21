@@ -302,6 +302,8 @@ export const megaMenuItems: MegaMenuItem[] = [
           { name: 'Was hilft gegen Lampenfieber?', href: '/wissen/lampenfieber', icon: Sparkles },
           { name: 'Wie mache ich richtig Pausen?', href: '/wissen/sprechpausen', icon: Pause },
           { name: 'Wie trainiere ich meine Stimme?', href: '/wissen/stimme-trainieren', icon: Mic },
+          { name: 'Wie bekomme ich eine tiefere Stimme?', href: '/wissen/tiefere-stimme', icon: Mic },
+          { name: 'Wie halte ich eine gute Rede?', href: '/wissen/gute-rede-halten', icon: Flag },
           { name: 'Kann man Charisma lernen?', href: '/wissen/charisma-lernen', icon: Star },
         ],
       },

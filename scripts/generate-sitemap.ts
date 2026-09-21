@@ -98,6 +98,8 @@ const staticPages = [
   { path: '/wissen/freie-trauung-ablauf', priority: '0.8', changefreq: 'monthly' },
   { path: '/wissen/elevator-pitch', priority: '0.8', changefreq: 'monthly' },
   { path: '/wissen/storytelling', priority: '0.8', changefreq: 'monthly' },
+  { path: '/wissen/tiefere-stimme', priority: '0.8', changefreq: 'monthly' },
+  { path: '/wissen/gute-rede-halten', priority: '0.8', changefreq: 'monthly' },
   { path: '/wissen/vier-ohren-modell', priority: '0.8', changefreq: 'monthly' },
   { path: '/wissen/keynote-aufbauen', priority: '0.8', changefreq: 'monthly' },
 

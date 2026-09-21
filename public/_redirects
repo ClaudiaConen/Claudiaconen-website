@@ -4,7 +4,11 @@
 # Die Sitemap hat bis zum 21.09.2026 85 Adressen /wissensbibliothek/<slug>
 # gemeldet, fuer die es nie eine Seite gab. Wer ueber so eine Adresse kommt,
 # landet jetzt in der Bibliothek statt auf "nicht gefunden".
-/wissensbibliothek/*    /wissensbibliothek    301
+# ACHTUNG: mit Platzhalter, NICHT mit Stern. Die Stern-Fassung
+# (/wissensbibliothek/* -> /wissensbibliothek) hat Netlify am 21.09.2026 als
+# Schleife verworfen - das Ziel passt selbst auf das Muster - und lieferte
+# stattdessen seine nackte "Page not found"-Seite. :slug verlangt ein Segment.
+/wissensbibliothek/:slug    /wissensbibliothek    301
 
 # Bereiche, die es nur im Browser gibt (Anmeldung, Mitglieder, Buchung).
 # Sie brauchen das Auffangnetz mit Status 200. Die Liste stammt aus dem

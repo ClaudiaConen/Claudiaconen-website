@@ -41,6 +41,8 @@ const KACHELN: Kachel[] = [
   { bild: '12-buch', oben: 'Autorin', satz: 'Wenn jedes Wort zählt', ziel: '/wissen-to-go' },
   { bild: '10-messe', oben: 'The Power of AI', satz: 'KI spart Zeit. Du gibst ihr Bedeutung.', ziel: '/ki-einsteiger-coaching' },
   { bild: '06-kamera', oben: 'Im Studio', satz: 'Vor laufender Kamera', ziel: '/storytelling-kurs' },
+  // Claudias Foto vom 22.09.2026 ("Momente im Tonstudio als Voice Over"); nur 360x254 px - sobald ein groesseres Original da ist, ersetzen.
+  { bild: '15-tonstudio', oben: 'Im Tonstudio', satz: 'Vom Ohr ins Herz', ziel: '/stimme-voiceover' },
   { bild: '07-freie-rednerin', oben: 'Freie Rednerin', satz: 'In Momenten, die bleiben', ziel: '/freie-rednerin' },
 ];
 

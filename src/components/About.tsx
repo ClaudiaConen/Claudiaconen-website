@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { Users, Clock, BookOpen, Award } from 'lucide-react';
 
 export default function About() {
@@ -83,29 +84,34 @@ export default function About() {
             </div>
 
             <article className="space-y-3 md:space-y-4 leading-relaxed text-sm md:text-base">
+              {/*
+                Text am 21.09.2026 mit Claudia abgestimmt: ihre freigegebene Definition
+                (Wortlaut wie in index.html und SEO.tsx), ihr eigener KI-Satz aus der
+                alten Fassung, ihr neuer Claim. Ihre Geschichte wird hier nicht mehr
+                erzaehlt, nur angedeutet - der Verweis-Satz ist IHRE Formulierung
+                ("Warum sie hoert, was andere ueberhoeren" empfand sie als Unterstellung).
+              */}
               <p className="text-white">
-                bekannt als „Die Umsatzstimme" – Expertin für emotionale Wirkungskraft, Speakerin, freie Rednerin, Coach, Trainerin und Autorin.
+                Claudia Conen ist Keynote-Speakerin, Trainerin, Coach und Autorin für unverwechselbare persönliche Wirkung – bekannt als „Die Umsatzstimme".
               </p>
               <p className="text-white">
-                Sie schärft das Bewusstsein für eines der wertvollsten Marketinginstrumente unserer Zeit: die menschliche Persönlichkeit.
+                Sie trainiert Rhetorik, Storytelling, Präsentation und den Auftritt vor der Kamera. Sie arbeitet mit Unternehmern, Führungskräften, Speakern und Teams – seit 37 Jahren.
               </p>
               <p className="text-white">
-                Als elfjähriges Mädchen erlebte sie, wie Stimmen und Worte sich tief im Gehirn verankern – unauslöschlich. Aus dieser Erfahrung wurde ihre Berufung: Menschen zu zeigen, wie Sprache berührt, Vertrauen schafft und Wirkung entfaltet.
+                Ihr Schwerpunkt ist die hörbare Persönlichkeit: das Zusammenspiel von Worten, Stimme und Haltung. Denn die Bühne beginnt dort, wo jemand das Wort ergreift.
               </p>
               <p className="text-white">
-                Heute vereint sie Kommunikation und künstliche Intelligenz. Sie zeigt Unternehmern, Führungskräften, Coaches und Speakern, wie sie sich im Zeitalter der KI mit echter Persönlichkeit abheben, wie sie Vertrauen aufbauen, Kunden gewinnen und Botschaften mit höchster Wirkungskraft transportieren.
+                Heute verbindet sie Kommunikation und künstliche Intelligenz. Denn KI kann berechnen, doch Persönlichkeit begeistert, fasziniert und berührt.
               </p>
               <p className="text-white">
-                Menschen reden überall – im Business, auf Social Media, in Meetings oder in der Familie. Claudia Conen lehrt, Kommunikation spürbar zu machen: vom Ohr über den Kopf direkt ins Herz.
-              </p>
-              <p className="text-white">
-                Sie inspiriert, KI als Fortschritt zu nutzen, um Prozesse zu vereinfachen – und mehr Zeit für Menschen zu gewinnen. Denn KI kann berechnen, doch Persönlichkeit begeistert, fasziniert und berührt.
-              </p>
-              <p className="text-white">
-                In einer Zeit, in der Technologie rasanter wächst als je zuvor, bleibt eines konstant: Der Mensch ist – und bleibt – einzigartig und unverwechselbar auf der Welt.
+                Warum sie weiß, dass Menschen sich für immer im Gehirn verankern können, erzählt sie auf{' '}
+                <Link to="/ueber-mich" className="underline decoration-luxury-gold/60 underline-offset-4 transition-colors hover:text-bright-gold">
+                  „Über mich"
+                </Link>
+                .
               </p>
               <p className="font-semibold text-bright-gold">
-                Perfektion klickt. Persönlichkeit bleibt.
+                Perfektion ist klickbar. Persönlichkeit weckt Vertrauen. Und bleibt.
               </p>
             </article>
 

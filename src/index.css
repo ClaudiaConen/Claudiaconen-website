@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&display=swap');
+/* Schriften vom eigenen Server (public/fonts/) statt von Google - siehe schriften.css. */
+@import './schriften.css';
 
 @tailwind base;
 @tailwind components;

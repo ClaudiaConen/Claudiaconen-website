@@ -297,6 +297,7 @@ export const megaMenuItems: MegaMenuItem[] = [
           bildMotiv: 'Schreibtisch mit Notizen, Detailaufnahme',
         },
         tiles: [
+          { name: 'Wie wird man Keynote Speaker?', href: '/wissen/keynote-speaker-werden', icon: Flag },
           { name: 'Wie baue ich eine Keynote auf?', href: '/wissen/keynote-aufbauen', icon: Flag },
           { name: 'Wie finde ich mein Thema?', href: '/wissen/thema-finden-speaker', icon: Target },
           { name: 'Was hilft gegen Lampenfieber?', href: '/wissen/lampenfieber', icon: Sparkles },

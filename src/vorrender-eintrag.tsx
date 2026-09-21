@@ -42,6 +42,7 @@ export const SEITEN: { pfad: string; laden: () => Promise<any> }[] = [
   { pfad: '/wissen/thema-finden-speaker', laden: () => import('./pages/ArtikelThemaFinden') },
   { pfad: '/wissen/sprechpausen', laden: () => import('./pages/ArtikelSprechpausen') },
   { pfad: '/wissen/trauerrede-schreiben', laden: () => import('./pages/ArtikelTrauerredeSchreiben') },
+  { pfad: '/wissen/keynote-speaker-werden', laden: () => import('./pages/ArtikelSpeakerWerden') },
   { pfad: '/wissen/vier-ohren-modell', laden: () => import('./pages/ArtikelVierOhren') },
   { pfad: '/wissen/keynote-aufbauen', laden: () => import('./pages/ArtikelKeynoteAufbauen') },
   { pfad: '/marke-und-positionierung', laden: () => import('./pages/MarkeUndPositionierung') },

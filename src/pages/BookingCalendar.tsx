@@ -63,7 +63,19 @@ export default function BookingCalendar() {
       .order('price');
 
     if (data && !error) {
-      setAppointmentTypes(data);
+      // Drei Terminarten stammen NICHT von Claudia, sondern aus der Vorlage des
+      // Baukastens (supabase/migrations/20251206202906_create_booking_calendar_tables.sql):
+      // gleiche Sekunde angelegt, nie geaendert - mit 150, 200 und 300 Euro. Regel: Kein
+      // Preis steht auf der Seite, den Claudia nicht selbst genannt hat. Sobald sie eine
+      // davon im Admin-Bereich umbenennt oder den Preis aendert, erscheint sie wieder.
+      const VORLAGEN: [string, number][] = [
+        ['Coaching Session (60 Min.)', 150],
+        ['Intensive Session (90 Min.)', 200],
+        ['Workshop Buchung', 300],
+      ];
+      setAppointmentTypes(
+        data.filter((t) => !VORLAGEN.some(([name, preis]) => t.name === name && Number(t.price) === preis))
+      );
     }
   };
 
@@ -270,19 +282,22 @@ export default function BookingCalendar() {
         {/* Text vor dem Kalender. Vorher hatte diese Seite 275 Zeichen -
             ein Kalenderfenster ohne Worte drumherum. Sie steht in der
             Sitemap, also findet Google sie und sah nichts.
-            Die vier Termine sind nicht erfunden: Sie stehen als aktive
-            Einträge in der Tabelle appointment_types.
-            Die Preise stehen bewusst NICHT hier - sie erscheinen im
-            Kalender, sobald ein Typ gewählt ist, und kommen dort direkt
-            aus der Datenbank. Damit gibt es nur eine Quelle dafür. */}
+            RICHTIGSTELLUNG 21.09.2026: Hier standen vier Termine, weil sie als aktive
+            Eintraege in appointment_types liegen. Drei davon (Coaching 150 Euro,
+            Intensive 200 Euro, Workshop 300 Euro) sind aber Vorlagenwerte des
+            Baukastens - in derselben Sekunde angelegt wie die Tabelle, nie geaendert,
+            woertlich in der Migration 20251206202906. Claudia hat diese Preise nie
+            genannt. Deshalb beschreibt der Text nur noch das Erstgespraech; siehe
+            Filter in fetchAppointmentTypes. */}
         <div className="max-w-3xl mx-auto mb-14">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">
             Was Sie hier buchen können
           </h2>
           <p className="text-gray-700 leading-relaxed mb-6">
-            Vier Möglichkeiten, und die erste kostet nichts. Wenn Sie unsicher sind, welche
-            passt: Nehmen Sie das Erstgespräch. Dreißig Minuten reichen, um zu klären, ob und
-            wie es weitergeht — und wenn ich nicht die Richtige bin, sage ich Ihnen das dort.
+            Hier buchen Sie das Erstgespräch. Es kostet nichts. Dreißig Minuten reichen, um zu
+            klären, ob und wie es weitergeht — und wenn ich nicht die Richtige bin, sage ich
+            Ihnen das dort. Coaching, Training oder einen Workshop vereinbaren wir danach
+            gemeinsam, passend zu dem, was Sie vorhaben.
           </p>
           <dl className="space-y-4 text-gray-700">
             <div>
@@ -290,27 +305,6 @@ export default function BookingCalendar() {
               <dd className="mt-1 leading-relaxed">
                 Kennenlernen. Sie schildern, worum es geht, ich sage Ihnen ehrlich, ob ich helfen
                 kann. Ohne Verpflichtung und ohne Verkaufsgespräch am Ende.
-              </dd>
-            </div>
-            <div>
-              <dt className="font-semibold text-gray-900">Coaching Session · 60 Minuten</dt>
-              <dd className="mt-1 leading-relaxed">
-                Einzelarbeit an einem Thema: ein Auftritt, der ansteht, ein Gespräch, das nicht
-                lief, eine Formulierung, die nicht sitzt.
-              </dd>
-            </div>
-            <div>
-              <dt className="font-semibold text-gray-900">Intensive Session · 90 Minuten</dt>
-              <dd className="mt-1 leading-relaxed">
-                Wenn eine Stunde zu kurz ist — etwa weil Sie mit einem fertigen Vortrag kommen
-                und wir ihn zusammen durchgehen.
-              </dd>
-            </div>
-            <div>
-              <dt className="font-semibold text-gray-900">Workshop · 120 Minuten</dt>
-              <dd className="mt-1 leading-relaxed">
-                Für Gruppen. Vor der Buchung melde ich mich, um den Inhalt abzustimmen — ein
-                Workshop ohne Vorgespräch ist ein Vortrag mit Übungsanteil.
               </dd>
             </div>
           </dl>

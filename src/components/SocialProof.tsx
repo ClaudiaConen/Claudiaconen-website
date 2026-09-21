@@ -45,7 +45,7 @@ type Stimme = {
   bild: string;
   vimeo?: string;
   /** Eigenes Video statt Vimeo (Verena). */
-  video?: { quelle: string; standbild: string; dauer: string };
+  video?: { quelle: string; standbild: string; dauer: string; hochkant?: boolean };
   ergebnis?: string;
   zitat?: string;
   saetze?: string[];
@@ -70,6 +70,25 @@ const STIMMEN: Stimme[] = [
       'Du bist wahnsinnig vertrauensvoll, und ich habe mich gleich gut aufgehoben gefühlt.',
     ],
     verweis: { text: 'Zur Webseite von Verena Sommerfeld', ziel: 'https://sommerfeld-energieberatung.de/' },
+  },
+  // Neues Video von Claudia am 22.09.2026 (Drive-Ordner "Vinci 2"), Name von ihr genannt. Saetze
+  // woertlich aus dem Video (Transkript: sichtung/vinci2/telegram_transkript.txt), Beruf und Ort
+  // von https://azur-netzwerk.de/.../dr-ing-ann-kathrin-andresen-ing-up/ und ing-up.de.
+  {
+    id: 'ann-kathrin-andresen',
+    name: 'Dr.-Ing. Ann-Kathrin Andresen',
+    rolle: ['Verfahrenstechnikerin, Mentorin und Beraterin · Ing.-up', 'Kirchberg an der Murr'],
+    kurz: 'Ingenieurin',
+    bild: '/kundenstimmen/ann-kathrin-andresen.webp',
+    video: { quelle: '/kundenstimmen/ann-kathrin-andresen.mp4', standbild: '/kundenstimmen/ann-kathrin-andresen-video.jpg', dauer: '2 Minuten', hochkant: true },
+    ergebnis: 'Eine Rede vor technischem Publikum',
+    zitat: 'Die Atmosphäre ist sehr herzlich, sehr direkt und sehr intensiv, aber wir lachen auch viel gemeinsam und es macht sehr viel Spaß.',
+    saetze: [
+      'Ich habe mit Claudia zusammen eine Rede erstellt und einstudiert, die ich vor einem technischen Publikum halte. Ich bin Ingenieurin.',
+      'Sie schmeißt einen auch gerne mal ins kalte Wasser.',
+      'Mit vollem Herzblut dabei und fordert dich auch gerne heraus.',
+    ],
+    verweis: { text: 'Zur Webseite von Ann-Kathrin Andresen', ziel: 'https://ing-up.de/' },
   },
   {
     id: 'e24ec4f8-58df-4622-b0a3-f2498fa7dae9',
@@ -98,10 +117,16 @@ const STIMMEN: Stimme[] = [
   {
     id: '14e3877b-1e92-412b-b8a7-2efa39b84b0e',
     name: 'Stephan',
-    rolle: ['Kameramann', 'gemeinsame Videoproduktionen'],
+    rolle: ['Kameramann bei Videographiq', 'gemeinsame Videoproduktionen'],
     kurz: 'Kameramann',
     bild: kachel('14e3877b-1e92-412b-b8a7-2efa39b84b0e'),
     vimeo: 'https://vimeo.com/1144142728',
+    // Geschriebene Kundenstimme von Videographiq auf claudia-conen.webflow.io - dort mit genau diesem Standbild.
+    zitat: 'Es ist immer wieder eine Freude, mit ihr zu arbeiten.',
+    saetze: [
+      'Wir haben schon öfters mit ihr zusammengearbeitet.',
+      'Ob sie Menschen dazu bewegt, selber Texte zu verfassen und selber vorzutragen oder ob sie selbst spricht oder als Speaker auftritt – sie legt jedesmal ein unfassbares Engagement an den Tag.',
+    ],
   },
   {
     id: '7558459a-a382-4f80-8516-fa693a79d6b0',
@@ -146,6 +171,52 @@ const STIMMEN: Stimme[] = [
     bild: kachel('591c6945-460f-4e6a-8ae6-567bdd3f3024'),
     vimeo: 'https://vimeo.com/1144281010',
     verweis: { text: 'Zur Webseite von Regina Volz', ziel: 'https://www.volz-personalberatung.de/' },
+  },
+  // Geschriebene Kundenstimmen von Claudias frueherer Webseite (claudia-conen.webflow.io), dort schon mit
+  // Namen, Bild und Verweis veroeffentlicht; Claudias Auftrag vom 22.09.2026: "auch mitnehmen". Wortlaut
+  // unveraendert (Ablage: kundenstimmen/webflow/KUNDENSTIMMEN_webflow.md). Berufsangaben Stand 2020/21.
+  {
+    id: 'julien-backhaus',
+    name: 'Julien Backhaus',
+    rolle: ['Julien Backhaus Verlag', 'Herausgeber ERFOLG Magazin'],
+    kurz: 'Herausgeber ERFOLG Magazin',
+    bild: '/kundenstimmen/julien-backhaus.webp',
+    zitat: 'Claudia Conen hat eine beeindruckende Stimme.',
+    saetze: ['Und dazu ist sie noch schnell, kompetent und unkompliziert. Wir als Verlag arbeiten gerne mit ihr.'],
+    verweis: { text: 'Zur Webseite von Julien Backhaus', ziel: 'https://julienbackhaus.de' },
+  },
+  {
+    id: 'aimee-bastian',
+    name: 'Aimée Bastian',
+    rolle: ['PR-Beraterin und Führungs-Coach'],
+    kurz: 'PR-Beraterin',
+    bild: '/kundenstimmen/aimee-bastian.webp',
+    zitat: 'Tolle Radiostimme: samtig-weich und angenehm.',
+    verweis: { text: 'Zur Webseite von Aimée Bastian', ziel: 'https://www.management-kommunikation.de/team/bastian-aimee/' },
+  },
+  {
+    id: 'fabian-mahnke',
+    name: 'Fabian Mahnke',
+    rolle: ['Experte für KI und Automatisierung im Marketing'],
+    kurz: 'KI im Marketing',
+    bild: '/kundenstimmen/fabian-mahnke.webp',
+    zitat: 'Ihre Stimme lockt Kunden an wie Magnete!',
+    saetze: ['Als Unternehmer durfte ich erkennen, dass meine Stimme oft mehr verrät als meine Worte.'],
+    verweis: { text: 'Zur Webseite von Fabian Mahnke', ziel: 'https://www.fabianmahnke.com/' },
+  },
+  {
+    // Kein brauchbares Foto (nur ein 295x166-Banner) -> Schrift-Kachel.
+    id: 'tobias-conrad',
+    name: 'Tobias Conrad',
+    rolle: ['Life Coach, Speaker und Motivationstrainer'],
+    kurz: 'Speaker',
+    bild: '',
+    zitat: 'Ihre Präsenz auf der Bühne und ihre Stimme ist außergewöhnlich.',
+    saetze: [
+      'Mit ihrer Vielfalt, mit ihrer Tiefe berührt sie die Menschen.',
+      'Die Klarheit, mit der sie Botschaften transportiert, beeindruckt.',
+    ],
+    verweis: { text: 'Zur Webseite von Tobias Conrad', ziel: 'https://tobias-conrad.com/' },
   },
   // Nummer 9 und 10 hat Claudia noch nicht benannt (Stand 22.09.2026).
   {
@@ -296,7 +367,7 @@ export default function SocialProof() {
           habe
         </h2>
         <p className="mt-3 max-w-2xl font-inter text-base leading-relaxed text-midnight-blue/80 md:text-lg">
-          Keine ausgedachten Zitate. Tippe ein Video an – und lies, was sie sagen.
+          Keine ausgedachten Zitate. Tippe eine Kachel an – und lies, was sie sagen.
         </p>
       </div>
 
@@ -340,7 +411,9 @@ export default function SocialProof() {
               autoPlay
               playsInline
               poster={s.video.standbild}
-              className="block aspect-video w-full rounded-xl border border-[#D4AF37]/55 bg-black"
+              className={`block rounded-xl border border-[#D4AF37]/55 bg-black ${
+                s.video.hochkant ? 'mx-auto aspect-[9/16] h-[420px] max-w-full' : 'aspect-video w-full'
+              }`}
               aria-label={`${s.name} erzählt von der Zusammenarbeit, ${s.video.dauer}`}
             >
               <source src={s.video.quelle} type="video/mp4" />
@@ -357,7 +430,7 @@ export default function SocialProof() {
               ))}
             </div>
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2.5">
-              {!(videoOffen && s.video) && (
+              {(s.vimeo || s.video) && !(videoOffen && s.video) && (
                 <button
                   type="button"
                   onClick={() => spiele(s, gewaehlt)}
@@ -401,9 +474,15 @@ export default function SocialProof() {
                   tabIndex={runde === 1 ? -1 : undefined}
                   onClick={() => waehle(i)}
                   aria-pressed={i === gewaehlt}
-                  aria-label={`${st.name}: lesen, was im Video gesagt wird`}
+                  aria-label={`${st.name}: lesen, was ${st.vimeo || st.video ? 'im Video gesagt wird' : 'geschrieben wurde'}`}
                   className="absolute inset-0 block h-full w-full cursor-pointer focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-[-3px] focus-visible:outline-[#EBD197]"
                 >
+                  {!st.bild && (
+                    <span className="absolute inset-0 flex flex-col justify-center gap-3 bg-midnight-blue px-5 text-left">
+                      <span aria-hidden="true" className="font-cormorant text-7xl font-semibold leading-[0.6] text-[#D4AF37]">„</span>
+                      <span className="font-cormorant text-[1.35rem] font-semibold italic leading-snug text-white">{st.zitat}</span>
+                    </span>
+                  )}
                   {st.bild && (
                     <img
                       src={st.bild}
@@ -422,7 +501,17 @@ export default function SocialProof() {
                 </button>
 
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 flex items-center gap-2.5 px-4 pb-[18px] pt-4 text-white">
-                  <button
+                  {!(st.vimeo || st.video) && (
+                    <span
+                      aria-hidden="true"
+                      className={`grid h-[42px] w-[42px] flex-none place-items-center rounded-full border-[1.5px] bg-midnight-blue/20 pt-3 font-cormorant text-4xl font-semibold leading-none ${
+                        i === gewaehlt ? 'border-[#EBD197] text-[#EBD197]' : 'border-white/85 text-white'
+                      }`}
+                    >
+                      „
+                    </span>
+                  )}
+                  {(st.vimeo || st.video) && <button
                     type="button"
                     tabIndex={runde === 1 ? -1 : undefined}
                     onClick={() => spiele(st, i)}
@@ -430,7 +519,7 @@ export default function SocialProof() {
                     className={`cc-pfeil pointer-events-auto grid h-[42px] w-[42px] flex-none cursor-pointer place-items-center rounded-full border-[1.5px] bg-midnight-blue/20 transition-colors hover:bg-midnight-blue/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#EBD197] ${
                       i === gewaehlt ? 'border-[#EBD197] text-[#EBD197]' : 'border-white/85 text-white'
                     }`}
-                  />
+                  />}
                   <span className="flex min-w-0 flex-col gap-0.5 text-left">
                     <span className="font-montserrat text-[14.5px] font-extrabold leading-tight tracking-[0.02em]">{st.name}</span>
                     <span className="font-inter text-xs font-medium leading-snug text-white/85">{st.kurz}</span>

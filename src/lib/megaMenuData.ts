@@ -318,6 +318,7 @@ export const megaMenuItems: MegaMenuItem[] = [
           { name: 'Wie schreibe ich eine Trauerrede?', desc: 'Aufbau, Anfang, Länge – und was nicht hinein muss', href: '/wissen/trauerrede-schreiben', icon: Ear },
           { name: 'Wie läuft eine freie Trauung ab?', desc: 'Ablauf, Dauer und die Sache mit dem Standesamt', href: '/wissen/freie-trauung-ablauf', icon: Heart },
           { name: 'Was ist ein Elevator Pitch?', desc: 'Aufbau, Länge und Beispiele im Vorher-Nachher', href: '/wissen/elevator-pitch', icon: ChevronsRight },
+          { name: 'Was ist Storytelling?', desc: 'Warum eine Szene bleibt und eine Aufzählung nicht', href: '/wissen/storytelling', icon: BookOpen },
         ],
       },
       {

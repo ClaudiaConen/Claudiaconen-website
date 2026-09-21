@@ -45,6 +45,7 @@ export const SEITEN: { pfad: string; laden: () => Promise<any> }[] = [
   { pfad: '/wissen/keynote-speaker-werden', laden: () => import('./pages/ArtikelSpeakerWerden') },
   { pfad: '/wissen/freie-trauung-ablauf', laden: () => import('./pages/ArtikelFreieTrauung') },
   { pfad: '/wissen/elevator-pitch', laden: () => import('./pages/ArtikelElevatorPitch') },
+  { pfad: '/wissen/storytelling', laden: () => import('./pages/ArtikelStorytelling') },
   { pfad: '/wissen/vier-ohren-modell', laden: () => import('./pages/ArtikelVierOhren') },
   { pfad: '/wissen/keynote-aufbauen', laden: () => import('./pages/ArtikelKeynoteAufbauen') },
   { pfad: '/marke-und-positionierung', laden: () => import('./pages/MarkeUndPositionierung') },

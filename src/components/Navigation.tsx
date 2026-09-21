@@ -77,14 +77,26 @@ export default function Navigation() {
     setActiveMenuId(null);
   }, [clearTimers]);
 
-  const handleCtaClick = () => {
+  const handleCtaClick = (e?: React.MouseEvent) => {
+    e?.preventDefault();
     setIsMobileMenuOpen(false);
     closeMegaMenu();
     navigate('/');
-    setTimeout(() => {
+    // Die Startseite laedt ihre Abschnitte nach. Nach festen 100 ms gab es
+    // #contact von einer Unterseite aus oft noch nicht - der Besucher landete
+    // dann oben auf der Startseite statt beim Formular. Deshalb: suchen, bis
+    // der Abschnitt da ist, hoechstens zwei Sekunden.
+    let versuche = 0;
+    const suchen = () => {
       const el = document.querySelector('#contact');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+        return;
+      }
+      versuche += 1;
+      if (versuche < 20) setTimeout(suchen, 100);
+    };
+    setTimeout(suchen, 100);
   };
 
   return (
@@ -177,13 +189,17 @@ export default function Navigation() {
                 decoding="async"
               />
             </a>
-            <button
+            {/* Ein echter Verweis statt eines Knopfes: Als <button> war der
+                einzige Anfrage-Weg der Kopfzeile fuer Suchprogramme unsichtbar
+                (gemessen am 21.09.2026: null Verweise auf Kontakt im Menue). */}
+            <a
+              href="/#contact"
               onClick={handleCtaClick}
-              className="mega-nav-cta"
+              className="mega-nav-cta no-underline"
             >
               <Calendar size={16} />
               Jetzt anfragen
-            </button>
+            </a>
           </div>
 
           <button

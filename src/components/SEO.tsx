@@ -104,7 +104,7 @@ export default function SEO({
           name: article.author || 'Claudia Conen',
           url: 'https://claudiaconen.com/ueber-mich',
           jobTitle: 'Keynote-Speakerin, Trainerin, Coach und Autorin für unverwechselbare persönliche Wirkung',
-          description: 'Claudia Conen ist Keynote-Speakerin, Trainerin, Coach und Autorin für unverwechselbare persönliche Wirkung. Seit 37 Jahren arbeitet sie mit Stimme, Bühne und Menschen. Sie unterstützt Unternehmer, Führungskräfte, Speaker und Teams mit Präsentationscoaching, Rhetoriktraining und Storytelling dabei, ihre Botschaft klar zu vermitteln und glaubwürdig zu überzeugen: auf der Bühne, vor der Kamera und im Gespräch.'
+          description: 'Claudia Conen ist Keynote-Speakerin, Trainerin, Coach und Autorin für unverwechselbare persönliche Wirkung. Sie trainiert Rhetorik, Storytelling, Präsentation und den Auftritt vor der Kamera. Sie arbeitet mit Unternehmern, Führungskräften, Speakern und Teams – seit 37 Jahren. Ihr Schwerpunkt ist die hörbare Persönlichkeit: das Zusammenspiel von Worten, Stimme und Haltung. Denn die Bühne beginnt dort, wo jemand das Wort ergreift.'
         },
         publisher: {
           '@type': 'Organization',
@@ -157,7 +157,7 @@ export default function SEO({
           opens: '09:00',
           closes: '18:00'
         },
-        description: 'Claudia Conen ist Keynote-Speakerin, Trainerin, Coach und Autorin für unverwechselbare persönliche Wirkung. Seit 37 Jahren arbeitet sie mit Stimme, Bühne und Menschen. Sie unterstützt Unternehmer, Führungskräfte, Speaker und Teams mit Präsentationscoaching, Rhetoriktraining und Storytelling dabei, ihre Botschaft klar zu vermitteln und glaubwürdig zu überzeugen: auf der Bühne, vor der Kamera und im Gespräch.',
+        description: 'Claudia Conen ist Keynote-Speakerin, Trainerin, Coach und Autorin für unverwechselbare persönliche Wirkung. Sie trainiert Rhetorik, Storytelling, Präsentation und den Auftritt vor der Kamera. Sie arbeitet mit Unternehmern, Führungskräften, Speakern und Teams – seit 37 Jahren. Ihr Schwerpunkt ist die hörbare Persönlichkeit: das Zusammenspiel von Worten, Stimme und Haltung. Denn die Bühne beginnt dort, wo jemand das Wort ergreift.',
         sameAs: [
           'https://www.linkedin.com/in/claudia-conen-die-stimme/',
           'https://www.instagram.com/claudia_conen_umsatzstimme/'
@@ -166,7 +166,7 @@ export default function SEO({
           '@type': 'Person',
           name: 'Claudia Conen',
           jobTitle: 'Keynote-Speakerin, Trainerin, Coach und Autorin für unverwechselbare persönliche Wirkung',
-          description: 'Claudia Conen ist Keynote-Speakerin, Trainerin, Coach und Autorin für unverwechselbare persönliche Wirkung. Seit 37 Jahren arbeitet sie mit Stimme, Bühne und Menschen. Sie unterstützt Unternehmer, Führungskräfte, Speaker und Teams mit Präsentationscoaching, Rhetoriktraining und Storytelling dabei, ihre Botschaft klar zu vermitteln und glaubwürdig zu überzeugen: auf der Bühne, vor der Kamera und im Gespräch.'
+          description: 'Claudia Conen ist Keynote-Speakerin, Trainerin, Coach und Autorin für unverwechselbare persönliche Wirkung. Sie trainiert Rhetorik, Storytelling, Präsentation und den Auftritt vor der Kamera. Sie arbeitet mit Unternehmern, Führungskräften, Speakern und Teams – seit 37 Jahren. Ihr Schwerpunkt ist die hörbare Persönlichkeit: das Zusammenspiel von Worten, Stimme und Haltung. Denn die Bühne beginnt dort, wo jemand das Wort ergreift.'
         }
       };
     }

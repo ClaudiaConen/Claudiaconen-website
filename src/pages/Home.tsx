@@ -26,7 +26,7 @@ export default function Home() {
     <div className="relative">
       <SEO
         title="Claudia Conen | Keynote-Speakerin, Trainerin & Coach"
-        description="Claudia Conen: Keynote-Speakerin, Trainerin, Coach und Autorin. Präsentationscoaching, Rhetoriktraining und Storytelling für Bühne, Kamera und Gespräch."
+        description="Claudia Conen: Keynote-Speakerin, Trainerin, Coach und Autorin. Rhetorik, Storytelling, Präsentation und Kameratraining – seit 37 Jahren."
         keywords={SEO_KEYWORDS}
       />
       <a href="#main" className="visually-hidden focusable">

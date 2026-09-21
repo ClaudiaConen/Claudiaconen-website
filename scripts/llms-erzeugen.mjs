@@ -67,14 +67,13 @@ function main() {
   let text = `# Claudia Conen
 
 > Claudia Conen ist Keynote-Speakerin, Trainerin, Coach und Autorin fuer
-> unverwechselbare persoenliche Wirkung. Seit 37 Jahren arbeitet sie mit
-> Stimme, Buehne und Menschen. Sie unterstuetzt Unternehmer, Fuehrungskraefte,
-> Speaker und Teams mit Praesentationscoaching, Rhetoriktraining und
-> Storytelling dabei, ihre Botschaft klar zu vermitteln und glaubwuerdig zu
-> ueberzeugen: auf der Buehne, vor der Kamera und im Gespraech. Ihr besonderer
-> Schwerpunkt ist die hoerbare Persoenlichkeit: das Zusammenspiel von Worten,
-> Stimme und Haltung. Ausserdem bildet sie Rednerinnen und Redner aus und
-> spricht selbst bei Trauerfeiern und freien Trauungen.
+> unverwechselbare persoenliche Wirkung. Sie trainiert Rhetorik, Storytelling,
+> Praesentation und den Auftritt vor der Kamera. Sie arbeitet mit Unternehmern,
+> Fuehrungskraeften, Speakern und Teams - seit 37 Jahren. Ihr Schwerpunkt ist
+> die hoerbare Persoenlichkeit: das Zusammenspiel von Worten, Stimme und
+> Haltung. Denn die Buehne beginnt dort, wo jemand das Wort ergreift.
+> Ausserdem bildet sie Rednerinnen und Redner aus und spricht selbst bei
+> Trauerfeiern und freien Trauungen.
 
 Diese Datei listet die Seiten von claudiaconen.com mit ihrer eigenen
 Beschreibung, damit Sprachmodelle den Inhalt einordnen koennen, ohne

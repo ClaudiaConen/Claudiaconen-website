@@ -256,7 +256,6 @@ export const megaMenuItems: MegaMenuItem[] = [
           { name: 'KI-Manager Ausbildung', href: '/ki-manager-ausbildung', icon: Monitor },
           { name: 'KI 1:1', href: '/ki-1zu1', icon: Users },
           { name: 'HeyGen Kurs', href: '/ki-heygen-kurs', icon: Video },
-          { name: 'KI-Abkürzungen', href: '/1zu1-abkuerzung-dezember', icon: ChevronsRight },
           { name: 'Marke im KI-Zeitalter', href: '/marke-und-positionierung', icon: Target },
         ],
       },

@@ -87,7 +87,9 @@ export const SEITEN: { pfad: string; laden: () => Promise<any> }[] = [
   { pfad: '/wissen-telegram', laden: () => import('./pages/WissenTelegram') },
   { pfad: '/wissen-whatsapp', laden: () => import('./pages/WissenWhatsapp') },
   { pfad: '/adventskalender', laden: () => import('./pages/AdventLanding') },
-  { pfad: '/1zu1-abkuerzung-dezember', laden: () => import('./pages/Abkuerzung1zu1') },
+  // '/1zu1-abkuerzung-dezember' wird seit 21.09.2026 nicht mehr vorgerendert: Die Seite
+  // zeigte einen am 31.12.2025 abgelaufenen Countdown ("00 Tage") samt Aktionspreis.
+  // Die Adresse leitet per _redirects auf /ki-1zu1.
   { pfad: '/termin-buchen', laden: () => import('./pages/BookingCalendar') },
   { pfad: '/events', laden: () => import('./pages/Events') },
   { pfad: '/spanien-ki-workshop', laden: () => import('./pages/SpanienRetreat') },

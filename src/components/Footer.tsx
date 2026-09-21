@@ -31,7 +31,8 @@ export default function Footer() {
         { label: 'Newsletter', href: '/newsletter' },
         { label: 'Blog', href: '/blog' },
         { label: 'Shop', href: 'https://umsatzstimme-claudiaconen.tentary.com/', external: true },
-        { label: 'Partnerprogramm', href: 'https://partnerprogramm.claudiaconen-akademie.de/', external: true },
+        // 'Partnerprogramm' zeigte auf partnerprogramm.claudiaconen-akademie.de - nicht
+        // erreichbar (geprueft 20. und 21.09.2026). Entfernt, bis es wieder eine Adresse gibt.
         { label: 'Kontakt', href: 'https://claudiaconen.com/termin-buchen', external: true },
       ],
     },

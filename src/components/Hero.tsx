@@ -258,14 +258,13 @@ export default function Hero() {
                 <Calendar size={20} />
                 JETZT UNVERWECHSELBAR WERDEN
               </a>
-              <a
-                href="https://claudiaconen-akademie.de/workshop-claudia"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center px-8 py-4 border-2 border-luxury-gold text-pearl-white font-semibold rounded-full hover:bg-luxury-gold/10 transition-all duration-300 whitespace-nowrap"
-              >
-                Zum Gratis Webinar
-              </a>
+              {/* Hier stand bis 21.09.2026 der Knopf "Zum Gratis Webinar" auf
+                  claudiaconen-akademie.de/workshop-claudia. Die Webseite dieser
+                  Domain antwortet seit mindestens 18.09.2026 nicht mehr - der
+                  zweite Knopf der Startseite fuehrte ins Leere. Bewusst ENTFERNT
+                  statt umgebogen: Claudias Knopf-Regel vom 18.09. sagt, der erste
+                  Klick verspricht einen Blick, keine Verpflichtung. Wieder
+                  einsetzen, sobald es ein Webinar mit lebender Adresse gibt. */}
             </motion.div>
           </motion.div>
 

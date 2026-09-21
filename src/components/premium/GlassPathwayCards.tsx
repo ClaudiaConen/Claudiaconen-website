@@ -51,7 +51,7 @@ const PATHWAYS: PathwayCard[] = [
       'Keynote-Entwicklung: Deine Botschaft perfektionieren',
     ],
     videoLabel: 'Video: Ausbildungs-Einblick einfügen',
-    link: '/ausbildung-beruf',
+    link: '/speaker-ausbildung', // vorher Zweitadresse /ausbildung-beruf
   },
   {
     icon: Bot,

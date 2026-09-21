@@ -160,7 +160,7 @@ export default function AdventCalendar() {
               className="mt-8 mb-6"
             >
               <Link
-                to="/1zu1-abkuerzung-dezember"
+                to="/ki-1zu1"
                 className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#C9A227] to-[#F5E6B3] text-[#1A1A1A] font-bold text-lg rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transition-all"
               >
                 <Sparkles size={24} />

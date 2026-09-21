@@ -45,7 +45,7 @@ const CAROUSEL_CARDS: CarouselCard[] = [
     title: 'WISSEN, DAS WIRKT – UND GESCHENKE FÜR DICH',
     subtitle: 'Ausbildungen\nOnline Kurse\nExklusives 1:1 Coaching\nGeschenke\nShop',
     icon: GraduationCap,
-    link: '/stimme-hochzeit',
+    link: '/premiumangebote', // vorher /stimme-hochzeit: Kachel verspricht Ausbildungen/Kurse/Coaching, fuehrte aber zur Zeremonien-Seite
     gradient: 'from-[#0F1F3A] via-[#1A2B4C] to-[#1A2B4C]',
     hoverVideo: 'https://player.vimeo.com/video/1133532511?background=1&loop=1&byline=0&title=0&muted=1',
     thumbnail: 'https://vumbnail.com/1133532511.jpg',
@@ -54,7 +54,7 @@ const CAROUSEL_CARDS: CarouselCard[] = [
     title: 'GESCHICHTEN SCHAFFEN GÄNSEHAUT',
     subtitle: 'Menschen merken sich Bilder, nicht Aufzählungen\n\nStorytelling • Emotional Selling • Elevator Pitch',
     icon: Headphones,
-    link: '/speaker-storytelling',
+    link: '/storytelling-kurs', // vorher Zweitadresse /speaker-storytelling, die selbst hierher verweist
     gradient: 'from-[#B8860B] via-[#DAA520] to-[#F4D03F]',
     hoverVideo: 'https://player.vimeo.com/video/1133493475?background=1&loop=1&byline=0&title=0&muted=1',
     thumbnail: 'https://vumbnail.com/1133493475.jpg',
@@ -63,7 +63,7 @@ const CAROUSEL_CARDS: CarouselCard[] = [
     title: 'WISSEN TO GO',
     subtitle: 'BLOG\nEVENTS\nÜBER MICH\nCOMMUNITY\nKOOPERATIONEN\nAUDIO IMPULSE',
     icon: Smartphone,
-    link: '/social-media-wirkung',
+    link: '/wissen-to-go', // vorher /social-media-wirkung: Kachel heisst WISSEN TO GO
     gradient: 'from-[#0F1F3A] via-[#1A2B4C] to-[#1A2B4C]',
     hoverVideo: 'https://player.vimeo.com/video/1133532379?background=1&loop=1&byline=0&title=0&muted=1',
     thumbnail: 'https://vumbnail.com/1133532379.jpg',
@@ -72,7 +72,7 @@ const CAROUSEL_CARDS: CarouselCard[] = [
     title: 'VOM OHR INS HERZ',
     subtitle: 'Für unvergessliche Momente und Botschaften\n\nFreie Rednerin • Hochzeiten • Trauerfeiern • Events',
     icon: MapPin,
-    link: '/immer-da-wo-du-bist',
+    link: '/freie-rednerin', // vorher /immer-da-wo-du-bist: Kachel verspricht Freie Rednerin, Hochzeiten, Trauerfeiern
     gradient: 'from-[#B8860B] via-[#DAA520] to-[#F4D03F]',
     hoverVideo: 'https://player.vimeo.com/video/1133502217?background=1&loop=1&byline=0&title=0&muted=1',
     thumbnail: 'https://vumbnail.com/1133502217.jpg',

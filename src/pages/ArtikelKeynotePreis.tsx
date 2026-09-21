@@ -7,7 +7,11 @@ import ArtikelSeite, { ArtikelInhalt } from '../components/ArtikelSeite';
  * Die Marktspannen stammen aus Claudias eigener Marktrecherche
  * (MARKETINGSTRATEGIE, Abschnitt 7, "Marktwerte aus der Recherche"). Sie
  * werden hier als Marktwerte benannt und nicht als eigene Preise ausgegeben.
- * Claudias eigene Preise stehen getrennt und sind als ihre gekennzeichnet.
+ * EIGENE PREISE STEHEN HIER NICHT MEHR (entfernt am 21.09.2026): Der Abschnitt
+ * "Claudia Conens Honorare" nannte 2.500 / 3.500-5.000 / 3.900 / ab 9.500 Euro.
+ * Diese Zahlen kamen am 18.09.2026 durch Vinci auf die Seite - aus Entwurfs- und
+ * Marktwerten, NICHT aus einer Entscheidung von Claudia. Sie hatte gesagt, die
+ * Preise legen wir gemeinsam fest. Erst wieder einsetzen, wenn sie sie nennt.
  */
 const INHALT: ArtikelInhalt = {
   pfad: '/wissen/was-kostet-ein-keynote-speaker',
@@ -49,12 +53,6 @@ const INHALT: ArtikelInhalt = {
       absaetze: [
         'Ein Rabatt auf dieselbe Leistung ist selten ein gutes Zeichen. Wer den Preis schnell senkt, ohne dass sich der Umfang ändert, hat ihn vorher zu hoch angesetzt oder braucht den Termin dringend.',
         'Sinnvoll ist dagegen ein kleineres Format zum kleineren Preis: ein Impulsvortrag statt einer Keynote, ein halber Tag statt eines ganzen, ein Online-Termin statt einer Anreise. Das ist ehrlich und für beide Seiten planbar.',
-      ],
-    },
-    {
-      titel: 'Claudia Conens Honorare',
-      absaetze: [
-        'Zur Einordnung die eigenen Preise, damit dieser Text nicht nur über andere spricht: Ein Impulsvortrag liegt bei 2.500 Euro. Eine Keynote von 45 bis 60 Minuten liegt zwischen 3.500 und 5.000 Euro. Ein Workshoptag im Unternehmen kostet 3.900 Euro. Mehrteilige Programme über mehrere Termine beginnen bei 9.500 Euro. Alle Angaben zuzüglich Umsatzsteuer und Reisekosten.',
       ],
     },
   ],

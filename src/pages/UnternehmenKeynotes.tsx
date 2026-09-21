@@ -25,8 +25,9 @@ import ZielgruppenSeite, { ZielgruppenInhalt } from '../components/ZielgruppenSe
  * einen Redner" - und fuer die es im deutschen Netz kaum gute Antworten
  * gibt.
  *
- * PREIS: Die 3.900 Euro standen bereits live auf dieser Seite und bleiben
- * deshalb stehen. In Claudias eigenem Produktdokument steht fuer Firmen
+ * PREIS: Am 21.09.2026 entfernt. Die 3.900 Euro "standen bereits live" - aber
+ * nur, weil Vinci sie am 18.09.2026 selbst dorthin geschrieben hatte (Commit
+ * fbdffa0), aus einem Entwurfswert. Vorher standen sie nie auf der Seite. In Claudias eigenem Produktdokument steht fuer Firmen
  * allerdings "auf Anfrage". Sie wurde darauf hingewiesen; die Entscheidung
  * gehoert ihr.
  */
@@ -118,9 +119,9 @@ const INHALT: ZielgruppenInhalt = {
   angebotName: 'Ein Tag im Haus',
   angebotZeile:
     'Keynote am Vormittag für alle, Arbeit am Nachmittag mit denen, die danach sprechen müssen. Ein Tag, ein Raum, ein Ergebnis — kein Programm über Monate.',
-  angebotPreis: '3.900 €',
+  angebotPreis: 'Honorar im Vorgespräch',
   angebotPreisHinweis:
-    'Zuzüglich Umsatzsteuer und Anreise. Für reine Keynotes ohne Workshop gilt ein eigenes Honorar — fragen Sie einfach.',
+    'Es hängt von Dauer, Ort und Vorbereitung ab. Zur Einordnung: Im deutschen Markt liegen etablierte Fachrednerinnen zwischen 3.000 und 8.000 Euro je Vortrag.',
   angebotPunkte: [
     'Vorgespräch mit Ihnen: Was ist die eigentliche Lage, und was darf ich ansprechen?',
     'Keynote für die gesamte Mannschaft, auf Ihre Situation zugeschnitten',
@@ -208,7 +209,7 @@ const INHALT: ZielgruppenInhalt = {
     {
       frage: 'Was kostet eine Keynote bei Ihnen?',
       antwort:
-        'Der Tag im Haus liegt bei 3.900 Euro zuzüglich Umsatzsteuer und Anreise. Für eine reine Keynote nennen wir das Honorar im Vorgespräch, weil es von Dauer, Ort und Vorbereitung abhängt. Zur Einordnung: Im deutschen Markt liegen etablierte Fachrednerinnen zwischen 3.000 und 8.000 Euro je Vortrag.',
+        'Das Honorar nennen wir im Vorgespräch, weil es von Dauer, Ort und Vorbereitung abhängt. Zur Einordnung: Im deutschen Markt liegen etablierte Fachrednerinnen zwischen 3.000 und 8.000 Euro je Vortrag.',
     },
     {
       frage: 'Sprechen Sie auch online?',

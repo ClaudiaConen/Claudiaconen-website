@@ -27,6 +27,7 @@ interface Testimonial {
  * die im Quelltext zu haben waere schlechter als nichts gewesen.
  */
 import stimmenAnfang from '../../public/stimmen.json';
+import NamentlicheStimmen from './NamentlicheStimmen';
 
 /**
  * Vorschaubilder, die es in einer eigenen, aufgehellten Fassung gibt
@@ -118,6 +119,9 @@ export default function SocialProof() {
             selbst erzählen, was sich verändert hat.
           </p>
         </motion.div>
+
+        {/* Stimmen mit Namen und Text - stehen im HTML, anders als die Videos. */}
+        <NamentlicheStimmen />
 
         {loading ? (
           <div className="text-center text-white/80 py-12">

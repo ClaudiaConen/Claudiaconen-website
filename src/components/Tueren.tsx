@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import KachelStimme from './KachelStimme';
 
 /**
  * Kopfzeile und die vier Tueren: der Einstieg nach ZIELGRUPPE, nicht nach Format.
@@ -27,6 +28,9 @@ type Tuer = {
   stichworte: string[];
   knopf: string;
   ziel: string;
+  /** Claudias Sprechtext zu dieser Tuer, z. B. '/audio/tuer-unternehmen.mp3'.
+   *  Solange die Aufnahme fehlt, bleibt das Feld leer und es erscheint kein Knopf. */
+  stimme?: string;
 };
 
 const TUEREN: Tuer[] = [
@@ -140,16 +144,23 @@ export default function Tueren() {
                 className="tuer-karte rounded-xl px-7 py-8 motion-reduce:transform-none sm:px-10 sm:py-11"
                 style={{ transform: `scale(${1 - (TUEREN.length - 1 - i) * 0.012})` }}
               >
-                <h3>
-                  <span
-                    className={
-                      'inline-block rounded-sm bg-midnight-blue px-4 py-2 font-montserrat text-sm font-bold uppercase tracking-[0.12em] text-pearl-white sm:text-base' +
-                      (i === 0 ? ' tuer-marke-puls' : '')
-                    }
-                  >
-                    {t.wer}
-                  </span>
-                </h3>
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <h3>
+                    <span
+                      className={
+                        'inline-block rounded-sm bg-midnight-blue px-4 py-2 font-montserrat text-sm font-bold uppercase tracking-[0.12em] text-pearl-white sm:text-base' +
+                        (i === 0 ? ' tuer-marke-puls' : '')
+                      }
+                    >
+                      {t.wer}
+                    </span>
+                  </h3>
+                  <KachelStimme
+                    quelle={t.stimme}
+                    aufHell
+                    beschreibung={`Claudia erzählt, was hinter der Tür „${t.wer}" liegt`}
+                  />
+                </div>
 
                 <p className="mt-5 font-montserrat text-2xl font-bold leading-[1.15] text-midnight-blue sm:text-3xl">
                   {t.frage}

@@ -2300,3 +2300,10 @@ html, body { cursor: auto; }
     animation: none;
   }
 }
+
+/* Tonspur im Hoer-Knopf der Kacheln (KachelStimme.tsx). Bewegt sich nur,
+   waehrend gesprochen wird; steht still, wenn das System Bewegung abgeschaltet hat. */
+.cc-kachelstimme-strich { transform-origin: center; transform: scaleY(0.55); }
+.cc-kachelstimme-laeuft { animation: ccKachelStimme 0.9s ease-in-out infinite alternate; }
+@keyframes ccKachelStimme { from { transform: scaleY(0.3); } to { transform: scaleY(1); } }
+@media (prefers-reduced-motion: reduce) { .cc-kachelstimme-laeuft { animation: none; } }

@@ -316,6 +316,8 @@ export const megaMenuItems: MegaMenuItem[] = [
           { name: 'Wie finde ich den passenden Speaker?', desc: 'Woran man vorher erkennt, ob es passt', href: '/wissen/keynote-speaker-finden', icon: Compass },
           { name: 'Das Vier-Ohren-Modell', desc: 'Warum dasselbe anders ankommt', href: '/wissen/vier-ohren-modell', icon: Ear },
           { name: 'Wie schreibe ich eine Trauerrede?', desc: 'Aufbau, Anfang, Länge – und was nicht hinein muss', href: '/wissen/trauerrede-schreiben', icon: Ear },
+          { name: 'Wie läuft eine freie Trauung ab?', desc: 'Ablauf, Dauer und die Sache mit dem Standesamt', href: '/wissen/freie-trauung-ablauf', icon: Heart },
+          { name: 'Was ist ein Elevator Pitch?', desc: 'Aufbau, Länge und Beispiele im Vorher-Nachher', href: '/wissen/elevator-pitch', icon: ChevronsRight },
         ],
       },
       {

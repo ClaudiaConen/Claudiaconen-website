@@ -35,7 +35,7 @@ const INHALT: ZielgruppenInhalt = {
     'Ein Kennenlernen, ein ausführliches Gespräch, eine Zeremonie, die nur zu euch passt. Mit Ritual, wenn ihr wollt, und ohne, wenn ihr nicht wollt.',
   angebotPreis: 'Honorar auf Anfrage',
   angebotPreisHinweis:
-    'Zur Einordnung: Freie Trauungen liegen in Deutschland meist zwischen 1.100 und 1.600 Euro, die gesamte Spanne reicht von 800 bis 2.500. Dahinter stecken 25 bis 35 Arbeitsstunden je Trauung. Was es bei euch ist, sage ich euch nach dem Kennenlernen.',
+    'Zur Einordnung: Der Durchschnitt liegt in Deutschland bei rund 1.000 Euro je Trauung, erfahrene Rednerinnen liegen zwischen 1.100 und 1.600 Euro, die gesamte Spanne reicht von etwa 800 bis 2.500. Dahinter stecken 25 bis 35 Arbeitsstunden je Trauung. Was es bei euch ist, sage ich euch nach dem Kennenlernen.',
   angebotPunkte: [
     'Ein Kennenlernen ohne Verpflichtung, online oder bei einem Kaffee',
     'Ein ausführliches Gespräch, in dem eure Geschichte entsteht',

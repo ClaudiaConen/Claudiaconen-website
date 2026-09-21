@@ -23,6 +23,8 @@ const ArtikelThemaFinden = lazy(() => import('./pages/ArtikelThemaFinden'));
 const ArtikelSprechpausen = lazy(() => import('./pages/ArtikelSprechpausen'));
 const ArtikelTrauerredeSchreiben = lazy(() => import('./pages/ArtikelTrauerredeSchreiben'));
 const ArtikelSpeakerWerden = lazy(() => import('./pages/ArtikelSpeakerWerden'));
+const ArtikelFreieTrauung = lazy(() => import('./pages/ArtikelFreieTrauung'));
+const ArtikelElevatorPitch = lazy(() => import('./pages/ArtikelElevatorPitch'));
 const ArtikelVierOhren = lazy(() => import('./pages/ArtikelVierOhren'));
 const ArtikelKeynoteAufbauen = lazy(() => import('./pages/ArtikelKeynoteAufbauen'));
 const MarkeUndPositionierung = lazy(() => import('./pages/MarkeUndPositionierung'));
@@ -196,6 +198,8 @@ function App() {
         <Route path="/wissen/sprechpausen" element={<ArtikelSprechpausen />} />
         <Route path="/wissen/trauerrede-schreiben" element={<ArtikelTrauerredeSchreiben />} />
         <Route path="/wissen/keynote-speaker-werden" element={<ArtikelSpeakerWerden />} />
+        <Route path="/wissen/freie-trauung-ablauf" element={<ArtikelFreieTrauung />} />
+        <Route path="/wissen/elevator-pitch" element={<ArtikelElevatorPitch />} />
         <Route path="/wissen/vier-ohren-modell" element={<ArtikelVierOhren />} />
         <Route path="/wissen/keynote-aufbauen" element={<ArtikelKeynoteAufbauen />} />
         <Route path="/marke-und-positionierung" element={<MarkeUndPositionierung />} />

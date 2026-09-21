@@ -95,6 +95,8 @@ const staticPages = [
   { path: '/wissen/sprechpausen', priority: '0.8', changefreq: 'monthly' },
   { path: '/wissen/trauerrede-schreiben', priority: '0.8', changefreq: 'monthly' },
   { path: '/wissen/keynote-speaker-werden', priority: '0.8', changefreq: 'monthly' },
+  { path: '/wissen/freie-trauung-ablauf', priority: '0.8', changefreq: 'monthly' },
+  { path: '/wissen/elevator-pitch', priority: '0.8', changefreq: 'monthly' },
   { path: '/wissen/vier-ohren-modell', priority: '0.8', changefreq: 'monthly' },
   { path: '/wissen/keynote-aufbauen', priority: '0.8', changefreq: 'monthly' },
 

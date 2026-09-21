@@ -595,8 +595,15 @@ export default function Wissensbibliothek() {
                   />
 
                   <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 pt-4 sm:pt-6 border-t-2 border-gray-100">
+                    {/* Vorsorglich seit 21.09.2026: In der Datenbank steht bei 52 von 85
+                        Artikeln "Claudia Hupprich" als Autorin - das ist der
+                        STANDARDWERT der Spalte (Migration 20251109132846, Zeile 53),
+                        und es gibt eine reale Coachin dieses Namens. Bei 22 weiteren
+                        steht "Hans Eichner". Solange Claudia nicht bestaetigt hat, dass
+                        diese Personen die Texte geschrieben haben, zeigt die Seite nur
+                        ihren eigenen Namen an - nie einen fremden. */}
                     <div className="text-xs sm:text-sm text-gray-500">
-                      Von {selectedArticle.author}
+                      {selectedArticle.author === 'Claudia Conen' ? 'Von Claudia Conen' : ''}
                     </div>
                     <div className="flex flex-wrap gap-1.5 sm:gap-2">
                       {selectedArticle.tags.map(tag => (

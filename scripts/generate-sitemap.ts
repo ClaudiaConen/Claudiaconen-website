@@ -239,15 +239,27 @@ async function generateSitemap() {
     xml += '  </url>\n';
   });
 
-  articles.forEach(article => {
-    const lastmod = article.published_at ? new Date(article.published_at).toISOString().split('T')[0] : today;
-    xml += '  <url>\n';
-    xml += `    <loc>${SITE_URL}/wissensbibliothek/${article.slug}</loc>\n`;
-    xml += `    <lastmod>${lastmod}</lastmod>\n`;
-    xml += `    <changefreq>monthly</changefreq>\n`;
-    xml += `    <priority>0.8</priority>\n`;
-    xml += '  </url>\n';
-  });
+  // ABGESCHALTET am 21.09.2026 - und das ist kein Versehen:
+  // Die Sitemap hat hier 85 Adressen der Form /wissensbibliothek/<slug>
+  // gemeldet. Fuer diese Adressen gibt es in App.tsx KEINE Route und gab es
+  // nie eine - wer sie aufruft, landet auf der "nicht gefunden"-Seite. Die
+  // Artikel leben nur als Aufklapp-Inhalt innerhalb von /wissensbibliothek.
+  // Eine Sitemap, die 85 nicht existierende Seiten anmeldet, schadet dem
+  // Vertrauen einer Suchmaschine in alle anderen Eintraege.
+  // Wieder einschalten, sobald es die Artikelseiten wirklich gibt UND der
+  // jeweilige Artikel inhaltlich geprueft ist (Zahlen, Quellen, Autor).
+  const ARTIKELSEITEN_GIBT_ES = false;
+  if (ARTIKELSEITEN_GIBT_ES) {
+    articles.forEach(article => {
+      const lastmod = article.published_at ? new Date(article.published_at).toISOString().split('T')[0] : today;
+      xml += '  <url>\n';
+      xml += `    <loc>${SITE_URL}/wissensbibliothek/${article.slug}</loc>\n`;
+      xml += `    <lastmod>${lastmod}</lastmod>\n`;
+      xml += `    <changefreq>monthly</changefreq>\n`;
+      xml += `    <priority>0.8</priority>\n`;
+      xml += '  </url>\n';
+    });
+  }
 
   xml += '</urlset>';
 
@@ -256,9 +268,10 @@ async function generateSitemap() {
 
   fs.writeFileSync(sitemapPath, xml, 'utf-8');
   console.log(`✓ Sitemap erstellt: ${sitemapPath}`);
-  console.log(`✓ Insgesamt ${staticPages.length + articles.length} URLs in Sitemap`);
+  const gemeldeteArtikel = ARTIKELSEITEN_GIBT_ES ? articles.length : 0;
+  console.log(`✓ Insgesamt ${staticPages.length + gemeldeteArtikel} URLs in Sitemap`);
   console.log(`  - ${staticPages.length} statische Seiten`);
-  console.log(`  - ${articles.length} Wissensbibliothek-Artikel`);
+  console.log(`  - ${gemeldeteArtikel} Wissensbibliothek-Artikel (${articles.length} in der Datenbank, nicht gemeldet: es gibt keine Artikelseiten)`);
 }
 
 generateSitemap().catch(console.error);

@@ -36,7 +36,7 @@ export default function UeberMich() {
     <div className="min-h-screen bg-pearl-white">
       <SEO
         title="Über mich | Claudia Conen"
-        description="Claudia Conen, Keynote Speakerin und KI-Managerin. Warum sie hört, wie Menschen sprechen, und was daraus wurde."
+        description="Claudia Conen ist Keynote-Speakerin, Trainerin, Coach und Autorin für unverwechselbare persönliche Wirkung. Woher das kommt und was daraus wurde."
         path="/ueber-mich"
       />
 

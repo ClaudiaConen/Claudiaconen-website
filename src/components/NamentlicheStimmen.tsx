@@ -33,6 +33,8 @@ type Stimme = {
   zitat: string;
   weitere: string[];
   verweis?: { text: string; ziel: string };
+  /** Geschnittene Fassung fuer die Seite. Laedt erst beim Klick (preload none). */
+  video?: { quelle: string; standbild: string; dauer: string };
 };
 
 const STIMMEN: Stimme[] = [
@@ -48,6 +50,7 @@ const STIMMEN: Stimme[] = [
       'Du bist wahnsinnig vertrauensvoll, und ich habe mich gleich gut aufgehoben gefühlt.',
     ],
     verweis: { text: 'Zur Webseite von Verena Sommerfeld', ziel: 'https://sommerfeld-energieberatung.de/' },
+    video: { quelle: '/kundenstimmen/verena-sommerfeld.mp4', standbild: '/kundenstimmen/verena-sommerfeld-video.jpg', dauer: '2 Minuten' },
   },
 ];
 
@@ -84,6 +87,21 @@ export default function NamentlicheStimmen() {
                 {s.ort ? ` · ${s.ort}` : ''}
               </span>
             </figcaption>
+
+            {s.video && (
+              <div className="mt-5 max-w-xl overflow-hidden rounded-xl border border-white/20 shadow-[0_14px_40px_-22px_rgba(10,22,40,0.9)]">
+                <video
+                  controls
+                  preload="none"
+                  playsInline
+                  poster={s.video.standbild}
+                  className="block aspect-video w-full bg-midnight-blue"
+                  aria-label={`${s.name} erzählt von der Zusammenarbeit, ${s.video.dauer}`}
+                >
+                  <source src={s.video.quelle} type="video/mp4" />
+                </video>
+              </div>
+            )}
 
             <details className="group mt-4">
               <summary className="inline-flex cursor-pointer list-none items-center gap-2 font-montserrat text-sm font-semibold text-white/90 underline decoration-luxury-gold/50 underline-offset-4 transition-colors hover:text-luxury-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-luxury-gold [&::-webkit-details-marker]:hidden">

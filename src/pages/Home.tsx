@@ -25,8 +25,8 @@ export default function Home() {
   return (
     <div className="relative">
       <SEO
-        title="Claudia Conen | Keynote-Speakerin und Mentorin für persönliche Wirkung"
-        description="Der erste Eindruck entsteht, bevor der erste Satz zu Ende ist. Claudia Conen zeigt dir, wie deine Persönlichkeit zu dem wird, was keine KI kopieren kann: Keynotes, Redner-Ausbildungen und Mentoring."
+        title="Claudia Conen | Keynote-Speakerin, Trainerin & Coach"
+        description="Claudia Conen: Keynote-Speakerin, Trainerin, Coach und Autorin. Präsentationscoaching, Rhetoriktraining und Storytelling für Bühne, Kamera und Gespräch."
         keywords={SEO_KEYWORDS}
       />
       <a href="#main" className="visually-hidden focusable">

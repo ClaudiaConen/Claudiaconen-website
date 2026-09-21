@@ -171,10 +171,12 @@ export default function SocialProof() {
                     style={{ background: 'linear-gradient(90deg, transparent, #DAA520, transparent)' }}
                   />
 
+                  {/* Dunkles statt weisses Glas: Auf den aufgehellten Bildern war der weisse
+                      Knopf kaum zu sehen (Claudias Bildschirmfoto vom 21.09.2026). */}
                   {/* Oben rechts statt mittig: der Knopf sass vorher genau
                       auf dem Gesicht. Claudias Hinweis vom 19.09.2026. */}
                   <div className="absolute right-2.5 top-2.5">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/45 bg-white/20 shadow-[0_6px_18px_-8px_rgba(10,22,40,0.55)] backdrop-blur-md backdrop-saturate-150 transition-transform duration-300 group-hover:scale-110 motion-reduce:transition-none">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/60 bg-[#0F1F3A]/45 shadow-[0_6px_18px_-8px_rgba(10,22,40,0.7)] backdrop-blur-md backdrop-saturate-150 transition-transform duration-300 group-hover:scale-110 group-hover:border-luxury-gold/80 motion-reduce:transition-none">
                       <Play className="ml-0.5 h-4 w-4 text-white drop-shadow" />
                     </div>
                   </div>

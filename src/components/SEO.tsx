@@ -103,8 +103,8 @@ export default function SEO({
           '@type': 'Person',
           name: article.author || 'Claudia Conen',
           url: 'https://claudiaconen.com/ueber-mich',
-          jobTitle: 'Keynote-Speakerin und Mentorin für persönliche Wirkung',
-          description: 'Claudia Conen arbeitet seit 37 Jahren mit Stimme, Bühne und Menschen. Sie hält Keynotes für Unternehmen, bildet Rednerinnen und Redner aus und spricht bei Trauerfeiern und freien Trauungen.'
+          jobTitle: 'Keynote-Speakerin, Trainerin, Coach und Autorin für unverwechselbare persönliche Wirkung',
+          description: 'Claudia Conen ist Keynote-Speakerin, Trainerin, Coach und Autorin für unverwechselbare persönliche Wirkung. Seit 37 Jahren arbeitet sie mit Stimme, Bühne und Menschen. Sie unterstützt Unternehmer, Führungskräfte, Speaker und Teams mit Präsentationscoaching, Rhetoriktraining und Storytelling dabei, ihre Botschaft klar zu vermitteln und glaubwürdig zu überzeugen: auf der Bühne, vor der Kamera und im Gespräch.'
         },
         publisher: {
           '@type': 'Organization',
@@ -157,7 +157,7 @@ export default function SEO({
           opens: '09:00',
           closes: '18:00'
         },
-        description: 'Claudia Conen arbeitet seit 37 Jahren mit Stimme, Bühne und Menschen. Sie hält Keynotes für Unternehmen, bildet Rednerinnen und Redner aus und spricht bei Trauerfeiern und freien Trauungen.',
+        description: 'Claudia Conen ist Keynote-Speakerin, Trainerin, Coach und Autorin für unverwechselbare persönliche Wirkung. Seit 37 Jahren arbeitet sie mit Stimme, Bühne und Menschen. Sie unterstützt Unternehmer, Führungskräfte, Speaker und Teams mit Präsentationscoaching, Rhetoriktraining und Storytelling dabei, ihre Botschaft klar zu vermitteln und glaubwürdig zu überzeugen: auf der Bühne, vor der Kamera und im Gespräch.',
         sameAs: [
           'https://www.linkedin.com/in/claudia-conen-die-stimme/',
           'https://www.instagram.com/claudia_conen_umsatzstimme/'
@@ -165,8 +165,8 @@ export default function SEO({
         founder: {
           '@type': 'Person',
           name: 'Claudia Conen',
-          jobTitle: 'Keynote-Speakerin und Mentorin für persönliche Wirkung',
-          description: 'Claudia Conen arbeitet seit 37 Jahren mit Stimme, Bühne und Menschen. Sie hält Keynotes für Unternehmen, bildet Rednerinnen und Redner aus und spricht bei Trauerfeiern und freien Trauungen.'
+          jobTitle: 'Keynote-Speakerin, Trainerin, Coach und Autorin für unverwechselbare persönliche Wirkung',
+          description: 'Claudia Conen ist Keynote-Speakerin, Trainerin, Coach und Autorin für unverwechselbare persönliche Wirkung. Seit 37 Jahren arbeitet sie mit Stimme, Bühne und Menschen. Sie unterstützt Unternehmer, Führungskräfte, Speaker und Teams mit Präsentationscoaching, Rhetoriktraining und Storytelling dabei, ihre Botschaft klar zu vermitteln und glaubwürdig zu überzeugen: auf der Bühne, vor der Kamera und im Gespräch.'
         }
       };
     }

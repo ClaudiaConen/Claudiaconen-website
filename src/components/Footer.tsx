@@ -12,7 +12,7 @@ export default function Footer() {
       title: 'Über',
       links: [
         { label: 'Über mich', href: '/ueber-mich' },
-        { label: 'Methode', href: '#solution' },
+        { label: 'Methode', href: '#methode' }, // vorher #solution - den Anker gab es nicht
         { label: 'Menschen, mit denen ich gearbeitet habe', href: '#social-proof' },
       ],
     },
@@ -21,7 +21,7 @@ export default function Footer() {
       links: [
         { label: 'Voice to Impact', href: 'https://voice-to-impact-conv-h10m.bolt.host', external: true },
         { label: 'Voice-to-Brain Mentoring', href: 'https://claudia-conen-voice-ui2e.bolt.host', external: true },
-        { label: 'Premium Workshop', href: '#offers' },
+        { label: 'Premium Workshop', href: '/premiumangebote' }, // vorher #offers - den Anker gibt es auf der Startseite nicht
       ],
     },
     resources: {

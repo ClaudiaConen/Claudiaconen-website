@@ -1,259 +1,202 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
-import { Ear, Mic, Shield, MessageSquare, Sparkles, Target, Heart } from 'lucide-react';
+import { motion, useMotionValueEvent, useScroll } from 'framer-motion';
+import { useRef, useState } from 'react';
+
+/**
+ * Die sieben Schritte - als ruhige Treppe.
+ *
+ * Neu gebaut am 21.09.2026, nachdem Claudia den Bereich "so nicht" fand.
+ * Vorher: 21 Endlos-Animationen gleichzeitig (pulsierende Symbole, pulsierende
+ * Zahlen, rotierende Ringe), am Handy lief der goldene Strich mitten durch die
+ * Kacheln, die Symbole passten nicht zum Inhalt, und "Sprich mit mir" zeigte
+ * auf #offers - einen Anker, den es auf der Startseite nicht gibt.
+ *
+ * Jetzt:
+ *   - EIN Strich links, der sich beim Scrollen mit Gold fuellt (nur transform,
+ *     kein Layout) - die einzige Bewegung im ganzen Abschnitt.
+ *   - Zahlen statt Symbole.
+ *   - Glasflaechen statt dunkler Kaesten (ihr Wunsch vom 21.09.).
+ *   - Am Rechner bleibt die Ueberschrift links stehen, rechts ziehen die
+ *     Schritte vorbei. FALLE: Der Abschnitt darf dafuer kein overflow-hidden
+ *     haben, sonst faellt "sticky" lautlos aus - deshalb overflow-clip.
+ *
+ * CLAUDIAS TEXTE SIND UNVERAENDERT (titel, kurz, lang). Der lange Text steht
+ * eingeklappt im HTML und bleibt damit fuer Suchmaschinen und KI lesbar.
+ *
+ * TON: 'hell' oder 'dunkel' - eine Zeile, Claudia hat in der Vorschau gewaehlt.
+ */
+const TON: 'hell' | 'dunkel' = 'hell';
+
+const FARBEN = {
+  hell: {
+    abschnitt: 'bg-pearl-white text-midnight-blue',
+    leise: 'text-midnight-blue/70',
+    auge: 'text-[#8A6508]',
+    glas: 'border-white/90 bg-white/60 shadow-[0_0_0_1px_rgba(10,22,40,0.08),0_24px_50px_-34px_rgba(10,22,40,0.45)]',
+    spur: 'bg-dark-gold/25',
+    marke: 'border-dark-gold/30 bg-white text-midnight-blue/60',
+    mehr: 'text-[#8A6508] hover:text-dark-gold',
+    fleckOben: 'bg-luxury-gold/30',
+    fleckUnten: 'bg-royal-navy/20',
+  },
+  dunkel: {
+    abschnitt: 'bg-midnight-blue text-pearl-white',
+    leise: 'text-pearl-white/70',
+    auge: 'text-bright-gold',
+    glas: 'border-white/15 bg-white/[0.07] shadow-[0_24px_50px_-34px_rgba(0,0,0,0.6)]',
+    spur: 'bg-luxury-gold/25',
+    marke: 'border-luxury-gold/30 bg-[#0F1F3A] text-pearl-white/70',
+    mehr: 'text-bright-gold hover:text-luxury-gold',
+    fleckOben: 'bg-luxury-gold/20',
+    fleckUnten: 'bg-[#3C5FAA]/30',
+  },
+} as const;
+
+const SCHRITTE = [
+  {
+    titel: 'KI spart Zeit. Du gibst ihr Bedeutung.',
+    kurz: 'Sie berechnet blitzschnell – du berührst bleibend.',
+    lang: 'Sie berechnet blitzschnell – du berührst bleibend.\nSie schenkt dir Zeit – damit du sie mit Menschen teilst.\nKI kann Daten verarbeiten – du kannst Verbindung schaffen.\nUnd genau darin liegt Wirkungskraft:\nPerfektion klickt. Persönlichkeit bleibt.',
+  },
+  {
+    titel: 'Entdecke was Menschen bewegt – bevor sie entscheiden.',
+    kurz: 'Verstehen, was Menschen bewegt – bevor sie entscheiden.',
+    lang: 'Verstehen, was Menschen bewegt – bevor sie entscheiden.\nDas Gefühl ist da, bevor der Gedanke es einholt.\nWenn du weißt, wie Vertrauen entsteht, berührst du Menschen tiefer, als Worte je können.',
+  },
+  {
+    titel: 'Jede Wirkung beginnt mit einer Geschichte – deiner.',
+    kurz: 'Selbsterkenntnis ist der Schlüssel zu Wirkungskraft.',
+    lang: 'Selbsterkenntnis ist der Schlüssel zu Wirkungskraft.\nWer seine Berufung lebt und seine Persönlichkeit klar positioniert, wird unverwechselbar – im Business und im Leben. Nutze deine Einzigartigkeit.',
+  },
+  {
+    titel: 'Klarheit verkauft. Storytelling verbindet.',
+    kurz: 'Der Elevator Pitch zeigt, wer du bist – und warum Menschen dir zuhören.',
+    lang: 'Der Elevator Pitch zeigt, wer du bist – und warum Menschen dir zuhören.\nEine Geschichte erreicht Menschen schneller als eine Aufzählung,\nweil Bilder Emotionen auslösen und im Gedächtnis bleiben.\nOb auf Social Media, im Kundengespräch oder live auf der Bühne:\nFrag dich: Welche Emotion willst du wecken – und was sollen Menschen fühlen, denken oder tun?',
+  },
+  {
+    titel: 'Du wirkst, bevor du sprichst.',
+    kurz: 'Deine Geschichte, dein Erlebtes – sie sind dein unverwechselbarer Klang.',
+    lang: 'Von Selbsterkenntnis zu Wirkungskraft – durch Haltung, Persönlichkeit, Stimme und Blick.\nDeine Geschichte, dein Erlebtes – sie sind dein unverwechselbarer Klang.\nRhetorik ist nicht das Spiel mit Worten, sondern die Kunst, echt zu wirken.\nWenn Stimme, Körpersprache und Worte dieselbe Sprache sprechen,\nentsteht Charisma – und die unsichtbare Brücke vom Ohr, über den Kopf, direkt ins Herz',
+  },
+  {
+    titel: 'Werde zum Privatdetektiv deiner Wirkung.',
+    kurz: 'Menschen entscheiden mit dem Herzen, lange bevor der Verstand folgt.',
+    lang: 'Worte sind unaufhaltbar. Beobachte, was du im anderen auslöst – und welche Energie du sendest, wenn du sprichst.\nMenschen sind emotionale Wesen – sie entscheiden mit dem Herzen, lange bevor der Verstand folgt.\nDeine Worte können begeistern, motivieren, trösten, faszinieren oder verletzen.\nSie können Vertrauen schaffen – oder zerstören.\nNutze die unsichtbare Brücke:\nvom Ohr über den Kopf direkt ins Herz.',
+  },
+  {
+    titel: 'Unverwechselbar DU. Nicht ersetzbar.',
+    kurz: 'Bleib das, was kein Algorithmus je sein kann – ein Original.',
+    lang: 'Bleib das, was kein Algorithmus je sein kann – ein Original.\nNutze die 7 Schritte zu echter Wirkung.\nPerfektion klickt. Persönlichkeit bleibt.',
+  },
+];
 
 export default function Timeline() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start center', 'end center'],
+  const f = FARBEN[TON];
+  const treppe = useRef<HTMLDivElement>(null);
+  const [erreicht, setErreicht] = useState(0);
+
+  // Der Strich fuellt sich, waehrend die Treppe an der Bildschirmmitte vorbeizieht.
+  const { scrollYProgress } = useScroll({ target: treppe, offset: ['start 55%', 'end 55%'] });
+
+  // Neu gerechnet wird nur, wenn ein weiterer Schritt erreicht ist - nicht bei jedem Pixel.
+  useMotionValueEvent(scrollYProgress, 'change', (p) => {
+    const i = Math.min(SCHRITTE.length - 1, Math.floor(p * (SCHRITTE.length - 1) + 0.15));
+    setErreicht((vorher) => (vorher === i ? vorher : i));
   });
 
-  const lineHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
-
-  const steps = [
-    {
-      number: 1,
-      kurz: 'Sie berechnet blitzschnell – du berührst bleibend.',
-      icon: Ear,
-      title: 'KI spart Zeit. Du gibst ihr Bedeutung.',
-      description: 'Sie berechnet blitzschnell – du berührst bleibend.\nSie schenkt dir Zeit – damit du sie mit Menschen teilst.\nKI kann Daten verarbeiten – du kannst Verbindung schaffen.\nUnd genau darin liegt Wirkungskraft:\nPerfektion klickt. Persönlichkeit bleibt.',
-      side: 'left',
-    },
-    {
-      number: 2,
-      kurz: 'Verstehen, was Menschen bewegt – bevor sie entscheiden.',
-      icon: Mic,
-      title: 'Entdecke was Menschen bewegt – bevor sie entscheiden.',
-      description: 'Verstehen, was Menschen bewegt – bevor sie entscheiden.\nDas Gefühl ist da, bevor der Gedanke es einholt.\nWenn du weißt, wie Vertrauen entsteht, berührst du Menschen tiefer, als Worte je können.',
-      side: 'right',
-    },
-    {
-      number: 3,
-      kurz: 'Selbsterkenntnis ist der Schlüssel zu Wirkungskraft.',
-      icon: Shield,
-      title: 'Jede Wirkung beginnt mit einer Geschichte – deiner.',
-      description: 'Selbsterkenntnis ist der Schlüssel zu Wirkungskraft.\nWer seine Berufung lebt und seine Persönlichkeit klar positioniert, wird unverwechselbar – im Business und im Leben. Nutze deine Einzigartigkeit.',
-      side: 'left',
-    },
-    {
-      number: 4,
-      kurz: 'Der Elevator Pitch zeigt, wer du bist – und warum Menschen dir zuhören.',
-      icon: MessageSquare,
-      title: 'Klarheit verkauft. Storytelling verbindet.',
-      description: 'Der Elevator Pitch zeigt, wer du bist – und warum Menschen dir zuhören.\nEine Geschichte erreicht Menschen schneller als eine Aufzählung,\nweil Bilder Emotionen auslösen und im Gedächtnis bleiben.\nOb auf Social Media, im Kundengespräch oder live auf der Bühne:\nFrag dich: Welche Emotion willst du wecken – und was sollen Menschen fühlen, denken oder tun?',
-      side: 'right',
-    },
-    {
-      number: 5,
-      kurz: 'Deine Geschichte, dein Erlebtes – sie sind dein unverwechselbarer Klang.',
-      icon: Sparkles,
-      title: 'Du wirkst, bevor du sprichst.',
-      description: 'Von Selbsterkenntnis zu Wirkungskraft – durch Haltung, Persönlichkeit, Stimme und Blick.\nDeine Geschichte, dein Erlebtes – sie sind dein unverwechselbarer Klang.\nRhetorik ist nicht das Spiel mit Worten, sondern die Kunst, echt zu wirken.\nWenn Stimme, Körpersprache und Worte dieselbe Sprache sprechen,\nentsteht Charisma – und die unsichtbare Brücke vom Ohr, über den Kopf, direkt ins Herz',
-      side: 'left',
-    },
-    {
-      number: 6,
-      kurz: 'Menschen entscheiden mit dem Herzen, lange bevor der Verstand folgt.',
-      icon: Target,
-      title: 'Werde zum Privatdetektiv deiner Wirkung.',
-      description: 'Worte sind unaufhaltbar. Beobachte, was du im anderen auslöst – und welche Energie du sendest, wenn du sprichst.\nMenschen sind emotionale Wesen – sie entscheiden mit dem Herzen, lange bevor der Verstand folgt.\nDeine Worte können begeistern, motivieren, trösten, faszinieren oder verletzen.\nSie können Vertrauen schaffen – oder zerstören.\nNutze die unsichtbare Brücke:\nvom Ohr über den Kopf direkt ins Herz.',
-      side: 'right',
-    },
-    {
-      number: 7,
-      kurz: 'Bleib das, was kein Algorithmus je sein kann – ein Original.',
-      icon: Heart,
-      title: 'Unverwechselbar DU. Nicht ersetzbar.',
-      description: 'Bleib das, was kein Algorithmus je sein kann – ein Original.\nNutze die 7 Schritte zu echter Wirkung.\nPerfektion klickt. Persönlichkeit bleibt.',
-      side: 'left',
-    },
-  ];
-
   return (
-    <section className="py-12 md:py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden" aria-labelledby="timeline-headline">
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: "url('/WhatsApp Image 2025-10-18 at 09.35.25.jpeg')" }}
-      ></div>
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0A1628] via-[#0F1F3A] to-[#0A1628] opacity-90"></div>
-      <div className="max-w-7xl mx-auto relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.2 }}
-          className="text-center mb-16 md:mb-28"
-        >
-          <div className="inline-block mb-4 px-6 py-2 bg-gradient-to-r from-[#DAA520]/20 to-[#F4D03F]/20 rounded-full border border-luxury-gold/30">
-            <span className="text-bright-gold font-semibold">Die Voice-to-Brain™ Methode</span>
-          </div>
+    <section
+      id="methode"
+      className={`relative scroll-mt-24 overflow-clip px-4 py-14 sm:px-6 md:py-24 lg:px-8 ${f.abschnitt}`}
+      aria-labelledby="timeline-headline"
+    >
+      <div aria-hidden="true" className={`pointer-events-none absolute -right-40 -top-32 h-[520px] w-[520px] rounded-full blur-[70px] ${f.fleckOben}`} />
+      <div aria-hidden="true" className={`pointer-events-none absolute -bottom-44 -left-56 h-[560px] w-[560px] rounded-full blur-[70px] ${f.fleckUnten}`} />
+
+      <div className="relative z-10 mx-auto grid max-w-5xl gap-10 lg:grid-cols-[5fr_7fr] lg:items-start lg:gap-16">
+        <div className="flex flex-col items-start gap-4 lg:sticky lg:top-32">
+          <span className={`font-montserrat text-xs font-semibold uppercase tracking-[0.18em] ${f.auge}`}>
+            Die Voice-to-Brain™ Methode
+          </span>
           <h2
             id="timeline-headline"
-            className="font-montserrat text-3xl font-bold leading-[1.1] tracking-tight sm:text-4xl md:text-5xl lg:text-6xl"
+            className="font-montserrat text-4xl font-extrabold leading-[1.04] tracking-tight sm:text-5xl"
           >
-            <span className="block text-pearl-white">Maschinen rechnen.</span>
-            <span className="mt-1 block gold-text-animated">Menschen berühren.</span>
+            <span className="block">Maschinen rechnen.</span>
+            <span className="block bg-gradient-to-r from-dark-gold via-luxury-gold to-bright-gold bg-clip-text text-transparent">
+              Menschen berühren.
+            </span>
           </h2>
-          <p className="mx-auto mt-7 max-w-xl font-inter text-base leading-relaxed text-pearl-white/60 sm:text-lg">
+          <p className={`max-w-sm font-inter text-base leading-relaxed sm:text-lg ${f.leise}`}>
             KI spart Zeit. Was du daraus machst, entscheidet, ob man sich an dich erinnert.
           </p>
-        </motion.div>
+          <p className={`font-montserrat text-sm font-semibold tabular-nums ${f.leise}`} aria-hidden="true">
+            <span className={`mr-1 text-2xl font-extrabold ${TON === 'hell' ? 'text-midnight-blue' : 'text-pearl-white'}`}>
+              {erreicht + 1}
+            </span>
+            von {SCHRITTE.length}
+          </p>
+        </div>
 
-        <div ref={containerRef} className="relative">
-          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-luxury-gold/20 -translate-x-1/2">
+        <div ref={treppe} className="relative pl-[54px]">
+          <div aria-hidden="true" className={`absolute bottom-5 left-[19px] top-5 w-0.5 rounded-full ${f.spur}`}>
             <motion.div
-              style={{ height: lineHeight }}
-              className="w-full bg-gradient-to-b from-[#DAA520] to-[#F4D03F]"
+              style={{ scaleY: scrollYProgress }}
+              className="h-full w-full origin-top rounded-full bg-gradient-to-b from-luxury-gold to-bright-gold"
             />
           </div>
 
-          <div className="space-y-10 md:space-y-16">
-            {steps.map((step, index) => {
-              const Icon = step.icon;
-              const isLeft = step.side === 'left';
-
-              return (
-                <motion.div
-                  key={index}
-                  id={`schritt${step.number}`}
-                  initial={{ opacity: 0, x: isLeft ? -30 : 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, amount: 0.2, margin: '-50px' }}
-                  transition={{ duration: 0.2 }}
-                  className={`relative grid grid-cols-1 lg:grid-cols-2 gap-8 items-center ${
-                    isLeft ? '' : (step.number === 2 || step.number === 4 || step.number === 6) ? '' : 'lg:text-right'
+          <ol className="flex list-none flex-col gap-4 p-0 md:gap-5">
+            {SCHRITTE.map((s, i) => (
+              <li key={s.titel} id={`schritt${i + 1}`} className="relative scroll-mt-28">
+                <span
+                  aria-hidden="true"
+                  className={`absolute -left-[54px] top-[18px] grid h-10 w-10 place-items-center rounded-full border-2 font-montserrat text-[15px] font-bold tabular-nums transition-[background,color,border-color,transform] duration-300 motion-reduce:transition-none ${
+                    i <= erreicht
+                      ? 'scale-105 border-transparent bg-gradient-to-br from-luxury-gold to-bright-gold text-midnight-blue'
+                      : f.marke
                   }`}
                 >
-                  <div className={`${isLeft ? 'lg:pr-16' : 'lg:pl-16 lg:col-start-2'}`}>
-                    <motion.div
-                      whileHover={{ scale: 1.02, y: -5 }}
-                      className="bg-royal-navy/40 backdrop-blur-sm p-6 md:p-8 rounded-2xl border border-luxury-gold/20 hover:border-luxury-gold/40 transition-all duration-300"
-                    >
-                      <div
-                        className={`flex items-center gap-4 mb-6 ${
-                          isLeft ? '' : (step.number === 2 || step.number === 4 || step.number === 6) ? '' : 'lg:flex-row-reverse'
-                        }`}
-                      >
-                        <motion.div
-                          animate={{
-                            boxShadow: [
-                              '0 0 20px rgba(218, 165, 32, 0.3)',
-                              '0 0 30px rgba(218, 165, 32, 0.5)',
-                              '0 0 20px rgba(218, 165, 32, 0.3)',
-                            ],
-                          }}
-                          transition={{ duration: 2, repeat: Infinity }}
-                          className="w-16 h-16 rounded-full bg-gradient-to-r from-[#DAA520] to-[#F4D03F] flex items-center justify-center flex-shrink-0"
-                        >
-                          <Icon size={28} className="text-midnight-blue" />
-                        </motion.div>
-                        <div>
-                          <div className="text-sm text-bright-gold font-semibold mb-1">
-                            Schritt {step.number}
-                          </div>
-                          <h3 className="font-montserrat font-bold text-lg sm:text-xl md:text-2xl text-pearl-white">
-                            {step.title}
-                          </h3>
-                        </div>
-                      </div>
-                      {/* Immer sichtbar: ein Satz. Der Rest steht im
-                          Quelltext und ist damit fuer Suchmaschinen und KI
-                          vollstaendig lesbar, nur eingeklappt. */}
-                      <p className="font-inter text-pearl-white/85 leading-relaxed">{step.kurz}</p>
+                  {i + 1}
+                </span>
 
-                      <details className="cc-mehr mt-4">
-                        <summary className="inline-flex items-center gap-2 font-montserrat text-sm font-semibold text-bright-gold transition-colors hover:text-luxury-gold">
-                          <span className="cc-mehr-zu">Mehr dazu</span>
-                          <span className="cc-mehr-auf">Weniger</span>
-                          <span aria-hidden="true" className="cc-mehr-pfeil">&#8964;</span>
-                        </summary>
-                        <p className="mt-3 whitespace-pre-line font-inter leading-relaxed text-pearl-white/75">
-                          {step.description}
-                        </p>
-                      </details>
-                    </motion.div>
-                  </div>
+                <div
+                  className={`flex flex-col gap-2 rounded-[20px] border p-5 backdrop-blur-lg backdrop-saturate-150 transition-transform duration-300 ease-out hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0 md:p-6 ${f.glas}`}
+                >
+                  <h3 className="font-montserrat text-lg font-bold leading-snug tracking-tight md:text-xl">
+                    <span className="sr-only">Schritt {i + 1}: </span>
+                    {s.titel}
+                  </h3>
+                  <p className={`font-inter leading-relaxed ${f.leise}`}>{s.kurz}</p>
 
-                  <div className={`hidden lg:block ${isLeft ? 'lg:col-start-2' : 'lg:col-start-1'}`}>
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      whileInView={{ scale: 1 }}
-                      viewport={{ once: true, amount: 0.5 }}
-                      transition={{ duration: 0.2 }}
-                      className="flex items-center justify-center h-full"
-                    >
-                      <div className="relative w-12 h-12">
-                        <motion.div
-                          animate={{
-                            scale: [1, 1.5, 1],
-                            opacity: [0.5, 0, 0.5],
-                          }}
-                          transition={{ duration: 2, repeat: Infinity }}
-                          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-bright-gold z-0"
-                        />
-                        <motion.div
-                          animate={{ rotate: 360 }}
-                          transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-                          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full border-2 border-luxury-gold/30 z-10"
-                        />
-                        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-gradient-to-r from-[#DAA520] to-[#F4D03F] flex items-center justify-center font-montserrat font-bold text-midnight-blue text-xl z-20">
-                          {step.number}
-                        </div>
-                      </div>
-                    </motion.div>
-                  </div>
+                  {/* Der Rest steht im Quelltext und ist damit fuer Suchmaschinen
+                      und KI vollstaendig lesbar, nur eingeklappt. */}
+                  <details className="cc-mehr mt-1">
+                    <summary className={`inline-flex items-center gap-2 font-montserrat text-sm font-semibold transition-colors ${f.mehr}`}>
+                      <span className="cc-mehr-zu">Mehr dazu</span>
+                      <span className="cc-mehr-auf">Weniger</span>
+                      <span aria-hidden="true" className="cc-mehr-pfeil">&#8964;</span>
+                    </summary>
+                    <p className={`mt-3 whitespace-pre-line font-inter text-[15px] leading-relaxed ${f.leise}`}>{s.lang}</p>
+                  </details>
+                </div>
+              </li>
+            ))}
+          </ol>
 
-                  <div className="lg:hidden flex justify-center">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-[#DAA520] to-[#F4D03F] flex items-center justify-center font-montserrat font-bold text-midnight-blue text-xl">
-                      {step.number}
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.2 }}
-            className="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-1/2"
-          >
-            <motion.div
-              animate={{
-                boxShadow: [
-                  '0 0 30px rgba(218, 165, 32, 0.4)',
-                  '0 0 50px rgba(218, 165, 32, 0.7)',
-                  '0 0 30px rgba(218, 165, 32, 0.4)',
-                ],
-              }}
-              transition={{ duration: 3, repeat: Infinity }}
-              className="w-20 h-20 rounded-full bg-gradient-to-r from-[#DAA520] to-[#F4D03F] flex items-center justify-center"
+          <div className="mt-10 flex flex-col items-start gap-4">
+            <p className="font-cormorant text-2xl italic leading-snug sm:text-3xl">
+              Bereit, diese sieben Schritte zu gehen?
+            </p>
+            {/* Vorher "#offers" - diesen Anker gibt es auf der Startseite nicht. */}
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-luxury-gold to-bright-gold px-7 py-3.5 font-montserrat text-[15px] font-bold text-midnight-blue shadow-[0_14px_30px_-16px_rgba(218,165,32,0.9)] transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-luxury-gold motion-reduce:transition-none"
             >
-              <Sparkles size={40} className="text-midnight-blue" />
-            </motion.div>
-          </motion.div>
+              Sprich mit mir
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.2 }}
-          className="text-center mt-16 md:mt-32"
-        >
-          <p className="text-base md:text-xl text-pearl-white/80 mb-4 md:mb-6">
-            Bereit, diese sieben Schritte zu gehen?
-          </p>
-          <a
-            href="#offers"
-            className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg"
-          >
-            Sprich mit mir
-          </a>
-        </motion.div>
       </div>
     </section>
   );

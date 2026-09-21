@@ -315,6 +315,7 @@ export const megaMenuItems: MegaMenuItem[] = [
           { name: 'Was kostet ein Keynote Speaker?', desc: 'Preisspannen im deutschen Markt', href: '/wissen/was-kostet-ein-keynote-speaker', icon: Star },
           { name: 'Wie finde ich den passenden Speaker?', desc: 'Woran man vorher erkennt, ob es passt', href: '/wissen/keynote-speaker-finden', icon: Compass },
           { name: 'Das Vier-Ohren-Modell', desc: 'Warum dasselbe anders ankommt', href: '/wissen/vier-ohren-modell', icon: Ear },
+          { name: 'Wie schreibe ich eine Trauerrede?', desc: 'Aufbau, Anfang, Länge – und was nicht hinein muss', href: '/wissen/trauerrede-schreiben', icon: Ear },
         ],
       },
       {

@@ -93,6 +93,7 @@ const staticPages = [
   { path: '/wissen/charisma-lernen', priority: '0.8', changefreq: 'monthly' },
   { path: '/wissen/thema-finden-speaker', priority: '0.8', changefreq: 'monthly' },
   { path: '/wissen/sprechpausen', priority: '0.8', changefreq: 'monthly' },
+  { path: '/wissen/trauerrede-schreiben', priority: '0.8', changefreq: 'monthly' },
   { path: '/wissen/vier-ohren-modell', priority: '0.8', changefreq: 'monthly' },
   { path: '/wissen/keynote-aufbauen', priority: '0.8', changefreq: 'monthly' },
 
@@ -103,7 +104,6 @@ const staticPages = [
   { path: '/experten', priority: '0.7', changefreq: 'monthly' },
   { path: '/wirkungskraft-quiz', priority: '0.7', changefreq: 'monthly' },
   { path: '/ki-workshop-unverwechselbar', priority: '0.8', changefreq: 'monthly' },
-  { path: '/spanien-ki-workshop', priority: '0.7', changefreq: 'monthly' },
   { path: '/ki-einsteiger-coaching', priority: '0.7', changefreq: 'monthly' },
 
   { path: '/impressum', priority: '0.3', changefreq: 'yearly' },
@@ -123,6 +123,9 @@ const NICHT_IN_DIE_SITEMAP = new Set([
   '/checklist-bestaetigung',
   '/linkedin-freebie-confirmed',
   '/spanien-ki-workshop/danke',
+  // Traegt selbst noindex (SpanienRetreat.tsx). Eine Sitemap, die eine Seite
+  // anmeldet, die sich selbst abmeldet, widerspricht sich.
+  '/spanien-ki-workshop',
   '/ki-workshop-unverwechselbar/danke',
   '/wissensmagazin',
   // Nicht oeffentlich, obwohl die Adresse es nicht verraet: diese drei

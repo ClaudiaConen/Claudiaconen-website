@@ -1,5 +1,30 @@
-# Das Auffangnetz zeigt bewusst auf app.html, NICHT auf index.html.
-# index.html ist seit dem Vorrendern die fertige Startseite. Wuerde sie auch
-# als Auffangnetz dienen, wuerden alle Adressen ohne eigene Datei im
-# Quelltext behaupten, sie seien die Startseite.
-/*    /app.html   200
+# Reihenfolge zaehlt: Netlify nimmt die ERSTE passende Regel. Vorhandene
+# Dateien (alle vorgerenderten Seiten) gehen ohnehin vor jeder Regel hier.
+
+# Die Sitemap hat bis zum 21.09.2026 85 Adressen /wissensbibliothek/<slug>
+# gemeldet, fuer die es nie eine Seite gab. Wer ueber so eine Adresse kommt,
+# landet jetzt in der Bibliothek statt auf "nicht gefunden".
+/wissensbibliothek/*    /wissensbibliothek    301
+
+# Bereiche, die es nur im Browser gibt (Anmeldung, Mitglieder, Buchung).
+# Sie brauchen das Auffangnetz mit Status 200. Die Liste stammt aus dem
+# Abgleich App.tsx gegen vorrender-eintrag.tsx vom 21.09.2026: 60 Routen,
+# alle unter diesen sechs Anfaengen. Kommt ein neuer Bereich dazu, der nicht
+# vorgerendert wird, gehoert er HIER hinein - sonst meldet er 404.
+/admin                  /app.html   200
+/admin/*                /app.html   200
+/member                 /app.html   200
+/member/*               /app.html   200
+/adventskalender/*      /app.html   200
+/buchen/*               /app.html   200
+/jahres-contentplan     /app.html   200
+/meine-plaene           /app.html   200
+
+# Alles andere gibt es nicht - und das sagt der Server jetzt auch.
+# Bis zum 21.09.2026 antwortete JEDE erfundene Adresse mit "200 OK". Eine
+# Suchmaschine kann dann echte Seiten nicht von Tippfehlern unterscheiden.
+# Ausgeliefert wird weiter app.html, also zeigt der Browser die gestaltete
+# "nicht gefunden"-Seite; nur der Status ist jetzt ehrlich.
+# Das Auffangnetz zeigt bewusst auf app.html, NICHT auf index.html:
+# index.html ist die fertige Startseite.
+/*                      /app.html   404

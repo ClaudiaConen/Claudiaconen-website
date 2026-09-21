@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
+import Buecher from '../components/Buecher';
 
 /**
  * Ueber mich.
@@ -201,6 +202,9 @@ export default function UeberMich() {
             </blockquote>
           </div>
         </section>
+
+        {/* 3b. Veroeffentlichungen - Beleg fuer "Autorin". Bewusst NACH "Was daraus wurde", nicht hinter der Geschichte. */}
+        <Buecher />
 
         {/* 4. Kein Angebot. Ein Angebot zum Hören. */}
         <section

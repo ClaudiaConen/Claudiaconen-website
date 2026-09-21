@@ -50,8 +50,11 @@ export default function SEO({
   const location = useLocation();
   const initialTimestamp = useRef(new Date().toISOString());
 
+  // Der Name gehoert genau einmal in den Titel. Frueher hing hier
+  // "| Claudia Conen Expert Platform" an - der Projektname des Baukastens,
+  // der in 78 von 78 Titeln stand und in 50 den Namen verdoppelte.
   const fullTitle = useMemo(
-    () => `${title} | Claudia Conen Expert Platform`,
+    () => (title.includes('Claudia Conen') ? title : `${title} | Claudia Conen`),
     [title]
   );
 
@@ -100,12 +103,12 @@ export default function SEO({
           '@type': 'Person',
           name: article.author || 'Claudia Conen',
           url: 'https://claudiaconen.com/ueber-mich',
-          jobTitle: 'Speaker, Coach & Mentor',
-          description: 'Die Umsatzstimme - 37 Jahre Expertise in emotionaler Wirkungskraft'
+          jobTitle: 'Keynote-Speakerin und Mentorin für persönliche Wirkung',
+          description: 'Claudia Conen arbeitet seit 37 Jahren mit Stimme, Bühne und Menschen. Sie hält Keynotes für Unternehmen, bildet Rednerinnen und Redner aus und spricht bei Trauerfeiern und freien Trauungen.'
         },
         publisher: {
           '@type': 'Organization',
-          name: 'Claudia Conen - Die Umsatzstimme',
+          name: 'Claudia Conen',
           logo: {
             '@type': 'ImageObject',
             url: 'https://claudiaconen.com/og-image.jpg'
@@ -128,7 +131,7 @@ export default function SEO({
       return {
         '@context': 'https://schema.org',
         '@type': 'LocalBusiness',
-        name: 'Claudia Conen - Die Umsatzstimme',
+        name: 'Claudia Conen',
         image: 'https://claudiaconen.com/og-image.jpg',
         '@id': 'https://claudiaconen.com/',
         url: 'https://claudiaconen.com/',
@@ -154,17 +157,16 @@ export default function SEO({
           opens: '09:00',
           closes: '18:00'
         },
-        description: 'Claudia Conen - Die Umsatzstimme. Expertin für emotionale Wirkungskraft, Voice-to-Brain Methode, Coaching, Mentoring und Speaker-Ausbildung in Köln.',
+        description: 'Claudia Conen arbeitet seit 37 Jahren mit Stimme, Bühne und Menschen. Sie hält Keynotes für Unternehmen, bildet Rednerinnen und Redner aus und spricht bei Trauerfeiern und freien Trauungen.',
         sameAs: [
           'https://www.linkedin.com/in/claudia-conen-die-stimme/',
-          'https://www.instagram.com/claudia_conen_umsatzstimme/',
-          'https://www.provenexpert.com/de-de/conen/'
+          'https://www.instagram.com/claudia_conen_umsatzstimme/'
         ],
         founder: {
           '@type': 'Person',
           name: 'Claudia Conen',
-          jobTitle: 'Speaker, Coach & Mentor',
-          description: 'Die Umsatzstimme - 37 Jahre Expertise in Persönlichkeitsentwicklung und Storytelling'
+          jobTitle: 'Keynote-Speakerin und Mentorin für persönliche Wirkung',
+          description: 'Claudia Conen arbeitet seit 37 Jahren mit Stimme, Bühne und Menschen. Sie hält Keynotes für Unternehmen, bildet Rednerinnen und Redner aus und spricht bei Trauerfeiern und freien Trauungen.'
         }
       };
     }
@@ -181,7 +183,7 @@ export default function SEO({
       { property: 'og:type', content: ogType },
       { property: 'og:url', content: canonicalUrl },
       { property: 'og:image', content: ogImage },
-      { property: 'og:site_name', content: 'Claudia Conen Expert Platform' },
+      { property: 'og:site_name', content: 'Claudia Conen' },
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:title', content: fullTitle },
       { name: 'twitter:description', content: description },

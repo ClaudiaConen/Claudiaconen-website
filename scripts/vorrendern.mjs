@@ -94,8 +94,20 @@ async function main() {
   // Ohne Gegenmassnahme wuerden rund 120 Adressen im Quelltext behaupten, sie
   // seien die Startseite - mitsamt deren Titel und deren kanonischer Adresse.
   // Deshalb bekommt das Auffangnetz eine eigene, unveraenderte Datei.
-  fs.writeFileSync(path.join(DIST, 'app.html'), huelle, 'utf-8');
-  console.log('  + Auffangnetz nach dist/app.html gesichert');
+  //
+  // Das Auffangnetz darf ausserdem NICHT behaupten, die Startseite zu sein.
+  // Gemessen am 21.09.2026: Alle 85 Artikel unter /wissensbibliothek/ trugen
+  // im ausgelieferten HTML die kanonische Adresse https://claudiaconen.com/ -
+  // jede Suchmaschine bekam also gesagt, der Artikel sei nur eine Kopie der
+  // Startseite. Die Zeilen fliegen hier raus; SEO.tsx setzt sie im Browser
+  // fuer die jeweilige Seite neu (legt das Element an, wenn es fehlt).
+  const auffangnetz = huelle
+    .replace(/^[ \t]*<link rel="canonical" href="[^"]*"\s*\/?>\s*\n/m, '')
+    .replace(/^[ \t]*<meta property="og:url" content="[^"]*"\s*\/?>\s*\n/m, '')
+    .replace(/^[ \t]*<meta name="twitter:url" content="[^"]*"\s*\/?>\s*\n/m, '');
+  fs.writeFileSync(path.join(DIST, 'app.html'), auffangnetz, 'utf-8');
+  console.log('  + Auffangnetz nach dist/app.html gesichert'
+    + (auffangnetz.includes('rel="canonical"') ? ' - ACHTUNG: kanonische Adresse steht noch drin' : ' (ohne kanonische Adresse)'));
 
   const mod = await import(pathToFileURL(BUENDEL).href);
   let fertig = 0;

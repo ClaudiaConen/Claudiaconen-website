@@ -86,6 +86,12 @@ const INHALT: ZielgruppenInhalt = {
 
   fragen: [
     {
+      // Gesucht wird "freie Rednerin in der Naehe" - siehe Trauerrednerin.tsx.
+      frage: 'Wo bist du als freie Rednerin unterwegs?',
+      antwort:
+        'Ich lebe in Witten und begleite freie Trauungen im Ruhrgebiet. Weitere Wege sind nach Absprache möglich. Schreibt mir, wo ihr feiert, dann sage ich euch gleich, ob ich kommen kann.',
+    },
+    {
       frage: 'Wie früh sollten wir anfragen?',
       antwort:
         'Für Samstage zwischen Mai und September sind zwölf bis achtzehn Monate üblich. Kurzfristig geht öfter, als man denkt, weil Termine auch frei werden. Fragt einfach.',

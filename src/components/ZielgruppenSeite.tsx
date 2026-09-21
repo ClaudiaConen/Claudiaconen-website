@@ -352,7 +352,7 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
             <div className="mx-auto max-w-4xl px-6">
               <div className="grid gap-5 sm:grid-cols-3">
                 {inhalt.bilder.map((b) => (
-                  <figure key={b.bereich} className="flex flex-col">
+                  <figure key={b.bereich} className="flex flex-col" aria-hidden="true" data-bildplatz={b.bereich} data-motiv={b.motiv}>
                     <div
                       className="relative flex aspect-[4/3] items-end overflow-hidden rounded-lg border border-midnight-blue/10"
                       style={{
@@ -377,12 +377,8 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
                         <p className="font-montserrat text-xs font-semibold uppercase tracking-[0.18em] text-luxury-gold">
                           {b.bereich}
                         </p>
-                        <p className="mt-2 font-inter text-xs leading-relaxed text-pearl-white/60">
-                          {b.motiv}
-                        </p>
                       </figcaption>
                     </div>
-                    <p className="mt-2 font-inter text-[11px] text-midnight-blue/40">Platzhalter</p>
                   </figure>
                 ))}
               </div>

@@ -19,14 +19,14 @@ import WhatsAppButton from '../components/WhatsAppButton';
 import CookieBanner from '../components/CookieBanner';
 import SEO from '../components/SEO';
 
-const SEO_KEYWORDS = ['Claudia Conen', 'Voice-to-Brain', 'Köln', 'Witten', 'Kommunikationstraining', 'Persönlichkeitsentwicklung', 'Stimm-Coaching', 'Neurowissenschaft', 'Speaker Training', 'Business Coach Köln'];
+const SEO_KEYWORDS = ['Claudia Conen', 'Keynote-Speakerin', 'persönliche Wirkung', 'Wirkung auf andere', 'Stimme', 'Redner-Ausbildung', 'Voice-to-Brain', 'Witten', 'Ruhrgebiet'];
 
 export default function Home() {
   return (
     <div className="relative">
       <SEO
-        title="Claudia Conen | Voice-to-Brain® Expert Köln | Der Türöffner ins Kundengehirn"
-        description="Der erste Eindruck entsteht, bevor der erste Satz zu Ende ist. Claudia Conen aus Köln zeigt dir, wie deine Persönlichkeit zu dem wird, was keine KI kopieren kann."
+        title="Claudia Conen | Keynote-Speakerin und Mentorin für persönliche Wirkung"
+        description="Der erste Eindruck entsteht, bevor der erste Satz zu Ende ist. Claudia Conen zeigt dir, wie deine Persönlichkeit zu dem wird, was keine KI kopieren kann: Keynotes, Redner-Ausbildungen und Mentoring."
         keywords={SEO_KEYWORDS}
       />
       <a href="#main" className="visually-hidden focusable">

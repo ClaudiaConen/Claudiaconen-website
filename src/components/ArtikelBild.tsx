@@ -12,9 +12,17 @@
  *
  * Wird ersetzt, sobald echte Bilder da sind: eine Zeile je Artikel.
  */
+/*
+ * Korrektur vom 21.09.2026: Die Motivbeschreibung ("kurz vor dem Auftritt,
+ * Seitenbuehne, ruhig") und die Zeile "Platzhalter. Hier steht spaeter ein
+ * echtes Bild." standen sichtbar auf der Seite - auf 27 Seiten, lesbar fuer
+ * jeden Besucher und jede KI. Das war eine Notiz an Claudia, kein Inhalt.
+ * Die Flaeche bleibt (ihre Vorgabe), die Notiz wandert ins data-Attribut:
+ * im Quelltext auffindbar, auf der Seite unsichtbar.
+ */
 export default function ArtikelBild({ bereich, motiv }: { bereich: string; motiv?: string }) {
   return (
-    <figure className="mt-10">
+    <figure className="mt-10" aria-hidden="true" data-bildplatz={bereich} data-motiv={motiv}>
       <div
         className="relative flex aspect-[16/7] w-full items-end overflow-hidden rounded-lg"
         style={{
@@ -40,16 +48,8 @@ export default function ArtikelBild({ bereich, motiv }: { bereich: string; motiv
           <p className="font-montserrat text-xs font-semibold uppercase tracking-[0.22em] text-luxury-gold">
             {bereich}
           </p>
-          {motiv && (
-            <p className="mt-2 max-w-md font-inter text-sm leading-relaxed text-pearl-white/65">
-              {motiv}
-            </p>
-          )}
         </div>
       </div>
-      <figcaption className="mt-2 font-inter text-xs text-midnight-blue/45">
-        Platzhalter. Hier steht später ein echtes Bild.
-      </figcaption>
     </figure>
   );
 }

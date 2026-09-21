@@ -88,6 +88,14 @@ const INHALT: ZielgruppenInhalt = {
 
   fragen: [
     {
+      // Gesucht wird "Trauerredner in der Naehe" - bis 21.09.2026 stand auf
+      // dieser Seite kein Ort ausserhalb der Fusszeile. Der Radius ist mit
+      // Claudia noch nicht festgelegt, deshalb bewusst ohne Staedteliste.
+      frage: 'Wo sind Sie als Trauerrednerin tätig?',
+      antwort:
+        'Ich lebe in Witten und spreche bei Trauerfeiern im Ruhrgebiet. Weitere Wege sind nach Absprache möglich. Nennen Sie mir am Telefon den Ort, dann sage ich Ihnen sofort, ob ich kommen kann.',
+    },
+    {
       frage: 'Wie kurzfristig geht das?',
       antwort:
         'Oft innerhalb weniger Tage. Rufen Sie an, auch wenn es sehr schnell gehen muss. Wenn ich es nicht schaffe, sage ich es Ihnen sofort und nenne Ihnen jemanden aus meinem Netzwerk.',

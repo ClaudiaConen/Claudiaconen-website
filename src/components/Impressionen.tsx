@@ -71,7 +71,7 @@ export default function Impressionen() {
 
         <div className="mt-12 grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
           {PLAETZE.map((p) => (
-            <figure key={p.bereich} className="flex flex-col">
+            <figure key={p.bereich} className="flex flex-col" aria-hidden="true" data-bildplatz={p.bereich} data-motiv={p.motiv}>
               <div
                 className={`relative flex items-end overflow-hidden rounded-lg border border-pearl-white/10 ${
                   p.hoch ? 'aspect-[3/4]' : 'aspect-[4/5]'
@@ -97,14 +97,8 @@ export default function Impressionen() {
                   <p className="font-montserrat text-xs font-semibold uppercase tracking-[0.2em] text-luxury-gold">
                     {p.bereich}
                   </p>
-                  <p className="mt-2 font-inter text-xs leading-relaxed text-pearl-white/55">
-                    {p.motiv}
-                  </p>
                 </figcaption>
               </div>
-              <p className="mt-2 font-inter text-[11px] text-pearl-white/35">
-                Platzhalter
-              </p>
             </figure>
           ))}
         </div>

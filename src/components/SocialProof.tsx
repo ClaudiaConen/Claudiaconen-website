@@ -121,7 +121,10 @@ export default function SocialProof() {
                     </div>
                   )}
 
-                  <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/60 via-black/25 to-transparent transition-opacity group-hover:opacity-80" />
+                  {/* Claudia am 21.09.2026: "nicht so dunkel die Felder". Vorher lag
+                      ein schwarzer Verlauf ueber den unteren 40 Prozent jedes Bildes.
+                      Jetzt bleibt das Bild hell; lesbar wird der Name durch ein
+                      kleines Glasschild statt durch Abdunkeln der ganzen Flaeche. */}
                   <div
                     aria-hidden="true"
                     className="absolute inset-x-0 bottom-0 h-px"
@@ -131,16 +134,16 @@ export default function SocialProof() {
                   {/* Oben rechts statt mittig: der Knopf sass vorher genau
                       auf dem Gesicht. Claudias Hinweis vom 19.09.2026. */}
                   <div className="absolute right-2.5 top-2.5">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full border border-luxury-gold/40 bg-midnight-blue/70 backdrop-blur-sm transition-transform group-hover:scale-110">
-                      <Play className="ml-0.5 h-4 w-4 text-luxury-gold" />
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/45 bg-white/20 shadow-[0_6px_18px_-8px_rgba(10,22,40,0.55)] backdrop-blur-md backdrop-saturate-150 transition-transform duration-300 group-hover:scale-110 motion-reduce:transition-none">
+                      <Play className="ml-0.5 h-4 w-4 text-white drop-shadow" />
                     </div>
                   </div>
 
-                  <div className="absolute bottom-0 left-0 right-0 p-3 text-white">
-                    <h3 className="font-semibold text-base mb-1 leading-tight">
+                  <div className="absolute inset-x-2 bottom-2 rounded-xl border border-white/25 bg-[#0F1F3A]/40 px-3 py-2 text-white shadow-[0_10px_28px_-14px_rgba(10,22,40,0.7)] backdrop-blur-md backdrop-saturate-150 transition-colors duration-300 group-hover:border-luxury-gold/60 group-hover:bg-[#0F1F3A]/30 motion-reduce:transition-none">
+                    <h3 className="font-semibold text-sm sm:text-base leading-tight">
                       {testimonial.name}
                     </h3>
-                    <p className="text-xs text-gray-200 leading-tight">
+                    <p className="mt-0.5 text-xs text-white/85 leading-tight">
                       {testimonial.role}
                     </p>
                   </div>

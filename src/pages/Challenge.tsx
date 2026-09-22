@@ -469,14 +469,14 @@ export default function Challenge() {
                 "7 Tage fuer deine Wirkungskraft - weil Perfektion klickbar ist und Persoenlichkeit Vertrauen weckt",
                 Knopf "Nutze die Video-Challenge". Die 7 ist hell (kein Schimmer), der Rest traegt den Gold-Schimmer. */}
             <h1 className="mt-5 flex items-center gap-4 font-montserrat font-black uppercase tracking-tight sm:gap-6">
-              <span className="text-[6.5rem] leading-[0.85] text-[#FFF6DC] drop-shadow-[0_0_28px_rgba(247,231,206,0.55)] sm:text-[10rem]">7</span>
-              <span className="gold-text-animated text-3xl leading-[1.04] sm:text-5xl">Tage für deine<br />Wirkungskraft</span>
+              <span className="text-[5.6rem] leading-[0.85] text-[#FFF6DC] drop-shadow-[0_0_28px_rgba(247,231,206,0.55)] sm:text-[10rem]">7</span>
+              <span className="gold-text-animated text-[1.45rem] leading-[1.04] sm:text-5xl">Tage für deine<br />Wirkungskraft</span>
             </h1>
             <p className="mt-5 font-cormorant text-2xl italic leading-snug text-[#F7E7CE] sm:text-3xl">– weil Perfektion klickbar ist<br className="hidden sm:block" /> und Persönlichkeit Vertrauen weckt.</p>
             {/* Claudia, 22.09.2026 13:01 UTC: "auf dem Banner ist mir zu viel Text" - ein Satz zur Dauer, der Fingerabdruck-
                 Satz, "mehr nicht". Die Punkte stehen hell unter dem Kopf, der WhatsApp-Hinweis steht im Formular. */}
             <p className="mt-4 max-w-xl font-montserrat text-base font-extrabold leading-snug text-white sm:text-lg">
-              Sieben Tage. 30 Minuten am Tag. Und deine Wirkung wächst – hörbar, sichtbar, spürbar.
+              7 Tage. 30 Minuten am Tag. Und deine Wirkung wächst – hörbar, sichtbar, spürbar.
             </p>
             <p className="mt-4 max-w-xl font-inter text-lg leading-relaxed text-white">
               Nutze eine der wertvollsten Marketing-Möglichkeiten der Welt: deinen akustischen Fingerabdruck. Weil du ein Unikat bist.

@@ -1017,7 +1017,15 @@ export default function Challenge() {
           community.claudiaconen.com/netzwerkwebinar, 22.09.2026: Di 3.11.2026, 18:18 Uhr). Gabi steht NUR hier. */}
       <Abschnitt id="community" className="bg-pearl-white py-16 sm:py-24" label="community-titel">
         <div className="mx-auto max-w-6xl px-6">
-          <div className={`grid items-center gap-8 bg-white p-7 text-midnight-blue sm:p-10 md:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] ${KACHEL} border-[#D4AF37] shadow-[0_18px_40px_-18px_rgba(212,175,55,0.5)]`}>
+          {/* 8-Sekunden-Clip (Veo 3.1 ueber Claudias Google-Schluessel, ihr Ja 22.09.2026 11:40 UTC): Mikrofon,
+              goldene Stimmwelle, die Silhouetten zu einem Netzwerk verbindet. Stumm, Schleife, 2,4 MB, Standbild als Poster.
+              Original: projects/claudiaconen/video/netzwerk-stimme-veo31-720p.mp4 */}
+          <div className={`overflow-hidden bg-[#0A1628] ${KACHEL} border-[#D4AF37] shadow-[0_18px_40px_-18px_rgba(212,175,55,0.5)]`}>
+            <video className="block aspect-video h-auto w-full" autoPlay muted loop playsInline preload="metadata" poster="/challenge/netzwerk-poster.webp" aria-label="Eine goldene Stimmwelle geht von einem Mikrofon aus und verbindet Menschen zu einem Netzwerk">
+              <source src="/challenge/netzwerk.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <div className={`mt-4 grid items-center gap-8 bg-white p-7 text-midnight-blue sm:p-10 md:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] ${KACHEL} border-[#D4AF37] shadow-[0_18px_40px_-18px_rgba(212,175,55,0.5)]`}>
             <div>
               <Kicker text="Die Unverwechselbaren · nach der Challenge" hell />
               <h2 id="community-titel" className="mt-4 font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">

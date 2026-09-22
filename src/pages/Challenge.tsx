@@ -117,7 +117,6 @@ const WERKZEUG: { titel: string; text: string }[] = [
 const START = new Date(2026, 9, 26); // Montag, 26.10.2026, lokale Zeit
 const ENDE = new Date(2026, 10, 2); // Montag, 02.11.2026 (letzter Tag)
 const VORBEREITUNG_TAG1 = true; // Tag 1 vor dem Start lesbar (Aufwaermen ueben)
-const LANG = new Intl.DateTimeFormat('de-DE', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
 
 /** Freischaltdatum je Tag (0-basiert). */
 function freischaltung(heute: Date, tag: number): Date {
@@ -127,15 +126,16 @@ function freischaltung(heute: Date, tag: number): Date {
   return d;
 }
 
-/** Die Zeile im Kopf - je nachdem, ob der Durchgang bevorsteht, laeuft oder vorbei ist. */
+/** Die Zeile im Kopf - je nachdem, ob der Durchgang bevorsteht, laeuft oder vorbei ist. Live-Termine
+ *  (Claudia, 22.09.2026 11:16 UTC): Start-Zoom Mo 26.10. 19:00 Uhr, Abschlusstreffen Mo 02.11. 19:00 Uhr. */
 function standZeile(heute: Date): string {
   const h = new Date(heute); h.setHours(0, 0, 0, 0);
-  if (h < START) return `Start: ${LANG.format(START)} – bis ${LANG.format(ENDE)}.`;
+  if (h < START) return 'Start: Montag, 26. Oktober 2026, 19:00 Uhr – live im Zoom-Call · Abschluss: Montag, 2. November, 19:00 Uhr';
   if (h <= ENDE) {
     const tag = Math.min(7, Math.floor((h.getTime() - START.getTime()) / 86400000) + 1);
-    return `Die Challenge läuft – heute ist Tag ${tag}. Start war ${LANG.format(START)}.`;
+    return `Die Challenge läuft – heute ist Tag ${tag} · Abschluss: Montag, 2. November, 19:00 Uhr`;
   }
-  return `Der Durchgang vom ${LANG.format(START)} ist beendet. Trag dich ein – du erfährst als Erste, wann es wieder losgeht.`;
+  return 'Der Durchgang vom 26. Oktober ist beendet – trag dich ein, du erfährst als Erste, wann es wieder losgeht';
 }
 const KURZ = new Intl.DateTimeFormat('de-DE', { weekday: 'short', day: 'numeric', month: 'short' });
 
@@ -244,16 +244,24 @@ const TAGE: Tag[] = [
 ];
 
 /** "Zuallererst" - Claudias Wegweiser-Tipp (22.09.2026): eine WhatsApp-Gruppe nur mit sich selbst. */
+/** Tipp 1, vor Tag 1 - Claudias Diktat vom 22.09.2026, 11:17 UTC ("Der Tipp soll Gold leuchten", aufklappbar,
+ *  "das kannst du auch jetzt schon tun"). Anleitung fuer WhatsApp in vier Schritten; ihre Nummer aus dem Flyer. */
 const WEGWEISER = {
-  titel: 'Zuallererst: Leg dir eine Gruppe nur für dich an',
-  text: 'Bevor es losgeht, legst du in WhatsApp eine Gruppe an, in der nur du bist. Dort landen deine sieben Aufnahmen, deine Notizen und die Hinweise aus der Challenge. So übst du, ohne dass jemand zusieht – und am Ende hörst du im Vergleich, wie sich deine Stimme von Tag 1 bis Tag 7 verändert hat.',
-  wie: 'So geht es: Neue Gruppe anlegen, niemanden hinzufügen, Namen vergeben – zum Beispiel „Meine Stimme". Fertig.',
+  titel: 'Erstelle dir eine eigene WhatsApp-Gruppe – nur für dich',
+  vorschau: 'Meine Empfehlung bis zum Start: ein Raum, in dem du übst, ohne dass dich jemand stört. Das kannst du jetzt schon tun.',
+  text: 'In dieser Gruppe bist nur du. Dort übst du, hörst deine Steigerung – und sammelst vielleicht sogar Videomaterial für Social Media. Nach sieben Tagen entdeckst du deine eigenen Erfolge, Aufnahme für Aufnahme.',
+  schritte: [
+    'WhatsApp öffnen → „Neue Gruppe" (Android: die drei Punkte oben rechts · iPhone: „Neuer Chat" und dann „Neue Gruppe").',
+    'Niemanden auswählen und einfach weiter – WhatsApp erlaubt eine Gruppe nur mit dir. Besteht deine Version auf einer zweiten Person: Lade mich ein (+49 160 99142208) und wirf mich danach wieder raus. Ich nehme es nicht persönlich.',
+    'Namen vergeben – zum Beispiel „Meine Stimme". Fertig.',
+    'Ab jetzt: jede Aufnahme dort hineinsprechen. Nach sieben Tagen hörst du den Unterschied.',
+  ],
 };
 
 const ABLAUF = [
-  'Du trägst dich unten ein und gehst in die WhatsApp-Gruppe – dort läuft die Challenge.',
-  'Ab Montag bekommst du jeden Morgen eine Aufgabe – die sieben stehen hier unten zum Aufklappen.',
-  'Du nimmst dich mit dem Handy auf, eine Minute, und teilst das Video in der Gruppe. Du bekommst Feedback von mir.',
+  'Du trägst dich unten ein und gehst in die WhatsApp-Gruppe – dort läuft die Challenge, mit Tipps, Austausch und einem Miteinander.',
+  'Wir starten gemeinsam: live im Zoom-Call, Montag, 26. Oktober, 19:00 Uhr. Danach jeden Tag ein neuer Schlüssel – als Audio von mir, mit Hinweisen.',
+  'Du nimmst dein Video auf – eine Minute, 24 Stunden Zeit – und bekommst mein Feedback. Abschlusstreffen live im Zoom: Montag, 2. November, 19:00 Uhr.',
 ];
 
 const FUER = [
@@ -431,16 +439,26 @@ export default function Challenge() {
             <Brotkrumen krumen={[{ name: 'Sieben Tage für deine Wirkung' }]} />
           </div>
           <div className="max-w-3xl rounded-[12px] border border-[#D4AF37]/45 bg-[rgba(10,22,40,0.86)] px-6 py-8 text-pearl-white shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)] sm:px-10 sm:py-11" style={{ borderTopColor: '#F7E7CE' }}>
-            <Kicker text="Video-Challenge · kostenfrei" />
-            <h1 className="mt-6 font-montserrat text-4xl font-black uppercase leading-[1.05] tracking-tight sm:text-6xl">
-              <span className="block text-white [text-shadow:0_2px_24px_rgba(0,0,0,0.65)]">Sieben Tage</span>
-              <span className="gold-text-animated block">für deine Wirkung.</span>
-            </h1>
-            <p className="mt-5 font-cormorant text-2xl italic leading-snug text-[#F7E7CE] sm:text-3xl">Zeig dich. Sei dabei. Lerne deine Wirkungskraft kennen.</p>
-            <p className="mt-5 max-w-xl font-inter text-lg leading-relaxed text-white">
-              <b className="font-montserrat font-extrabold">So starten wir:</b> Jeden Tag eine kleine Anleitung für dich – und eine Chance auf Feedback. Du hast 24 Stunden, um dein Video einzureichen und ein kostenfreies persönliches Feedback zu erhalten. Alle sieben Tage begleite ich dich persönlich in der WhatsApp-Gruppe – mit Tipps, mit Austausch, mit einem Miteinander.
+            {/* Claudia, 22.09.2026 11:16 UTC: Kicker groesser; "Sieben Tage" in derselben Schrift wie "fuer deine
+                Wirkung" (eine Zeile Gold-Schimmer, nicht zwei Schriften); weniger weisser Text; Punkte, was die
+                Challenge bringt; das Datum "damit es direkt auffaellt". */}
+            <p className="flex items-center gap-3 font-montserrat text-sm font-extrabold uppercase tracking-[0.22em] text-[#EBD197] sm:text-base">
+              <span aria-hidden="true" className={`cc-linie h-[3px] w-7 rounded-full ${GOLD}`} />
+              Video-Challenge · kostenfrei
             </p>
-            <p className="mt-4 font-montserrat text-base font-bold text-[#EBD197]">
+            <h1 className="gold-text-animated mt-6 font-montserrat text-4xl font-black uppercase leading-[1.08] tracking-tight sm:text-6xl">
+              Sieben Tage für deine Wirkung.
+            </h1>
+            <p className="mt-5 font-cormorant text-2xl italic leading-snug text-[#F7E7CE] sm:text-3xl">Zeig dich. Sei dabei. Lerne deine Wirkung kennen.</p>
+            <p className="mt-5 max-w-xl font-inter text-lg leading-relaxed text-white">
+              Nutze eine der wertvollsten Marketing-Möglichkeiten der Welt: deinen akustischen Fingerabdruck. Weil du ein Unikat bist. Entdecke hier in der Challenge:
+            </p>
+            <ul className="mt-3 grid list-none gap-1.5 p-0 sm:grid-cols-2">
+              {['Deine Wirkung', 'Deine Keynote-Möglichkeiten', 'Warum Menschen dir zuhören', 'Was wirklich zählt'].map((z) => (
+                <li key={z} className="flex items-start gap-3 font-montserrat text-[15px] font-bold text-white"><Haken />{z}</li>
+              ))}
+            </ul>
+            <p className={`mt-6 inline-block rounded-md px-4 py-3 font-montserrat text-sm font-extrabold uppercase tracking-[0.06em] text-midnight-blue sm:text-base ${GOLD}`}>
               {stand}
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-4">
@@ -452,7 +470,7 @@ export default function Challenge() {
               </a>
             </div>
             <p className="mt-5 max-w-xl font-inter text-sm text-pearl-white/80">
-              Die Challenge läuft in einer WhatsApp-Gruppe; dort sehen die Mitglieder gegenseitig die Handynummern. Wer das nicht möchte, schreibt mir direkt.
+              Die Challenge läuft in einer WhatsApp-Gruppe. Dort sehen die Mitglieder gegenseitig Handynummern und Videos – anders geht es nicht. Wer dabei ist, erklärt sich damit einverstanden.
             </p>
           </div>
         </div>
@@ -466,10 +484,11 @@ export default function Challenge() {
             <div>
               <Kicker text="Das Programm" hell />
               <h2 id="programm-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">
-                Sieben Schritte. Ein Ergebnis: <span className="underline decoration-[#D4AF37] decoration-[4px] underline-offset-[6px]">Du bleibst im Kopf.</span>
+                Sieben Schritte. Ein Ergebnis:
+                <span className="mt-1 block underline decoration-[#D4AF37] decoration-[4px] underline-offset-[6px]">Du bleibst im Kopf.</span>
               </h2>
               <p className="mt-4 max-w-2xl font-inter text-lg text-midnight-blue">
-                Jeder Schritt ist ein eigener Baustein – und zusammen sind sie der Weg vom „Ich rede" zum „Man erinnert sich an mich".
+                Jeden Tag bekommst du einen weiteren Schlüssel – als Türöffner zu deinem Gegenüber. Du erhältst eingesprochene Audios, Hinweise und ein Feedback zu deinem Video. Für jedes Video hast du 24 Stunden Zeit – und es dauert nur eine Minute.
               </p>
             </div>
             <Kopfbild datei="keynote" alt="Claudia Conen auf der Bühne bei einer Keynote" />
@@ -524,14 +543,32 @@ export default function Challenge() {
             Jeder Morgen beginnt mit den fünf Minuten von Tag 1 – und mit deinem Satz. So hörst du am Ende, was sich verändert hat.
           </p>
 
-          <div className={`mt-8 grid gap-x-6 gap-y-3 bg-white px-5 py-5 text-midnight-blue sm:grid-cols-[auto_minmax(0,1fr)] sm:px-7 sm:py-6 ${KACHEL}`}>
-            <span className={`self-start rounded-md px-2.5 py-2 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-midnight-blue ${GOLD}`}>Zuerst</span>
-            <div className="min-w-0">
-              <h3 className="font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">{WEGWEISER.titel}</h3>
-              <p className="mt-2 font-inter text-[15px] leading-relaxed sm:text-base">{WEGWEISER.text}</p>
-              <p className="mt-2 font-inter text-[15px] leading-relaxed text-midnight-blue/80">{WEGWEISER.wie}</p>
+          <details className={`group mt-8 text-midnight-blue ${GOLD} ${KACHEL} border-transparent shadow-[0_18px_40px_-18px_rgba(212,175,55,0.7)]`}>
+            <summary className="grid cursor-pointer list-none gap-x-6 gap-y-2 px-5 py-5 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:items-center sm:px-7 sm:py-6 [&::-webkit-details-marker]:hidden">
+              <span className="self-start rounded-md bg-midnight-blue px-2.5 py-2 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-[#EBD197]">Tipp 1 · jetzt schon</span>
+              <span className="min-w-0">
+                <span className="block font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">{WEGWEISER.titel}</span>
+                <span className="mt-1 block font-inter text-[15px] leading-relaxed">{WEGWEISER.vorschau}</span>
+              </span>
+              <span className="flex items-center gap-2 font-montserrat text-sm font-bold underline decoration-midnight-blue/40 underline-offset-4">
+                <span className="group-open:hidden">Anleitung lesen</span>
+                <span className="hidden group-open:inline">Zuklappen</span>
+                <span aria-hidden="true" className="inline-block transition-transform group-open:rotate-180">▾</span>
+              </span>
+            </summary>
+            <div className="border-t border-midnight-blue/20 px-5 pb-5 pt-4 sm:px-7 sm:pb-6">
+              <p className="font-inter text-[15px] leading-relaxed">{WEGWEISER.text}</p>
+              <p className="mt-3 font-montserrat text-[11px] font-extrabold uppercase tracking-[0.14em]">So legst du die Gruppe an:</p>
+              <ol className="mt-1.5 grid list-none gap-1.5 p-0">
+                {WEGWEISER.schritte.map((s, i) => (
+                  <li key={s} className="flex items-start gap-3 font-inter text-[15px] leading-normal">
+                    <span className="mt-0.5 flex h-5 w-5 flex-none items-center justify-center rounded-full bg-midnight-blue font-montserrat text-[11px] font-black text-[#EBD197]">{i + 1}</span>
+                    <span>{s}</span>
+                  </li>
+                ))}
+              </ol>
             </div>
-          </div>
+          </details>
 
           <div className="mt-3 grid gap-5 md:grid-cols-[34px_minmax(0,1fr)]">
           <Schiene />

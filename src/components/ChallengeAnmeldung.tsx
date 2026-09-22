@@ -93,7 +93,7 @@ export default function ChallengeAnmeldung({ start }: { start: string }) {
       <label className="mt-4 flex items-start gap-3 font-inter text-sm leading-relaxed text-pearl-white/85">
         <input id="challenge-einverstanden" name="einverstanden" type="checkbox" required checked={einverstanden} onChange={(e) => setEinverstanden(e.target.checked)} className="mt-1 h-4 w-4 flex-none accent-[#D4AF37]" />
         <span>
-          Ich bin einverstanden, dass Claudia Conen meine Angaben speichert, um mich zur Challenge zu begleiten und danach zu Angeboten einzuladen. Widerruf jederzeit per E-Mail.{' '}
+          Ich bin einverstanden, dass Claudia Conen meine Angaben speichert, um mich zur Challenge zu begleiten und danach zu Angeboten einzuladen – und dass in der WhatsApp-Gruppe meine Nummer und meine Videos für die anderen Teilnehmer sichtbar sind. Widerruf jederzeit per E-Mail.{' '}
           <Link to="/datenschutz" className="underline decoration-[#D4AF37]/60 underline-offset-2 hover:decoration-[#F7E7CE]">Datenschutz</Link>
         </span>
       </label>

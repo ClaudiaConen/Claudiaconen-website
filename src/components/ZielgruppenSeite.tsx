@@ -458,7 +458,9 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
 
         {/* 3d. Bildplaetze. Claudias Vorgabe: immer Platzhalter lassen,
             und jeder sagt, welches Foto dorthin gehoert. */}
-        {inhalt.bilder && inhalt.bilder.length > 0 && (
+        {/* Seit 22.09.2026 hat jede Seite ein echtes Kopfbild; die leeren Bildplaetze zeigen wir dann
+            nicht mehr - "leere dunkle Kaesten" waren Claudias Kritik. Die Motivwuensche bleiben im Code. */}
+        {!inhalt.bild && inhalt.bilder && inhalt.bilder.length > 0 && (
           <section className="bg-warm py-16 sm:py-20" aria-label="Bildplätze">
             <div className="mx-auto max-w-4xl px-6">
               <div className="grid gap-5 sm:grid-cols-3">

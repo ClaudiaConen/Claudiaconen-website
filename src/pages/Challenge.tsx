@@ -6,7 +6,7 @@ import SEO from '../components/SEO';
 import Brotkrumen from '../components/Brotkrumen';
 import WorkbookBlaettern from '../components/WorkbookBlaettern';
 import Stimmwelle from '../components/Stimmwelle';
-import ChallengeAnmeldung from '../components/ChallengeAnmeldung';
+import ChallengeAnmeldung, { EINGETRAGEN_SCHLUESSEL } from '../components/ChallengeAnmeldung';
 import FotoReihen from '../components/FotoReihen';
 import { Ban, Smile, Clock, EyeOff, Database, Bot } from 'lucide-react';
 
@@ -68,7 +68,8 @@ const MENSCH_KANN = [
 ];
 
 
-const SCHRITTE: { titel: string; text: string }[] = [
+/** `inhalt` = Claudias Text je Schritt (kommt per Diktat); solange leer, wird `text` gezeigt. */
+const SCHRITTE: { titel: string; text: string; inhalt?: string }[] = [
   { titel: 'Das Gehirn verstehen', text: 'Blitzschnell. Emotionen. Verstand. Wie Menschen entscheiden, bevor sie es merken – und was das für jeden deiner Sätze heißt.' },
   { titel: 'KI & Mensch – das Zusammenspiel', text: 'Perfektion klickt. Persönlichkeit bleibt. Was du der Technik gibst – und was du niemals abgibst.' },
   { titel: 'Essenz und Wirkung', text: 'Unverwechselbarkeit beginnt im Inneren. Was dich ausmacht, in einen Satz gebracht.' },
@@ -392,6 +393,11 @@ export default function Challenge() {
   const heute = new Date();
   const stand = standZeile(heute);
   const startKurz = new Intl.DateTimeFormat('de-DE', { day: 'numeric', month: 'long', year: 'numeric' }).format(START);
+  // Sieben Schritte: Inhalte erst nach dem Eintrag (Claudia, 22.09.2026 12:28 UTC: "weckt Neugier"). Merkt sich das Handy.
+  const [eingetragen, setEingetragen] = useState(false);
+  useEffect(() => {
+    try { if (window.localStorage.getItem(EINGETRAGEN_SCHLUESSEL) === '1') setEingetragen(true); } catch { /* kein Speicher */ }
+  }, []);
   // Welche Tage sind freigeschaltet? Beim Vorrendern gilt das Bau-Datum, im Browser der echte Tag.
   const frei = TAGE.map((_, i) => heute >= freischaltung(heute, i));
   const listeRef = useRef<HTMLOListElement>(null);
@@ -488,7 +494,7 @@ export default function Challenge() {
       {/* Anmeldung direkt unter dem Kopf (Kritiker-Durchgang 22.09.2026, Claudias Ja 12:22 UTC: "mach das alles so"). */}
       <section id="anmeldung" className="bg-pearl-white pt-6 pb-4 sm:pt-8" aria-label="Anmeldung zur Challenge">
         <div className="mx-auto max-w-6xl px-6">
-          <ChallengeAnmeldung start={startKurz} />
+          <ChallengeAnmeldung start={startKurz} onEingetragen={() => setEingetragen(true)} />
         </div>
       </section>
 
@@ -504,7 +510,7 @@ export default function Challenge() {
                 <span className="mt-1 block underline decoration-[#D4AF37] decoration-[4px] underline-offset-[6px]">Du bleibst im Kopf.</span>
               </h2>
               <p className="mt-4 max-w-2xl font-inter text-lg text-midnight-blue">
-                Jeden Tag bekommst du einen weiteren Schlüssel – als Türöffner zu deinem Gegenüber. Du erhältst eingesprochene Audios, Hinweise und ein Feedback zu deinem Video. Für jedes Video hast du 24 Stunden Zeit – und es dauert nur eine Minute.
+                Jeden Tag bekommst du einen weiteren Schlüssel – als Türöffner zu deinem Gegenüber. Du erhältst eingesprochene Audios, Hinweise und ein Feedback zu deinem Video. Für jedes Video hast du 24 Stunden Zeit – und es dauert nur eine Minute. Entdecke die Inhalte der sieben Schritte nach dem Eintragen.
               </p>
             </div>
             <Kopfbild datei="keynote" alt="Claudia Conen auf der Bühne bei einer Keynote" />
@@ -516,7 +522,7 @@ export default function Challenge() {
                 <li
                   key={s.titel}
                   style={{ ['--i' as string]: i }}
-                  className={`cc-stufe p-6 hover:-translate-y-0.5 ${KACHEL} ${letzter ? `${GOLD} border-transparent text-midnight-blue` : 'min-h-[190px] bg-pearl-white text-midnight-blue'}`}
+                  className={`cc-stufe p-6 hover:-translate-y-0.5 ${KACHEL} ${letzter ? `${GOLD} border-transparent text-midnight-blue` : 'bg-pearl-white text-midnight-blue'}`}
                 >
                   {/* 3-D-Icons nach den Flyer-Piktogrammen (Claudias Impuls 22.09.2026 11:48 UTC), erzeugt mit
                       skripte/schritt_icons.py ueber ihren Gemini-Schluessel. */}
@@ -525,7 +531,18 @@ export default function Challenge() {
                     <span aria-hidden="true" className={`font-montserrat text-3xl font-black ${letzter ? 'text-midnight-blue/40' : 'text-[#D4AF37]'}`}>{String(i + 1).padStart(2, '0')}</span>
                   </div>
                   <h3 className="mt-3 font-montserrat text-base font-extrabold uppercase tracking-wide">{s.titel}</h3>
-                  <p className="mt-2.5 font-inter text-[15px] leading-relaxed">{s.text}</p>
+                  {eingetragen ? (
+                    <details className="group mt-2">
+                      <summary className="cursor-pointer list-none font-montserrat text-sm font-bold underline decoration-[#D4AF37] underline-offset-4 [&::-webkit-details-marker]:hidden">
+                        <span className="group-open:hidden">Aufklappen ▾</span><span className="hidden group-open:inline">Zuklappen ▴</span>
+                      </summary>
+                      <p className="mt-2.5 font-inter text-[15px] leading-relaxed">{s.inhalt ?? s.text}</p>
+                    </details>
+                  ) : (
+                    <a href="#anmelden" className={`mt-2.5 inline-flex items-center gap-2 font-montserrat text-xs font-bold uppercase tracking-[0.12em] no-underline ${letzter ? 'text-midnight-blue/80' : 'text-midnight-blue/70'} hover:text-midnight-blue`}>
+                      <Schluessel /> Entdecke den Inhalt nach dem Eintragen
+                    </a>
+                  )}
                 </li>
               );
             })}

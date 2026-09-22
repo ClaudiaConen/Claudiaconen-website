@@ -23,7 +23,10 @@ const GOLD = 'bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]';
 const FELD =
   'w-full rounded-md border border-midnight-blue/25 bg-white px-4 py-3 font-inter text-[15px] text-midnight-blue placeholder:text-midnight-blue/45 focus:border-[#D4AF37] focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/40';
 
-export default function ChallengeAnmeldung({ start }: { start: string }) {
+/** Schluessel im Browser: nach dem Eintrag duerfen die sieben Schritte aufgeklappt werden (Claudias Idee 22.09.2026 12:28 UTC). */
+export const EINGETRAGEN_SCHLUESSEL = 'cc-challenge-eingetragen';
+
+export default function ChallengeAnmeldung({ start, onEingetragen }: { start: string; onEingetragen?: () => void }) {
   const [vorname, setVorname] = useState('');
   const [email, setEmail] = useState('');
   const [telefon, setTelefon] = useState('');
@@ -49,6 +52,8 @@ export default function ChallengeAnmeldung({ start }: { start: string }) {
       return;
     }
     setZustand('fertig');
+    try { window.localStorage.setItem(EINGETRAGEN_SCHLUESSEL, '1'); } catch { /* privater Modus o. ae. */ }
+    onEingetragen?.();
   }
 
   if (zustand === 'fertig') {

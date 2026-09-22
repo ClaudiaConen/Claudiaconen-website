@@ -115,6 +115,30 @@ const GOLD = 'bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]';
 const KACHEL = 'rounded-[10px] border border-[#D4AF37]/55 transition-[border-color,box-shadow] duration-200 hover:border-[#EBD197] hover:shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)]';
 const DUNKEL = { background: 'linear-gradient(180deg, #0A1628 0%, #0F1F3A 55%, #0A1628 100%)' };
 const WHATSAPP = 'https://wa.me/4916093102073';
+/** Claudias Idee vom 22.09.2026, 02:13 UTC: vom Event per QR in eine Video-Challenge - sieben Tage,
+ *  sieben Schritte, 60 Sekunden am Tag. Kanal (WhatsApp oder E-Mail) legt sie fest; bis dahin WhatsApp. */
+const CHALLENGE_LINK = `${WHATSAPP}?text=${encodeURIComponent('Ich bin dabei bei der 7-Tage-Challenge')}`;
+/** Workbook "Entdecke deine Stimmwirkung" (Brainself-Buchauszug). Verweis erst, wenn die PDF korrigiert
+ *  ist (Aufgabe 18: "150 Millisekunden", "Opfer", "30 Jahre") - bis dahin nur das Deckblatt. */
+const WORKBOOK_URL = '' as string;
+
+const TAGE: { titel: string; aufgabe: string }[] = [
+  { titel: 'Das Gehirn verstehen', aufgabe: 'Sag in 60 Sekunden, was du tust – ohne ein einziges Fachwort. So, dass es deine Nachbarin versteht.' },
+  { titel: 'KI & Mensch', aufgabe: 'Lass dir von einer KI einen Satz über dich schreiben. Dann sag ihn so, wie du ihn wirklich sagen würdest. Nimm beides auf und hör den Unterschied.' },
+  { titel: 'Essenz und Wirkung', aufgabe: 'Ein Satz: Wofür stehst du? Sag ihn dreimal – jedes Mal langsamer.' },
+  { titel: 'Dein Kunde denkt in Bildern', aufgabe: 'Erzähl den Moment, in dem du wusstest: Das ist mein Beruf. Eine Person, ein Ort, ein Satz, der fiel.' },
+  { titel: 'Unaufhaltbar', aufgabe: 'Wärm deine Stimme auf (Werkzeugkasten unten), dann dieselbe Aufnahme wie an Tag 1. Vergleich beide.' },
+  { titel: 'Wirkung ist kein Zufall', aufgabe: 'Ein Satz, drei Absichten: einmal beruhigend, einmal weckend, einmal überzeugend. Dieselben Worte.' },
+  { titel: 'Dein Kopf. Ihr Gefühl.', aufgabe: 'Dein Satz zum Mitnehmen – der eine, den du überall sagen kannst. Den schickst du mir. Du bekommst eine Antwort von mir, keine Vorlage.' },
+];
+
+const WERKZEUG: { titel: string; text: string }[] = [
+  { titel: 'Stimme', text: 'Sprich zum letzten Stuhl im Raum – auch wenn nur das Handy vor dir steht. Ein Satz, eine Pause, der nächste Satz. Die Pause ist kein Loch, sie ist die Stelle, an der der Zuhörer nickt.' },
+  { titel: 'Innere Haltung', text: 'Bevor du auf Aufnahme drückst: Wem erzählst du das? Stell dir einen Menschen vor, nicht ein Publikum. Die Kamera merkt, ob du jemanden meinst – und die Zuschauer merken es auch.' },
+  { titel: 'Stimme aufwärmen', text: 'Zwei Minuten reichen. Summen auf „mmm", bis die Lippen kribbeln. Lippen flattern lassen wie ein Pferd. Dann drei Sätze laut lesen, übertrieben deutlich. Danach normal sprechen – es klingt sofort wacher.' },
+  { titel: 'Storytelling', text: 'Fang mit dem Moment an, nicht mit der Vorgeschichte. Eine Person, ein Ort, etwas, das schiefging – und was du seitdem anders machst. Das ist eine Geschichte. Alles andere ist ein Bericht.' },
+  { titel: 'Das Mikrofon', text: 'Das Handymikrofon nimmt den Raum auf, nicht dich. Ein Ansteckmikrofon fürs Handy – mit Kabel oder Funk, für wenig Geld – holt deine Stimme nach vorn. Gut soll sie klingen. Nicht perfekt. Perfekt ist der Avatar.' },
+];
 
 function Kicker({ text, hell }: { text: string; hell?: boolean }) {
   return (
@@ -194,8 +218,8 @@ export default function UnverwechselbarDu() {
               <a href="#geschenk" className={`inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue transition-transform hover:-translate-y-px ${GOLD}`}>
                 Mein Geschenk holen: der Wirkungs-Check
               </a>
-              <a href="#programm" className="inline-flex items-center rounded-full border-2 border-[#D4AF37] px-7 py-4 font-montserrat text-sm font-bold text-pearl-white transition-colors hover:text-[#EBD197]">
-                Die sieben Schritte ansehen
+              <a href="#challenge" className="inline-flex items-center rounded-full border-2 border-[#D4AF37] px-7 py-4 font-montserrat text-sm font-bold text-pearl-white transition-colors hover:text-[#EBD197]">
+                Zur 7-Tage-Video-Challenge
               </a>
             </div>
           </div>
@@ -342,6 +366,79 @@ export default function UnverwechselbarDu() {
               );
             })}
           </ol>
+        </div>
+      </section>
+
+      {/* Challenge */}
+      <section id="challenge" className="bg-pearl-white py-16 sm:py-24" aria-labelledby="challenge-titel">
+        <div className="mx-auto max-w-6xl px-6">
+          <Kicker text="Vom Event direkt in die Praxis" hell />
+          <h2 id="challenge-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
+            Die 7-Tage-Video-Challenge: sieben Tage, sieben Schritte, 60 Sekunden am Tag.
+          </h2>
+          <p className="mt-4 max-w-2xl font-inter text-lg leading-relaxed text-midnight-blue">
+            Du scannst den Code, sagst „Ich bin dabei" – und ab Montag bekommst du jeden Morgen eine Aufgabe. Du nimmst dich mit dem Handy auf. Nur für dich. Wer mag, teilt sein Video mit <b>#unverwechselbarDU</b>.
+          </p>
+          <ol className="mt-8 grid list-none gap-2.5 p-0">
+            {TAGE.map((tg, i) => {
+              const letzter = i === TAGE.length - 1;
+              return (
+                <li key={tg.titel} className={`grid grid-cols-[auto_1fr] items-start gap-4 bg-white px-4 py-4 text-midnight-blue ${KACHEL}`}>
+                  <span className={`mt-0.5 rounded-md px-2.5 py-2 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] ${letzter ? `${GOLD} text-midnight-blue` : 'bg-midnight-blue text-pearl-white'}`}>
+                    Tag {i + 1}
+                  </span>
+                  <span>
+                    <b className="block font-montserrat font-extrabold">{tg.titel}</b>
+                    <span className="font-inter text-[15px]">{tg.aufgabe}</span>
+                  </span>
+                </li>
+              );
+            })}
+          </ol>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a href={CHALLENGE_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full bg-midnight-blue px-7 py-4 font-montserrat text-sm font-bold text-pearl-white transition-colors hover:bg-royal-navy">
+              Ich bin dabei – per WhatsApp
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Werkzeugkasten + Workbook */}
+      <section className="py-16 text-pearl-white sm:py-24" style={DUNKEL} aria-labelledby="werkzeug-titel">
+        <div className="mx-auto max-w-6xl px-6">
+          <Kicker text="Dein Werkzeugkasten für die Challenge" />
+          <h2 id="werkzeug-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">
+            Fünf Dinge, die du vor der ersten Aufnahme wissen solltest.
+          </h2>
+          <div className="mt-9 grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
+            {WERKZEUG.map((w, i) => (
+              <article key={w.titel} className={`bg-white p-6 text-midnight-blue ${KACHEL}`}>
+                <span aria-hidden="true" className="grid h-11 w-11 place-items-center rounded-[10px] bg-midnight-blue font-montserrat font-black text-[#EBD197]">{i + 1}</span>
+                <h3 className="mt-4 font-montserrat text-base font-extrabold uppercase tracking-wide">{w.titel}</h3>
+                <p className="mt-2.5 font-inter text-[15px] leading-relaxed">{w.text}</p>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-12 grid items-center gap-8 md:grid-cols-[minmax(0,0.55fr)_minmax(0,1fr)] md:gap-12">
+            <figure className={`m-0 max-w-[340px] -rotate-[1.5deg] overflow-hidden shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)] ${KACHEL}`}>
+              <img src="/unverwechselbar/workbook-deckblatt.webp" alt="Deckblatt des Workbooks Entdecke deine Stimmwirkung – Brainself, Buchauszug von Claudia Conen" width={520} height={736} loading="lazy" decoding="async" className="h-auto w-full" />
+            </figure>
+            <div>
+              <Kicker text="Zum Mitnehmen" />
+              <h3 className="mt-4 font-montserrat text-2xl font-extrabold uppercase">Workbook „Entdecke deine Stimmwirkung"</h3>
+              <p className="mt-3 font-inter leading-relaxed text-pearl-white/90">
+                Mein Buchauszug aus <em>Brainself</em> – aus der Angst zum Selbstbewusstsein – als Workbook zum Ausfüllen: deine akustische Visitenkarte, Übungen für Stimme und Wirkung, Platz für deine eigenen Sätze.
+              </p>
+              {WORKBOOK_URL ? (
+                <a href={WORKBOOK_URL} target="_blank" rel="noopener noreferrer" className={`mt-6 inline-flex items-center rounded-full px-6 py-3.5 font-montserrat text-sm font-bold text-midnight-blue ${GOLD}`}>
+                  Workbook öffnen (PDF)
+                </a>
+              ) : (
+                <p className="mt-4 font-inter text-[15px] text-pearl-white/90">Du bekommst es im Wirkungs-Check – oder mit der ersten Aufgabe der Challenge.</p>
+              )}
+            </div>
+          </div>
         </div>
       </section>
 

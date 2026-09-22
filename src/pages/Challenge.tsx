@@ -4,6 +4,7 @@ import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import Brotkrumen from '../components/Brotkrumen';
+import ChallengeAnmeldung from '../components/ChallengeAnmeldung';
 
 /**
  * Die 7-Tage-Video-Challenge - eine kurze Seite, kein Programm.
@@ -71,47 +72,25 @@ const TAGE: Tag[] = [
     danach: 'Jetzt noch einmal den Satz. Fühl hinein: Klingt deine Stimme ein bisschen anders?',
   },
   {
-    titel: 'Deine Stimme gegen die Maschine',
-    vorschau: 'Ein Satz von der KI, ein Satz von dir – und der Unterschied, den man hört.',
-    aufgabe: 'Lass dir von einer KI einen Satz über dich schreiben und sag ihn. Dann sag es so, wie du es wirklich sagen würdest. Nimm beides auf.',
+    titel: 'Die Pause gehört dem Zuhörer',
+    vorschau: 'Atmen, Tempo, Stille – die drei Dinge, die Profis anders machen.',
+    aufgabe: 'Nach den fünf Minuten von Tag 1: Sag deinen Satz noch einmal – und mach nach jedem Komma eine Pause, in der du still bis zwei zählst. Dann drei Sätze über deinen gestrigen Tag, genauso.',
     schrittTitel: 'Drei Tipps:',
     schritte: [
-      'Streich jedes Wort, das du im Gespräch nie benutzt. „Innovativ", „ganzheitlich", „Lösungen" – das sagt die Maschine, nicht du.',
-      'Persönlich wird ein Satz durch ein Detail, das nur du kennst: ein Ort, ein Name, eine Zahl aus deinem Alltag.',
-      'Hör beide Aufnahmen mit geschlossenen Augen. Welchem Menschen würdest du glauben? Das ist deine Richtung.',
-    ],
-  },
-  {
-    titel: 'Wofür stehst du?',
-    vorschau: 'Ein Satz, dreimal gesagt – jedes Mal langsamer.',
-    aufgabe: 'Ein Satz: Wofür stehst du? Sag ihn dreimal – jedes Mal langsamer.',
-    schrittTitel: 'Drei Tipps:',
-    schritte: [
-      'Langsam heißt nicht gedehnt. Sprich im normalen Tempo – und mach die Pausen länger. Die Pause gehört dem Zuhörer; dort versteht er dich.',
-      'Betone ein Wort, nicht drei. Wenn alles wichtig klingt, ist nichts wichtig.',
-      'Der Satz ist fertig, wenn er ohne „eigentlich", „irgendwie" und „ein bisschen" auskommt. Diese Wörter nehmen ihm das Rückgrat.',
-    ],
-  },
-  {
-    titel: 'Ein Moment statt Lebenslauf',
-    vorschau: 'Der Moment, in dem du wusstest: Das ist mein Beruf.',
-    aufgabe: 'Erzähl den Moment, in dem du wusstest: Das ist mein Beruf. Eine Person, ein Ort, ein Satz, der fiel.',
-    schrittTitel: 'Drei Tipps:',
-    schritte: [
-      'Beginn mittendrin: „Dienstag, acht Uhr, der Kunde sagt …" – keine Vorgeschichte, keine Einleitung.',
-      'Zeig, was zu sehen war, statt zu sagen, was zu fühlen ist. „Sie legte den Stift weg" wirkt stärker als „Sie war beeindruckt".',
-      'Ende mit dem, was sich seitdem geändert hat – ein Satz. Er ist der Grund, warum du die Geschichte erzählst.',
-    ],
-  },
-  {
-    titel: 'Die Stimme, die du hast',
-    vorschau: 'Aufgewärmt gegen kalt – dieselbe Aufnahme wie an Tag 1.',
-    aufgabe: 'Mach die Fünf-Minuten-Übung von Tag 1. Dann dieselbe Aufnahme wie am ersten Morgen. Vergleich beide.',
-    schrittTitel: 'Drei Tipps:',
-    schritte: [
-      'Sprich zur letzten Reihe, auch wenn nur das Handy vor dir steht. Der Körper richtet sich auf, die Stimme trägt.',
       'Atme vor dem ersten Wort aus, nicht ein. Wer mit vollen Lungen startet, presst. Wer ruhig einatmet, klingt ruhig.',
-      'Tiefer wird die Stimme nicht durch Drücken, sondern durch Ruhe. Ein Satz, eine Pause. Eile hört man.',
+      'Die Pause fühlt sich für dich lang an – für den Zuhörer ist sie genau richtig. Dort versteht er dich. Dort nickt er.',
+      'Tiefer wird die Stimme nicht durch Drücken, sondern durch Ruhe. Ein Satz, eine Pause, der nächste Satz. Eile hört man.',
+    ],
+  },
+  {
+    titel: 'Sag, was du tust',
+    vorschau: 'Eine Minute ohne Fachwort – so, dass deine Nachbarin es versteht.',
+    aufgabe: 'Eine Minute: Was tust du – ohne ein einziges Fachwort. So, dass deine Nachbarin es versteht.',
+    schrittTitel: 'Drei Tipps:',
+    schritte: [
+      'Ein Gedanke pro Satz. Wo ein „und" steht, versteckt sich meist ein zweiter Satz. Punkt setzen, atmen, weiter.',
+      'Fang beim Menschen an, nicht bei dir: „Wenn jemand …, dann …" – so hört jeder sofort, ob es ihn betrifft.',
+      'Sag es einmal so, wie du es am Telefon einer Freundin sagen würdest. Genau diese Fassung nimmst du auf – nicht die offizielle.',
     ],
   },
   {
@@ -126,9 +105,31 @@ const TAGE: Tag[] = [
     ],
   },
   {
+    titel: 'Ein Moment statt Lebenslauf',
+    vorschau: 'Der Moment, in dem du wusstest: Das ist mein Beruf.',
+    aufgabe: 'Erzähl den Moment, in dem du wusstest: Das ist mein Beruf. Eine Person, ein Ort, ein Satz, der fiel.',
+    schrittTitel: 'Drei Tipps:',
+    schritte: [
+      'Beginn mittendrin: „Dienstag, acht Uhr, der Kunde sagt …" – keine Vorgeschichte, keine Einleitung.',
+      'Zeig, was zu sehen war, statt zu sagen, was zu fühlen ist. „Sie legte den Stift weg" wirkt stärker als „Sie war beeindruckt".',
+      'Ende mit dem, was sich seitdem geändert hat – ein Satz. Er ist der Grund, warum du die Geschichte erzählst.',
+    ],
+  },
+  {
+    titel: 'Deine Stimme gegen die Maschine',
+    vorschau: 'Ein Satz von der KI, ein Satz von dir – und der Unterschied, den man hört.',
+    aufgabe: 'Lass dir von einer KI einen Satz über dich schreiben und sag ihn. Dann sag es so, wie du es wirklich sagen würdest. Nimm beides auf.',
+    schrittTitel: 'Drei Tipps:',
+    schritte: [
+      'Streich jedes Wort, das du im Gespräch nie benutzt. „Innovativ", „ganzheitlich", „Lösungen" – das sagt die Maschine, nicht du.',
+      'Persönlich wird ein Satz durch ein Detail, das nur du kennst: ein Ort, ein Name, eine Zahl aus deinem Alltag.',
+      'Hör beide Aufnahmen mit geschlossenen Augen. Welchem Menschen würdest du glauben? Das ist deine Richtung.',
+    ],
+  },
+  {
     titel: 'Dein Satz zum Mitnehmen',
-    vorschau: 'Der eine Satz, den du überall sagen kannst – und meine Antwort darauf.',
-    aufgabe: 'Der eine Satz, den du überall sagen kannst. Den schickst du mir – und bekommst eine Antwort von mir, keine Vorlage.',
+    vorschau: 'Tag 1 neben Tag 7 hören – und der eine Satz, den du überall sagen kannst.',
+    aufgabe: 'Nach den fünf Minuten: Sag deinen Satz von Tag 1 und hör ihn neben der Aufnahme vom ersten Morgen. Dann der eine Satz, den du überall sagen kannst. Den schickst du mir – und bekommst eine Antwort von mir, keine Vorlage.',
     schrittTitel: 'Drei Tipps:',
     schritte: [
       'Kurz genug, dass ihn jemand weitererzählen kann, ohne nachzulesen. Test: Sag ihn einer Person und bitte sie, ihn morgen zu wiederholen.',
@@ -146,7 +147,7 @@ const WEGWEISER = {
 };
 
 const ABLAUF = [
-  'Du trittst der WhatsApp-Gruppe bei und sagst „Ich bin dabei".',
+  'Du trägst dich unten ein und gehst in die WhatsApp-Gruppe – dort läuft die Challenge.',
   'Ab Montag bekommst du jeden Morgen eine Aufgabe – die sieben stehen hier unten zum Aufklappen.',
   'Du nimmst dich mit dem Handy auf, eine Minute, und teilst das Video in der Gruppe. Du bekommst Feedback von mir.',
 ];
@@ -221,7 +222,10 @@ function WhatsAppBlock() {
       <img src="/challenge/qr-whatsapp.png" alt="QR-Code: Einladung in die WhatsApp-Gruppe der Challenge" width={328} height={328} loading="lazy" decoding="async" className="h-24 w-24 rounded-md bg-white sm:h-28 sm:w-28" />
       <div className="min-w-0">
         <p className="font-montserrat text-lg font-extrabold leading-tight sm:text-xl">Hier geht es in die Gruppe.</p>
-        <p className="mt-1 font-inter text-[15px] leading-relaxed">Am Handy: Knopf drücken. Am Rechner: Code mit dem Handy scannen. Kostenfrei.</p>
+        <p className="mt-1 font-inter text-[15px] leading-relaxed">
+          Am Handy: Knopf drücken. Am Rechner: Code mit dem Handy scannen. Noch nicht eingetragen?{' '}
+          <a href="#anmelden" className="font-semibold underline decoration-midnight-blue/40 underline-offset-2">Hier eintragen.</a>
+        </p>
       </div>
       <Einstieg hell />
     </div>
@@ -279,7 +283,9 @@ export default function Challenge() {
               Start immer montags – nächster Start: Montag, {montag}.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <Einstieg />
+              <a href="#anmelden" className={`inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue transition-transform hover:-translate-y-px ${GOLD}`}>
+                Ich bin dabei – eintragen
+              </a>
               <a href="#tage" className="font-montserrat text-sm font-semibold text-[#EBD197] underline decoration-[#D4AF37]/50 underline-offset-4 hover:decoration-[#F7E7CE]">
                 Die sieben Tage ansehen ↓
               </a>
@@ -324,6 +330,9 @@ export default function Challenge() {
           <h2 id="tage-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
             Sieben Tage. Jeden Tag eine Anleitung – zum Aufklappen.
           </h2>
+          <p className="mt-4 max-w-2xl font-inter text-lg leading-relaxed text-midnight-blue">
+            Jeder Morgen beginnt mit den fünf Minuten von Tag 1 – und mit deinem Satz. So hörst du am Ende, was sich verändert hat.
+          </p>
 
           <div className={`mt-8 grid gap-x-6 gap-y-3 bg-white px-5 py-5 text-midnight-blue sm:grid-cols-[auto_minmax(0,1fr)] sm:px-7 sm:py-6 ${KACHEL}`}>
             <span className={`self-start rounded-md px-2.5 py-2 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-midnight-blue ${GOLD}`}>Zuerst</span>
@@ -376,7 +385,7 @@ export default function Challenge() {
                       {t.danach && <p className="mt-4 font-montserrat text-base font-bold">{t.danach}</p>}
                     </div>
                   </details>
-                  {i === 0 && <WhatsAppBlock />}
+                  {i === 0 && <ChallengeAnmeldung montag={montag} />}
                 </li>
               );
             })}

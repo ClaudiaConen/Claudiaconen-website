@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
@@ -164,11 +164,56 @@ const WERKZEUG: { titel: string; text: string }[] = [
 function Kicker({ text, hell }: { text: string; hell?: boolean }) {
   return (
     <p className={`flex items-center gap-3 font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] ${hell ? 'text-midnight-blue' : 'text-[#EBD197]'}`}>
-      <span aria-hidden="true" className={`h-[3px] w-7 rounded-full ${GOLD}`} />
+      <span aria-hidden="true" className={`cc-linie h-[3px] w-7 rounded-full ${GOLD}`} />
       {text}
     </p>
   );
 }
+
+/** Blendet einen Abschnitt beim Scrollen ein (Klassen cc-r / da in index.css). Ohne JavaScript
+ *  oder mit "Bewegung reduzieren" ist alles sofort sichtbar. Ein Beobachter je Abschnitt, keine Bibliothek. */
+function useEinblenden() {
+  const ref = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      el.classList.add('da');
+      return;
+    }
+    const io = new IntersectionObserver(
+      (es) => {
+        if (es.some((e) => e.isIntersecting)) {
+          el.classList.add('da');
+          io.disconnect();
+        }
+      },
+      { rootMargin: '0px 0px -8% 0px' }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  return ref;
+}
+
+function Abschnitt({ id, className, style, label, children }: { id?: string; className: string; style?: React.CSSProperties; label: string; children: React.ReactNode }) {
+  const ref = useEinblenden();
+  return (
+    <section ref={ref} id={id} className={`cc-r ${className}`} style={style} aria-labelledby={label}>
+      {children}
+    </section>
+  );
+}
+
+/** Kleines Foto rechts neben der Ueberschrift eines Abschnitts - nie Text ueber einem riesigen Bild. */
+function Kopfbild({ datei, alt, quer }: { datei: string; alt: string; quer?: boolean }) {
+  return (
+    <figure className={`m-0 overflow-hidden bg-[#13233F] shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)] sm:justify-self-end ${KACHEL} ${quer ? 'aspect-[3/2] w-[clamp(220px,36vw,380px)]' : 'aspect-[9/16] w-[clamp(150px,22vw,210px)]'}`}>
+      <img src={`/unverwechselbar/${datei}.webp`} alt={alt} width={quer ? 900 : 360} height={quer ? 600 : 640} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.04]" />
+    </figure>
+  );
+}
+const KOPF = 'grid items-end gap-6 sm:grid-cols-[minmax(0,1fr)_auto] sm:gap-10';
 
 function Haken() {
   return <span aria-hidden="true" className="mt-2 h-2.5 w-2.5 flex-none rotate-[-45deg] border-b-2 border-r-2 border-[#D4AF37]" />;
@@ -248,7 +293,7 @@ export default function UnverwechselbarDu() {
               </a>
             </div>
           </div>
-          <figure className={`relative mx-auto aspect-[9/16] w-full max-w-[340px] overflow-hidden bg-[#13233F] shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)] ${KACHEL}`}>
+          <figure className={`cc-schweben relative mx-auto aspect-[9/16] w-full max-w-[340px] overflow-hidden bg-[#13233F] shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)] ${KACHEL}`}>
             <img src="/situationen/06-kamera.webp" alt="Claudia Conen im dunklen Blazer, Arme verschränkt, Blick in die Kamera" width={360} height={640} className="h-full w-full object-cover" />
             <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(10,22,40,0)_55%,rgba(10,22,40,0.9)_100%)]" />
             <figcaption className="absolute inset-x-0 bottom-0 p-5 font-montserrat text-[11px] font-extrabold uppercase tracking-[0.14em] text-[#EBD197]">
@@ -260,13 +305,18 @@ export default function UnverwechselbarDu() {
       </header>
 
       {/* Hand aufs Herz */}
-      <section className="bg-pearl-white py-16 sm:py-24" aria-labelledby="hand-aufs-herz">
+      <Abschnitt className="bg-pearl-white py-16 sm:py-24" label="hand-aufs-herz">
         <div className="mx-auto max-w-6xl px-6">
-          <Kicker text="Hand aufs Herz" hell />
-          <h2 id="hand-aufs-herz" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
-            Bei wem holst du dir häufiger Rat – bei ChatGPT oder bei echten Menschen?
-          </h2>
-          <p className="mt-4 font-inter text-lg text-midnight-blue">Kreuze an, was du kennst.</p>
+          <div className={KOPF}>
+            <div>
+              <Kicker text="Hand aufs Herz" hell />
+              <h2 id="hand-aufs-herz" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
+                Bei wem holst du dir häufiger Rat – bei ChatGPT oder bei echten Menschen?
+              </h2>
+              <p className="mt-4 font-inter text-lg text-midnight-blue">Kreuze an, was du kennst.</p>
+            </div>
+            <Kopfbild datei="avatare" alt="Claudia Conen als Mensch neben ihren KI-Avataren" />
+          </div>
           <ul className="mt-7 grid list-none gap-2.5 p-0 sm:grid-cols-2 lg:grid-cols-3">
             {KREUZE.map((k, i) => (
               <li key={k}>
@@ -286,10 +336,10 @@ export default function UnverwechselbarDu() {
             <p className="mt-1.5 font-cormorant text-2xl italic leading-tight text-[#F7E7CE] sm:text-3xl">Was hast du, was KI niemals haben wird? Dich.</p>
           </div>
         </div>
-      </section>
+      </Abschnitt>
 
       {/* KI und du */}
-      <section className="py-16 text-pearl-white sm:py-24" style={DUNKEL} aria-labelledby="ki-und-du">
+      <Abschnitt className="py-16 text-pearl-white sm:py-24" style={DUNKEL} label="ki-und-du">
         <div className="mx-auto max-w-6xl px-6">
           <Kicker text="Dein KI-Agent ist effizient. Und du?" />
           <h2 id="ki-und-du" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">
@@ -333,16 +383,21 @@ export default function UnverwechselbarDu() {
             </div>
           </div>
         </div>
-      </section>
+      </Abschnitt>
 
       {/* Selbst-Check */}
-      <section className="bg-white py-16 sm:py-24" aria-labelledby="selbstcheck">
+      <Abschnitt className="bg-white py-16 sm:py-24" label="selbstcheck">
         <div className="mx-auto max-w-6xl px-6">
-          <Kicker text="Selbst-Check" hell />
-          <h2 id="selbstcheck" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
-            So bleibst du unverwechselbar – auch im Zeitalter von KI.
-          </h2>
-          <p className="mt-4 font-inter text-lg text-midnight-blue">Sieben Fragen. Ehrlich beantwortet, sagen sie dir, wo du stehst.</p>
+          <div className={KOPF}>
+            <div>
+              <Kicker text="Selbst-Check" hell />
+              <h2 id="selbstcheck" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
+                So bleibst du unverwechselbar – auch im Zeitalter von KI.
+              </h2>
+              <p className="mt-4 font-inter text-lg text-midnight-blue">Sieben Fragen. Ehrlich beantwortet, sagen sie dir, wo du stehst.</p>
+            </div>
+            <Kopfbild datei="gehirn" alt="Claudia Conen mit einem Gehirnmodell in der Hand" />
+          </div>
           <ul className="mt-7 grid list-none gap-2.5 p-0">
             {FRAGEN.map((f, i) => (
               <li key={f.frage}>
@@ -362,25 +417,31 @@ export default function UnverwechselbarDu() {
             {nFragen > 0 && nFragen < 7 && `${nFragen} von 7. ${nFragen < 4 ? 'Da ist Luft – und genau dafür sind die sieben Schritte da.' : 'Gute Basis. Die fehlenden Punkte sind die, die den Unterschied machen.'}`}
           </p>
         </div>
-      </section>
+      </Abschnitt>
 
       {/* Sieben Schritte */}
-      <section id="programm" className="py-16 text-pearl-white sm:py-24" style={DUNKEL} aria-labelledby="programm-titel">
+      <Abschnitt id="programm" className="py-16 text-pearl-white sm:py-24" style={DUNKEL} label="programm-titel">
         <div className="mx-auto max-w-6xl px-6">
-          <Kicker text="Das Programm" />
-          <h2 id="programm-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">
-            Sieben Schritte. Ein Ergebnis: <span className="gold-text-animated">Du bleibst im Kopf.</span>
-          </h2>
-          <p className="mt-4 max-w-2xl font-inter text-lg text-pearl-white/90">
-            Jeder Schritt ist ein eigener Baustein – und zusammen sind sie der Weg vom „Ich rede" zum „Man erinnert sich an mich".
-          </p>
+          <div className={KOPF}>
+            <div>
+              <Kicker text="Das Programm" />
+              <h2 id="programm-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">
+                Sieben Schritte. Ein Ergebnis: <span className="gold-text-animated">Du bleibst im Kopf.</span>
+              </h2>
+              <p className="mt-4 max-w-2xl font-inter text-lg text-pearl-white/90">
+                Jeder Schritt ist ein eigener Baustein – und zusammen sind sie der Weg vom „Ich rede" zum „Man erinnert sich an mich".
+              </p>
+            </div>
+            <Kopfbild datei="keynote" alt="Claudia Conen auf der Bühne bei einer Keynote" />
+          </div>
           <ol className="mt-9 grid list-none gap-3.5 p-0 sm:grid-cols-2 lg:grid-cols-3">
             {SCHRITTE.map((s, i) => {
               const letzter = i === SCHRITTE.length - 1;
               return (
                 <li
                   key={s.titel}
-                  className={`min-h-[190px] p-6 hover:-translate-y-0.5 ${KACHEL} ${letzter ? `${GOLD} border-transparent text-midnight-blue` : 'bg-[#13233F] text-pearl-white'}`}
+                  style={{ ['--i' as string]: i }}
+                  className={`cc-stufe min-h-[190px] p-6 hover:-translate-y-0.5 ${KACHEL} ${letzter ? `${GOLD} border-transparent text-midnight-blue` : 'bg-[#13233F] text-pearl-white'}`}
                 >
                   <span aria-hidden="true" className={`font-montserrat text-4xl font-black ${letzter ? 'text-midnight-blue/40' : 'text-[#D4AF37]/45'}`}>
                     {String(i + 1).padStart(2, '0')}
@@ -392,23 +453,28 @@ export default function UnverwechselbarDu() {
             })}
           </ol>
         </div>
-      </section>
+      </Abschnitt>
 
       {/* Challenge */}
-      <section id="challenge" className="bg-pearl-white py-16 sm:py-24" aria-labelledby="challenge-titel">
+      <Abschnitt id="challenge" className="bg-pearl-white py-16 sm:py-24" label="challenge-titel">
         <div className="mx-auto max-w-6xl px-6">
-          <Kicker text="Vom Event direkt in die Praxis" hell />
-          <h2 id="challenge-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
-            Die 7-Tage-Video-Challenge: sieben Tage, sieben Schritte, 60 Sekunden am Tag.
-          </h2>
-          <p className="mt-4 max-w-2xl font-inter text-lg leading-relaxed text-midnight-blue">
-            <b>Start immer montags – nächster Start: Montag, {montag}.</b> Du scannst den Code, sagst „Ich bin dabei" – und ab dann bekommst du jeden Morgen eine Aufgabe. Du nimmst dich mit dem Handy auf. Nur für dich. Wer mag, teilt sein Video mit <b>#unverwechselbarDU</b>.
-          </p>
+          <div className={KOPF}>
+            <div>
+              <Kicker text="Vom Event direkt in die Praxis" hell />
+              <h2 id="challenge-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
+                Die 7-Tage-Video-Challenge: sieben Tage, sieben Schritte, 60 Sekunden am Tag.
+              </h2>
+              <p className="mt-4 max-w-2xl font-inter text-lg leading-relaxed text-midnight-blue">
+                <b>Start immer montags – nächster Start: Montag, {montag}.</b> Du scannst den Code, sagst „Ich bin dabei" – und ab dann bekommst du jeden Morgen eine Aufgabe. Du nimmst dich mit dem Handy auf. Nur für dich. Wer mag, teilt sein Video mit <b>#unverwechselbarDU</b>.
+              </p>
+            </div>
+            <Kopfbild datei="selfie" alt="Claudia Conen nimmt mit dem Handy ein Video auf, zwei Menschen lachen mit" quer />
+          </div>
           <ol className="mt-8 grid list-none gap-2.5 p-0">
             {TAGE.map((tg, i) => {
               const letzter = i === TAGE.length - 1;
               return (
-                <li key={tg.titel} className={`grid grid-cols-[auto_1fr] items-start gap-4 bg-white px-4 py-4 text-midnight-blue ${KACHEL}`}>
+                <li key={tg.titel} style={{ ['--i' as string]: i }} className={`cc-stufe grid grid-cols-[auto_1fr] items-start gap-4 bg-white px-4 py-4 text-midnight-blue ${KACHEL}`}>
                   <span className={`mt-0.5 rounded-md px-2.5 py-2 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] ${letzter ? `${GOLD} text-midnight-blue` : 'bg-midnight-blue text-pearl-white'}`}>
                     Tag {i + 1}
                   </span>
@@ -429,18 +495,23 @@ export default function UnverwechselbarDu() {
             Die Challenge läuft in einer WhatsApp-Gruppe. Dort sehen alle Mitglieder gegenseitig die Handynummern – wer das nicht möchte, schreibt mir direkt.
           </p>
         </div>
-      </section>
+      </Abschnitt>
 
       {/* Werkzeugkasten + Workbook */}
-      <section className="py-16 text-pearl-white sm:py-24" style={DUNKEL} aria-labelledby="werkzeug-titel">
+      <Abschnitt className="py-16 text-pearl-white sm:py-24" style={DUNKEL} label="werkzeug-titel">
         <div className="mx-auto max-w-6xl px-6">
-          <Kicker text="Dein Werkzeugkasten für die Challenge" />
-          <h2 id="werkzeug-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">
-            Fünf Dinge, die du vor der ersten Aufnahme wissen solltest.
-          </h2>
+          <div className={KOPF}>
+            <div>
+              <Kicker text="Dein Werkzeugkasten für die Challenge" />
+              <h2 id="werkzeug-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">
+                Fünf Dinge, die du vor der ersten Aufnahme wissen solltest.
+              </h2>
+            </div>
+            <Kopfbild datei="tonstudio" alt="Claudia Conen am Mikrofon im Tonstudio" />
+          </div>
           <div className="mt-9 grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
             {WERKZEUG.map((w, i) => (
-              <article key={w.titel} className={`bg-white p-6 text-midnight-blue ${KACHEL}`}>
+              <article key={w.titel} style={{ ['--i' as string]: i }} className={`cc-stufe bg-white p-6 text-midnight-blue ${KACHEL}`}>
                 <span aria-hidden="true" className="grid h-11 w-11 place-items-center rounded-[10px] bg-midnight-blue font-montserrat font-black text-[#EBD197]">{i + 1}</span>
                 <h3 className="mt-4 font-montserrat text-base font-extrabold uppercase tracking-wide">{w.titel}</h3>
                 <p className="mt-2.5 font-inter text-[15px] leading-relaxed">{w.text}</p>
@@ -468,15 +539,20 @@ export default function UnverwechselbarDu() {
             </div>
           </div>
         </div>
-      </section>
+      </Abschnitt>
 
       {/* Angebot */}
-      <section id="geschenk" className="bg-pearl-white py-16 sm:py-24" aria-labelledby="angebot-titel">
+      <Abschnitt id="geschenk" className="bg-pearl-white py-16 sm:py-24" label="angebot-titel">
         <div className="mx-auto max-w-6xl px-6">
-          <Kicker text="Zwei Wege. Ein Anfang." hell />
-          <h2 id="angebot-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
-            Mein Geschenk für deine Wirkung – und der Schritt danach.
-          </h2>
+          <div className={KOPF}>
+            <div>
+              <Kicker text="Zwei Wege. Ein Anfang." hell />
+              <h2 id="angebot-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
+                Mein Geschenk für deine Wirkung – und der Schritt danach.
+              </h2>
+            </div>
+            <Kopfbild datei="am-telefon" alt="Claudia Conen lächelt mit dem Telefon in der Hand" quer />
+          </div>
           <div className="mt-9 grid gap-4 md:grid-cols-2">
             <div className={`flex flex-col bg-white p-7 text-midnight-blue sm:p-9 ${KACHEL} border-[#D4AF37]`}>
               <span className="self-start rounded-full bg-midnight-blue px-3 py-1.5 font-montserrat text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#EBD197]">Geschenk · kostenlos</span>
@@ -525,10 +601,10 @@ export default function UnverwechselbarDu() {
             </div>
           </div>
         </div>
-      </section>
+      </Abschnitt>
 
       {/* Warum ich */}
-      <section className="py-16 text-pearl-white sm:py-24" style={DUNKEL} aria-labelledby="warum">
+      <Abschnitt className="py-16 text-pearl-white sm:py-24" style={DUNKEL} label="warum">
         <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2 md:gap-14">
           <div>
             <Kicker text="Warum ich" />
@@ -554,10 +630,10 @@ export default function UnverwechselbarDu() {
             </p>
           </div>
         </div>
-      </section>
+      </Abschnitt>
 
       {/* Fragen */}
-      <section className="bg-white py-16 sm:py-24" aria-labelledby="fragen">
+      <Abschnitt className="bg-white py-16 sm:py-24" label="fragen">
         <div className="mx-auto max-w-6xl px-6">
           <Kicker text="Fragen, die vorher kommen" hell />
           <h2 id="fragen" className="mt-5 font-montserrat text-3xl font-extrabold text-midnight-blue sm:text-4xl">Kurz beantwortet.</h2>
@@ -570,10 +646,47 @@ export default function UnverwechselbarDu() {
             ))}
           </div>
         </div>
-      </section>
+      </Abschnitt>
+
+      {/* Community - Claudias Idee vom 22.09.2026 (02:24 UTC): wer sieben Tage lang auf die Seite kommt,
+          soll wissen, wo es danach weitergeht. Text aus ihren Worten; die Community-Seite war beim Bau
+          nicht lesbar (gleiches Netlify-Konto, abgeschaltet). */}
+      <Abschnitt className="bg-pearl-white py-16 sm:py-24" label="community-titel">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="cc-goldbuehne rounded-[18px] p-3 shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)] sm:p-4">
+          <div className="cc-glas grid items-center gap-8 rounded-[14px] p-7 text-pearl-white sm:p-10 md:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
+            <div>
+              <Kicker text="Nach der Challenge" />
+              <h2 id="community-titel" className="mt-4 font-montserrat text-3xl font-extrabold leading-tight text-white sm:text-4xl">
+                Die Unverwechselbaren – die Netzwerk-Community für den Mittelstand.
+              </h2>
+              <p className="mt-4 font-inter text-lg leading-relaxed text-pearl-white/90">
+                Sieben Tage sind ein Anfang. In der Community geht es weiter: Menschen aus dem Mittelstand, die sichtbar und unverwechselbar werden wollen – mit und ohne KI. Austausch, Übung, echte Rückmeldung.
+              </p>
+              <ul className="mt-5 grid list-none gap-2.5 p-0 font-inter text-pearl-white/90">
+                {[
+                  'Wer die Challenge gemacht hat, kennt schon die sieben Schritte – hier werden sie zur Gewohnheit.',
+                  'Live-Abende im Rederaum, Menschen, die dich beim Wort nehmen.',
+                  'Du bleibst nicht allein mit deiner Wirkung.',
+                ].map((z) => (
+                  <li key={z} className="flex gap-3"><Haken />{z}</li>
+                ))}
+              </ul>
+              <a href="https://community.claudiaconen.com/" target="_blank" rel="noopener noreferrer" className={`mt-7 inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue ${GOLD}`}>
+                Zur Community
+              </a>
+            </div>
+            {/* Platzhalter: Claudia will hier ein Foto von Gabi und sich ("wo wir lachen") - liegt noch nicht vor. */}
+            <figure className={`m-0 aspect-[3/2] w-full max-w-[380px] justify-self-center overflow-hidden ${KACHEL}`}>
+              <img src="/unverwechselbar/selfie.webp" alt="" width={900} height={600} loading="lazy" decoding="async" className="h-full w-full object-cover" />
+            </figure>
+          </div>
+          </div>
+        </div>
+      </Abschnitt>
 
       {/* Schluss */}
-      <section className="py-16 text-center text-pearl-white sm:py-24" style={DUNKEL} aria-labelledby="schluss">
+      <Abschnitt className="py-16 text-center text-pearl-white sm:py-24" style={DUNKEL} label="schluss">
         <div className="mx-auto max-w-4xl px-6">
           <p className="flex items-center justify-center gap-3 font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] text-[#EBD197]">
             <span aria-hidden="true" className={`h-[3px] w-7 rounded-full ${GOLD}`} />
@@ -591,7 +704,7 @@ export default function UnverwechselbarDu() {
             </a>
           </div>
         </div>
-      </section>
+      </Abschnitt>
 
       <Footer />
     </div>

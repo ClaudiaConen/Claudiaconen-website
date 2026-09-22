@@ -2343,6 +2343,31 @@ html, body { cursor: auto; }
 .cc-mom-band { max-width: min(100%, 1180px); margin-inline: auto; }
 .cc-mom-spur { animation-duration: 80s; }
 .cc-mom { height: clamp(190px, 42vw, 236px); }
+
+/* ---- Einblenden beim Scrollen (Unverwechselbar DU, 22.09.2026) ------------
+   Versteckt wird nur, wenn JavaScript laeuft (html.js, gesetzt in index.html) -
+   das vorgerenderte HTML und Leser ohne JavaScript sehen alles sofort. */
+.js .cc-r { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+.js .cc-r.da { opacity: 1; transform: none; }
+.js .cc-r .cc-linie { transform: scaleX(0); transform-origin: left; transition: transform .8s ease .25s; }
+.js .cc-r.da .cc-linie { transform: none; }
+.js .cc-r .cc-stufe { opacity: 0; transform: translateY(14px); }
+.js .cc-r.da .cc-stufe { opacity: 1; transform: none; transition: opacity .6s ease, transform .6s ease, border-color .2s, box-shadow .2s; transition-delay: calc(var(--i, 0) * 70ms); }
+.cc-schweben { animation: cc-schweben 7s ease-in-out infinite; }
+@keyframes cc-schweben { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+/* Glas ueber bewegtem Gold - Claudias Wunsch vom 22.09.2026 fuer den Community-Block (Optik ihrer
+   Community-Seite). Bewusst NUR dort: fuer Textflaechen bleibt Milchglas tabu (DESIGN_PRAEFERENZEN). */
+.cc-goldbuehne { position: relative; overflow: hidden; background: linear-gradient(120deg, #C9A961 0%, #F7E7CE 28%, #D4AF37 52%, #EBD197 76%, #C9A961 100%); background-size: 260% 260%; animation: cc-goldlauf 11s ease-in-out infinite; }
+.cc-goldbuehne::before { content: ""; position: absolute; inset: -30%; background: radial-gradient(40% 40% at 30% 30%, rgba(255,255,255,.55), transparent 70%), radial-gradient(35% 35% at 75% 70%, rgba(10,22,40,.35), transparent 70%); animation: cc-glanzlauf 14s ease-in-out infinite alternate; }
+@keyframes cc-goldlauf { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+@keyframes cc-glanzlauf { from { transform: translate(-4%, -3%) rotate(0deg); } to { transform: translate(4%, 3%) rotate(6deg); } }
+.cc-glas { position: relative; background: rgba(10,22,40,.74); -webkit-backdrop-filter: blur(18px) saturate(1.2); backdrop-filter: blur(18px) saturate(1.2); border: 1px solid rgba(247,231,206,.45); }
+@media (prefers-reduced-motion: reduce) {
+  .js .cc-r, .js .cc-r .cc-stufe { opacity: 1; transform: none; transition: none; }
+  .js .cc-r .cc-linie { transform: none; }
+  .cc-schweben { animation: none; }
+  .cc-goldbuehne, .cc-goldbuehne::before { animation: none; }
+}
 .cc-glanz::before {
   content: "";
   position: absolute;

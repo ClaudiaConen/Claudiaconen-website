@@ -179,7 +179,9 @@ export default function Navigation({ hell = false }: { hell?: boolean } = {}) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="The Power of AI – Klick für Chancen"
-              className="inline-flex h-11 overflow-hidden rounded-xl ring-1 ring-[rgba(212,175,55,0.35)] hover:ring-[rgba(212,175,55,0.7)] hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(212,175,55,0.25)] transition-all duration-300"
+              // Das Banner nur ab 1536 px: zwischen 1280 und 1535 px war die Leiste zu voll - Banner auf 29 px gequetscht,
+              // "Jetzt anfragen" rechts abgeschnitten (gemessen 22.09.2026 23:45 UTC, Claudias Laptop).
+              className="hidden 2xl:inline-flex h-11 overflow-hidden rounded-xl ring-1 ring-[rgba(212,175,55,0.35)] hover:ring-[rgba(212,175,55,0.7)] hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(212,175,55,0.25)] transition-all duration-300"
             >
               <img
                 src="/power-of-ai-banner.jpg"

@@ -2531,3 +2531,9 @@ html, body { cursor: auto; }
    die Layout-Breite groesser als den Bildschirm, und alle fixierten Leisten - auch das Menue - ragen rechts hinaus.
    overflow-x: clip schneidet ab, ohne einen Scrollbereich zu erzeugen (position: sticky bleibt intakt). 22.09.2026. */
 html, body { overflow-x: clip; }
+
+/* Kopfzeile zwischen 1280 und 1535 px (uebliche Laptops): enger gesetzt, damit nichts abgeschnitten wird (22.09.2026). */
+@media (min-width: 1280px) and (max-width: 1535px) {
+  .mega-nav-link { padding: 0.5rem 0.62rem; font-size: 0.84rem; }
+  .mega-nav-cta { padding: 0.65rem 1.05rem; font-size: 0.74rem; }
+}

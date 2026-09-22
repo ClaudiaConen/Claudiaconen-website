@@ -39,4 +39,6 @@
 # "nicht gefunden"-Seite; nur der Status ist jetzt ehrlich.
 # Das Auffangnetz zeigt bewusst auf app.html, NICHT auf index.html:
 # index.html ist die fertige Startseite.
+# 22.09.2026: Flyer-Seite und Challenge-Seite zu einer zusammengelegt (Claudia: 'die Seite soll Challenge heissen').
+/unverwechselbar-du    /challenge    301
 /*                      /app.html   404

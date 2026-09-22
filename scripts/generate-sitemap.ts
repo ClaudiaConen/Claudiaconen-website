@@ -105,7 +105,6 @@ const staticPages = [
 
   // Vorhandene Seiten, die bisher in keiner Sitemap standen (18.09.2026)
   { path: '/premiumangebote', priority: '0.9', changefreq: 'monthly' },
-  { path: '/unverwechselbar-du', priority: '0.9', changefreq: 'monthly' },
   { path: '/challenge', priority: '0.9', changefreq: 'weekly' },
   { path: '/termin-buchen', priority: '0.8', changefreq: 'monthly' },
   { path: '/events', priority: '0.8', changefreq: 'weekly' },

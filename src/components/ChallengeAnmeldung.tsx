@@ -23,7 +23,7 @@ const GOLD = 'bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]';
 const FELD =
   'w-full rounded-md border border-midnight-blue/25 bg-white px-4 py-3 font-inter text-[15px] text-midnight-blue placeholder:text-midnight-blue/45 focus:border-[#D4AF37] focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/40';
 
-export default function ChallengeAnmeldung({ montag }: { montag: string }) {
+export default function ChallengeAnmeldung({ start }: { start: string }) {
   const [vorname, setVorname] = useState('');
   const [email, setEmail] = useState('');
   const [telefon, setTelefon] = useState('');
@@ -39,7 +39,7 @@ export default function ChallengeAnmeldung({ montag }: { montag: string }) {
         name: vorname.trim(),
         email: email.trim(),
         phone: telefon.trim() || null,
-        message: `7-TAGE-CHALLENGE – Anmeldung über claudiaconen.com/challenge\nStart: Montag, ${montag}\nEinwilligung Datenschutz: ja`,
+        message: `7-TAGE-CHALLENGE – Anmeldung über claudiaconen.com/challenge\nStart: Montag, ${start}\nEinwilligung Datenschutz: ja`,
       },
     ]);
     if (error) {
@@ -57,7 +57,7 @@ export default function ChallengeAnmeldung({ montag }: { montag: string }) {
         <div className="min-w-0">
           <p className="font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">Danke, {vorname.trim() || 'du'} – du bist eingetragen.</p>
           <p className="mt-2 font-inter text-[15px] leading-relaxed sm:text-base">
-            Jetzt noch in die Gruppe, dort läuft die Challenge: am Handy den Knopf drücken, am Rechner den Code scannen. Start: Montag, {montag}.
+            Jetzt noch in die Gruppe, dort läuft die Challenge: am Handy den Knopf drücken, am Rechner den Code scannen. Start: Montag, {start}.
           </p>
           <a href={CHALLENGE_LINK} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center rounded-full bg-midnight-blue px-7 py-4 font-montserrat text-sm font-bold text-pearl-white transition-colors hover:bg-royal-navy">
             Zur WhatsApp-Gruppe

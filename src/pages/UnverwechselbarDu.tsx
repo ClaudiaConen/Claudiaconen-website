@@ -4,6 +4,8 @@ import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import Brotkrumen from '../components/Brotkrumen';
+import WorkbookBlaettern from '../components/WorkbookBlaettern';
+import Stimmwelle from '../components/Stimmwelle';
 
 /**
  * Landingpage "Unverwechselbar DU" - ein Produkt, eine Seite.
@@ -139,9 +141,9 @@ const WHATSAPP = 'https://wa.me/4916093102073';
  *  sieben Schritte, 60 Sekunden am Tag. Kanal: ihre WhatsApp-Gruppe "Video-Challenge" (Einladungslink
  *  von ihr am 22.09.2026, 02:20 UTC). Aendert sie den Link, hier tauschen. */
 const CHALLENGE_LINK = 'https://chat.whatsapp.com/IWSuqZ9ZrMn3dYNgVY1sp6?s=qt&p=i&mlu=4&ilr=4';
-/** Workbook "Entdecke deine Stimmwirkung" (Brainself-Buchauszug). Verweis erst, wenn die PDF korrigiert
- *  ist (Aufgabe 18: "150 Millisekunden", "Opfer", "30 Jahre") - bis dahin nur das Deckblatt. */
-const WORKBOOK_URL = '' as string;
+/** Workbook "Entdecke deine Stimmwirkung" (Brainself-Buchauszug), korrigierte Fassung vom 22.09.2026
+ *  (Aufgabe 18: keine Millisekunden-Zahl, kein "Opfer", 37 Jahre, Nachtblau). Blaettern: WorkbookBlaettern.tsx. */
+const WORKBOOK_PDF = '/unverwechselbar/workbook-entdecke-deine-stimmwirkung.pdf';
 
 const TAGE: { titel: string; aufgabe: string }[] = [
   { titel: 'Das Gehirn verstehen', aufgabe: 'Sag in 60 Sekunden, was du tust – ohne ein einziges Fachwort. So, dass es deine Nachbarin versteht.' },
@@ -196,11 +198,18 @@ function useEinblenden() {
   return ref;
 }
 
-function Abschnitt({ id, className, style, label, children }: { id?: string; className: string; style?: React.CSSProperties; label: string; children: React.ReactNode }) {
+/** welle: eine hauchzarte Stimmwelle im Hintergrund (Claudia, 22.09.2026: "sanfte Schallwellen, die man kaum sieht");
+ *  gold: leise wandernde Goldflecken hinter Glas-Kacheln ("mit dem bewegten Gold dahinter"). Beide reines CSS. */
+function Abschnitt({ id, className, style, label, welle, gold, children }: { id?: string; className: string; style?: React.CSSProperties; label: string; welle?: boolean; gold?: boolean; children: React.ReactNode }) {
   const ref = useEinblenden();
   return (
-    <section ref={ref} id={id} className={`cc-r ${className}`} style={style} aria-labelledby={label}>
-      {children}
+    <section ref={ref} id={id} className={`cc-r ${gold ? 'cc-goldnebel' : ''} ${welle ? 'relative overflow-hidden' : ''} ${className}`} style={style} aria-labelledby={label}>
+      {welle && (
+        <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-1/2 h-64 -translate-y-1/2 opacity-[0.16]">
+          <Stimmwelle />
+        </div>
+      )}
+      <div className="relative">{children}</div>
     </section>
   );
 }
@@ -222,6 +231,7 @@ function Haken() {
 export default function UnverwechselbarDu() {
   const [kreuze, setKreuze] = useState<boolean[]>(() => KREUZE.map(() => false));
   const [fragen, setFragen] = useState<boolean[]>(() => FRAGEN.map(() => false));
+  const [buchOffen, setBuchOffen] = useState(false);
   const nKreuze = kreuze.filter(Boolean).length;
   const nFragen = fragen.filter(Boolean).length;
   // Beim Vorrendern steht hier das Bau-Datum; im Browser rechnet React mit dem echten Tag neu.
@@ -339,7 +349,7 @@ export default function UnverwechselbarDu() {
       </Abschnitt>
 
       {/* KI und du */}
-      <Abschnitt className="py-16 text-pearl-white sm:py-24" style={DUNKEL} label="ki-und-du">
+      <Abschnitt className="py-16 text-pearl-white sm:py-24" style={DUNKEL} label="ki-und-du" welle>
         <div className="mx-auto max-w-6xl px-6">
           <Kicker text="Dein KI-Agent ist effizient. Und du?" />
           <h2 id="ki-und-du" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">
@@ -420,7 +430,7 @@ export default function UnverwechselbarDu() {
       </Abschnitt>
 
       {/* Sieben Schritte */}
-      <Abschnitt id="programm" className="py-16 text-pearl-white sm:py-24" style={DUNKEL} label="programm-titel">
+      <Abschnitt id="programm" className="py-16 text-pearl-white sm:py-24" style={DUNKEL} label="programm-titel" gold>
         <div className="mx-auto max-w-6xl px-6">
           <div className={KOPF}>
             <div>
@@ -441,7 +451,7 @@ export default function UnverwechselbarDu() {
                 <li
                   key={s.titel}
                   style={{ ['--i' as string]: i }}
-                  className={`cc-stufe min-h-[190px] p-6 hover:-translate-y-0.5 ${KACHEL} ${letzter ? `${GOLD} border-transparent text-midnight-blue` : 'bg-[#13233F] text-pearl-white'}`}
+                  className={`cc-stufe min-h-[190px] p-6 hover:-translate-y-0.5 ${KACHEL} ${letzter ? `${GOLD} border-transparent text-midnight-blue` : 'cc-glaskachel text-pearl-white'}`}
                 >
                   <span aria-hidden="true" className={`font-montserrat text-4xl font-black ${letzter ? 'text-midnight-blue/40' : 'text-[#D4AF37]/45'}`}>
                     {String(i + 1).padStart(2, '0')}
@@ -498,7 +508,7 @@ export default function UnverwechselbarDu() {
       </Abschnitt>
 
       {/* Werkzeugkasten + Workbook */}
-      <Abschnitt className="py-16 text-pearl-white sm:py-24" style={DUNKEL} label="werkzeug-titel">
+      <Abschnitt className="py-16 text-pearl-white sm:py-24" style={DUNKEL} label="werkzeug-titel" gold welle>
         <div className="mx-auto max-w-6xl px-6">
           <div className={KOPF}>
             <div>
@@ -520,22 +530,32 @@ export default function UnverwechselbarDu() {
           </div>
 
           <div className="mt-12 grid items-center gap-8 md:grid-cols-[minmax(0,0.55fr)_minmax(0,1fr)] md:gap-12">
-            <figure className={`m-0 max-w-[340px] -rotate-[1.5deg] overflow-hidden shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)] ${KACHEL}`}>
-              <img src="/unverwechselbar/workbook-deckblatt.webp" alt="Deckblatt des Workbooks Entdecke deine Stimmwirkung – Brainself, Buchauszug von Claudia Conen" width={520} height={736} loading="lazy" decoding="async" className="h-auto w-full" />
-            </figure>
+            <button
+              type="button"
+              onClick={() => setBuchOffen(true)}
+              aria-label="Workbook öffnen und blättern"
+              className={`group relative m-0 block max-w-[340px] -rotate-[1.5deg] overflow-hidden p-0 text-left shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)] ${KACHEL}`}
+            >
+              <img src="/unverwechselbar/workbook/seite-01.webp" alt="Deckblatt des Workbooks Entdecke deine Stimmwirkung – Brainself, Buchauszug von Claudia Conen" width={900} height={1273} loading="lazy" decoding="async" className="h-auto w-full transition-transform duration-500 group-hover:scale-[1.03]" />
+              <span className="absolute inset-x-0 bottom-0 bg-midnight-blue/80 px-4 py-3 font-montserrat text-xs font-extrabold uppercase tracking-[0.16em] text-[#EBD197]">
+                Antippen und blättern →
+              </span>
+            </button>
             <div>
               <Kicker text="Zum Mitnehmen" />
               <h3 className="mt-4 font-montserrat text-2xl font-extrabold uppercase">Workbook „Entdecke deine Stimmwirkung"</h3>
               <p className="mt-3 font-inter leading-relaxed text-pearl-white/90">
                 Mein Buchauszug aus <em>Brainself</em> – aus der Angst zum Selbstbewusstsein – als Workbook zum Ausfüllen: deine akustische Visitenkarte, Übungen für Stimme und Wirkung, Platz für deine eigenen Sätze.
               </p>
-              {WORKBOOK_URL ? (
-                <a href={WORKBOOK_URL} target="_blank" rel="noopener noreferrer" className={`mt-6 inline-flex items-center rounded-full px-6 py-3.5 font-montserrat text-sm font-bold text-midnight-blue ${GOLD}`}>
-                  Workbook öffnen (PDF)
+              <div className="mt-6 flex flex-wrap gap-3">
+                <button type="button" onClick={() => setBuchOffen(true)} className={`inline-flex items-center rounded-full px-6 py-3.5 font-montserrat text-sm font-bold text-midnight-blue ${GOLD}`}>
+                  Im Workbook blättern
+                </button>
+                <a href={WORKBOOK_PDF} download className="inline-flex items-center rounded-full border-2 border-[#D4AF37] px-6 py-3.5 font-montserrat text-sm font-bold text-pearl-white hover:text-[#EBD197]">
+                  Als PDF speichern
                 </a>
-              ) : (
-                <p className="mt-4 font-inter text-[15px] text-pearl-white/90">Du bekommst es im Wirkungs-Check – oder mit der ersten Aufgabe der Challenge.</p>
-              )}
+              </div>
+              <WorkbookBlaettern offen={buchOffen} schliessen={() => setBuchOffen(false)} />
             </div>
           </div>
         </div>
@@ -604,7 +624,7 @@ export default function UnverwechselbarDu() {
       </Abschnitt>
 
       {/* Warum ich */}
-      <Abschnitt className="py-16 text-pearl-white sm:py-24" style={DUNKEL} label="warum">
+      <Abschnitt className="py-16 text-pearl-white sm:py-24" style={DUNKEL} label="warum" welle>
         <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2 md:gap-14">
           <div>
             <Kicker text="Warum ich" />
@@ -691,7 +711,7 @@ export default function UnverwechselbarDu() {
       </Abschnitt>
 
       {/* Schluss */}
-      <Abschnitt className="py-16 text-center text-pearl-white sm:py-24" style={DUNKEL} label="schluss">
+      <Abschnitt className="py-16 text-center text-pearl-white sm:py-24" style={DUNKEL} label="schluss" gold welle>
         <div className="mx-auto max-w-4xl px-6">
           <p className="flex items-center justify-center gap-3 font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] text-[#EBD197]">
             <span aria-hidden="true" className={`h-[3px] w-7 rounded-full ${GOLD}`} />

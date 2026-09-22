@@ -248,6 +248,13 @@ const INHALT: ZielgruppenInhalt = {
   bild: '/seiten/mikrofon.webp',
   bildAlt: 'Claudia Conen spricht ins Mikrofon',
 
+  // Claudias Ansage vom 22.09.2026: Live-Workshop in Köln und in Witten, dazu 1:1 und 6:1.
+  formate: [
+    { titel: 'Live-Workshop in Köln · Gruppe 6:1', text: 'Ein Tag in kleiner Runde, sechs Teilnehmende. Jeder steht mehrfach auf und redet; die anderen sind dein erstes Publikum.' },
+    { titel: 'Live-Workshop in Witten · Gruppe 6:1', text: 'Dasselbe Format bei mir in Witten – sechs Menschen, eine Trainerin, ein Tag.' },
+    { titel: 'Live in Witten · 1:1', text: 'Du und ich, ein Tag oder mehrere Termine. Alles dreht sich um deine Stimme, deine Texte, deine Situationen.' },
+  ],
+
   seoTitel: 'Speaker und freie Redner werden: Workshop und Ausbildung | Claudia Conen',
   seoText:
     'Vom Fachgebiet zum Thema, von der Rede zum Auftritt: Workshop und Ausbildung für Speaker und freie Redner. Mit Stimmarbeit, Aufnahme und ehrlicher Rückmeldung.',

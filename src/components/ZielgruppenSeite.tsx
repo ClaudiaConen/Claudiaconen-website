@@ -93,6 +93,10 @@ export type ZielgruppenInhalt = {
   nichtFuerTitel?: string;
   /** Eine Kundenstimme, die genau zu dieser Leistung gehoert (22.09.2026). Saetze woertlich
    *  aus dem Video, nie umformuliert. Das Video laedt erst beim Klick auf Abspielen. */
+  /** Formate und Orte (Claudia, 22.09.2026 02:54 UTC): Live in Koeln, Live in Witten, 1:1 und 6:1.
+   *  Ohne Preis, bis sie ihn nennt. */
+  formate?: { titel: string; text: string }[];
+  formateTitel?: string;
   kundenstimme?: {
     titel: string;
     name: string;
@@ -297,6 +301,28 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
             </div>
           </div>
         </section>
+
+        {/* 3a0. Formate und Orte */}
+        {inhalt.formate && inhalt.formate.length > 0 && (
+          <section className="bg-white py-16 sm:py-24" aria-labelledby="formate">
+            <div className="mx-auto max-w-4xl px-6">
+              <h2 id="formate" className="font-montserrat text-2xl font-bold text-midnight-blue sm:text-3xl">
+                {inhalt.formateTitel ?? 'Formate und Orte'}
+              </h2>
+              <p className="mt-4 max-w-2xl font-inter text-lg leading-relaxed text-midnight-blue/75">
+                Du wählst, wie und wo. Den Preis nenne ich dir vorher, schriftlich – er hängt am Format.
+              </p>
+              <div className="mt-10 grid gap-5 sm:grid-cols-2">
+                {inhalt.formate.map((f) => (
+                  <div key={f.titel} className="rounded-[10px] border border-[#D4AF37]/55 bg-pearl-white px-6 py-5 transition-[border-color,box-shadow] hover:border-[#EBD197] hover:shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)]">
+                    <h3 className="font-montserrat text-base font-extrabold uppercase tracking-wide text-midnight-blue">{f.titel}</h3>
+                    <p className="mt-2 font-inter text-sm leading-relaxed text-midnight-blue/80">{f.text}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* 3a. Eine Kundenstimme zu genau dieser Leistung. Deckende Flaeche, harte Kante, Goldrand -
             Claudias Kacheln (DESIGN_PRAEFERENZEN.md), kein Glas. */}

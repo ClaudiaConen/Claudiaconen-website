@@ -161,6 +161,13 @@ const INHALT: ZielgruppenInhalt = {
   bild: '/seiten/keynote.webp',
   bildAlt: 'Claudia Conen bei einer Keynote auf der Bühne',
 
+  // Claudias Ansage vom 22.09.2026: Live-Workshop in Köln und in Witten, dazu 1:1 und 6:1.
+  formate: [
+    { titel: 'Live-Workshop in Köln · Gruppe 6:1', text: 'Ein Tag in kleiner Runde, sechs Teilnehmende. Jeder steht mehrfach auf und redet; die anderen sind dein erstes Publikum.' },
+    { titel: 'Live-Workshop in Witten · Gruppe 6:1', text: 'Dasselbe Format bei mir in Witten – sechs Menschen, eine Trainerin, ein Tag.' },
+    { titel: 'Live in Witten · 1:1', text: 'Du und ich, ein Tag oder mehrere Termine. Alles dreht sich um deine Stimme, deine Texte, deine Situationen.' },
+  ],
+
   seoTitel: 'Speaker werden — Keynote-Speaker-Ausbildung bei Claudia Conen',
   seoText:
     'Ausbildung zur Speakerin und zum Speaker: vom Fachgebiet zum Thema, von der Keynote zum Auftritt. Mit Stimmarbeit und einer Videoaufnahme am Ende.',

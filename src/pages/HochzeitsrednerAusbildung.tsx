@@ -157,6 +157,12 @@ const INHALT: ZielgruppenInhalt = {
   bild: '/seiten/steinmauer.webp',
   bildAlt: 'Claudia Conen sitzt lachend an einer alten Natursteinmauer',
 
+  // Claudias Ansage vom 22.09.2026: Hochzeitsredner-Ausbildung in Witten, 1:1 und 6:1.
+  formate: [
+    { titel: 'Live in Witten · 1:1', text: 'Du und ich, ein Tag oder mehrere Termine. Alles dreht sich um deine Stimme, deine Texte, deine Situationen.' },
+    { titel: 'Live in Witten · Gruppe 6:1', text: 'Sechs Menschen, eine Trainerin. Jeder steht mehrfach auf und redet; die anderen sind dein erstes Publikum.' },
+  ],
+
   seoTitel: 'Hochzeitsrednerin werden — Ausbildung bei Claudia Conen',
   seoText:
     'Ausbildung zur Hochzeitsrednerin und zum Trauredner: Paargespräch, Zeremonie, Stimme im Freien und der Ablauf am Hochzeitstag.',

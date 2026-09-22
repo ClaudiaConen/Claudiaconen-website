@@ -2361,6 +2361,18 @@ html, body { cursor: auto; }
 .cc-goldbuehne::before { content: ""; position: absolute; inset: -30%; background: radial-gradient(40% 40% at 30% 30%, rgba(255,255,255,.55), transparent 70%), radial-gradient(35% 35% at 75% 70%, rgba(10,22,40,.35), transparent 70%); animation: cc-glanzlauf 14s ease-in-out infinite alternate; }
 @keyframes cc-goldlauf { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
 @keyframes cc-glanzlauf { from { transform: translate(-4%, -3%) rotate(0deg); } to { transform: translate(4%, 3%) rotate(6deg); } }
+.cc-goldnebel { position: relative; overflow: hidden; }
+.cc-goldnebel::before { content: ""; position: absolute; inset: -20%; pointer-events: none; background: radial-gradient(38% 32% at 22% 28%, rgba(212,175,55,.22), transparent 70%), radial-gradient(34% 30% at 78% 72%, rgba(247,231,206,.16), transparent 70%); animation: cc-nebel 18s ease-in-out infinite alternate; }
+@keyframes cc-nebel { from { transform: translate(-3%, -2%) scale(1); } to { transform: translate(3%, 2%) scale(1.06); } }
+.cc-glaskachel { background: rgba(19,35,63,.62); -webkit-backdrop-filter: blur(14px) saturate(1.15); backdrop-filter: blur(14px) saturate(1.15); border-color: rgba(247,231,206,.4); }
+@media (prefers-reduced-motion: reduce) { .cc-goldnebel::before { animation: none; } }
+.cc-buch { perspective: 1600px; }
+.cc-buchseite { transform-origin: left center; backface-visibility: hidden; }
+.cc-blatt-vor { animation: cc-blatt-vor .28s ease-in forwards; }
+.cc-blatt-zurueck { transform-origin: right center; animation: cc-blatt-zurueck .28s ease-in forwards; }
+@keyframes cc-blatt-vor { to { transform: rotateY(-88deg); opacity: .15; } }
+@keyframes cc-blatt-zurueck { to { transform: rotateY(88deg); opacity: .15; } }
+@media (prefers-reduced-motion: reduce) { .cc-blatt-vor, .cc-blatt-zurueck { animation: none; opacity: 0; } }
 .cc-glas { position: relative; background: rgba(10,22,40,.74); -webkit-backdrop-filter: blur(18px) saturate(1.2); backdrop-filter: blur(18px) saturate(1.2); border: 1px solid rgba(247,231,206,.45); }
 @media (prefers-reduced-motion: reduce) {
   .js .cc-r, .js .cc-r .cc-stufe { opacity: 1; transform: none; transition: none; }

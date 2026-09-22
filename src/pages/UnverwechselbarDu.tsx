@@ -656,12 +656,14 @@ export default function UnverwechselbarDu() {
           <div className="cc-goldbuehne rounded-[18px] p-3 shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)] sm:p-4">
           <div className="cc-glas grid items-center gap-8 rounded-[14px] p-7 text-pearl-white sm:p-10 md:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
             <div>
-              <Kicker text="Nach der Challenge" />
+              <Kicker text="Die Unverwechselbaren · nach der Challenge" />
               <h2 id="community-titel" className="mt-4 font-montserrat text-3xl font-extrabold leading-tight text-white sm:text-4xl">
-                Die Unverwechselbaren – die Netzwerk-Community für den Mittelstand.
+                Netzwerk Mittelstand – deine Community.
               </h2>
+              {/* Beschreibung aus dem Seitentitel/der Suchbeschreibung von community.claudiaconen.com (22.09.2026);
+                  Claudias Ansage: Gabi ist NUR fuer die Community mit zustaendig, nicht fuer Programm/Challenge. */}
               <p className="mt-4 font-inter text-lg leading-relaxed text-pearl-white/90">
-                Sieben Tage sind ein Anfang. In der Community geht es weiter: Menschen aus dem Mittelstand, die sichtbar und unverwechselbar werden wollen – mit und ohne KI. Austausch, Übung, echte Rückmeldung.
+                Sieben Tage sind ein Anfang. In der Community geht es weiter: die Premium-Community für den deutschen Mittelstand – Sichtbarkeit, Netzwerk und Umsatz, unverwechselbar im KI-Zeitalter. Dafür stehen Gabi Lindemann und ich gemeinsam.
               </p>
               <ul className="mt-5 grid list-none gap-2.5 p-0 font-inter text-pearl-white/90">
                 {[
@@ -676,9 +678,12 @@ export default function UnverwechselbarDu() {
                 Zur Community
               </a>
             </div>
-            {/* Platzhalter: Claudia will hier ein Foto von Gabi und sich ("wo wir lachen") - liegt noch nicht vor. */}
-            <figure className={`m-0 aspect-[3/2] w-full max-w-[380px] justify-self-center overflow-hidden ${KACHEL}`}>
-              <img src="/unverwechselbar/selfie.webp" alt="" width={900} height={600} loading="lazy" decoding="async" className="h-full w-full object-cover" />
+            {/* Foto von Claudia am 22.09.2026 (02:45 UTC), Schriftband unten weggeschnitten. */}
+            <figure className={`relative m-0 aspect-[3/2] w-full max-w-[380px] justify-self-center overflow-hidden ${KACHEL}`}>
+              <img src="/unverwechselbar/gabi-und-claudia.webp" alt="Claudia Conen und Gabi Lindemann lachen zusammen" width={900} height={600} loading="lazy" decoding="async" className="h-full w-full object-cover" />
+              <figcaption className="absolute inset-x-0 bottom-0 bg-midnight-blue/75 px-3 py-2 font-montserrat text-[11px] font-bold text-[#EBD197]">
+                Gabi Lindemann und Claudia Conen – zusammen zuständig für die Community
+              </figcaption>
             </figure>
           </div>
           </div>

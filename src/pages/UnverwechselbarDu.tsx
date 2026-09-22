@@ -116,8 +116,9 @@ const KACHEL = 'rounded-[10px] border border-[#D4AF37]/55 transition-[border-col
 const DUNKEL = { background: 'linear-gradient(180deg, #0A1628 0%, #0F1F3A 55%, #0A1628 100%)' };
 const WHATSAPP = 'https://wa.me/4916093102073';
 /** Claudias Idee vom 22.09.2026, 02:13 UTC: vom Event per QR in eine Video-Challenge - sieben Tage,
- *  sieben Schritte, 60 Sekunden am Tag. Kanal (WhatsApp oder E-Mail) legt sie fest; bis dahin WhatsApp. */
-const CHALLENGE_LINK = `${WHATSAPP}?text=${encodeURIComponent('Ich bin dabei bei der 7-Tage-Challenge')}`;
+ *  sieben Schritte, 60 Sekunden am Tag. Kanal: ihre WhatsApp-Gruppe "Video-Challenge" (Einladungslink
+ *  von ihr am 22.09.2026, 02:20 UTC). Aendert sie den Link, hier tauschen. */
+const CHALLENGE_LINK = 'https://chat.whatsapp.com/IWSuqZ9ZrMn3dYNgVY1sp6?s=qt&p=i&mlu=4&ilr=4';
 /** Workbook "Entdecke deine Stimmwirkung" (Brainself-Buchauszug). Verweis erst, wenn die PDF korrigiert
  *  ist (Aufgabe 18: "150 Millisekunden", "Opfer", "30 Jahre") - bis dahin nur das Deckblatt. */
 const WORKBOOK_URL = '' as string;
@@ -397,9 +398,12 @@ export default function UnverwechselbarDu() {
           </ol>
           <div className="mt-8 flex flex-wrap gap-3">
             <a href={CHALLENGE_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full bg-midnight-blue px-7 py-4 font-montserrat text-sm font-bold text-pearl-white transition-colors hover:bg-royal-navy">
-              Ich bin dabei – per WhatsApp
+              Ich bin dabei – zur WhatsApp-Gruppe
             </a>
           </div>
+          <p className="mt-4 max-w-2xl font-inter text-[15px] text-midnight-blue">
+            Die Challenge läuft in einer WhatsApp-Gruppe. Dort sehen alle Mitglieder gegenseitig die Handynummern – wer das nicht möchte, schreibt mir direkt.
+          </p>
         </div>
       </section>
 

@@ -116,6 +116,10 @@ const inhalt: ZielgruppenInhalt = {
     { titel: 'Speaker werden', text: 'Wenn es nicht um einen Auftritt geht, sondern um den Beruf.', ziel: '/speaker-ausbildung' },
   ],
 
+  // Kopfbild (22.09.2026): Claudia Conen auf einer großen, rot beleuchteten Bühne
+  bild: '/seiten/grosse-buehne.webp',
+  bildAlt: 'Claudia Conen auf einer großen, rot beleuchteten Bühne',
+
   seoTitel: 'Bühnenpräsenz und Auftritt trainieren | Claudia Conen',
   seoText:
     'Bühnenwirkung trainieren an Ihrem echten Vortrag: Stand, Blick, Pausen, die ersten neunzig Sekunden. Mit Aufnahme — und ohne Körpersprache-Regeln, die beim Sprechen im Weg stehen.',

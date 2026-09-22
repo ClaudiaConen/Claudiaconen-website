@@ -112,6 +112,10 @@ const inhalt: ZielgruppenInhalt = {
     { titel: 'Interne Events & Moderation', text: 'Wenn jemand durch den Tag führen soll.', ziel: '/unternehmen-events' },
   ],
 
+  // Kopfbild (22.09.2026): Claudia Conen im Training vor einer Gruppe
+  bild: '/seiten/training.webp',
+  bildAlt: 'Claudia Conen im Training vor einer Gruppe',
+
   seoTitel: 'Führung & Kommunikation für Führungskräfte | Claudia Conen',
   seoText:
     'Training für Führungskräfte: Wie Ansagen ankommen, was zu tun ist, wenn niemand widerspricht, und wie man Konflikte anspricht, ohne dass jemand das Gesicht verliert. An Ihren echten Situationen.',

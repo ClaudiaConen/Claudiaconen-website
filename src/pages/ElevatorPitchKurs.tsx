@@ -131,6 +131,10 @@ const INHALT: ZielgruppenInhalt = {
   schrittKnopf: 'Vorgespräch vereinbaren',
   schrittZiel: '/termin-buchen',
 
+  // Kopfbild (22.09.2026): Claudia Conen auf der Bühne, groß auf der Leinwand
+  bild: '/seiten/bildschirm.webp',
+  bildAlt: 'Claudia Conen auf der Bühne, groß auf der Leinwand',
+
   seoTitel: 'Elevator-Pitch-Kurs | Claudia Conen',
   seoText:
     'Ein Satz, der sitzt: Im Elevator-Pitch-Kurs entsteht Ihre Antwort auf die Frage, was Sie tun — in drei Längen, laut geprüft und unter Gegenwind getestet.',

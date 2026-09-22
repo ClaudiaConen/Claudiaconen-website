@@ -111,6 +111,11 @@ const inhalt: ZielgruppenInhalt = {
     { titel: 'Marke & eigene Sprache', text: 'Dieselbe Arbeit über mehrere Monate.', ziel: '/mentoring-transformation' },
   ],
 
+  // Kopfbild (22.09.2026): Claudia Conen am Fenster mit Laptop und roter Mappe
+  bild: '/seiten/am-laptop.webp',
+  bildAlt: 'Claudia Conen am Fenster mit Laptop und roter Mappe',
+  bildQuer: true,
+
   seoTitel: 'Positionierung für Speaker und Selbstständige | Claudia Conen',
   seoText:
     'Wofür stehen Sie — in einem Satz, den ein anderer wiederholen kann? Rückwärts suchen statt nachdenken, weglassen statt aufzählen, und die Probe an echten Menschen.',

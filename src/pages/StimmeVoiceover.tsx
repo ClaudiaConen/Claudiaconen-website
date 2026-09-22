@@ -127,6 +127,10 @@ const inhalt: ZielgruppenInhalt = {
     { titel: 'Reden auf Social Media', text: 'Wenn Sie selbst vor die Kamera wollen.', ziel: '/speaker-social' },
   ],
 
+  // Kopfbild (22.09.2026): Claudia Conen am Mikrofon im Tonstudio
+  bild: '/seiten/tonstudio.webp',
+  bildAlt: 'Claudia Conen am Mikrofon im Tonstudio',
+
   seoTitel: 'Voice-Over Sprecherin für Podcast, Imagefilm und Kurs | Claudia Conen',
   seoText:
     'Professionell eingesprochene Texte für Podcast-Trailer, Imagefilme, E-Learning und Werbung. Eigenes Studio, mehrere Fassungen zur Auswahl, Korrekturschleife inbegriffen.',

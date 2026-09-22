@@ -244,6 +244,10 @@ const INHALT: ZielgruppenInhalt = {
   schrittKnopf: 'Vorgespräch vereinbaren',
   schrittZiel: '/termin-buchen',
 
+  // Kopfbild (22.09.2026): Claudia Conen spricht ins Mikrofon
+  bild: '/seiten/mikrofon.webp',
+  bildAlt: 'Claudia Conen spricht ins Mikrofon',
+
   seoTitel: 'Speaker und freie Redner werden: Workshop und Ausbildung | Claudia Conen',
   seoText:
     'Vom Fachgebiet zum Thema, von der Rede zum Auftritt: Workshop und Ausbildung für Speaker und freie Redner. Mit Stimmarbeit, Aufnahme und ehrlicher Rückmeldung.',

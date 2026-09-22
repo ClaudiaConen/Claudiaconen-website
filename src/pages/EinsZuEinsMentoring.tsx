@@ -98,6 +98,11 @@ const INHALT: ZielgruppenInhalt = {
   schrittKnopf: 'Erstgespräch vereinbaren',
   schrittZiel: '/termin-buchen',
 
+  // Kopfbild (22.09.2026): Claudia Conen lächelt mit dem Telefon in der Hand
+  bild: '/seiten/am-telefon.webp',
+  bildAlt: 'Claudia Conen lächelt mit dem Telefon in der Hand',
+  bildQuer: true,
+
   seoTitel: 'Voice-to-Brain Intensiv für Coaches und Trainer | Claudia Conen',
   seoText:
     'Einzelbegleitung über zwölf Wochen für Coaches und Trainer, die unverwechselbar werden wollen. Positionierung, Persönlichkeit, Vertrauen, Kundengewinnung.',

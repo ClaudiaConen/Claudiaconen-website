@@ -133,6 +133,10 @@ const INHALT: ZielgruppenInhalt = {
   schrittKnopf: 'Vorgespräch vereinbaren',
   schrittZiel: '/termin-buchen',
 
+  // Kopfbild (22.09.2026): Claudia Conen mit aufgeschlagenem Buch
+  bild: '/seiten/buch.webp',
+  bildAlt: 'Claudia Conen mit aufgeschlagenem Buch',
+
   seoTitel: 'Storytelling-Kurs | Claudia Conen',
   seoText:
     'Storytelling lernen mit eigenem Material: Geschichten finden, zuschneiden, sprechen. Drei erzählbare Geschichten für Vortrag, Kundengespräch und Webseite.',

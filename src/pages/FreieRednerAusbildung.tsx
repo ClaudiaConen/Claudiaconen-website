@@ -160,6 +160,10 @@ const INHALT: ZielgruppenInhalt = {
   schrittKnopf: 'Vorgespräch vereinbaren',
   schrittZiel: '/termin-buchen',
 
+  // Kopfbild (22.09.2026): Claudia Conen als freie Rednerin am Mikrofon, dazu Momente einer Trauung
+  bild: '/seiten/freie-rednerin.webp',
+  bildAlt: 'Claudia Conen als freie Rednerin am Mikrofon, dazu Momente einer Trauung',
+
   seoTitel: 'Freie Rednerin werden — Ausbildung bei Claudia Conen',
   seoText:
     'Ausbildung zur freien Rednerin und zum freien Redner: Stimme, Handwerk und Auftritt in einem Weg. Für Trauerfeiern, freie Trauungen und besondere Anlässe.',

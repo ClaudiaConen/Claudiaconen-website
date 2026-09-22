@@ -48,8 +48,11 @@ export type ZielgruppenInhalt = {
   schrittText: string;
   schrittKnopf: string;
   schrittZiel: string;
+  /** Kopfbild rechts neben Frage und Vorspann (22.09.2026) - nie Text ueber einem riesigen Foto.
+   *  Hochkant 360x640 oder, mit bildQuer, 900x600. Liegt in public/seiten/. */
   bild?: string;
   bildAlt?: string;
+  bildQuer?: boolean;
   seoTitel: string;
   seoText: string;
   /** dunkel = Standard, hell = festlich mit mehr Gold, ruhig = zurueckhaltend */
@@ -192,7 +195,8 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
             <Stimmwelle />
           </div>
         )}
-        <div className="relative z-10 mx-auto max-w-4xl px-6">
+        <div className={`relative z-10 mx-auto px-6 ${inhalt.bild ? 'grid max-w-6xl items-center gap-10 md:grid-cols-[minmax(0,1fr)_auto] md:gap-14' : 'max-w-4xl'}`}>
+          <div className="min-w-0">
           {/* Der Pfad von der Startseite bis hierher. Er ersetzt den
               frueheren Zurueck-Verweis: derselbe Weg, aber vollstaendig
               und mit den Daten, aus denen Google den Pfad im
@@ -218,6 +222,23 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
           <p className={`mt-6 max-w-2xl font-inter text-lg leading-relaxed ${s.kopfLeise}`}>
             {inhalt.vorspann}
           </p>
+          </div>
+          {inhalt.bild && (
+            <figure
+              className={`m-0 justify-self-start overflow-hidden rounded-[10px] border border-[#D4AF37]/55 bg-[#13233F] shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)] md:justify-self-end ${
+                inhalt.bildQuer ? 'aspect-[3/2] w-full max-w-[420px]' : 'aspect-[9/16] w-[clamp(180px,26vw,260px)]'
+              }`}
+            >
+              <img
+                src={inhalt.bild}
+                alt={inhalt.bildAlt ?? ''}
+                width={inhalt.bildQuer ? 900 : 360}
+                height={inhalt.bildQuer ? 600 : 640}
+                decoding="async"
+                className="h-full w-full object-cover"
+              />
+            </figure>
+          )}
         </div>
       </header>
 

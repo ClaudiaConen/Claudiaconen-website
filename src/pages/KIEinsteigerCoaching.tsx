@@ -95,6 +95,10 @@ const INHALT: ZielgruppenInhalt = {
   schrittKnopf: 'Einfach mit KI starten',
   schrittZiel: '/termin-buchen',
 
+  // Kopfbild (22.09.2026): Claudia Conen mit dem Plakat „The Power of AI" in der Hand
+  bild: '/seiten/messe.webp',
+  bildAlt: 'Claudia Conen mit dem Plakat „The Power of AI" in der Hand',
+
   seoTitel: 'KI für Einsteiger, ohne Fachchinesisch | Claudia Conen',
   seoText:
     'Der Einstieg in KI für Menschen ohne Vorkenntnisse. Verstehen, sicher anwenden, Zeit gewinnen und dabei unverwechselbar bleiben.',

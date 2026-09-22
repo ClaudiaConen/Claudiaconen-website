@@ -110,6 +110,10 @@ const inhalt: ZielgruppenInhalt = {
     { titel: 'Voice-Over & Podcast', text: 'Wenn die Stimme ohne Bild tragen soll.', ziel: '/stimme-voiceover' },
   ],
 
+  // Kopfbild (22.09.2026): Claudia Conen im dunklen Blazer, bereit für die Kamera
+  bild: '/seiten/kamera.webp',
+  bildAlt: 'Claudia Conen im dunklen Blazer, bereit für die Kamera',
+
   seoTitel: 'Vor der Kamera sprechen: Videos für LinkedIn und Social Media | Claudia Conen',
   seoText:
     'Warum Videos scheitern, obwohl der Inhalt gut ist — und was die ersten drei Sekunden damit zu tun haben. Mit Telefon aufnehmen, gemeinsam ansehen, einen Rhythmus finden, den Sie durchhalten.',

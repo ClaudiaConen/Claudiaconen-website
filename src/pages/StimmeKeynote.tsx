@@ -112,6 +112,10 @@ const inhalt: ZielgruppenInhalt = {
     { titel: 'Voice-Over & Podcast', text: 'Wenn die Stimme aufgenommen werden soll statt live.', ziel: '/stimme-voiceover' },
   ],
 
+  // Kopfbild (22.09.2026): Claudia Conen auf einer großen, rot beleuchteten Bühne
+  bild: '/seiten/grosse-buehne.webp',
+  bildAlt: 'Claudia Conen auf einer großen, rot beleuchteten Bühne',
+
   seoTitel: 'Keynote Speakerin und Moderatorin buchen | Claudia Conen',
   seoText:
     'Keynote oder Moderation für Kongress, Verbandstagung, Preisverleihung und Jahresauftakt — mit Vorgespräch und Beispielen aus Ihrer Veranstaltung, nicht aus dem Regal.',

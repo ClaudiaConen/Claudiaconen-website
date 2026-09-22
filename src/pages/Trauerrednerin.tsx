@@ -128,6 +128,11 @@ const INHALT: ZielgruppenInhalt = {
   schrittKnopf: 'Kontakt aufnehmen',
   schrittZiel: '/termin-buchen',
 
+  // Kopfbild (22.09.2026): Ruhige Veranda mit zwei Stühlen, kein Mensch im Bild
+  bild: '/seiten/veranda.webp',
+  bildAlt: 'Ruhige Veranda mit zwei Stühlen, kein Mensch im Bild',
+  bildQuer: true,
+
   seoTitel: 'Trauerrednerin | Claudia Conen',
   seoText:
     'Eine persönliche Trauerrede, geschrieben nach einem Gespräch mit der Familie und gehalten bei der Trauerfeier. Frei oder mit Konfession, kurzfristig möglich.',

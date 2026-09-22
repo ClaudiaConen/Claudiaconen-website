@@ -109,6 +109,10 @@ const inhalt: ZielgruppenInhalt = {
     { titel: 'Adventskalender', text: 'Vierundzwanzig Türchen im Dezember.', ziel: '/adventskalender' },
   ],
 
+  // Kopfbild (22.09.2026): Claudia Conen mit einem Gehirnmodell in der Hand
+  bild: '/seiten/gehirn.webp',
+  bildAlt: 'Claudia Conen mit einem Gehirnmodell in der Hand',
+
   seoTitel: 'Kostenlos: Artikel, Werkzeuge und Webinare | Claudia Conen',
   seoText:
     'Was es bei Claudia Conen umsonst gibt — und was es wirklich kostet. Wissensbibliothek und Werkzeuge ohne Anmeldung, Webinare mit. Bei jedem Angebot steht dabei, was Sie dafür hergeben.',

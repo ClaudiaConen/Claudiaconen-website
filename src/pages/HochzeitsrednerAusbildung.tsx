@@ -153,6 +153,10 @@ const INHALT: ZielgruppenInhalt = {
   schrittKnopf: 'Vorgespräch vereinbaren',
   schrittZiel: '/termin-buchen',
 
+  // Kopfbild (22.09.2026): Claudia Conen sitzt lachend an einer alten Natursteinmauer
+  bild: '/seiten/steinmauer.webp',
+  bildAlt: 'Claudia Conen sitzt lachend an einer alten Natursteinmauer',
+
   seoTitel: 'Hochzeitsrednerin werden — Ausbildung bei Claudia Conen',
   seoText:
     'Ausbildung zur Hochzeitsrednerin und zum Trauredner: Paargespräch, Zeremonie, Stimme im Freien und der Ablauf am Hochzeitstag.',

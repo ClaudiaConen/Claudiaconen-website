@@ -124,6 +124,11 @@ const INHALT: ZielgruppenInhalt = {
   schrittKnopf: 'Kennenlernen vereinbaren',
   schrittZiel: '/termin-buchen',
 
+  // Kopfbild (22.09.2026): Claudia Conen im hellen Kleid auf einer Wiese, dahinter die Buchstaben LOVE und Seifenblasen
+  bild: '/seiten/love.webp',
+  bildAlt: 'Claudia Conen im hellen Kleid auf einer Wiese, dahinter die Buchstaben LOVE und Seifenblasen',
+  bildQuer: true,
+
   seoTitel: 'Freie Trauung und Hochzeitsrednerin | Claudia Conen',
   seoText:
     'Eine freie Trauung, die nur zu euch passt: persönliches Gespräch, geschriebene Zeremonie zum Mitlesen und Ändern, Abstimmung mit Location und Technik.',

@@ -152,6 +152,11 @@ const INHALT: ZielgruppenInhalt = {
   schrittKnopf: 'Vorgespräch vereinbaren',
   schrittZiel: '/termin-buchen',
 
+  // Kopfbild (22.09.2026): Claudia Conen am Schreibtisch, schreibend, mit roter Mappe
+  bild: '/seiten/schreibtisch.webp',
+  bildAlt: 'Claudia Conen am Schreibtisch, schreibend, mit roter Mappe',
+  bildQuer: true,
+
   seoTitel: 'Trauerrednerin werden — Ausbildung bei Claudia Conen',
   seoText:
     'Ausbildung zur Trauerrednerin: Angehörigengespräch, Rede, Stimme im Raum — und der Umgang mit dem, was die Arbeit mit einem selbst macht.',

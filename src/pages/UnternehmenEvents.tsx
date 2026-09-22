@@ -109,6 +109,11 @@ const inhalt: ZielgruppenInhalt = {
     { titel: 'Claudia als Rednerin', text: 'Auch für Anlässe außerhalb der Firma.', ziel: '/freie-rednerin' },
   ],
 
+  // Kopfbild (22.09.2026): Claudia Conen mit Mikrofon auf einer kleinen Bühne, Publikum von hinten
+  bild: '/seiten/benefiz.webp',
+  bildAlt: 'Claudia Conen mit Mikrofon auf einer kleinen Bühne, Publikum von hinten',
+  bildQuer: true,
+
   seoTitel: 'Moderation für Firmenveranstaltungen und interne Events | Claudia Conen',
   seoText:
     'Moderation für Jahresauftakt, Kickoff, Jubiläum und Mitarbeiterversammlung — einschließlich der Stellen, an denen das Programm kippt. Mit Vorbereitung, nicht nur Ansagen.',

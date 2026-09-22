@@ -109,6 +109,10 @@ const inhalt: ZielgruppenInhalt = {
     { titel: 'Elevator-Pitch-Kurs', text: 'Ein Satz, der erklärt, was Sie tun.', ziel: '/elevator-pitch-kurs' },
   ],
 
+  // Kopfbild (22.09.2026): Claudia Conen hört im Gespräch aufmerksam zu
+  bild: '/seiten/zuhoeren.webp',
+  bildAlt: 'Claudia Conen hört im Gespräch aufmerksam zu',
+
   seoTitel: 'Verkaufstraining: Emotional Selling für Vertriebsteams | Claudia Conen',
   seoText:
     'Verkaufstraining ohne Abschlusstechniken: Fragen, die etwas öffnen, die Pause nach dem Preis aushalten, Einwände als Information behandeln. An zwei echten Gesprächen aus Ihrem Haus.',

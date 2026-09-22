@@ -247,6 +247,10 @@ const INHALT: ZielgruppenInhalt = {
   schrittKnopf: 'Vorgespräch vereinbaren',
   schrittZiel: '/termin-buchen',
 
+  // Kopfbild (22.09.2026): Claudia Conen bei einer Keynote auf der Bühne
+  bild: '/seiten/keynote.webp',
+  bildAlt: 'Claudia Conen bei einer Keynote auf der Bühne',
+
   seoTitel: 'Keynote Speakerin für Unternehmen: Mensch und KI | Claudia Conen',
   seoText:
     'Keynote und Workshop für Unternehmen zum Thema Mensch und KI: warum Belegschaften KI nicht nutzen, was dagegen hilft und wie Botschaften ankommen. Mit belegten Zahlen.',

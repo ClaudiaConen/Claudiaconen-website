@@ -157,6 +157,10 @@ const INHALT: ZielgruppenInhalt = {
   schrittKnopf: 'Vorgespräch vereinbaren',
   schrittZiel: '/termin-buchen',
 
+  // Kopfbild (22.09.2026): Claudia Conen bei einer Keynote auf der Bühne
+  bild: '/seiten/keynote.webp',
+  bildAlt: 'Claudia Conen bei einer Keynote auf der Bühne',
+
   seoTitel: 'Speaker werden — Keynote-Speaker-Ausbildung bei Claudia Conen',
   seoText:
     'Ausbildung zur Speakerin und zum Speaker: vom Fachgebiet zum Thema, von der Keynote zum Auftritt. Mit Stimmarbeit und einer Videoaufnahme am Ende.',

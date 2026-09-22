@@ -54,9 +54,9 @@ export default function Footer() {
         <div className="py-8 border-b border-luxury-gold/20">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex flex-col sm:flex-row items-center gap-6 text-pearl-white/80">
-              <a href="mailto:info@claudiaconen-akademie.de" className="flex items-center gap-2 hover:text-bright-gold transition-colors">
+              <a href="mailto:claudiaconen@umsatzstimme.de" className="flex items-center gap-2 hover:text-bright-gold transition-colors">
                 <Mail size={20} />
-                info@claudiaconen-akademie.de
+                claudiaconen@umsatzstimme.de
               </a>
               <a href="https://wa.me/4916093102073" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-bright-gold transition-colors">
                 <Phone size={20} />
@@ -119,7 +119,7 @@ export default function Footer() {
 
             <div className="flex gap-4">
               <a
-                href="mailto:info@claudiaconen-akademie.de"
+                href="mailto:claudiaconen@umsatzstimme.de"
                 className="w-10 h-10 rounded-full bg-royal-navy border border-luxury-gold/20 flex items-center justify-center hover:border-luxury-gold transition-colors"
               >
                 <Mail size={18} className="text-pearl-white/70" />

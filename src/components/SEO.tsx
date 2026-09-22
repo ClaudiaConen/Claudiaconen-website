@@ -136,7 +136,7 @@ export default function SEO({
         '@id': 'https://claudiaconen.com/',
         url: 'https://claudiaconen.com/',
         telephone: '+49-160-99142208',
-        email: 'info@claudiaconen-akademie.de',
+        email: 'claudiaconen@umsatzstimme.de',
         address: {
           '@type': 'PostalAddress',
           streetAddress: 'Beisenweg 20',

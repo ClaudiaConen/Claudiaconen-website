@@ -53,8 +53,8 @@ export default function ContactSection() {
     {
       icon: Mail,
       label: 'E-Mail',
-      value: 'info@claudiaconen-akademie.de',
-      href: 'mailto:info@claudiaconen-akademie.de',
+      value: 'claudiaconen@umsatzstimme.de',
+      href: 'mailto:claudiaconen@umsatzstimme.de',
     },
     {
       icon: Phone,

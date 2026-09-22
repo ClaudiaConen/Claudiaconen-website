@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Lightbulb, MessageCircle, BookOpen, Mic2, Eye, Sparkles, Heart, Calendar } from 'lucide-react';
+import { Calendar } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import AudioButton from './AudioButton';
 import VideoButton from './VideoButton';
@@ -48,49 +48,49 @@ export default function Hero() {
 
   const keyPoints = [
     {
-      icon: Lightbulb,
+      icon: 'klarheit',
       title: 'KLARHEIT.',
       subtitle: 'Wofür du stehst.',
       href: '#schritt3',
       stepNumber: 3,
     },
     {
-      icon: MessageCircle,
+      icon: 'botschaft',
       title: 'BOTSCHAFT.',
       subtitle: 'Die Vertrauen schafft.',
       href: '#schritt2',
       stepNumber: 2,
     },
     {
-      icon: BookOpen,
+      icon: 'story',
       title: 'STORY.',
       subtitle: 'Die Emotionen weckt.',
       href: '#schritt4',
       stepNumber: 4,
     },
     {
-      icon: Mic2,
+      icon: 'stimme',
       title: 'STIMME.',
       subtitle: 'Die unaufhaltbar ist.',
       href: '#schritt6',
       stepNumber: 6,
     },
     {
-      icon: Eye,
+      icon: 'praesenz',
       title: 'PRÄSENZ.',
       subtitle: 'Die wirkt, bevor du sprichst.',
       href: '#schritt5',
       stepNumber: 5,
     },
     {
-      icon: Sparkles,
+      icon: 'ki',
       title: 'KI.',
       subtitle: 'Die dich beschleunigt.',
       href: '#schritt1',
       stepNumber: 1,
     },
     {
-      icon: Heart,
+      icon: 'wirkung',
       title: 'WIRKUNG.',
       subtitle: 'Die bleibt.',
       href: '#schritt7',
@@ -183,7 +183,6 @@ export default function Hero() {
 
             <div className="hero-kacheln flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 sm:grid sm:grid-cols-3 sm:gap-3 sm:overflow-visible lg:grid-cols-7">
               {keyPoints.map((point, index) => {
-                const Icon = point.icon;
                 const media = stepMediaData[point.stepNumber];
                 return (
                   <motion.a
@@ -211,9 +210,16 @@ export default function Hero() {
                         Das Gold bleibt jetzt dort, wo etwas passiert: am
                         Abspielknopf. */}
                     <div className="flex items-start gap-2.5 text-left">
-                      <Icon
-                        size={16}
-                        className="mt-0.5 flex-shrink-0 text-[#DAA520]/70 transition-colors duration-300 group-hover:text-[#DAA520]"
+                      {/* 3-D-Icons (22.09.2026, ueber Claudias Gemini-Schluessel erzeugt, freigestellt):
+                          Nachtblau-Glas mit Goldfassung - eine Materialsprache fuer alle sieben Kacheln. */}
+                      <img
+                        src={`/icons/${point.icon}.webp`}
+                        alt=""
+                        width={256}
+                        height={256}
+                        loading="eager"
+                        decoding="async"
+                        className="h-9 w-9 flex-shrink-0 drop-shadow-[0_6px_10px_rgba(0,0,0,0.35)] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110"
                       />
                       <div className="min-w-0 flex-1">
                         <p className="text-[0.82rem] font-semibold leading-snug text-pearl-white">

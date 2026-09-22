@@ -55,7 +55,8 @@ const TUEREN: Tuer[] = [
     ],
     knopf: 'Mehr Wirkung im Unternehmen',
     ziel: '/unternehmen-keynotes',
-    bild: { datei: 'unternehmen', alt: 'Claudia Conen leitet einen Workshop vor der Leinwand' },
+    /* Claudia, 22.09.2026 22:49 UTC: "setze das 2. auf die 1. Karte" - Buehnenfoto hierher, Workshop-Foto auf die Speaker-Karte. */
+    bild: { datei: 'speaker', alt: 'Claudia Conen auf der Bühne einer Benefizveranstaltung' },
   },
   {
     wer: 'Speaker & freie Redner',
@@ -72,7 +73,7 @@ const TUEREN: Tuer[] = [
     ],
     knopf: 'Unverwechselbar sprechen',
     ziel: '/redner-ausbildungen',
-    bild: { datei: 'speaker', alt: 'Claudia Conen auf der Bühne einer Benefizveranstaltung' },
+    bild: { datei: 'unternehmen', alt: 'Claudia Conen im Workshop vor den Moderationswänden' },
   },
   {
     wer: 'Coaches & Trainer',

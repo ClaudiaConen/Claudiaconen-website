@@ -3,6 +3,7 @@ import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import Buecher from '../components/Buecher';
+import Werte from '../components/Werte';
 
 /**
  * Ueber mich.
@@ -230,7 +231,8 @@ export default function UeberMich() {
         </section>
 
         {/* 3b. Veroeffentlichungen - Beleg fuer "Autorin". Bewusst NACH "Was daraus wurde", nicht hinter der Geschichte. */}
-        <Buecher />
+        <Werte />
+      <Buecher />
 
         {/* 4. Kein Angebot. Ein Angebot zum Hören. */}
         <section

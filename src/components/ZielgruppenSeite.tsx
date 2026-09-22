@@ -370,8 +370,8 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
           </div>
           {inhalt.bild && (
             <figure
-              className={`cc-schweben m-0 justify-self-start overflow-hidden rounded-[10px] border border-[#D4AF37]/55 bg-[#13233F] shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)] md:justify-self-end ${
-                inhalt.bildQuer ? 'aspect-[3/2] w-full max-w-[420px]' : 'aspect-[9/16] w-[clamp(180px,26vw,260px)]'
+              className={`cc-schweben cc-ausblendung m-0 justify-self-start overflow-hidden md:justify-self-end ${
+                inhalt.bildQuer ? 'aspect-[3/2] w-full max-w-[460px]' : 'aspect-[9/16] w-[clamp(200px,28vw,300px)]'
               }`}
             >
               <img

@@ -4,6 +4,7 @@ import SituationsBand from '../components/SituationsBand';
 import SituationsKacheln from '../components/SituationsKacheln';
 import Tueren from '../components/Tueren';
 import LogoBand from '../components/LogoBand';
+import Werte from '../components/Werte';
 import MissionSection from '../components/MissionSection';
 import Timeline from '../components/Timeline';
 import About from '../components/About';
@@ -39,6 +40,7 @@ export default function Home() {
         <SituationsBand />
         <SituationsKacheln />
         <Tueren />
+        <Werte />
         <LogoBand />
         <MissionSection />
         <Timeline />

@@ -2370,6 +2370,14 @@ html, body { cursor: auto; }
 .cc-glaskachel { background: rgba(19,35,63,.62); -webkit-backdrop-filter: blur(14px) saturate(1.15); backdrop-filter: blur(14px) saturate(1.15); border-color: rgba(247,231,206,.4); }
 @media (prefers-reduced-motion: reduce) { .cc-goldnebel::before { animation: none; } }
 .cc-buch { perspective: 1600px; }
+/* Fotos laufen weich in den Hintergrund aus (Claudia, 22.09.2026: "ineinander schweben" - wie auf ihrer
+   Vergleichsseite). Eine Maske, unabhaengig von der Hintergrundfarbe; Rueckgaengig = Klasse entfernen. */
+.cc-ausblendung {
+  -webkit-mask-image: linear-gradient(180deg, #000 58%, transparent 100%), linear-gradient(90deg, transparent 0, #000 26%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(180deg, #000 58%, transparent 100%), linear-gradient(90deg, transparent 0, #000 26%);
+  mask-composite: intersect;
+}
 .cc-buchseite { transform-origin: left center; backface-visibility: hidden; }
 .cc-blatt-vor { animation: cc-blatt-vor .28s ease-in forwards; }
 .cc-blatt-zurueck { transform-origin: right center; animation: cc-blatt-zurueck .28s ease-in forwards; }

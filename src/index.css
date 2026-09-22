@@ -2499,7 +2499,8 @@ html, body { cursor: auto; }
   transform: rotateY(26deg) rotateX(6deg); animation: ccBuchSchwenk 9s ease-in-out infinite alternate;
   transition: transform .9s cubic-bezier(.2,.7,.2,1); }
 /* KEIN filter/opacity/overflow auf .cc-buch - das wuerde preserve-3d aufheben und alle Flaechen platt legen (so gesehen am 22.09.2026). */
-.cc-buch-buehne:hover .cc-buch, .cc-buch-buehne:focus-visible .cc-buch { animation-play-state: paused; transform: rotateY(18deg) rotateX(4deg); }
+/* Claudia, 22.09.2026 16:26 UTC: beim Darueberfahren soll sich das Buch auch leicht anheben. */
+.cc-buch-buehne:hover .cc-buch, .cc-buch-buehne:focus-visible .cc-buch { animation-play-state: paused; transform: translateY(-14px) scale(1.04) rotateY(18deg) rotateX(4deg); }
 .cc-buch > span { position: absolute; inset: 0; border-radius: 3px 10px 10px 3px; }
 .cc-buch-rueckseite { background: linear-gradient(135deg, #0F1F3A, #0A1628); transform: translateZ(-30px); box-shadow: 0 46px 60px -28px rgba(10,22,40,.7); }
 .cc-buch-ruecken { right: auto; width: 30px; border-radius: 3px 0 0 3px; transform-origin: left center; transform: rotateY(90deg);

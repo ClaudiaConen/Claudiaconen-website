@@ -113,6 +113,18 @@ export default function ChallengeAnmeldung({ start, onEingetragen }: { start: st
         <button type="submit" disabled={zustand === 'sendet'} className={`inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue transition-transform hover:-translate-y-px disabled:opacity-70 ${GOLD}`}>
           {zustand === 'sendet' ? 'Wird eingetragen …' : 'Eintragen und in die Gruppe'}
         </button>
+        {/* Claudia, 22.09.2026 16:19 UTC: "kleinen Button 'Vereinbarung widerrufen', der sich aufklappt - bedenke: was du
+            selbst ins Netz gibst, kann ich nicht zurueckholen". Steht im Quelltext, nur per CSS zu. */}
+        <details className="group w-full sm:w-auto">
+          <summary className="inline-flex cursor-pointer list-none items-center gap-2 rounded-full border border-[#D4AF37]/60 px-4 py-2 font-montserrat text-xs font-bold uppercase tracking-[0.12em] text-[#EBD197] transition-colors hover:border-[#F7E7CE] hover:text-[#F7E7CE] [&::-webkit-details-marker]:hidden">
+            Vereinbarung widerrufen <span aria-hidden="true" className="transition-transform group-open:rotate-180">▾</span>
+          </summary>
+          <p className="mt-3 max-w-xl font-inter text-sm leading-relaxed text-pearl-white/90">
+            Jederzeit und ohne Begründung: eine kurze Nachricht an{' '}
+            <a href="mailto:claudiaconen@umsatzstimme.de?subject=Widerruf%20Challenge" className="underline decoration-[#D4AF37]/60 underline-offset-2 hover:decoration-[#F7E7CE]">claudiaconen@umsatzstimme.de</a>
+            {' '}– ich nehme dich aus der Gruppe und lösche deine Angaben. Bedenke: Was du selbst ins Netz gibst – deine Videos, deine Nummer in der Gruppe –, kann ich nicht zurückholen.
+          </p>
+        </details>
       </div>
       {zustand === 'fehler' && (
         <p role="alert" className="mt-4 font-inter text-sm text-[#F7E7CE]">

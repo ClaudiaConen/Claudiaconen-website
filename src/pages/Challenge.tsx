@@ -859,14 +859,29 @@ export default function Challenge() {
           </div>
 
           <div className="mt-14 grid items-center gap-10 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] md:gap-14">
+            {/* 3-D-Buch (Claudia, 22.09.2026 16:13 UTC: "3D Book Mockup Animation ... dreht oder aufklappt"): reines
+                CSS (.cc-buch* in index.css). Schwenkt langsam im Raum; beim Darueberfahren klappt der Deckel auf und
+                zeigt die erste Innenseite. Antippen oeffnet wie bisher das Blaetter-Fenster. Ohne Bewegung bei
+                prefers-reduced-motion. Kein Skript, keine Bibliothek, keine Ladezeit. */}
             <button
               type="button"
               onClick={() => setBuchOffen(true)}
               aria-label="Workbook öffnen und blättern"
-              className={`group relative m-0 block w-full max-w-[520px] -rotate-[1.5deg] overflow-hidden bg-white p-0 text-left shadow-[0_30px_60px_-24px_rgba(10,22,40,0.55)] ${KACHEL}`}
+              className="cc-buch-buehne m-0 block w-full max-w-[420px] justify-self-center bg-transparent p-0 text-left"
             >
-              <img src="/unverwechselbar/workbook/seite-01.webp" alt="Deckblatt des Workbooks Entdecke deine Stimmwirkung – Brainself, Buchauszug von Claudia Conen" width={900} height={1273} loading="lazy" decoding="async" className="h-auto w-full transition-transform duration-500 group-hover:scale-[1.03]" />
-              <span className="absolute inset-x-0 bottom-0 bg-midnight-blue/80 px-4 py-3 font-montserrat text-xs font-extrabold uppercase tracking-[0.16em] text-[#EBD197]">
+              <span className="cc-buch">
+                <span className="cc-buch-rueckseite" aria-hidden="true" />
+                <span className="cc-buch-ruecken" aria-hidden="true"><span>Entdecke deine Stimmwirkung · Claudia Conen</span></span>
+                <span className="cc-buch-kante" aria-hidden="true" />
+                <span className="cc-buch-block" aria-hidden="true">
+                  <img src="/unverwechselbar/workbook/seite-02.webp" alt="" width={900} height={1274} loading="lazy" decoding="async" />
+                </span>
+                <span className="cc-buch-deckel">
+                  <img src="/unverwechselbar/workbook/seite-01.webp" alt="Deckblatt des Workbooks Entdecke deine Stimmwirkung – Brainself, Buchauszug von Claudia Conen" width={900} height={1273} loading="lazy" decoding="async" />
+                  <span className="cc-buch-innen" aria-hidden="true" />
+                </span>
+              </span>
+              <span className="mt-6 block text-center font-montserrat text-xs font-extrabold uppercase tracking-[0.16em] text-midnight-blue">
                 Antippen und blättern →
               </span>
             </button>
@@ -905,7 +920,8 @@ export default function Challenge() {
                 Mein Geschenk für deine Wirkung – und der Schritt danach.
               </h2>
             </div>
-            <Kopfbild datei="am-telefon" alt="Claudia Conen lächelt mit dem Telefon in der Hand" quer />
+            {/* Claudias Foto vom 22.09.2026 16:16 UTC (rote Mappe), Original in projects/claudiaconen/ablage/claudia-rote-mappe-2026-09-22.jpg */}
+            <Kopfbild datei="geschenk" alt="Claudia Conen mit einer aufgeschlagenen roten Mappe, lächelnd" />
           </div>
           <div className="mt-9 grid gap-4 md:grid-cols-2">
             <div className={`flex flex-col bg-white p-7 text-midnight-blue ${KACHEL} border-[#D4AF37]`}>

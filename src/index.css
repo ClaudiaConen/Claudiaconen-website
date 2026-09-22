@@ -2490,3 +2490,31 @@ html, body { cursor: auto; }
 .cc-puls { animation: cc-puls 2.6s ease-in-out infinite; }
 @keyframes cc-puls { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.06); opacity: .82; } }
 @media (prefers-reduced-motion: reduce) { .cc-puls { animation: none; } }
+
+/* 3-D-Buch fuer das Workbook auf /challenge (22.09.2026, Claudias Wunsch "3D Book Mockup Animation").
+   Reines CSS: Deckel, Innenseite, Seitenblock, Schnittkante, Ruecken und Rueckseite als Flaechen im Raum.
+   Das Buch schwenkt langsam (alternate), beim Darueberfahren klappt der Deckel auf. */
+.cc-buch-buehne { perspective: 1700px; perspective-origin: 50% 40%; padding: 26px 26px 6px 34px; }
+.cc-buch { position: relative; display: block; width: 100%; aspect-ratio: 900 / 1273; transform-style: preserve-3d;
+  transform: rotateY(26deg) rotateX(6deg); animation: ccBuchSchwenk 9s ease-in-out infinite alternate;
+  transition: transform .9s cubic-bezier(.2,.7,.2,1); }
+/* KEIN filter/opacity/overflow auf .cc-buch - das wuerde preserve-3d aufheben und alle Flaechen platt legen (so gesehen am 22.09.2026). */
+.cc-buch-buehne:hover .cc-buch, .cc-buch-buehne:focus-visible .cc-buch { animation-play-state: paused; transform: rotateY(18deg) rotateX(4deg); }
+.cc-buch > span { position: absolute; inset: 0; border-radius: 3px 10px 10px 3px; }
+.cc-buch-rueckseite { background: linear-gradient(135deg, #0F1F3A, #0A1628); transform: translateZ(-30px); box-shadow: 0 46px 60px -28px rgba(10,22,40,.7); }
+.cc-buch-ruecken { right: auto; width: 30px; border-radius: 3px 0 0 3px; transform-origin: left center; transform: rotateY(90deg);
+  background: linear-gradient(90deg, #0A1628, #1A2B4C 55%, #0A1628); display: flex; align-items: center; justify-content: center; }
+.cc-buch-ruecken > span { writing-mode: vertical-rl; transform: rotate(180deg); font: 700 9px/1 'Montserrat', sans-serif; letter-spacing: .18em; text-transform: uppercase; color: #EBD197; white-space: nowrap; }
+.cc-buch-kante { left: auto; width: 30px; border-radius: 0; transform-origin: right center; transform: rotateY(-90deg) translateZ(-1px);
+  background: repeating-linear-gradient(180deg, #FFFFFF 0 2px, #D8D0BE 2px 3px); inset: 4px 0 4px auto; }
+.cc-buch-block { inset: 3px 0 3px 3px; background: #fff; overflow: hidden; transform: translateZ(-1px); }
+.cc-buch-block img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.cc-buch-deckel { transform-origin: left center; transform-style: preserve-3d; transform: rotateY(0deg); transition: transform 1s cubic-bezier(.2,.7,.2,1); background: transparent; }
+/* kein overflow:hidden auf dem Deckel - das legt Deckel-Innenseite und Bild platt, und beim Aufklappen erscheint das Titelbild gespiegelt. */
+.cc-buch-deckel img { display: block; width: 100%; height: 100%; object-fit: cover; backface-visibility: hidden; border-radius: 3px 10px 10px 3px; box-shadow: inset 6px 0 12px -8px rgba(10,22,40,.35); }
+.cc-buch-deckel::after { content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: 3px 10px 10px 3px; backface-visibility: hidden; background: linear-gradient(108deg, rgba(255,255,255,0) 42%, rgba(255,255,255,.22) 50%, rgba(255,255,255,0) 58%); }
+.cc-buch-innen { position: absolute; inset: 0; background: #FDFBF7; transform: rotateY(180deg); backface-visibility: hidden; border-radius: 10px 3px 3px 10px; }
+.cc-buch-buehne:hover .cc-buch-deckel, .cc-buch-buehne:focus-visible .cc-buch-deckel { transform: rotateY(-128deg); }
+@keyframes ccBuchSchwenk { from { transform: rotateY(34deg) rotateX(7deg); } to { transform: rotateY(12deg) rotateX(3deg); } }
+@media (prefers-reduced-motion: reduce) { .cc-buch { animation: none; } .cc-buch-deckel { transition: none; } }
+@media (max-width: 640px) { .cc-buch-buehne { padding: 18px 18px 4px 24px; } }

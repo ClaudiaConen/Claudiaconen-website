@@ -387,21 +387,23 @@ const KOPF = 'grid items-end gap-6 sm:grid-cols-[minmax(0,1fr)_auto] sm:gap-10';
  *  Gesichter, die sich so ein bisschen bewegen ... das soll das Netzwerk darstellen"). Nur ihre eigenen Fotos aus den
  *  Kopf-Kacheln - Mitglieder erst mit Einwilligung. Ab md sichtbar; bei reduzierter Bewegung stehen sie still. */
 const NETZ_GESICHTER: { datei: string; stil: React.CSSProperties }[] = [
-  { datei: 'buch', stil: { left: '3%', top: '12%' } },
-  { datei: 'kamera', stil: { left: '9%', top: '46%' } },
-  { datei: 'zuhoeren', stil: { left: '4%', top: '78%' } },
-  { datei: 'mappe', stil: { right: '4%', top: '10%' } },
-  { datei: 'tonstudio', stil: { right: '10%', top: '44%' } },
-  { datei: 'telefon', stil: { right: '3%', top: '76%' } },
+  { datei: 'buch', stil: { left: '3%', top: '10%' } },
+  { datei: 'kamera', stil: { left: '11%', top: '34%' } },
+  { datei: 'zuhoeren', stil: { left: '5%', top: '58%' } },
+  { datei: 'training', stil: { left: '12%', top: '82%' } },
+  { datei: 'mappe', stil: { right: '4%', top: '9%' } },
+  { datei: 'tonstudio', stil: { right: '12%', top: '33%' } },
+  { datei: 'telefon', stil: { right: '3%', top: '57%' } },
+  { datei: 'steinmauer', stil: { right: '11%', top: '81%' } },
 ];
 function NetzGesichter() {
   return (
     <div aria-hidden="true" className="pointer-events-none absolute inset-0 hidden md:block">
       <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-        <path d="M6 16 L14 50 L8 82 M94 14 L88 48 L95 80 M14 50 L40 30 M88 48 L60 30" fill="none" stroke="#D4AF37" strokeOpacity=".28" strokeWidth=".25" vectorEffect="non-scaling-stroke" />
+        <path d="M6 14 L14 38 L8 62 L15 86 M94 13 L86 37 L95 61 L87 85 M14 38 L40 26 M86 37 L60 26 M8 62 L34 74 M95 61 L66 74" fill="none" stroke="#D4AF37" strokeOpacity=".25" strokeWidth=".25" vectorEffect="non-scaling-stroke" />
       </svg>
       {NETZ_GESICHTER.map((g, i) => (
-        <span key={g.datei} style={{ ...g.stil, animationDelay: `${i * 0.9}s`, animationDuration: `${6 + (i % 3)}s` }} className="cc-schwebt absolute h-12 w-12 overflow-hidden rounded-full border-2 border-white shadow-[0_8px_20px_-6px_rgba(10,22,40,0.45)] ring-1 ring-[#D4AF37]/70 lg:h-14 lg:w-14">
+        <span key={g.datei} style={{ ...g.stil, animationDelay: `-${i * 1.7}s`, animationDuration: `${11 + (i % 4) * 1.5}s`, animationDirection: i % 2 ? 'alternate-reverse' : 'alternate' }} className="cc-schwebt absolute h-12 w-12 overflow-hidden rounded-full border-2 border-white shadow-[0_8px_20px_-6px_rgba(10,22,40,0.45)] ring-1 ring-[#D4AF37]/70 lg:h-14 lg:w-14">
           <img src={`/challenge/karten/${g.datei}.webp`} alt="" width={240} height={320} loading="lazy" decoding="async" className="h-full w-full object-cover object-[50%_18%]" />
         </span>
       ))}
@@ -1089,21 +1091,14 @@ export default function Challenge() {
               <p className="mt-1 inline-block rounded-full bg-pearl-white px-3 py-1 font-inter text-sm">Keynote-Speakerin · Trainerin · Coach</p>
               <h2 id="community-titel" className="mt-6 font-montserrat text-4xl font-black leading-[1.05] tracking-tight sm:text-6xl">
                 Willkommen bei den
-                <span className="block text-transparent" style={{ WebkitTextStroke: '2px #D4AF37' }}>Unverwechselbaren.</span>
-                <span className="mt-2 block font-cormorant text-3xl font-medium italic tracking-normal text-[#D4AF37] sm:text-5xl">Netzwerk Mittelstand</span>
-                <span className="mt-2 block font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] text-midnight-blue/80">Die Community · nach der Challenge</span>
+                {/* Claudia, 22.09.2026 14:44 UTC: "die Stelle ist noch nicht gut" - jetzt wie auf ihrer Community-Seite:
+                    das Wort blass gefuellt mit goldener Kontur, darunter nur die Schreibschrift, keine weitere Zeile. */}
+                <span className="block text-[#F1E2B3]" style={{ WebkitTextStroke: '1.5px #D4AF37' }}>Unverwechselbaren.</span>
+                <span className="mt-2 block font-cormorant text-4xl font-semibold italic tracking-normal text-[#D4AF37] sm:text-6xl">Netzwerk Mittelstand</span>
               </h2>
               <p className="mx-auto mt-6 max-w-2xl rounded-2xl bg-pearl-white px-6 py-4 font-inter text-lg leading-relaxed">
                 Menschen, die sich zusammentun und ein wachsendes Netzwerk bilden – weil sie wissen: Gemeinsam sind wir stärker. Hier zählt Empfehlung mehr als Werbung.
               </p>
-              <dl className="mx-auto mt-8 grid max-w-2xl grid-cols-3 divide-x divide-[#D4AF37]/40">
-                {[['27', 'Umsetzer – die ersten'], ['3.11.', 'erstes Treffen · 18:18 Uhr · online'], ['1×', 'im Monat live im Zoom']].map(([z, t]) => (
-                  <div key={t} className="flex flex-col-reverse px-2">
-                    <dt className="mt-1 font-inter text-xs leading-snug text-midnight-blue/85 sm:text-sm">{t}</dt>
-                    <dd className="m-0 font-montserrat text-3xl font-black sm:text-5xl">{z}</dd>
-                  </div>
-                ))}
-              </dl>
               <p className="mt-8 font-montserrat text-base font-extrabold sm:text-lg">Trag dich ein zum ersten Termin – sei einer von 27 Umsetzern.</p>
               <div className="mt-4 flex flex-wrap justify-center gap-3">
                 <a href="https://community.claudiaconen.com/netzwerkwebinar/" target="_blank" rel="noopener noreferrer" className={`inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue transition-transform hover:-translate-y-px ${GOLD}`}>

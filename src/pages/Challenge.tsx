@@ -6,7 +6,7 @@ import SEO from '../components/SEO';
 import Brotkrumen from '../components/Brotkrumen';
 import WorkbookBlaettern from '../components/WorkbookBlaettern';
 import Stimmwelle from '../components/Stimmwelle';
-import ChallengeAnmeldung, { EINGETRAGEN_SCHLUESSEL } from '../components/ChallengeAnmeldung';
+import ChallengeAnmeldung from '../components/ChallengeAnmeldung';
 import FotoReihen from '../components/FotoReihen';
 import { Ban, Smile, Clock, EyeOff, Database, Bot } from 'lucide-react';
 
@@ -16,7 +16,10 @@ import { Ban, Smile, Clock, EyeOff, Database, Bot } from 'lucide-react';
  * Vorgaenger: die Flyer-Seite /unverwechselbar-du (Nacht 22.09., aus dem Event-Flyer "UNVERWECHSELBAR DU")
  * und die kurze /challenge (Vormittag 22.09.). /unverwechselbar-du leitet per 301 hierher.
  *
- * Reihenfolge: Kopf mit Foto-Reihen -> Sieben Schritte -> So laeuft es + die sieben Tage (oeffnen erst an
+ * Reihenfolge (Stand 22.09.2026 13:30 UTC): Kopf (kurz) -> Punkte hell -> Anmeldung -> Sieben Schritte (oeffnen je an
+ * ihrem Tag, Finale volle Breite) -> So laeuft es ab (acht Schritte) -> Wegweiser -> Hand aufs Herz -> KI und du ->
+ * Werkzeugkasten (Klapp-Kacheln) + Workbook -> Zwei Wege -> Fuer wen (hell) -> Warum ich -> Schluss -> Netzwerk (letzter).
+ * Aeltere Notiz: Kopf mit Foto-Reihen -> Sieben Schritte -> So laeuft es + die sieben Tage (oeffnen erst an
  * ihrem Tag) + Anmeldung -> Hand aufs Herz (zehn Saetze) -> KI und du -> Selbst-Check -> Werkzeugkasten +
  * Workbook -> Geschenk, Rederaum, Online-Buehne -> Fuer wen -> Warum ich -> Netzwerk Mittelstand -> Schluss.
  *
@@ -68,16 +71,6 @@ const MENSCH_KANN = [
 ];
 
 
-/** `inhalt` = Claudias Text je Schritt (kommt per Diktat); solange leer, wird `text` gezeigt. */
-const SCHRITTE: { titel: string; text: string; inhalt?: string }[] = [
-  { titel: 'Das Gehirn verstehen', text: 'Blitzschnell. Emotionen. Verstand. Wie Menschen entscheiden, bevor sie es merken – und was das für jeden deiner Sätze heißt.' },
-  { titel: 'KI & Mensch – das Zusammenspiel', text: 'Perfektion klickt. Persönlichkeit bleibt. Was du der Technik gibst – und was du niemals abgibst.' },
-  { titel: 'Essenz und Wirkung', text: 'Unverwechselbarkeit beginnt im Inneren. Was dich ausmacht, in einen Satz gebracht.' },
-  { titel: 'Dein Kunde denkt in Bildern', text: 'Geschichten bleiben. Daten nicht. Wie du aus deiner Erfahrung Bilder machst, die man weitererzählt.' },
-  { titel: 'Unaufhaltbar', text: 'Einzigartig. Unüberhörbar. Deine Stimme. Deine Wirkung. Das Zusammenspiel von Worten, Stimme und Haltung.' },
-  { titel: 'Wirkung ist kein Zufall', text: 'Sie ist trainierbar. Sichtbar. Entscheidbar. Echt, unverwechselbar – nicht perfekt.' },
-  { titel: 'Dein Kopf. Ihr Gefühl.', text: 'Du bekommst wertvolle Audio-Impulse, Anleitungen und Feedback – der Schritt, in dem alles zusammenkommt.' },
-];
 
 
 const GOLD = 'bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]';
@@ -91,15 +84,19 @@ const DUNKEL = { background: 'linear-gradient(180deg, #0A1628 0%, #0F1F3A 55%, #
 const WORKBOOK_PDF = '/unverwechselbar/workbook-entdecke-deine-stimmwirkung.pdf';
 
 
-/** Fuenf kleine Kacheln wie im Kopf der Startseite, mit den 3-D-Icons (Claudia, 22.09.2026 11:27 UTC:
- *  "kleinere Felder ... so wie auf der Hauptseite oben die fuenf Kacheln, auch mit diesen 3-D-Icons"). */
-const WERKZEUG: { titel: string; text: string; icon: string }[] = [
-  { titel: 'Stimme', text: 'Sprich zum letzten Stuhl im Raum – auch wenn nur das Handy vor dir steht. Ein Satz, eine Pause, der nächste Satz.', icon: 'stimme' },
-  { titel: 'Innere Haltung', text: 'Bevor du auf Aufnahme drückst: Wem erzählst du das? Ein Mensch, nicht ein Publikum.', icon: 'praesenz' },
-  { titel: 'Der Blick', text: 'Schau in die Linse, nicht auf dich selbst. Der Zuhörer sitzt hinter der Kamera – und merkt, ob du ihn meinst.', icon: 'wirkung' },
-  { titel: 'Storytelling', text: 'Fang mit dem Moment an, nicht mit der Vorgeschichte. Das ist eine Geschichte – alles andere ein Bericht.', icon: 'story' },
-  { titel: 'Das Mikrofon', text: 'Das Handy nimmt den Raum auf. Ein Ansteckmikrofon holt deine Stimme nach vorn. Gut, nicht perfekt – perfekt ist der Avatar.', icon: 'botschaft' },
+/** Fuenf Klapp-Kacheln (Claudia, 22.09.2026 13:13 UTC: "sieht sehr gequetscht aus ... als Klappkachel, das Icon neben
+ *  der Schrift ... so dass die KI es lesen kann") - ihre Texte, nur geglaettet. Vorschau sichtbar, Rest im <details>. */
+const WERKZEUG: { titel: string; vorschau: string; text: string; icon: string }[] = [
+  { titel: 'Stimme', vorschau: 'Niemand klingt wie du, wenn du ins Handy sprichst.', text: 'Stell dir vor, du sprichst zu einem Menschen – und sprichst den Letzten in der Reihe an. So überträgt sich deine Energie durch den ganzen Raum.', icon: 'stimme' },
+  { titel: 'Innere Haltung', vorschau: 'Bevor du auf Aufnahme drückst: Wen willst du erreichen?', text: 'Frag dich: Was willst du in diesem Menschen erreichen? Welches Gefühl willst du auslösen? Was soll ihn bewegen? Es ist ein Mensch, nicht ein Publikum. Es ist immer ein Mensch.', icon: 'praesenz' },
+  { titel: 'Der Blick', vorschau: 'Schau in die Linse deines Handys – nicht dich selbst an.', text: 'Der Zuhörer sitzt genau in dieser Linse. Sonst hat er deinen Blickkontakt nicht. Das merkt er – und die Verbindung stellt sich nicht her.', icon: 'wirkung' },
+  { titel: 'Storytelling', vorschau: 'Jeder Mensch ist ein Unikat. Entdecke deine Geschichten.', text: 'Die Geschichten, die mit deinem Business in Einklang stehen. Echte Geschichten, Wahres aus dem Leben – dann hört man dir gerne zu.', icon: 'story' },
+  { titel: 'Das Mikrofon', vorschau: 'Das Handy nimmt den Raum auf. Ein Ansteckmikrofon holt deine Stimme nach vorn.', text: 'Es gibt sie günstig – und deine Stimme kommt damit ganz anders zur Wirkung. Natürlich kannst du auch ohne dabei sein. Ich empfehle dir, eins zu bestellen – auch für danach.', icon: 'botschaft' },
 ];
+
+/** Die Punkte aus dem Kopf, jetzt hell darunter (Claudia, 22.09.2026 13:01/13:05 UTC: "damit das oben nicht so voll
+ *  gepackt ist ... unter den Slider kommt dann hell und da werden die Punkte aufgelistet"). */
+const ENTDECKE = ['Deine Wirkung', 'Deine Keynote-Möglichkeiten', 'Warum Menschen dir zuhören', 'Was wirklich zählt', 'Tipps, wie KI deine echte Kommunikation unterstützt', 'Das Workbook „Entdecke deine Stimmwirkung" – zum Blättern und Mitnehmen'];
 
 
 /** Der Durchgang: Montag, 26.10.2026 bis Montag, 02.11.2026 (Claudia, 22.09.2026 11:02 UTC). Vorher ist nur
@@ -133,110 +130,101 @@ const KURZ = new Intl.DateTimeFormat('de-DE', { weekday: 'short', day: 'numeric'
 
 type Tag = {
   titel: string;
-  /** Eine Zeile, die auf der zugeklappten Kachel steht. */
-  vorschau: string;
-  /** Die Aufgabe des Tages - steht oben in der aufgeklappten Kachel. */
+  /** Schwerpunkt - steht auf der Programm-Kachel unter der Ueberschrift. */
+  schwerpunkt: string;
+  /** Der Gedanke zum Einstieg, in dem man sich wiedererkennt. */
+  einstieg: string;
+  /** Worum es geht - ein, zwei Saetze. */
+  inhalt: string;
   aufgabe: string;
-  /** Der Satz, der eingesprochen wird (Tag 1 - Claudias Wortlaut). */
-  satz?: string;
-  /** Ueberschrift ueber den Schritten, z. B. "Dann weck deine Stimme auf - fuenf Minuten:". */
-  schrittTitel: string;
-  schritte: string[];
-  /** Der Abschluss, nach den Schritten. */
-  danach?: string;
+  /** Freiwilliger Zusatz zur Aufgabe (z. B. Aufnahme). */
+  zusatz?: string;
+  reflexion: string;
+  /** Icon in public/icons/ */
+  icon: string;
 };
 
-/** Tag 1 ist Claudias Wortlaut (Discord, 22.09.2026, 09:19 UTC), nur geglaettet: ihr Satz, ihre Bilder
- *  (Eisschollen, Raubkatze, Glas Wasser), ihre Reihenfolge. Tage 2 bis 7 sind meine Entwuerfe, bis
- *  ihre Fassungen kommen - dann hier ersetzen. */
+/** Der Uebungssatz - an allen sieben Tagen wortgleich (Claudias Briefing, 22.09.2026 12:54 UTC). */
+const UEBUNGSSATZ = 'Wo ich spreche, ist meine Bühne – mit Persönlichkeit, Achtsamkeit und Leichtigkeit berühre ich Menschen.';
+
+/** Die sieben Tage - Wortlaut aus Claudias Briefing "Sieben Schritte zu deinem selbstbewussteren Business-Auftritt"
+ *  (Discord, 22.09.2026 12:54 UTC), nur in Du-Ansprache geglaettet. Keine Zahlen, keine Versprechen dazu. */
 const TAGE: Tag[] = [
   {
-    titel: 'Lerne deine Stimmwirkung kennen',
-    vorschau: 'Der Satz am Morgen – und fünf Minuten, die deine Stimme aufwecken.',
-    aufgabe: 'Morgens, bevor du irgendetwas anderes tust: Handy in die Hand, Aufnahme an – und sprich diesen Satz ein.',
-    satz: 'Meine Stimme ist unaufhaltbar. Überall auf der Welt kann ich blitzschnell Menschen erreichen – sobald ich den Hörer in die Hand nehme, in ein Video spreche, auf einer Bühne stehe oder ins Radio rede. Deshalb lerne ich meine Stimme kennen.',
-    schrittTitel: 'Dann weck deine Stimme auf – fünf Minuten:',
-    schritte: [
-      'Stell dir vor: Du wirst wach, und deine Stimmlippen sind über Nacht eingefroren – wie Eisschollen auf dem Wasser. Sobald du dich streckst und die Lippen leckst, knackt das Eis. Es beginnt zu tauen.',
-      'Gib deinem Rachen, deinem Mund, deinem ganzen Sprechapparat Platz. Spiel mit der Zunge: Drück sie oben an den Gaumen – und sag dir dabei „Guten Morgen".',
-      'Streck die Zunge weit heraus, ganz weit – und zähl dabei bis zehn.',
-      'Kreise mit der Zunge jeden einzelnen Zahn ab – außen, hinter der Lippe.',
-      'Summ. Ungefähr eine Minute. Und beweg dich dabei in deinem Bett wie eine Raubkatze.',
-      'Trink ein Glas Wasser. Über Nacht verlierst du viel davon – und deine Stimmlippen sind fein und zart.',
-      'Bei jeder Bewegung: Die Eisschollen draußen auf dem Meer tauen, und das Meer beginnt, Wellen zu schlagen. Genau so schwingen deine Stimmlippen – zart, weich, in Wellen. Je freier sie schwingen, desto besser klingen sie.',
-    ],
-    danach: 'Jetzt noch einmal den Satz. Fühl hinein: Klingt deine Stimme ein bisschen anders?',
+    titel: 'Was möchtest du wirklich sagen?', schwerpunkt: 'Innere Klarheit', icon: 'schritt-1',
+    einstieg: 'Kennst du das? Das Gespräch ist vorbei. Erst danach fällt dir ein, was du eigentlich sagen wolltest.',
+    inhalt: 'Den eigenen Beitrag ernst nehmen. Klären, was beim Gegenüber ankommen soll.',
+    aufgabe: 'Denk an eine berufliche Situation, in der du dich deutlicher ausdrücken möchtest. Ergänze: „Mir ist wichtig, dass mein Gegenüber versteht …"',
+    zusatz: 'Wenn du möchtest, nimm den Übungssatz und anschließend deine Aussage in höchstens 30 Sekunden auf. Bewahre diese erste Aufnahme für dich auf.',
+    reflexion: 'Hast du ausgesprochen, was dir wichtig ist?',
   },
   {
-    titel: 'Die Pause gehört dem Zuhörer',
-    vorschau: 'Atmen, Tempo, Stille – die drei Dinge, die Profis anders machen.',
-    aufgabe: 'Nach den fünf Minuten von Tag 1: Sag deinen Satz noch einmal – und mach nach jedem Komma eine Pause, in der du still bis zwei zählst. Dann drei Sätze über deinen gestrigen Tag, genauso.',
-    schrittTitel: 'Drei Tipps:',
-    schritte: [
-      'Atme vor dem ersten Wort aus, nicht ein. Wer mit vollen Lungen startet, presst. Wer ruhig einatmet, klingt ruhig.',
-      'Die Pause fühlt sich für dich lang an – für den Zuhörer ist sie genau richtig. Dort versteht er dich. Dort nickt er.',
-      'Tiefer wird die Stimme nicht durch Drücken, sondern durch Ruhe. Ein Satz, eine Pause, der nächste Satz. Eile hört man.',
-    ],
+    titel: 'Gib dir einen sicheren Stand', schwerpunkt: 'Haltung', icon: 'schritt-3',
+    einstieg: 'Wie viel Kraft kostet es dich, gleichzeitig zu sprechen und darüber nachzudenken, wie du wirkst?',
+    inhalt: 'Eine angenehme Haltung finden, in der du dich auf deine Aussage konzentrieren kannst.',
+    aufgabe: 'Spür den Boden unter deinen Füßen oder die Sitzfläche unter dir. Richte dich bequem auf und lass die Schultern locker. Sprich den Übungssatz und deine Aussage von Tag 1 erneut.',
+    reflexion: 'In welcher Haltung fällt dir das Sprechen leichter?',
   },
   {
-    titel: 'Sag, was du tust',
-    vorschau: 'Eine Minute ohne Fachwort – so, dass deine Nachbarin es versteht.',
-    aufgabe: 'Eine Minute: Was tust du – ohne ein einziges Fachwort. So, dass deine Nachbarin es versteht.',
-    schrittTitel: 'Drei Tipps:',
-    schritte: [
-      'Ein Gedanke pro Satz. Wo ein „und" steht, versteckt sich meist ein zweiter Satz. Punkt setzen, atmen, weiter.',
-      'Fang beim Menschen an, nicht bei dir: „Wenn jemand …, dann …" – so hört jeder sofort, ob es ihn betrifft.',
-      'Sag es einmal so, wie du es am Telefon einer Freundin sagen würdest. Genau diese Fassung nimmst du auf – nicht die offizielle.',
-    ],
+    titel: 'Du darfst sichtbar sein', schwerpunkt: 'Gestik und Ausdruck', icon: 'schritt-8',
+    einstieg: 'Wohin mit den Händen? Sobald die Kamera läuft, werden sie plötzlich zur Hauptsache.',
+    inhalt: 'Den Händen erlauben, einen Gedanken zu begleiten. Gestik darf natürlich entstehen.',
+    aufgabe: 'Sprich den Übungssatz. Erkläre anschließend deine berufliche Aussage und lass eine Geste entstehen, die dazu passt: etwas zeigen, einen Unterschied verdeutlichen oder einen Gedanken öffnen.',
+    zusatz: 'Probier es spielerisch aus. Du musst keine bestimmte Bewegung nachmachen.',
+    reflexion: 'Welche Geste unterstützt dich, ohne sich gespielt anzufühlen?',
   },
   {
-    titel: 'Dieselben Worte, drei Wirkungen',
-    vorschau: 'Beruhigend, weckend, überzeugend – mit demselben Satz.',
-    aufgabe: 'Ein Satz, drei Absichten: einmal beruhigend, einmal weckend, einmal überzeugend. Dieselben Worte.',
-    schrittTitel: 'Drei Tipps:',
-    schritte: [
-      'Entscheide vor dem Sprechen, was der Zuhörer danach tun soll. Die Absicht färbt die Stimme – ohne dass du an ihr herumbastelst.',
-      'Beruhigen: Tempo runter, Stimme am Satzende nach unten. Wecken: kürzere Sätze, direkter Blick. Überzeugen: eine Pause vor dem wichtigsten Wort.',
-      'Respekt ist hörbar. Wer den Zuhörer verstehen statt überreden will, klingt anders – das ist die überzeugende Fassung.',
-    ],
+    titel: 'Du darfst dir Zeit nehmen', schwerpunkt: 'Atmung und Ruhe', icon: 'schritt-6',
+    einstieg: 'Das Telefon klingelt. Du gehst ran – und bist gedanklich noch bei der Aufgabe davor.',
+    inhalt: 'Vor dem ersten Satz ankommen. Atempausen zulassen.',
+    aufgabe: 'Stell dir vor, du beginnst ein wichtiges Telefonat. Lass vorher einige ruhige, ungezwungene Atemzüge zu. Sprich deinen Übungssatz und anschließend die ersten zwei Sätze des Gesprächs.',
+    zusatz: 'Du brauchst nicht alles auf einen Atemzug zu sagen.',
+    reflexion: 'Wie klingt dein Einstieg, wenn du dir einen Moment Zeit gibst?',
   },
   {
-    titel: 'Ein Moment statt Lebenslauf',
-    vorschau: 'Der Moment, in dem du wusstest: Das ist mein Beruf.',
-    aufgabe: 'Erzähl den Moment, in dem du wusstest: Das ist mein Beruf. Eine Person, ein Ort, ein Satz, der fiel.',
-    schrittTitel: 'Drei Tipps:',
-    schritte: [
-      'Beginn mittendrin: „Dienstag, acht Uhr, der Kunde sagt …" – keine Vorgeschichte, keine Einleitung.',
-      'Zeig, was zu sehen war, statt zu sagen, was zu fühlen ist. „Sie legte den Stift weg" wirkt stärker als „Sie war beeindruckt".',
-      'Ende mit dem, was sich seitdem geändert hat – ein Satz. Er ist der Grund, warum du die Geschichte erzählst.',
-    ],
+    titel: 'Hörst du dich selbst darin?', schwerpunkt: 'Stimme und Persönlichkeit', icon: 'schritt-5',
+    einstieg: 'Mit vertrauten Menschen sprichst du lebendig. Was passiert mit dieser Stimme, wenn es beruflich wichtig wird?',
+    inhalt: 'Einen angenehmen Klang erkunden und die eigene Beteiligung am Thema hörbar machen.',
+    aufgabe: 'Summ kurz und sanft „Mhm" in einer angenehmen Tonhöhe. Sprich den Übungssatz. Erzähl anschließend einer vorgestellten, interessierten Person in zwei oder drei Sätzen, warum dir deine Arbeit wichtig ist.',
+    zusatz: 'Keine tiefere Stimme erzwingen.',
+    reflexion: 'An welcher Stelle klingst du für dich besonders natürlich?',
   },
   {
-    titel: 'Deine Stimme gegen die Maschine',
-    vorschau: 'Ein Satz von der KI, ein Satz von dir – und der Unterschied, den man hört.',
-    aufgabe: 'Lass dir von einer KI einen Satz über dich schreiben und sag ihn. Dann sag es so, wie du es wirklich sagen würdest. Nimm beides auf.',
-    schrittTitel: 'Drei Tipps:',
-    schritte: [
-      'Streich jedes Wort, das du im Gespräch nie benutzt. „Innovativ", „ganzheitlich", „Lösungen" – das sagt die Maschine, nicht du.',
-      'Persönlich wird ein Satz durch ein Detail, das nur du kennst: ein Ort, ein Name, eine Zahl aus deinem Alltag.',
-      'Hör beide Aufnahmen mit geschlossenen Augen. Welchem Menschen würdest du glauben? Das ist deine Richtung.',
-    ],
+    titel: 'Gib deinen Worten Gewicht', schwerpunkt: 'Betonung, Klarheit und Pausen', icon: 'schritt-9',
+    einstieg: 'Du hast etwas Wichtiges gesagt. Hast du deinem Gegenüber auch Zeit gelassen, es aufzunehmen?',
+    inhalt: 'Wichtige Gedanken hervorheben und verständlich gliedern.',
+    aufgabe: 'Sprich den Übungssatz und betone zuerst „Persönlichkeit", dann „Achtsamkeit", dann „Leichtigkeit". Hör, wie sich die Bedeutung verändert. Übertrag das auf deine berufliche Aussage: Wähle ein Schlüsselwort und setze nach dem wichtigsten Gedanken eine Pause.',
+    reflexion: 'Was soll dein Gegenüber mitnehmen – und hört man das?',
   },
   {
-    titel: 'Dein Satz zum Mitnehmen',
-    vorschau: 'Tag 1 neben Tag 7 hören – und der eine Satz, den du überall sagen kannst.',
-    aufgabe: 'Nach den fünf Minuten: Sag deinen Satz von Tag 1 und hör ihn neben der Aufnahme vom ersten Morgen. Dann der eine Satz, den du überall sagen kannst. Den schickst du mir – und bekommst eine Antwort von mir, keine Vorlage.',
-    schrittTitel: 'Drei Tipps:',
-    schritte: [
-      'Kurz genug, dass ihn jemand weitererzählen kann, ohne nachzulesen. Test: Sag ihn einer Person und bitte sie, ihn morgen zu wiederholen.',
-      'Kein Superlativ. „Die Beste", „einzigartig", „führend" – das behauptet jeder. Ein konkretes Versprechen behauptet keiner.',
-      'Er muss nach dir klingen, nicht nach einem Slogan. Wenn du dich beim Sagen räusperst, ist es noch nicht deiner.',
-    ],
+    titel: 'Jetzt geht es um dein Gegenüber', schwerpunkt: 'Verbindung und Zuhören', icon: 'schritt-7',
+    einstieg: 'Wie verändert sich ein Gespräch, wenn du deine Aufmerksamkeit dem anderen schenkst?',
+    inhalt: 'Die bisherigen Übungen verbinden und wahrnehmen, was tatsächlich ankommt.',
+    aufgabe: 'Sprich den Übungssatz und deine berufliche Aussage zu einer vertrauten Person oder in die Kamera. Nutze, was dir diese Woche geholfen hat. Wenn jemand zuhört, frag anschließend: „Was ist bei dir angekommen?" Lass die Antwort stehen und hör zu.',
+    zusatz: 'Wenn du Aufnahmen gemacht hast, vergleiche den Übungssatz von Tag 1 und Tag 7.',
+    reflexion: 'Was gelingt dir bewusster – und was möchtest du weiter üben?',
   },
 ];
 
-/** Der Tipp am Morgen ist Tag 1 in Claudias Wortlaut - steht vorweg, damit die Streifen Geheimnis bleiben. */
-const MORGEN = TAGE[0];
+/** Tipp 2 "am Morgen" - Claudias Aufwachuebung in ihrem Wortlaut (Discord, 22.09.2026, 09:19 UTC), nur geglaettet. */
+const MORGEN = {
+  aufgabe: 'Morgens, bevor du irgendetwas anderes tust: Handy in die Hand, Aufnahme an – und sprich diesen Satz ein.',
+  satz: 'Meine Stimme ist unaufhaltbar. Überall auf der Welt kann ich blitzschnell Menschen erreichen – sobald ich den Hörer in die Hand nehme, in ein Video spreche, auf einer Bühne stehe oder ins Radio rede. Deshalb lerne ich meine Stimme kennen.',
+  schrittTitel: 'Dann weck deine Stimme auf – fünf Minuten:',
+  schritte: [
+    'Stell dir vor: Du wirst wach, und deine Stimmlippen sind über Nacht eingefroren – wie Eisschollen auf dem Wasser. Sobald du dich streckst und die Lippen leckst, knackt das Eis. Es beginnt zu tauen.',
+    'Gib deinem Rachen, deinem Mund, deinem ganzen Sprechapparat Platz. Spiel mit der Zunge: Drück sie oben an den Gaumen – und sag dir dabei „Guten Morgen".',
+    'Streck die Zunge weit heraus, ganz weit – und zähl dabei bis zehn.',
+    'Kreise mit der Zunge jeden einzelnen Zahn ab – außen, hinter der Lippe.',
+    'Summ. Ungefähr eine Minute. Und beweg dich dabei in deinem Bett wie eine Raubkatze.',
+    'Trink ein Glas Wasser. Über Nacht verlierst du viel davon – und deine Stimmlippen sind fein und zart.',
+    'Bei jeder Bewegung: Die Eisschollen draußen auf dem Meer tauen, und das Meer beginnt, Wellen zu schlagen. Genau so schwingen deine Stimmlippen – zart, weich, in Wellen. Je freier sie schwingen, desto besser klingen sie.',
+  ],
+  danach: 'Jetzt noch einmal den Satz. Fühl hinein: Klingt deine Stimme ein bisschen anders?',
+};
+
+/** Die Programm-Kacheln sind die sieben Tage (Claudias Briefing) - eine Liste, ein Inhalt. */
+const SCHRITTE = TAGE;
 
 /** Tipp 1, vor Tag 1 - Claudias Diktat vom 22.09.2026, 11:17 UTC ("Der Tipp soll Gold leuchten", aufklappbar,
  *  "das kannst du auch jetzt schon tun"). Anleitung fuer WhatsApp in vier Schritten; ihre Nummer aus dem Flyer. */
@@ -252,22 +240,30 @@ const WEGWEISER = {
   ],
 };
 
-const ABLAUF = [
-  'Du trägst dich unten ein und gehst in die WhatsApp-Gruppe – dort läuft die Challenge, mit Tipps, Austausch und einem Miteinander.',
-  'Wir starten gemeinsam live im Zoom. Danach jeden Tag ein neuer Schlüssel – als Audio von mir, mit Hinweisen.',
-  'Du nimmst dein Video auf – eine Minute – und teilst es in der Gruppe. Dort bekommst du mein Feedback.',
+/** So laeuft es ab - Claudias Diktate vom 22.09.2026, 13:07 und 13:10 UTC ("Wie kann ich das ein bisschen sortieren",
+ *  "schreib das kuerzer"), in ihrer Reihenfolge, ein Gedanke je Satz. Termine aus START/ENDE. */
+const ABLAUF: { titel: string; text: string }[] = [
+  { titel: 'Eintragen', text: 'Du trägst dich hier ein. Danach kommst du in die WhatsApp-Gruppe.' },
+  { titel: 'Die Gruppe', text: 'Austausch untereinander ist gern gesehen. Werbung nicht – dafür gibt es am letzten Tag Werbezeit, für jeden.' },
+  { titel: 'Der Auftakt', text: 'Montag, 26. Oktober, 19 Uhr, 60 Minuten im Zoom: kennenlernen, miteinander lachen, den Wegweiser in die Hand bekommen. Dann geht es los.' },
+  { titel: 'Jeden Tag ein Impuls', text: 'Ein Audio von mir in der Gruppe: Hinweise, eine kleine Lektion, deine Aufgabe des Tages. Dein Video dazu: eine Minute. Du hast 24 Stunden Zeit zum Posten.' },
+  { titel: 'Dein Feedback', text: 'Wer innerhalb der 24 Stunden postet, bekommt persönliches Feedback von mir. Danach darfst du dein Video verbessern – für dich, um daran zu wachsen.' },
+  { titel: 'Zwischendurch', text: 'Impulse zu Storytelling und Prompts für die KI, die du direkt nutzen kannst – um deine Positionierung zu schärfen und deine innere Haltung nach außen zu tragen.' },
+  { titel: 'Das Workbook', text: 'Wenn dir danach ist: Schnapp dir das Workbook weiter unten und genieß es an einem ruhigen Abend. Alles kann, nichts muss.' },
+  { titel: 'Der Ausklang', text: 'Montag, 2. November, 19 Uhr im Zoom: Erfahrungen austauschen, Feedback untereinander. Danach darfst du dein Business in der Community-Gruppe vorstellen.' },
 ];
+const ABLAUF_HINWEIS = 'Mein Tipp: Nimm dir täglich 30 Minuten Zeit – wann auch immer. Alles läuft in der WhatsApp-Gruppe, bis unsere Plattform fertig ist. Dann lade ich euch alle dazu ein.';
 
 const FUER = [
   'gehört werden willst – im Meeting, am Telefon, vor Kunden, auf der Bühne',
-  'täglich fünf Minuten und ein Handy hast',
+  'täglich 30 Minuten und ein Handy hast',
   'dich selbst hören willst, auch wenn es am Anfang unangenehm ist',
   'Feedback willst statt Applaus',
-  'eine Woche durchhältst – sieben Aufnahmen, keine mehr',
+  'eine Woche lang jeden Tag einen kleinen Schritt gehst',
 ];
 const NICHT_FUER = [
   'eine perfekte Aufnahme willst statt einer echten',
-  'Tipps sammeln, aber nichts aufnehmen möchtest',
+  'Tipps sammeln, aber nichts ausprobieren möchtest',
   'erst eine Bühne brauchst, bevor du übst',
   'erwartest, dass die KI das Sprechen für dich übernimmt',
 ];
@@ -308,6 +304,21 @@ function Schluessel() {
       </defs>
       <path fill="url(#cc-schluessel-gold)" d="M14.5 2a7.5 7.5 0 0 0-7.2 9.6L2 16.9V22h5.1v-2.6h2.6v-2.6h2.6l1.3-1.3A7.5 7.5 0 1 0 14.5 2Zm2 4.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4Z" />
     </svg>
+  );
+}
+
+/** Der Inhalt eines Tages - in der Programm-Kachel (nach dem Eintrag) und im Tages-Streifen (an seinem Tag). */
+function TagInhalt({ t }: { t: Tag }) {
+  return (
+    <div className="font-inter text-[15px] leading-relaxed text-midnight-blue">
+      <p className="font-cormorant text-xl italic leading-snug sm:text-2xl">„{t.einstieg}"</p>
+      <p className="mt-3">{t.inhalt}</p>
+      <p className="mt-3"><b className="font-montserrat font-extrabold">Deine Aufgabe: </b>{t.aufgabe}</p>
+      {t.zusatz && <p className="mt-2 text-midnight-blue/85">{t.zusatz}</p>}
+      <p className="mt-3 border-l-4 border-[#D4AF37] bg-pearl-white px-4 py-2 font-montserrat text-sm font-bold">Übungssatz: „{UEBUNGSSATZ}"</p>
+      <p className="mt-3"><b className="font-montserrat font-extrabold">Reflexion: </b>{t.reflexion}</p>
+      <p className="mt-3 text-[14px] text-midnight-blue/85">Wenn du magst, teile deinen Versuch in der Gruppe. Du bekommst persönliches Feedback von mir – und wir können miteinander und aneinander wachsen. Wer still mitübt, gehört genauso dazu.</p>
+    </div>
   );
 }
 
@@ -372,6 +383,32 @@ function Kopfbild({ datei, alt, quer }: { datei: string; alt: string; quer?: boo
 }
 const KOPF = 'grid items-end gap-6 sm:grid-cols-[minmax(0,1fr)_auto] sm:gap-10';
 
+/** Kleine runde Gesichter am Rand des Netzwerk-Blocks, die leicht schweben (Claudia, 22.09.2026 13:19 UTC: "kleine
+ *  Gesichter, die sich so ein bisschen bewegen ... das soll das Netzwerk darstellen"). Nur ihre eigenen Fotos aus den
+ *  Kopf-Kacheln - Mitglieder erst mit Einwilligung. Ab md sichtbar; bei reduzierter Bewegung stehen sie still. */
+const NETZ_GESICHTER: { datei: string; stil: React.CSSProperties }[] = [
+  { datei: 'buch', stil: { left: '3%', top: '12%' } },
+  { datei: 'kamera', stil: { left: '9%', top: '46%' } },
+  { datei: 'zuhoeren', stil: { left: '4%', top: '78%' } },
+  { datei: 'mappe', stil: { right: '4%', top: '10%' } },
+  { datei: 'tonstudio', stil: { right: '10%', top: '44%' } },
+  { datei: 'telefon', stil: { right: '3%', top: '76%' } },
+];
+function NetzGesichter() {
+  return (
+    <div aria-hidden="true" className="pointer-events-none absolute inset-0 hidden md:block">
+      <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <path d="M6 16 L14 50 L8 82 M94 14 L88 48 L95 80 M14 50 L40 30 M88 48 L60 30" fill="none" stroke="#D4AF37" strokeOpacity=".28" strokeWidth=".25" vectorEffect="non-scaling-stroke" />
+      </svg>
+      {NETZ_GESICHTER.map((g, i) => (
+        <span key={g.datei} style={{ ...g.stil, animationDelay: `${i * 0.9}s`, animationDuration: `${6 + (i % 3)}s` }} className="cc-schwebt absolute h-12 w-12 overflow-hidden rounded-full border-2 border-white shadow-[0_8px_20px_-6px_rgba(10,22,40,0.45)] ring-1 ring-[#D4AF37]/70 lg:h-14 lg:w-14">
+          <img src={`/challenge/karten/${g.datei}.webp`} alt="" width={240} height={320} loading="lazy" decoding="async" className="h-full w-full object-cover object-[50%_18%]" />
+        </span>
+      ))}
+    </div>
+  );
+}
+
 function Haken() {
   return <span aria-hidden="true" className="mt-2 h-2.5 w-2.5 flex-none rotate-[-45deg] border-b-2 border-r-2 border-[#D4AF37]" />;
 }
@@ -393,11 +430,8 @@ export default function Challenge() {
   const heute = new Date();
   const stand = standZeile(heute);
   const startKurz = new Intl.DateTimeFormat('de-DE', { day: 'numeric', month: 'long', year: 'numeric' }).format(START);
-  // Sieben Schritte: Inhalte erst nach dem Eintrag (Claudia, 22.09.2026 12:28 UTC: "weckt Neugier"). Merkt sich das Handy.
-  const [eingetragen, setEingetragen] = useState(false);
-  useEffect(() => {
-    try { if (window.localStorage.getItem(EINGETRAGEN_SCHLUESSEL) === '1') setEingetragen(true); } catch { /* kein Speicher */ }
-  }, []);
+  // Die Inhalte der sieben Schritte oeffnen sich in der Challenge-Woche, je an ihrem Tag (Claudia, 22.09.2026 13:05 UTC:
+  // "nicht 'nach dem Eintragen', sondern 'in der Challenge-Woche' - vorher nicht") - siehe `frei`.
   // Welche Tage sind freigeschaltet? Beim Vorrendern gilt das Bau-Datum, im Browser der echte Tag.
   const frei = TAGE.map((_, i) => heute >= freischaltung(heute, i));
   const listeRef = useRef<HTMLOListElement>(null);
@@ -427,7 +461,7 @@ export default function Challenge() {
     name: 'Sieben Tage für deine Wirkung – die Video-Challenge',
     description: 'Sieben Tage, jeden Tag eine Aufgabe und eine Minute Video mit dem Handy – mit Feedback von Claudia Conen. Kostenfrei, in einer WhatsApp-Gruppe.',
     totalTime: 'P7D',
-    step: TAGE.map((t, i) => ({ '@type': 'HowToStep', position: i + 1, name: `Tag ${i + 1}: ${t.titel}`, text: t.aufgabe })),
+    step: TAGE.map((t, i) => ({ '@type': 'HowToStep', position: i + 1, name: `Tag ${i + 1}: ${t.titel} (${t.schwerpunkt})`, text: t.aufgabe })),
     url: `https://claudiaconen.com${PFAD}`,
   };
 
@@ -439,11 +473,11 @@ export default function Challenge() {
         path={PFAD}
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(strukturierteDaten) }} />
-      <Navigation />
+      <Navigation hell />
 
       {/* Kopf: Foto-Reihen laufen hinter dem Text (Claudia, 22.09.2026 10:38 UTC: "dass diese Kacheln
           von der Webinar-Seite im Hintergrund hier auch laufen"), davor eine deckende Text-Kachel. */}
-      <header className="relative overflow-hidden bg-[#0A1628] pt-32 pb-16 sm:pt-40 sm:pb-24">
+      <header className="relative overflow-hidden bg-[#0A1628] pt-28 pb-14 sm:pt-36 sm:pb-20">
         <FotoReihen />
         <div className="relative z-10 mx-auto max-w-6xl px-6">
           <div className="mb-6 text-pearl-white/75">
@@ -461,18 +495,14 @@ export default function Challenge() {
               Sieben Tage für deine Wirkung.
             </h1>
             <p className="mt-5 font-cormorant text-2xl italic leading-snug text-[#F7E7CE] sm:text-3xl">Zeig dich. Sei dabei. Lerne deine Wirkung kennen.</p>
-            {/* Der eine Satz, der sagt, was passiert (Kritiker-Durchgang 22.09.2026: "Kernversprechen kommt zu spaet"). */}
+            {/* Claudia, 22.09.2026 13:01 UTC: "auf dem Banner ist mir zu viel Text" - ein Satz zur Dauer, der Fingerabdruck-
+                Satz, "mehr nicht". Die Punkte stehen hell unter dem Kopf, der WhatsApp-Hinweis steht im Formular. */}
             <p className="mt-4 max-w-xl font-montserrat text-base font-extrabold leading-snug text-white sm:text-lg">
-              Sieben Tage, jeden Tag ein Video von einer Minute in der WhatsApp-Gruppe – und jeden Tag mein Feedback. Kostenfrei.
+              Sieben Tage. 30 Minuten am Tag – für deine persönliche Wirkung.
             </p>
             <p className="mt-4 max-w-xl font-inter text-lg leading-relaxed text-white">
-              Nutze eine der wertvollsten Marketing-Möglichkeiten der Welt: deinen akustischen Fingerabdruck. Weil du ein Unikat bist. Entdecke hier in der Challenge:
+              Nutze eine der wertvollsten Marketing-Möglichkeiten der Welt: deinen akustischen Fingerabdruck. Weil du ein Unikat bist.
             </p>
-            <ul className="mt-3 grid list-none gap-1.5 p-0 sm:grid-cols-2">
-              {['Deine Wirkung', 'Deine Keynote-Möglichkeiten', 'Warum Menschen dir zuhören', 'Was wirklich zählt', 'Tipps, wie KI deine echte Kommunikation unterstützt', 'Das Workbook „Entdecke deine Stimmwirkung" – zum Blättern und Mitnehmen'].map((z) => (
-                <li key={z} className="flex items-start gap-3 font-montserrat text-[15px] font-bold text-white"><Haken />{z}</li>
-              ))}
-            </ul>
             <p className={`mt-6 inline-block rounded-md px-4 py-3 font-montserrat text-sm font-extrabold uppercase tracking-[0.06em] text-midnight-blue sm:text-base ${GOLD}`}>
               {stand}
             </p>
@@ -484,17 +514,29 @@ export default function Challenge() {
                 Die sieben Tage ansehen ↓
               </a>
             </div>
-            <p className="mt-5 max-w-xl font-inter text-sm text-pearl-white/80">
-              Die Challenge läuft in einer WhatsApp-Gruppe. Dort sehen die Mitglieder gegenseitig Handynummern und Videos – anders geht es nicht. Wer dabei ist, erklärt sich damit einverstanden.
-            </p>
           </div>
         </div>
       </header>
 
+      {/* Die Punkte, hell unter dem Kopf (Claudia, 22.09.2026 13:05 UTC). */}
+      <Abschnitt className="bg-pearl-white pt-10 sm:pt-14" label="entdecke-titel">
+        <div className="mx-auto max-w-6xl px-6">
+          <h2 id="entdecke-titel" className="flex items-center gap-3 font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] text-midnight-blue">
+            <span aria-hidden="true" className={`cc-linie h-[3px] w-7 rounded-full ${GOLD}`} />
+            Entdecke in der Challenge
+          </h2>
+          <ul className="mt-4 grid list-none gap-3 p-0 sm:grid-cols-2 lg:grid-cols-3">
+            {ENTDECKE.map((z, i) => (
+              <li key={z} style={{ ['--i' as string]: i }} className={`cc-stufe flex items-start gap-3 bg-white px-4 py-3.5 font-montserrat text-[15px] font-bold text-midnight-blue ${KACHEL}`}><Haken />{z}</li>
+            ))}
+          </ul>
+        </div>
+      </Abschnitt>
+
       {/* Anmeldung direkt unter dem Kopf (Kritiker-Durchgang 22.09.2026, Claudias Ja 12:22 UTC: "mach das alles so"). */}
       <section id="anmeldung" className="bg-pearl-white pt-6 pb-4 sm:pt-8" aria-label="Anmeldung zur Challenge">
         <div className="mx-auto max-w-6xl px-6">
-          <ChallengeAnmeldung start={startKurz} onEingetragen={() => setEingetragen(true)} />
+          <ChallengeAnmeldung start={startKurz} />
         </div>
       </section>
 
@@ -510,11 +552,13 @@ export default function Challenge() {
                 <span className="mt-1 block underline decoration-[#D4AF37] decoration-[4px] underline-offset-[6px]">Du bleibst im Kopf.</span>
               </h2>
               <p className="mt-4 max-w-2xl font-inter text-lg text-midnight-blue">
-                Jeden Tag bekommst du einen weiteren Schlüssel – als Türöffner zu deinem Gegenüber. Du erhältst eingesprochene Audios, Hinweise und ein Feedback zu deinem Video. Für jedes Video hast du 24 Stunden Zeit – und es dauert nur eine Minute. Entdecke die Inhalte der sieben Schritte nach dem Eintragen.
+                Jeden Tag ein Audio-Impuls von mir mit einem Gedanken, in dem du dich wiedererkennst, und einer konkreten Aufgabe – 30 Minuten am Tag, einschließlich Übung, Aufnahme und Reflexion. Wer seine Aufnahme in der Gruppe teilt, bekommt persönliches Feedback von mir – und alle lernen mit. Die Inhalte öffnen sich in der Challenge-Woche, jeden Tag einer.
               </p>
             </div>
             <Kopfbild datei="keynote" alt="Claudia Conen auf der Bühne bei einer Keynote" />
           </div>
+          {/* Die finale Kachel geht ueber die volle Breite (Claudia, 22.09.2026 13:05 UTC: "so breit wie drei ... von ganz
+              links bis ganz rechts, das ist ja der finale"); die Inhalte oeffnen sich je an ihrem Tag der Challenge-Woche. */}
           <ol className="mt-9 grid list-none gap-3.5 p-0 sm:grid-cols-2 lg:grid-cols-3">
             {SCHRITTE.map((s, i) => {
               const letzter = i === SCHRITTE.length - 1;
@@ -522,27 +566,31 @@ export default function Challenge() {
                 <li
                   key={s.titel}
                   style={{ ['--i' as string]: i }}
-                  className={`cc-stufe p-6 hover:-translate-y-0.5 ${KACHEL} ${letzter ? `${GOLD} border-transparent text-midnight-blue` : 'bg-pearl-white text-midnight-blue'}`}
+                  className={`cc-stufe p-6 hover:-translate-y-0.5 ${KACHEL} ${letzter ? `${GOLD} border-transparent text-midnight-blue sm:col-span-2 lg:col-span-3 lg:flex lg:items-start lg:gap-8` : 'bg-pearl-white text-midnight-blue'}`}
                 >
                   {/* 3-D-Icons nach den Flyer-Piktogrammen (Claudias Impuls 22.09.2026 11:48 UTC), erzeugt mit
                       skripte/schritt_icons.py ueber ihren Gemini-Schluessel. */}
-                  <div className="flex items-center gap-4">
-                    <img src={`/icons/schritt-${i + 1}.webp`} alt="" width={256} height={256} loading="lazy" decoding="async" className="h-16 w-16 flex-none drop-shadow-[0_8px_12px_rgba(10,22,40,0.25)]" />
+                  <div className="flex flex-none items-center gap-4">
+                    <img src={`/icons/${s.icon}.webp`} alt="" width={256} height={256} loading="lazy" decoding="async" className={`flex-none drop-shadow-[0_8px_12px_rgba(10,22,40,0.25)] ${letzter ? 'h-16 w-16 lg:h-24 lg:w-24' : 'h-16 w-16'}`} />
                     <span aria-hidden="true" className={`font-montserrat text-3xl font-black ${letzter ? 'text-midnight-blue/40' : 'text-[#D4AF37]'}`}>{String(i + 1).padStart(2, '0')}</span>
                   </div>
-                  <h3 className="mt-3 font-montserrat text-base font-extrabold uppercase tracking-wide">{s.titel}</h3>
-                  {eingetragen ? (
-                    <details className="group mt-2">
-                      <summary className="cursor-pointer list-none font-montserrat text-sm font-bold underline decoration-[#D4AF37] underline-offset-4 [&::-webkit-details-marker]:hidden">
-                        <span className="group-open:hidden">Aufklappen ▾</span><span className="hidden group-open:inline">Zuklappen ▴</span>
-                      </summary>
-                      <p className="mt-2.5 font-inter text-[15px] leading-relaxed">{s.inhalt ?? s.text}</p>
-                    </details>
-                  ) : (
-                    <a href="#anmelden" className={`mt-2.5 inline-flex items-center gap-2 font-montserrat text-xs font-bold uppercase tracking-[0.12em] no-underline ${letzter ? 'text-midnight-blue/80' : 'text-midnight-blue/70'} hover:text-midnight-blue`}>
-                      <Schluessel /> Entdecke den Inhalt nach dem Eintragen
-                    </a>
-                  )}
+                  <div className="min-w-0 flex-1">
+                    {letzter && <p className="mt-3 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-midnight-blue/80 lg:mt-0">Das Finale · Dein Kopf. Ihr Gefühl.</p>}
+                    <h3 className={`font-montserrat font-extrabold uppercase tracking-wide ${letzter ? 'mt-1 text-lg sm:text-xl' : 'mt-3 text-base'}`}>{s.titel}</h3>
+                    <p className="mt-1 font-montserrat text-[11px] font-bold uppercase tracking-[0.14em] text-midnight-blue/70">{s.schwerpunkt}</p>
+                    {frei[i] ? (
+                      <details className="group mt-2">
+                        <summary className="cursor-pointer list-none font-montserrat text-sm font-bold underline decoration-[#D4AF37] underline-offset-4 [&::-webkit-details-marker]:hidden">
+                          <span className="group-open:hidden">Aufklappen ▾</span><span className="hidden group-open:inline">Zuklappen ▴</span>
+                        </summary>
+                        <div className="mt-2.5"><TagInhalt t={s} /></div>
+                      </details>
+                    ) : (
+                      <p className={`mt-2.5 flex items-center gap-2 font-montserrat text-xs font-bold uppercase tracking-[0.12em] ${letzter ? 'text-midnight-blue/80' : 'text-midnight-blue/70'}`}>
+                        <Schluessel /> Entdecke den Inhalt in der Challenge-Woche · Tag {i + 1} · {KURZ.format(freischaltung(heute, i))}
+                      </p>
+                    )}
+                  </div>
                 </li>
               );
             })}
@@ -550,19 +598,25 @@ export default function Challenge() {
         </div>
       </Abschnitt>
 
-      {/* So läuft es - drei Zeilen, nicht mehr */}
+      {/* So laeuft es ab - Claudias Diktate 13:07 + 13:10 UTC, sortiert (ABLAUF). */}
       <Abschnitt id="ablauf" className="bg-pearl-white py-12 sm:py-16" label="ablauf-titel">
         <div className="mx-auto max-w-6xl px-6">
-          <Kicker text="So läuft es" hell />
-          <h2 id="ablauf-titel" className="sr-only">So läuft die Challenge</h2>
-          <ol className="mt-6 grid list-none gap-3 p-0 sm:grid-cols-3">
-            {ABLAUF.map((s, i) => (
-              <li key={s} style={{ ['--i' as string]: i }} className={`cc-stufe flex items-start gap-4 bg-white px-5 py-5 text-midnight-blue ${KACHEL}`}>
-                <span className={`flex h-9 w-9 flex-none items-center justify-center rounded-md font-montserrat text-sm font-black text-midnight-blue ${GOLD}`}>{i + 1}</span>
-                <span className="font-inter text-[15px] leading-relaxed">{s}</span>
+          <Kicker text="So läuft es ab" hell />
+          <h2 id="ablauf-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
+            Sieben Tage für deine Wirkung – Schritt für Schritt.
+          </h2>
+          <ol className="mt-7 grid list-none gap-3 p-0 sm:grid-cols-2 lg:grid-cols-4">
+            {ABLAUF.map((a, i) => (
+              <li key={a.titel} style={{ ['--i' as string]: i }} className={`cc-stufe bg-white px-5 py-5 text-midnight-blue ${KACHEL}`}>
+                <div className="flex items-center gap-3">
+                  <span className={`flex h-9 w-9 flex-none items-center justify-center rounded-md font-montserrat text-sm font-black text-midnight-blue ${GOLD}`}>{i + 1}</span>
+                  <h3 className="font-montserrat text-sm font-extrabold uppercase tracking-wide">{a.titel}</h3>
+                </div>
+                <p className="mt-3 font-inter text-[15px] leading-relaxed">{a.text}</p>
               </li>
             ))}
           </ol>
+          <p className="mt-5 max-w-3xl border-l-4 border-[#D4AF37] bg-white px-5 py-3 font-inter text-[15px] leading-relaxed text-midnight-blue">{ABLAUF_HINWEIS}</p>
         </div>
       </Abschnitt>
 
@@ -577,14 +631,18 @@ export default function Challenge() {
           <Kicker text="Dein Wegweiser" hell />
           <h2 id="tage-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
             Sieben Tage. Jeden Tag eine Anleitung zum Aufklappen –
-            <span className="mt-1 block underline decoration-[#D4AF37] decoration-[4px] underline-offset-[6px]">jeden Tag fünf Minuten für deine Wirkung.</span>
+            <span className="mt-1 block underline decoration-[#D4AF37] decoration-[4px] underline-offset-[6px]">jeden Tag 30 Minuten für deine Wirkung.</span>
           </h2>
           <p className="mt-4 max-w-3xl font-inter text-lg leading-relaxed text-midnight-blue">
             Warum hören Menschen dir gerne zu? „Ich mag meine Stimme nicht." Story, Elevator Pitch, Keynote, Miteinander, jeden Tag telefonieren, Kaltakquise, Kundengewinnung – all das und noch viel mehr gehört dazu.
           </p>
+          <p className="mt-5 max-w-3xl border-l-4 border-[#D4AF37] bg-white px-5 py-4 font-cormorant text-2xl italic leading-snug text-midnight-blue sm:text-3xl">
+            „{UEBUNGSSATZ}"
+            <span className="mt-1 block font-montserrat text-[11px] font-extrabold not-italic uppercase tracking-[0.16em] text-midnight-blue/70">Unser Satz – an allen sieben Tagen</span>
+          </p>
           <div className={`mt-7 flex flex-wrap items-center justify-between gap-x-6 gap-y-1 rounded-md px-5 py-2.5 font-montserrat text-[13px] font-extrabold uppercase tracking-[0.12em] text-midnight-blue ${GOLD}`}>
-            <span>Gruppentreffen live im Zoom · Montag, 26. Oktober 2026 · 19:00 Uhr</span>
-            <span>Abschlusstreffen · Montag, 2. November 2026 · 19:00 Uhr</span>
+            <span>Auftakt live im Zoom · Montag, 26. Oktober 2026 · 19:00 Uhr</span>
+            <span>Abschluss · Montag, 2. November 2026 · 19:00–20:00 Uhr · Zoom freiwillig</span>
           </div>
 
           <details className={`group mt-8 text-midnight-blue ${GOLD} ${KACHEL} border-transparent shadow-[0_18px_40px_-18px_rgba(212,175,55,0.7)]`}>
@@ -667,25 +725,8 @@ export default function Challenge() {
                     </summary>
                     <div className="border-t border-[#D4AF37]/40 px-5 pb-5 pt-4 sm:px-7 sm:pb-6">
                       <h3 className="font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">{t.titel}</h3>
-                      <p className="mt-2 font-inter text-[15px] leading-relaxed">
-                        <b className="font-montserrat font-extrabold">Deine Aufgabe: </b>
-                        {t.aufgabe}
-                      </p>
-                      {t.satz && (
-                        <blockquote className="mt-3 border-l-4 border-[#D4AF37] bg-pearl-white px-5 py-3 font-cormorant text-xl italic leading-snug text-midnight-blue sm:text-2xl">
-                          „{t.satz}"
-                        </blockquote>
-                      )}
-                      <p className="mt-3 font-montserrat text-[11px] font-extrabold uppercase tracking-[0.14em] text-midnight-blue/80">{t.schrittTitel}</p>
-                      <ul className="mt-1.5 grid list-none gap-1.5 p-0">
-                        {t.schritte.map((s) => (
-                          <li key={s} className="flex items-start gap-3 font-inter text-[15px] leading-normal">
-                            <Haken />
-                            <span>{s}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      {t.danach && <p className="mt-4 font-montserrat text-base font-bold">{t.danach}</p>}
+                      <p className="mt-1 font-montserrat text-[11px] font-bold uppercase tracking-[0.14em] text-midnight-blue/70">{t.schwerpunkt}</p>
+                      <div className="mt-3"><TagInhalt t={t} /></div>
                     </div>
                   </details>
                   )}
@@ -823,17 +864,19 @@ export default function Challenge() {
             </div>
             <Kopfbild datei="tonstudio" alt="Claudia Conen am Mikrofon im Tonstudio" />
           </div>
-          <div className="mt-9 grid gap-3 sm:grid-cols-3 lg:grid-cols-5">
+          <div className="mt-9 grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
             {WERKZEUG.map((w, i) => (
-              <article key={w.titel} style={{ ['--i' as string]: i }} className={`cc-stufe group relative bg-white p-4 text-midnight-blue ${KACHEL}`}>
-                <div className="flex items-start gap-3">
-                  <img src={`/icons/${w.icon}.webp`} alt="" width={256} height={256} loading="lazy" decoding="async" className="h-12 w-12 flex-shrink-0 drop-shadow-[0_6px_10px_rgba(10,22,40,0.25)] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110" />
-                  <div className="min-w-0 flex-1">
-                    <h3 className="font-montserrat text-[0.85rem] font-extrabold leading-snug">{w.titel}</h3>
-                    <p className="mt-1 font-inter text-[0.78rem] leading-snug">{w.text}</p>
-                  </div>
-                </div>
-              </article>
+              <details key={w.titel} style={{ ['--i' as string]: i }} className={`cc-stufe group bg-white p-5 text-midnight-blue ${KACHEL}`}>
+                <summary className="flex cursor-pointer list-none items-start gap-4 [&::-webkit-details-marker]:hidden">
+                  <img src={`/icons/${w.icon}.webp`} alt="" width={256} height={256} loading="lazy" decoding="async" className="h-16 w-16 flex-none drop-shadow-[0_8px_12px_rgba(10,22,40,0.25)] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-105" />
+                  <span className="min-w-0 flex-1">
+                    <span className="block font-montserrat text-base font-extrabold uppercase tracking-wide">{w.titel}</span>
+                    <span className="mt-1 block font-inter text-[15px] leading-relaxed">{w.vorschau}</span>
+                    <span className="mt-2 inline-block font-montserrat text-xs font-bold underline decoration-[#D4AF37] underline-offset-4"><span className="group-open:hidden">Mehr lesen ▾</span><span className="hidden group-open:inline">Zuklappen ▴</span></span>
+                  </span>
+                </summary>
+                <p className="mt-3 border-t border-[#D4AF37]/40 pt-3 font-inter text-[15px] leading-relaxed">{w.text}</p>
+              </details>
             ))}
           </div>
 
@@ -853,10 +896,10 @@ export default function Challenge() {
               <Kicker text="Zum Mitnehmen" hell />
               <h3 className="mt-4 font-montserrat text-2xl font-extrabold uppercase text-midnight-blue sm:text-3xl">Workbook „Entdecke deine Stimmwirkung"</h3>
               <p className="mt-3 font-montserrat text-base font-bold text-midnight-blue">
-                Buchauszug aus dem <em>Brainself</em>-Buch – gemeinsam veröffentlicht mit dem Neurowissenschaftler Karsten Brocke und weiteren Experten.
+                Mein Buchauszug aus dem <em>Brainself</em>-Buch, das ich gemeinsam mit dem Neurowissenschaftler Karsten Brocke und weiteren Experten veröffentlicht habe. Das Kapitel „Entdecke deine Stimmwirkung" stammt von mir.
               </p>
               <p className="mt-3 font-inter leading-relaxed text-midnight-blue">
-                Als Workbook zum Ausfüllen: deine akustische Visitenkarte, Übungen für Stimme und Wirkung, Platz für deine eigenen Sätze. 41 Seiten zum Blättern – oder als PDF.
+                Ein Workbook zur Selbsterkenntnis – für deine akustische Visitenkarte und eine wertschätzende, achtsame Kommunikation im Business. Zum Ausfüllen, mit Platz für deine eigenen Sätze. 41 Seiten zum Blättern – oder als PDF.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <button type="button" onClick={() => setBuchOffen(true)} className={`inline-flex items-center rounded-full px-6 py-3.5 font-montserrat text-sm font-bold text-midnight-blue ${GOLD}`}>
@@ -924,27 +967,38 @@ export default function Challenge() {
         </div>
       </Abschnitt>
 
-      {/* Fuer wen - und fuer wen nicht (Claudia, 22.09.2026: "fuer wen ist das? Und fuer wen ist das nicht?") */}
-      <Abschnitt id="fuer-wen" className="bg-[#0A1628] py-14 text-pearl-white sm:py-20" label="fuer-wen-titel">
+      {/* Fuer wen - hell mit 3-D-Icons (Claudia, 22.09.2026 13:15/13:17 UTC: "doofer Satz", "sieht sehr haesslich aus",
+          "so schoene Icons ... bring da noch welche ein"). Ueberschrift und "30 Minuten am Tag" in ihrem Wortlaut. */}
+      <Abschnitt id="fuer-wen" className="bg-pearl-white py-16 text-midnight-blue sm:py-24" label="fuer-wen-titel">
         <div className="mx-auto max-w-6xl px-6">
-          <Kicker text="Für wen das ist" />
+          <Kicker text="Für wen das ist" hell />
           <h2 id="fuer-wen-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">
-            Sieben Tage sind kurz. Für die Richtigen reichen sie.
+            Sieben Tage zur Selbsterkenntnis. Ein Anfang.
+            <span className="mt-1 block underline decoration-[#D4AF37] decoration-[4px] underline-offset-[6px]">Eine unsichtbare Brücke in die Zuhörer hinein.</span>
           </h2>
-          <div className="mt-8 grid gap-px overflow-hidden rounded-[12px] border border-[#D4AF37]/40 bg-[#D4AF37]/30 sm:grid-cols-2">
-            <div className="bg-[#0F1F3A] p-6 sm:p-7">
-              <h3 className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#EBD197]">Für dich, wenn du</h3>
+          <p className={`mt-6 inline-block rounded-md px-4 py-3 font-montserrat text-sm font-extrabold uppercase tracking-[0.06em] text-midnight-blue ${GOLD}`}>
+            30 Minuten am Tag – für dich, deine Wirkung.
+          </p>
+          <div className="mt-8 grid gap-4 md:grid-cols-2">
+            <div style={{ ['--i' as string]: 0 }} className={`cc-stufe bg-white p-6 sm:p-7 ${KACHEL}`}>
+              <div className="flex items-center gap-4">
+                <img src="/icons/wirkung.webp" alt="" width={256} height={256} loading="lazy" decoding="async" className="h-16 w-16 flex-none drop-shadow-[0_8px_12px_rgba(10,22,40,0.25)]" />
+                <h3 className="font-montserrat text-base font-extrabold uppercase tracking-wide">Für dich, wenn du</h3>
+              </div>
               <ul className="mt-4 grid list-none gap-2.5 p-0">
-                {FUER.map((s) => (
-                  <li key={s} className="flex items-start gap-3 font-inter text-[15px] leading-relaxed text-white"><Haken /><span>{s}</span></li>
+                {FUER.map((z) => (
+                  <li key={z} className="flex items-start gap-3 font-inter text-[15px] leading-relaxed"><Haken /><span>{z}</span></li>
                 ))}
               </ul>
             </div>
-            <div className="bg-[#0F1F3A] p-6 sm:p-7">
-              <h3 className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.2em] text-pearl-white/70">Nicht für dich, wenn du</h3>
+            <div style={{ ['--i' as string]: 1 }} className={`cc-stufe bg-white p-6 sm:p-7 ${KACHEL}`}>
+              <div className="flex items-center gap-4">
+                <img src="/icons/ki.webp" alt="" width={256} height={256} loading="lazy" decoding="async" className="h-16 w-16 flex-none drop-shadow-[0_8px_12px_rgba(10,22,40,0.25)]" />
+                <h3 className="font-montserrat text-base font-extrabold uppercase tracking-wide">Nicht für dich, wenn du</h3>
+              </div>
               <ul className="mt-4 grid list-none gap-2.5 p-0">
-                {NICHT_FUER.map((s) => (
-                  <li key={s} className="flex items-start gap-3 font-inter text-[15px] leading-relaxed text-pearl-white/80"><span aria-hidden="true" className="mt-0.5 font-montserrat font-black text-pearl-white/40">✕</span><span>{s}</span></li>
+                {NICHT_FUER.map((z) => (
+                  <li key={z} className="flex items-start gap-3 font-inter text-[15px] leading-relaxed"><span aria-hidden="true" className="mt-0.5 font-montserrat font-black text-[#D4AF37]">✕</span><span>{z}</span></li>
                 ))}
               </ul>
             </div>
@@ -982,9 +1036,32 @@ export default function Challenge() {
         </div>
       </Abschnitt>
 
-      {/* Netzwerk Mittelstand - deine Community. Claudia, 22.09.2026 11:29 UTC: "nicht so yellow gelb beige",
-          "gar nicht viel drauf": Mitentdecker unter den ersten 27, Termin des ersten Zoom-Calls (von Gabis Seite
-          community.claudiaconen.com/netzwerkwebinar, 22.09.2026: Di 3.11.2026, 18:18 Uhr). Gabi steht NUR hier. */}
+      {/* Schluss - Claudias Satz (22.09.2026, 10:59 UTC), "gestalten" ersetzt: "Gestalten ist ein bloedes Wort". */}
+      <Abschnitt className="py-16 text-center text-pearl-white sm:py-24" style={DUNKEL} label="schluss" welle>
+        <div className="mx-auto max-w-4xl px-6">
+          <p className="flex items-center justify-center gap-3 font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] text-[#EBD197]">
+            <span aria-hidden="true" className={`h-[3px] w-7 rounded-full ${GOLD}`} />
+            Willst du dich speichern?
+          </p>
+          <h2 id="schluss" className="mt-5 font-montserrat text-3xl font-extrabold leading-tight sm:text-5xl">
+            Willst du im KI-Zeitalter mit deiner Persönlichkeit punkten – statt vergleichbar über den Preis Kunden zu gewinnen? <span className="gold-text-animated">Dann schließ dich unserem Netzwerk an: die Unverwechselbaren, die Community für den Mittelstand.</span>
+          </h2>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <a href="#anmelden" className={`inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue ${GOLD}`}>
+              Ich bin dabei – eintragen
+            </a>
+            <a href="#community" className="inline-flex items-center rounded-full border-2 border-[#D4AF37] px-7 py-4 font-montserrat text-sm font-bold text-pearl-white hover:text-[#EBD197]">
+              Zum Netzwerk der Unverwechselbaren ↓
+            </a>
+          </div>
+        </div>
+      </Abschnitt>
+
+      {/* Netzwerk Mittelstand - deine Community, als letzter Abschnitt (Claudia, 22.09.2026 13:19 UTC: "das soll unten
+          als Letztes sein"). Machart ihrer Community-Startseite (ihr Foto 13:17 UTC): hell, rundes Foto, grosse
+          Ueberschrift mit goldener Kontur, "Netzwerk" in Schreibschrift, Satz in einer weissen Pille, drei Kennzahlen
+          (nur, was hier schon steht), kleine Gesichter, die sich leicht bewegen (ihre eigenen Fotos - keine
+          Mitglieder ohne Einwilligung), Gabi und Claudia bleiben. Gabi steht NUR hier. */}
       <Abschnitt id="community" className="bg-pearl-white py-16 sm:py-24" label="community-titel">
         <div className="mx-auto max-w-6xl px-6">
           {/* 8-Sekunden-Clip (Veo 3.1 ueber Claudias Google-Schluessel, ihr Ja 22.09.2026 11:40 UTC): Mikrofon,
@@ -1002,67 +1079,64 @@ export default function Challenge() {
               </p>
             </div>
           </div>
-          <div className={`mt-4 grid items-center gap-8 bg-white p-7 text-midnight-blue sm:p-10 md:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] ${KACHEL} border-[#D4AF37] shadow-[0_18px_40px_-18px_rgba(212,175,55,0.5)]`}>
-            <div>
-              <Kicker text="Die Unverwechselbaren · nach der Challenge" hell />
-              <h2 id="community-titel" className="mt-4 font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
-                Netzwerk Mittelstand
-                <span className="mt-2 block font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] text-[#B8860B]">deine Community</span>
+          <div className={`relative mt-4 overflow-hidden bg-white px-6 py-10 text-center text-midnight-blue sm:px-10 sm:py-14 ${KACHEL} border-[#D4AF37] shadow-[0_18px_40px_-18px_rgba(212,175,55,0.5)]`}>
+            <NetzGesichter />
+            <div className="relative">
+              <figure className="mx-auto m-0 h-28 w-28 overflow-hidden rounded-full border-4 border-white shadow-[0_12px_30px_-10px_rgba(212,175,55,0.8)] ring-2 ring-[#D4AF37] sm:h-36 sm:w-36">
+                <img src="/challenge/karten/messe.webp" alt="Claudia Conen" width={240} height={320} loading="lazy" decoding="async" className="h-full w-full object-cover object-[50%_15%]" />
+              </figure>
+              <p className="mt-4 font-montserrat text-lg font-extrabold">Claudia Conen</p>
+              <p className="mt-1 inline-block rounded-full bg-pearl-white px-3 py-1 font-inter text-sm">Keynote-Speakerin · Trainerin · Coach</p>
+              <h2 id="community-titel" className="mt-6 font-montserrat text-4xl font-black leading-[1.05] tracking-tight sm:text-6xl">
+                Willkommen bei den
+                <span className="block text-transparent" style={{ WebkitTextStroke: '2px #D4AF37' }}>Unverwechselbaren.</span>
+                <span className="mt-2 block font-cormorant text-3xl font-medium italic tracking-normal text-[#D4AF37] sm:text-5xl">Netzwerk Mittelstand</span>
+                <span className="mt-2 block font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] text-midnight-blue/80">Die Community · nach der Challenge</span>
               </h2>
-              <p className="mt-5 font-inter text-lg leading-relaxed text-midnight-blue">
-                Willst du Mitentdecker sein – einer der ersten 27 – in einem Netzwerk, in dem deine Produkte, deine Persönlichkeit und deine Termine eine Bühne haben? Hier zählt Empfehlung mehr als Werbung.
+              <p className="mx-auto mt-6 max-w-2xl rounded-2xl bg-pearl-white px-6 py-4 font-inter text-lg leading-relaxed">
+                Menschen, die sich zusammentun und ein wachsendes Netzwerk bilden – weil sie wissen: Gemeinsam sind wir stärker. Hier zählt Empfehlung mehr als Werbung.
               </p>
-              <ul className="mt-5 grid list-none gap-2 p-0 font-inter text-[15px] text-midnight-blue sm:grid-cols-2">
-                {[
-                  'Kurs-Marktplatz: eigene Kurse verkaufen, ohne Provision',
-                  'Social-Media-Studio für deine Beiträge',
-                  'Dein Kalender: Zoom-Calls, Workshops, Meetups',
-                  'Monatliches Live-Treffen im Zoom, einmal im Jahr vor Ort',
-                  'Alle ein bis zwei Jahre ein gemeinsames Buch',
-                  'Video-Profil, Masterminds, KI-Member-Matching',
-                ].map((z) => (
-                  <li key={z} className="flex gap-3"><Haken />{z}</li>
+              <dl className="mx-auto mt-8 grid max-w-2xl grid-cols-3 divide-x divide-[#D4AF37]/40">
+                {[['27', 'Umsetzer – die ersten'], ['3.11.', 'erstes Treffen · 18:18 Uhr · online'], ['1×', 'im Monat live im Zoom']].map(([z, t]) => (
+                  <div key={t} className="flex flex-col-reverse px-2">
+                    <dt className="mt-1 font-inter text-xs leading-snug text-midnight-blue/85 sm:text-sm">{t}</dt>
+                    <dd className="m-0 font-montserrat text-3xl font-black sm:text-5xl">{z}</dd>
+                  </div>
                 ))}
-              </ul>
-              <p className={`mt-6 inline-block rounded-md px-4 py-3 font-montserrat text-sm font-extrabold uppercase tracking-[0.06em] text-midnight-blue ${GOLD}`}>
-                Erstes Treffen der 27: Dienstag, 3. November 2026, 18:18 Uhr – online. Trag dir den Termin ein.
-              </p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <a href="https://community.claudiaconen.com/netzwerkwebinar/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full bg-midnight-blue px-7 py-4 font-montserrat text-sm font-bold text-pearl-white transition-colors hover:bg-royal-navy">
-                  Einer der ersten 27 werden
+              </dl>
+              <p className="mt-8 font-montserrat text-base font-extrabold sm:text-lg">Trag dich ein zum ersten Termin – sei einer von 27 Umsetzern.</p>
+              <div className="mt-4 flex flex-wrap justify-center gap-3">
+                <a href="https://community.claudiaconen.com/netzwerkwebinar/" target="_blank" rel="noopener noreferrer" className={`inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue transition-transform hover:-translate-y-px ${GOLD}`}>
+                  Zum ersten Termin eintragen →
                 </a>
                 <a href="https://community.claudiaconen.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full border-2 border-midnight-blue px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue transition-colors hover:bg-midnight-blue hover:text-pearl-white">
-                  Zur Community
+                  Entdecken
                 </a>
               </div>
+              <div className="mt-10 grid items-center gap-6 text-left md:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
+                <div>
+                  <p className="font-montserrat text-xs font-extrabold uppercase tracking-[0.22em]">Was dich dort erwartet</p>
+                  <ul className="mt-3 grid list-none gap-2 p-0 font-inter text-[15px] sm:grid-cols-2">
+                    {[
+                      'Kurs-Marktplatz: eigene Kurse verkaufen, ohne Provision',
+                      'Social-Media-Studio für deine Beiträge',
+                      'Dein Kalender: Zoom-Calls, Workshops, Meetups',
+                      'Monatliches Live-Treffen im Zoom, einmal im Jahr vor Ort',
+                      'Alle ein bis zwei Jahre ein gemeinsames Buch',
+                      'Video-Profil, Masterminds, KI-Member-Matching',
+                    ].map((z) => (
+                      <li key={z} className="flex gap-3"><Haken />{z}</li>
+                    ))}
+                  </ul>
+                </div>
+                <figure className={`relative m-0 aspect-[3/2] w-full max-w-[380px] justify-self-center overflow-hidden ${KACHEL}`}>
+                  <img src="/unverwechselbar/gabi-und-claudia.webp" alt="Claudia Conen und Gabi Lindemann lachen zusammen" width={900} height={600} loading="lazy" decoding="async" className="h-full w-full object-cover" />
+                  <figcaption className="absolute inset-x-0 bottom-0 bg-midnight-blue/75 px-3 py-2 font-montserrat text-[11px] font-bold text-[#EBD197]">
+                    Gabi Lindemann und Claudia Conen – zusammen zuständig für die Community
+                  </figcaption>
+                </figure>
+              </div>
             </div>
-            <figure className={`relative m-0 aspect-[3/2] w-full max-w-[380px] justify-self-center overflow-hidden ${KACHEL}`}>
-              <img src="/unverwechselbar/gabi-und-claudia.webp" alt="Claudia Conen und Gabi Lindemann lachen zusammen" width={900} height={600} loading="lazy" decoding="async" className="h-full w-full object-cover" />
-              <figcaption className="absolute inset-x-0 bottom-0 bg-midnight-blue/75 px-3 py-2 font-montserrat text-[11px] font-bold text-[#EBD197]">
-                Gabi Lindemann und Claudia Conen – zusammen zuständig für die Community
-              </figcaption>
-            </figure>
-          </div>
-        </div>
-      </Abschnitt>
-
-      {/* Schluss - Claudias Satz (22.09.2026, 10:59 UTC), "gestalten" ersetzt: "Gestalten ist ein bloedes Wort". */}
-      <Abschnitt className="py-16 text-center text-pearl-white sm:py-24" style={DUNKEL} label="schluss" welle>
-        <div className="mx-auto max-w-4xl px-6">
-          <p className="flex items-center justify-center gap-3 font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] text-[#EBD197]">
-            <span aria-hidden="true" className={`h-[3px] w-7 rounded-full ${GOLD}`} />
-            Willst du dich speichern?
-          </p>
-          <h2 id="schluss" className="mt-5 font-montserrat text-3xl font-extrabold leading-tight sm:text-5xl">
-            Willst du im KI-Zeitalter mit deiner Persönlichkeit punkten – statt vergleichbar über den Preis Kunden zu gewinnen? <span className="gold-text-animated">Dann schließ dich unserem Netzwerk an: die Unverwechselbaren, die Community für den Mittelstand.</span>
-          </h2>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <a href="#anmelden" className={`inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue ${GOLD}`}>
-              Ich bin dabei – eintragen
-            </a>
-            <a href="https://community.claudiaconen.com/netzwerkwebinar/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full border-2 border-[#D4AF37] px-7 py-4 font-montserrat text-sm font-bold text-pearl-white hover:text-[#EBD197]">
-              Zum Netzwerk der Unverwechselbaren
-            </a>
           </div>
         </div>
       </Abschnitt>

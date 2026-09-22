@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom';
 const SAETZE = [
   '7-Tage-Video-Challenge',
   'Zeig dich. Sei dabei.',
-  'Jeden Tag eine Minute Video, jeden Tag Feedback',
+  'Jeden Tag eine Aufgabe · 30 Minuten · Feedback in der Gruppe',
   'Start: Montag, 26. Oktober',
   'Kostenfrei mitmachen – klick hier',
 ];

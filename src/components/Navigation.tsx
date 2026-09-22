@@ -6,7 +6,9 @@ import { megaMenuItems } from '../lib/megaMenuData';
 import MegaMenuPanel from './mega-menu/MegaMenuPanel';
 import MobileMegaMenu from './mega-menu/MobileMegaMenu';
 
-export default function Navigation() {
+/** hell: helle Leiste mit nachtblauer Schrift von Anfang an, oben buendig (Claudia, 22.09.2026 13:01 UTC fuer /challenge:
+ *  "ganz oben ist dunkelblau und dann kommt auch wieder dunkelblau ... das obere hell ... mit blauer Schrift"). */
+export default function Navigation({ hell = false }: { hell?: boolean } = {}) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeMenuId, setActiveMenuId] = useState<string | null>(null);
@@ -101,12 +103,12 @@ export default function Navigation() {
 
   return (
     <nav
-      className={`fixed top-10 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
+      className={`fixed left-0 right-0 z-50 transition-all duration-300 ${hell ? 'top-0 mega-nav-hell' : 'top-10'} ${
+        hell ? '' : isScrolled
           ? 'mega-nav-scrolled'
           : 'mega-nav-default'
       }`}
-      style={{ borderBottom: '1px solid rgba(212,175,55,0.2)' }}
+      style={{ borderBottom: hell ? '1px solid rgba(212,175,55,0.45)' : '1px solid rgba(212,175,55,0.2)' }}
     >
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-[72px]">
@@ -204,7 +206,7 @@ export default function Navigation() {
 
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="xl:hidden text-pearl-white p-2 hover:text-[#D4AF37] transition-colors"
+            className={`xl:hidden p-2 hover:text-[#D4AF37] transition-colors ${hell ? 'text-midnight-blue' : 'text-pearl-white'}`}
           >
             {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>

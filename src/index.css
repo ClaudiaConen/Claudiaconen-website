@@ -818,6 +818,16 @@ html, body { cursor: auto; }
   box-shadow: 0 4px 20px rgba(0,0,0,0.15);
 }
 
+/* Helle Leiste (Navigation hell) - Nachtblau in voller Staerke, kein Grau (Designliste 21.09.2026). */
+.mega-nav-hell { background: #FDFBF7; box-shadow: 0 4px 20px rgba(10,22,40,0.08); }
+.mega-nav-hell .mega-nav-link { color: #0A1628; }
+.mega-nav-hell .mega-nav-link:hover, .mega-nav-hell .mega-nav-link.active { color: #0A1628; background: rgba(212,175,55,0.16); }
+.mega-nav-hell .mega-nav-chevron { color: rgba(10,22,40,0.55); }
+.mega-nav-hell .mega-nav-link:hover .mega-nav-chevron, .mega-nav-hell .mega-nav-link.active .mega-nav-chevron { color: #B8860B; }
+/* Kleine Gesichter im Netzwerk-Block schweben leicht. */
+@keyframes ccSchwebt { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+.cc-schwebt { animation: ccSchwebt 7s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .cc-schwebt { animation: none; } }
 .mega-nav-link {
   font-family: 'Inter', sans-serif;
   color: rgba(255,255,255,0.85);

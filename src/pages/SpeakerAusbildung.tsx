@@ -169,19 +169,8 @@ const INHALT: ZielgruppenInhalt = {
   ],
 
   fragenZusatz: ['ausbildung'],
-  // Kundenstimme (22.09.2026): dieselben woertlichen Saetze wie auf der Startseite.
-  kundenstimme: {
-    titel: 'Eine Rede vor technischem Publikum',
-    name: 'Dr.-Ing. Ann-Kathrin Andresen',
-    rolle: 'Verfahrenstechnikerin, Mentorin und Beraterin · Ing.-up',
-    saetze: [
-      'Ich habe mit Claudia zusammen eine Rede erstellt und einstudiert, die ich vor einem technischen Publikum halte. Ich bin Ingenieurin.',
-      'Die Atmosphäre ist sehr herzlich, sehr direkt und sehr intensiv, aber wir lachen auch viel gemeinsam und es macht sehr viel Spaß.',
-      'Sie schmeißt einen auch gerne mal ins kalte Wasser.',
-    ],
-    video: { quelle: '/kundenstimmen/ann-kathrin-andresen.mp4', standbild: '/kundenstimmen/ann-kathrin-andresen-video.jpg', breite: 464, hoehe: 848 },
-    verweis: { text: 'Zur Webseite von Ann-Kathrin Andresen', ziel: 'https://ing-up.de/' },
-  },
+  // Kundenstimme bewusst NICHT hier: Claudia (22.09.2026, 07:29 UTC) will Ann-Kathrin nur auf der Startseite.
+  // Stattdessen kommt Ankes Geschichte (50 Jahre Redeangst, erster Preis) - wartet auf Fakten, Bilder, Ankes Ja.
   seoTitel: 'Speaker-Ausbildung in Köln und Witten – Keynote-Speaker werden | Claudia Conen',
   seoText:
     'Ausbildung zur Speakerin und zum Speaker: vom Fachgebiet zum Thema, von der Keynote zum Auftritt. Mit Stimmarbeit und einer Videoaufnahme am Ende.',

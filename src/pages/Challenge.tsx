@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import Brotkrumen from '../components/Brotkrumen';
 import ChallengeAnmeldung from '../components/ChallengeAnmeldung';
+import FotoReihen from '../components/FotoReihen';
 
 /**
  * Die 7-Tage-Video-Challenge - eine kurze Seite, kein Programm.
@@ -152,6 +153,30 @@ const ABLAUF = [
   'Du nimmst dich mit dem Handy auf, eine Minute, und teilst das Video in der Gruppe. Du bekommst Feedback von mir.',
 ];
 
+const FUER = [
+  'gehört werden willst – im Meeting, am Telefon, vor Kunden, auf der Bühne',
+  'täglich fünf Minuten und ein Handy hast',
+  'dich selbst hören willst, auch wenn es am Anfang unangenehm ist',
+  'Feedback willst statt Applaus',
+  'eine Woche durchhältst – sieben Aufnahmen, keine mehr',
+];
+const NICHT_FUER = [
+  'eine perfekte Aufnahme willst statt einer echten',
+  'Tipps sammeln, aber nichts aufnehmen möchtest',
+  'erst eine Bühne brauchst, bevor du übst',
+  'erwartest, dass die KI das Sprechen für dich übernimmt',
+];
+
+/** Goldene Linie links neben den sieben Tagen; der Pfeil wandert beim Scrollen mit (setzt --p). */
+function Schiene() {
+  return (
+    <div className="cc-schiene" aria-hidden="true">
+      <span className="cc-schiene-wort">Deine sieben Tage</span>
+      <span className="cc-schiene-linie"><span className="cc-schiene-pfeil" data-pfeil>➜</span></span>
+    </div>
+  );
+}
+
 function Kicker({ text, hell }: { text: string; hell?: boolean }) {
   return (
     <p className={`flex items-center gap-3 font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] ${hell ? 'text-midnight-blue' : 'text-[#EBD197]'}`}>
@@ -235,6 +260,26 @@ function WhatsAppBlock() {
 export default function Challenge() {
   // Beim Vorrendern steht hier das Bau-Datum; im Browser rechnet React mit dem echten Tag neu.
   const montag = naechsterMontag(new Date());
+  const listeRef = useRef<HTMLOListElement>(null);
+  // Pfeil auf der Schiene folgt dem Scrollen: 0 % am Anfang der Liste, 100 % am Ende.
+  useEffect(() => {
+    const liste = listeRef.current;
+    const pfeil = liste?.parentElement?.querySelector<HTMLElement>('[data-pfeil]');
+    if (!liste || !pfeil || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    let raf = 0;
+    const setzen = () => {
+      raf = 0;
+      const r = liste.getBoundingClientRect();
+      const mitte = window.innerHeight * 0.45;
+      const p = Math.min(1, Math.max(0, (mitte - r.top) / Math.max(1, r.height)));
+      pfeil.style.setProperty('--p', `${(p * 100).toFixed(1)}%`);
+    };
+    const onScroll = () => { if (!raf) raf = window.requestAnimationFrame(setzen); };
+    setzen();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => { window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll); if (raf) window.cancelAnimationFrame(raf); };
+  }, []);
 
   const strukturierteDaten = {
     '@context': 'https://schema.org',
@@ -256,33 +301,28 @@ export default function Challenge() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(strukturierteDaten) }} />
       <Navigation />
 
-      {/* Kopf: kurz, Text neben kleinem Bild */}
-      <header
-        className="relative pt-36 pb-14 sm:pt-44 sm:pb-20"
-        style={{
-          background:
-            'radial-gradient(120% 85% at 12% 0%, rgba(26,43,76,0.95) 0%, rgba(10,22,40,0) 62%),' +
-            'radial-gradient(90% 70% at 88% 18%, rgba(212,175,55,0.16) 0%, rgba(10,22,40,0) 58%),' +
-            'linear-gradient(175deg, #0B1B33 0%, #0A1628 48%, #0C1E38 100%)',
-        }}
-      >
-        <div className="mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)] items-center gap-10 px-6 md:grid-cols-[minmax(0,1.3fr)_auto] md:gap-16">
-          <div className="min-w-0 text-pearl-white">
-            <div className="mb-7 text-pearl-white/75">
-              <Brotkrumen krumen={[{ name: 'Sieben Tage für deine Wirkung' }]} />
-            </div>
+      {/* Kopf: Foto-Reihen laufen hinter dem Text (Claudia, 22.09.2026 10:38 UTC: "dass diese Kacheln
+          von der Webinar-Seite im Hintergrund hier auch laufen"), davor eine deckende Text-Kachel. */}
+      <header className="relative overflow-hidden bg-[#0A1628] pt-32 pb-16 sm:pt-40 sm:pb-24">
+        <FotoReihen />
+        <div className="relative z-10 mx-auto max-w-6xl px-6">
+          <div className="mb-6 text-pearl-white/75">
+            <Brotkrumen krumen={[{ name: 'Sieben Tage für deine Wirkung' }]} />
+          </div>
+          <div className="max-w-3xl rounded-[12px] border border-[#D4AF37]/45 bg-[rgba(10,22,40,0.86)] px-6 py-8 text-pearl-white shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)] sm:px-10 sm:py-11" style={{ borderTopColor: '#F7E7CE' }}>
             <Kicker text="Video-Challenge · kostenfrei" />
             <h1 className="mt-6 font-montserrat text-4xl font-black uppercase leading-[1.05] tracking-tight sm:text-6xl">
-              Sieben Tage <span className="gold-text-animated">für deine Wirkung.</span>
+              <span className="block text-white [text-shadow:0_2px_24px_rgba(0,0,0,0.65)]">Sieben Tage</span>
+              <span className="gold-text-animated block">für deine Wirkung.</span>
             </h1>
-            <p className="mt-5 font-cormorant text-2xl italic leading-snug text-[#F7E7CE] sm:text-3xl">Zeig dich. Sei dabei.</p>
-            <p className="mt-5 max-w-xl font-inter text-lg leading-relaxed text-pearl-white/90">
-              Jeden Tag eine Anleitung, eine Minute Video mit dem Handy – und Feedback von mir. Keine Technik, keine Show. Nur du und deine Stimme.
+            <p className="mt-5 font-cormorant text-2xl italic leading-snug text-[#F7E7CE] sm:text-3xl">Zeig dich. Sei dabei. Lerne deine Wirkungskraft kennen.</p>
+            <p className="mt-5 max-w-xl font-inter text-lg leading-relaxed text-white">
+              <b className="font-montserrat font-extrabold">So starten wir:</b> Jeden Tag eine kleine Anleitung für dich – und eine Chance auf Feedback. Du hast 24 Stunden, um dein Video einzureichen und ein kostenfreies persönliches Feedback zu erhalten.
             </p>
-            <p className="mt-5 font-montserrat text-base font-bold text-white">
+            <p className="mt-4 font-montserrat text-base font-bold text-[#EBD197]">
               Start immer montags – nächster Start: Montag, {montag}.
             </p>
-            <div className="mt-8 flex flex-wrap items-center gap-4">
+            <div className="mt-7 flex flex-wrap items-center gap-4">
               <a href="#anmelden" className={`inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue transition-transform hover:-translate-y-px ${GOLD}`}>
                 Ich bin dabei – eintragen
               </a>
@@ -290,18 +330,10 @@ export default function Challenge() {
                 Die sieben Tage ansehen ↓
               </a>
             </div>
-            <p className="mt-5 max-w-xl font-inter text-sm text-pearl-white/75">
+            <p className="mt-5 max-w-xl font-inter text-sm text-pearl-white/80">
               Die Challenge läuft in einer WhatsApp-Gruppe; dort sehen die Mitglieder gegenseitig die Handynummern. Wer das nicht möchte, schreibt mir direkt.
             </p>
           </div>
-          <figure className={`cc-schweben relative mx-auto aspect-[9/16] w-[clamp(170px,24vw,240px)] overflow-hidden bg-[#13233F] shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)] ${KACHEL}`}>
-            <img src="/unverwechselbar/selfie.webp" alt="Claudia Conen nimmt mit dem Handy ein Video auf, zwei Menschen lachen mit" width={360} height={640} className="h-full w-full object-cover" />
-            <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(10,22,40,0)_60%,rgba(10,22,40,0.9)_100%)]" />
-            <figcaption className="absolute inset-x-0 bottom-0 p-4 font-montserrat text-[11px] font-extrabold uppercase tracking-[0.14em] text-[#EBD197]">
-              Eine Minute am Tag
-              <span className="mt-1 block text-sm normal-case tracking-normal text-white">Handy reicht.</span>
-            </figcaption>
-          </figure>
         </div>
       </header>
 
@@ -343,7 +375,9 @@ export default function Challenge() {
             </div>
           </div>
 
-          <ol className="mt-3 grid list-none gap-3 p-0">
+          <div className="mt-3 grid gap-5 md:grid-cols-[34px_minmax(0,1fr)]">
+          <Schiene />
+          <ol ref={listeRef} className="grid list-none gap-3 p-0">
             {TAGE.map((t, i) => {
               const letzter = i === TAGE.length - 1;
               return (
@@ -390,7 +424,36 @@ export default function Challenge() {
               );
             })}
           </ol>
+          </div>
           <WhatsAppBlock />
+        </div>
+      </Abschnitt>
+
+      {/* Fuer wen - und fuer wen nicht (Claudia, 22.09.2026: "fuer wen ist das? Und fuer wen ist das nicht?") */}
+      <Abschnitt id="fuer-wen" className="bg-[#0A1628] py-14 text-pearl-white sm:py-20" label="fuer-wen-titel">
+        <div className="mx-auto max-w-6xl px-6">
+          <Kicker text="Für wen das ist" />
+          <h2 id="fuer-wen-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">
+            Sieben Tage sind kurz. Für die Richtigen reichen sie.
+          </h2>
+          <div className="mt-8 grid gap-px overflow-hidden rounded-[12px] border border-[#D4AF37]/40 bg-[#D4AF37]/30 sm:grid-cols-2">
+            <div className="bg-[#0F1F3A] p-6 sm:p-7">
+              <h3 className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#EBD197]">Für dich, wenn du</h3>
+              <ul className="mt-4 grid list-none gap-2.5 p-0">
+                {FUER.map((s) => (
+                  <li key={s} className="flex items-start gap-3 font-inter text-[15px] leading-relaxed text-white"><Haken /><span>{s}</span></li>
+                ))}
+              </ul>
+            </div>
+            <div className="bg-[#0F1F3A] p-6 sm:p-7">
+              <h3 className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.2em] text-pearl-white/70">Nicht für dich, wenn du</h3>
+              <ul className="mt-4 grid list-none gap-2.5 p-0">
+                {NICHT_FUER.map((s) => (
+                  <li key={s} className="flex items-start gap-3 font-inter text-[15px] leading-relaxed text-pearl-white/80"><span aria-hidden="true" className="mt-0.5 font-montserrat font-black text-pearl-white/40">✕</span><span>{s}</span></li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
       </Abschnitt>
 

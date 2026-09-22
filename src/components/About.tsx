@@ -49,7 +49,7 @@ export default function About() {
             transition={{ duration: 0.2 }}
             className="relative mt-20 lg:mt-24"
           >
-            <div className="absolute -inset-4 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] rounded-3xl blur-2xl opacity-20"></div>
+            <div className="absolute -inset-4 bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] rounded-3xl blur-2xl opacity-20"></div>
             <div className="relative">
               <div className="aspect-[3/4] rounded-3xl overflow-hidden border-2 border-luxury-gold/30">
                 <img
@@ -72,7 +72,7 @@ export default function About() {
             className="space-y-4 md:space-y-6"
           >
             <div>
-              <div className="inline-block mb-4 px-6 py-2 bg-gradient-to-r from-[#DAA520]/20 to-[#F4D03F]/20 rounded-full border border-luxury-gold/30">
+              <div className="inline-block mb-4 px-6 py-2 bg-gradient-to-r from-[#D4AF37]/20 to-[#F7E7CE]/20 rounded-full border border-luxury-gold/30">
                 <span className="text-bright-gold font-semibold">Über Claudia</span>
               </div>
               <h2 id="about-claudia" className="font-montserrat font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-4 md:mb-6">
@@ -139,7 +139,7 @@ export default function About() {
 
             <a
               href="/ueber-mich"
-              className="inline-block px-8 py-4 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue font-bold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg mt-6"
+              className="inline-block px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] text-midnight-blue font-bold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg mt-6"
             >
               Mehr über Claudia erfahren
             </a>

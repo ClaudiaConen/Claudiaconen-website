@@ -5,7 +5,6 @@ import SituationsKacheln from '../components/SituationsKacheln';
 import Tueren from '../components/Tueren';
 import LogoBand from '../components/LogoBand';
 import MissionSection from '../components/MissionSection';
-import HeroBrainSection from '../components/HeroBrainSection';
 import Timeline from '../components/Timeline';
 import About from '../components/About';
 import SocialProof from '../components/SocialProof';
@@ -41,7 +40,6 @@ export default function Home() {
         <SituationsKacheln />
         <Tueren />
         <LogoBand />
-        <HeroBrainSection />
         <MissionSection />
         <Timeline />
         <About />

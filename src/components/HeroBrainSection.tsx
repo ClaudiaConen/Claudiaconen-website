@@ -49,7 +49,7 @@ function LightParticles() {
             left: p.left,
             animationDelay: p.delay,
             animationDuration: p.duration,
-            background: 'radial-gradient(circle, rgba(218, 165, 32, 0.8), transparent)',
+            background: 'radial-gradient(circle, rgba(212, 175, 55, 0.8), transparent)',
           }}
         />
       ))}
@@ -106,8 +106,8 @@ export default function HeroBrainSection() {
             to="/premiumangebote"
             className="cc-cta-hero-brain group inline-flex items-center gap-4 px-10 py-5 md:px-14 md:py-6 text-xl md:text-2xl font-semibold text-white rounded-full transition-all duration-400"
             style={{
-              background: 'linear-gradient(135deg, #DAA520, #F4D03F)',
-              boxShadow: '0 8px 32px rgba(218, 165, 32, 0.3), 0 0 60px rgba(218, 165, 32, 0.1)',
+              background: 'linear-gradient(135deg, #D4AF37, #F7E7CE)',
+              boxShadow: '0 8px 32px rgba(212, 175, 55, 0.3), 0 0 60px rgba(212, 175, 55, 0.1)',
             }}
           >
             <span className="relative z-10">Klick rein – und entdecke dein Angebot</span>

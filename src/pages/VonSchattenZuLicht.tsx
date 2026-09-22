@@ -70,7 +70,7 @@ export default function VonSchattenZuLicht() {
               transition={{ duration: 0.6 }}
               className="mb-8"
             >
-              <div className="inline-block px-6 py-3 bg-gradient-to-r from-[#DAA520]/20 to-[#F4D03F]/20 rounded-full border border-luxury-gold/30 mb-6">
+              <div className="inline-block px-6 py-3 bg-gradient-to-r from-[#D4AF37]/20 to-[#F7E7CE]/20 rounded-full border border-luxury-gold/30 mb-6">
                 <span className="text-luxury-gold font-semibold text-lg">Von Schatten zu Licht</span>
               </div>
 
@@ -157,7 +157,7 @@ export default function VonSchattenZuLicht() {
                     href="https://claudiaconen-akademie.de/von-schatten-ins-licht"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg"
+                    className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg"
                   >
                     Zur Workshop-Anmeldung
                     <ArrowRight size={20} />
@@ -475,7 +475,7 @@ export default function VonSchattenZuLicht() {
                   href="https://claudiaconen-akademie.de/von-schatten-ins-licht"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300"
                 >
                   Zur Workshop-Anmeldung
                   <ArrowRight size={20} />
@@ -500,7 +500,7 @@ export default function VonSchattenZuLicht() {
                 </p>
                 <a
                   href="/1zu1-mentoring"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300"
                 >
                   Mehr erfahren
                   <ArrowRight size={20} />
@@ -617,7 +617,7 @@ export default function VonSchattenZuLicht() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full px-8 py-4 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? 'Wird gesendet...' : 'Hier vormerken'}
                 </button>
@@ -780,7 +780,7 @@ export default function VonSchattenZuLicht() {
                 href="https://t.me/+tQBwOmBOhM01YmEy"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300 text-lg"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300 text-lg"
               >
                 Community-Einladung jetzt, nicht erst später
                 <ArrowRight size={24} />
@@ -912,7 +912,7 @@ export default function VonSchattenZuLicht() {
                   href="https://claudiaconen-akademie.de/von-schatten-ins-licht"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue font-bold rounded-full hover:scale-105 transition-transform duration-300 text-xl shadow-2xl"
+                  className="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] text-midnight-blue font-bold rounded-full hover:scale-105 transition-transform duration-300 text-xl shadow-2xl"
                 >
                   Jetzt starten
                   <ArrowRight size={28} />

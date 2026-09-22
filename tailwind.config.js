@@ -11,8 +11,8 @@ export default {
         'jakarta': ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
       },
       colors: {
-        'luxury-gold': '#DAA520',
-        'bright-gold': '#F4D03F',
+        'luxury-gold': '#D4AF37', /* 22.09.2026: Community-Gold statt #DAA520 (Claudia: 'neongelb') */
+        'bright-gold': '#EBD197', /* 22.09.2026: helles Schrift-Gold statt #F4D03F */
         'dark-gold': '#B8860B',
         'mid-gold': '#D4AF37',
         'light-gold': '#C9A961',

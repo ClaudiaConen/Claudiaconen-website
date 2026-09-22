@@ -72,13 +72,13 @@ export default function ClaudiaAIBeta() {
             animate={{
               scale: [1, 1.2, 1],
               boxShadow: [
-                '0 0 20px rgba(218, 165, 32, 0.3)',
-                '0 0 60px rgba(218, 165, 32, 0.6)',
-                '0 0 20px rgba(218, 165, 32, 0.3)',
+                '0 0 20px rgba(212, 175, 55, 0.3)',
+                '0 0 60px rgba(212, 175, 55, 0.6)',
+                '0 0 20px rgba(212, 175, 55, 0.3)',
               ],
             }}
             transition={{ duration: 2, repeat: Infinity }}
-            className="w-24 h-24 mx-auto rounded-full bg-gradient-to-r from-[#DAA520] to-[#DAA520] flex items-center justify-center"
+            className="w-24 h-24 mx-auto rounded-full bg-gradient-to-r from-[#D4AF37] to-[#D4AF37] flex items-center justify-center"
           >
             <CheckCircle size={48} className="text-midnight-blue" />
           </motion.div>
@@ -117,7 +117,7 @@ export default function ClaudiaAIBeta() {
 
           <button
             onClick={() => navigate('/')}
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300"
           >
             <ArrowLeft size={20} />
             Zurück zur Hauptseite
@@ -149,10 +149,10 @@ export default function ClaudiaAIBeta() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#DAA520]/20 to-[#DAA520]/20 rounded-full border border-[#DAA520]/30 mb-6"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#D4AF37]/20 to-[#D4AF37]/20 rounded-full border border-[#D4AF37]/30 mb-6"
           >
-            <Sparkles size={20} className="text-[#DAA520]" />
-            <span className="text-[#DAA520] font-semibold">Beta in Vorbereitung</span>
+            <Sparkles size={20} className="text-[#D4AF37]" />
+            <span className="text-[#D4AF37] font-semibold">Beta in Vorbereitung</span>
           </motion.div>
 
           <motion.h1
@@ -161,7 +161,7 @@ export default function ClaudiaAIBeta() {
             transition={{ delay: 0.1 }}
             className="font-montserrat font-bold text-4xl sm:text-5xl lg:text-6xl mb-6"
           >
-            <span className="bg-gradient-to-r from-[#DAA520] via-[#DAA520] to-[#B8860B] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#D4AF37] via-[#D4AF37] to-[#B8860B] bg-clip-text text-transparent">
               ClaudiaAI
             </span>
             <br />
@@ -187,9 +187,9 @@ export default function ClaudiaAIBeta() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 + index * 0.1 }}
-                className="bg-royal-navy/30 backdrop-blur-sm p-6 rounded-2xl border border-[#DAA520]/10"
+                className="bg-royal-navy/30 backdrop-blur-sm p-6 rounded-2xl border border-[#D4AF37]/10"
               >
-                <div className="w-14 h-14 rounded-full bg-gradient-to-r from-[#DAA520] to-[#DAA520] flex items-center justify-center mb-4">
+                <div className="w-14 h-14 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#D4AF37] flex items-center justify-center mb-4">
                   <Icon size={28} className="text-midnight-blue" />
                 </div>
                 <h3 className="font-montserrat font-bold text-xl mb-2">{feature.title}</h3>
@@ -209,7 +209,7 @@ export default function ClaudiaAIBeta() {
             <div className="space-y-6">
               {benefits.map((benefit, index) => (
                 <div key={index} className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-[#DAA520] to-[#DAA520] flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#D4AF37] flex items-center justify-center flex-shrink-0">
                     <CheckCircle size={24} className="text-midnight-blue" />
                   </div>
                   <div>
@@ -227,7 +227,7 @@ export default function ClaudiaAIBeta() {
                   transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
                   className="relative w-16 h-16 flex-shrink-0"
                 >
-                  <div className="absolute inset-0 rounded-full border-4 border-[#DAA520]"></div>
+                  <div className="absolute inset-0 rounded-full border-4 border-[#D4AF37]"></div>
                   <div className="absolute inset-0 rounded-full overflow-hidden">
                     {/* Die frueher hier verwiesene Datei
                         "photo_2025-09-25 23.28.37 (2).jpeg" existiert
@@ -352,7 +352,7 @@ export default function ClaudiaAIBeta() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-[#DAA520] to-[#DAA520] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#D4AF37] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
                   'Wird gespeichert...'

@@ -90,7 +90,7 @@ export default function ContactSection() {
           transition={{ duration: 0.3 }}
           className="text-center mb-12 md:mb-16"
         >
-          <div className="inline-block mb-4 px-6 py-2 bg-gradient-to-r from-[#DAA520]/20 to-[#F4D03F]/20 rounded-full border border-luxury-gold/30">
+          <div className="inline-block mb-4 px-6 py-2 bg-gradient-to-r from-[#D4AF37]/20 to-[#F7E7CE]/20 rounded-full border border-luxury-gold/30">
             <span className="text-[#B8860B] font-semibold">Kontakt</span>
           </div>
           <h2
@@ -134,7 +134,7 @@ export default function ContactSection() {
                       transition={{ duration: 0.3, delay: index * 0.1 }}
                       className="flex items-start gap-4 p-4 bg-white rounded-xl border border-luxury-gold/20 hover:border-luxury-gold/40 hover:shadow-lg transition-all duration-300 group"
                     >
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-r from-[#DAA520] to-[#F4D03F] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
                         <Icon size={24} className="text-midnight-blue" />
                       </div>
                       <div>
@@ -151,7 +151,7 @@ export default function ContactSection() {
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-[#DAA520]/10 to-[#F4D03F]/10 rounded-2xl p-6 border border-luxury-gold/30">
+            <div className="bg-gradient-to-br from-[#D4AF37]/10 to-[#F7E7CE]/10 rounded-2xl p-6 border border-luxury-gold/30">
               <h4 className="text-xl font-montserrat font-bold text-midnight-blue mb-4">
                 Direkt buchen
               </h4>
@@ -162,7 +162,7 @@ export default function ContactSection() {
                 href="https://claudiaconen.com/termin-buchen"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue font-bold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] text-midnight-blue font-bold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg"
               >
                 <Phone size={20} />
                 Termin vereinbaren
@@ -285,7 +285,7 @@ export default function ContactSection() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue font-bold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] text-midnight-blue font-bold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
                 {isSubmitting ? (
                   <>

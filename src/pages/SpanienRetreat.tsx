@@ -233,7 +233,7 @@ export default function SpanienRetreat() {
             style={{
               background:
                 'radial-gradient(1200px 600px at 20% 0%, rgba(244,194,215,0.45) 0%, transparent 60%),' +
-                'radial-gradient(900px 500px at 90% 30%, rgba(218,165,32,0.30) 0%, transparent 60%),' +
+                'radial-gradient(900px 500px at 90% 30%, rgba(212,175,55,0.30) 0%, transparent 60%),' +
                 'linear-gradient(180deg, #FFFBF3 0%, #FBF7F0 60%, #F7E7CE 100%)',
             }}
           />
@@ -258,7 +258,7 @@ export default function SpanienRetreat() {
                 transition={{ duration: 0.5 }}
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/70 backdrop-blur border border-[#E8B4C8]/50 shadow-sm mb-6"
               >
-                <Sun size={16} className="text-[#DAA520]" />
+                <Sun size={16} className="text-[#D4AF37]" />
                 <span className="text-sm font-semibold text-[#2A1F3D]">KI-Workshop-Woche · Spanien · {RETREAT_DATE_SHORT} · {seatBadge}</span>
               </motion.div>
 
@@ -271,7 +271,7 @@ export default function SpanienRetreat() {
                 <span className="text-[#2A1F3D]">Erlebe eine Woche </span>
                 <span
                   style={{
-                    background: 'linear-gradient(135deg, #DAA520 0%, #E8B4C8 50%, #C9A961 100%)',
+                    background: 'linear-gradient(135deg, #D4AF37 0%, #E8B4C8 50%, #C9A961 100%)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',
@@ -302,9 +302,9 @@ export default function SpanienRetreat() {
               >
                 <button
                   onClick={scrollToForm}
-                  className="inline-flex items-center gap-2 px-7 py-4 rounded-full font-bold text-sm md:text-base tracking-wide shadow-[0_8px_24px_rgba(218,165,32,0.35)] hover:translate-y-[-2px] hover:shadow-[0_12px_32px_rgba(218,165,32,0.45)] transition-all duration-300"
+                  className="inline-flex items-center gap-2 px-7 py-4 rounded-full font-bold text-sm md:text-base tracking-wide shadow-[0_8px_24px_rgba(212,175,55,0.35)] hover:translate-y-[-2px] hover:shadow-[0_12px_32px_rgba(212,175,55,0.45)] transition-all duration-300"
                   style={{
-                    background: 'linear-gradient(135deg, #DAA520 0%, #E8B4C8 100%)',
+                    background: 'linear-gradient(135deg, #D4AF37 0%, #E8B4C8 100%)',
                     color: '#2A1F3D',
                   }}
                 >
@@ -313,7 +313,7 @@ export default function SpanienRetreat() {
                 </button>
                 <a
                   href="#programm"
-                  className="inline-flex items-center gap-2 px-7 py-4 rounded-full font-semibold text-sm md:text-base bg-white/80 backdrop-blur border border-[#DAA520]/40 text-[#2A1F3D] hover:bg-white hover:border-[#DAA520] transition-all duration-300"
+                  className="inline-flex items-center gap-2 px-7 py-4 rounded-full font-semibold text-sm md:text-base bg-white/80 backdrop-blur border border-[#D4AF37]/40 text-[#2A1F3D] hover:bg-white hover:border-[#D4AF37] transition-all duration-300"
                 >
                   Mehr erfahren
                   <ArrowRight size={18} />
@@ -327,9 +327,9 @@ export default function SpanienRetreat() {
                 className="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-sm text-[#4A3F5C]"
               >
                 <span className="inline-flex items-center gap-2"><MapPin size={16} className="text-[#C97AAF]" /> Spanien · genauer Ort nach Buchung</span>
-                <span className="inline-flex items-center gap-2"><Calendar size={16} className="text-[#DAA520]" /> Anreise sonntags · Workshop-Start montags</span>
+                <span className="inline-flex items-center gap-2"><Calendar size={16} className="text-[#D4AF37]" /> Anreise sonntags · Workshop-Start montags</span>
                 <span className="inline-flex items-center gap-2"><Clock size={16} className="text-[#C97AAF]" /> Lernzeit: 9–13 &amp; 16–18 Uhr · Sa frei</span>
-                <span className="inline-flex items-center gap-2"><Users size={16} className="text-[#DAA520]" /> max. {TOTAL_SEATS} Teilnehmer:innen</span>
+                <span className="inline-flex items-center gap-2"><Users size={16} className="text-[#D4AF37]" /> max. {TOTAL_SEATS} Teilnehmer:innen</span>
               </motion.div>
             </div>
 
@@ -340,8 +340,8 @@ export default function SpanienRetreat() {
               transition={{ duration: 0.7, delay: 0.2 }}
               className="lg:col-span-5"
             >
-              <div className="relative rounded-3xl bg-white/80 backdrop-blur-xl border border-[#E8B4C8]/40 shadow-[0_30px_80px_-20px_rgba(218,165,32,0.35)] p-8">
-                <div className="absolute -top-3 left-6 px-3 py-1 rounded-full bg-gradient-to-r from-[#DAA520] to-[#E8B4C8] text-[#2A1F3D] text-xs font-bold tracking-wider uppercase shadow">
+              <div className="relative rounded-3xl bg-white/80 backdrop-blur-xl border border-[#E8B4C8]/40 shadow-[0_30px_80px_-20px_rgba(212,175,55,0.35)] p-8">
+                <div className="absolute -top-3 left-6 px-3 py-1 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#E8B4C8] text-[#2A1F3D] text-xs font-bold tracking-wider uppercase shadow">
                   Premiere Edition
                 </div>
 
@@ -358,7 +358,7 @@ export default function SpanienRetreat() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Sparkles size={24} className="text-[#DAA520] mt-1" />
+                  <Sparkles size={24} className="text-[#D4AF37] mt-1" />
                   <div>
                     <p className="text-sm font-semibold uppercase tracking-wider text-[#C97AAF]">Investition</p>
                     <p className="font-montserrat text-3xl md:text-4xl font-black text-[#2A1F3D] mt-1">
@@ -372,19 +372,19 @@ export default function SpanienRetreat() {
 
                 <div className="mt-6 space-y-3 text-sm text-[#2A1F3D]">
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 size={18} className="text-[#DAA520] mt-0.5 flex-shrink-0" />
+                    <CheckCircle2 size={18} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
                     <span>30 Stunden Lernzeit mit Claudia &amp; Gabi — live, praktisch, vor Ort</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 size={18} className="text-[#DAA520] mt-0.5 flex-shrink-0" />
+                    <CheckCircle2 size={18} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
                     <span>Wir bauen alles gemeinsam — du schaust uns über die Schulter</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 size={18} className="text-[#DAA520] mt-0.5 flex-shrink-0" />
+                    <CheckCircle2 size={18} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
                     <span>Mini-Gruppe von max. {TOTAL_SEATS} Menschen — persönliche Begleitung</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 size={18} className="text-[#DAA520] mt-0.5 flex-shrink-0" />
+                    <CheckCircle2 size={18} className="text-[#D4AF37] mt-0.5 flex-shrink-0" />
                     <span>Nachmittage frei: Pool, Strand, Siesta, zusammenwachsen</span>
                   </div>
                 </div>
@@ -398,9 +398,9 @@ export default function SpanienRetreat() {
 
                 <button
                   onClick={scrollToForm}
-                  className="mt-6 w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full font-bold tracking-wide shadow-[0_8px_24px_rgba(218,165,32,0.35)] hover:translate-y-[-2px] transition-all"
+                  className="mt-6 w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full font-bold tracking-wide shadow-[0_8px_24px_rgba(212,175,55,0.35)] hover:translate-y-[-2px] transition-all"
                   style={{
-                    background: 'linear-gradient(135deg, #DAA520 0%, #E8B4C8 100%)',
+                    background: 'linear-gradient(135deg, #D4AF37 0%, #E8B4C8 100%)',
                     color: '#2A1F3D',
                   }}
                 >
@@ -427,7 +427,7 @@ export default function SpanienRetreat() {
               Aus Theorie{' '}
               <span
                 style={{
-                  background: 'linear-gradient(135deg, #DAA520 0%, #C97AAF 100%)',
+                  background: 'linear-gradient(135deg, #D4AF37 0%, #C97AAF 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
@@ -458,10 +458,10 @@ export default function SpanienRetreat() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.3 }}
                   transition={{ duration: 0.5, delay: i * 0.08 }}
-                  className="rounded-2xl bg-white border border-[#E8B4C8]/30 p-7 shadow-[0_10px_30px_-12px_rgba(218,165,32,0.25)] hover:shadow-[0_18px_42px_-12px_rgba(218,165,32,0.35)] hover:-translate-y-1 transition-all"
+                  className="rounded-2xl bg-white border border-[#E8B4C8]/30 p-7 shadow-[0_10px_30px_-12px_rgba(212,175,55,0.25)] hover:shadow-[0_18px_42px_-12px_rgba(212,175,55,0.35)] hover:-translate-y-1 transition-all"
                 >
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#FBF1D8] to-[#FDE8F2] flex items-center justify-center mb-4">
-                    <Icon size={22} className="text-[#DAA520]" />
+                    <Icon size={22} className="text-[#D4AF37]" />
                   </div>
                   <h3 className="font-montserrat font-bold text-xl text-[#2A1F3D] mb-2">{p.title}</h3>
                   <p className="text-[#6B5F7A] leading-relaxed">{p.desc}</p>
@@ -501,11 +501,11 @@ export default function SpanienRetreat() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.4, delay: (i % 6) * 0.05 }}
-                  className="group rounded-2xl bg-white border border-[#E8B4C8]/25 p-6 hover:border-[#DAA520]/60 hover:shadow-[0_18px_42px_-14px_rgba(218,165,32,0.4)] hover:-translate-y-1 transition-all duration-300"
+                  className="group rounded-2xl bg-white border border-[#E8B4C8]/25 p-6 hover:border-[#D4AF37]/60 hover:shadow-[0_18px_42px_-14px_rgba(212,175,55,0.4)] hover:-translate-y-1 transition-all duration-300"
                 >
                   <div className="flex items-start gap-4">
-                    <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 bg-gradient-to-br from-[#FBF1D8] to-[#FDE8F2] group-hover:from-[#DAA520]/30 group-hover:to-[#E8B4C8]/40 transition-colors">
-                      <Icon size={20} className="text-[#DAA520] group-hover:text-[#A8801F]" />
+                    <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 bg-gradient-to-br from-[#FBF1D8] to-[#FDE8F2] group-hover:from-[#D4AF37]/30 group-hover:to-[#E8B4C8]/40 transition-colors">
+                      <Icon size={20} className="text-[#D4AF37] group-hover:text-[#A8801F]" />
                     </div>
                     <div>
                       <h3 className="font-montserrat font-bold text-[#2A1F3D] text-lg leading-snug">{t.title}</h3>
@@ -532,7 +532,7 @@ export default function SpanienRetreat() {
             <p className="text-sm uppercase tracking-[0.3em] font-bold text-[#C97AAF] mb-4">Der Wochenplan</p>
             <h2 className="font-montserrat font-black text-3xl md:text-5xl text-[#2A1F3D] leading-tight">
               5 Lerntage. 1 Auszeit-Tag.<br />
-              <span style={{ background: 'linear-gradient(135deg, #DAA520 0%, #C97AAF 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+              <span style={{ background: 'linear-gradient(135deg, #D4AF37 0%, #C97AAF 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                 30 Stunden Lernzeit — und jede Menge Spanien drumherum.
               </span>
             </h2>
@@ -543,15 +543,15 @@ export default function SpanienRetreat() {
             </p>
 
             <div className="mt-7 grid sm:grid-cols-2 gap-3 max-w-2xl mx-auto">
-              <div className="flex items-center gap-3 px-5 py-3 rounded-xl bg-white border border-[#DAA520]/30 shadow-sm">
-                <Clock size={18} className="text-[#DAA520]" />
+              <div className="flex items-center gap-3 px-5 py-3 rounded-xl bg-white border border-[#D4AF37]/30 shadow-sm">
+                <Clock size={18} className="text-[#D4AF37]" />
                 <div className="text-left">
                   <div className="text-[10px] uppercase tracking-wider font-bold text-[#C97AAF]">Vormittags-Slot</div>
                   <div className="font-bold text-[#2A1F3D]">{LEARN_SLOT_MORNING}</div>
                 </div>
               </div>
-              <div className="flex items-center gap-3 px-5 py-3 rounded-xl bg-white border border-[#DAA520]/30 shadow-sm">
-                <Clock size={18} className="text-[#DAA520]" />
+              <div className="flex items-center gap-3 px-5 py-3 rounded-xl bg-white border border-[#D4AF37]/30 shadow-sm">
+                <Clock size={18} className="text-[#D4AF37]" />
                 <div className="text-left">
                   <div className="text-[10px] uppercase tracking-wider font-bold text-[#C97AAF]">Nachmittags-Slot</div>
                   <div className="font-bold text-[#2A1F3D]">{LEARN_SLOT_AFTERNOON}</div>
@@ -582,7 +582,7 @@ export default function SpanienRetreat() {
                       style={{
                         background: isFree
                           ? 'linear-gradient(135deg, #C97AAF 0%, #E8B4C8 100%)'
-                          : 'linear-gradient(135deg, #DAA520 0%, #C97AAF 100%)',
+                          : 'linear-gradient(135deg, #D4AF37 0%, #C97AAF 100%)',
                       }}
                     >
                       {isFree ? <Sun size={18} /> : i + 1}
@@ -595,10 +595,10 @@ export default function SpanienRetreat() {
                   <p className="text-[#6B5F7A] leading-relaxed">{d.desc}</p>
                   {!isFree && (
                     <div className="mt-4 flex flex-wrap gap-2">
-                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#FBF1D8] border border-[#DAA520]/30 text-[11px] font-bold text-[#A8801F]">
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#FBF1D8] border border-[#D4AF37]/30 text-[11px] font-bold text-[#A8801F]">
                         <Clock size={11} /> {LEARN_SLOT_MORNING}
                       </span>
-                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#FBF1D8] border border-[#DAA520]/30 text-[11px] font-bold text-[#A8801F]">
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#FBF1D8] border border-[#D4AF37]/30 text-[11px] font-bold text-[#A8801F]">
                         <Clock size={11} /> {LEARN_SLOT_AFTERNOON}
                       </span>
                     </div>
@@ -665,7 +665,7 @@ export default function SpanienRetreat() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="rounded-3xl bg-white border border-[#E8B4C8]/30 overflow-hidden shadow-[0_18px_42px_-18px_rgba(218,165,32,0.4)]"
+                className="rounded-3xl bg-white border border-[#E8B4C8]/30 overflow-hidden shadow-[0_18px_42px_-18px_rgba(212,175,55,0.4)]"
               >
                 <div className="relative h-72 overflow-hidden bg-gradient-to-br from-[#FBF1D8] to-[#FDE8F2]">
                   <img src={host.img} alt={host.name} className="w-full h-full object-cover object-center" loading="lazy" />
@@ -677,7 +677,7 @@ export default function SpanienRetreat() {
                   <p className="mt-4 text-[#4A3F5C] leading-relaxed">{host.bio}</p>
                   <div className="mt-5 flex flex-wrap gap-2">
                     {host.tags.map((t) => (
-                      <span key={t} className="px-3 py-1 rounded-full text-xs font-semibold bg-[#FBF1D8] text-[#A8801F] border border-[#DAA520]/30">
+                      <span key={t} className="px-3 py-1 rounded-full text-xs font-semibold bg-[#FBF1D8] text-[#A8801F] border border-[#D4AF37]/30">
                         {t}
                       </span>
                     ))}
@@ -726,10 +726,10 @@ export default function SpanienRetreat() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="rounded-2xl p-7 border bg-white border-[#E8B4C8]/30 hover:border-[#DAA520]/50 hover:-translate-y-1 transition-all shadow-sm hover:shadow-[0_18px_42px_-18px_rgba(218,165,32,0.4)]"
+                className="rounded-2xl p-7 border bg-white border-[#E8B4C8]/30 hover:border-[#D4AF37]/50 hover:-translate-y-1 transition-all shadow-sm hover:shadow-[0_18px_42px_-18px_rgba(212,175,55,0.4)]"
               >
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 bg-gradient-to-br from-[#FBF1D8] to-[#FDE8F2]">
-                  <CheckCircle2 size={22} className="text-[#DAA520]" />
+                  <CheckCircle2 size={22} className="text-[#D4AF37]" />
                 </div>
                 <h3 className="font-montserrat font-bold text-xl text-[#2A1F3D] mb-3">{p.title}</h3>
                 <p className="text-[#6B5F7A] leading-relaxed">{p.desc}</p>
@@ -747,12 +747,12 @@ export default function SpanienRetreat() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6 }}
-            className="rounded-3xl bg-white border border-[#DAA520]/30 p-8 md:p-14 shadow-[0_30px_80px_-20px_rgba(218,165,32,0.4)]"
+            className="rounded-3xl bg-white border border-[#D4AF37]/30 p-8 md:p-14 shadow-[0_30px_80px_-20px_rgba(212,175,55,0.4)]"
           >
             <div className="text-center max-w-3xl mx-auto">
               <p className="text-sm uppercase tracking-[0.3em] font-bold text-[#C97AAF] mb-4">Deine Investition</p>
               <h2 className="font-montserrat font-black text-4xl md:text-6xl text-[#2A1F3D] leading-tight">
-                <span style={{ background: 'linear-gradient(135deg, #DAA520 0%, #C97AAF 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                <span style={{ background: 'linear-gradient(135deg, #D4AF37 0%, #C97AAF 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                   Auf Anfrage
                 </span>
                 <span className="text-[#2A1F3D] block text-lg md:text-xl font-semibold mt-3">
@@ -769,9 +769,9 @@ export default function SpanienRetreat() {
             </div>
 
             <div className="mt-10 grid md:grid-cols-2 gap-6">
-              <div className="rounded-2xl bg-gradient-to-br from-[#FBF1D8] to-white p-6 border border-[#DAA520]/30">
+              <div className="rounded-2xl bg-gradient-to-br from-[#FBF1D8] to-white p-6 border border-[#D4AF37]/30">
                 <div className="flex items-center gap-2 mb-3">
-                  <CheckCircle2 size={20} className="text-[#DAA520]" />
+                  <CheckCircle2 size={20} className="text-[#D4AF37]" />
                   <h4 className="font-montserrat font-bold text-[#2A1F3D]">Im Preis enthalten</h4>
                 </div>
                 <ul className="space-y-2 text-sm text-[#4A3F5C]">
@@ -804,9 +804,9 @@ export default function SpanienRetreat() {
               </div>
               <button
                 onClick={scrollToForm}
-                className="inline-flex items-center gap-2 px-9 py-4 rounded-full font-bold tracking-wide shadow-[0_12px_32px_rgba(218,165,32,0.4)] hover:translate-y-[-2px] hover:shadow-[0_16px_40px_rgba(218,165,32,0.55)] transition-all"
+                className="inline-flex items-center gap-2 px-9 py-4 rounded-full font-bold tracking-wide shadow-[0_12px_32px_rgba(212,175,55,0.4)] hover:translate-y-[-2px] hover:shadow-[0_16px_40px_rgba(212,175,55,0.55)] transition-all"
                 style={{
-                  background: 'linear-gradient(135deg, #DAA520 0%, #E8B4C8 100%)',
+                  background: 'linear-gradient(135deg, #D4AF37 0%, #E8B4C8 100%)',
                   color: '#2A1F3D',
                 }}
               >
@@ -842,7 +842,7 @@ export default function SpanienRetreat() {
                   <span className="font-montserrat font-bold text-[#2A1F3D]">{item.q}</span>
                   <ChevronDown
                     size={20}
-                    className={`text-[#DAA520] flex-shrink-0 transition-transform ${openFaq === i ? 'rotate-180' : ''}`}
+                    className={`text-[#D4AF37] flex-shrink-0 transition-transform ${openFaq === i ? 'rotate-180' : ''}`}
                   />
                 </button>
                 {openFaq === i && (
@@ -883,7 +883,7 @@ export default function SpanienRetreat() {
                   'Mit Zahlungseingang ist dein Platz endgültig gesichert.',
                 ].map((t) => (
                   <div key={t} className="flex items-start gap-3">
-                    <CheckCircle2 size={20} className="text-[#DAA520] mt-1 flex-shrink-0" />
+                    <CheckCircle2 size={20} className="text-[#D4AF37] mt-1 flex-shrink-0" />
                     <span className="text-[#2A1F3D]">{t}</span>
                   </div>
                 ))}
@@ -903,7 +903,7 @@ export default function SpanienRetreat() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.5 }}
-              className="rounded-3xl bg-white border border-[#DAA520]/30 p-7 md:p-9 shadow-[0_30px_80px_-20px_rgba(218,165,32,0.4)] space-y-5"
+              className="rounded-3xl bg-white border border-[#D4AF37]/30 p-7 md:p-9 shadow-[0_30px_80px_-20px_rgba(212,175,55,0.4)] space-y-5"
             >
               {submitError && (
                 <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-red-800 text-sm">
@@ -911,7 +911,7 @@ export default function SpanienRetreat() {
                 </div>
               )}
 
-              <div className="rounded-2xl bg-gradient-to-br from-[#FBF1D8] to-[#FDE8F2] border border-[#DAA520]/30 p-4 text-center">
+              <div className="rounded-2xl bg-gradient-to-br from-[#FBF1D8] to-[#FDE8F2] border border-[#D4AF37]/30 p-4 text-center">
                 <p className="text-[10px] uppercase tracking-wider font-bold text-[#C97AAF]">Vorgemerkt für</p>
                 <p className="font-montserrat font-bold text-[#2A1F3D] mt-1">KI-Workshop-Woche Spanien · nächste Auflage</p>
                 <p className="text-xl font-black text-[#2A1F3D] mt-2">
@@ -925,13 +925,13 @@ export default function SpanienRetreat() {
                 <div>
                   <label className="block text-sm font-bold text-[#2A1F3D] mb-2">Vorname *</label>
                   <input type="text" name="vorname" required value={formData.vorname} onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl border border-[#E8B4C8]/50 bg-[#FBF7F0]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#DAA520] transition-all"
+                    className="w-full px-4 py-3 rounded-xl border border-[#E8B4C8]/50 bg-[#FBF7F0]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all"
                     placeholder="Max" />
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-[#2A1F3D] mb-2">Nachname *</label>
                   <input type="text" name="nachname" required value={formData.nachname} onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl border border-[#E8B4C8]/50 bg-[#FBF7F0]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#DAA520] transition-all"
+                    className="w-full px-4 py-3 rounded-xl border border-[#E8B4C8]/50 bg-[#FBF7F0]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all"
                     placeholder="Musterfrau" />
                 </div>
               </div>
@@ -940,13 +940,13 @@ export default function SpanienRetreat() {
                 <div>
                   <label className="block text-sm font-bold text-[#2A1F3D] mb-2">E-Mail *</label>
                   <input type="email" name="email" required value={formData.email} onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl border border-[#E8B4C8]/50 bg-[#FBF7F0]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#DAA520] transition-all"
+                    className="w-full px-4 py-3 rounded-xl border border-[#E8B4C8]/50 bg-[#FBF7F0]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all"
                     placeholder="du@beispiel.de" />
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-[#2A1F3D] mb-2">Telefon (optional)</label>
                   <input type="tel" name="telefon" value={formData.telefon} onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl border border-[#E8B4C8]/50 bg-[#FBF7F0]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#DAA520] transition-all"
+                    className="w-full px-4 py-3 rounded-xl border border-[#E8B4C8]/50 bg-[#FBF7F0]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all"
                     placeholder="+49 ..." />
                 </div>
               </div>
@@ -956,14 +956,14 @@ export default function SpanienRetreat() {
               <div>
                 <label className="block text-sm font-bold text-[#2A1F3D] mb-2">Firma (optional)</label>
                 <input type="text" name="firma" value={formData.firma} onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl border border-[#E8B4C8]/50 bg-[#FBF7F0]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#DAA520] transition-all"
+                  className="w-full px-4 py-3 rounded-xl border border-[#E8B4C8]/50 bg-[#FBF7F0]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all"
                   placeholder="Musterfrau GmbH" />
               </div>
 
               <div>
                 <label className="block text-sm font-bold text-[#2A1F3D] mb-2">Straße & Hausnummer *</label>
                 <input type="text" name="strasse" required value={formData.strasse} onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl border border-[#E8B4C8]/50 bg-[#FBF7F0]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#DAA520] transition-all"
+                  className="w-full px-4 py-3 rounded-xl border border-[#E8B4C8]/50 bg-[#FBF7F0]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all"
                   placeholder="Musterstraße 12" />
               </div>
 
@@ -971,13 +971,13 @@ export default function SpanienRetreat() {
                 <div>
                   <label className="block text-sm font-bold text-[#2A1F3D] mb-2">PLZ *</label>
                   <input type="text" name="plz" required value={formData.plz} onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl border border-[#E8B4C8]/50 bg-[#FBF7F0]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#DAA520] transition-all"
+                    className="w-full px-4 py-3 rounded-xl border border-[#E8B4C8]/50 bg-[#FBF7F0]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all"
                     placeholder="50667" />
                 </div>
                 <div className="col-span-2">
                   <label className="block text-sm font-bold text-[#2A1F3D] mb-2">Ort *</label>
                   <input type="text" name="ort" required value={formData.ort} onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl border border-[#E8B4C8]/50 bg-[#FBF7F0]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#DAA520] transition-all"
+                    className="w-full px-4 py-3 rounded-xl border border-[#E8B4C8]/50 bg-[#FBF7F0]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all"
                     placeholder="Köln" />
                 </div>
               </div>
@@ -986,13 +986,13 @@ export default function SpanienRetreat() {
                 <div>
                   <label className="block text-sm font-bold text-[#2A1F3D] mb-2">Land *</label>
                   <input type="text" name="land" required value={formData.land} onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl border border-[#E8B4C8]/50 bg-[#FBF7F0]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#DAA520] transition-all"
+                    className="w-full px-4 py-3 rounded-xl border border-[#E8B4C8]/50 bg-[#FBF7F0]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all"
                     placeholder="Deutschland" />
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-[#2A1F3D] mb-2">USt-IdNr. (optional)</label>
                   <input type="text" name="ustIdNr" value={formData.ustIdNr} onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl border border-[#E8B4C8]/50 bg-[#FBF7F0]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#DAA520] transition-all"
+                    className="w-full px-4 py-3 rounded-xl border border-[#E8B4C8]/50 bg-[#FBF7F0]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all"
                     placeholder="DE123456789" />
                 </div>
               </div>
@@ -1000,21 +1000,21 @@ export default function SpanienRetreat() {
               <div>
                 <label className="block text-sm font-bold text-[#2A1F3D] mb-2">Nachricht an uns (optional)</label>
                 <textarea name="nachricht" rows={3} value={formData.nachricht} onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl border border-[#E8B4C8]/50 bg-[#FBF7F0]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#DAA520] transition-all resize-none"
+                  className="w-full px-4 py-3 rounded-xl border border-[#E8B4C8]/50 bg-[#FBF7F0]/40 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all resize-none"
                   placeholder="Allergien, besondere Wünsche, oder einfach 'Hallo!'" />
               </div>
 
               <div className="space-y-3 pt-2">
                 <label className="flex items-start gap-3 cursor-pointer">
                   <input type="checkbox" name="privacyAccepted" required checked={formData.privacyAccepted} onChange={handleChange}
-                    className="mt-1 w-5 h-5 rounded border-[#E8B4C8] text-[#DAA520] focus:ring-[#DAA520]" />
+                    className="mt-1 w-5 h-5 rounded border-[#E8B4C8] text-[#D4AF37] focus:ring-[#D4AF37]" />
                   <span className="text-sm text-[#4A3F5C] leading-relaxed">
                     Ich habe die <a href="/datenschutz" target="_blank" rel="noopener noreferrer" className="text-[#C97AAF] underline">Datenschutzerklärung</a> gelesen und akzeptiert. *
                   </span>
                 </label>
                 <label className="flex items-start gap-3 cursor-pointer">
                   <input type="checkbox" name="agbAccepted" required checked={formData.agbAccepted} onChange={handleChange}
-                    className="mt-1 w-5 h-5 rounded border-[#E8B4C8] text-[#DAA520] focus:ring-[#DAA520]" />
+                    className="mt-1 w-5 h-5 rounded border-[#E8B4C8] text-[#D4AF37] focus:ring-[#D4AF37]" />
                   <span className="text-sm text-[#4A3F5C] leading-relaxed">
                     Ich habe die <a href="/agb" target="_blank" rel="noopener noreferrer" className="text-[#C97AAF] underline">AGB</a> gelesen und akzeptiert. Mir ist bewusst, dass mit dem Absenden <strong>noch keine Zahlungspflicht</strong> entsteht — ich werde zuerst über Termin und Preis informiert. *
                   </span>
@@ -1024,9 +1024,9 @@ export default function SpanienRetreat() {
               <button
                 type="submit"
                 disabled={submitting || !formData.agbAccepted || !formData.privacyAccepted}
-                className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full font-bold tracking-wide shadow-[0_12px_32px_rgba(218,165,32,0.4)] hover:translate-y-[-2px] transition-all disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+                className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full font-bold tracking-wide shadow-[0_12px_32px_rgba(212,175,55,0.4)] hover:translate-y-[-2px] transition-all disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0"
                 style={{
-                  background: 'linear-gradient(135deg, #DAA520 0%, #E8B4C8 100%)',
+                  background: 'linear-gradient(135deg, #D4AF37 0%, #E8B4C8 100%)',
                   color: '#2A1F3D',
                 }}
               >

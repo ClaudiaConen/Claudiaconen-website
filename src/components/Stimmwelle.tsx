@@ -39,8 +39,8 @@ export default function Stimmwelle({ className = '' }: { className?: string }) {
       <defs>
         <linearGradient id="cc-welle-gold" x1="0" y1="0" x2="1" y2="0">
           <stop offset="0%" stopColor="#B8860B" stopOpacity="0" />
-          <stop offset="25%" stopColor="#DAA520" stopOpacity="1" />
-          <stop offset="75%" stopColor="#DAA520" stopOpacity="1" />
+          <stop offset="25%" stopColor="#D4AF37" stopOpacity="1" />
+          <stop offset="75%" stopColor="#D4AF37" stopOpacity="1" />
           <stop offset="100%" stopColor="#B8860B" stopOpacity="0" />
         </linearGradient>
       </defs>
@@ -60,7 +60,7 @@ export default function Stimmwelle({ className = '' }: { className?: string }) {
             className="cc-welle-licht"
             d={w.d}
             fill="none"
-            stroke="#F4D03F"
+            stroke="#F7E7CE"
             strokeWidth="1.6"
             strokeLinecap="round"
             opacity={w.o}

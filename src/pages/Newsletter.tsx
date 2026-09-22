@@ -19,7 +19,7 @@ export default function Newsletter() {
       <section className="min-h-screen py-24 bg-gradient-to-b from-[#0A1628] via-[#0F1F3A] to-[#0A1628] relative overflow-hidden">
         <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0" style={{
-            backgroundImage: 'radial-gradient(circle at 2px 2px, #DAA520 1px, transparent 0)',
+            backgroundImage: 'radial-gradient(circle at 2px 2px, #D4AF37 1px, transparent 0)',
             backgroundSize: '40px 40px'
           }}></div>
         </div>
@@ -38,7 +38,7 @@ export default function Newsletter() {
 
             <h1 className="text-4xl md:text-5xl font-montserrat font-bold text-pearl-white mb-6">
               Bleib auf dem{' '}
-              <span className="bg-gradient-to-r from-[#B8860B] via-[#DAA520] to-[#F4D03F] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#B8860B] via-[#D4AF37] to-[#F7E7CE] bg-clip-text text-transparent">
                 neuesten Stand
               </span>
             </h1>
@@ -55,7 +55,7 @@ export default function Newsletter() {
             className="bg-gradient-to-br from-royal-navy/50 to-midnight-blue/50 backdrop-blur-sm rounded-2xl border border-luxury-gold/20 p-8 shadow-2xl"
           >
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#DAA520] to-[#F4D03F] flex items-center justify-center flex-shrink-0">
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#F7E7CE] flex items-center justify-center flex-shrink-0">
                 <Mail size={24} className="text-midnight-blue" />
               </div>
               <div>

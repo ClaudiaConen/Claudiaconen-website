@@ -129,7 +129,7 @@ export default function LinkedInFreebie() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue px-4 py-2 rounded-full font-semibold mb-6 text-sm">
+              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] text-midnight-blue px-4 py-2 rounded-full font-semibold mb-6 text-sm">
                 <Download size={18} />
                 <span>Kostenloses Workbook</span>
               </div>
@@ -137,7 +137,7 @@ export default function LinkedInFreebie() {
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-midnight-blue mb-6 leading-tight">
                 Unverwechselbar Du
                 <br />
-                <span className="bg-gradient-to-r from-[#DAA520] to-[#F4D03F] bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] bg-clip-text text-transparent">
                   Dein 7-Schritte Content-Plan
                 </span>
               </h1>
@@ -264,7 +264,7 @@ export default function LinkedInFreebie() {
                   <button
                     type="submit"
                     disabled={loading || !agreedToPrivacy}
-                    className="w-full py-4 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue font-bold rounded-full hover:scale-105 transition-transform disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 text-lg shadow-lg flex items-center justify-center gap-2"
+                    className="w-full py-4 bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] text-midnight-blue font-bold rounded-full hover:scale-105 transition-transform disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 text-lg shadow-lg flex items-center justify-center gap-2"
                   >
                     {loading ? (
                       <>

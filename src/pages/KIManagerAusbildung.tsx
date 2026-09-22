@@ -11,6 +11,7 @@ import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import WhatsAppButton from '../components/WhatsAppButton';
 import KIManagerBookingModal from '../components/KIManagerBookingModal';
+import HeroBrainSection from '../components/HeroBrainSection';
 
 export default function KIManagerAusbildung() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -258,6 +259,10 @@ export default function KIManagerAusbildung() {
             </motion.div>
           </div>
         </section>
+
+        {/* "Was kein Algorithmus kann" mit dem schwebenden KI-Kopf - von der Startseite hierher gezogen
+            (Claudia, 22.09.2026: passt zum Einstieg zwischen Mensch und Maschine). */}
+        <HeroBrainSection />
 
         <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
           <div className="max-w-6xl mx-auto">

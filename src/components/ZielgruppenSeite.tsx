@@ -620,13 +620,13 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
                         className="pointer-events-none absolute inset-0"
                         style={{
                           background:
-                            'radial-gradient(60% 70% at 20% 15%, rgba(218,165,32,0.20), transparent 70%)',
+                            'radial-gradient(60% 70% at 20% 15%, rgba(212,175,55,0.20), transparent 70%)',
                         }}
                       />
                       <div
                         aria-hidden="true"
                         className="pointer-events-none absolute inset-x-0 bottom-0 h-px"
-                        style={{ background: 'linear-gradient(90deg, #DAA520, #F4D03F, #DAA520)' }}
+                        style={{ background: 'linear-gradient(90deg, #D4AF37, #F7E7CE, #D4AF37)' }}
                       />
                       <figcaption className="relative px-5 py-4">
                         <p className="font-montserrat text-xs font-semibold uppercase tracking-[0.18em] text-luxury-gold">

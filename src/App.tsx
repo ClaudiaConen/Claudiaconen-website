@@ -119,7 +119,6 @@ const KarussellGenerator = lazy(() => import('./pages/KarussellGenerator'));
 const Generatoren = lazy(() => import('./pages/Generatoren'));
 const Abkuerzung1zu1 = lazy(() => import('./pages/Abkuerzung1zu1'));
 const KIManagerAusbildung = lazy(() => import('./pages/KIManagerAusbildung'));
-const KIHeyGenKurs = lazy(() => import('./pages/KIHeyGenKurs'));
 const KIWebseiteErlebnis = lazy(() => import('./pages/KIWebseiteErlebnis'));
 const KIEinsteigerCoaching = lazy(() => import('./pages/KIEinsteigerCoaching'));
 const KI1zu1 = lazy(() => import('./pages/KI1zu1'));
@@ -168,7 +167,7 @@ const AdminGapTextList = lazy(() => import('./pages/AdminGapTextList'));
 const AdminGapTextEdit = lazy(() => import('./pages/AdminGapTextEdit'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 import CustomCursor from './components/CustomCursor';
-import Umbauhinweis from './components/Umbauhinweis';
+// Umbauhinweis seit 22.09.2026 nicht mehr eingeblendet (Komponente bleibt fuer den naechsten grossen Umbau).
 import ScrollToTop from './components/ScrollToTop';
 
 function App() {
@@ -235,7 +234,6 @@ function App() {
         <Route path="/ausbildung-beruf" element={<AusbildungBeruf />} />
         <Route path="/ausbildung-zertifizierung" element={<AusbildungZertifizierung />} />
         <Route path="/ki-manager-ausbildung" element={<KIManagerAusbildung />} />
-        <Route path="/ki-heygen-kurs" element={<KIHeyGenKurs />} />
         <Route path="/ki-webseite-erlebnis" element={<KIWebseiteErlebnis />} />
         <Route path="/ki-einsteiger-coaching" element={<KIEinsteigerCoaching />} />
         <Route path="/ki-1zu1" element={<KI1zu1 />} />
@@ -351,7 +349,6 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
       </Suspense>
-      <Umbauhinweis />
     </Router>
     </StudentAuthProvider>
   );

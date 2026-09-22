@@ -27,7 +27,7 @@ export default function SocialMediaWirkung() {
             </div>
             <h1 className="font-montserrat font-bold text-4xl sm:text-5xl lg:text-6xl mb-6">
               Social Media{' '}
-              <span className="bg-gradient-to-r from-[#B8860B] via-[#DAA520] to-[#F4D03F] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#B8860B] via-[#D4AF37] to-[#F7E7CE] bg-clip-text text-transparent">
                 Wirkung
               </span>
             </h1>

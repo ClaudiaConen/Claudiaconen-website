@@ -43,10 +43,10 @@ interface CommunityEvent {
 
 const EVENT_COLORS: Record<string, string> = {
   zoom: '#4A90D9',
-  live: '#DAA520',
+  live: '#D4AF37',
   workshop: '#9B59B6',
   vortrag: '#E74C3C',
-  meetup: '#DAA520',
+  meetup: '#D4AF37',
   speaker: '#E91E63',
 };
 
@@ -503,7 +503,7 @@ export default function Events() {
       <div className="min-h-screen pt-24 pb-16 relative" style={{ background: 'linear-gradient(180deg, #0A1628 0%, #1A2B4C 200px, #0A1628 500px)' }}>
         <div
           className="absolute top-0 left-0 right-0 h-[400px] pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse 120% 80% at 50% -5%, rgba(218,165,32,0.08) 0%, rgba(218,165,32,0.03) 50%, transparent 80%)' }}
+          style={{ background: 'radial-gradient(ellipse 120% 80% at 50% -5%, rgba(212,175,55,0.08) 0%, rgba(212,175,55,0.03) 50%, transparent 80%)' }}
         />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}

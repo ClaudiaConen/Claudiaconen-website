@@ -2,10 +2,10 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
 
 const RINGS = [
-  { size: 520, className: 'orbital-ring-1', borderStyle: 'border-t-[#DAA520] border-r-[#DAA520]/40 border-b-transparent border-l-transparent', nodes: [0, 120, 240] },
-  { size: 400, className: 'orbital-ring-2', borderStyle: 'border-t-transparent border-r-[#F4D03F]/50 border-b-[#F4D03F] border-l-transparent', nodes: [60, 200] },
-  { size: 280, className: 'orbital-ring-3', borderStyle: 'border-t-[#F4D03F]/60 border-r-transparent border-b-transparent border-l-[#F4D03F]/30', nodes: [30, 170, 310] },
-  { size: 160, className: 'orbital-ring-4', borderStyle: 'border-t-transparent border-r-transparent border-b-[#DAA520]/40 border-l-[#DAA520]/60', nodes: [90, 270] },
+  { size: 520, className: 'orbital-ring-1', borderStyle: 'border-t-[#D4AF37] border-r-[#D4AF37]/40 border-b-transparent border-l-transparent', nodes: [0, 120, 240] },
+  { size: 400, className: 'orbital-ring-2', borderStyle: 'border-t-transparent border-r-[#F7E7CE]/50 border-b-[#F7E7CE] border-l-transparent', nodes: [60, 200] },
+  { size: 280, className: 'orbital-ring-3', borderStyle: 'border-t-[#F7E7CE]/60 border-r-transparent border-b-transparent border-l-[#F7E7CE]/30', nodes: [30, 170, 310] },
+  { size: 160, className: 'orbital-ring-4', borderStyle: 'border-t-transparent border-r-transparent border-b-[#D4AF37]/40 border-l-[#D4AF37]/60', nodes: [90, 270] },
 ];
 
 function OrbitalNode({ angle, ringSize }: { angle: number; ringSize: number }) {
@@ -16,11 +16,11 @@ function OrbitalNode({ angle, ringSize }: { angle: number; ringSize: number }) {
 
   return (
     <div
-      className="orbital-node absolute w-2 h-2 rounded-full bg-[#DAA520]"
+      className="orbital-node absolute w-2 h-2 rounded-full bg-[#D4AF37]"
       style={{
         left: `calc(50% + ${x}px - 4px)`,
         top: `calc(50% + ${y}px - 4px)`,
-        boxShadow: '0 0 10px rgba(218, 165, 32, 0.6)',
+        boxShadow: '0 0 10px rgba(212, 175, 55, 0.6)',
         animationDelay: `${angle * 10}ms`,
       }}
     />
@@ -36,8 +36,8 @@ export default function OrbitalHero() {
   return (
     <section className="relative bg-pearl-white pt-40 pb-24 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-[#DAA520]/[0.03] blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-[#F4D03F]/[0.03] blur-3xl" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-[#D4AF37]/[0.03] blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-[#F7E7CE]/[0.03] blur-3xl" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -68,7 +68,7 @@ export default function OrbitalHero() {
                   height: '15%',
                   top: '42.5%',
                   left: '42.5%',
-                  background: 'radial-gradient(circle, #F4D03F 0%, #DAA520 60%, #B8860B 100%)',
+                  background: 'radial-gradient(circle, #F7E7CE 0%, #D4AF37 60%, #B8860B 100%)',
                 }}
               />
 
@@ -83,7 +83,7 @@ export default function OrbitalHero() {
                     left: '50%',
                     transformOrigin: 'bottom center',
                     transform: `rotate(${i * 45}deg)`,
-                    background: 'linear-gradient(to top, transparent 20%, rgba(218, 165, 32, 0.06) 50%, transparent 100%)',
+                    background: 'linear-gradient(to top, transparent 20%, rgba(212, 175, 55, 0.06) 50%, transparent 100%)',
                   }}
                 />
               ))}
@@ -96,8 +96,8 @@ export default function OrbitalHero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#DAA520]/10 border border-[#DAA520]/20 mb-8">
-                <Sparkles size={16} className="text-[#DAA520]" />
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/20 mb-8">
+                <Sparkles size={16} className="text-[#D4AF37]" />
                 <span className="text-sm font-medium text-[#1a2744]">Premiumangebote</span>
               </div>
             </motion.div>
@@ -111,7 +111,7 @@ export default function OrbitalHero() {
             >
               Die Stimme zwischen
               <br />
-              <span className="bg-gradient-to-r from-[#B8860B] via-[#DAA520] to-[#F4D03F] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#B8860B] via-[#D4AF37] to-[#F7E7CE] bg-clip-text text-transparent">
                 Mensch & Maschine
               </span>
             </motion.h1>
@@ -135,8 +135,8 @@ export default function OrbitalHero() {
                 onClick={scrollToCards}
                 className="group inline-flex items-center gap-3 px-8 py-4 rounded-full font-bold text-lg text-[#1a2744] transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
                 style={{
-                  background: 'linear-gradient(135deg, #F4D03F 0%, #DAA520 100%)',
-                  boxShadow: '0 4px 20px rgba(218, 165, 32, 0.3)',
+                  background: 'linear-gradient(135deg, #F7E7CE 0%, #D4AF37 100%)',
+                  boxShadow: '0 4px 20px rgba(212, 175, 55, 0.3)',
                 }}
               >
                 Entdecke deine Wirkung

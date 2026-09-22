@@ -119,7 +119,7 @@ export default function Hero() {
         style={{
           background:
             'radial-gradient(120% 85% at 12% 0%, rgba(26,43,76,0.95) 0%, rgba(10,22,40,0) 62%),' +
-            'radial-gradient(90% 70% at 88% 18%, rgba(218,165,32,0.14) 0%, rgba(10,22,40,0) 58%),' +
+            'radial-gradient(90% 70% at 88% 18%, rgba(212,175,55,0.14) 0%, rgba(10,22,40,0) 58%),' +
             'linear-gradient(175deg, #0B1B33 0%, #0A1628 48%, #0C1E38 100%)',
           zIndex: 0,
         }}
@@ -181,7 +181,7 @@ export default function Hero() {
               </p>
             </div>
 
-            <div className="hero-kacheln flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 sm:grid sm:grid-cols-3 sm:gap-3 sm:overflow-visible lg:grid-cols-7">
+            <div className="hero-kacheln flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 sm:grid sm:grid-cols-3 sm:gap-3 sm:overflow-visible lg:grid-cols-4 2xl:grid-cols-7">
               {keyPoints.map((point, index) => {
                 const media = stepMediaData[point.stepNumber];
                 return (
@@ -191,7 +191,7 @@ export default function Hero() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.2 }}
-                    className="hero-glass-card group w-[11rem] flex-shrink-0 snap-start rounded-xl p-3.5 sm:w-auto sm:flex-shrink"
+                    className="hero-glass-card group relative w-[11rem] flex-shrink-0 snap-start rounded-xl p-3.5 sm:w-auto sm:flex-shrink"
                     onClick={(e) => {
                       e.preventDefault();
                       const target = document.querySelector(point.href);
@@ -219,10 +219,10 @@ export default function Hero() {
                         height={256}
                         loading="eager"
                         decoding="async"
-                        className="h-9 w-9 flex-shrink-0 drop-shadow-[0_6px_10px_rgba(0,0,0,0.35)] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110"
+                        className="h-11 w-11 flex-shrink-0 drop-shadow-[0_6px_10px_rgba(0,0,0,0.35)] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110"
                       />
                       <div className="min-w-0 flex-1">
-                        <p className="text-[0.82rem] font-semibold leading-snug text-pearl-white">
+                        <p className="break-words text-[0.8rem] font-semibold leading-snug text-pearl-white [hyphens:auto]">
                           {point.title}
                         </p>
                         <p className="mt-0.5 text-[0.7rem] leading-snug text-pearl-white/60">
@@ -230,7 +230,7 @@ export default function Hero() {
                         </p>
                       </div>
                       {media && (
-                        <div className="flex-shrink-0" onClick={(e) => e.stopPropagation()}>
+                        <div className="absolute bottom-2 right-2 scale-[0.7] opacity-80 transition-opacity group-hover:opacity-100" onClick={(e) => e.stopPropagation()}>
                           {media.media_type === 'audio' ? (
                             <AudioButton audioUrl={media.media_url} ariaLabel={`Play ${point.title} audio`} />
                           ) : media.media_type === 'video' && media.platform ? (
@@ -255,7 +255,7 @@ export default function Hero() {
             >
               <a
                 href="#schritt1"
-                className="flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg whitespace-nowrap"
+                className="flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg whitespace-nowrap"
                 onClick={(e) => {
                   e.preventDefault();
                   const target = document.querySelector('#schritt1');

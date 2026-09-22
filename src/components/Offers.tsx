@@ -29,7 +29,7 @@ export default function Offers() {
       name: 'Voice-to-Brain Mentoring',
       price: 'Hier weitere Informationen einsehen:',
       badge: 'BESTSELLER - KI-Zeitalter',
-      badgeColor: 'from-[#DAA520] to-[#F4D03F]',
+      badgeColor: 'from-[#D4AF37] to-[#F7E7CE]',
       benefit: '12-18 Wochen Mentoring: Unverwechselbar DU im KI-Zeitalter',
       features: [
         '12 wöchentliche Live-Sessions',
@@ -38,7 +38,7 @@ export default function Offers() {
         'Wirkung verstehen und gezielt einsetzen',
       ],
       buttonText: 'Hier weitere Informationen',
-      buttonColor: 'from-[#DAA520] to-[#F4D03F]',
+      buttonColor: 'from-[#D4AF37] to-[#F7E7CE]',
       link: 'https://claudia-conen-voice-ui2e.bolt.host/',
       highlighted: true,
       icon: Sparkles,
@@ -84,7 +84,7 @@ export default function Offers() {
           >
             <h2 id="offers-headline" className="font-montserrat font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-4 md:mb-6">
               <span className="text-white">Wähle deinen </span>
-              <span className="bg-gradient-to-r from-[#B8860B] via-[#DAA520] to-[#F4D03F] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#B8860B] via-[#D4AF37] to-[#F7E7CE] bg-clip-text text-transparent">
                 Transformationsweg
               </span>
             </h2>
@@ -114,9 +114,9 @@ export default function Offers() {
                     <motion.div
                       animate={{
                         boxShadow: [
-                          '0 0 20px rgba(218, 165, 32, 0.3)',
-                          '0 0 40px rgba(218, 165, 32, 0.6)',
-                          '0 0 20px rgba(218, 165, 32, 0.3)',
+                          '0 0 20px rgba(212, 175, 55, 0.3)',
+                          '0 0 40px rgba(212, 175, 55, 0.6)',
+                          '0 0 20px rgba(212, 175, 55, 0.3)',
                         ],
                       }}
                       transition={{ duration: 3, repeat: Infinity }}
@@ -137,7 +137,7 @@ export default function Offers() {
                     </h3>
 
                     <div className="mb-4">
-                      <span className="text-2xl md:text-4xl font-bold bg-gradient-to-r from-[#DAA520] to-[#F4D03F] bg-clip-text text-transparent">
+                      <span className="text-2xl md:text-4xl font-bold bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] bg-clip-text text-transparent">
                         {offer.price}
                       </span>
                     </div>

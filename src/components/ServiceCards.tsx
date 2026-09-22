@@ -23,7 +23,7 @@ export default function ServiceCards() {
       link: '/ki-manager-ausbildung',
       footer: 'KI-Manager Ausbildung',
       icon: Users,
-      gradient: 'from-[#DAA520] to-[#B8860B]',
+      gradient: 'from-[#D4AF37] to-[#B8860B]',
       borderColor: 'luxury-gold',
     },
     {
@@ -61,7 +61,7 @@ export default function ServiceCards() {
                     className="relative h-full bg-white rounded-2xl border border-gray-200 hover:border-gray-300 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden p-8 flex flex-col"
                     style={{
                       borderTopWidth: '4px',
-                      borderTopColor: service.borderColor === 'luxury-gold' ? '#DAA520' : service.borderColor === 'royal-navy' ? '#1A2B4C' : '#0A1628'
+                      borderTopColor: service.borderColor === 'luxury-gold' ? '#D4AF37' : service.borderColor === 'royal-navy' ? '#1A2B4C' : '#0A1628'
                     }}
                   >
                     <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-gray-50 to-transparent rounded-bl-full" />

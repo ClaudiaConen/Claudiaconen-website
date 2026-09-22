@@ -123,9 +123,9 @@ export default function AdventLanding() {
                 whileTap={{ scale: 0.95 }}
                 animate={{
                   boxShadow: [
-                    '0 0 20px rgba(218, 165, 32, 0.5)',
-                    '0 0 40px rgba(218, 165, 32, 0.8)',
-                    '0 0 20px rgba(218, 165, 32, 0.5)'
+                    '0 0 20px rgba(212, 175, 55, 0.5)',
+                    '0 0 40px rgba(212, 175, 55, 0.8)',
+                    '0 0 20px rgba(212, 175, 55, 0.5)'
                   ]
                 }}
                 transition={{

@@ -20,7 +20,7 @@ import { Link } from 'react-router-dom';
  * - Nie duerfen dieselben Bilder gleichzeitig zweimal zu sehen sein -> das Band ist auf gut elf
  *   Kachelbreiten begrenzt (.cc-lauf-band). Mit mehr Kacheln kann es breiter werden.
  * - Gold ist das metallische Gold ihrer Community-Seite (#D4AF37 / #F7E7CE / #C9A961), nicht das
- *   gelbliche #F4D03F.
+ *   gelbliche #F7E7CE.
  *
  * Die Bilder liegen in public/situationen/ (360x640, WebP, zusammen rund 215 KB). Die Kachel
  * "In der Moderation" ist ein stummer Clip (Founder Summit, Sekunde 7-14, ihre Ansage); er laedt

@@ -35,7 +35,7 @@ export default function Wissensmagazin() {
 
           <div className="space-y-8 mt-8">
             <section>
-              <h2 className="text-2xl font-bold mb-4"><span className="bg-gradient-to-r from-[#DAA520] to-[#F4D03F] bg-clip-text text-transparent">1. „Ankommen?" – Kommen Sie beim Gegenüber an?</span></h2>
+              <h2 className="text-2xl font-bold mb-4"><span className="bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] bg-clip-text text-transparent">1. „Ankommen?" – Kommen Sie beim Gegenüber an?</span></h2>
               <div className="bg-gradient-to-r from-bright-gold/10 to-luxury-gold/5 border-l-4 border-bright-gold p-6 rounded-lg">
                 <p className="text-gray-700 leading-relaxed">
                   Bevor Sie ein Wort sprechen, hat Ihr Gegenüber sich schon ein Bild gemacht. Noch bevor der erste Satz zu Ende ist, entscheidet sich: Bin ich bereit zuzuhören oder schon abgeschaltet? Ihre Präsenz, Klangfarbe, Haltung – all das wirkt. Wenn Sie bewusst „ankommen", öffnet sich der Raum für Wirkung.
@@ -44,7 +44,7 @@ export default function Wissensmagazin() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold mb-4"><span className="bg-gradient-to-r from-[#DAA520] to-[#F4D03F] bg-clip-text text-transparent">2. „Aufmachen?" – Öffnen Sie Räume oder Mauern?</span></h2>
+              <h2 className="text-2xl font-bold mb-4"><span className="bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] bg-clip-text text-transparent">2. „Aufmachen?" – Öffnen Sie Räume oder Mauern?</span></h2>
               <div className="bg-gradient-to-r from-bright-gold/10 to-luxury-gold/5 border-l-4 border-bright-gold p-6 rounded-lg">
                 <p className="text-gray-700 leading-relaxed">
                   Wirkung entsteht durch Öffnung – nicht durch Funktionieren. Ihre Stimme soll Türen öffnen, nicht Schleusen dicht machen. Wer Mauern aufbaut, erschwert Nähe. Ihre Aufgabe: Räume schaffen, in denen emotionales Entscheiden entsteht.
@@ -53,7 +53,7 @@ export default function Wissensmagazin() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold mb-4"><span className="bg-gradient-to-r from-[#DAA520] to-[#F4D03F] bg-clip-text text-transparent">3. „Anders?" – Heben Sie sich ab oder bleiben Sie verborgen?</span></h2>
+              <h2 className="text-2xl font-bold mb-4"><span className="bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] bg-clip-text text-transparent">3. „Anders?" – Heben Sie sich ab oder bleiben Sie verborgen?</span></h2>
               <div className="bg-gradient-to-r from-bright-gold/10 to-luxury-gold/5 border-l-4 border-bright-gold p-6 rounded-lg">
                 <p className="text-gray-700 leading-relaxed">
                   In der Masse bleibt man unsichtbar. Ihre Stimme, Ihre Story, Ihre Marke – sie müssen „anders" genug sein, um wahrgenommen zu werden. Unterscheiden heißt nicht laut sein, sondern klar sein.
@@ -62,7 +62,7 @@ export default function Wissensmagazin() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold mb-4"><span className="bg-gradient-to-r from-[#DAA520] to-[#F4D03F] bg-clip-text text-transparent">4. „Authentisch?" – Sind Sie echt oder nur perfekt?</span></h2>
+              <h2 className="text-2xl font-bold mb-4"><span className="bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] bg-clip-text text-transparent">4. „Authentisch?" – Sind Sie echt oder nur perfekt?</span></h2>
               <div className="bg-gradient-to-r from-bright-gold/10 to-luxury-gold/5 border-l-4 border-bright-gold p-6 rounded-lg">
                 <p className="text-gray-700 leading-relaxed">
                   Perfektion ist austauschbar. Echtsein nicht. Im Zeitalter der KI wird Ihre Authentizität zur Währung. Ihre Stimme, Ihre Geschichte, Ihre Haltung – alles muss echt sein, damit Sie wirken.
@@ -71,7 +71,7 @@ export default function Wissensmagazin() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold mb-4"><span className="bg-gradient-to-r from-[#DAA520] to-[#F4D03F] bg-clip-text text-transparent">5. „Anspruchsvoll?" – Welcher Maßstab treibt Sie?</span></h2>
+              <h2 className="text-2xl font-bold mb-4"><span className="bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] bg-clip-text text-transparent">5. „Anspruchsvoll?" – Welcher Maßstab treibt Sie?</span></h2>
               <div className="bg-gradient-to-r from-bright-gold/10 to-luxury-gold/5 border-l-4 border-bright-gold p-6 rounded-lg">
                 <p className="text-gray-700 leading-relaxed">
                   Wirkung ist kein Zufall – sie verlangt Bewusstsein und Anspruch. Welche Standards setzen Sie sich? Welche Wirkung ist Ihr Ziel? Nur wer anspruchsvoll mit sich ist, kann Wirkung entfalten.
@@ -80,7 +80,7 @@ export default function Wissensmagazin() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold mb-4"><span className="bg-gradient-to-r from-[#DAA520] to-[#F4D03F] bg-clip-text text-transparent">6. „Aktiv?" – Handeln Sie oder reagieren Sie nur?</span></h2>
+              <h2 className="text-2xl font-bold mb-4"><span className="bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] bg-clip-text text-transparent">6. „Aktiv?" – Handeln Sie oder reagieren Sie nur?</span></h2>
               <div className="bg-gradient-to-r from-bright-gold/10 to-luxury-gold/5 border-l-4 border-bright-gold p-6 rounded-lg">
                 <p className="text-gray-700 leading-relaxed">
                   Wirkung entsteht nicht durch Reaktion, sondern durch Aktion. Ihre Stimme, Ihre Marke, Ihre Botschaft – sie müssen vollzogen werden. Wer nur reagiert, bleibt passiv. Wer aktiv ist, wirkt.
@@ -89,7 +89,7 @@ export default function Wissensmagazin() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold mb-4"><span className="bg-gradient-to-r from-[#DAA520] to-[#F4D03F] bg-clip-text text-transparent">7. „Aufrecht?" – Stehen Sie für etwas oder schweben Sie mit?</span></h2>
+              <h2 className="text-2xl font-bold mb-4"><span className="bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] bg-clip-text text-transparent">7. „Aufrecht?" – Stehen Sie für etwas oder schweben Sie mit?</span></h2>
               <div className="bg-gradient-to-r from-bright-gold/10 to-luxury-gold/5 border-l-4 border-bright-gold p-6 rounded-lg">
                 <p className="text-gray-700 leading-relaxed">
                   Eine starke Marke steht für etwas – und lässt sich nicht treiben. Ihre Wirkung ist dann nachhaltig, wenn Sie Haltung zeigen. „Aufrecht" sein heißt: sichtbar, verbindlich, konsequent.
@@ -98,7 +98,7 @@ export default function Wissensmagazin() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold mb-4"><span className="bg-gradient-to-r from-[#DAA520] to-[#F4D03F] bg-clip-text text-transparent">Ihr Weg zur unverwechselbaren Wirkung</span></h2>
+              <h2 className="text-2xl font-bold mb-4"><span className="bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] bg-clip-text text-transparent">Ihr Weg zur unverwechselbaren Wirkung</span></h2>
               <p className="text-gray-700 leading-relaxed">
                 Diese sieben Fragen sind nicht nur rhetorisch – sie sind handlungsleitend. Jede beantwortete Frage erhöht Ihre Wirkungskraft. Jede ausgelassene Frage schwächt Ihre Präsenz. Nutzen Sie dieses Modell als Kompass: Stimme, Marke, Persönlichkeit. Ihre Wirkung beginnt dort, wo Perfektion endet.
               </p>
@@ -139,7 +139,7 @@ export default function Wissensmagazin() {
             transition={{ duration: 0.6 }}
           >
             <h1 className="font-montserrat font-bold text-5xl md:text-6xl lg:text-7xl text-midnight-blue mb-6 text-center">
-              <span className="bg-gradient-to-r from-[#DAA520] to-[#F4D03F] bg-clip-text text-transparent">Wissensmagazin</span>
+              <span className="bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] bg-clip-text text-transparent">Wissensmagazin</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-700 text-center max-w-3xl mx-auto mb-12 leading-relaxed">
               Fundiertes Wissen über Stimme, Wirkung, Persönlichkeit und Markenführung
@@ -162,7 +162,7 @@ export default function Wissensmagazin() {
                   onClick={() => setSelectedTag(null)}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                     selectedTag === null
-                      ? 'bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue shadow-md'
+                      ? 'bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] text-midnight-blue shadow-md'
                       : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-bright-gold shadow-sm'
                   }`}
                 >
@@ -174,7 +174,7 @@ export default function Wissensmagazin() {
                     onClick={() => setSelectedTag(tag)}
                     className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                       selectedTag === tag
-                        ? 'bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue shadow-md'
+                        ? 'bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] text-midnight-blue shadow-md'
                         : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-bright-gold shadow-sm'
                     }`}
                   >
@@ -230,7 +230,7 @@ export default function Wissensmagazin() {
                         const articleSection = document.getElementById(`article-${article.id}`);
                         articleSection?.scrollIntoView({ behavior: 'smooth' });
                       }}
-                      className="inline-block px-6 py-2 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform"
+                      className="inline-block px-6 py-2 bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform"
                     >
                       Artikel lesen
                     </a>
@@ -263,7 +263,7 @@ export default function Wissensmagazin() {
                         <time>{new Date(article.date).toLocaleDateString('de-DE', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
                       </div>
                       <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                        <span className="bg-gradient-to-r from-[#DAA520] to-[#F4D03F] bg-clip-text text-transparent">{article.title}</span>
+                        <span className="bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] bg-clip-text text-transparent">{article.title}</span>
                       </h2>
                       <div className="flex flex-wrap gap-2 mb-8">
                         {article.tags.map(tag => (

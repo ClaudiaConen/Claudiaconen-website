@@ -19,7 +19,7 @@ const SITUATIONEN = [
   'im Vier-Augen-Gespräch',
   'im Meeting',
   'im Team, das wieder brennt',
-  'vor 500 Menschen',
+  'vor vollem Saal',
   'auf der Messe',
   'im Radio',
   'im Podcast',

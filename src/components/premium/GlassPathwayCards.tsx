@@ -16,7 +16,7 @@ interface PathwayCard {
 const PATHWAYS: PathwayCard[] = [
   {
     icon: Mic2,
-    iconBg: '#F4D03F',
+    iconBg: '#F7E7CE',
     title: 'Vorträge & Events',
     subtitle: 'Für Unternehmen, Kongresse, Veranstaltungen',
     bullets: [
@@ -42,7 +42,7 @@ const PATHWAYS: PathwayCard[] = [
   },
   {
     icon: GraduationCap,
-    iconBg: '#F4D03F',
+    iconBg: '#F7E7CE',
     title: 'Ausbildung',
     subtitle: 'Werde Speaker, Trainer oder freier Redner',
     bullets: [
@@ -55,7 +55,7 @@ const PATHWAYS: PathwayCard[] = [
   },
   {
     icon: Bot,
-    iconBg: '#F4D03F',
+    iconBg: '#F7E7CE',
     title: 'Mensch & KI',
     subtitle: 'KI verstehen, nutzen, übertreffen',
     bullets: [
@@ -106,8 +106,8 @@ function PathwayCardItem({ card, index }: { card: PathwayCard; index: number }) 
         onMouseLeave={handleMouseLeave}
         style={{ willChange: 'transform' }}
       >
-        <div className="rounded-2xl border-2 border-dashed border-[#DAA520]/30 bg-[#FDFBF7] flex items-center justify-center h-40 mb-6 relative">
-          <Video size={28} className="text-[#DAA520]/40 mb-2" />
+        <div className="rounded-2xl border-2 border-dashed border-[#D4AF37]/30 bg-[#FDFBF7] flex items-center justify-center h-40 mb-6 relative">
+          <Video size={28} className="text-[#D4AF37]/40 mb-2" />
           <span className="absolute bottom-3 left-4 text-xs text-[#1a2744]/50 font-medium">
             {card.videoLabel}
           </span>
@@ -134,7 +134,7 @@ function PathwayCardItem({ card, index }: { card: PathwayCard; index: number }) 
         <ul className="space-y-3 mb-6 flex-1">
           {card.bullets.map((bullet, i) => (
             <li key={i} className="flex items-start gap-2.5">
-              <ArrowRight size={16} className="text-[#DAA520] flex-shrink-0 mt-0.5" />
+              <ArrowRight size={16} className="text-[#D4AF37] flex-shrink-0 mt-0.5" />
               <span className="text-[#1e3a5f] text-sm leading-relaxed">{bullet}</span>
             </li>
           ))}
@@ -142,7 +142,7 @@ function PathwayCardItem({ card, index }: { card: PathwayCard; index: number }) 
 
         <Link
           to={card.link}
-          className="group inline-flex items-center gap-2 text-[#DAA520] font-semibold text-sm hover:text-[#B8860B] transition-colors duration-300"
+          className="group inline-flex items-center gap-2 text-[#D4AF37] font-semibold text-sm hover:text-[#B8860B] transition-colors duration-300"
         >
           Mehr erfahren
           <ArrowRight

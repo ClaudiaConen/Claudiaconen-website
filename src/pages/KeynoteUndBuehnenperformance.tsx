@@ -26,7 +26,7 @@ export default function KeynoteUndBuehnenperformance() {
               <Target size={64} className="text-white" />
             </div>
             <h1 className="font-montserrat font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl mb-6 leading-tight">
-              <span className="bg-gradient-to-r from-[#B8860B] via-[#DAA520] to-[#F4D03F] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#B8860B] via-[#D4AF37] to-[#F7E7CE] bg-clip-text text-transparent">
                 POSITIONIERUNG<br/>
                 PERSÖNLICHKEIT<br/>
                 PERFORMANCE<br/>

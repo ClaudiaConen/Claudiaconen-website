@@ -35,14 +35,14 @@ export default function ClaudiaAI() {
             transition={{ duration: 0.2 }}
             className="space-y-6 md:space-y-8"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#DAA520]/20 to-[#DAA520]/20 rounded-full border border-[#DAA520]/30">
-              <Sparkles size={20} className="text-[#DAA520]" />
-              <span className="text-[#DAA520] font-semibold">Neu: KI-Revolution</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#D4AF37]/20 to-[#D4AF37]/20 rounded-full border border-[#D4AF37]/30">
+              <Sparkles size={20} className="text-[#D4AF37]" />
+              <span className="text-[#D4AF37] font-semibold">Neu: KI-Revolution</span>
             </div>
 
             <div>
               <h2 className="font-montserrat font-bold text-3xl sm:text-4xl lg:text-5xl mb-6">
-                <span className="bg-gradient-to-r from-[#DAA520] via-[#DAA520] to-[#B8860B] bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[#D4AF37] via-[#D4AF37] to-[#B8860B] bg-clip-text text-transparent">
                   Claudia AI – Entdecke, was kein Algorithmus kann: DICH.
                 </span>
               </h2>
@@ -64,7 +64,7 @@ export default function ClaudiaAI() {
                 Denn Maschinen berechnen.<br />
                 Menschen berühren.
               </p>
-              <p className="text-xl font-bold bg-gradient-to-r from-[#DAA520] via-[#DAA520] to-[#B8860B] bg-clip-text text-transparent">
+              <p className="text-xl font-bold bg-gradient-to-r from-[#D4AF37] via-[#D4AF37] to-[#B8860B] bg-clip-text text-transparent">
                 🔸 Starte jetzt – entdecke deine Wirkungskraft.
               </p>
             </div>
@@ -79,9 +79,9 @@ export default function ClaudiaAI() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, amount: 0.3 }}
                     transition={{ duration: 0.2 }}
-                    className="flex items-start gap-4 bg-royal-navy/30 backdrop-blur-sm p-4 rounded-xl border border-[#DAA520]/10"
+                    className="flex items-start gap-4 bg-royal-navy/30 backdrop-blur-sm p-4 rounded-xl border border-[#D4AF37]/10"
                   >
-                    <div className="p-2 rounded-full bg-gradient-to-r from-[#DAA520] to-[#DAA520]">
+                    <div className="p-2 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#D4AF37]">
                       <Icon size={24} className="text-midnight-blue" />
                     </div>
                     <div>
@@ -96,7 +96,7 @@ export default function ClaudiaAI() {
             <div>
               <button
                 onClick={() => setIsBetaModalOpen(true)}
-                className="flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-[#DAA520] to-[#DAA520] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg"
+                className="flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#D4AF37] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg"
               >
                 <Sparkles size={20} />
                 Zur Beta-Warteliste
@@ -117,8 +117,8 @@ export default function ClaudiaAI() {
                 transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
                 className="relative w-24 h-24"
               >
-                <div className="absolute inset-0 rounded-full border-4 border-[#DAA520]/30"></div>
-                <div className="absolute inset-0 rounded-full overflow-hidden border-4 border-[#DAA520]">
+                <div className="absolute inset-0 rounded-full border-4 border-[#D4AF37]/30"></div>
+                <div className="absolute inset-0 rounded-full overflow-hidden border-4 border-[#D4AF37]">
                   <img
                     src="/claudia20.webp"
                     width={720}
@@ -130,19 +130,19 @@ export default function ClaudiaAI() {
                 </div>
               </motion.div>
 
-              <div className="h-0.5 w-20 bg-gradient-to-r from-[#DAA520] to-transparent"></div>
+              <div className="h-0.5 w-20 bg-gradient-to-r from-[#D4AF37] to-transparent"></div>
 
               <motion.div
                 animate={{
                   scale: [1, 1.1, 1],
                   boxShadow: [
-                    '0 0 20px rgba(218, 165, 32, 0.3)',
-                    '0 0 40px rgba(218, 165, 32, 0.6)',
-                    '0 0 20px rgba(218, 165, 32, 0.3)',
+                    '0 0 20px rgba(212, 175, 55, 0.3)',
+                    '0 0 40px rgba(212, 175, 55, 0.6)',
+                    '0 0 20px rgba(212, 175, 55, 0.3)',
                   ],
                 }}
                 transition={{ duration: 2, repeat: Infinity }}
-                className="w-16 h-16 rounded-full bg-gradient-to-r from-[#DAA520] to-[#DAA520] flex items-center justify-center"
+                className="w-16 h-16 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#D4AF37] flex items-center justify-center"
               >
                 <Bot size={32} className="text-midnight-blue" />
               </motion.div>
@@ -150,7 +150,7 @@ export default function ClaudiaAI() {
 
             <div className="text-center mb-12">
               <p className="text-xl font-semibold">
-                <span className="bg-gradient-to-r from-[#DAA520] via-[#DAA520] to-[#B8860B] bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[#D4AF37] via-[#D4AF37] to-[#B8860B] bg-clip-text text-transparent">
                   37 Jahre Expertise × KI-Power
                 </span>
               </p>
@@ -167,13 +167,13 @@ export default function ClaudiaAI() {
                 <motion.div
                   animate={{
                     boxShadow: [
-                      '0 0 40px rgba(218, 165, 32, 0.4)',
-                      '0 0 80px rgba(218, 165, 32, 0.6)',
-                      '0 0 40px rgba(218, 165, 32, 0.4)',
+                      '0 0 40px rgba(212, 175, 55, 0.4)',
+                      '0 0 80px rgba(212, 175, 55, 0.6)',
+                      '0 0 40px rgba(212, 175, 55, 0.4)',
                     ],
                   }}
                   transition={{ duration: 3, repeat: Infinity }}
-                  className="w-48 h-48 rounded-full bg-gradient-to-r from-[#DAA520] to-[#DAA520] flex items-center justify-center"
+                  className="w-48 h-48 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#D4AF37] flex items-center justify-center"
                 >
                   <Bot size={120} className="text-midnight-blue" />
                 </motion.div>
@@ -184,7 +184,7 @@ export default function ClaudiaAI() {
                 transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
                 className="absolute inset-0 flex items-center justify-center"
               >
-                <div className="w-72 h-72 rounded-full border-2 border-[#DAA520]/20">
+                <div className="w-72 h-72 rounded-full border-2 border-[#D4AF37]/20">
                   {[0, 90, 180, 270].map((rotation, i) => (
                     <motion.div
                       key={i}
@@ -194,7 +194,7 @@ export default function ClaudiaAI() {
                         left: '50%',
                         transform: `rotate(${rotation}deg) translateY(-144px) translateX(-50%)`,
                       }}
-                      className="w-3 h-3 rounded-full bg-[#DAA520]"
+                      className="w-3 h-3 rounded-full bg-[#D4AF37]"
                     />
                   ))}
                 </div>
@@ -205,7 +205,7 @@ export default function ClaudiaAI() {
                 transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
                 className="absolute inset-0 flex items-center justify-center"
               >
-                <div className="w-96 h-96 rounded-full border border-[#DAA520]/10"></div>
+                <div className="w-96 h-96 rounded-full border border-[#D4AF37]/10"></div>
               </motion.div>
             </div>
           </motion.div>

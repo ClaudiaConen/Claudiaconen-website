@@ -39,7 +39,7 @@ export default function MissionSection() {
             className="bg-white rounded-2xl p-8 shadow-lg border-2 border-luxury-gold/20 hover:border-luxury-gold/40 transition-all duration-300"
           >
             <div className="flex items-start gap-4 mb-6">
-              <div className="p-3 rounded-full bg-gradient-to-r from-[#DAA520] to-[#F4D03F] flex-shrink-0">
+              <div className="p-3 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] flex-shrink-0">
                 <Sparkles className="text-midnight-blue" size={24} />
               </div>
               <h3 className="text-2xl md:text-3xl font-bold text-midnight-blue pt-2">
@@ -60,7 +60,7 @@ export default function MissionSection() {
                 Deine Botschaft ist nur so viel wert wie die Fähigkeit, sie zu kommunizieren. Punkt.
               </p>
 
-              <div className="bg-gradient-to-r from-[#DAA520]/10 to-[#F4D03F]/10 rounded-xl p-6 my-6">
+              <div className="bg-gradient-to-r from-[#D4AF37]/10 to-[#F7E7CE]/10 rounded-xl p-6 my-6">
                 <p className="text-2xl md:text-3xl font-bold text-midnight-blue mb-2">
                   Der erste Moment
                 </p>
@@ -100,7 +100,7 @@ export default function MissionSection() {
             className="bg-gradient-to-br from-midnight-blue to-royal-navy rounded-2xl p-8 shadow-lg border-2 border-luxury-gold/30 text-pearl-white"
           >
             <div className="flex items-start gap-4 mb-6">
-              <div className="p-3 rounded-full bg-gradient-to-r from-[#DAA520] to-[#F4D03F] flex-shrink-0">
+              <div className="p-3 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] flex-shrink-0">
                 <Heart className="text-midnight-blue" size={24} />
               </div>
               <h3 className="text-2xl md:text-3xl font-bold pt-2">
@@ -164,7 +164,7 @@ export default function MissionSection() {
           className="bg-white rounded-2xl p-8 md:p-10 shadow-lg border-2 border-luxury-gold/30"
         >
           <div className="flex items-center gap-4 mb-6">
-            <div className="p-3 rounded-full bg-gradient-to-r from-[#DAA520] to-[#F4D03F]">
+            <div className="p-3 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE]">
               <Zap className="text-midnight-blue" size={28} />
             </div>
             <h3 className="text-2xl md:text-3xl font-bold text-midnight-blue">

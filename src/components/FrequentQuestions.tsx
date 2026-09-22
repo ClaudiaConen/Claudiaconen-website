@@ -172,7 +172,7 @@ export default function FrequentQuestions() {
         >
           <Link
             to="/wissensbibliothek"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue font-bold rounded-full hover:scale-105 transition-transform shadow-xl"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] text-midnight-blue font-bold rounded-full hover:scale-105 transition-transform shadow-xl"
           >
             <BookOpen size={20} />
             Zur kompletten Wissensbibliothek

@@ -81,7 +81,7 @@ export default function ImageSlider() {
             onClick={() => setCurrentIndex(index)}
             className={`w-3 h-3 rounded-full transition-all duration-300 ${
               index === currentIndex
-                ? 'bg-[#DAA520] w-8'
+                ? 'bg-[#D4AF37] w-8'
                 : 'bg-gray-400/50 hover:bg-gray-400/70'
             }`}
             aria-label={`Bild ${index + 1}`}

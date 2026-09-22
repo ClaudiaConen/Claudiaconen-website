@@ -127,7 +127,7 @@ export default function KarussellGenerator() {
   const [selectedFormat, setSelectedFormat] = useState(formats[0]);
   const [colors, setColors] = useState({
     bg: '#1A1A2E',
-    accent: '#F4D03F',
+    accent: '#F7E7CE',
     text: '#FFFFFF'
   });
   const [font, setFont] = useState('Montserrat');
@@ -290,7 +290,7 @@ export default function KarussellGenerator() {
     ctx.fillText('Die ' + fields.contrast3, 75 * s, contrastY + 90 * s);
 
     const comfortY = 560 * s;
-    ctx.fillStyle = 'rgba(244, 208, 63, 0.2)';
+    ctx.fillStyle = 'rgba(247, 231, 206, 0.2)';
     roundRect(ctx, 50 * s, comfortY, w - 100 * s, 50 * s, 10 * s);
     ctx.font = `bold ${16 * s}px ${font}`;
     ctx.fillStyle = colors.accent;
@@ -369,7 +369,7 @@ export default function KarussellGenerator() {
 
   const renderSlide3 = (ctx: CanvasRenderingContext2D, w: number, _h: number, s: number, fields: { [key: string]: string }) => {
     ctx.font = `${80 * s}px ${font}`;
-    ctx.fillStyle = 'rgba(244, 208, 63, 0.3)';
+    ctx.fillStyle = 'rgba(247, 231, 206, 0.3)';
     ctx.textAlign = 'center';
     ctx.fillText('"', w / 2, 150 * s);
 
@@ -383,7 +383,7 @@ export default function KarussellGenerator() {
     ctx.fillText(fields.desc2, 150 * s, 430 * s);
     ctx.fillText(fields.desc3, 150 * s, 460 * s);
 
-    ctx.fillStyle = 'rgba(244, 208, 63, 0.15)';
+    ctx.fillStyle = 'rgba(247, 231, 206, 0.15)';
     roundRect(ctx, 120 * s, 550 * s, w - 240 * s, 70 * s, 12 * s);
     ctx.font = `bold ${18 * s}px ${font}`;
     ctx.fillStyle = colors.text;
@@ -420,7 +420,7 @@ export default function KarussellGenerator() {
       y += 85 * s;
     });
 
-    ctx.fillStyle = 'rgba(244, 208, 63, 0.2)';
+    ctx.fillStyle = 'rgba(247, 231, 206, 0.2)';
     roundRect(ctx, 50 * s, y + 20 * s, w - 100 * s, 150 * s, 14 * s);
     ctx.font = `bold ${16 * s}px ${font}`;
     ctx.fillStyle = colors.accent;
@@ -506,7 +506,7 @@ export default function KarussellGenerator() {
     });
     ctx.textAlign = 'left';
 
-    ctx.fillStyle = 'rgba(244, 208, 63, 0.25)';
+    ctx.fillStyle = 'rgba(247, 231, 206, 0.25)';
     roundRect(ctx, 80 * s, 580 * s, w - 160 * s, 80 * s, 12 * s);
     ctx.font = `bold ${16 * s}px ${font}`;
     ctx.fillStyle = colors.accent;
@@ -609,14 +609,14 @@ export default function KarussellGenerator() {
         <div className="bg-gradient-to-br from-[#FFF9E5] via-[#FBF8F3] to-[#FFF5DC] py-20 pt-32">
           <div className="max-w-7xl mx-auto px-4">
             <div className="text-center mb-12 fade-in">
-              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#F4D03F]/20 to-[#C9A227]/20 px-5 py-2.5 rounded-full mb-6 border border-[#C9A227]/30">
+              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#F7E7CE]/20 to-[#C9A227]/20 px-5 py-2.5 rounded-full mb-6 border border-[#C9A227]/30">
                 <Sparkles className="w-5 h-5 text-[#C9A227]" />
                 <span className="text-sm font-bold text-[#1A1A2E]">Premium Tool für Content Creator</span>
               </div>
               <h1 className="text-5xl md:text-6xl font-serif font-bold text-[#1A1A2E] mb-4">
                 Karussell-Generator
               </h1>
-              <div className="w-32 h-1.5 bg-gradient-to-r from-[#F4D03F] via-[#C9A227] to-[#F4D03F] mx-auto my-6 rounded-full" />
+              <div className="w-32 h-1.5 bg-gradient-to-r from-[#F7E7CE] via-[#C9A227] to-[#F7E7CE] mx-auto my-6 rounded-full" />
               <p className="text-xl text-gray-700 max-w-3xl mx-auto mb-8 leading-relaxed">
                 Erstelle professionelle Social Media Karussell-Posts in wenigen Minuten mit der bewährten <strong className="text-[#C9A227]">7-Slide Write-to-Brain Formel</strong>
               </p>
@@ -632,24 +632,24 @@ export default function KarussellGenerator() {
 
             {/* Features Grid */}
             <div className="grid md:grid-cols-3 gap-6 mt-16 max-w-5xl mx-auto">
-              <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-[#F4D03F]/30 text-center hover:scale-105 hover:shadow-xl transition-all">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#F4D03F]/20 to-[#C9A227]/20 border-2 border-[#C9A227] flex items-center justify-center">
+              <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-[#F7E7CE]/30 text-center hover:scale-105 hover:shadow-xl transition-all">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#F7E7CE]/20 to-[#C9A227]/20 border-2 border-[#C9A227] flex items-center justify-center">
                   <Layers className="w-7 h-7 text-[#C9A227]" />
                 </div>
                 <h3 className="text-lg font-bold mb-2 text-[#1A1A2E]">7-Slide System</h3>
                 <p className="text-sm text-gray-600">Bewährte Struktur für maximale Aufmerksamkeit und Engagement</p>
               </div>
 
-              <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-[#F4D03F]/30 text-center hover:scale-105 hover:shadow-xl transition-all">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#F4D03F]/20 to-[#C9A227]/20 border-2 border-[#C9A227] flex items-center justify-center">
+              <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-[#F7E7CE]/30 text-center hover:scale-105 hover:shadow-xl transition-all">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#F7E7CE]/20 to-[#C9A227]/20 border-2 border-[#C9A227] flex items-center justify-center">
                   <Target className="w-7 h-7 text-[#C9A227]" />
                 </div>
                 <h3 className="text-lg font-bold mb-2 text-[#1A1A2E]">Write-to-Brain</h3>
                 <p className="text-sm text-gray-600">Gehirngerechte Kommunikation für bessere Conversion</p>
               </div>
 
-              <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-[#F4D03F]/30 text-center hover:scale-105 hover:shadow-xl transition-all">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#F4D03F]/20 to-[#C9A227]/20 border-2 border-[#C9A227] flex items-center justify-center">
+              <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-[#F7E7CE]/30 text-center hover:scale-105 hover:shadow-xl transition-all">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#F7E7CE]/20 to-[#C9A227]/20 border-2 border-[#C9A227] flex items-center justify-center">
                   <Zap className="w-7 h-7 text-[#C9A227]" />
                 </div>
                 <h3 className="text-lg font-bold mb-2 text-[#1A1A2E]">Schnell & Einfach</h3>
@@ -672,7 +672,7 @@ export default function KarussellGenerator() {
                   { icon: Palette, text: 'Vollständig anpassbare Farben und Schriften' },
                   { icon: ImageIcon, text: 'Foto-Upload für persönliche Note' },
                 ].map((benefit, index) => (
-                  <div key={index} className="flex items-start gap-3 bg-white/80 backdrop-blur-sm p-5 rounded-xl shadow-md border border-[#F4D03F]/20 hover:shadow-lg transition-shadow">
+                  <div key={index} className="flex items-start gap-3 bg-white/80 backdrop-blur-sm p-5 rounded-xl shadow-md border border-[#F7E7CE]/20 hover:shadow-lg transition-shadow">
                     <benefit.icon className="w-5 h-5 text-[#C9A227] flex-shrink-0 mt-0.5" />
                     <p className="text-sm text-gray-700 font-medium">{benefit.text}</p>
                   </div>
@@ -691,7 +691,7 @@ export default function KarussellGenerator() {
 
           <div className="grid lg:grid-cols-[350px_1fr] gap-8">
             {/* Premium Sidebar */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-2xl border-2 border-[#F4D03F]/20 h-fit lg:sticky lg:top-4">
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-2xl border-2 border-[#F7E7CE]/20 h-fit lg:sticky lg:top-4">
               <div className="mb-6">
                 <h3 className="text-xs font-bold text-[#C9A227] uppercase tracking-wide mb-4 flex items-center gap-2">
                   <Palette className="w-4 h-4" />
@@ -704,15 +704,15 @@ export default function KarussellGenerator() {
                       onClick={() => setSelectedFormat(format)}
                       className={`w-full flex items-center gap-3 p-4 rounded-xl transition-all border-2 ${
                         selectedFormat.name === format.name
-                          ? 'border-[#F4D03F] bg-gradient-to-br from-[#F4D03F]/10 to-[#C9A227]/5 shadow-md'
-                          : 'border-gray-200 hover:border-[#F4D03F]/50 hover:shadow-sm'
+                          ? 'border-[#F7E7CE] bg-gradient-to-br from-[#F7E7CE]/10 to-[#C9A227]/5 shadow-md'
+                          : 'border-gray-200 hover:border-[#F7E7CE]/50 hover:shadow-sm'
                       }`}
                     >
                       <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all ${
-                        selectedFormat.name === format.name ? 'border-[#F4D03F] bg-[#F4D03F]/10' : 'border-gray-300'
+                        selectedFormat.name === format.name ? 'border-[#F7E7CE] bg-[#F7E7CE]/10' : 'border-gray-300'
                       }`}>
                         {selectedFormat.name === format.name && (
-                          <div className="w-3 h-3 rounded-full bg-gradient-to-br from-[#F4D03F] to-[#C9A227]" />
+                          <div className="w-3 h-3 rounded-full bg-gradient-to-br from-[#F7E7CE] to-[#C9A227]" />
                         )}
                       </div>
                       <div className="flex-1 text-left">
@@ -745,7 +745,7 @@ export default function KarussellGenerator() {
                         type="text"
                         value={value}
                         onChange={(e) => setColors({ ...colors, [key]: e.target.value })}
-                        className="w-24 px-3 py-2 border-2 border-gray-300 rounded-lg text-xs font-mono text-gray-900 focus:border-[#F4D03F] focus:outline-none"
+                        className="w-24 px-3 py-2 border-2 border-gray-300 rounded-lg text-xs font-mono text-gray-900 focus:border-[#F7E7CE] focus:outline-none"
                       />
                     </div>
                   ))}
@@ -760,7 +760,7 @@ export default function KarussellGenerator() {
                 <select
                   value={font}
                   onChange={(e) => setFont(e.target.value)}
-                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl font-bold bg-white cursor-pointer text-[#1A1A2E] hover:border-[#F4D03F] focus:border-[#F4D03F] focus:outline-none transition-colors"
+                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl font-bold bg-white cursor-pointer text-[#1A1A2E] hover:border-[#F7E7CE] focus:border-[#F7E7CE] focus:outline-none transition-colors"
                 >
                   <option value="Montserrat">Montserrat</option>
                   <option value="Inter">Inter</option>
@@ -786,7 +786,7 @@ export default function KarussellGenerator() {
                 </button>
               </div>
 
-              <div className="mt-6 p-4 bg-gradient-to-br from-[#FBF8F3] to-white rounded-xl text-center border-2 border-[#F4D03F]/20">
+              <div className="mt-6 p-4 bg-gradient-to-br from-[#FBF8F3] to-white rounded-xl text-center border-2 border-[#F7E7CE]/20">
                 <p className="text-xs text-gray-600 mb-1 font-semibold">Signatur auf jeder Slide:</p>
                 <p className="text-sm font-bold"><span className="text-[#C9A227]">Claudia Conen</span> - Die Umsatzstimme</p>
               </div>
@@ -802,14 +802,14 @@ export default function KarussellGenerator() {
                     onClick={() => setCurrentSlide(num)}
                     className={`group flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-sm transition-all ${
                       currentSlide === num
-                        ? 'bg-gradient-to-r from-[#F4D03F] to-[#C9A227] text-[#1A1A2E] shadow-lg scale-105'
+                        ? 'bg-gradient-to-r from-[#F7E7CE] to-[#C9A227] text-[#1A1A2E] shadow-lg scale-105'
                         : 'bg-gray-100 text-gray-600 hover:bg-gray-200 hover:scale-102'
                     }`}
                   >
                     <span className={`flex items-center justify-center w-6 h-6 rounded-lg font-black text-xs ${
                       currentSlide === num
-                        ? 'bg-[#1A1A2E] text-[#F4D03F]'
-                        : 'bg-white text-gray-600 group-hover:bg-[#F4D03F] group-hover:text-[#1A1A2E]'
+                        ? 'bg-[#1A1A2E] text-[#F7E7CE]'
+                        : 'bg-white text-gray-600 group-hover:bg-[#F7E7CE] group-hover:text-[#1A1A2E]'
                     }`}>
                       {num}
                     </span>
@@ -826,7 +826,7 @@ export default function KarussellGenerator() {
                     <span className="text-xs font-bold text-[#C9A227] uppercase">Live Vorschau</span>
                   </div>
                   <div
-                    className="bg-[#1A1A2E] rounded-xl overflow-hidden shadow-2xl border-4 border-[#F4D03F]/20 hover:border-[#F4D03F]/40 transition-all"
+                    className="bg-[#1A1A2E] rounded-xl overflow-hidden shadow-2xl border-4 border-[#F7E7CE]/20 hover:border-[#F7E7CE]/40 transition-all"
                     style={{ width: '324px', height: `${previewHeight}px` }}
                   >
                     <canvas
@@ -864,14 +864,14 @@ export default function KarussellGenerator() {
                             type="text"
                             value={field.value}
                             onChange={(e) => updateField(currentSlide, field.id, e.target.value)}
-                            className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-[#F4D03F] focus:outline-none focus:shadow-lg focus:shadow-[#F4D03F]/20 transition-all text-gray-900 font-medium"
+                            className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-[#F7E7CE] focus:outline-none focus:shadow-lg focus:shadow-[#F7E7CE]/20 transition-all text-gray-900 font-medium"
                           />
                         )}
                         {field.type === 'textarea' && (
                           <textarea
                             value={field.value}
                             onChange={(e) => updateField(currentSlide, field.id, e.target.value)}
-                            className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-[#F4D03F] focus:outline-none focus:shadow-lg focus:shadow-[#F4D03F]/20 transition-all min-h-[100px] resize-y text-gray-900 font-medium"
+                            className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-[#F7E7CE] focus:outline-none focus:shadow-lg focus:shadow-[#F7E7CE]/20 transition-all min-h-[100px] resize-y text-gray-900 font-medium"
                           />
                         )}
                         {field.type === 'photo' && (
@@ -885,7 +885,7 @@ export default function KarussellGenerator() {
                             />
                             <label
                               htmlFor={`photo-${currentSlide}-${field.id}`}
-                              className="block w-full p-10 border-3 border-dashed border-[#F4D03F]/40 rounded-xl text-center cursor-pointer hover:border-[#F4D03F] hover:bg-[#F4D03F]/5 transition-all group-hover:scale-102"
+                              className="block w-full p-10 border-3 border-dashed border-[#F7E7CE]/40 rounded-xl text-center cursor-pointer hover:border-[#F7E7CE] hover:bg-[#F7E7CE]/5 transition-all group-hover:scale-102"
                             >
                               <ImageIcon className="w-12 h-12 text-[#C9A227] mx-auto mb-3" />
                               <p className="text-sm font-bold text-[#1A1A2E]">Klicke zum Hochladen</p>
@@ -902,30 +902,30 @@ export default function KarussellGenerator() {
           </div>
 
           {/* Tips Section */}
-          <div className="mt-16 bg-gradient-to-br from-[#FFF9E5] via-white to-[#FFF5DC] rounded-2xl p-8 shadow-xl border-2 border-[#F4D03F]/30">
+          <div className="mt-16 bg-gradient-to-br from-[#FFF9E5] via-white to-[#FFF5DC] rounded-2xl p-8 shadow-xl border-2 border-[#F7E7CE]/30">
             <div className="flex items-center gap-3 mb-6 justify-center">
-              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#F4D03F]/20 to-[#C9A227]/20 border-2 border-[#C9A227] flex items-center justify-center">
+              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#F7E7CE]/20 to-[#C9A227]/20 border-2 border-[#C9A227] flex items-center justify-center">
                 <Sparkles className="w-7 h-7 text-[#C9A227]" />
               </div>
               <h3 className="text-2xl font-bold text-[#1A1A2E]">Pro-Tipps für bessere Karussells</h3>
             </div>
             <div className="grid md:grid-cols-3 gap-6">
-              <div className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-[#F4D03F]/30 hover:shadow-xl transition-shadow">
-                <div className="w-14 h-14 mb-4 rounded-full bg-gradient-to-br from-[#F4D03F]/20 to-[#C9A227]/20 border-2 border-[#C9A227] flex items-center justify-center">
+              <div className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-[#F7E7CE]/30 hover:shadow-xl transition-shadow">
+                <div className="w-14 h-14 mb-4 rounded-full bg-gradient-to-br from-[#F7E7CE]/20 to-[#C9A227]/20 border-2 border-[#C9A227] flex items-center justify-center">
                   <Target className="w-7 h-7 text-[#C9A227]" />
                 </div>
                 <h4 className="font-bold mb-2 text-[#1A1A2E]">Hook ist King</h4>
                 <p className="text-sm text-gray-600">Die erste Slide entscheidet über Erfolg. Nutze Fragen, Kontraste und emotionale Trigger.</p>
               </div>
-              <div className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-[#F4D03F]/30 hover:shadow-xl transition-shadow">
-                <div className="w-14 h-14 mb-4 rounded-full bg-gradient-to-br from-[#F4D03F]/20 to-[#C9A227]/20 border-2 border-[#C9A227] flex items-center justify-center">
+              <div className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-[#F7E7CE]/30 hover:shadow-xl transition-shadow">
+                <div className="w-14 h-14 mb-4 rounded-full bg-gradient-to-br from-[#F7E7CE]/20 to-[#C9A227]/20 border-2 border-[#C9A227] flex items-center justify-center">
                   <Heart className="w-7 h-7 text-[#C9A227]" />
                 </div>
                 <h4 className="font-bold mb-2 text-[#1A1A2E]">Komfort-Elemente</h4>
                 <p className="text-sm text-gray-600">Reduziere Widerstände mit Sätzen wie "Kein Druck" oder "Alles freiwillig".</p>
               </div>
-              <div className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-[#F4D03F]/30 hover:shadow-xl transition-shadow">
-                <div className="w-14 h-14 mb-4 rounded-full bg-gradient-to-br from-[#F4D03F]/20 to-[#C9A227]/20 border-2 border-[#C9A227] flex items-center justify-center">
+              <div className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-[#F7E7CE]/30 hover:shadow-xl transition-shadow">
+                <div className="w-14 h-14 mb-4 rounded-full bg-gradient-to-br from-[#F7E7CE]/20 to-[#C9A227]/20 border-2 border-[#C9A227] flex items-center justify-center">
                   <MessageSquare className="w-7 h-7 text-[#C9A227]" />
                 </div>
                 <h4 className="font-bold mb-2 text-[#1A1A2E]">Klarer CTA</h4>
@@ -941,11 +941,11 @@ export default function KarussellGenerator() {
                 Basierend auf der <strong className="text-[#C9A227]">Claudia Write to Brain Formel</strong>
               </p>
               <p className="text-base text-gray-600 mb-4">
-                <Link to="/" className="text-[#C9A227] hover:text-[#F4D03F] font-bold underline decoration-2">ClaudiaConen.com</Link>
+                <Link to="/" className="text-[#C9A227] hover:text-[#F7E7CE] font-bold underline decoration-2">ClaudiaConen.com</Link>
                 <span className="mx-2 text-gray-400">|</span>
-                <a href="tel:+4916099142208" className="text-[#C9A227] hover:text-[#F4D03F] font-bold">0160 99 14 22 08</a>
+                <a href="tel:+4916099142208" className="text-[#C9A227] hover:text-[#F7E7CE] font-bold">0160 99 14 22 08</a>
               </p>
-              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#F4D03F]/10 to-[#C9A227]/10 px-6 py-3 rounded-full border-2 border-[#F4D03F]/30">
+              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#F7E7CE]/10 to-[#C9A227]/10 px-6 py-3 rounded-full border-2 border-[#F7E7CE]/30">
                 <Sparkles className="w-4 h-4 text-[#C9A227]" />
                 <p className="text-sm font-bold text-[#1A1A2E]">
                   Perfektion klickt. Persönlichkeit bleibt.

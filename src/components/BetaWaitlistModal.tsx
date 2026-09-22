@@ -119,7 +119,7 @@ export default function BetaWaitlistModal({ isOpen, onClose }: BetaWaitlistModal
                       }}
                       className="absolute w-3 h-3 rounded-full"
                       style={{
-                        backgroundColor: ['#FFD84D', '#DAA520', '#F4D03F', '#DAA520'][Math.floor(Math.random() * 4)]
+                        backgroundColor: ['#FFD84D', '#D4AF37', '#F7E7CE', '#D4AF37'][Math.floor(Math.random() * 4)]
                       }}
                     />
                   ))}

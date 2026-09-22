@@ -72,7 +72,6 @@ export const SEITEN: { pfad: string; laden: () => Promise<any> }[] = [
   { pfad: '/ausbildung-beruf', laden: () => import('./pages/AusbildungBeruf') },
   { pfad: '/ausbildung-zertifizierung', laden: () => import('./pages/AusbildungZertifizierung') },
   { pfad: '/ki-manager-ausbildung', laden: () => import('./pages/KIManagerAusbildung') },
-  { pfad: '/ki-heygen-kurs', laden: () => import('./pages/KIHeyGenKurs') },
   { pfad: '/ki-webseite-erlebnis', laden: () => import('./pages/KIWebseiteErlebnis') },
   { pfad: '/ki-einsteiger-coaching', laden: () => import('./pages/KIEinsteigerCoaching') },
   { pfad: '/ki-1zu1', laden: () => import('./pages/KI1zu1') },

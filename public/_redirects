@@ -36,3 +36,6 @@
 # Das Auffangnetz zeigt bewusst auf app.html, NICHT auf index.html:
 # index.html ist die fertige Startseite.
 /*                      /app.html   404
+
+# HeyGen-Kurs am 22.09.2026 entfernt (Claudia: 'den unterrichte ich nicht, das ist falsch').
+/ki-heygen-kurs    /ki-einsteiger-coaching    301

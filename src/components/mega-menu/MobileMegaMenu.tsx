@@ -49,12 +49,12 @@ export default function MobileMegaMenu({ onClose }: MobileMegaMenuProps) {
           <div key={item.id}>
             <button
               onClick={() => toggleMenu(item.id)}
-              className="flex items-center justify-between w-full py-3 px-4 rounded-xl text-[#1A2B4C] hover:bg-[rgba(218,165,32,0.08)] transition-all duration-200"
+              className="flex items-center justify-between w-full py-3 px-4 rounded-xl text-[#1A2B4C] hover:bg-[rgba(212,175,55,0.08)] transition-all duration-200"
             >
               <span className="font-semibold text-[0.95rem]">{item.label}</span>
               <ChevronDown
                 size={18}
-                className={`transition-transform duration-300 text-[#DAA520]/60 ${expandedMenu === item.id ? 'rotate-180' : ''}`}
+                className={`transition-transform duration-300 text-[#D4AF37]/60 ${expandedMenu === item.id ? 'rotate-180' : ''}`}
               />
             </button>
 
@@ -73,13 +73,13 @@ export default function MobileMegaMenu({ onClose }: MobileMegaMenuProps) {
                       <div key={cat.id} className="mb-1">
                         <button
                           onClick={() => toggleCategory(cat.id)}
-                          className="flex items-center gap-3 w-full py-2.5 px-4 rounded-lg text-[rgba(26,43,76,0.78)] hover:text-[#1A2B4C] hover:bg-[rgba(218,165,32,0.07)] transition-all duration-200"
+                          className="flex items-center gap-3 w-full py-2.5 px-4 rounded-lg text-[rgba(26,43,76,0.78)] hover:text-[#1A2B4C] hover:bg-[rgba(212,175,55,0.07)] transition-all duration-200"
                         >
                           <CatIcon size={16} className="text-[#B8860B]/70 flex-shrink-0" />
                           <span className="text-[0.85rem] font-medium flex-1 text-left">{cat.label}</span>
                           <ChevronDown
                             size={14}
-                            className={`transition-transform duration-300 text-[#DAA520]/40 ${expandedCategory === cat.id ? 'rotate-180' : ''}`}
+                            className={`transition-transform duration-300 text-[#D4AF37]/40 ${expandedCategory === cat.id ? 'rotate-180' : ''}`}
                           />
                         </button>
 
@@ -96,7 +96,7 @@ export default function MobileMegaMenu({ onClose }: MobileMegaMenuProps) {
                                 <button
                                   key={tile.name}
                                   onClick={() => handleTileClick(tile.href, tile.external)}
-                                  className="flex items-center gap-2 w-full py-2 px-3 rounded-lg text-[rgba(26,43,76,0.68)] hover:text-[#B8860B] hover:bg-[rgba(218,165,32,0.06)] transition-all duration-200 text-left"
+                                  className="flex items-center gap-2 w-full py-2 px-3 rounded-lg text-[rgba(26,43,76,0.68)] hover:text-[#B8860B] hover:bg-[rgba(212,175,55,0.06)] transition-all duration-200 text-left"
                                 >
                                   <ChevronRight size={12} className="text-[#B8860B]/55 flex-shrink-0" />
                                   <span className="text-[0.8rem]">{tile.name}</span>
@@ -108,7 +108,7 @@ export default function MobileMegaMenu({ onClose }: MobileMegaMenuProps) {
                                   className="mt-1 flex w-full items-center gap-2 border-t border-[rgba(26,43,76,0.09)] px-3 py-2.5 text-left text-[rgba(26,43,76,0.66)] transition-colors duration-200 hover:text-[#B8860B]"
                                 >
                                   <span className="text-[0.78rem]">{cat.uebersicht.name}</span>
-                                  <ChevronRight size={12} className="flex-shrink-0 text-[#DAA520]/60" />
+                                  <ChevronRight size={12} className="flex-shrink-0 text-[#D4AF37]/60" />
                                 </button>
                               )}
                             </motion.div>
@@ -129,7 +129,7 @@ export default function MobileMegaMenu({ onClose }: MobileMegaMenuProps) {
           rel="noopener noreferrer"
           onClick={onClose}
           aria-label="The Power of AI – Klick für Chancen"
-          className="flex items-center justify-center w-full mt-4 rounded-2xl overflow-hidden ring-1 ring-[rgba(218,165,32,0.4)] hover:ring-[rgba(218,165,32,0.7)] hover:shadow-[0_6px_20px_rgba(218,165,32,0.25)] transition-all duration-200"
+          className="flex items-center justify-center w-full mt-4 rounded-2xl overflow-hidden ring-1 ring-[rgba(212,175,55,0.4)] hover:ring-[rgba(212,175,55,0.7)] hover:shadow-[0_6px_20px_rgba(212,175,55,0.25)] transition-all duration-200"
         >
           <img
             src="/power-of-ai-banner.jpg"
@@ -146,9 +146,9 @@ export default function MobileMegaMenu({ onClose }: MobileMegaMenuProps) {
           onClick={() => handleTileClick('/#contact')}
           className="flex items-center justify-center gap-2 w-full px-6 py-3 mt-3 rounded-full font-bold text-[0.8rem] uppercase tracking-wider"
           style={{
-            background: 'linear-gradient(135deg, #DAA520 0%, #C9A961 100%)',
+            background: 'linear-gradient(135deg, #D4AF37 0%, #C9A961 100%)',
             color: '#0A1F44',
-            boxShadow: '0 4px 15px rgba(218,165,32,0.3)',
+            boxShadow: '0 4px 15px rgba(212,175,55,0.3)',
           }}
         >
           <Calendar size={16} />

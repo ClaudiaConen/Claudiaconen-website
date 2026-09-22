@@ -66,14 +66,14 @@ export default function Experten() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#DAA520] to-[#F4D03F] text-midnight-blue px-6 py-2 rounded-full font-semibold mb-6">
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] text-midnight-blue px-6 py-2 rounded-full font-semibold mb-6">
               <Star size={20} />
               <span>Expertenwissen</span>
             </div>
             <h1 className="font-montserrat font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-midnight-blue mb-6 px-2">
               Die Experten, von denen ich
               <br />
-              <span className="bg-gradient-to-r from-[#DAA520] to-[#F4D03F] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] bg-clip-text text-transparent">
                 lernen durfte
               </span>
             </h1>
@@ -101,7 +101,7 @@ export default function Experten() {
               >
                 <div className="p-8">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-[#DAA520] to-[#F4D03F] flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] flex items-center justify-center">
                       <Award className="text-midnight-blue" size={24} />
                     </div>
                     <div className="flex-1">

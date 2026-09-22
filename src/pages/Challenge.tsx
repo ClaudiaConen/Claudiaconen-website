@@ -383,34 +383,6 @@ function Kopfbild({ datei, alt, quer }: { datei: string; alt: string; quer?: boo
 }
 const KOPF = 'grid items-end gap-6 sm:grid-cols-[minmax(0,1fr)_auto] sm:gap-10';
 
-/** Kleine runde Gesichter am Rand des Netzwerk-Blocks, die leicht schweben (Claudia, 22.09.2026 13:19 UTC: "kleine
- *  Gesichter, die sich so ein bisschen bewegen ... das soll das Netzwerk darstellen"). Nur ihre eigenen Fotos aus den
- *  Kopf-Kacheln - Mitglieder erst mit Einwilligung. Ab md sichtbar; bei reduzierter Bewegung stehen sie still. */
-const NETZ_GESICHTER: { datei: string; stil: React.CSSProperties }[] = [
-  { datei: 'buch', stil: { left: '3%', top: '10%' } },
-  { datei: 'kamera', stil: { left: '11%', top: '34%' } },
-  { datei: 'zuhoeren', stil: { left: '5%', top: '58%' } },
-  { datei: 'training', stil: { left: '12%', top: '82%' } },
-  { datei: 'mappe', stil: { right: '4%', top: '9%' } },
-  { datei: 'tonstudio', stil: { right: '12%', top: '33%' } },
-  { datei: 'telefon', stil: { right: '3%', top: '57%' } },
-  { datei: 'steinmauer', stil: { right: '11%', top: '81%' } },
-];
-function NetzGesichter() {
-  return (
-    <div aria-hidden="true" className="pointer-events-none absolute inset-0 hidden md:block">
-      <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-        <path d="M6 14 L14 38 L8 62 L15 86 M94 13 L86 37 L95 61 L87 85 M14 38 L40 26 M86 37 L60 26 M8 62 L34 74 M95 61 L66 74" fill="none" stroke="#D4AF37" strokeOpacity=".25" strokeWidth=".25" vectorEffect="non-scaling-stroke" />
-      </svg>
-      {NETZ_GESICHTER.map((g, i) => (
-        <span key={g.datei} style={{ ...g.stil, animationDelay: `-${i * 1.7}s`, animationDuration: `${11 + (i % 4) * 1.5}s`, animationDirection: i % 2 ? 'alternate-reverse' : 'alternate' }} className="cc-schwebt absolute h-12 w-12 overflow-hidden rounded-full border-2 border-white shadow-[0_8px_20px_-6px_rgba(10,22,40,0.45)] ring-1 ring-[#D4AF37]/70 lg:h-14 lg:w-14">
-          <img src={`/challenge/karten/${g.datei}.webp`} alt="" width={240} height={320} loading="lazy" decoding="async" className="h-full w-full object-cover object-[50%_18%]" />
-        </span>
-      ))}
-    </div>
-  );
-}
-
 function Haken() {
   return <span aria-hidden="true" className="mt-2 h-2.5 w-2.5 flex-none rotate-[-45deg] border-b-2 border-r-2 border-[#D4AF37]" />;
 }
@@ -1009,18 +981,18 @@ export default function Challenge() {
       </Abschnitt>
 
 
-      {/* Warum ich */}
-      <Abschnitt className="py-16 text-pearl-white sm:py-24" style={DUNKEL} label="warum" welle>
+      {/* Warum ich - hell (Claudia, 22.09.2026 15:00 UTC: "der Bereich ist viel zu dunkel", "zu viel und zu dunkel"). */}
+      <Abschnitt className="bg-white py-16 text-midnight-blue sm:py-24" label="warum">
         <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2 md:gap-14">
           <div>
-            <Kicker text="Warum ich" />
+            <Kicker text="Warum ich" hell />
             <h2 id="warum" className="mt-5 font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">Menschen prägen Menschen.</h2>
-            <p className="mt-7 border-l-4 border-[#D4AF37] pl-5 font-cormorant text-3xl italic leading-snug text-[#F7E7CE] sm:text-4xl">
+            <p className="mt-7 border-l-4 border-[#D4AF37] pl-5 font-cormorant text-3xl italic leading-snug sm:text-4xl">
               Ich höre, was andere überhören. Und mache daraus deine Wirkung.
             </p>
           </div>
           <div>
-            <ul className="grid list-none gap-3 p-0 font-inter text-pearl-white/90">
+            <ul className="grid list-none gap-3 p-0 font-inter text-midnight-blue">
               {[
                 'Claudia Conen ist Keynote-Speakerin, Trainerin, Coach und Autorin für unverwechselbare persönliche Wirkung.',
                 'Sie trainiert Rhetorik, Storytelling, Präsentation und den Auftritt vor der Kamera – seit 37 Jahren.',
@@ -1030,109 +1002,58 @@ export default function Challenge() {
                 <li key={z} className="flex gap-3"><Haken />{z}</li>
               ))}
             </ul>
-            <p className="mt-5 font-inter text-[15px] text-pearl-white/90">
+            <p className="mt-5 font-inter text-[15px] text-midnight-blue">
               Warum ich weiß, dass Menschen sich für immer im Gehirn verankern können, erzähle ich auf{' '}
-              <Link to="/ueber-mich" className="underline decoration-[#D4AF37] decoration-2 underline-offset-4 hover:text-[#EBD197]">„Über mich"</Link>.
+              <Link to="/ueber-mich" className="underline decoration-[#D4AF37] decoration-2 underline-offset-4 hover:text-royal-navy">„Über mich"</Link>.
             </p>
           </div>
         </div>
       </Abschnitt>
 
-      {/* Schluss - Claudias Satz (22.09.2026, 10:59 UTC), "gestalten" ersetzt: "Gestalten ist ein bloedes Wort". */}
-      <Abschnitt className="py-16 text-center text-pearl-white sm:py-24" style={DUNKEL} label="schluss" welle>
-        <div className="mx-auto max-w-4xl px-6">
-          <p className="flex items-center justify-center gap-3 font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] text-[#EBD197]">
-            <span aria-hidden="true" className={`h-[3px] w-7 rounded-full ${GOLD}`} />
-            Willst du dich speichern?
-          </p>
-          <h2 id="schluss" className="mt-5 font-montserrat text-3xl font-extrabold leading-tight sm:text-5xl">
-            Willst du im KI-Zeitalter mit deiner Persönlichkeit punkten – statt vergleichbar über den Preis Kunden zu gewinnen? <span className="gold-text-animated">Dann schließ dich unserem Netzwerk an: die Unverwechselbaren, die Community für den Mittelstand.</span>
-          </h2>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <a href="#anmelden" className={`inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue ${GOLD}`}>
-              Ich bin dabei – eintragen
-            </a>
-            <a href="#community" className="inline-flex items-center rounded-full border-2 border-[#D4AF37] px-7 py-4 font-montserrat text-sm font-bold text-pearl-white hover:text-[#EBD197]">
-              Zum Netzwerk der Unverwechselbaren ↓
-            </a>
-          </div>
-        </div>
-      </Abschnitt>
-
-      {/* Netzwerk Mittelstand - deine Community, als letzter Abschnitt (Claudia, 22.09.2026 13:19 UTC: "das soll unten
-          als Letztes sein"). Machart ihrer Community-Startseite (ihr Foto 13:17 UTC): hell, rundes Foto, grosse
-          Ueberschrift mit goldener Kontur, "Netzwerk" in Schreibschrift, Satz in einer weissen Pille, drei Kennzahlen
-          (nur, was hier schon steht), kleine Gesichter, die sich leicht bewegen (ihre eigenen Fotos - keine
-          Mitglieder ohne Einwilligung), Gabi und Claudia bleiben. Gabi steht NUR hier. */}
+      {/* Netzwerk Mittelstand - deine Community, letzter Abschnitt (Claudia, 22.09.2026 13:19 UTC: "das soll unten als
+          Letztes sein"). Machart ihrer Community-Startseite (Foto 13:17 UTC): grosse Ueberschrift, das Wort blass mit
+          goldener Kontur, Schreibschrift, Satz in einer weissen Pille. Seit 14:51-15:01 UTC OHNE Liste, OHNE runde Bilder,
+          OHNE Video ("alles zu unruhig", "nur das von Gabi und mir"), und der fruehere dunkle Schluss-Satz steht jetzt
+          hier als Einstieg ("viel zu dunkel"). Gabi steht NUR hier. */}
       <Abschnitt id="community" className="bg-pearl-white py-16 sm:py-24" label="community-titel">
         <div className="mx-auto max-w-6xl px-6">
-          {/* 8-Sekunden-Clip (Veo 3.1 ueber Claudias Google-Schluessel, ihr Ja 22.09.2026 11:40 UTC): Mikrofon,
-              goldene Stimmwelle, die Silhouetten zu einem Netzwerk verbindet. Stumm, Schleife, 2,4 MB, Standbild als Poster.
-              Original: projects/claudiaconen/video/netzwerk-stimme-veo31-720p.mp4 */}
-          <div className={`relative overflow-hidden bg-[#0A1628] ${KACHEL} border-[#D4AF37] shadow-[0_18px_40px_-18px_rgba(212,175,55,0.5)]`}>
-            <video className="block aspect-video h-auto w-full" autoPlay muted loop playsInline preload="metadata" poster="/challenge/netzwerk-poster.webp" aria-label="Eine goldene Stimmwelle geht von einem Mikrofon aus">
-              <source src="/challenge/netzwerk.mp4" type="video/mp4" />
-            </video>
-            {/* Claudias Satz (22.09.2026 12:10 UTC), in leichter Schreibschrift, taucht auf, wenn der Block sichtbar wird. */}
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-[linear-gradient(180deg,rgba(10,22,40,0)_0%,rgba(10,22,40,0.85)_70%)] px-6 pb-6 pt-16 sm:px-10 sm:pb-8">
-              <p style={{ ['--i' as string]: 2 }} className="cc-stufe max-w-3xl font-cormorant text-2xl italic leading-snug text-[#F7E7CE] sm:text-4xl">
-                Wo immer du den Mund aufmachst, ist Bühne.
-                <span className="mt-1 block text-white">Deine Persönlichkeit braucht sie. Nutze sie.</span>
-              </p>
+          <p className="flex items-center gap-3 font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] text-midnight-blue">
+            <span aria-hidden="true" className={`cc-linie h-[3px] w-7 rounded-full ${GOLD}`} />
+            Willst du dich speichern?
+          </p>
+          <p className="mt-5 max-w-4xl font-montserrat text-2xl font-extrabold leading-tight text-midnight-blue sm:text-3xl">
+            Willst du im KI-Zeitalter mit deiner Persönlichkeit punkten – statt vergleichbar über den Preis Kunden zu gewinnen?
+            <span className="mt-1 block underline decoration-[#D4AF37] decoration-[4px] underline-offset-[6px]">Dann schließ dich unserem Netzwerk an: die Unverwechselbaren, die Community für den Mittelstand.</span>
+          </p>
+          <div className={`mt-8 bg-white px-6 py-10 text-center text-midnight-blue sm:px-10 sm:py-14 ${KACHEL} border-[#D4AF37] shadow-[0_18px_40px_-18px_rgba(212,175,55,0.5)]`}>
+            <h2 id="community-titel" className="font-montserrat text-4xl font-black leading-[1.05] tracking-tight sm:text-6xl">
+              Willkommen bei den
+              <span className="block text-[#F1E2B3]" style={{ WebkitTextStroke: '1.5px #D4AF37' }}>Unverwechselbaren.</span>
+              <span className="mt-2 block font-cormorant text-4xl font-semibold italic tracking-normal text-[#D4AF37] sm:text-6xl">Netzwerk Mittelstand</span>
+            </h2>
+            <p className="mx-auto mt-6 max-w-2xl rounded-2xl bg-pearl-white px-6 py-4 font-inter text-lg leading-relaxed">
+              Menschen, die sich zusammentun und ein wachsendes Netzwerk bilden – weil sie wissen: Gemeinsam sind wir stärker. Hier zählt Empfehlung mehr als Werbung.
+            </p>
+            <p className="mt-8 font-montserrat text-base font-extrabold sm:text-lg">Trag dich ein zum ersten Termin – sei einer von 27 Umsetzern.</p>
+            <div className="mt-4 flex flex-wrap justify-center gap-3">
+              <a href="https://community.claudiaconen.com/netzwerkwebinar/" target="_blank" rel="noopener noreferrer" className={`inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue transition-transform hover:-translate-y-px ${GOLD}`}>
+                Zum ersten Termin eintragen →
+              </a>
+              <a href="https://community.claudiaconen.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full border-2 border-midnight-blue px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue transition-colors hover:bg-midnight-blue hover:text-pearl-white">
+                Entdecken
+              </a>
             </div>
+            <figure className={`relative mx-auto mt-10 aspect-[3/2] w-full max-w-[520px] overflow-hidden ${KACHEL}`}>
+              <img src="/unverwechselbar/gabi-und-claudia.webp" alt="Claudia Conen und Gabi Lindemann lachen zusammen" width={900} height={600} loading="lazy" decoding="async" className="h-full w-full object-cover" />
+              <figcaption className="absolute inset-x-0 bottom-0 bg-midnight-blue/75 px-3 py-2 font-montserrat text-[11px] font-bold text-[#EBD197]">
+                Gabi Lindemann und Claudia Conen – zusammen zuständig für die Community
+              </figcaption>
+            </figure>
           </div>
-          <div className={`relative mt-4 overflow-hidden bg-white px-6 py-10 text-center text-midnight-blue sm:px-10 sm:py-14 ${KACHEL} border-[#D4AF37] shadow-[0_18px_40px_-18px_rgba(212,175,55,0.5)]`}>
-            <NetzGesichter />
-            <div className="relative">
-              <figure className="mx-auto m-0 h-28 w-28 overflow-hidden rounded-full border-4 border-white shadow-[0_12px_30px_-10px_rgba(212,175,55,0.8)] ring-2 ring-[#D4AF37] sm:h-36 sm:w-36">
-                <img src="/challenge/karten/messe.webp" alt="Claudia Conen" width={240} height={320} loading="lazy" decoding="async" className="h-full w-full object-cover object-[50%_15%]" />
-              </figure>
-              <p className="mt-4 font-montserrat text-lg font-extrabold">Claudia Conen</p>
-              <p className="mt-1 inline-block rounded-full bg-pearl-white px-3 py-1 font-inter text-sm">Keynote-Speakerin · Trainerin · Coach</p>
-              <h2 id="community-titel" className="mt-6 font-montserrat text-4xl font-black leading-[1.05] tracking-tight sm:text-6xl">
-                Willkommen bei den
-                {/* Claudia, 22.09.2026 14:44 UTC: "die Stelle ist noch nicht gut" - jetzt wie auf ihrer Community-Seite:
-                    das Wort blass gefuellt mit goldener Kontur, darunter nur die Schreibschrift, keine weitere Zeile. */}
-                <span className="block text-[#F1E2B3]" style={{ WebkitTextStroke: '1.5px #D4AF37' }}>Unverwechselbaren.</span>
-                <span className="mt-2 block font-cormorant text-4xl font-semibold italic tracking-normal text-[#D4AF37] sm:text-6xl">Netzwerk Mittelstand</span>
-              </h2>
-              <p className="mx-auto mt-6 max-w-2xl rounded-2xl bg-pearl-white px-6 py-4 font-inter text-lg leading-relaxed">
-                Menschen, die sich zusammentun und ein wachsendes Netzwerk bilden – weil sie wissen: Gemeinsam sind wir stärker. Hier zählt Empfehlung mehr als Werbung.
-              </p>
-              <p className="mt-8 font-montserrat text-base font-extrabold sm:text-lg">Trag dich ein zum ersten Termin – sei einer von 27 Umsetzern.</p>
-              <div className="mt-4 flex flex-wrap justify-center gap-3">
-                <a href="https://community.claudiaconen.com/netzwerkwebinar/" target="_blank" rel="noopener noreferrer" className={`inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue transition-transform hover:-translate-y-px ${GOLD}`}>
-                  Zum ersten Termin eintragen →
-                </a>
-                <a href="https://community.claudiaconen.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full border-2 border-midnight-blue px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue transition-colors hover:bg-midnight-blue hover:text-pearl-white">
-                  Entdecken
-                </a>
-              </div>
-              <div className="mt-10 grid items-center gap-6 text-left md:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
-                <div>
-                  <p className="font-montserrat text-xs font-extrabold uppercase tracking-[0.22em]">Was dich dort erwartet</p>
-                  <ul className="mt-3 grid list-none gap-2 p-0 font-inter text-[15px] sm:grid-cols-2">
-                    {[
-                      'Kurs-Marktplatz: eigene Kurse verkaufen, ohne Provision',
-                      'Social-Media-Studio für deine Beiträge',
-                      'Dein Kalender: Zoom-Calls, Workshops, Meetups',
-                      'Monatliches Live-Treffen im Zoom, einmal im Jahr vor Ort',
-                      'Alle ein bis zwei Jahre ein gemeinsames Buch',
-                      'Video-Profil, Masterminds, KI-Member-Matching',
-                    ].map((z) => (
-                      <li key={z} className="flex gap-3"><Haken />{z}</li>
-                    ))}
-                  </ul>
-                </div>
-                <figure className={`relative m-0 aspect-[3/2] w-full max-w-[380px] justify-self-center overflow-hidden ${KACHEL}`}>
-                  <img src="/unverwechselbar/gabi-und-claudia.webp" alt="Claudia Conen und Gabi Lindemann lachen zusammen" width={900} height={600} loading="lazy" decoding="async" className="h-full w-full object-cover" />
-                  <figcaption className="absolute inset-x-0 bottom-0 bg-midnight-blue/75 px-3 py-2 font-montserrat text-[11px] font-bold text-[#EBD197]">
-                    Gabi Lindemann und Claudia Conen – zusammen zuständig für die Community
-                  </figcaption>
-                </figure>
-              </div>
-            </div>
-          </div>
+          <p className="mt-6 text-center font-inter text-[15px] text-midnight-blue">
+            Noch nicht in der Challenge?{' '}
+            <a href="#anmelden" className="font-montserrat font-bold underline decoration-[#D4AF37] decoration-2 underline-offset-4">Hier eintragen ↑</a>
+          </p>
         </div>
       </Abschnitt>
 

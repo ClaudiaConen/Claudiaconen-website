@@ -8,7 +8,7 @@ import WorkbookBlaettern from '../components/WorkbookBlaettern';
 import Stimmwelle from '../components/Stimmwelle';
 import ChallengeAnmeldung from '../components/ChallengeAnmeldung';
 import FotoReihen from '../components/FotoReihen';
-import { Ban, Smile, Zap, Clock, MessageSquareOff, EyeOff, Heart, Database, SlidersHorizontal, Bot } from 'lucide-react';
+import { Ban, Smile, Clock, EyeOff, Database, Bot } from 'lucide-react';
 
 /**
  * Die Challenge-Seite - EINE Seite aus zwei (Claudia, 22.09.2026 11:00 UTC: "jetzt hast du von beiden
@@ -50,13 +50,9 @@ const SIEBEN_A = ['A-bsolut', 'A-ngenehm', 'A-nders', 'A-ls', 'A-lle', 'A-nderen
 const KI_GRUENDE: { titel: string; text: string; Icon: typeof Ban }[] = [
   { titel: 'Keine Bewertung.', text: 'Der Avatar urteilt nicht. Nie.', Icon: Ban },
   { titel: 'Keine Peinlichkeit.', text: 'Du kannst „dumme Fragen" stellen – ohne Scham.', Icon: Smile },
-  { titel: 'Sofortige Reaktion.', text: 'Der Avatar antwortet schnell, ohne zu zögern.', Icon: Zap },
   { titel: 'Immer verfügbar.', text: '24/7 erreichbar. Kein Termin nötig.', Icon: Clock },
-  { titel: 'Kein Smalltalk. Kein Drama.', text: 'Der Avatar bleibt bei der Sache.', Icon: MessageSquareOff },
   { titel: 'Keine Körpersprache. Keine Unsicherheit.', text: 'Kein Flackern der Augen, keine nervöse Haltung.', Icon: EyeOff },
-  { titel: 'Optimierte Freundlichkeit.', text: 'Avatare sind höflich, geduldig, nie genervt.', Icon: Heart },
   { titel: 'Datenspeicher statt Emotionen.', text: 'Der Avatar vergisst nicht. Und er verzeiht sofort.', Icon: Database },
-  { titel: 'Individuelle Anpassung.', text: 'Er klingt so, wie du es möchtest: ruhig, motivierend, sachlich, warm.', Icon: SlidersHorizontal },
   { titel: 'Keine Geschichte. Kein Ego.', text: 'Kein Gepäck. Kein Stolz, keine Verletzlichkeit – nur Funktion.', Icon: Bot },
 ];
 
@@ -71,15 +67,6 @@ const MENSCH_KANN = [
   'Ein Blick, der den anderen meint. Wer angesehen wird, fühlt sich gemeint – und bleibt.',
 ];
 
-const FRAGEN: { frage: string; text: string }[] = [
-  { frage: 'Kennst du deine Berufung?', text: 'Und kannst du daraus echte Storys formen, die im Gedächtnis bleiben?' },
-  { frage: 'Weißt du, wie das Gehirn Entscheidungen trifft?', text: 'Und wie du dich dort verankern kannst?' },
-  { frage: 'Kannst du blitzschnell Emotionen wecken?', text: 'Und deine Botschaft fühlbar machen?' },
-  { frage: 'Nutzt du deine Stimme bewusst?', text: 'Als eins der stärksten Marketinginstrumente, die Vertrauen schaffen und unaufhaltbar sind.' },
-  { frage: 'Strahlst du Sicherheit aus?', text: 'So, dass andere sofort spüren: Bei dir bin ich richtig.' },
-  { frage: 'Baust du Verbindung auf?', text: 'Von Mensch zu Mensch, statt nur Argument zu Argument.' },
-  { frage: 'Bleibst du im Kopf deiner Zuhörer?', text: 'Weil du ihr Herz erreichst?' },
-];
 
 const SCHRITTE: { titel: string; text: string }[] = [
   { titel: 'Das Gehirn verstehen', text: 'Blitzschnell. Emotionen. Verstand. Wie Menschen entscheiden, bevor sie es merken – und was das für jeden deiner Sätze heißt.' },
@@ -258,7 +245,7 @@ const WEGWEISER = {
   text: 'In dieser Gruppe bist nur du. Dort übst du, hörst deine Steigerung – und sammelst vielleicht sogar Videomaterial für Social Media. Nach sieben Tagen entdeckst du deine eigenen Erfolge, Aufnahme für Aufnahme.',
   schritte: [
     'WhatsApp öffnen → „Neue Gruppe" (Android: die drei Punkte oben rechts · iPhone: „Neuer Chat" und dann „Neue Gruppe").',
-    'Niemanden auswählen und einfach weiter – WhatsApp erlaubt eine Gruppe nur mit dir. Besteht deine Version auf einer zweiten Person: Lade mich ein (+49 160 99142208) und wirf mich danach wieder raus. Ich nehme es nicht persönlich.',
+    'Niemanden auswählen und einfach weiter – WhatsApp erlaubt eine Gruppe nur mit dir. Besteht deine Version auf einer zweiten Person: Lade mich ein (+49 160 93102073) und wirf mich danach wieder raus. Ich nehme es nicht persönlich.',
     'Namen vergeben – zum Beispiel „Meine Stimme". Fertig.',
     'Ab jetzt: jede Aufnahme dort hineinsprechen. Nach sieben Tagen hörst du den Unterschied.',
   ],
@@ -390,11 +377,9 @@ function Haken() {
 
 export default function Challenge() {
   const [antworten, setAntworten] = useState<(boolean | null)[]>(() => LERNBOX.map(() => null));
-  const [fragen, setFragen] = useState<boolean[]>(() => FRAGEN.map(() => false));
   const [buchOffen, setBuchOffen] = useState(false);
   const nBeantwortet = antworten.filter((a) => a !== null).length;
   const nRichtig = antworten.filter((a, i) => a === LERNBOX[i].ja).length;
-  const nFragen = fragen.filter(Boolean).length;
   // Sprungmarke aus der Adresse (z. B. /challenge#anmelden vom Laufband der Startseite):
   // ScrollToTop springt bei jedem Seitenwechsel nach oben, deshalb hier nach dem Aufbau zum Ziel.
   useEffect(() => {
@@ -499,6 +484,13 @@ export default function Challenge() {
           </div>
         </div>
       </header>
+
+      {/* Anmeldung direkt unter dem Kopf (Kritiker-Durchgang 22.09.2026, Claudias Ja 12:22 UTC: "mach das alles so"). */}
+      <section id="anmeldung" className="bg-pearl-white pt-6 pb-4 sm:pt-8" aria-label="Anmeldung zur Challenge">
+        <div className="mx-auto max-w-6xl px-6">
+          <ChallengeAnmeldung start={startKurz} />
+        </div>
+      </section>
 
       {/* Sieben Schritte - Claudia, 22.09.2026 10:55 UTC: "dieser grau-braune Ton hinter dem Programm ... in Weiss
           austauschen" und "viel weiter nach oben, damit die direkt wissen, warum sie dabei sein sollen". */}
@@ -680,7 +672,6 @@ export default function Challenge() {
                     </div>
                   </details>
                   )}
-                  {i === 0 && <ChallengeAnmeldung start={startKurz} />}
                 </li>
               );
             })}
@@ -743,7 +734,7 @@ export default function Challenge() {
           </details>
           <div className={`mt-4 rounded-[10px] px-5 py-5 text-midnight-blue sm:px-7 ${GOLD}`}>
             <p className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.2em]">Warum deine Einzigartigkeit Gold wert ist</p>
-            <p className="mt-2 font-inter text-[15px] leading-relaxed">Stell dir vor: „Alle sind gleich perfekt." – und da bist DU. Die 7 A's der modernen Vermarktung, nach Karsten Brocke:</p>
+            <p className="mt-2 font-inter text-[15px] leading-relaxed">Stell dir vor: „Alle sind gleich perfekt." – und da bist DU. Der Neurowissenschaftler Karsten Brocke bringt es auf sieben Merkworte – die 7 A's der modernen Vermarktung: <b>absolut angenehm anders als alle anderen auffallen.</b> Nicht lauter, nicht perfekter – erkennbar du.</p>
             <p className="mt-3 flex flex-wrap gap-x-2 gap-y-1 font-montserrat text-xl font-black uppercase leading-tight sm:text-2xl">
               {SIEBEN_A.map((a) => (<span key={a}>{a}</span>))}
             </p>
@@ -755,32 +746,34 @@ export default function Challenge() {
       {/* KI und du - Claudia, 22.09.2026 10:51-10:52 UTC: weniger Text ("die Leute lesen nicht mehr so viel"),
           Text soll "mitlaufen wie beim Schreiben" (cc-schreib: Zeilen wischen beim Scrollen nacheinander auf),
           rechts die Ueberschrift "Der Mensch ist das Unikat ..." und darunter die Vorteile des Menschen. */}
-      <Abschnitt className="py-16 text-pearl-white sm:py-24" style={DUNKEL} label="ki-und-du" welle>
+      <Abschnitt className="bg-pearl-white py-16 text-midnight-blue sm:py-24" label="ki-und-du">
         <div className="mx-auto max-w-6xl px-6">
-          <Kicker text="Dein KI-Agent ist effizient. Und du?" />
-          <h2 id="ki-und-du" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">
+          <Kicker text="Dein KI-Agent ist effizient. Und du?" hell />
+          <h2 id="ki-und-du" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
             Warum Menschen so gern mit der KI reden. Der Mensch ist das Unikat, die KI der Beschleuniger – wir nutzen beides.
-            <span className="gold-text-animated mt-1 block">Lass dich überraschen.</span>
+            <span className="mt-1 block underline decoration-[#D4AF37] decoration-[4px] underline-offset-[6px]">Lass dich überraschen.</span>
           </h2>
-          <div className="mt-9 grid gap-4 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
-            <div className={`bg-[#13233F] p-6 sm:p-8 ${KACHEL}`}>
-              <h3 className="font-montserrat text-xs font-extrabold uppercase tracking-[0.2em] text-[#EBD197]">Warum die KI so bequem ist</h3>
-              <ul className="mt-5 grid list-none gap-3 p-0 sm:grid-cols-2">
+          {/* Zwei gleich breite, weisse Karten (Claudias Foto 22.09.2026 12:22 UTC: "unterschiedlich breit ... so schwarz ...
+              Schrift schlecht lesbar"); die KI-Gruende auf sechs gekuerzt (Kritiker-Durchgang). */}
+          <div className="mt-9 grid gap-4 md:grid-cols-2">
+            <div className={`bg-white p-6 text-midnight-blue sm:p-8 ${KACHEL} border-[#D4AF37]`}>
+              <h3 className="font-montserrat text-xs font-extrabold uppercase tracking-[0.2em] text-midnight-blue/80">Warum die KI so bequem ist</h3>
+              <ul className="mt-5 grid list-none gap-3.5 p-0">
                 {KI_GRUENDE.map((g, i) => (
                   <li key={g.titel} style={{ ['--i' as string]: i }} className="cc-stufe flex items-start gap-3">
-                    <span className="grid h-9 w-9 flex-none place-items-center rounded-md border border-[#D4AF37]/50 bg-[#0A1628] text-[#EBD197]"><g.Icon size={18} strokeWidth={2} aria-hidden="true" /></span>
+                    <span className="grid h-9 w-9 flex-none place-items-center rounded-md bg-midnight-blue text-[#EBD197]"><g.Icon size={18} strokeWidth={2} aria-hidden="true" /></span>
                     <span className="min-w-0">
-                      <b className="block font-montserrat text-[14px] font-extrabold leading-tight text-white">{g.titel}</b>
-                      <span className="font-inter text-[13.5px] leading-snug text-pearl-white/80">{g.text}</span>
+                      <b className="block font-montserrat text-[14px] font-extrabold leading-tight">{g.titel}</b>
+                      <span className="font-inter text-[14px] leading-snug">{g.text}</span>
                     </span>
                   </li>
                 ))}
               </ul>
-              <p className="mt-6 font-inter text-[15px] leading-relaxed text-pearl-white/85">
+              <p className="mt-6 font-inter text-[15px] leading-relaxed">
                 Und trotzdem: Keine Geschichte, kein Ego, keine Verletzlichkeit – genau deshalb erinnert sich niemand an einen Avatar.
               </p>
             </div>
-            <div className={`bg-pearl-white p-6 text-midnight-blue sm:p-8 ${KACHEL} border-[#D4AF37]`}>
+            <div className={`bg-white p-6 text-midnight-blue sm:p-8 ${KACHEL} border-[#D4AF37]`}>
               <h3 className="font-montserrat text-xl font-black leading-tight sm:text-2xl">
                 Der Mensch ist das Unikat. Die KI der Beschleuniger – <span className="underline decoration-[#D4AF37] decoration-[3px] underline-offset-4">wenn wir Menschlichkeit zeigen.</span>
               </h3>
@@ -801,40 +794,6 @@ export default function Challenge() {
         </div>
       </Abschnitt>
 
-      {/* Selbst-Check */}
-      <Abschnitt className="bg-white py-16 sm:py-24" label="selbstcheck">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className={KOPF}>
-            <div>
-              <Kicker text="Selbst-Check" hell />
-              <h2 id="selbstcheck" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
-                So bleibst du unverwechselbar – auch im Zeitalter von KI.
-              </h2>
-              <p className="mt-4 font-inter text-lg text-midnight-blue">Sieben Fragen. Ehrlich beantwortet, sagen sie dir, wo du stehst.</p>
-            </div>
-            <Kopfbild datei="gehirn" alt="Claudia Conen mit einem Gehirnmodell in der Hand" />
-          </div>
-          <ul className="mt-7 grid list-none gap-2.5 p-0">
-            {FRAGEN.map((f, i) => (
-              <li key={f.frage}>
-                <label className={`grid cursor-pointer grid-cols-[auto_1fr] items-start gap-4 bg-pearl-white px-4 py-4 text-midnight-blue ${KACHEL}`}>
-                  <input type="checkbox" className="mt-0.5 h-5 w-5 accent-[#D4AF37]" checked={fragen[i]} onChange={() => setFragen((a) => a.map((v, j) => (j === i ? !v : v)))} />
-                  <span>
-                    <b className="block font-montserrat font-bold">{f.frage}</b>
-                    <span className="font-inter text-[15px]">{f.text}</span>
-                  </span>
-                </label>
-              </li>
-            ))}
-          </ul>
-          <p className="mt-6 font-montserrat text-lg font-extrabold text-midnight-blue" aria-live="polite">
-            {nFragen === 0 && 'Jeden Tag prasseln Eindrücke auf uns ein wie Regentropfen. Nur wenige bleiben. Die Frage ist: Bist du einer davon?'}
-            {nFragen === 7 && 'Sieben von sieben. Dann brauchst du kein Programm – dann brauchst du eine Bühne. Melde dich trotzdem, ich glaube dir erst, wenn ich dich gehört habe.'}
-            {nFragen > 0 && nFragen < 7 && `${nFragen} von 7. ${nFragen < 4 ? 'Da ist Luft – und genau dafür sind die sieben Schritte da.' : 'Gute Basis. Die fehlenden Punkte sind die, die den Unterschied machen.'}`}
-          </p>
-        </div>
-      </Abschnitt>
-
       {/* Werkzeugkasten + Workbook */}
       <Abschnitt className="bg-white py-16 text-midnight-blue sm:py-24" label="werkzeug-titel">
         <div className="mx-auto max-w-6xl px-6">
@@ -849,12 +808,12 @@ export default function Challenge() {
           </div>
           <div className="mt-9 grid gap-3 sm:grid-cols-3 lg:grid-cols-5">
             {WERKZEUG.map((w, i) => (
-              <article key={w.titel} style={{ ['--i' as string]: i }} className="cc-stufe hero-glass-card group relative rounded-xl p-3.5">
+              <article key={w.titel} style={{ ['--i' as string]: i }} className={`cc-stufe group relative bg-white p-4 text-midnight-blue ${KACHEL}`}>
                 <div className="flex items-start gap-3">
-                  <img src={`/icons/${w.icon}.webp`} alt="" width={256} height={256} loading="lazy" decoding="async" className="h-11 w-11 flex-shrink-0 drop-shadow-[0_6px_10px_rgba(0,0,0,0.35)] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110" />
+                  <img src={`/icons/${w.icon}.webp`} alt="" width={256} height={256} loading="lazy" decoding="async" className="h-12 w-12 flex-shrink-0 drop-shadow-[0_6px_10px_rgba(10,22,40,0.25)] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110" />
                   <div className="min-w-0 flex-1">
-                    <h3 className="text-[0.8rem] font-semibold leading-snug text-pearl-white">{w.titel}</h3>
-                    <p className="mt-0.5 text-[0.7rem] leading-snug text-pearl-white/60">{w.text}</p>
+                    <h3 className="font-montserrat text-[0.85rem] font-extrabold leading-snug">{w.titel}</h3>
+                    <p className="mt-1 font-inter text-[0.78rem] leading-snug">{w.text}</p>
                   </div>
                 </div>
               </article>
@@ -877,7 +836,7 @@ export default function Challenge() {
               <Kicker text="Zum Mitnehmen" hell />
               <h3 className="mt-4 font-montserrat text-2xl font-extrabold uppercase text-midnight-blue sm:text-3xl">Workbook „Entdecke deine Stimmwirkung"</h3>
               <p className="mt-3 font-montserrat text-base font-bold text-midnight-blue">
-                Buchauszug aus dem <em>Brainself</em>-Buch – gemeinsam veröffentlicht mit Karsten Brocke und weiteren Experten.
+                Buchauszug aus dem <em>Brainself</em>-Buch – gemeinsam veröffentlicht mit dem Neurowissenschaftler Karsten Brocke und weiteren Experten.
               </p>
               <p className="mt-3 font-inter leading-relaxed text-midnight-blue">
                 Als Workbook zum Ausfüllen: deine akustische Visitenkarte, Übungen für Stimme und Wirkung, Platz für deine eigenen Sätze. 41 Seiten zum Blättern – oder als PDF.

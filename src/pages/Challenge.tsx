@@ -118,7 +118,7 @@ function freischaltung(heute: Date, tag: number): Date {
  *  (Claudia, 22.09.2026 11:16 UTC): Start-Zoom Mo 26.10. 19:00 Uhr, Abschlusstreffen Mo 02.11. 19:00 Uhr. */
 function standZeile(heute: Date): string {
   const h = new Date(heute); h.setHours(0, 0, 0, 0);
-  if (h < START) return 'Start: Montag, 26. Oktober 2026 · 19:00 Uhr · live im Zoom-Call';
+  if (h < START) return 'Start: Montag, 26. Oktober 2026 · 19 Uhr · live im Zoom';
   if (h <= ENDE) {
     const tag = Math.min(7, Math.floor((h.getTime() - START.getTime()) / 86400000) + 1);
     return `Die Challenge läuft – heute ist Tag ${tag} von 7`;
@@ -444,6 +444,7 @@ export default function Challenge() {
         title="Sieben Tage für deine Wirkung – die Video-Challenge"
         description="Sieben Tage, jeden Tag eine Anleitung, eine Minute Video mit dem Handy, Feedback von Claudia Conen. Kostenfrei, in einer WhatsApp-Gruppe – mit den sieben Schritten, dem Workbook und dem Weg danach."
         path={PFAD}
+        ogImage="https://claudiaconen.com/challenge/vorschau.jpg"
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(strukturierteDaten) }} />
       <Navigation hell />
@@ -471,7 +472,7 @@ export default function Challenge() {
             {/* Claudia, 22.09.2026 13:01 UTC: "auf dem Banner ist mir zu viel Text" - ein Satz zur Dauer, der Fingerabdruck-
                 Satz, "mehr nicht". Die Punkte stehen hell unter dem Kopf, der WhatsApp-Hinweis steht im Formular. */}
             <p className="mt-4 max-w-xl font-montserrat text-base font-extrabold leading-snug text-white sm:text-lg">
-              Sieben Tage. 30 Minuten am Tag – für deine persönliche Wirkung.
+              Sieben Tage. 30 Minuten am Tag. Und deine Wirkung wächst – hörbar, sichtbar, spürbar.
             </p>
             <p className="mt-4 max-w-xl font-inter text-lg leading-relaxed text-white">
               Nutze eine der wertvollsten Marketing-Möglichkeiten der Welt: deinen akustischen Fingerabdruck. Weil du ein Unikat bist.

@@ -61,6 +61,15 @@ function kopfSetzen(html, seo) {
     html = ersetzen(html, /<meta name="robots" content="[^"]*"/,
       '<meta name="robots" content="noindex, follow"');
   }
+  // Das Vorschaubild je Seite (og:image). Fehlte bis zum 22.09.2026: Die
+  // Challenge-Seite lieferte in Discord und WhatsApp das Standardbild der
+  // Startseite, obwohl SEO.tsx ein eigenes mitgab - nur im Browser gesetzt.
+  if (seo.ogImage) {
+    html = ersetzen(html, /<meta property="og:image" content="[^"]*"/,
+      `<meta property="og:image" content="${maskieren(seo.ogImage)}"`);
+    html = ersetzen(html, /<meta name="twitter:image" content="[^"]*"/,
+      `<meta name="twitter:image" content="${maskieren(seo.ogImage)}"`);
+  }
   if (seo.canonicalUrl) {
     html = ersetzen(html, /<link rel="canonical" href="[^"]*"/,
       `<link rel="canonical" href="${maskieren(seo.canonicalUrl)}"`);

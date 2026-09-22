@@ -92,11 +92,17 @@ const KI_GRUENDE: { titel: string; text: string }[] = [
   { titel: 'Keine Geschichte. Kein Ego.', text: 'Der Avatar bringt kein Gepäck mit. Kein Stolz, keine Verletzlichkeit – nur Funktion.' },
 ];
 
-const DU_ANTWORTEN: { titel: string; text: string }[] = [
-  { titel: 'KI perfektioniert.', text: 'Persönlichkeit verankert.' },
-  { titel: 'Tempo durch Technik.', text: 'Vertrauen durch dich.' },
-  { titel: 'Der Mensch ist das Unikat.', text: 'KI ist der Beschleuniger.' },
-  { titel: 'Wir Menschen haben keine Reset-Taste.', text: 'Was wir sagen und tun, kann sich bei anderen verankern.' },
+
+/** Vorteile des Menschen in der Kommunikation - die ersten zwei nach Claudias Diktat (22.09.2026, 10:52 UTC:
+ *  "wir spueren die Emotionen eines Menschen, bevor wir die Worte verstehen", "Redepausen geben Platz fuer
+ *  Verstaendnis und Wirkung"), der Rest in derselben Tonlage. Keine Hirnforschungs-Behauptungen. */
+const MENSCH_KANN = [
+  'Wir spüren, was ein Mensch fühlt – bevor wir seine Worte verstehen.',
+  'Redepausen geben Platz. Für Verständnis und für Wirkung.',
+  'Eine Stimme, die meint, was sie sagt, hört man. Wissen klingt anders als Überzeugung.',
+  'Ein Blick, der den anderen meint. Wer angesehen wird, fühlt sich gemeint – und bleibt.',
+  'Ein Detail, das nur du kennst: ein Ort, ein Name, ein Satz, der fiel. Geschichten bleiben, Daten nicht.',
+  'Unperfekt, aber echt. Ein Versprecher, über den du lachst, macht dich glaubwürdiger als jede glatte Antwort.',
 ];
 
 const FRAGEN: { frage: string; text: string }[] = [
@@ -363,48 +369,45 @@ export default function UnverwechselbarDu() {
         </div>
       </Abschnitt>
 
-      {/* KI und du */}
+      {/* KI und du - Claudia, 22.09.2026 10:51-10:52 UTC: weniger Text ("die Leute lesen nicht mehr so viel"),
+          Text soll "mitlaufen wie beim Schreiben" (cc-schreib: Zeilen wischen beim Scrollen nacheinander auf),
+          rechts die Ueberschrift "Der Mensch ist das Unikat ..." und darunter die Vorteile des Menschen. */}
       <Abschnitt className="py-16 text-pearl-white sm:py-24" style={DUNKEL} label="ki-und-du" welle>
         <div className="mx-auto max-w-6xl px-6">
           <Kicker text="Dein KI-Agent ist effizient. Und du?" />
           <h2 id="ki-und-du" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">
             Warum Menschen so gern mit der KI reden – und was trotzdem nur du kannst.
           </h2>
-          <div className="mt-9 grid gap-4 md:grid-cols-2">
+          <div className="mt-9 grid gap-4 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
             <div className={`bg-[#13233F] p-6 sm:p-8 ${KACHEL}`}>
               <h3 className="font-montserrat text-xs font-extrabold uppercase tracking-[0.2em] text-[#EBD197]">Warum die KI so bequem ist</h3>
-              <ul className="mt-5 grid list-none gap-3 p-0">
-                {KI_GRUENDE.map((g) => (
-                  <li key={g.titel} className="flex gap-3 font-inter text-[15px]">
-                    <Haken />
-                    <span>
-                      <b className="block font-montserrat font-bold text-white">{g.titel}</b>
-                      <span className="text-pearl-white/80">{g.text}</span>
-                    </span>
+              <ul className="mt-5 flex list-none flex-wrap gap-2 p-0">
+                {KI_GRUENDE.map((g, i) => (
+                  <li key={g.titel} style={{ ['--i' as string]: i }} className="cc-stufe rounded-full border border-[#D4AF37]/40 bg-white/[0.06] px-3.5 py-2 font-montserrat text-[13px] font-bold text-white">
+                    {g.titel}
                   </li>
                 ))}
               </ul>
+              <p className="mt-6 font-inter text-[15px] leading-relaxed text-pearl-white/85">
+                Bequem, schnell, nie genervt. Und trotzdem: Keine Geschichte, kein Ego, keine Verletzlichkeit – genau deshalb erinnert sich niemand an einen Avatar.
+              </p>
             </div>
             <div className={`bg-pearl-white p-6 text-midnight-blue sm:p-8 ${KACHEL} border-[#D4AF37]`}>
-              <h3 className="font-montserrat text-xs font-extrabold uppercase tracking-[0.2em]">Und was bleibt davon im Kopf?</h3>
-              <ul className="mt-5 grid list-none gap-3 p-0">
-                {DU_ANTWORTEN.map((g) => (
-                  <li key={g.titel} className="flex gap-3 font-inter text-[15px]">
+              <h3 className="font-montserrat text-xl font-black leading-tight sm:text-2xl">
+                Der Mensch ist das Unikat. Die KI der Beschleuniger – <span className="underline decoration-[#D4AF37] decoration-[3px] underline-offset-4">wenn wir Menschlichkeit zeigen.</span>
+              </h3>
+              <p className="mt-4 font-inter text-[15px] leading-relaxed">
+                Wir Menschen haben keine Reset-Taste. Was wir sagen, bleibt beim anderen. Und solange wir mit uns selbst beschäftigt sind, reden wir nicht mit ihm – sondern nur vor ihm.
+              </p>
+              <p className="mt-5 font-montserrat text-[11px] font-extrabold uppercase tracking-[0.2em] text-midnight-blue/80">Was der Mensch kann</p>
+              <ul className="mt-2 grid list-none gap-2.5 p-0">
+                {MENSCH_KANN.map((s, i) => (
+                  <li key={s} style={{ ['--i' as string]: i }} className="cc-schreib flex gap-3 font-inter text-[15px] leading-relaxed">
                     <Haken />
-                    <span>
-                      <b className="block font-montserrat font-bold">{g.titel}</b>
-                      <span>{g.text}</span>
-                    </span>
+                    <span>{s}</span>
                   </li>
                 ))}
               </ul>
-              <p className="mt-6 font-montserrat text-xl font-black uppercase leading-tight sm:text-2xl">
-                Keine Geschichte, kein Ego, keine Verletzlichkeit – genau das ist der Grund, warum sich niemand an einen Avatar{' '}
-                <span className="underline decoration-[#D4AF37] decoration-[3px] underline-offset-4">erinnert</span>.
-              </p>
-              <p className="mt-4 font-inter text-[15px] leading-relaxed">
-                Der Avatar ist bequem. Du bist unvergesslich. Das Programm zeigt dir, wie du beides nutzt: die Technik für das Tempo – und dich für das, was bleibt.
-              </p>
             </div>
           </div>
         </div>

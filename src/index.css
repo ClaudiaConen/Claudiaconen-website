@@ -1225,19 +1225,14 @@ html, body { cursor: auto; }
   position: relative;
 }
 
+/* 22.09.2026: Claudia - "der Schimmer mit dem Gold stimmt auf der Startseite immer noch nicht".
+   Hier pulsierten noch drei gestapelte Leuchtschatten (bis 60 px) mit. Die Community-Seite
+   (assets/index-BV3TAOvs.css, abgerufen 22.09.2026) bewegt nur die Verlaufsposition:
+   @keyframes goldShimmer{0%,to{background-position:0% center}50%{background-position:200% center}}
+   Jetzt zeichengleich. */
 @keyframes goldShimmer {
-  0%, 100% {
-    background-position: 0% center;
-    filter: drop-shadow(0 4px 12px rgba(201, 169, 97, 0.5))
-      drop-shadow(0 8px 24px rgba(201, 169, 97, 0.3))
-      drop-shadow(0 0 40px rgba(212, 175, 55, 0.2));
-  }
-  50% {
-    background-position: 200% center;
-    filter: drop-shadow(0 4px 16px rgba(212, 175, 55, 0.7))
-      drop-shadow(0 8px 32px rgba(247, 231, 206, 0.4))
-      drop-shadow(0 0 60px rgba(212, 175, 55, 0.3));
-  }
+  0%, 100% { background-position: 0% center; }
+  50% { background-position: 200% center; }
 }
 
 @keyframes subtleFloat {
@@ -2341,6 +2336,10 @@ html, body { cursor: auto; }
 @keyframes cc-lauf {
   to { transform: translateX(-50%); }
 }
+/* Challenge-Laufband im Startseiten-Kopf (22.09.2026): kuerzere Strecke, also schneller durch. */
+.cc-chal-spur { animation-duration: 34s; }
+.cc-chal-punkt { animation: cc-chal-punkt 1.8s ease-in-out infinite; }
+@keyframes cc-chal-punkt { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
 /* "Momente, die bleiben": eine Reihe, alle Bilder gleich hoch, Hochkant und Quer gemischt.
    Sechs Bilder ergeben rund 1.500 px - mehr als der sichtbare Ausschnitt, also keine Doppelten. */
 .cc-mom-band { max-width: min(100%, 1180px); margin-inline: auto; }

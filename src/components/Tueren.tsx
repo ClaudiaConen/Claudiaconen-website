@@ -28,6 +28,9 @@ type Tuer = {
   stichworte: string[];
   knopf: string;
   ziel: string;
+  /* Optionaler zweiter Verweis unter dem Knopf (22.09.2026: Claudia will die
+     KI-Manager-Ausbildung von der Startseite aus verlinkt haben). */
+  zweiter?: { text: string; ziel: string };
   /** Claudias Sprechtext zu dieser Tuer, z. B. '/audio/tuer-unternehmen.mp3'.
    *  Solange die Aufnahme fehlt, bleibt das Feld leer und es erscheint kein Knopf. */
   stimme?: string;
@@ -97,6 +100,7 @@ const TUEREN: Tuer[] = [
     ],
     knopf: 'Einfach mit KI starten',
     ziel: '/ki-einsteiger-coaching',
+    zweiter: { text: 'Oder gleich tiefer: KI-Manager-Ausbildung', ziel: '/ki-manager-ausbildung' },
   },
 ];
 
@@ -191,6 +195,14 @@ export default function Tueren() {
                 >
                   {t.knopf} →
                 </Link>
+                {t.zweiter && (
+                  <Link
+                    to={t.zweiter.ziel}
+                    className="ml-6 mt-7 inline-block font-inter text-sm font-medium text-midnight-blue/70 underline decoration-midnight-blue/25 underline-offset-4 transition-colors hover:text-dark-gold hover:decoration-dark-gold"
+                  >
+                    {t.zweiter.text} →
+                  </Link>
+                )}
               </article>
             </div>
           ))}

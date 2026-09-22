@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Calendar } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import AudioButton from './AudioButton';
+import ChallengeBand from './ChallengeBand';
 import VideoButton from './VideoButton';
 import VideoModal from './VideoModal';
 
@@ -247,11 +248,14 @@ export default function Hero() {
               })}
             </div>
 
+            {/* Laufband "Aktuell: 7-Tage-Video-Challenge" - Claudia, 22.09.2026 (Wochenend-Buehnenprogramm). */}
+            <ChallengeBand />
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.2 }}
-              className="flex flex-col sm:flex-row gap-3 md:gap-4"
+              className="mt-6 flex flex-col sm:flex-row gap-3 md:gap-4"
             >
               <a
                 href="#schritt1"

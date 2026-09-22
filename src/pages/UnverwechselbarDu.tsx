@@ -234,6 +234,14 @@ export default function UnverwechselbarDu() {
   const [buchOffen, setBuchOffen] = useState(false);
   const nKreuze = kreuze.filter(Boolean).length;
   const nFragen = fragen.filter(Boolean).length;
+  // Sprungmarke aus der Adresse (z. B. /unverwechselbar-du#challenge vom Laufband der Startseite):
+  // ScrollToTop springt bei jedem Seitenwechsel nach oben, deshalb hier nach dem Aufbau zum Ziel.
+  useEffect(() => {
+    const id = window.location.hash.replace('#', '');
+    if (!id) return;
+    const t = window.setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+    return () => window.clearTimeout(t);
+  }, []);
   // Beim Vorrendern steht hier das Bau-Datum; im Browser rechnet React mit dem echten Tag neu.
   const heute = new Date();
   const montag = naechsterMontag(heute);
@@ -475,7 +483,7 @@ export default function UnverwechselbarDu() {
                 Die 7-Tage-Video-Challenge: sieben Tage, sieben Schritte, 60 Sekunden am Tag.
               </h2>
               <p className="mt-4 max-w-2xl font-inter text-lg leading-relaxed text-midnight-blue">
-                <b>Start immer montags – nächster Start: Montag, {montag}.</b> Du scannst den Code, sagst „Ich bin dabei" – und ab dann bekommst du jeden Morgen eine Aufgabe. Du nimmst dich mit dem Handy auf. Nur für dich. Wer mag, teilt sein Video mit <b>#unverwechselbarDU</b>.
+                <b>Start immer montags – nächster Start: Montag, {montag}.</b> Du scannst den Code, sagst „Ich bin dabei" – und ab dann bekommst du jeden Morgen eine Aufgabe. Du nimmst dich mit dem Handy auf – eine Minute, mehr nicht. Zu jedem Video, das du in der Gruppe teilst, bekommst du Feedback von mir. Kostenfrei. Und wer nach sieben Tagen weiter will: Ich lade dich ein zum Performance-Coaching und in die Netzwerk-Community. Wer mag, teilt sein Video mit <b>#unverwechselbarDU</b>.
               </p>
             </div>
             <Kopfbild datei="selfie" alt="Claudia Conen nimmt mit dem Handy ein Video auf, zwei Menschen lachen mit" quer />

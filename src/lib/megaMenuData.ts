@@ -1,5 +1,5 @@
 import {
-  BookOpen, Bot, Brain, Calendar, ChevronsRight, Compass, Ear, Edit3, Eye, Flag, Gift, Globe, GraduationCap, Handshake, Heart, Mail, MessageSquare, Mic, Monitor, Newspaper, Pause, Send, Share2, Shield, Sparkles, Star, Sun, Target, Users, Video, Wrench
+  BookOpen, Bot, Brain, Calendar, ChevronsRight, Compass, Ear, Edit3, Eye, Flag, Gift, Globe, GraduationCap, Handshake, Heart, Mail, MessageSquare, Mic, Monitor, Newspaper, Pause, Send, Share2, Shield, Sparkles, Star, Sun, Target, Users, Wrench
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
@@ -254,8 +254,7 @@ export const megaMenuItems: MegaMenuItem[] = [
         tiles: [
           { name: 'KI-Einsteiger-Coaching', href: '/ki-einsteiger-coaching', icon: Compass },
           { name: 'KI-Manager Ausbildung', href: '/ki-manager-ausbildung', icon: Monitor },
-          { name: 'KI 1:1', href: '/ki-1zu1', icon: Users },
-          { name: 'HeyGen Kurs', href: '/ki-heygen-kurs', icon: Video },
+          { name: 'KI 1:1 für Einsteiger', href: '/ki-1zu1', icon: Users },
           { name: 'Marke im KI-Zeitalter', href: '/marke-und-positionierung', icon: Target },
         ],
       },

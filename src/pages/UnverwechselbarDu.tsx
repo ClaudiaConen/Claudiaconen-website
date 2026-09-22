@@ -63,13 +63,20 @@ function naechsterMontag(heute: Date): string {
   return new Intl.DateTimeFormat('de-DE', { day: 'numeric', month: 'long' }).format(d);
 }
 
+/** Zehn Saetze zum Ankreuzen - Claudias Wunsch vom 22.09.2026, 10:50 UTC: statt der ChatGPT-Liste vom Flyer
+ *  Fragen zur Kommunikation im KI-Zeitalter (Pausen, Selbstsicherheit, Perfektion), "wie ein Rhetorik-Profi
+ *  sie stellen wuerde". Eigene Formulierungen, keine Zitate. Die letzten zwei sind die persoenlichen. */
 const KREUZE = [
-  'ChatGPT für schnelle Antworten',
-  'ChatGPT für kreative Ideen',
-  'ChatGPT ist immer verfügbar',
-  'ChatGPT urteilt nicht',
-  'ChatGPT hört immer zu',
-  'ChatGPT kostet nichts',
+  'Im Zeitalter der KI wird das Gespräch von Mensch zu Mensch wichtiger – nicht unwichtiger.',
+  'Eine Pause im Satz ist kein Aussetzer. Sie ist der Moment, in dem der andere versteht.',
+  'Selbstsicher wirkt, wer aufgehört hat, perfekt sein zu wollen.',
+  'Man hört einer Stimme an, ob sie meint, was sie sagt.',
+  'Zuhören ist die Hälfte des Redens.',
+  'Ein Satz, den ich nicht in einem Atemzug sagen kann, ist zu lang.',
+  'Fachwörter schützen den Redner – nicht den Zuhörer.',
+  'Vertrauen entsteht nicht durch Argumente, sondern durch Haltung.',
+  'Ich weiß, wie ich auf andere wirke.',
+  'Ich habe meine eigene Stimme in den letzten vier Wochen bewusst angehört.',
 ];
 
 const KI_GRUENDE: { titel: string; text: string }[] = [
@@ -295,12 +302,10 @@ export default function UnverwechselbarDu() {
             <h1 className="mt-6 font-montserrat text-4xl font-black uppercase leading-[1.05] tracking-tight sm:text-6xl">
               Unverwechselbar <span className="gold-text-animated">DU.</span>
             </h1>
-            <p className="mt-6 font-montserrat text-xl font-bold leading-snug text-white sm:text-2xl">Was hast du, was KI niemals haben wird?</p>
+            <p className="mt-6 font-montserrat text-xl font-bold leading-snug text-white sm:text-2xl">Du wirkst immer. Die Frage ist nur: wie.</p>
+            <p className="mt-2 font-inter text-base text-pearl-white/85">Wie willst du denn wirken?</p>
             <p className="mt-4 max-w-xl font-inter text-lg leading-relaxed text-pearl-white/90">
               Sieben Schritte, nach denen du im Kopf deiner Kunden bleibst – mit deiner Stimme, deiner Geschichte und deiner Haltung. Für Unternehmer, Führungskräfte, Speaker und Teams.
-            </p>
-            <p className="mt-7 font-cormorant text-2xl italic leading-snug text-[#F7E7CE] sm:text-3xl">
-              Perfektion ist klickbar. Persönlichkeit weckt Vertrauen. Und bleibt.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a href="#geschenk" className={`inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue transition-transform hover:-translate-y-px ${GOLD}`}>
@@ -315,7 +320,7 @@ export default function UnverwechselbarDu() {
             <img src="/situationen/06-kamera.webp" alt="Claudia Conen im dunklen Blazer, Arme verschränkt, Blick in die Kamera" width={360} height={640} className="h-full w-full object-cover" />
             <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(10,22,40,0)_55%,rgba(10,22,40,0.9)_100%)]" />
             <figcaption className="absolute inset-x-0 bottom-0 p-5 font-montserrat text-[11px] font-extrabold uppercase tracking-[0.14em] text-[#EBD197]">
-              Keynote-Speakerin · Trainerin · Coach · Autorin
+              Keynote-Speakerin · Trainerin · Coach · Mentorin · Autorin
               <span className="mt-1 block text-base normal-case tracking-normal text-white">Claudia Conen</span>
             </figcaption>
           </figure>
@@ -329,17 +334,17 @@ export default function UnverwechselbarDu() {
             <div>
               <Kicker text="Hand aufs Herz" hell />
               <h2 id="hand-aufs-herz" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
-                Bei wem holst du dir häufiger Rat – bei ChatGPT oder bei echten Menschen?
+                Zehn Sätze. Welche würdest du unterschreiben?
               </h2>
-              <p className="mt-4 font-inter text-lg text-midnight-blue">Kreuze an, was du kennst.</p>
+              <p className="mt-4 font-inter text-lg text-midnight-blue">Kreuze an, wo du zustimmst – ehrlich, nicht höflich.</p>
             </div>
             <Kopfbild datei="avatare" alt="Claudia Conen als Mensch neben ihren KI-Avataren" />
           </div>
-          <ul className="mt-7 grid list-none gap-2.5 p-0 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-7 grid list-none gap-2.5 p-0 sm:grid-cols-2">
             {KREUZE.map((k, i) => (
               <li key={k}>
-                <label className={`flex cursor-pointer items-center gap-3.5 bg-white px-4 py-3.5 font-inter font-medium text-midnight-blue ${KACHEL}`}>
-                  <input type="checkbox" className="h-5 w-5 flex-none accent-[#D4AF37]" checked={kreuze[i]} onChange={() => setKreuze((a) => a.map((v, j) => (j === i ? !v : v)))} />
+                <label className={`flex cursor-pointer items-start gap-3.5 bg-white px-4 py-3.5 font-inter font-medium leading-snug text-midnight-blue ${KACHEL}`}>
+                  <input type="checkbox" className="mt-0.5 h-5 w-5 flex-none accent-[#D4AF37]" checked={kreuze[i]} onChange={() => setKreuze((a) => a.map((v, j) => (j === i ? !v : v)))} />
                   {k}
                 </label>
               </li>
@@ -349,7 +354,9 @@ export default function UnverwechselbarDu() {
             <p className="font-inter text-pearl-white/90">
               {nKreuze === 0
                 ? 'Kreuze an – und lies dann weiter.'
-                : `${nKreuze === 1 ? 'Ein Kreuz.' : `${nKreuze} Kreuze.`} Alles richtig – und trotzdem: An nichts davon erinnert sich morgen jemand.`}
+                : kreuze[8] && kreuze[9]
+                  ? `${nKreuze} von zehn. Du kennst deine Wirkung und deine Stimme – dann geht es jetzt um die Feinheiten: die sieben Schritte.`
+                  : `${nKreuze} von zehn. Die ersten acht sind Wissen. Die letzten zwei sind Wirkung – und genau da fängt die Arbeit an.`}
             </p>
             <p className="mt-1.5 font-cormorant text-2xl italic leading-tight text-[#F7E7CE] sm:text-3xl">Was hast du, was KI niemals haben wird? Dich.</p>
           </div>

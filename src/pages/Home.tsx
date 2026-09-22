@@ -12,7 +12,7 @@ import SocialProof from '../components/SocialProof';
 import ClaudiaAI from '../components/ClaudiaAI';
 import FrequentQuestions from '../components/FrequentQuestions';
 import ContactSection from '../components/ContactSection';
-import Impressionen from '../components/Impressionen';
+import Momente from '../components/Momente';
 import FinalCTA from '../components/FinalCTA';
 import Footer from '../components/Footer';
 import WhatsAppButton from '../components/WhatsAppButton';
@@ -49,7 +49,7 @@ export default function Home() {
         <ClaudiaAI />
         <FrequentQuestions />
         <ContactSection />
-        <Impressionen />
+        <Momente />
         <FinalCTA />
       </main>
       <Footer />

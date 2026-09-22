@@ -2338,6 +2338,11 @@ html, body { cursor: auto; }
 @keyframes cc-lauf {
   to { transform: translateX(-50%); }
 }
+/* "Momente, die bleiben": eine Reihe, alle Bilder gleich hoch, Hochkant und Quer gemischt.
+   Sechs Bilder ergeben rund 1.500 px - mehr als der sichtbare Ausschnitt, also keine Doppelten. */
+.cc-mom-band { max-width: min(100%, 1180px); margin-inline: auto; }
+.cc-mom-spur { animation-duration: 80s; }
+.cc-mom { height: clamp(190px, 42vw, 236px); }
 .cc-glanz::before {
   content: "";
   position: absolute;

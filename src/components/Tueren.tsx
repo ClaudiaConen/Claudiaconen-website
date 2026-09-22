@@ -34,6 +34,9 @@ type Tuer = {
   /** Claudias Sprechtext zu dieser Tuer, z. B. '/audio/tuer-unternehmen.mp3'.
    *  Solange die Aufnahme fehlt, bleibt das Feld leer und es erscheint kein Knopf. */
   stimme?: string;
+  /** Foto zum Thema, links neben dem Text (Claudia, 22.09.2026 21:31 UTC: "damit auch bessere Orientierung ist und die
+   *  Kacheln nicht so untergehen"). Nur ihre eigenen Fotos, keine erkennbaren Dritten. Dateien in public/tueren/, 960x720. */
+  bild: { datei: string; alt: string };
 };
 
 const TUEREN: Tuer[] = [
@@ -52,6 +55,7 @@ const TUEREN: Tuer[] = [
     ],
     knopf: 'Mehr Wirkung im Unternehmen',
     ziel: '/unternehmen-keynotes',
+    bild: { datei: 'unternehmen', alt: 'Claudia Conen leitet einen Workshop vor der Leinwand' },
   },
   {
     wer: 'Speaker & freie Redner',
@@ -68,6 +72,7 @@ const TUEREN: Tuer[] = [
     ],
     knopf: 'Unverwechselbar sprechen',
     ziel: '/redner-ausbildungen',
+    bild: { datei: 'speaker', alt: 'Claudia Conen auf der Bühne einer Benefizveranstaltung' },
   },
   {
     wer: 'Coaches & Trainer',
@@ -84,6 +89,7 @@ const TUEREN: Tuer[] = [
     ],
     knopf: 'Zur klaren Wahl werden',
     ziel: '/1-zu-1-mentoring',
+    bild: { datei: 'coaches', alt: 'Claudia Conen im Gespräch am Telefon' },
   },
   {
     wer: 'KI-Einsteiger & Neugierige',
@@ -100,6 +106,7 @@ const TUEREN: Tuer[] = [
     ],
     knopf: 'Einfach mit KI starten',
     ziel: '/ki-einsteiger-coaching',
+    bild: { datei: 'ki', alt: 'Claudia Conen arbeitet am Laptop, die rote Mappe daneben' },
     zweiter: { text: 'Oder gleich tiefer: KI-Manager-Ausbildung', ziel: '/ki-manager-ausbildung' },
   },
 ];
@@ -145,9 +152,15 @@ export default function Tueren() {
               style={{ top: `${72 + i * 18}px`, zIndex: i + 1 }}
             >
               <article
-                className="tuer-karte rounded-xl px-7 py-8 motion-reduce:transform-none sm:px-10 sm:py-11"
+                className="tuer-karte overflow-hidden rounded-xl motion-reduce:transform-none"
                 style={{ transform: `scale(${1 - (TUEREN.length - 1 - i) * 0.012})` }}
               >
+               {/* Foto links, Text rechts (Claudia, 22.09.2026 21:31 UTC) - auf dem Handy das Foto oben, 16:9. */}
+               <div className="grid md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
+                <figure className="m-0 aspect-[16/9] overflow-hidden md:aspect-auto md:h-full">
+                  <img src={`/tueren/${t.bild.datei}.webp`} alt={t.bild.alt} width={960} height={720} loading="lazy" decoding="async" className="h-full w-full object-cover" />
+                </figure>
+                <div className="px-7 py-8 sm:px-10 sm:py-11">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <h3>
                     <span
@@ -203,6 +216,8 @@ export default function Tueren() {
                     {t.zweiter.text} →
                   </Link>
                 )}
+                </div>
+               </div>
               </article>
             </div>
           ))}

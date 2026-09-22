@@ -38,8 +38,28 @@ const PFAD = '/unverwechselbar-du';
 const ANGEBOT = {
   preis: '' as string, // z. B. '690 €'
   format: '' as string, // z. B. 'Ein Tag in kleiner Runde, 6 bis 8 Personen'
-  termin: '' as string, // z. B. 'Samstag, 18. Oktober 2026'
 };
+
+/** Termine des Programms als ISO-Datum. Die Seite zeigt nur den naechsten, der noch in der Zukunft
+ *  liegt; vergangene verschwinden von selbst - Claudias Sorge vom 22.09.2026 ("wenn es abgelaufen
+ *  ist ... dann ist man wieder nicht aktuell"). Leer = "Naechster Termin auf Anfrage". */
+const TERMINE: string[] = []; // z. B. ['2026-10-18']
+
+const DATUM = new Intl.DateTimeFormat('de-DE', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+
+function naechsterTermin(heute: Date): string | null {
+  const start = new Date(heute); start.setHours(0, 0, 0, 0);
+  const next = TERMINE.map((s) => new Date(s)).filter((d) => d >= start).sort((a, b) => a.getTime() - b.getTime())[0];
+  return next ? DATUM.format(next) : null;
+}
+
+/** Die Challenge startet immer montags - der naechste Montag wird berechnet, nie eingetragen. */
+function naechsterMontag(heute: Date): string {
+  const d = new Date(heute);
+  const tage = (8 - d.getDay()) % 7 || 7;
+  d.setDate(d.getDate() + tage);
+  return new Intl.DateTimeFormat('de-DE', { day: 'numeric', month: 'long' }).format(d);
+}
 
 const KREUZE = [
   'ChatGPT für schnelle Antworten',
@@ -159,6 +179,10 @@ export default function UnverwechselbarDu() {
   const [fragen, setFragen] = useState<boolean[]>(() => FRAGEN.map(() => false));
   const nKreuze = kreuze.filter(Boolean).length;
   const nFragen = fragen.filter(Boolean).length;
+  // Beim Vorrendern steht hier das Bau-Datum; im Browser rechnet React mit dem echten Tag neu.
+  const heute = new Date();
+  const montag = naechsterMontag(heute);
+  const termin = naechsterTermin(heute);
 
   const strukturierteDaten = {
     '@context': 'https://schema.org',
@@ -378,7 +402,7 @@ export default function UnverwechselbarDu() {
             Die 7-Tage-Video-Challenge: sieben Tage, sieben Schritte, 60 Sekunden am Tag.
           </h2>
           <p className="mt-4 max-w-2xl font-inter text-lg leading-relaxed text-midnight-blue">
-            Du scannst den Code, sagst „Ich bin dabei" – und ab Montag bekommst du jeden Morgen eine Aufgabe. Du nimmst dich mit dem Handy auf. Nur für dich. Wer mag, teilt sein Video mit <b>#unverwechselbarDU</b>.
+            <b>Start immer montags – nächster Start: Montag, {montag}.</b> Du scannst den Code, sagst „Ich bin dabei" – und ab dann bekommst du jeden Morgen eine Aufgabe. Du nimmst dich mit dem Handy auf. Nur für dich. Wer mag, teilt sein Video mit <b>#unverwechselbarDU</b>.
           </p>
           <ol className="mt-8 grid list-none gap-2.5 p-0">
             {TAGE.map((tg, i) => {
@@ -480,9 +504,7 @@ export default function UnverwechselbarDu() {
               <span className={`self-start rounded-full px-3 py-1.5 font-montserrat text-[10px] font-extrabold uppercase tracking-[0.18em] text-midnight-blue ${GOLD}`}>Das Programm</span>
               <h3 className="mt-4 font-montserrat text-2xl font-extrabold uppercase">Unverwechselbar DU – die sieben Schritte live</h3>
               <p className="mt-4 font-montserrat text-4xl font-black">{ANGEBOT.preis || 'Auf Anfrage'}</p>
-              {(ANGEBOT.format || ANGEBOT.termin) && (
-                <p className="mt-3 font-inter text-pearl-white/90">{[ANGEBOT.format, ANGEBOT.termin].filter(Boolean).join(' · ')}</p>
-              )}
+              <p className="mt-3 font-inter text-pearl-white/90">{[ANGEBOT.format, termin ?? 'Nächster Termin auf Anfrage'].filter(Boolean).join(' · ')}</p>
               <p className="mt-4 font-inter leading-relaxed text-pearl-white/90">Das ist drin:</p>
               <ul className="mt-4 grid list-none gap-2.5 p-0 font-inter text-pearl-white/90">
                 {[

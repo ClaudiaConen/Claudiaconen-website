@@ -23,7 +23,6 @@ import FotoReihen from '../components/FotoReihen';
  */
 
 const PFAD = '/challenge';
-const CHALLENGE_LINK = 'https://chat.whatsapp.com/IWSuqZ9ZrMn3dYNgVY1sp6?s=qt&p=i&mlu=4&ilr=4';
 
 const GOLD = 'bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]';
 const KACHEL = 'rounded-[10px] border border-[#D4AF37]/55 transition-[border-color,box-shadow] duration-200 hover:border-[#EBD197] hover:shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)]';
@@ -35,6 +34,26 @@ function naechsterMontag(heute: Date): string {
   d.setDate(d.getDate() + tage);
   return new Intl.DateTimeFormat('de-DE', { day: 'numeric', month: 'long' }).format(d);
 }
+
+/** Erster Durchlauf der Challenge (Montag nach Claudias Buehnenwochenende). Vorher ist nur Tag 1 offen -
+ *  als Vorbereitung (Aufwachuebung + Satz). Ab dann laeuft es woechentlich: Tag n oeffnet am n-ten Tag
+ *  des laufenden Zyklus (Montag = Tag 1 ... Sonntag = Tag 7). Claudias Einwand vom 22.09.2026, 10:45 UTC:
+ *  alles Aufgeklappte wirkt ueberladen, "man sollte die vielleicht erst oeffnen duerfen, wenn es losgeht". */
+const ERSTER_START = new Date(2026, 8, 28); // 28.09.2026, lokale Zeit
+const VORBEREITUNG_TAG1 = true; // Tag 1 vor dem ersten Start lesbar (Aufwaermen ueben)
+
+/** Freischaltdatum je Tag (0-basiert) fuer den Zyklus, in dem 'heute' liegt. */
+function freischaltung(heute: Date, tag: number): Date {
+  const start = new Date(heute); start.setHours(0, 0, 0, 0);
+  if (start < ERSTER_START) {
+    const d = new Date(ERSTER_START); d.setDate(d.getDate() + tag);
+    return tag === 0 && VORBEREITUNG_TAG1 ? new Date(0) : d;
+  }
+  start.setDate(start.getDate() - ((start.getDay() + 6) % 7)); // letzter Montag (oder heute)
+  start.setDate(start.getDate() + tag);
+  return start;
+}
+const KURZ = new Intl.DateTimeFormat('de-DE', { weekday: 'short', day: 'numeric', month: 'short' });
 
 type Tag = {
   titel: string;
@@ -224,42 +243,28 @@ function Abschnitt({ id, className, style, label, children }: { id: string; clas
   );
 }
 
-function Einstieg({ hell }: { hell?: boolean }) {
+/** Unter den Tagen: kein direkter Weg in die Gruppe, nur zurueck zum Eintragen (Claudia, 22.09.2026). */
+function EintragBlock() {
   return (
-    <a
-      href={CHALLENGE_LINK}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold transition-transform hover:-translate-y-px ${
-        hell ? 'bg-midnight-blue text-pearl-white hover:bg-royal-navy' : `text-midnight-blue ${GOLD}`
-      }`}
-    >
-      Ich bin dabei – zur WhatsApp-Gruppe
-    </a>
-  );
-}
-
-/** Der Einstieg zwischen den Kacheln: Knopf fuer das Handy, QR-Code fuer alle, die am Rechner lesen.
- *  QR zeigt auf den Gruppenlink (public/challenge/qr-whatsapp.png, erzeugt 22.09.2026, zurueckgelesen). */
-function WhatsAppBlock() {
-  return (
-    <div className={`mt-3 grid items-center gap-5 px-5 py-5 text-midnight-blue sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:px-7 ${GOLD} ${KACHEL} border-transparent`}>
-      <img src="/challenge/qr-whatsapp.png" alt="QR-Code: Einladung in die WhatsApp-Gruppe der Challenge" width={328} height={328} loading="lazy" decoding="async" className="h-24 w-24 rounded-md bg-white sm:h-28 sm:w-28" />
+    <div className={`mt-3 grid items-center gap-5 rounded-[10px] px-5 py-5 text-midnight-blue sm:grid-cols-[minmax(0,1fr)_auto] sm:px-7 ${GOLD}`}>
       <div className="min-w-0">
-        <p className="font-montserrat text-lg font-extrabold leading-tight sm:text-xl">Hier geht es in die Gruppe.</p>
-        <p className="mt-1 font-inter text-[15px] leading-relaxed">
-          Am Handy: Knopf drücken. Am Rechner: Code mit dem Handy scannen. Noch nicht eingetragen?{' '}
-          <a href="#anmelden" className="font-semibold underline decoration-midnight-blue/40 underline-offset-2">Hier eintragen.</a>
-        </p>
+        <p className="font-montserrat text-lg font-extrabold leading-tight sm:text-xl">Noch nicht eingetragen?</p>
+        <p className="mt-1 font-inter text-[15px] leading-relaxed">Erst eintragen, dann in die Gruppe – so weiß ich, wer dabei ist. Kostenfrei.</p>
       </div>
-      <Einstieg hell />
+      <a href="#anmelden" className="inline-flex items-center rounded-full bg-midnight-blue px-7 py-4 font-montserrat text-sm font-bold text-pearl-white transition-colors hover:bg-royal-navy">
+        Ich bin dabei – eintragen
+      </a>
     </div>
   );
 }
 
 export default function Challenge() {
   // Beim Vorrendern steht hier das Bau-Datum; im Browser rechnet React mit dem echten Tag neu.
-  const montag = naechsterMontag(new Date());
+  const heute = new Date();
+  const montag = naechsterMontag(heute);
+  // Welche Tage sind freigeschaltet? Beim Vorrendern gilt das Bau-Datum, im Browser der echte Tag.
+  const frei = TAGE.map((_, i) => heute >= freischaltung(heute, i));
+  const offenerTag = frei.lastIndexOf(true);
   const listeRef = useRef<HTMLOListElement>(null);
   // Pfeil auf der Schiene folgt dem Scrollen: 0 % am Anfang der Liste, 100 % am Ende.
   useEffect(() => {
@@ -317,7 +322,7 @@ export default function Challenge() {
             </h1>
             <p className="mt-5 font-cormorant text-2xl italic leading-snug text-[#F7E7CE] sm:text-3xl">Zeig dich. Sei dabei. Lerne deine Wirkungskraft kennen.</p>
             <p className="mt-5 max-w-xl font-inter text-lg leading-relaxed text-white">
-              <b className="font-montserrat font-extrabold">So starten wir:</b> Jeden Tag eine kleine Anleitung für dich – und eine Chance auf Feedback. Du hast 24 Stunden, um dein Video einzureichen und ein kostenfreies persönliches Feedback zu erhalten.
+              <b className="font-montserrat font-extrabold">So starten wir:</b> Jeden Tag eine kleine Anleitung für dich – und eine Chance auf Feedback. Du hast 24 Stunden, um dein Video einzureichen und ein kostenfreies persönliches Feedback zu erhalten. Alle sieben Tage begleite ich dich persönlich in der WhatsApp-Gruppe – mit Tipps, mit Austausch, mit einem Miteinander.
             </p>
             <p className="mt-4 font-montserrat text-base font-bold text-[#EBD197]">
               Start immer montags – nächster Start: Montag, {montag}.
@@ -382,7 +387,19 @@ export default function Challenge() {
               const letzter = i === TAGE.length - 1;
               return (
                 <li key={t.titel} style={{ ['--i' as string]: i }} className="cc-stufe">
-                  <details className={`group bg-white text-midnight-blue ${KACHEL}`} open={i === 0}>
+                  {!frei[i] ? (
+                    <div className={`grid gap-x-6 gap-y-2 bg-white/70 px-5 py-5 text-midnight-blue sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:items-center sm:px-7 sm:py-6 ${KACHEL} border-[#D4AF37]/35`}>
+                      <span className="self-start rounded-md bg-midnight-blue/70 px-2.5 py-2 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-pearl-white">
+                        Tag {i + 1}
+                      </span>
+                      <span className="min-w-0">
+                        <span className="block font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">{t.titel}</span>
+                        <span className="mt-1 block font-inter text-[15px] leading-relaxed">{t.vorschau}</span>
+                      </span>
+                      <span className="font-montserrat text-sm font-bold text-midnight-blue/70">Öffnet {KURZ.format(freischaltung(heute, i))}</span>
+                    </div>
+                  ) : (
+                  <details className={`group bg-white text-midnight-blue ${KACHEL}`} open={i === offenerTag}>
                     <summary className="grid cursor-pointer list-none gap-x-6 gap-y-2 px-5 py-5 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:items-center sm:px-7 sm:py-6 [&::-webkit-details-marker]:hidden">
                       <span className={`self-start rounded-md px-2.5 py-2 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] ${letzter ? `${GOLD} text-midnight-blue` : 'bg-midnight-blue text-pearl-white'}`}>
                         Tag {i + 1}
@@ -397,20 +414,20 @@ export default function Challenge() {
                         <span aria-hidden="true" className="inline-block transition-transform group-open:rotate-180">▾</span>
                       </span>
                     </summary>
-                    <div className="border-t border-[#D4AF37]/40 px-5 pb-6 pt-4 sm:px-7 sm:pb-7">
-                      <p className="font-inter text-[15px] leading-relaxed sm:text-base">
+                    <div className="border-t border-[#D4AF37]/40 px-5 pb-5 pt-4 sm:px-7 sm:pb-6">
+                      <p className="font-inter text-[15px] leading-relaxed">
                         <b className="font-montserrat font-extrabold">Deine Aufgabe: </b>
                         {t.aufgabe}
                       </p>
                       {t.satz && (
-                        <blockquote className="mt-4 border-l-4 border-[#D4AF37] bg-pearl-white px-5 py-4 font-cormorant text-2xl italic leading-snug text-midnight-blue sm:text-[1.7rem]">
+                        <blockquote className="mt-3 border-l-4 border-[#D4AF37] bg-pearl-white px-5 py-3 font-cormorant text-xl italic leading-snug text-midnight-blue sm:text-2xl">
                           „{t.satz}"
                         </blockquote>
                       )}
-                      <p className="mt-4 font-montserrat text-sm font-extrabold uppercase tracking-[0.12em]">{t.schrittTitel}</p>
-                      <ul className="mt-2 grid list-none gap-2 p-0">
+                      <p className="mt-3 font-montserrat text-[11px] font-extrabold uppercase tracking-[0.14em] text-midnight-blue/80">{t.schrittTitel}</p>
+                      <ul className="mt-1.5 grid list-none gap-1.5 p-0">
                         {t.schritte.map((s) => (
-                          <li key={s} className="flex items-start gap-3 font-inter text-[15px] leading-relaxed">
+                          <li key={s} className="flex items-start gap-3 font-inter text-[15px] leading-normal">
                             <Haken />
                             <span>{s}</span>
                           </li>
@@ -419,13 +436,14 @@ export default function Challenge() {
                       {t.danach && <p className="mt-4 font-montserrat text-base font-bold">{t.danach}</p>}
                     </div>
                   </details>
+                  )}
                   {i === 0 && <ChallengeAnmeldung montag={montag} />}
                 </li>
               );
             })}
           </ol>
           </div>
-          <WhatsAppBlock />
+          <EintragBlock />
         </div>
       </Abschnitt>
 
@@ -458,26 +476,38 @@ export default function Challenge() {
       </Abschnitt>
 
 
-      {/* Nach Tag 7 - kurz */}
-      <Abschnitt id="danach" className="py-14 text-pearl-white sm:py-20" style={{ background: 'linear-gradient(180deg, #0A1628 0%, #0F1F3A 55%, #0A1628 100%)' }} label="danach-titel">
-        <div className="mx-auto max-w-6xl px-6">
-          <Kicker text="Nach Tag 7" />
-          <h2 id="danach-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">
-            Sieben Tage sind ein Anfang. Wer weiter will, hat zwei Türen.
-          </h2>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2">
-            <Link to="/1-zu-1-mentoring" className={`block bg-[#13233F] p-6 no-underline ${KACHEL}`}>
-              <p className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#EBD197]">Performance-Coaching</p>
-              <p className="mt-2 font-montserrat text-xl font-extrabold text-white">Deine Wirkung, mit mir, eins zu eins.</p>
-              <p className="mt-2 font-inter text-[15px] leading-relaxed text-pearl-white/85">Wir nehmen deinen Satz, deine Geschichte, deine Stimme – und machen daraus deinen Auftritt. Erstgespräch kostenlos.</p>
-              <p className="mt-4 font-montserrat text-sm font-bold text-[#F7E7CE]">Mehr dazu →</p>
-            </Link>
-            <a href="https://community.claudiaconen.com/" target="_blank" rel="noopener noreferrer" className={`block bg-[#13233F] p-6 no-underline ${KACHEL}`}>
-              <p className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#EBD197]">Netzwerk Mittelstand – deine Community</p>
-              <p className="mt-2 font-montserrat text-xl font-extrabold text-white">Die Unverwechselbaren.</p>
-              <p className="mt-2 font-inter text-[15px] leading-relaxed text-pearl-white/85">Menschen, die ihre Wirkung ernst nehmen – und sich gegenseitig eine Bühne geben. Dort wird aus sieben Tagen eine Gewohnheit.</p>
-              <p className="mt-4 font-montserrat text-sm font-bold text-[#F7E7CE]">Zur Community →</p>
-            </a>
+      {/* Nach Tag 7 - zwei Schritte zum Weitergehen als Glas ueber bewegtem Gold (Claudia, 22.09.2026 10:47 UTC:
+          "dieses dunkelblau auf blau sieht man sehr schlecht", die Glas-Kacheln gefallen ihr). Texte nach ihrem Diktat,
+          geglaettet ("das hoert sich so plump an, verbessere das mal"). */}
+      <Abschnitt id="danach" className="cc-goldbuehne py-14 sm:py-20" label="danach-titel">
+        <div className="relative z-10 mx-auto max-w-6xl px-6">
+          <div className="cc-glas rounded-[14px] p-7 text-pearl-white sm:p-10">
+            <Kicker text="Nach Tag 7" />
+            <h2 id="danach-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-white sm:text-4xl">
+              Zwei Schritte zum Weitergehen.
+            </h2>
+            <div className="mt-8 grid gap-4 md:grid-cols-2">
+              <div className="flex flex-col rounded-[10px] border border-[#F7E7CE]/40 bg-white/[0.06] p-6">
+                <p className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#EBD197]">Performance-Coaching · 1:1</p>
+                <p className="mt-2 font-montserrat text-xl font-extrabold leading-tight text-white">Du willst deine Wirkungskraft steigern – und mit mir darüber sprechen.</p>
+                <p className="mt-3 font-inter text-[15px] leading-relaxed text-white/90">
+                  30 Minuten Entdeckungsreise: Wo stehst du, was willst du erreichen, und wie könnten wir miteinander arbeiten. Kostenlos, ohne Verpflichtung – ein Gespräch, kein Verkaufstermin.
+                </p>
+                <Link to="/buchen/erstgespraech" className={`mt-5 inline-flex w-fit items-center rounded-full px-6 py-3.5 font-montserrat text-sm font-bold text-midnight-blue transition-transform hover:-translate-y-px ${GOLD}`}>
+                  30 Minuten mit mir
+                </Link>
+              </div>
+              <div className="flex flex-col rounded-[10px] border border-[#F7E7CE]/40 bg-white/[0.06] p-6">
+                <p className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#EBD197]">Netzwerk Mittelstand – deine Community</p>
+                <p className="mt-2 font-montserrat text-xl font-extrabold leading-tight text-white">Die Unverwechselbaren: vernetzen, empfehlen, Kunden gewinnen.</p>
+                <p className="mt-3 font-inter text-[15px] leading-relaxed text-white/90">
+                  Deine Kompetenz, deine Ausstrahlung, dein Business – hier triffst du Menschen, die sich gegenseitig empfehlen. Kunden über Empfehlung statt über Werbung. Deine Chance, von Anfang an dabei zu sein.
+                </p>
+                <a href="https://community.claudiaconen.com/" target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex w-fit items-center rounded-full border-2 border-[#F7E7CE] px-6 py-3.5 font-montserrat text-sm font-bold text-white transition-colors hover:bg-white/10">
+                  Zur Community
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </Abschnitt>

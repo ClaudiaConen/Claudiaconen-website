@@ -14,7 +14,8 @@ import { supabase } from '../lib/supabase';
  * Eine E-Mail an Claudia je Anmeldung gibt es hier NICHT - dafuer braeuchte es eine Edge-Function
  * wie send-ki-workshop-booking-notification (Resend), die jemand mit Supabase-Zugang deployt.
  *
- * Nach dem Absenden erscheint der Weg in die Gruppe (Knopf + QR), weil beides zusammengehoert.
+ * Nach dem Absenden erscheint der Weg in die Gruppe (Knopf + QR). Einen Weg in die Gruppe OHNE Eintrag gibt es
+ * auf der Seite nicht mehr (Claudia, 22.09.2026 10:45 UTC: 'Nur in die Gruppe ohne eintragen geht nicht').
  */
 const CHALLENGE_LINK = 'https://chat.whatsapp.com/IWSuqZ9ZrMn3dYNgVY1sp6?s=qt&p=i&mlu=4&ilr=4';
 const GOLD = 'bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]';
@@ -100,9 +101,6 @@ export default function ChallengeAnmeldung({ montag }: { montag: string }) {
         <button type="submit" disabled={zustand === 'sendet'} className={`inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue transition-transform hover:-translate-y-px disabled:opacity-70 ${GOLD}`}>
           {zustand === 'sendet' ? 'Wird eingetragen …' : 'Eintragen und in die Gruppe'}
         </button>
-        <a href={CHALLENGE_LINK} target="_blank" rel="noopener noreferrer" className="font-montserrat text-sm font-semibold text-[#EBD197] underline decoration-[#D4AF37]/50 underline-offset-4 hover:decoration-[#F7E7CE]">
-          Nur in die Gruppe, ohne Eintrag →
-        </a>
       </div>
       {zustand === 'fehler' && (
         <p role="alert" className="mt-4 font-inter text-sm text-[#F7E7CE]">

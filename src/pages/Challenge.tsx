@@ -8,6 +8,7 @@ import WorkbookBlaettern from '../components/WorkbookBlaettern';
 import Stimmwelle from '../components/Stimmwelle';
 import ChallengeAnmeldung from '../components/ChallengeAnmeldung';
 import FotoReihen from '../components/FotoReihen';
+import { Ban, Smile, Zap, Clock, MessageSquareOff, EyeOff, Heart, Database, SlidersHorizontal, Bot } from 'lucide-react';
 
 /**
  * Die Challenge-Seite - EINE Seite aus zwei (Claudia, 22.09.2026 11:00 UTC: "jetzt hast du von beiden
@@ -43,17 +44,19 @@ const KREUZE = [
   'Ich habe meine eigene Stimme in den letzten vier Wochen bewusst angehört.',
 ];
 
-const KI_GRUENDE: { titel: string; text: string }[] = [
-  { titel: 'Keine Bewertung.', text: 'Der Avatar urteilt nicht. Nie.' },
-  { titel: 'Keine Peinlichkeit.', text: 'Du kannst „dumme Fragen" stellen – ohne Scham.' },
-  { titel: 'Sofortige Reaktion.', text: 'Der Avatar antwortet schnell, ohne zu zögern.' },
-  { titel: 'Immer verfügbar.', text: '24/7 erreichbar. Kein Termin nötig.' },
-  { titel: 'Kein Smalltalk. Kein Drama.', text: 'Der Avatar bleibt bei der Sache.' },
-  { titel: 'Keine Körpersprache. Keine Unsicherheit.', text: 'Kein Flackern der Augen, keine nervöse Haltung.' },
-  { titel: 'Optimierte Freundlichkeit.', text: 'Avatare sind höflich, geduldig, nie genervt.' },
-  { titel: 'Datenspeicher statt Emotionen.', text: 'Der Avatar „weiß", was du vorher gesagt hast. Er vergisst nicht. Und er verzeiht sofort.' },
-  { titel: 'Individuelle Anpassung.', text: 'Der Avatar klingt so, wie du es möchtest: ruhig, motivierend, sachlich, warm.' },
-  { titel: 'Keine Geschichte. Kein Ego.', text: 'Der Avatar bringt kein Gepäck mit. Kein Stolz, keine Verletzlichkeit – nur Funktion.' },
+/** Wie auf dem Flyer: Piktogramm, Titel, eine Zeile (Claudia, 22.09.2026 11:24 UTC: "nicht diese runden
+ *  Bubble-Dinger ... eher so wie auf dem Flyer, auch mit den Icons"). */
+const KI_GRUENDE: { titel: string; text: string; Icon: typeof Ban }[] = [
+  { titel: 'Keine Bewertung.', text: 'Der Avatar urteilt nicht. Nie.', Icon: Ban },
+  { titel: 'Keine Peinlichkeit.', text: 'Du kannst „dumme Fragen" stellen – ohne Scham.', Icon: Smile },
+  { titel: 'Sofortige Reaktion.', text: 'Der Avatar antwortet schnell, ohne zu zögern.', Icon: Zap },
+  { titel: 'Immer verfügbar.', text: '24/7 erreichbar. Kein Termin nötig.', Icon: Clock },
+  { titel: 'Kein Smalltalk. Kein Drama.', text: 'Der Avatar bleibt bei der Sache.', Icon: MessageSquareOff },
+  { titel: 'Keine Körpersprache. Keine Unsicherheit.', text: 'Kein Flackern der Augen, keine nervöse Haltung.', Icon: EyeOff },
+  { titel: 'Optimierte Freundlichkeit.', text: 'Avatare sind höflich, geduldig, nie genervt.', Icon: Heart },
+  { titel: 'Datenspeicher statt Emotionen.', text: 'Der Avatar vergisst nicht. Und er verzeiht sofort.', Icon: Database },
+  { titel: 'Individuelle Anpassung.', text: 'Er klingt so, wie du es möchtest: ruhig, motivierend, sachlich, warm.', Icon: SlidersHorizontal },
+  { titel: 'Keine Geschichte. Kein Ego.', text: 'Kein Gepäck. Kein Stolz, keine Verletzlichkeit – nur Funktion.', Icon: Bot },
 ];
 
 
@@ -116,7 +119,7 @@ const WERKZEUG: { titel: string; text: string }[] = [
  *  Naechster Durchgang: START und ENDE hier aendern - sonst nichts. */
 const START = new Date(2026, 9, 26); // Montag, 26.10.2026, lokale Zeit
 const ENDE = new Date(2026, 10, 2); // Montag, 02.11.2026 (letzter Tag)
-const VORBEREITUNG_TAG1 = true; // Tag 1 vor dem Start lesbar (Aufwaermen ueben)
+const VORBEREITUNG_TAG1 = false; // Streifen bleiben vor dem Start zu - die Aufwachuebung steht als 'Tipp am Morgen' davor (22.09.2026 11:24 UTC)
 
 /** Freischaltdatum je Tag (0-basiert). */
 function freischaltung(heute: Date, tag: number): Date {
@@ -243,7 +246,9 @@ const TAGE: Tag[] = [
   },
 ];
 
-/** "Zuallererst" - Claudias Wegweiser-Tipp (22.09.2026): eine WhatsApp-Gruppe nur mit sich selbst. */
+/** Der Tipp am Morgen ist Tag 1 in Claudias Wortlaut - steht vorweg, damit die Streifen Geheimnis bleiben. */
+const MORGEN = TAGE[0];
+
 /** Tipp 1, vor Tag 1 - Claudias Diktat vom 22.09.2026, 11:17 UTC ("Der Tipp soll Gold leuchten", aufklappbar,
  *  "das kannst du auch jetzt schon tun"). Anleitung fuer WhatsApp in vier Schritten; ihre Nummer aus dem Flyer. */
 const WEGWEISER = {
@@ -591,6 +596,34 @@ export default function Challenge() {
             </div>
           </details>
 
+          {/* Kleiner Tipp am Morgen - Claudias Aufwachuebung (ihr Wortlaut vom 22.09.2026 09:19 UTC), vor den sieben
+              Tagen zum Aufklappen; die Tage selbst bleiben Geheimnis (11:24 UTC). */}
+          <details className={`group mt-3 text-midnight-blue ${GOLD} ${KACHEL} border-transparent shadow-[0_18px_40px_-18px_rgba(212,175,55,0.7)]`}>
+            <summary className="grid cursor-pointer list-none gap-x-6 gap-y-2 px-5 py-5 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:items-center sm:px-7 sm:py-6 [&::-webkit-details-marker]:hidden">
+              <span className="self-start rounded-md bg-midnight-blue px-2.5 py-2 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-[#EBD197]">Tipp 2 · am Morgen</span>
+              <span className="min-w-0">
+                <span className="block font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">Lerne deine Stimmwirkung kennen</span>
+                <span className="mt-1 block font-inter text-[15px] leading-relaxed">Ein kleiner Tipp am Morgen, vorweg: ein Satz, fünf Minuten – und du hörst, was sich verändert.</span>
+              </span>
+              <span className="flex items-center gap-2 font-montserrat text-sm font-bold underline decoration-midnight-blue/40 underline-offset-4">
+                <span className="group-open:hidden">Aufklappen</span>
+                <span className="hidden group-open:inline">Zuklappen</span>
+                <span aria-hidden="true" className="inline-block transition-transform group-open:rotate-180">▾</span>
+              </span>
+            </summary>
+            <div className="border-t border-midnight-blue/20 px-5 pb-5 pt-4 sm:px-7 sm:pb-6">
+              <p className="font-inter text-[15px] leading-relaxed">{MORGEN.aufgabe}</p>
+              <blockquote className="mt-3 border-l-4 border-midnight-blue bg-white/60 px-5 py-3 font-cormorant text-xl italic leading-snug sm:text-2xl">„{MORGEN.satz}"</blockquote>
+              <p className="mt-3 font-montserrat text-[11px] font-extrabold uppercase tracking-[0.14em]">{MORGEN.schrittTitel}</p>
+              <ul className="mt-1.5 grid list-none gap-1.5 p-0">
+                {MORGEN.schritte.map((s) => (
+                  <li key={s} className="flex items-start gap-3 font-inter text-[15px] leading-normal"><Haken />{s}</li>
+                ))}
+              </ul>
+              <p className="mt-3 font-montserrat text-base font-bold">{MORGEN.danach}</p>
+            </div>
+          </details>
+
           <div className="mt-3 grid gap-5 md:grid-cols-[34px_minmax(0,1fr)]">
           <Schiene />
           <ol ref={listeRef} className="grid list-none gap-3 p-0">
@@ -609,8 +642,7 @@ export default function Challenge() {
                     <summary className="flex cursor-pointer list-none items-center gap-4 px-4 py-3 sm:px-6 [&::-webkit-details-marker]:hidden">
                       <span className={`cc-puls rounded-md px-2.5 py-1.5 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] ${letzter ? `${GOLD} text-midnight-blue` : 'bg-midnight-blue text-pearl-white'}`}>Tag {i + 1}</span>
                       <span className="min-w-0 flex-1 font-montserrat text-sm font-bold text-midnight-blue/80">
-                        {KURZ.format(freischaltung(heute, i).getTime() > 0 ? freischaltung(heute, i) : START)}
-                        <span className="hidden group-open:inline"> · {t.titel}</span>
+                        {KURZ.format(freischaltung(heute, i))}
                       </span>
                       <span className="hidden font-montserrat text-xs font-bold text-midnight-blue/70 sm:inline"><span className="group-open:hidden">Aufklappen</span><span className="hidden group-open:inline">Zuklappen</span></span>
                       <Schluessel />
@@ -697,15 +729,19 @@ export default function Challenge() {
           <div className="mt-9 grid gap-4 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
             <div className={`bg-[#13233F] p-6 sm:p-8 ${KACHEL}`}>
               <h3 className="font-montserrat text-xs font-extrabold uppercase tracking-[0.2em] text-[#EBD197]">Warum die KI so bequem ist</h3>
-              <ul className="mt-5 flex list-none flex-wrap gap-2 p-0">
+              <ul className="mt-5 grid list-none gap-3 p-0 sm:grid-cols-2">
                 {KI_GRUENDE.map((g, i) => (
-                  <li key={g.titel} style={{ ['--i' as string]: i }} className="cc-stufe rounded-full border border-[#D4AF37]/40 bg-white/[0.06] px-3.5 py-2 font-montserrat text-[13px] font-bold text-white">
-                    {g.titel}
+                  <li key={g.titel} style={{ ['--i' as string]: i }} className="cc-stufe flex items-start gap-3">
+                    <span className="grid h-9 w-9 flex-none place-items-center rounded-md border border-[#D4AF37]/50 bg-[#0A1628] text-[#EBD197]"><g.Icon size={18} strokeWidth={2} aria-hidden="true" /></span>
+                    <span className="min-w-0">
+                      <b className="block font-montserrat text-[14px] font-extrabold leading-tight text-white">{g.titel}</b>
+                      <span className="font-inter text-[13.5px] leading-snug text-pearl-white/80">{g.text}</span>
+                    </span>
                   </li>
                 ))}
               </ul>
               <p className="mt-6 font-inter text-[15px] leading-relaxed text-pearl-white/85">
-                Bequem, schnell, nie genervt. Und trotzdem: Keine Geschichte, kein Ego, keine Verletzlichkeit – genau deshalb erinnert sich niemand an einen Avatar.
+                Und trotzdem: Keine Geschichte, kein Ego, keine Verletzlichkeit – genau deshalb erinnert sich niemand an einen Avatar.
               </p>
             </div>
             <div className={`bg-pearl-white p-6 text-midnight-blue sm:p-8 ${KACHEL} border-[#D4AF37]`}>

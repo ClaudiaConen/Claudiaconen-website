@@ -445,6 +445,7 @@ html, body { cursor: auto; }
 
 .cc-cursor-dot,
 .cc-cursor-pulse {
+  display: none; /* seit 22.09.2026 abgeschaltet - der Pfeil ist jetzt selbst golden */
   position: fixed;
   left: 0;
   top: 0;
@@ -484,9 +485,11 @@ html, body { cursor: auto; }
   100% { transform: translate3d(var(--x), var(--y), 0) scale(4);   opacity: 0; }
 }
 
+/* Claudia, 22.09.2026: der goldene Punkt neben dem Pfeil war "schwerer zu bedienen" -
+   jetzt ist der Pfeil selbst golden (public/cursor-gold.png, 24 px, Spitze bei 2/2). */
 @media (min-width: 769px) {
   body.cc-custom-cursor {
-    cursor: auto;
+    cursor: url('/cursor-gold.png') 2 2, auto;
   }
 
   body.cc-custom-cursor a,

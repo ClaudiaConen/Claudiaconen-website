@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from './Navigation';
 import Footer from './Footer';
@@ -161,10 +162,10 @@ function Autorenzeile({ hell }: { hell: boolean }) {
     <section className={`${hell ? 'bg-warm' : 'bg-pearl-white'} py-12 sm:py-14`} aria-label="Wer diese Seite verantwortet">
       <div className="mx-auto flex max-w-4xl flex-col items-start gap-6 px-6 sm:flex-row sm:items-center">
         <img
-          src="/seiten/kamera.webp"
+          src="/seiten/claudia-kopf.webp"
           alt="Claudia Conen"
           width={360}
-          height={640}
+          height={360}
           loading="lazy"
           decoding="async"
           className="h-28 w-28 flex-none rounded-full border border-[#D4AF37]/60 object-cover object-top shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)]"
@@ -227,6 +228,24 @@ const STIMMUNG = {
 
 export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt }) {
   const s = STIMMUNG[inhalt.stimmung ?? 'dunkel'];
+  // Einblenden beim Scrollen (Claudia, 22.09.2026: die Angebotsseiten wirkten "zu starr"). Ein Beobachter
+  // fuer alle Abschnitte; versteckt wird nur mit JavaScript (html.js), Bewegung-reduzieren schaltet ab.
+  const seite = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = seite.current;
+    if (!el) return;
+    const teile = el.querySelectorAll<HTMLElement>('.cc-r');
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      teile.forEach((t) => t.classList.add('da'));
+      return;
+    }
+    const io = new IntersectionObserver(
+      (es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('da'); io.unobserve(e.target); } }),
+      { rootMargin: '0px 0px -8% 0px' }
+    );
+    teile.forEach((t) => io.observe(t));
+    return () => io.disconnect();
+  }, [inhalt.pfad]);
   const fragen: Frage[] = [...inhalt.fragen, ...(inhalt.fragenZusatz ?? []).flatMap((k) => ZUSATZFRAGEN[k])];
   const strukturierteDaten = {
     '@context': 'https://schema.org',
@@ -268,7 +287,7 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
   };
 
   return (
-    <div className="min-h-screen bg-pearl-white">
+    <div ref={seite} className="min-h-screen bg-pearl-white">
       <SEO title={inhalt.seoTitel} description={inhalt.seoText} path={inhalt.pfad} />
       <script
         type="application/ld+json"
@@ -320,12 +339,24 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
           {/* Auf einen Blick - nur, was feststeht (Recherche 22.09.2026: die vorne liegenden Seiten
               nennen Ort, Format, Gruppe oben). Dauer und Termine folgen, sobald Claudia sie nennt. */}
           {inhalt.formate && inhalt.formate.length > 0 && (
-            <dl className={`mt-7 grid max-w-2xl gap-x-8 gap-y-2 font-inter text-sm sm:grid-cols-2 ${s.kopfText}`}>
-              <div className="flex gap-2"><dt className="font-montserrat font-bold">Orte:</dt><dd>{[...new Set(inhalt.formate.map((f) => (f.titel.includes('Köln') ? 'Köln' : 'Witten')))].join(' und ')}</dd></div>
-              <div className="flex gap-2"><dt className="font-montserrat font-bold">Format:</dt><dd>1:1 oder Gruppe – höchstens sechs Menschen</dd></div>
-              <div className="flex gap-2"><dt className="font-montserrat font-bold">Trainerin:</dt><dd>Claudia Conen persönlich</dd></div>
-              <div className="flex gap-2"><dt className="font-montserrat font-bold">Einstieg:</dt><dd>Erstgespräch, 30 Minuten, kostenlos</dd></div>
-            </dl>
+            <ul className="mt-7 flex max-w-2xl flex-wrap gap-2 p-0" aria-label="Auf einen Blick">
+              {[
+                [...new Set(inhalt.formate.map((f) => (f.titel.includes('Köln') ? 'Köln' : 'Witten')))].join(' · '),
+                ...(inhalt.formate.some((f) => f.titel.includes('1:1')) ? ['Einzeln 1:1'] : []),
+                ...(inhalt.formate.some((f) => f.titel.includes('6:1')) ? ['Gruppe bis sechs'] : []),
+                'Claudia Conen persönlich',
+                'Erstgespräch 30 Minuten, kostenlos',
+              ].map((p) => (
+                <li
+                  key={p}
+                  className={`list-none rounded-full border px-3.5 py-1.5 font-montserrat text-[12px] font-bold tracking-wide ${
+                    (inhalt.stimmung ?? 'dunkel') === 'dunkel' ? 'border-[#D4AF37]/60 bg-white/5 text-[#EBD197]' : 'border-[#D4AF37] bg-white text-midnight-blue'
+                  }`}
+                >
+                  {p}
+                </li>
+              ))}
+            </ul>
           )}
           {inhalt.telefonImKopf && (
             <p className={`mt-7 font-inter text-base ${s.kopfText}`}>
@@ -339,7 +370,7 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
           </div>
           {inhalt.bild && (
             <figure
-              className={`m-0 justify-self-start overflow-hidden rounded-[10px] border border-[#D4AF37]/55 bg-[#13233F] shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)] md:justify-self-end ${
+              className={`cc-schweben m-0 justify-self-start overflow-hidden rounded-[10px] border border-[#D4AF37]/55 bg-[#13233F] shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)] md:justify-self-end ${
                 inhalt.bildQuer ? 'aspect-[3/2] w-full max-w-[420px]' : 'aspect-[9/16] w-[clamp(180px,26vw,260px)]'
               }`}
             >
@@ -349,7 +380,7 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
                 width={inhalt.bildQuer ? 900 : 360}
                 height={inhalt.bildQuer ? 600 : 640}
                 decoding="async"
-                className="h-full w-full object-cover"
+                className="h-full w-full object-cover object-top"
               />
             </figure>
           )}
@@ -358,7 +389,7 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
 
       <main>
         {/* 2. Das Problem */}
-        <section className="bg-pearl-white py-16 sm:py-24" aria-labelledby="problem">
+        <section className="cc-r bg-pearl-white py-16 sm:py-24" aria-labelledby="problem">
           <div className="mx-auto max-w-3xl px-6">
             <h2
               id="problem"
@@ -377,7 +408,7 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
         </section>
 
         {/* 3. Ein Angebot */}
-        <section className="bg-warm py-16 sm:py-24" aria-labelledby="angebot">
+        <section className="cc-r bg-warm py-16 sm:py-24" aria-labelledby="angebot">
           <div className="mx-auto max-w-3xl px-6">
             <h2
               id="angebot"
@@ -414,7 +445,7 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
 
         {/* 3a0. Formate und Orte */}
         {inhalt.formate && inhalt.formate.length > 0 && (
-          <section className="bg-white py-16 sm:py-24" aria-labelledby="formate">
+          <section className="cc-r bg-white py-16 sm:py-24" aria-labelledby="formate">
             <div className="mx-auto max-w-4xl px-6">
               <h2 id="formate" className="font-montserrat text-2xl font-bold text-midnight-blue sm:text-3xl">
                 {inhalt.formateTitel ?? 'Formate und Orte'}
@@ -423,8 +454,8 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
                 Du wählst, wie und wo. Den Preis nenne ich dir vorher, schriftlich – er hängt am Format.
               </p>
               <div className="mt-10 grid gap-5 sm:grid-cols-2">
-                {inhalt.formate.map((f) => (
-                  <div key={f.titel} className="rounded-[10px] border border-[#D4AF37]/55 bg-pearl-white px-6 py-5 transition-[border-color,box-shadow] hover:border-[#EBD197] hover:shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)]">
+                {inhalt.formate.map((f, i) => (
+                  <div key={f.titel} style={{ ['--i' as string]: i }} className="cc-stufe rounded-[10px] border border-[#D4AF37]/55 bg-pearl-white px-6 py-5 transition-[border-color,box-shadow] hover:border-[#EBD197] hover:shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)]">
                     <h3 className="font-montserrat text-base font-extrabold uppercase tracking-wide text-midnight-blue">{f.titel}</h3>
                     <p className="mt-2 font-inter text-sm leading-relaxed text-midnight-blue/80">{f.text}</p>
                   </div>
@@ -437,7 +468,7 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
         {/* 3a. Eine Kundenstimme zu genau dieser Leistung. Deckende Flaeche, harte Kante, Goldrand -
             Claudias Kacheln (DESIGN_PRAEFERENZEN.md), kein Glas. */}
         {inhalt.kundenstimme && (
-          <section className="bg-pearl-white py-16 sm:py-24" aria-labelledby="kundenstimme">
+          <section className="cc-r bg-pearl-white py-16 sm:py-24" aria-labelledby="kundenstimme">
             <div className="mx-auto max-w-4xl px-6">
               <p className="flex items-center gap-3 font-montserrat text-xs font-semibold uppercase tracking-[0.22em] text-midnight-blue">
                 <span aria-hidden="true" className="h-[3px] w-7 rounded-full bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]" />
@@ -490,7 +521,7 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
 
         {/* 3b. Wofuer gebucht wird */}
         {inhalt.anlaesse && inhalt.anlaesse.length > 0 && (
-          <section className="bg-pearl-white py-16 sm:py-24" aria-labelledby="anlaesse">
+          <section className="cc-r bg-pearl-white py-16 sm:py-24" aria-labelledby="anlaesse">
             <div className="mx-auto max-w-4xl px-6">
               <h2
                 id="anlaesse"
@@ -504,10 +535,11 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
                 </p>
               )}
               <div className="mt-10 grid gap-5 sm:grid-cols-2">
-                {inhalt.anlaesse.map((a) => (
+                {inhalt.anlaesse.map((a, i) => (
                   <div
                     key={a.titel}
-                    className="border-l-4 border-luxury-gold bg-warm px-6 py-5"
+                    style={{ ['--i' as string]: i }}
+                    className="cc-stufe border-l-4 border-luxury-gold bg-warm px-6 py-5"
                   >
                     <h3 className="font-montserrat text-base font-semibold text-midnight-blue">
                       {a.titel}
@@ -571,7 +603,7 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
         {/* Seit 22.09.2026 hat jede Seite ein echtes Kopfbild; die leeren Bildplaetze zeigen wir dann
             nicht mehr - "leere dunkle Kaesten" waren Claudias Kritik. Die Motivwuensche bleiben im Code. */}
         {!inhalt.bild && inhalt.bilder && inhalt.bilder.length > 0 && (
-          <section className="bg-warm py-16 sm:py-20" aria-label="Bildplätze">
+          <section className="cc-r bg-warm py-16 sm:py-20" aria-label="Bildplätze">
             <div className="mx-auto max-w-4xl px-6">
               <div className="grid gap-5 sm:grid-cols-3">
                 {inhalt.bilder.map((b) => (
@@ -610,7 +642,7 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
         )}
 
         {/* 4. Der Ablauf */}
-        <section className="bg-pearl-white py-16 sm:py-24" aria-labelledby="ablauf">
+        <section className="cc-r bg-pearl-white py-16 sm:py-24" aria-labelledby="ablauf">
           <div className="mx-auto max-w-3xl px-6">
             <h2
               id="ablauf"
@@ -620,7 +652,7 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
             </h2>
             <ol className="mt-8 flex flex-col gap-7">
               {inhalt.ablauf.map((s, i) => (
-                <li key={s.schritt} className="flex gap-5">
+                <li key={s.schritt} style={{ ['--i' as string]: i }} className="cc-stufe flex gap-5">
                   <span
                     aria-hidden="true"
                     className="font-montserrat text-2xl font-bold tabular-nums text-luxury-gold"
@@ -643,7 +675,7 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
 
         {/* 4b. Fuer wen das nicht ist */}
         {inhalt.nichtFuer && inhalt.nichtFuer.length > 0 && (
-          <section className="bg-warm py-16 sm:py-20" aria-labelledby="nichtfuer">
+          <section className="cc-r bg-warm py-16 sm:py-20" aria-labelledby="nichtfuer">
             <div className="mx-auto max-w-3xl px-6">
               <h2
                 id="nichtfuer"
@@ -672,7 +704,7 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
         )}
 
         {/* 5. Häufige Fragen */}
-        <section className="bg-warm py-16 sm:py-24" aria-labelledby="fragen">
+        <section className="cc-r bg-warm py-16 sm:py-24" aria-labelledby="fragen">
           <div className="mx-auto max-w-3xl px-6">
             <h2
               id="fragen"
@@ -705,7 +737,7 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
 
         {/* 5b. Passt dazu */}
         {inhalt.weitere && inhalt.weitere.length > 0 && (
-          <section className="bg-pearl-white py-16 sm:py-20" aria-labelledby="weitere">
+          <section className="cc-r bg-pearl-white py-16 sm:py-20" aria-labelledby="weitere">
             <div className="mx-auto max-w-4xl px-6">
               <h2
                 id="weitere"

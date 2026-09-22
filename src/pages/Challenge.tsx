@@ -524,9 +524,12 @@ export default function Challenge() {
                   style={{ ['--i' as string]: i }}
                   className={`cc-stufe p-6 hover:-translate-y-0.5 ${KACHEL} ${letzter ? `${GOLD} border-transparent text-midnight-blue` : 'min-h-[190px] bg-pearl-white text-midnight-blue'}`}
                 >
-                  <span aria-hidden="true" className={`font-montserrat text-4xl font-black ${letzter ? 'text-midnight-blue/40' : 'text-[#D4AF37]'}`}>
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
+                  {/* 3-D-Icons nach den Flyer-Piktogrammen (Claudias Impuls 22.09.2026 11:48 UTC), erzeugt mit
+                      skripte/schritt_icons.py ueber ihren Gemini-Schluessel. */}
+                  <div className="flex items-center gap-4">
+                    <img src={`/icons/schritt-${i + 1}.webp`} alt="" width={256} height={256} loading="lazy" decoding="async" className="h-16 w-16 flex-none drop-shadow-[0_8px_12px_rgba(10,22,40,0.25)]" />
+                    <span aria-hidden="true" className={`font-montserrat text-3xl font-black ${letzter ? 'text-midnight-blue/40' : 'text-[#D4AF37]'}`}>{String(i + 1).padStart(2, '0')}</span>
+                  </div>
                   <h3 className="mt-3 font-montserrat text-base font-extrabold uppercase tracking-wide">{s.titel}</h3>
                   <p className="mt-2.5 font-inter text-[15px] leading-relaxed">{s.text}</p>
                 </li>
@@ -737,7 +740,8 @@ export default function Challenge() {
             </p>
           </details>
           <div className={`mt-4 rounded-[10px] px-5 py-5 text-midnight-blue sm:px-7 ${GOLD}`}>
-            <p className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.2em]">Die 7 A's der modernen Vermarktung · nach Karsten Brocke</p>
+            <p className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.2em]">Warum deine Einzigartigkeit Gold wert ist</p>
+            <p className="mt-2 font-inter text-[15px] leading-relaxed">Stell dir vor: „Alle sind gleich perfekt." – und da bist DU. Die 7 A's der modernen Vermarktung, nach Karsten Brocke:</p>
             <p className="mt-3 flex flex-wrap gap-x-2 gap-y-1 font-montserrat text-xl font-black uppercase leading-tight sm:text-2xl">
               {SIEBEN_A.map((a) => (<span key={a}>{a}</span>))}
             </p>

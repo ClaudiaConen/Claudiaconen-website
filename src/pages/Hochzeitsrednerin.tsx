@@ -129,6 +129,7 @@ const INHALT: ZielgruppenInhalt = {
   bildAlt: 'Claudia Conen im hellen Kleid auf einer Wiese, dahinter die Buchstaben LOVE und Seifenblasen',
   bildQuer: true,
 
+  telefonImKopf: true,
   seoTitel: 'Freie Trauung und Hochzeitsrednerin | Claudia Conen',
   seoText:
     'Eine freie Trauung, die nur zu euch passt: persönliches Gespräch, geschriebene Zeremonie zum Mitlesen und Ändern, Abstimmung mit Location und Technik.',

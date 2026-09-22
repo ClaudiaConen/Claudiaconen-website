@@ -255,7 +255,8 @@ const INHALT: ZielgruppenInhalt = {
     { titel: 'Live in Witten · 1:1', text: 'Du und ich, ein Tag oder mehrere Termine. Alles dreht sich um deine Stimme, deine Texte, deine Situationen.' },
   ],
 
-  seoTitel: 'Speaker und freie Redner werden: Workshop und Ausbildung | Claudia Conen',
+  fragenZusatz: ['ausbildung'],
+  seoTitel: 'Redner-Ausbildungen in Köln und Witten: Speaker und freie Redner werden | Claudia Conen',
   seoText:
     'Vom Fachgebiet zum Thema, von der Rede zum Auftritt: Workshop und Ausbildung für Speaker und freie Redner. Mit Stimmarbeit, Aufnahme und ehrlicher Rückmeldung.',
 };

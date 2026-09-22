@@ -103,7 +103,7 @@ const INHALT: ZielgruppenInhalt = {
   bildAlt: 'Claudia Conen lächelt mit dem Telefon in der Hand',
   bildQuer: true,
 
-  seoTitel: 'Voice-to-Brain Intensiv für Coaches und Trainer | Claudia Conen',
+  seoTitel: '1:1-Mentoring und Rhetorik-Coaching in Witten und Köln | Claudia Conen',
   seoText:
     'Einzelbegleitung über zwölf Wochen für Coaches und Trainer, die unverwechselbar werden wollen. Positionierung, Persönlichkeit, Vertrauen, Kundengewinnung.',
 };

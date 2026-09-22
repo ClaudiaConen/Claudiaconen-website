@@ -137,7 +137,7 @@ const INHALT: ZielgruppenInhalt = {
   bild: '/seiten/buch.webp',
   bildAlt: 'Claudia Conen mit aufgeschlagenem Buch',
 
-  seoTitel: 'Storytelling-Kurs | Claudia Conen',
+  seoTitel: 'Storytelling-Kurs in Köln und Witten | Claudia Conen',
   seoText:
     'Storytelling lernen mit eigenem Material: Geschichten finden, zuschneiden, sprechen. Drei erzählbare Geschichten für Vortrag, Kundengespräch und Webseite.',
 };

@@ -163,6 +163,7 @@ const INHALT: ZielgruppenInhalt = {
     { titel: 'Live in Witten · Gruppe 6:1', text: 'Sechs Menschen, eine Trainerin. Jeder steht mehrfach auf und redet; die anderen sind dein erstes Publikum.' },
   ],
 
+  fragenZusatz: ['ausbildung', 'redner'],
   seoTitel: 'Hochzeitsrednerin werden — Ausbildung bei Claudia Conen',
   seoText:
     'Ausbildung zur Hochzeitsrednerin und zum Trauredner: Paargespräch, Zeremonie, Stimme im Freien und der Ablauf am Hochzeitstag.',

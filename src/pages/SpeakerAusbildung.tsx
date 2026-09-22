@@ -95,7 +95,7 @@ const INHALT: ZielgruppenInhalt = {
 
   nichtFuer: [
     'Sie suchen einen Titel oder ein Zertifikat. Ich vergebe keins, und bei diesem Beruf gibt es auch keins, das jemand verlangen würde.',
-    'Sie wollen schnell viel verdienen. Die ersten Honorare liegen im Markt zwischen 500 und 2.000 Euro, und bis dahin dauert es.',
+    'Sie wollen schnell viel verdienen. Die ersten Honorare liegen laut den Spannen der Speaker-Agenturen bei 1.500 bis 2.900 Euro je Vortrag, und bis zum ersten dauert es.',
     'Sie möchten einen fertigen Vortrag kaufen. Ich schreibe Ihnen keinen — Sie schreiben ihn, ich arbeite daran mit.',
     'Ihr Thema soll unangetastet bleiben. Genau daran arbeiten wir zuerst, und das ist der unbequemste Teil.',
   ],
@@ -114,7 +114,7 @@ const INHALT: ZielgruppenInhalt = {
     {
       frage: 'Was verdient man mit einem Vortrag?',
       antwort:
-        'Im deutschen Markt bewegen sich Einsteiger und lokale Anlässe zwischen 500 und 2.000 Euro, etablierte Fachspeaker zwischen 3.000 und 8.000 Euro, bekannte Namen zwischen 8.000 und 20.000 Euro. Was Sie erreichen, hängt von Ihrem Thema und Ihrer Sichtbarkeit ab. Eine Zahl für Sie persönlich zu nennen, wäre ein Versprechen ohne Deckung.',
+        'Die Spannen, die Speaker-Agenturen veröffentlichen: Die Agentur 5 Sterne Redner nennt für Einsteiger 1.500 bis 2.900 Euro, für etablierte Speaker 5.000 bis 10.000 Euro; Speakers Excellence arbeitet mit Honorargruppen von unter 3.000 bis über 12.000 Euro je Vortrag; keynotespeakers.eu nennt 3.000 bis 6.000 Euro als üblichen Rahmen (alle Angaben Stand September 2026, ohne Reisekosten und Mehrwertsteuer). Was Sie erreichen, hängt von Ihrem Thema und Ihrer Sichtbarkeit ab. Eine Zahl für Sie persönlich zu nennen, wäre ein Versprechen ohne Deckung.',
     },
     {
       frage: 'Ich habe Angst vor großen Sälen.',
@@ -168,7 +168,21 @@ const INHALT: ZielgruppenInhalt = {
     { titel: 'Live in Witten · 1:1', text: 'Du und ich, ein Tag oder mehrere Termine. Alles dreht sich um deine Stimme, deine Texte, deine Situationen.' },
   ],
 
-  seoTitel: 'Speaker werden — Keynote-Speaker-Ausbildung bei Claudia Conen',
+  fragenZusatz: ['ausbildung'],
+  // Kundenstimme (22.09.2026): dieselben woertlichen Saetze wie auf der Startseite.
+  kundenstimme: {
+    titel: 'Eine Rede vor technischem Publikum',
+    name: 'Dr.-Ing. Ann-Kathrin Andresen',
+    rolle: 'Verfahrenstechnikerin, Mentorin und Beraterin · Ing.-up',
+    saetze: [
+      'Ich habe mit Claudia zusammen eine Rede erstellt und einstudiert, die ich vor einem technischen Publikum halte. Ich bin Ingenieurin.',
+      'Die Atmosphäre ist sehr herzlich, sehr direkt und sehr intensiv, aber wir lachen auch viel gemeinsam und es macht sehr viel Spaß.',
+      'Sie schmeißt einen auch gerne mal ins kalte Wasser.',
+    ],
+    video: { quelle: '/kundenstimmen/ann-kathrin-andresen.mp4', standbild: '/kundenstimmen/ann-kathrin-andresen-video.jpg', breite: 464, hoehe: 848 },
+    verweis: { text: 'Zur Webseite von Ann-Kathrin Andresen', ziel: 'https://ing-up.de/' },
+  },
+  seoTitel: 'Speaker-Ausbildung in Köln und Witten – Keynote-Speaker werden | Claudia Conen',
   seoText:
     'Ausbildung zur Speakerin und zum Speaker: vom Fachgebiet zum Thema, von der Keynote zum Auftritt. Mit Stimmarbeit und einer Videoaufnahme am Ende.',
 };

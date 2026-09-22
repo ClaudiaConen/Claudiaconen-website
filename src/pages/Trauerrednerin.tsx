@@ -133,6 +133,7 @@ const INHALT: ZielgruppenInhalt = {
   bildAlt: 'Ruhige Veranda mit zwei Stühlen, kein Mensch im Bild',
   bildQuer: true,
 
+  telefonImKopf: true,
   seoTitel: 'Trauerrednerin | Claudia Conen',
   seoText:
     'Eine persönliche Trauerrede, geschrieben nach einem Gespräch mit der Familie und gehalten bei der Trauerfeier. Frei oder mit Konfession, kurzfristig möglich.',

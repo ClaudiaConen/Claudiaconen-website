@@ -163,6 +163,7 @@ const INHALT: ZielgruppenInhalt = {
     { titel: 'Live in Witten · Gruppe 6:1', text: 'Sechs Menschen, eine Trainerin. Jeder steht mehrfach auf und redet; die anderen sind dein erstes Publikum.' },
   ],
 
+  fragenZusatz: ['ausbildung', 'redner'],
   seoTitel: 'Trauerrednerin werden — Ausbildung bei Claudia Conen',
   seoText:
     'Ausbildung zur Trauerrednerin: Angehörigengespräch, Rede, Stimme im Raum — und der Umgang mit dem, was die Arbeit mit einem selbst macht.',

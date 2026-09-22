@@ -114,6 +114,19 @@ const inhalt: ZielgruppenInhalt = {
   bild: '/seiten/kamera.webp',
   bildAlt: 'Claudia Conen im dunklen Blazer, bereit für die Kamera',
 
+  // Kundenstimme (22.09.2026): dieselben woertlichen Saetze wie auf der Startseite.
+  kundenstimme: {
+    titel: 'Die Scheu vor der Kamera abgelegt',
+    name: 'Verena Sommerfeld',
+    rolle: 'Bauingenieurin und Energieberaterin, Esslingen',
+    saetze: [
+      'Ich habe sie wirklich abgelegt, diese Scheu vor der Kamera.',
+      'Ich interessiere mich für den Menschen dahinter, und zu dem rede ich. Und nicht dieses ganze Kopfkino. Das hast du mir wirklich sehr deutlich beigebracht.',
+      'Du bist wahnsinnig vertrauensvoll, und ich habe mich gleich gut aufgehoben gefühlt.',
+    ],
+    video: { quelle: '/kundenstimmen/verena-sommerfeld.mp4', standbild: '/kundenstimmen/verena-sommerfeld-video.jpg', breite: 848, hoehe: 472 },
+    verweis: { text: 'Zur Webseite von Verena Sommerfeld', ziel: 'https://sommerfeld-energieberatung.de/' },
+  },
   seoTitel: 'Vor der Kamera sprechen: Videos für LinkedIn und Social Media | Claudia Conen',
   seoText:
     'Warum Videos scheitern, obwohl der Inhalt gut ist — und was die ersten drei Sekunden damit zu tun haben. Mit Telefon aufnehmen, gemeinsam ansehen, einen Rhythmus finden, den Sie durchhalten.',

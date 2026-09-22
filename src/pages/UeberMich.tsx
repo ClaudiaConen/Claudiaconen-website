@@ -41,6 +41,32 @@ export default function UeberMich() {
         path="/ueber-mich"
       />
 
+      {/* ProfilePage (22.09.2026): Google empfiehlt es fuer "Ueber mich"-Seiten, damit die Person eindeutig
+          zugeordnet wird. mainEntity zeigt auf die Person aus index.html. */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'ProfilePage',
+            dateModified: '2026-09-22',
+            mainEntity: {
+              '@type': 'Person',
+              '@id': 'https://claudiaconen.com/#claudia-conen',
+              name: 'Claudia Conen',
+              description: 'Keynote-Speakerin, Trainerin, Coach und Autorin für unverwechselbare persönliche Wirkung – seit 37 Jahren.',
+              image: 'https://claudiaconen.com/Claudia14.png',
+              sameAs: [
+                'https://www.linkedin.com/in/claudia-conen-die-stimme/',
+                'https://www.instagram.com/claudia_conen_umsatzstimme/',
+                'https://www.youtube.com/channel/UCjJSrS_4lJ8pSdGtNZarKFQ',
+                'https://open.spotify.com/show/1roEST6nZsiRbMfkmpIciC',
+              ],
+            },
+          }),
+        }}
+      />
+
       <Navigation />
 
       {/* 1. Heute */}

@@ -97,6 +97,11 @@ export type ZielgruppenInhalt = {
    *  Ohne Preis, bis sie ihn nennt. */
   formate?: { titel: string; text: string }[];
   formateTitel?: string;
+  /** Standardfragen, die Menschen laut Recherche vom 22.09.2026 wirklich eingeben (Kosten, online,
+   *  Gruppe, Anmeldung; bei Rednern: Emotionen, IHK). Werden an `fragen` angehaengt. */
+  fragenZusatz?: ('ausbildung' | 'redner')[];
+  /** Telefonnummer im Kopfbereich - bei Trauerfall und Trauung entscheidet Erreichbarkeit. */
+  telefonImKopf?: boolean;
   kundenstimme?: {
     titel: string;
     name: string;
@@ -107,6 +112,79 @@ export type ZielgruppenInhalt = {
   };
 };
 
+
+/** Fragen, die Menschen laut Google-Autovervollstaendigung und den FAQ der vorne liegenden Anbieter
+ *  wirklich stellen (Recherche 22.09.2026, projects/claudiaconen/recherche/). Ohne Zahl, bis Claudia
+ *  Preise nennt; keine Behauptung, die sie nicht traegt. */
+const ZUSATZFRAGEN: Record<'ausbildung' | 'redner', Frage[]> = {
+  ausbildung: [
+    {
+      frage: 'Was kostet die Ausbildung?',
+      antwort:
+        'Der Preis hängt am Format – 1:1 oder Gruppe 6:1 – und am Ort. Sie bekommen ihn vor dem ersten Termin schriftlich, mit allem, was enthalten ist. Wie Sie zahlen, besprechen wir im Erstgespräch. Was Sie vorher wissen sollten: Ein Erstgespräch kostet nichts und dauert dreißig Minuten.',
+    },
+    {
+      frage: 'Geht das auch online?',
+      antwort:
+        'Die Ausbildung ist als Präsenz angelegt – in Witten oder in Köln. Reden lernt man vor Menschen, nicht vor einem Bildschirm. Wenn Sie etwas Bestimmtes online brauchen, sagen Sie es im Erstgespräch; dann sehen wir, was geht.',
+    },
+    {
+      frage: 'Wie groß ist die Gruppe – und wie viel Zeit arbeite ich direkt mit Claudia Conen?',
+      antwort:
+        'Höchstens sechs Menschen auf eine Trainerin, oder 1:1. Jeder steht mehrfach auf und redet; die Rückmeldung kommt von mir, nicht aus einem Handout. In der Gruppe sind die anderen fünf Ihr erstes Publikum.',
+    },
+    {
+      frage: 'Wie läuft die Anmeldung?',
+      antwort:
+        'Erstgespräch, dreißig Minuten, kostenlos. Dann wählen Sie Format und Ort, und Sie bekommen eine schriftliche Bestätigung mit Preis und Terminen. Nichts davon verpflichtet Sie vor der Bestätigung.',
+    },
+  ],
+  redner: [
+    {
+      frage: 'Ich bin nah am Wasser gebaut – geht das trotzdem?',
+      antwort:
+        'Ja. Gefühl ist kein Fehler, es ist der Grund, warum Menschen Ihnen zuhören. Sie lernen, es zu halten, statt es zu verstecken – mit Atem, mit Pausen, mit einem Text, der trägt. Wer nichts fühlt, sollte keine Reden halten.',
+    },
+    {
+      frage: 'Brauche ich ein IHK-Zertifikat?',
+      antwort:
+        'Freier Redner ist keine geschützte Berufsbezeichnung. Ein IHK-Zertifikat ist keine Voraussetzung, um Trauer- oder Hochzeitsreden zu halten – Angehörige und Paare fragen nicht nach einem Zertifikat, sondern danach, ob Sie zuhören können und ob Ihre Rede stimmt. Genau das üben wir. Wer ein Zertifikat für den Lebenslauf braucht, sagt es mir im Erstgespräch; dann sage ich ehrlich, was ich bieten kann und was nicht.',
+    },
+  ],
+};
+
+/** Autorenzeile - Google: "We strongly encourage adding accurate authorship information, such as
+ *  bylines" (Search Central, helpful content). Nur pruefbare Angaben, keine Verbandsmitgliedschaft,
+ *  die nicht belegt ist. */
+function Autorenzeile({ hell }: { hell: boolean }) {
+  return (
+    <section className={`${hell ? 'bg-warm' : 'bg-pearl-white'} py-12 sm:py-14`} aria-label="Wer diese Seite verantwortet">
+      <div className="mx-auto flex max-w-4xl flex-col items-start gap-6 px-6 sm:flex-row sm:items-center">
+        <img
+          src="/seiten/kamera.webp"
+          alt="Claudia Conen"
+          width={360}
+          height={640}
+          loading="lazy"
+          decoding="async"
+          className="h-28 w-28 flex-none rounded-full border border-[#D4AF37]/60 object-cover object-top shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)]"
+        />
+        <div>
+          <p className="font-montserrat text-xs font-extrabold uppercase tracking-[0.2em] text-midnight-blue">Wer diese Seite verantwortet</p>
+          <p className="mt-2 font-montserrat text-lg font-bold text-midnight-blue">Claudia Conen</p>
+          <p className="mt-1 font-inter text-[15px] leading-relaxed text-midnight-blue/85">
+            Keynote-Speakerin, Trainerin, Coach und Autorin für unverwechselbare persönliche Wirkung. Sie trainiert Rhetorik, Storytelling,
+            Präsentation und den Auftritt vor der Kamera – seit 37 Jahren, mit Unternehmern, Führungskräften, Speakern und Teams. Zu hören
+            unter anderem bei Sat.1 und RTL; Autorin des „Trauerreden Ratgebers" und Mitautorin von fünf weiteren Büchern.
+          </p>
+          <Link to="/ueber-mich" className="mt-3 inline-block font-inter text-sm text-midnight-blue underline decoration-[#D4AF37] decoration-2 underline-offset-4">
+            Mehr über Claudia Conen
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 /** Die drei Stimmungen. Werte aus der Marken-Referenz, nur anders gewichtet.
  *  hell:  festlich, viel Gold, warme helle Flaechen. Fuer Hochzeiten.
@@ -149,6 +227,7 @@ const STIMMUNG = {
 
 export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt }) {
   const s = STIMMUNG[inhalt.stimmung ?? 'dunkel'];
+  const fragen: Frage[] = [...inhalt.fragen, ...(inhalt.fragenZusatz ?? []).flatMap((k) => ZUSATZFRAGEN[k])];
   const strukturierteDaten = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -157,17 +236,29 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
         name: inhalt.angebotName,
         description: inhalt.angebotZeile,
         serviceType: inhalt.wer,
-        areaServed: { '@type': 'Country', name: 'Deutschland' },
         provider: {
           '@type': 'Person',
+          '@id': 'https://claudiaconen.com/#claudia-conen',
           name: 'Claudia Conen',
-          url: 'https://claudiaconen.com/',
+          url: 'https://claudiaconen.com/ueber-mich',
+          jobTitle: 'Keynote-Speakerin, Trainerin, Coach und Autorin für unverwechselbare persönliche Wirkung',
+          sameAs: [
+            'https://www.linkedin.com/in/claudia-conen-die-stimme/',
+            'https://www.instagram.com/claudia_conen_umsatzstimme/',
+            'https://www.youtube.com/channel/UCjJSrS_4lJ8pSdGtNZarKFQ',
+            'https://open.spotify.com/show/1roEST6nZsiRbMfkmpIciC',
+          ],
         },
+        areaServed: [
+          { '@type': 'City', name: 'Witten' },
+          { '@type': 'City', name: 'Köln' },
+          { '@type': 'Country', name: 'Deutschland' },
+        ],
         url: `https://claudiaconen.com${inhalt.pfad}`,
       },
       {
         '@type': 'FAQPage',
-        mainEntity: inhalt.fragen.map((f) => ({
+        mainEntity: fragen.map((f) => ({
           '@type': 'Question',
           name: f.frage,
           acceptedAnswer: { '@type': 'Answer', text: f.antwort },
@@ -226,6 +317,25 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
           <p className={`mt-6 max-w-2xl font-inter text-lg leading-relaxed ${s.kopfLeise}`}>
             {inhalt.vorspann}
           </p>
+          {/* Auf einen Blick - nur, was feststeht (Recherche 22.09.2026: die vorne liegenden Seiten
+              nennen Ort, Format, Gruppe oben). Dauer und Termine folgen, sobald Claudia sie nennt. */}
+          {inhalt.formate && inhalt.formate.length > 0 && (
+            <dl className={`mt-7 grid max-w-2xl gap-x-8 gap-y-2 font-inter text-sm sm:grid-cols-2 ${s.kopfText}`}>
+              <div className="flex gap-2"><dt className="font-montserrat font-bold">Orte:</dt><dd>{[...new Set(inhalt.formate.map((f) => (f.titel.includes('Köln') ? 'Köln' : 'Witten')))].join(' und ')}</dd></div>
+              <div className="flex gap-2"><dt className="font-montserrat font-bold">Format:</dt><dd>1:1 oder Gruppe – höchstens sechs Menschen</dd></div>
+              <div className="flex gap-2"><dt className="font-montserrat font-bold">Trainerin:</dt><dd>Claudia Conen persönlich</dd></div>
+              <div className="flex gap-2"><dt className="font-montserrat font-bold">Einstieg:</dt><dd>Erstgespräch, 30 Minuten, kostenlos</dd></div>
+            </dl>
+          )}
+          {inhalt.telefonImKopf && (
+            <p className={`mt-7 font-inter text-base ${s.kopfText}`}>
+              Erreichbar unter{' '}
+              <a href="tel:+4916099142208" className="font-montserrat font-bold underline decoration-[#D4AF37] decoration-2 underline-offset-4">
+                +49 160 99142208
+              </a>
+              {' '}– auch kurzfristig.
+            </p>
+          )}
           </div>
           {inhalt.bild && (
             <figure
@@ -574,7 +684,7 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
                 Eingeklappt waere es fuer Menschen bequemer, aber Claudia will
                 sie lesbar haben - fuer Suchmaschinen und fuer KI-Systeme. */}
             <dl className="mt-10 grid gap-5 sm:grid-cols-2">
-              {inhalt.fragen.map((f) => (
+              {fragen.map((f) => (
                 <div
                   key={f.frage}
                   className="glas-hell glas-heben flex flex-col p-6"
@@ -652,6 +762,7 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
         </section>
       </main>
 
+      <Autorenzeile hell={(inhalt.stimmung ?? 'dunkel') !== 'dunkel'} />
       <Footer />
     </div>
   );

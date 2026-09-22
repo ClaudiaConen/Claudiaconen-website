@@ -171,6 +171,7 @@ const INHALT: ZielgruppenInhalt = {
     { titel: 'Live in Witten · 1:1', text: 'Du und ich, ein Tag oder mehrere Termine. Alles dreht sich um deine Stimme, deine Texte, deine Situationen.' },
   ],
 
+  fragenZusatz: ['ausbildung', 'redner'],
   seoTitel: 'Freie Rednerin werden — Ausbildung bei Claudia Conen',
   seoText:
     'Ausbildung zur freien Rednerin und zum freien Redner: Stimme, Handwerk und Auftritt in einem Weg. Für Trauerfeiern, freie Trauungen und besondere Anlässe.',

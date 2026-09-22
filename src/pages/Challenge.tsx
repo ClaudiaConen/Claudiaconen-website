@@ -431,7 +431,7 @@ export default function Challenge() {
   const strukturierteDaten = {
     '@context': 'https://schema.org',
     '@type': 'HowTo',
-    name: 'Sieben Tage für deine Wirkung – die Video-Challenge',
+    name: '7 Tage für deine Wirkungskraft – die Video-Challenge',
     description: 'Sieben Tage, jeden Tag eine Aufgabe und eine Minute Video mit dem Handy – mit Feedback von Claudia Conen. Kostenfrei, in einer WhatsApp-Gruppe.',
     totalTime: 'P7D',
     step: TAGE.map((t, i) => ({ '@type': 'HowToStep', position: i + 1, name: `Tag ${i + 1}: ${t.titel} (${t.schwerpunkt})`, text: t.aufgabe })),
@@ -441,7 +441,7 @@ export default function Challenge() {
   return (
     <div className="min-h-screen bg-pearl-white">
       <SEO
-        title="Sieben Tage für deine Wirkung – die Video-Challenge"
+        title="7 Tage für deine Wirkungskraft – die Video-Challenge"
         description="Sieben Tage, jeden Tag eine Anleitung, eine Minute Video mit dem Handy, Feedback von Claudia Conen. Kostenfrei, in einer WhatsApp-Gruppe – mit den sieben Schritten, dem Workbook und dem Weg danach."
         path={PFAD}
         ogImage="https://claudiaconen.com/challenge/vorschau.jpg"
@@ -455,7 +455,7 @@ export default function Challenge() {
         <FotoReihen />
         <div className="relative z-10 mx-auto max-w-6xl px-6">
           <div className="mb-6 text-pearl-white/75">
-            <Brotkrumen krumen={[{ name: 'Sieben Tage für deine Wirkung' }]} />
+            <Brotkrumen krumen={[{ name: '7 Tage für deine Wirkungskraft' }]} />
           </div>
           <div className="max-w-3xl rounded-[12px] border border-[#D4AF37]/45 bg-[rgba(10,22,40,0.86)] px-6 py-8 text-pearl-white shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)] sm:px-10 sm:py-11" style={{ borderTopColor: '#F7E7CE' }}>
             {/* Claudia, 22.09.2026 11:16 UTC: Kicker groesser; "Sieben Tage" in derselben Schrift wie "fuer deine
@@ -463,12 +463,16 @@ export default function Challenge() {
                 Challenge bringt; das Datum "damit es direkt auffaellt". */}
             <p className="flex items-center gap-3 font-montserrat text-sm font-extrabold uppercase tracking-[0.22em] text-[#EBD197] sm:text-base">
               <span aria-hidden="true" className={`cc-linie h-[3px] w-7 rounded-full ${GOLD}`} />
-              Video-Challenge · kostenfrei
+              Video-Challenge
             </p>
-            <h1 className="gold-text-animated mt-6 font-montserrat text-4xl font-black uppercase leading-[1.08] tracking-tight sm:text-6xl">
-              Sieben Tage für deine Wirkung.
+            {/* Claudia, 22.09.2026 15:37/15:42 UTC - Wortlaut wie auf dem Vorschaubild: "die 7 groesser und heller",
+                "7 Tage fuer deine Wirkungskraft - weil Perfektion klickbar ist und Persoenlichkeit Vertrauen weckt",
+                Knopf "Nutze die Video-Challenge". Die 7 ist hell (kein Schimmer), der Rest traegt den Gold-Schimmer. */}
+            <h1 className="mt-5 flex items-center gap-4 font-montserrat font-black uppercase tracking-tight sm:gap-6">
+              <span className="text-[6.5rem] leading-[0.85] text-[#FFF6DC] drop-shadow-[0_0_28px_rgba(247,231,206,0.55)] sm:text-[10rem]">7</span>
+              <span className="gold-text-animated text-3xl leading-[1.04] sm:text-5xl">Tage für deine<br />Wirkungskraft</span>
             </h1>
-            <p className="mt-5 font-cormorant text-2xl italic leading-snug text-[#F7E7CE] sm:text-3xl">Zeig dich. Sei dabei. Lerne deine Wirkung kennen.</p>
+            <p className="mt-5 font-cormorant text-2xl italic leading-snug text-[#F7E7CE] sm:text-3xl">– weil Perfektion klickbar ist<br className="hidden sm:block" /> und Persönlichkeit Vertrauen weckt.</p>
             {/* Claudia, 22.09.2026 13:01 UTC: "auf dem Banner ist mir zu viel Text" - ein Satz zur Dauer, der Fingerabdruck-
                 Satz, "mehr nicht". Die Punkte stehen hell unter dem Kopf, der WhatsApp-Hinweis steht im Formular. */}
             <p className="mt-4 max-w-xl font-montserrat text-base font-extrabold leading-snug text-white sm:text-lg">
@@ -482,10 +486,10 @@ export default function Challenge() {
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-4">
               <a href="#anmelden" className={`inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue transition-transform hover:-translate-y-px ${GOLD}`}>
-                Ich bin dabei – eintragen
+                Nutze die Video-Challenge →
               </a>
               <a href="#tage" className="font-montserrat text-sm font-semibold text-[#EBD197] underline decoration-[#D4AF37]/50 underline-offset-4 hover:decoration-[#F7E7CE]">
-                Die sieben Tage ansehen ↓
+                Die 7 Tage ansehen ↓
               </a>
             </div>
           </div>
@@ -577,7 +581,7 @@ export default function Challenge() {
         <div className="mx-auto max-w-6xl px-6">
           <Kicker text="So läuft es ab" hell />
           <h2 id="ablauf-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
-            Sieben Tage für deine Wirkung – Schritt für Schritt.
+            7 Tage für deine Wirkungskraft – Schritt für Schritt.
           </h2>
           <ol className="mt-7 grid list-none gap-3 p-0 sm:grid-cols-2 lg:grid-cols-4">
             {ABLAUF.map((a, i) => (

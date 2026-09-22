@@ -41,7 +41,7 @@ const SPALTEN: { titel: string; links: { label: string; href: string; extern?: b
   {
     titel: 'Mitmachen',
     links: [
-      { label: 'Sieben Tage für deine Wirkung', href: '/challenge' },
+      { label: '7 Tage für deine Wirkungskraft', href: '/challenge' },
       { label: 'Die Unverwechselbaren · Community', href: 'https://community.claudiaconen.com/', extern: true },
       { label: 'Newsletter', href: '/newsletter' },
       { label: 'ClaudiaAI Beta', href: '/claudia-ai' },

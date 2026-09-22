@@ -28,6 +28,7 @@ export default function ChallengeAnmeldung({ start }: { start: string }) {
   const [email, setEmail] = useState('');
   const [telefon, setTelefon] = useState('');
   const [einverstanden, setEinverstanden] = useState(false);
+  const [angebote, setAngebote] = useState(false);
   const [zustand, setZustand] = useState<'offen' | 'sendet' | 'fertig' | 'fehler'>('offen');
 
   async function absenden(e: FormEvent) {
@@ -39,7 +40,7 @@ export default function ChallengeAnmeldung({ start }: { start: string }) {
         name: vorname.trim(),
         email: email.trim(),
         phone: telefon.trim() || null,
-        message: `7-TAGE-CHALLENGE – Anmeldung über claudiaconen.com/challenge\nStart: Montag, ${start}\nEinwilligung Datenschutz: ja`,
+        message: `7-TAGE-CHALLENGE – Anmeldung über claudiaconen.com/challenge\nStart: Montag, ${start}\nEinwilligung Challenge + WhatsApp-Gruppe: ja\nEinwilligung Angebote/Newsletter: ${angebote ? 'ja' : 'nein'}`,
       },
     ]);
     if (error) {
@@ -87,15 +88,21 @@ export default function ChallengeAnmeldung({ start }: { start: string }) {
         </label>
         <label className="block">
           <span className="sr-only">Handynummer (freiwillig)</span>
-          <input id="challenge-telefon" name="telefon" type="tel" autoComplete="tel" placeholder="Handynummer (freiwillig)" value={telefon} onChange={(e) => setTelefon(e.target.value)} className={FELD} />
+          <input id="challenge-telefon" name="telefon" type="tel" autoComplete="tel" placeholder="Handynummer (damit ich dich in der Gruppe erkenne)" value={telefon} onChange={(e) => setTelefon(e.target.value)} className={FELD} />
         </label>
       </div>
+      {/* Zwei Kaestchen statt einem (Kritiker-Durchgang 22.09.2026): Pflicht nur fuer die Challenge selbst, Werbung freiwillig
+          (Art. 7 Abs. 4 DSGVO, § 7 UWG); Widerruf mit Adresse; WhatsApp/Meta benannt. */}
       <label className="mt-4 flex items-start gap-3 font-inter text-sm leading-relaxed text-pearl-white/85">
         <input id="challenge-einverstanden" name="einverstanden" type="checkbox" required checked={einverstanden} onChange={(e) => setEinverstanden(e.target.checked)} className="mt-1 h-4 w-4 flex-none accent-[#D4AF37]" />
         <span>
-          Ich bin einverstanden, dass Claudia Conen meine Angaben speichert, um mich zur Challenge zu begleiten und danach zu Angeboten einzuladen – und dass in der WhatsApp-Gruppe meine Nummer und meine Videos für die anderen Teilnehmer sichtbar sind. Widerruf jederzeit per E-Mail.{' '}
+          Ja, Claudia Conen darf meine Angaben speichern, um mich durch die Challenge zu begleiten. Mir ist klar: Die Challenge läuft in einer WhatsApp-Gruppe (Meta) – dort sehen die anderen Teilnehmer meine Nummer und meine Videos. Widerruf jederzeit an claudiaconen@umsatzstimme.de.{' '}
           <Link to="/datenschutz" className="underline decoration-[#D4AF37]/60 underline-offset-2 hover:decoration-[#F7E7CE]">Datenschutz</Link>
         </span>
+      </label>
+      <label className="mt-2 flex items-start gap-3 font-inter text-sm leading-relaxed text-pearl-white/85">
+        <input id="challenge-angebote" name="angebote" type="checkbox" checked={angebote} onChange={(e) => setAngebote(e.target.checked)} className="mt-1 h-4 w-4 flex-none accent-[#D4AF37]" />
+        <span>Freiwillig: Claudia darf mich nach der Challenge per E-Mail zu Angeboten einladen (Rederaum, Coaching, Community).</span>
       </label>
       <div className="mt-5 flex flex-wrap items-center gap-4">
         <button type="submit" disabled={zustand === 'sendet'} className={`inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue transition-transform hover:-translate-y-px disabled:opacity-70 ${GOLD}`}>

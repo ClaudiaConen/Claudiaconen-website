@@ -191,7 +191,7 @@ export default function Footer() {
 
         <div className="py-8 border-t border-luxury-gold/20 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-pearl-white/60 text-sm">
-            © 2025 Claudia Conen. Alle Rechte vorbehalten.
+            © 2026 Claudia Conen. Alle Rechte vorbehalten.
           </p>
           <button
             onClick={scrollToTop}

@@ -470,7 +470,11 @@ export default function Challenge() {
               Sieben Tage für deine Wirkung.
             </h1>
             <p className="mt-5 font-cormorant text-2xl italic leading-snug text-[#F7E7CE] sm:text-3xl">Zeig dich. Sei dabei. Lerne deine Wirkung kennen.</p>
-            <p className="mt-5 max-w-xl font-inter text-lg leading-relaxed text-white">
+            {/* Der eine Satz, der sagt, was passiert (Kritiker-Durchgang 22.09.2026: "Kernversprechen kommt zu spaet"). */}
+            <p className="mt-4 max-w-xl font-montserrat text-base font-extrabold leading-snug text-white sm:text-lg">
+              Sieben Tage, jeden Tag ein Video von einer Minute in der WhatsApp-Gruppe – und jeden Tag mein Feedback. Kostenfrei.
+            </p>
+            <p className="mt-4 max-w-xl font-inter text-lg leading-relaxed text-white">
               Nutze eine der wertvollsten Marketing-Möglichkeiten der Welt: deinen akustischen Fingerabdruck. Weil du ein Unikat bist. Entdecke hier in der Challenge:
             </p>
             <ul className="mt-3 grid list-none gap-1.5 p-0 sm:grid-cols-2">
@@ -912,7 +916,7 @@ export default function Challenge() {
               <h3 className="mt-4 font-montserrat text-2xl font-extrabold uppercase">Der Wirkungs-Check</h3>
               <p className="mt-3 font-montserrat text-4xl font-black">0 €</p>
               <p className="mt-4 font-inter leading-relaxed">
-                20 Minuten am Telefon oder per Zoom. Du sprichst eine Minute über dein Thema – so, wie du es im Alltag tust. Dann hörst du von mir drei Dinge:
+                20 Minuten am Telefon oder per Zoom, ohne Vorbereitung: Du sprichst eine Minute über dein Thema – so, wie du es im Alltag tust. Dann hörst du von mir drei Dinge:
               </p>
               <ul className="mt-4 grid list-none gap-2.5 p-0 font-inter">
                 {['Was von dir hängen bleibt.', 'Was verpufft – und warum.', 'Was du morgen anders machst.'].map((z) => (
@@ -932,7 +936,7 @@ export default function Challenge() {
                 Möchtest du weitergehen – deine Performance, dein Auftreten, deine Selbstsicherheit, dein Elevator-Story-Training, deine Keynote-Performance ausarbeiten? Dann bin ich da für dich.
               </p>
               <p className="mt-3 font-inter leading-relaxed text-pearl-white/90">
-                Buch dir in meinem Kalender einen Rederaum: gemütlich, bei einem Kaffee, nur wir zwei. Wir schauen, wo du stehst, was du erreichen willst – und wie wir miteinander arbeiten können.
+                Buch dir in meinem Kalender einen Rederaum: 30 Minuten, kostenlos, nur wir zwei – bei einem Kaffee oder im Zoom. Wir schauen, wo du stehst, was du erreichen willst – und wie wir miteinander arbeiten können.
               </p>
               <div className="mt-auto pt-7">
                 <Link to="/buchen/erstgespraech" className={`inline-flex items-center rounded-full px-6 py-3.5 font-montserrat text-sm font-bold text-midnight-blue transition-transform hover:-translate-y-px ${GOLD}`}>
@@ -1010,10 +1014,17 @@ export default function Challenge() {
           {/* 8-Sekunden-Clip (Veo 3.1 ueber Claudias Google-Schluessel, ihr Ja 22.09.2026 11:40 UTC): Mikrofon,
               goldene Stimmwelle, die Silhouetten zu einem Netzwerk verbindet. Stumm, Schleife, 2,4 MB, Standbild als Poster.
               Original: projects/claudiaconen/video/netzwerk-stimme-veo31-720p.mp4 */}
-          <div className={`overflow-hidden bg-[#0A1628] ${KACHEL} border-[#D4AF37] shadow-[0_18px_40px_-18px_rgba(212,175,55,0.5)]`}>
-            <video className="block aspect-video h-auto w-full" autoPlay muted loop playsInline preload="metadata" poster="/challenge/netzwerk-poster.webp" aria-label="Eine goldene Stimmwelle geht von einem Mikrofon aus und verbindet Menschen zu einem Netzwerk">
+          <div className={`relative overflow-hidden bg-[#0A1628] ${KACHEL} border-[#D4AF37] shadow-[0_18px_40px_-18px_rgba(212,175,55,0.5)]`}>
+            <video className="block aspect-video h-auto w-full" autoPlay muted loop playsInline preload="metadata" poster="/challenge/netzwerk-poster.webp" aria-label="Eine goldene Stimmwelle geht von einem Mikrofon aus">
               <source src="/challenge/netzwerk.mp4" type="video/mp4" />
             </video>
+            {/* Claudias Satz (22.09.2026 12:10 UTC), in leichter Schreibschrift, taucht auf, wenn der Block sichtbar wird. */}
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-[linear-gradient(180deg,rgba(10,22,40,0)_0%,rgba(10,22,40,0.85)_70%)] px-6 pb-6 pt-16 sm:px-10 sm:pb-8">
+              <p style={{ ['--i' as string]: 2 }} className="cc-stufe max-w-3xl font-cormorant text-2xl italic leading-snug text-[#F7E7CE] sm:text-4xl">
+                Wo immer du den Mund aufmachst, ist Bühne.
+                <span className="mt-1 block text-white">Deine Persönlichkeit braucht sie. Nutze sie.</span>
+              </p>
+            </div>
           </div>
           <div className={`mt-4 grid items-center gap-8 bg-white p-7 text-midnight-blue sm:p-10 md:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] ${KACHEL} border-[#D4AF37] shadow-[0_18px_40px_-18px_rgba(212,175,55,0.5)]`}>
             <div>
@@ -1030,7 +1041,7 @@ export default function Challenge() {
                   'Kurs-Marktplatz: eigene Kurse verkaufen, ohne Provision',
                   'Social-Media-Studio für deine Beiträge',
                   'Dein Kalender: Zoom-Calls, Workshops, Meetups',
-                  'Jeden Monat live im Zoom, einmal im Jahr vor Ort',
+                  'Monatliches Live-Treffen im Zoom, einmal im Jahr vor Ort',
                   'Alle ein bis zwei Jahre ein gemeinsames Buch',
                   'Video-Profil, Masterminds, KI-Member-Matching',
                 ].map((z) => (

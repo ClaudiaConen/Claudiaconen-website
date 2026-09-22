@@ -31,13 +31,13 @@ type Kachel = { bild: string; oben: string; satz: string; ziel: string; clip?: s
 
 const KACHELN: Kachel[] = [
   { bild: '01-avatare', oben: 'Du + KI', satz: 'Mensch oder Avatar?', ziel: '/marke-und-positionierung' },
-  { bild: '03-keynote', oben: 'Keynote', satz: 'Vor 500 Menschen', ziel: '/unternehmen-keynotes' },
+  { bild: '03-keynote', oben: 'Keynote', satz: 'Auf der Bühne', ziel: '/unternehmen-keynotes' },
   { bild: '02-training', oben: 'Im Training', satz: 'Im Team, das wieder brennt', ziel: '/keynote-und-buehnenperformance' },
   { bild: '08-gehirn', oben: 'Mensch + KI', satz: 'Empathie schlägt Algorithmus', ziel: '/unternehmen-keynotes' },
   { bild: '14-besondere-anlaesse', oben: 'Bei der Hochzeit', satz: 'Stimmen bestimmen die Stimmung', ziel: '/freie-trauung' },
   { bild: '04-zuhoeren', oben: 'Im Gespräch', satz: 'Wenn Vertrauen entsteht', ziel: '/1-zu-1-mentoring' },
   { bild: 'moderation', oben: 'Am Mikrofon', satz: 'In der Moderation', ziel: '/freie-rednerin', clip: '/situationen/moderation.mp4' },
-  { bild: '05-grosse-buehne', oben: 'Live', satz: 'Auf der großen Bühne', ziel: '/redner-ausbildungen' },
+  { bild: '05-grosse-buehne', oben: 'Live', satz: 'Im Rampenlicht', ziel: '/redner-ausbildungen' },
   { bild: '12-buch', oben: 'Autorin', satz: 'Wenn jedes Wort zählt', ziel: '/wissen-to-go' },
   { bild: '10-messe', oben: 'The Power of AI', satz: 'KI spart Zeit. Du gibst ihr Bedeutung.', ziel: '/ki-einsteiger-coaching' },
   { bild: '06-kamera', oben: 'Im Studio', satz: 'Vor laufender Kamera', ziel: '/storytelling-kurs' },

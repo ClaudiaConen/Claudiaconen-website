@@ -54,7 +54,7 @@ type Stimme = {
 
 const kachel = (id: string) => `/kundenstimmen/${id}.webp`;
 
-const STIMMEN: Stimme[] = [
+const ALLE: Stimme[] = [
   {
     id: 'verena-sommerfeld',
     name: 'Verena Sommerfeld',
@@ -254,6 +254,28 @@ const STIMMEN: Stimme[] = [
     bild: kachel('f5bf13c7-0387-45ed-aaec-18a91a0b318f'),
     vimeo: 'https://vimeo.com/1144280941',
   },
+];
+
+// Reihenfolge im Band (22.09.2026). Die vier geschriebenen Stimmen (Backhaus, Bastian, Mahnke,
+// Conrad) standen ganz hinten - bei 24 px je Sekunde erschien die erste nach gut zwei Minuten,
+// Claudia fand sie nicht ("wo sind die Text bewertungen wie die von Julien backhaus?"). Jetzt
+// wechseln sich Video und Text ab. Wer hier nicht steht, kommt hinten dran.
+const REIHENFOLGE = [
+  'verena-sommerfeld',
+  'julien-backhaus',
+  'ann-kathrin-andresen',
+  'mario-fuerst',
+  'aimee-bastian',
+  'e24ec4f8-58df-4622-b0a3-f2498fa7dae9', // Freimuth Gorter
+  '08454326-b1e9-4ff6-8d83-ad919a77f471', // Melanie Miniaci
+  'fabian-mahnke',
+  '14e3877b-1e92-412b-b8a7-2efa39b84b0e', // Stephan
+  '7558459a-a382-4f80-8516-fa693a79d6b0', // Anke Elsa Delfs
+  'tobias-conrad',
+];
+const STIMMEN: Stimme[] = [
+  ...REIHENFOLGE.map((id) => ALLE.find((s) => s.id === id)).filter((s): s is Stimme => Boolean(s)),
+  ...ALLE.filter((s) => !REIHENFOLGE.includes(s.id)),
 ];
 
 const GOLD = 'bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]';

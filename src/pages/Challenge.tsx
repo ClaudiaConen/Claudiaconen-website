@@ -31,18 +31,19 @@ const PFAD = '/challenge';
 /** Zehn Saetze zum Ankreuzen - Claudias Wunsch vom 22.09.2026, 10:50 UTC: statt der ChatGPT-Liste vom Flyer
  *  Fragen zur Kommunikation im KI-Zeitalter (Pausen, Selbstsicherheit, Perfektion), "wie ein Rhetorik-Profi
  *  sie stellen wuerde". Eigene Formulierungen, keine Zitate. Die letzten zwei sind die persoenlichen. */
-const KREUZE = [
-  'Im Zeitalter der KI wird das Gespräch von Mensch zu Mensch wichtiger – nicht unwichtiger.',
-  'Eine Pause im Satz ist kein Aussetzer. Sie ist der Moment, in dem der andere versteht.',
-  'Selbstsicher wirkt, wer aufgehört hat, perfekt sein zu wollen.',
-  'Man hört einer Stimme an, ob sie meint, was sie sagt.',
-  'Zuhören ist die Hälfte des Redens.',
-  'Ein Satz, den ich nicht in einem Atemzug sagen kann, ist zu lang.',
-  'Fachwörter schützen den Redner – nicht den Zuhörer.',
-  'Vertrauen entsteht nicht durch Argumente, sondern durch Haltung.',
-  'Ich weiß, wie ich auf andere wirke.',
-  'Ich habe meine eigene Stimme in den letzten vier Wochen bewusst angehört.',
+/** Lernbox - Claudia, 22.09.2026 11:27 UTC: "so ein kleiner Test ... Feld zum Aufklappen, Lernbox, Ja- und
+ *  Nein-Fragen mit einer Antwort, alle zu Wirkung, Stimme, Performance - sieben Fragen". Ohne Hirnforschungszahlen. */
+const LERNBOX: { frage: string; ja: boolean; antwort: string }[] = [
+  { frage: 'Entscheiden Zuhörer, ob sie dir zuhören, bevor du deinen ersten Satz beendet hast?', ja: true, antwort: 'Ja. Die Stimme wirkt, bevor der Inhalt ankommt – deshalb beginnt die Challenge mit deiner Stimme.' },
+  { frage: 'Klingt eine Stimme tiefer, wenn man sie nach unten drückt?', ja: false, antwort: 'Nein. Tiefer wird sie durch Ruhe und Atmung. Drücken macht sie eng und angestrengt.' },
+  { frage: 'Ist eine Pause im Satz ein Zeichen von Unsicherheit?', ja: false, antwort: 'Nein. Die Pause ist der Moment, in dem der andere versteht. Profis machen mehr Pausen, nicht weniger.' },
+  { frage: 'Bleibt eine perfekt vorgetragene Rede besser im Kopf als eine mit einem Versprecher?', ja: false, antwort: 'Nein. Perfektion ist klickbar. Ein Mensch, der echt ist, bleibt – der Versprecher, über den du lachst, macht dich glaubwürdiger.' },
+  { frage: 'Merken sich Menschen Zahlen besser als Geschichten?', ja: false, antwort: 'Nein. Geschichten bleiben, Daten nicht. Ein Moment, eine Person, ein Satz, der fiel.' },
+  { frage: 'Reicht es, eine Rede gut zu schreiben, damit sie gut wirkt?', ja: false, antwort: 'Nein. Wirkung entsteht beim Sprechen: Stimme, Haltung, Blick. Deshalb nimmst du dich in der Challenge auf – Text allein reicht nicht.' },
+  { frage: 'Kann man Wirkung trainieren?', ja: true, antwort: 'Ja. Wirkung ist kein Zufall. Sie ist trainierbar, sichtbar, entscheidbar – in sieben Tagen fängst du an.' },
 ];
+/** Die 7 A's vom Flyer (nach Karsten Brocke) - Claudias ausdrueckliche Ansage vom 22.09.2026, 11:27 UTC. */
+const SIEBEN_A = ['A-bsolut', 'A-ngenehm', 'A-nders', 'A-ls', 'A-lle', 'A-nderen', 'A-uffallen'];
 
 /** Wie auf dem Flyer: Piktogramm, Titel, eine Zeile (Claudia, 22.09.2026 11:24 UTC: "nicht diese runden
  *  Bubble-Dinger ... eher so wie auf dem Flyer, auch mit den Icons"). */
@@ -104,12 +105,14 @@ const DUNKEL = { background: 'linear-gradient(180deg, #0A1628 0%, #0F1F3A 55%, #
 const WORKBOOK_PDF = '/unverwechselbar/workbook-entdecke-deine-stimmwirkung.pdf';
 
 
-const WERKZEUG: { titel: string; text: string }[] = [
-  { titel: 'Stimme', text: 'Sprich zum letzten Stuhl im Raum – auch wenn nur das Handy vor dir steht. Ein Satz, eine Pause, der nächste Satz. Die Pause ist kein Loch, sie ist die Stelle, an der der Zuhörer nickt.' },
-  { titel: 'Innere Haltung', text: 'Bevor du auf Aufnahme drückst: Wem erzählst du das? Stell dir einen Menschen vor, nicht ein Publikum. Die Kamera merkt, ob du jemanden meinst – und die Zuschauer merken es auch.' },
-  { titel: 'Stimme aufwärmen', text: 'Zwei Minuten reichen. Summen auf „mmm", bis die Lippen kribbeln. Lippen flattern lassen wie ein Pferd. Dann drei Sätze laut lesen, übertrieben deutlich. Danach normal sprechen – es klingt sofort wacher.' },
-  { titel: 'Storytelling', text: 'Fang mit dem Moment an, nicht mit der Vorgeschichte. Eine Person, ein Ort, etwas, das schiefging – und was du seitdem anders machst. Das ist eine Geschichte. Alles andere ist ein Bericht.' },
-  { titel: 'Das Mikrofon', text: 'Das Handymikrofon nimmt den Raum auf, nicht dich. Ein Ansteckmikrofon fürs Handy – mit Kabel oder Funk, für wenig Geld – holt deine Stimme nach vorn. Gut soll sie klingen. Nicht perfekt. Perfekt ist der Avatar.' },
+/** Fuenf kleine Kacheln wie im Kopf der Startseite, mit den 3-D-Icons (Claudia, 22.09.2026 11:27 UTC:
+ *  "kleinere Felder ... so wie auf der Hauptseite oben die fuenf Kacheln, auch mit diesen 3-D-Icons"). */
+const WERKZEUG: { titel: string; text: string; icon: string }[] = [
+  { titel: 'Stimme', text: 'Sprich zum letzten Stuhl im Raum – auch wenn nur das Handy vor dir steht. Ein Satz, eine Pause, der nächste Satz.', icon: 'stimme' },
+  { titel: 'Innere Haltung', text: 'Bevor du auf Aufnahme drückst: Wem erzählst du das? Ein Mensch, nicht ein Publikum.', icon: 'praesenz' },
+  { titel: 'Aufwärmen', text: 'Zwei Minuten: summen, Lippen flattern, drei Sätze überdeutlich. Danach klingt alles wacher.', icon: 'wirkung' },
+  { titel: 'Storytelling', text: 'Fang mit dem Moment an, nicht mit der Vorgeschichte. Das ist eine Geschichte – alles andere ein Bericht.', icon: 'story' },
+  { titel: 'Das Mikrofon', text: 'Das Handy nimmt den Raum auf. Ein Ansteckmikrofon holt deine Stimme nach vorn. Gut, nicht perfekt – perfekt ist der Avatar.', icon: 'botschaft' },
 ];
 
 
@@ -388,10 +391,11 @@ function Haken() {
 }
 
 export default function Challenge() {
-  const [kreuze, setKreuze] = useState<boolean[]>(() => KREUZE.map(() => false));
+  const [antworten, setAntworten] = useState<(boolean | null)[]>(() => LERNBOX.map(() => null));
   const [fragen, setFragen] = useState<boolean[]>(() => FRAGEN.map(() => false));
   const [buchOffen, setBuchOffen] = useState(false);
-  const nKreuze = kreuze.filter(Boolean).length;
+  const nBeantwortet = antworten.filter((a) => a !== null).length;
+  const nRichtig = antworten.filter((a, i) => a === LERNBOX[i].ja).length;
   const nFragen = fragen.filter(Boolean).length;
   // Sprungmarke aus der Adresse (z. B. /challenge#anmelden vom Laufband der Startseite):
   // ScrollToTop springt bei jedem Seitenwechsel nach oben, deshalb hier nach dem Aufbau zum Ziel.
@@ -472,7 +476,7 @@ export default function Challenge() {
               Nutze eine der wertvollsten Marketing-Möglichkeiten der Welt: deinen akustischen Fingerabdruck. Weil du ein Unikat bist. Entdecke hier in der Challenge:
             </p>
             <ul className="mt-3 grid list-none gap-1.5 p-0 sm:grid-cols-2">
-              {['Deine Wirkung', 'Deine Keynote-Möglichkeiten', 'Warum Menschen dir zuhören', 'Was wirklich zählt', 'Tipps, wie KI deine echte Kommunikation unterstützt'].map((z) => (
+              {['Deine Wirkung', 'Deine Keynote-Möglichkeiten', 'Warum Menschen dir zuhören', 'Was wirklich zählt', 'Tipps, wie KI deine echte Kommunikation unterstützt', 'Das Workbook „Entdecke deine Stimmwirkung" – zum Blättern und Mitnehmen'].map((z) => (
                 <li key={z} className="flex items-start gap-3 font-montserrat text-[15px] font-bold text-white"><Haken />{z}</li>
               ))}
             </ul>
@@ -681,37 +685,63 @@ export default function Challenge() {
         </div>
       </Abschnitt>
 
-      {/* Hand aufs Herz */}
+      {/* Hand aufs Herz - Lernbox (Claudia, 22.09.2026 11:27 UTC): sieben Ja/Nein-Fragen zum Aufklappen, jede mit
+          Antwort; darunter die 7 A's vom Flyer: "es ist alles schon in dir". */}
       <Abschnitt className="bg-pearl-white py-16 sm:py-24" label="hand-aufs-herz">
         <div className="mx-auto max-w-6xl px-6">
-          <div className={KOPF}>
-            <div>
-              <Kicker text="Hand aufs Herz" hell />
-              <h2 id="hand-aufs-herz" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
-                Zehn Sätze. Welche würdest du unterschreiben?
-              </h2>
-              <p className="mt-4 font-inter text-lg text-midnight-blue">Kreuze an, wo du zustimmst – ehrlich, nicht höflich.</p>
-            </div>
-          </div>
-          <ul className="mt-7 grid list-none gap-2.5 p-0 sm:grid-cols-2">
-            {KREUZE.map((k, i) => (
-              <li key={k}>
-                <label className={`flex cursor-pointer items-start gap-3.5 bg-white px-4 py-3.5 font-inter font-medium leading-snug text-midnight-blue ${KACHEL}`}>
-                  <input type="checkbox" className="mt-0.5 h-5 w-5 flex-none accent-[#D4AF37]" checked={kreuze[i]} onChange={() => setKreuze((a) => a.map((v, j) => (j === i ? !v : v)))} />
-                  {k}
-                </label>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-7 rounded-[10px] border border-[#D4AF37]/55 bg-midnight-blue px-6 py-5 text-pearl-white" aria-live="polite">
-            <p className="font-inter text-pearl-white/90">
-              {nKreuze === 0
-                ? 'Kreuze an – und lies dann weiter.'
-                : kreuze[8] && kreuze[9]
-                  ? `${nKreuze} von zehn. Du kennst deine Wirkung und deine Stimme – dann geht es jetzt um die Feinheiten: die sieben Schritte.`
-                  : `${nKreuze} von zehn. Die ersten acht sind Wissen. Die letzten zwei sind Wirkung – und genau da fängt die Arbeit an.`}
+          <Kicker text="Hand aufs Herz" hell />
+          <h2 id="hand-aufs-herz" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
+            Was denkst du – was ist richtig?
+          </h2>
+          <p className="mt-4 max-w-2xl font-inter text-lg text-midnight-blue">Sieben Fragen zu Wirkung, Stimme und Performance. Ja oder Nein – und dann die Antwort.</p>
+          <details className={`group mt-7 bg-white text-midnight-blue ${KACHEL}`}>
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 sm:px-7 [&::-webkit-details-marker]:hidden">
+              <span className="flex items-center gap-4">
+                <span className={`rounded-md px-2.5 py-2 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-midnight-blue ${GOLD}`}>Lernbox</span>
+                <span className="font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">Sieben Fragen. Sieben Antworten.</span>
+              </span>
+              <span className="flex items-center gap-2 font-montserrat text-sm font-bold underline decoration-[#D4AF37] underline-offset-4">
+                <span className="group-open:hidden">Aufklappen</span>
+                <span className="hidden group-open:inline">Zuklappen</span>
+                <span aria-hidden="true" className="inline-block transition-transform group-open:rotate-180">▾</span>
+              </span>
+            </summary>
+            <ol className="grid list-none gap-2.5 border-t border-[#D4AF37]/40 px-5 pb-5 pt-4 sm:px-7 sm:pb-6">
+              {LERNBOX.map((f, i) => {
+                const a = antworten[i];
+                const richtig = a !== null && a === f.ja;
+                return (
+                  <li key={f.frage} className="rounded-[10px] border border-[#D4AF37]/35 bg-pearl-white px-4 py-3.5">
+                    <div className="flex flex-wrap items-center justify-between gap-3">
+                      <p className="font-montserrat text-[15px] font-bold leading-snug">{i + 1}. {f.frage}</p>
+                      <span className="flex gap-2">
+                        {[true, false].map((wert) => (
+                          <button key={String(wert)} type="button" onClick={() => setAntworten((alle) => alle.map((v, j) => (j === i ? wert : v)))} className={`rounded-full border px-4 py-1.5 font-montserrat text-sm font-bold transition-colors ${a === wert ? 'border-midnight-blue bg-midnight-blue text-pearl-white' : 'border-midnight-blue/30 bg-white text-midnight-blue hover:border-midnight-blue'}`}>
+                            {wert ? 'Ja' : 'Nein'}
+                          </button>
+                        ))}
+                      </span>
+                    </div>
+                    {a !== null && (
+                      <p className="mt-2.5 flex items-start gap-3 font-inter text-[15px] leading-relaxed" aria-live="polite">
+                        <span aria-hidden="true" className={`mt-0.5 font-montserrat font-black ${richtig ? 'text-[#B8860B]' : 'text-midnight-blue/60'}`}>{richtig ? '✓' : '✕'}</span>
+                        <span>{f.antwort}</span>
+                      </p>
+                    )}
+                  </li>
+                );
+              })}
+            </ol>
+            <p className="border-t border-[#D4AF37]/40 px-5 py-4 font-montserrat text-base font-bold sm:px-7" aria-live="polite">
+              {nBeantwortet === 0 ? 'Fang einfach an – es gibt kein Falsch, nur ein Vorher und ein Nachher.' : `${nRichtig} von ${nBeantwortet} richtig.${nBeantwortet === LERNBOX.length ? ' Und alles, was du dafür brauchst, ist schon in dir.' : ''}`}
             </p>
-            <p className="mt-1.5 font-cormorant text-2xl italic leading-tight text-[#F7E7CE] sm:text-3xl">Was hast du, was KI niemals haben wird? Dich.</p>
+          </details>
+          <div className={`mt-4 rounded-[10px] px-5 py-5 text-midnight-blue sm:px-7 ${GOLD}`}>
+            <p className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.2em]">Die 7 A's der modernen Vermarktung · nach Karsten Brocke</p>
+            <p className="mt-3 flex flex-wrap gap-x-2 gap-y-1 font-montserrat text-xl font-black uppercase leading-tight sm:text-2xl">
+              {SIEBEN_A.map((a) => (<span key={a}>{a}</span>))}
+            </p>
+            <p className="mt-3 font-cormorant text-2xl italic leading-snug sm:text-3xl">Es ist alles schon in dir.</p>
           </div>
         </div>
       </Abschnitt>
@@ -811,12 +841,16 @@ export default function Challenge() {
             </div>
             <Kopfbild datei="tonstudio" alt="Claudia Conen am Mikrofon im Tonstudio" />
           </div>
-          <div className="mt-9 grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-9 grid gap-3 sm:grid-cols-3 lg:grid-cols-5">
             {WERKZEUG.map((w, i) => (
-              <article key={w.titel} style={{ ['--i' as string]: i }} className={`cc-stufe bg-pearl-white p-6 text-midnight-blue ${KACHEL}`}>
-                <span aria-hidden="true" className="grid h-11 w-11 place-items-center rounded-[10px] bg-midnight-blue font-montserrat font-black text-[#EBD197]">{i + 1}</span>
-                <h3 className="mt-4 font-montserrat text-base font-extrabold uppercase tracking-wide">{w.titel}</h3>
-                <p className="mt-2.5 font-inter text-[15px] leading-relaxed">{w.text}</p>
+              <article key={w.titel} style={{ ['--i' as string]: i }} className="cc-stufe hero-glass-card group relative rounded-xl p-3.5">
+                <div className="flex items-start gap-3">
+                  <img src={`/icons/${w.icon}.webp`} alt="" width={256} height={256} loading="lazy" decoding="async" className="h-11 w-11 flex-shrink-0 drop-shadow-[0_6px_10px_rgba(0,0,0,0.35)] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110" />
+                  <div className="min-w-0 flex-1">
+                    <h3 className="text-[0.8rem] font-semibold leading-snug text-pearl-white">{w.titel}</h3>
+                    <p className="mt-0.5 text-[0.7rem] leading-snug text-pearl-white/60">{w.text}</p>
+                  </div>
+                </div>
               </article>
             ))}
           </div>
@@ -978,13 +1012,12 @@ export default function Challenge() {
         </div>
       </Abschnitt>
 
-      {/* Netzwerk Mittelstand - deine Community. Claudias Diktat vom 22.09.2026, 10:59 UTC, geglaettet; "deine
-          Community" kleiner, wie die Gold-Zeile darueber. Helles Glas ueber bewegtem Gold statt dunklem Glas
-          ("dieser komische Braunton ... weg"). Gabi steht NUR hier (ihre Regel). */}
+      {/* Netzwerk Mittelstand - deine Community. Claudia, 22.09.2026 11:29 UTC: "nicht so yellow gelb beige",
+          "gar nicht viel drauf": Mitentdecker unter den ersten 27, Termin des ersten Zoom-Calls (von Gabis Seite
+          community.claudiaconen.com/netzwerkwebinar, 22.09.2026: Di 3.11.2026, 18:18 Uhr). Gabi steht NUR hier. */}
       <Abschnitt id="community" className="bg-pearl-white py-16 sm:py-24" label="community-titel">
         <div className="mx-auto max-w-6xl px-6">
-          <div className="cc-goldbuehne rounded-[18px] p-3 shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)] sm:p-4">
-          <div className="cc-glas-hell grid items-center gap-8 rounded-[14px] p-7 text-midnight-blue sm:p-10 md:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
+          <div className={`grid items-center gap-8 bg-white p-7 text-midnight-blue sm:p-10 md:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] ${KACHEL} border-[#D4AF37] shadow-[0_18px_40px_-18px_rgba(212,175,55,0.5)]`}>
             <div>
               <Kicker text="Die Unverwechselbaren · nach der Challenge" hell />
               <h2 id="community-titel" className="mt-4 font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
@@ -992,24 +1025,29 @@ export default function Challenge() {
                 <span className="mt-2 block font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] text-[#B8860B]">deine Community</span>
               </h2>
               <p className="mt-5 font-inter text-lg leading-relaxed text-midnight-blue">
-                Den ersten Schritt hast du gemacht: in die Sichtbarkeit. Jetzt kommt der, der dich mit Menschen verbindet und dir eine Bühne gibt. Lerne sie kennen – die Community der Unverwechselbaren – und werde ein Teil davon.
+                Willst du Mitentdecker sein – einer der ersten 27 – in einem Netzwerk, in dem deine Produkte, deine Persönlichkeit und deine Termine eine Bühne haben? Menschen, die sich gegenseitig empfehlen, statt sich über den Preis zu vergleichen.
               </p>
-              <ul className="mt-5 grid list-none gap-2.5 p-0 font-inter text-midnight-blue sm:grid-cols-2">
+              <ul className="mt-5 grid list-none gap-2 p-0 font-inter text-[15px] text-midnight-blue sm:grid-cols-2">
                 {[
-                  'Deine Produkte, Botschaften und Termine online einstellen',
-                  'Kurse anbieten, am Adventskalender und am Buchprojekt teilnehmen',
-                  'Live-Termine und regelmäßige Zoom-Calls',
-                  'Live-Sessions für die Mitglieder anbieten',
-                  'Tipps zu Performance und Wirkung – immer auf dem Laufenden',
-                  'Unsagbar viel Content – genießen und austauschen',
+                  'Deine Produkte, Botschaften und Termine einstellen',
+                  'Kurse anbieten, Buchprojekt, Adventskalender',
+                  'Jeden Monat live im Zoom, einmal im Jahr live vor Ort',
+                  'Tipps zu Performance und Wirkung – im Austausch',
                 ].map((z) => (
                   <li key={z} className="flex gap-3"><Haken />{z}</li>
                 ))}
               </ul>
-              <p className="mt-5 font-montserrat text-base font-bold text-midnight-blue">Lass dich überraschen: Klick auf den Knopf und sei dabei.</p>
-              <a href="https://community.claudiaconen.com/" target="_blank" rel="noopener noreferrer" className={`mt-6 inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue transition-transform hover:-translate-y-px ${GOLD}`}>
-                Sei dabei
-              </a>
+              <p className={`mt-6 inline-block rounded-md px-4 py-3 font-montserrat text-sm font-extrabold uppercase tracking-[0.06em] text-midnight-blue ${GOLD}`}>
+                Erstes Treffen der 27: Dienstag, 3. November 2026, 18:18 Uhr – online. Trag dir den Termin ein.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <a href="https://community.claudiaconen.com/netzwerkwebinar/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full bg-midnight-blue px-7 py-4 font-montserrat text-sm font-bold text-pearl-white transition-colors hover:bg-royal-navy">
+                  Einer der ersten 27 werden
+                </a>
+                <a href="https://community.claudiaconen.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full border-2 border-midnight-blue px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue transition-colors hover:bg-midnight-blue hover:text-pearl-white">
+                  Zur Community
+                </a>
+              </div>
             </div>
             <figure className={`relative m-0 aspect-[3/2] w-full max-w-[380px] justify-self-center overflow-hidden ${KACHEL}`}>
               <img src="/unverwechselbar/gabi-und-claudia.webp" alt="Claudia Conen und Gabi Lindemann lachen zusammen" width={900} height={600} loading="lazy" decoding="async" className="h-full w-full object-cover" />
@@ -1017,7 +1055,6 @@ export default function Challenge() {
                 Gabi Lindemann und Claudia Conen – zusammen zuständig für die Community
               </figcaption>
             </figure>
-          </div>
           </div>
         </div>
       </Abschnitt>
@@ -1030,15 +1067,15 @@ export default function Challenge() {
             Willst du dich speichern?
           </p>
           <h2 id="schluss" className="mt-5 font-montserrat text-3xl font-extrabold leading-tight sm:text-5xl">
-            Willst du deine Zukunft im KI-Zeitalter selbst in die Hand nehmen – und dich aus der Masse herausheben? <span className="gold-text-animated">Dann sei einfach mit dabei.</span>
+            Willst du im KI-Zeitalter mit deiner Persönlichkeit punkten – statt vergleichbar über den Preis Kunden zu gewinnen? <span className="gold-text-animated">Dann schließ dich unserem Netzwerk an: die Unverwechselbaren, die Community für den Mittelstand.</span>
           </h2>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <a href="#anmelden" className={`inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue ${GOLD}`}>
               Ich bin dabei – eintragen
             </a>
-            <Link to="/buchen/erstgespraech" className="inline-flex items-center rounded-full border-2 border-[#D4AF37] px-7 py-4 font-montserrat text-sm font-bold text-pearl-white hover:text-[#EBD197]">
-              Rederaum buchen
-            </Link>
+            <a href="https://community.claudiaconen.com/netzwerkwebinar/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full border-2 border-[#D4AF37] px-7 py-4 font-montserrat text-sm font-bold text-pearl-white hover:text-[#EBD197]">
+              Zum Netzwerk der Unverwechselbaren
+            </a>
           </div>
         </div>
       </Abschnitt>

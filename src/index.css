@@ -2519,3 +2519,10 @@ html, body { cursor: auto; }
 @keyframes ccBuchSchwenk { from { transform: rotateY(34deg) rotateX(7deg); } to { transform: rotateY(12deg) rotateX(3deg); } }
 @media (prefers-reduced-motion: reduce) { .cc-buch { animation: none; } .cc-buch-deckel { transition: none; } }
 @media (max-width: 640px) { .cc-buch-buehne { padding: 18px 18px 4px 24px; } }
+
+/* Schluss-Slogan der Startseite als grosse Laufschrift (22.09.2026) - hell, Nachtblau, goldene Punkte. */
+.cc-slogan { width: 100vw; position: relative; left: 50%; transform: translateX(-50%); padding: 6px 0 14px; }
+.cc-slogan-spur { display: flex; width: max-content; animation: cc-lauf 46s linear infinite; }
+.cc-slogan:hover .cc-slogan-spur { animation-play-state: paused; }
+.cc-slogan-punkt { display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: linear-gradient(135deg, #C9A961, #F7E7CE 48%, #D4AF37); flex: none; }
+@media (prefers-reduced-motion: reduce) { .cc-slogan-spur { animation: none; flex-wrap: wrap; width: auto; } }

@@ -3,8 +3,8 @@ import { Calendar, ArrowRight } from 'lucide-react';
 
 export default function FinalCTA() {
   return (
-    <section className="py-12 md:py-20 px-4 sm:px-6 lg:px-8 bg-white">
-      <div className="max-w-4xl mx-auto text-center">
+    <section className="overflow-hidden bg-white px-4 py-12 sm:px-6 md:py-20 lg:px-8">
+      <div className="mx-auto max-w-4xl text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -15,13 +15,28 @@ export default function FinalCTA() {
           {/* Schluss-Slogan nach Claudias Diktat vom 22.09.2026, 17:08 UTC ("nicht fuer KI, nicht gegen KI, sondern
               Fortschritt"; "hinter jedem Kunden steckt eine Persoenlichkeit"), fuer Geschaeftsleute, warm. Gold nur als
               Unterstreichung, nicht als Schriftfarbe auf Weiss (Designliste). */}
-          <h2 className="font-montserrat font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight text-midnight-blue">
-            Nutze den Fortschritt. Gewinne Zeit.
-            <span className="mt-2 block underline decoration-[#D4AF37] decoration-[4px] underline-offset-[6px]">Und schenk sie den Menschen, die dir vertrauen sollen.</span>
-          </h2>
+          {/* Fassung vom 22.09.2026, 17:40 UTC nach Claudias zweitem Diktat ("Fortschritt ist jeden Tag, jeder Moment ...
+              setze die Zeit dort ein, wo du nicht vergleichbar bist ... durch deine unverwechselbare Menschlichkeit
+              Vertrauen aufbauen, Kunden gewinnen, unvergleichbar sein"). */}
+          {/* Grosse durchlaufende Schrift (Claudia, 22.09.2026 17:40 UTC: "Waere das gut mit einer grossen, durchlaufenden
+              Schrift?" - laut Designliste ausdruecklich hell mit farbigem Text). Der Satz steht als Ueberschrift im
+              Quelltext (sr-only), das Laufband ist die sichtbare Fassung. */}
+          <h2 className="sr-only">Fortschritt passiert jeden Tag. Nutze ihn – gewinne Zeit. Und setze sie ein, wo dich niemand vergleichen kann: bei Menschen.</h2>
+          <div aria-hidden="true" className="cc-slogan -mx-4 overflow-hidden sm:-mx-6 lg:-mx-8">
+            <div className="cc-slogan-spur">
+              {[0, 1].map((k) => (
+                <span key={k} className="flex flex-none items-center gap-8 pr-8 font-montserrat text-3xl font-black uppercase leading-none tracking-tight text-midnight-blue sm:text-5xl md:text-6xl">
+                  <span>Fortschritt passiert jeden Tag.</span><span className="cc-slogan-punkt" />
+                  <span>Nutze ihn – gewinne Zeit.</span><span className="cc-slogan-punkt" />
+                  <span>Und setze sie ein, wo dich niemand vergleichen kann:</span><span className="cc-slogan-punkt" />
+                  <span>bei Menschen.</span><span className="cc-slogan-punkt" />
+                </span>
+              ))}
+            </div>
+          </div>
 
           <p className="font-cormorant text-2xl md:text-3xl italic leading-snug text-midnight-blue max-w-2xl mx-auto">
-            Denn hinter jedem Kunden steckt eine Persönlichkeit.
+            Mit deiner Persönlichkeit entsteht Vertrauen. Aus Vertrauen werden Kunden.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 items-center justify-center pt-2 md:pt-4">

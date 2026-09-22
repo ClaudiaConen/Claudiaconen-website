@@ -69,8 +69,6 @@ const MENSCH_KANN = [
   'Redepausen geben Platz. Für Verständnis und für Wirkung.',
   'Eine Stimme, die meint, was sie sagt, hört man. Wissen klingt anders als Überzeugung.',
   'Ein Blick, der den anderen meint. Wer angesehen wird, fühlt sich gemeint – und bleibt.',
-  'Ein Detail, das nur du kennst: ein Ort, ein Name, ein Satz, der fiel. Geschichten bleiben, Daten nicht.',
-  'Unperfekt, aber echt. Ein Versprecher, über den du lachst, macht dich glaubwürdiger als jede glatte Antwort.',
 ];
 
 const FRAGEN: { frage: string; text: string }[] = [
@@ -110,7 +108,7 @@ const WORKBOOK_PDF = '/unverwechselbar/workbook-entdecke-deine-stimmwirkung.pdf'
 const WERKZEUG: { titel: string; text: string; icon: string }[] = [
   { titel: 'Stimme', text: 'Sprich zum letzten Stuhl im Raum – auch wenn nur das Handy vor dir steht. Ein Satz, eine Pause, der nächste Satz.', icon: 'stimme' },
   { titel: 'Innere Haltung', text: 'Bevor du auf Aufnahme drückst: Wem erzählst du das? Ein Mensch, nicht ein Publikum.', icon: 'praesenz' },
-  { titel: 'Aufwärmen', text: 'Zwei Minuten: summen, Lippen flattern, drei Sätze überdeutlich. Danach klingt alles wacher.', icon: 'wirkung' },
+  { titel: 'Der Blick', text: 'Schau in die Linse, nicht auf dich selbst. Der Zuhörer sitzt hinter der Kamera – und merkt, ob du ihn meinst.', icon: 'wirkung' },
   { titel: 'Storytelling', text: 'Fang mit dem Moment an, nicht mit der Vorgeschichte. Das ist eine Geschichte – alles andere ein Bericht.', icon: 'story' },
   { titel: 'Das Mikrofon', text: 'Das Handy nimmt den Raum auf. Ein Ansteckmikrofon holt deine Stimme nach vorn. Gut, nicht perfekt – perfekt ist der Avatar.', icon: 'botschaft' },
 ];
@@ -136,10 +134,10 @@ function freischaltung(heute: Date, tag: number): Date {
  *  (Claudia, 22.09.2026 11:16 UTC): Start-Zoom Mo 26.10. 19:00 Uhr, Abschlusstreffen Mo 02.11. 19:00 Uhr. */
 function standZeile(heute: Date): string {
   const h = new Date(heute); h.setHours(0, 0, 0, 0);
-  if (h < START) return 'Start: Montag, 26. Oktober 2026, 19:00 Uhr – live im Zoom-Call · Abschluss: Montag, 2. November, 19:00 Uhr';
+  if (h < START) return 'Start: Montag, 26. Oktober 2026 · 19:00 Uhr · live im Zoom-Call';
   if (h <= ENDE) {
     const tag = Math.min(7, Math.floor((h.getTime() - START.getTime()) / 86400000) + 1);
-    return `Die Challenge läuft – heute ist Tag ${tag} · Abschluss: Montag, 2. November, 19:00 Uhr`;
+    return `Die Challenge läuft – heute ist Tag ${tag} von 7`;
   }
   return 'Der Durchgang vom 26. Oktober ist beendet – trag dich ein, du erfährst als Erste, wann es wieder losgeht';
 }
@@ -268,8 +266,8 @@ const WEGWEISER = {
 
 const ABLAUF = [
   'Du trägst dich unten ein und gehst in die WhatsApp-Gruppe – dort läuft die Challenge, mit Tipps, Austausch und einem Miteinander.',
-  'Wir starten gemeinsam: live im Zoom-Call, Montag, 26. Oktober, 19:00 Uhr. Danach jeden Tag ein neuer Schlüssel – als Audio von mir, mit Hinweisen.',
-  'Du nimmst dein Video auf – eine Minute, 24 Stunden Zeit – und bekommst mein Feedback. Abschlusstreffen live im Zoom: Montag, 2. November, 19:00 Uhr.',
+  'Wir starten gemeinsam live im Zoom. Danach jeden Tag ein neuer Schlüssel – als Audio von mir, mit Hinweisen.',
+  'Du nimmst dein Video auf – eine Minute – und teilst es in der Gruppe. Dort bekommst du mein Feedback.',
 ];
 
 const FUER = [
@@ -901,14 +899,14 @@ export default function Challenge() {
         <div className="mx-auto max-w-6xl px-6">
           <div className={KOPF}>
             <div>
-              <Kicker text="Drei Wege. Ein Anfang." hell />
+              <Kicker text="Zwei Wege. Ein Anfang." hell />
               <h2 id="angebot-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
                 Mein Geschenk für deine Wirkung – und der Schritt danach.
               </h2>
             </div>
             <Kopfbild datei="am-telefon" alt="Claudia Conen lächelt mit dem Telefon in der Hand" quer />
           </div>
-          <div className="mt-9 grid gap-4 md:grid-cols-3">
+          <div className="mt-9 grid gap-4 md:grid-cols-2">
             <div className={`flex flex-col bg-white p-7 text-midnight-blue ${KACHEL} border-[#D4AF37]`}>
               <span className="self-start rounded-full bg-midnight-blue px-3 py-1.5 font-montserrat text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#EBD197]">Geschenk · kostenlos</span>
               <h3 className="mt-4 font-montserrat text-2xl font-extrabold uppercase">Der Wirkungs-Check</h3>
@@ -940,18 +938,6 @@ export default function Challenge() {
                 <Link to="/buchen/erstgespraech" className={`inline-flex items-center rounded-full px-6 py-3.5 font-montserrat text-sm font-bold text-midnight-blue transition-transform hover:-translate-y-px ${GOLD}`}>
                   Rederaum buchen
                 </Link>
-              </div>
-            </div>
-            <div className={`flex flex-col p-7 text-midnight-blue ${GOLD} ${KACHEL} border-transparent`}>
-              <span className="self-start rounded-full bg-midnight-blue px-3 py-1.5 font-montserrat text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#EBD197]">Online-Bühne · sofort</span>
-              <h3 className="mt-4 font-montserrat text-2xl font-extrabold uppercase">Das Netzwerk der Unverwechselbaren</h3>
-              <p className="mt-4 font-inter leading-relaxed">
-                Willst du sofort eine Online-Bühne nutzen? Im Netzwerk Mittelstand – deiner Community – stellst du dich, deine Botschaft und deine Termine vor Menschen, die sich gegenseitig empfehlen.
-              </p>
-              <div className="mt-auto pt-7">
-                <a href="#community" className="inline-flex items-center rounded-full bg-midnight-blue px-6 py-3.5 font-montserrat text-sm font-bold text-pearl-white transition-colors hover:bg-royal-navy">
-                  Zum Netzwerk
-                </a>
               </div>
             </div>
           </div>
@@ -1037,14 +1023,16 @@ export default function Challenge() {
                 <span className="mt-2 block font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] text-[#B8860B]">deine Community</span>
               </h2>
               <p className="mt-5 font-inter text-lg leading-relaxed text-midnight-blue">
-                Willst du Mitentdecker sein – einer der ersten 27 – in einem Netzwerk, in dem deine Produkte, deine Persönlichkeit und deine Termine eine Bühne haben? Menschen, die sich gegenseitig empfehlen, statt sich über den Preis zu vergleichen.
+                Willst du Mitentdecker sein – einer der ersten 27 – in einem Netzwerk, in dem deine Produkte, deine Persönlichkeit und deine Termine eine Bühne haben? Hier zählt Empfehlung mehr als Werbung.
               </p>
               <ul className="mt-5 grid list-none gap-2 p-0 font-inter text-[15px] text-midnight-blue sm:grid-cols-2">
                 {[
-                  'Deine Produkte, Botschaften und Termine einstellen',
-                  'Kurse anbieten, Buchprojekt, Adventskalender',
-                  'Jeden Monat live im Zoom, einmal im Jahr live vor Ort',
-                  'Tipps zu Performance und Wirkung – im Austausch',
+                  'Kurs-Marktplatz: eigene Kurse verkaufen, ohne Provision',
+                  'Social-Media-Studio für deine Beiträge',
+                  'Dein Kalender: Zoom-Calls, Workshops, Meetups',
+                  'Jeden Monat live im Zoom, einmal im Jahr vor Ort',
+                  'Alle ein bis zwei Jahre ein gemeinsames Buch',
+                  'Video-Profil, Masterminds, KI-Member-Matching',
                 ].map((z) => (
                   <li key={z} className="flex gap-3"><Haken />{z}</li>
                 ))}

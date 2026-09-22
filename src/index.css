@@ -2479,3 +2479,8 @@ html, body { cursor: auto; }
 /* Helles Glas ueber bewegtem Gold (Netzwerk-Block, 22.09.2026): statt dunklem Glas, das Claudia als
    "komischer Braunton" sah - Gold schimmert am Rand durch, Text bleibt Nachtblau auf hellem Grund. */
 .cc-glas-hell { position: relative; background: rgba(253,251,247,.9); -webkit-backdrop-filter: blur(14px) saturate(1.1); backdrop-filter: blur(14px) saturate(1.1); border: 1px solid rgba(212,175,55,.55); }
+
+/* Tages-Streifen der Challenge: Zahl und Schluessel pulsieren leise (Claudia, 22.09.2026: "ein bisschen pulsieren"). */
+.cc-puls { animation: cc-puls 2.6s ease-in-out infinite; }
+@keyframes cc-puls { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.06); opacity: .82; } }
+@media (prefers-reduced-motion: reduce) { .cc-puls { animation: none; } }

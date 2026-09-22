@@ -86,7 +86,7 @@ const SCHRITTE: { titel: string; text: string }[] = [
   { titel: 'Dein Kunde denkt in Bildern', text: 'Geschichten bleiben. Daten nicht. Wie du aus deiner Erfahrung Bilder machst, die man weitererzählt.' },
   { titel: 'Unaufhaltbar', text: 'Einzigartig. Unüberhörbar. Deine Stimme. Deine Wirkung. Das Zusammenspiel von Worten, Stimme und Haltung.' },
   { titel: 'Wirkung ist kein Zufall', text: 'Sie ist trainierbar. Sichtbar. Entscheidbar. Echt, unverwechselbar – nicht perfekt.' },
-  { titel: 'Dein Kopf. Ihr Gefühl.', text: 'Wirkung beginnt im Inneren. Und bleibt im Kopf deiner Kunden. Der Schritt, in dem alles zusammenkommt.' },
+  { titel: 'Dein Kopf. Ihr Gefühl.', text: 'Du bekommst wertvolle Audio-Impulse, Anleitungen und Feedback – der Schritt, in dem alles zusammenkommt.' },
 ];
 
 
@@ -303,6 +303,20 @@ function EintragBlock() {
   );
 }
 
+/** Goldener Schluessel auf den Tages-Streifen (Claudia: "immer einen goldenen Schluessel mit drauf ... so Geheimnis"). */
+function Schluessel() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" className="cc-puls flex-none drop-shadow-[0_1px_2px_rgba(0,0,0,0.25)]">
+      <defs>
+        <linearGradient id="cc-schluessel-gold" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#C9A961" /><stop offset=".48" stopColor="#F7E7CE" /><stop offset="1" stopColor="#D4AF37" />
+        </linearGradient>
+      </defs>
+      <path fill="url(#cc-schluessel-gold)" d="M14.5 2a7.5 7.5 0 0 0-7.2 9.6L2 16.9V22h5.1v-2.6h2.6v-2.6h2.6l1.3-1.3A7.5 7.5 0 1 0 14.5 2Zm2 4.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4Z" />
+    </svg>
+  );
+}
+
 function Kicker({ text, hell }: { text: string; hell?: boolean }) {
   return (
     <p className={`flex items-center gap-3 font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] ${hell ? 'text-midnight-blue' : 'text-[#EBD197]'}`}>
@@ -388,7 +402,6 @@ export default function Challenge() {
   const startKurz = new Intl.DateTimeFormat('de-DE', { day: 'numeric', month: 'long', year: 'numeric' }).format(START);
   // Welche Tage sind freigeschaltet? Beim Vorrendern gilt das Bau-Datum, im Browser der echte Tag.
   const frei = TAGE.map((_, i) => heute >= freischaltung(heute, i));
-  const offenerTag = frei.lastIndexOf(true);
   const listeRef = useRef<HTMLOListElement>(null);
   // Pfeil auf der Schiene folgt dem Scrollen: 0 % am Anfang der Liste, 100 % am Ende.
   useEffect(() => {
@@ -454,7 +467,7 @@ export default function Challenge() {
               Nutze eine der wertvollsten Marketing-Möglichkeiten der Welt: deinen akustischen Fingerabdruck. Weil du ein Unikat bist. Entdecke hier in der Challenge:
             </p>
             <ul className="mt-3 grid list-none gap-1.5 p-0 sm:grid-cols-2">
-              {['Deine Wirkung', 'Deine Keynote-Möglichkeiten', 'Warum Menschen dir zuhören', 'Was wirklich zählt'].map((z) => (
+              {['Deine Wirkung', 'Deine Keynote-Möglichkeiten', 'Warum Menschen dir zuhören', 'Was wirklich zählt', 'Tipps, wie KI deine echte Kommunikation unterstützt'].map((z) => (
                 <li key={z} className="flex items-start gap-3 font-montserrat text-[15px] font-bold text-white"><Haken />{z}</li>
               ))}
             </ul>
@@ -500,7 +513,7 @@ export default function Challenge() {
                 <li
                   key={s.titel}
                   style={{ ['--i' as string]: i }}
-                  className={`cc-stufe min-h-[190px] p-6 hover:-translate-y-0.5 ${KACHEL} ${letzter ? `${GOLD} border-transparent text-midnight-blue` : 'bg-pearl-white text-midnight-blue'}`}
+                  className={`cc-stufe p-6 hover:-translate-y-0.5 ${KACHEL} ${letzter ? `${GOLD} border-transparent text-midnight-blue` : 'min-h-[190px] bg-pearl-white text-midnight-blue'}`}
                 >
                   <span aria-hidden="true" className={`font-montserrat text-4xl font-black ${letzter ? 'text-midnight-blue/40' : 'text-[#D4AF37]'}`}>
                     {String(i + 1).padStart(2, '0')}
@@ -535,13 +548,21 @@ export default function Challenge() {
           (Designliste: nie alles hinter einem Klick). Tag 1 ist aufgeklappt. */}
       <Abschnitt id="tage" className="bg-pearl-white pb-16 sm:pb-24" label="tage-titel">
         <div className="mx-auto max-w-6xl px-6">
+          {/* Claudia, 22.09.2026 11:21 UTC: "Dein Wegweiser: sieben Tage, jeden Tag eine Anleitung zum Aufklappen,
+              jeden Tag 5 Minuten fuer deine Wirkung", Themen als Vorgeschmack, dann "ganz schlanke Banner in Gold"
+              mit Datum und Uhrzeit des Gruppentreffens, darunter sieben duenne Streifen: nur Zahl, Datum, Schluessel. */}
           <Kicker text="Dein Wegweiser" hell />
           <h2 id="tage-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
-            Sieben Tage. Jeden Tag eine Anleitung – zum Aufklappen.
+            Sieben Tage. Jeden Tag eine Anleitung zum Aufklappen –
+            <span className="mt-1 block underline decoration-[#D4AF37] decoration-[4px] underline-offset-[6px]">jeden Tag fünf Minuten für deine Wirkung.</span>
           </h2>
-          <p className="mt-4 max-w-2xl font-inter text-lg leading-relaxed text-midnight-blue">
-            Jeder Morgen beginnt mit den fünf Minuten von Tag 1 – und mit deinem Satz. So hörst du am Ende, was sich verändert hat.
+          <p className="mt-4 max-w-3xl font-inter text-lg leading-relaxed text-midnight-blue">
+            Warum hören Menschen dir gerne zu? „Ich mag meine Stimme nicht." Story, Elevator Pitch, Keynote, Miteinander, jeden Tag telefonieren, Kaltakquise, Kundengewinnung – all das und noch viel mehr gehört dazu.
           </p>
+          <div className={`mt-7 flex flex-wrap items-center justify-between gap-x-6 gap-y-1 rounded-md px-5 py-2.5 font-montserrat text-[13px] font-extrabold uppercase tracking-[0.12em] text-midnight-blue ${GOLD}`}>
+            <span>Gruppentreffen live im Zoom · Montag, 26. Oktober 2026 · 19:00 Uhr</span>
+            <span>Abschlusstreffen · Montag, 2. November 2026 · 19:00 Uhr</span>
+          </div>
 
           <details className={`group mt-8 text-midnight-blue ${GOLD} ${KACHEL} border-transparent shadow-[0_18px_40px_-18px_rgba(212,175,55,0.7)]`}>
             <summary className="grid cursor-pointer list-none gap-x-6 gap-y-2 px-5 py-5 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:items-center sm:px-7 sm:py-6 [&::-webkit-details-marker]:hidden">
@@ -578,34 +599,25 @@ export default function Challenge() {
               return (
                 <li key={t.titel} style={{ ['--i' as string]: i }} className="cc-stufe">
                   {!frei[i] ? (
-                    <div className={`grid gap-x-6 gap-y-2 bg-white/70 px-5 py-5 text-midnight-blue sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:items-center sm:px-7 sm:py-6 ${KACHEL} border-[#D4AF37]/35`}>
-                      <span className="self-start rounded-md bg-midnight-blue/70 px-2.5 py-2 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-pearl-white">
-                        Tag {i + 1}
-                      </span>
-                      <span className="min-w-0">
-                        <span className="block font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">{t.titel}</span>
-                        <span className="mt-1 block font-inter text-[15px] leading-relaxed">{t.vorschau}</span>
-                      </span>
-                      <span className="font-montserrat text-sm font-bold text-midnight-blue/70">Öffnet {KURZ.format(freischaltung(heute, i))}</span>
+                    <div className={`flex items-center gap-4 bg-white/70 px-4 py-3 text-midnight-blue sm:px-6 ${KACHEL} border-[#D4AF37]/35`}>
+                      <span className="cc-puls rounded-md bg-midnight-blue/70 px-2.5 py-1.5 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-pearl-white">Tag {i + 1}</span>
+                      <span className="min-w-0 flex-1 font-montserrat text-sm font-bold text-midnight-blue/80">{KURZ.format(freischaltung(heute, i))}</span>
+                      <Schluessel />
                     </div>
                   ) : (
-                  <details className={`group bg-white text-midnight-blue ${KACHEL}`} open={i === offenerTag}>
-                    <summary className="grid cursor-pointer list-none gap-x-6 gap-y-2 px-5 py-5 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:items-center sm:px-7 sm:py-6 [&::-webkit-details-marker]:hidden">
-                      <span className={`self-start rounded-md px-2.5 py-2 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] ${letzter ? `${GOLD} text-midnight-blue` : 'bg-midnight-blue text-pearl-white'}`}>
-                        Tag {i + 1}
+                  <details className={`group bg-white text-midnight-blue ${KACHEL}`}>
+                    <summary className="flex cursor-pointer list-none items-center gap-4 px-4 py-3 sm:px-6 [&::-webkit-details-marker]:hidden">
+                      <span className={`cc-puls rounded-md px-2.5 py-1.5 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] ${letzter ? `${GOLD} text-midnight-blue` : 'bg-midnight-blue text-pearl-white'}`}>Tag {i + 1}</span>
+                      <span className="min-w-0 flex-1 font-montserrat text-sm font-bold text-midnight-blue/80">
+                        {KURZ.format(freischaltung(heute, i).getTime() > 0 ? freischaltung(heute, i) : START)}
+                        <span className="hidden group-open:inline"> · {t.titel}</span>
                       </span>
-                      <span className="min-w-0">
-                        <span className="block font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">{t.titel}</span>
-                        <span className="mt-1 block font-inter text-[15px] leading-relaxed">{t.vorschau}</span>
-                      </span>
-                      <span className="flex items-center gap-2 font-montserrat text-sm font-bold text-midnight-blue underline decoration-[#D4AF37] underline-offset-4">
-                        <span className="group-open:hidden">Anleitung lesen</span>
-                        <span className="hidden group-open:inline">Zuklappen</span>
-                        <span aria-hidden="true" className="inline-block transition-transform group-open:rotate-180">▾</span>
-                      </span>
+                      <span className="hidden font-montserrat text-xs font-bold text-midnight-blue/70 sm:inline"><span className="group-open:hidden">Aufklappen</span><span className="hidden group-open:inline">Zuklappen</span></span>
+                      <Schluessel />
                     </summary>
                     <div className="border-t border-[#D4AF37]/40 px-5 pb-5 pt-4 sm:px-7 sm:pb-6">
-                      <p className="font-inter text-[15px] leading-relaxed">
+                      <h3 className="font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">{t.titel}</h3>
+                      <p className="mt-2 font-inter text-[15px] leading-relaxed">
                         <b className="font-montserrat font-extrabold">Deine Aufgabe: </b>
                         {t.aufgabe}
                       </p>
@@ -648,7 +660,6 @@ export default function Challenge() {
               </h2>
               <p className="mt-4 font-inter text-lg text-midnight-blue">Kreuze an, wo du zustimmst – ehrlich, nicht höflich.</p>
             </div>
-            <Kopfbild datei="avatare" alt="Claudia Conen als Mensch neben ihren KI-Avataren" />
           </div>
           <ul className="mt-7 grid list-none gap-2.5 p-0 sm:grid-cols-2">
             {KREUZE.map((k, i) => (
@@ -680,7 +691,8 @@ export default function Challenge() {
         <div className="mx-auto max-w-6xl px-6">
           <Kicker text="Dein KI-Agent ist effizient. Und du?" />
           <h2 id="ki-und-du" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">
-            Warum Menschen so gern mit der KI reden – und was trotzdem nur du kannst.
+            Warum Menschen so gern mit der KI reden. Der Mensch ist das Unikat, die KI der Beschleuniger – wir nutzen beides.
+            <span className="gold-text-animated mt-1 block">Lass dich überraschen.</span>
           </h2>
           <div className="mt-9 grid gap-4 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
             <div className={`bg-[#13233F] p-6 sm:p-8 ${KACHEL}`}>

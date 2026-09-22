@@ -90,6 +90,25 @@ const STIMMEN: Stimme[] = [
     ],
     verweis: { text: 'Zur Webseite von Ann-Kathrin Andresen', ziel: 'https://ing-up.de/' },
   },
+  // Video von Claudia am 22.09.2026 per Discord ("kloster Kitchen bewertung" + LinkedIn-Verweis). Saetze woertlich
+  // aus dem Video (Transkript: sichtung/kloster-kitchen/transkript.txt); er stellt sich selbst als "Founder von
+  // Kloster Kitchen" vor, mehrere Quellen bestaetigen: Gruender und CEO (Ingwer-Shots).
+  {
+    id: 'mario-fuerst',
+    name: 'Mario Fürst',
+    rolle: ['Gründer von Kloster Kitchen', 'Ingwer-Shots'],
+    kurz: 'Gründer von Kloster Kitchen',
+    bild: '/kundenstimmen/mario-fuerst.webp',
+    video: { quelle: '/kundenstimmen/mario-fuerst.mp4', standbild: '/kundenstimmen/mario-fuerst-video.jpg', dauer: '1 Minute' },
+    ergebnis: 'Die Stimme am Telefon von Kloster Kitchen',
+    zitat: 'Ich kann nur die Zusammenarbeit mit Claudia wärmstens empfehlen.',
+    saetze: [
+      'Wir wollten einen extrem guten Text besprochen auf unserem normalen Anrufbeantworter und auf anderen Medien nutzen.',
+      'Claudia hat sich bereit erklärt, auf eine sehr unkomplizierte Weise das mit uns zu machen, und hat auch mit uns sehr schnell daran gearbeitet, dass wir jetzt einen extrem gut gesprochenen, von ihr gesprochenen Text auf unserem Anrufbeantworter haben.',
+      'Die Zusammenarbeit war echt gut und sehr harmonisch und hat auch sehr viel Spaß gemacht.',
+    ],
+    verweis: { text: 'Mario Fürst bei LinkedIn', ziel: 'https://www.linkedin.com/in/mario-f%C3%BCrst-0b644a208/' },
+  },
   {
     id: 'e24ec4f8-58df-4622-b0a3-f2498fa7dae9',
     name: 'Freimuth Gorter',

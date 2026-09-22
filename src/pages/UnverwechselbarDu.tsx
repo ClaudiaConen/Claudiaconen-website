@@ -508,6 +508,9 @@ export default function UnverwechselbarDu() {
             <a href={CHALLENGE_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full bg-midnight-blue px-7 py-4 font-montserrat text-sm font-bold text-pearl-white transition-colors hover:bg-royal-navy">
               Ich bin dabei – zur WhatsApp-Gruppe
             </a>
+            <Link to="/challenge" className="inline-flex items-center rounded-full border-2 border-midnight-blue px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue transition-colors hover:bg-midnight-blue hover:text-pearl-white">
+              Alle sieben Tage mit Tipps
+            </Link>
           </div>
           <p className="mt-4 max-w-2xl font-inter text-[15px] text-midnight-blue">
             Die Challenge läuft in einer WhatsApp-Gruppe. Dort sehen alle Mitglieder gegenseitig die Handynummern – wer das nicht möchte, schreibt mir direkt.

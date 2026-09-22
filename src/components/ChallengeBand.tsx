@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
  * Netzwerk-Community). Wunsch: "durchlaufende Schrift ... klicke hier und mache mit, ein bisschen
  * breiter, in der grossen Schrift, edel, unter die Audio-Buttons, dass man es direkt sieht".
  *
- * Ziel ist die Challenge auf /unverwechselbar-du (dort der WhatsApp-Einstieg und der Community-Block).
+ * Ziel ist die kurze Challenge-Seite /challenge (Claudia, 09:13 UTC: 'nicht so eine lange Seite').
  * "Kostenfrei" ist ihr Wort ("Kostenfrei mitmachen") - sie war noch unentschieden; ein Preis wird hier
  * erst eingetragen, wenn sie ihn nennt. Zum Abschalten: die Zeile <ChallengeBand /> in Hero.tsx entfernen.
  */
@@ -22,7 +22,7 @@ export default function ChallengeBand() {
   const durchlauf = [...SAETZE, ...SAETZE];
   return (
     <Link
-      to="/unverwechselbar-du#challenge"
+      to="/challenge"
       className="cc-chal group mt-6 flex items-stretch overflow-hidden rounded-full border border-[#D4AF37]/40 bg-white/[0.04] no-underline shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] transition-colors hover:border-[#F7E7CE]/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#F7E7CE]"
       aria-label="Aktuelle Challenge: 7-Tage-Video-Challenge, kostenfrei mitmachen"
     >

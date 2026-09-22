@@ -1,0 +1,325 @@
+import { useEffect, useRef, type CSSProperties, type ReactNode } from 'react';
+import { Link } from 'react-router-dom';
+import Navigation from '../components/Navigation';
+import Footer from '../components/Footer';
+import SEO from '../components/SEO';
+import Brotkrumen from '../components/Brotkrumen';
+
+/**
+ * Die 7-Tage-Video-Challenge - eine kurze Seite, kein Programm.
+ *
+ * Claudias Ansage vom 22.09.2026, 09:13 UTC: "die 7 Tage challenge unterseite soll nicht zu lang
+ * sein, dafuer fuer alle sieben Tage eine Anleitung mit kostbaren Tipps ... nicht so eine lange
+ * Seite". Vorher fuehrte das Laufband der Startseite auf die lange Produktseite /unverwechselbar-du
+ * (Abschnitt Challenge). Jetzt: Kopf, sieben Tage mit je einer Aufgabe und drei Tipps, der
+ * WhatsApp-Einstieg, "Nach Tag 7". Sonst nichts.
+ *
+ * Die Tipps sind Handwerk in ihrer Stimme: klar, respektvoll, ohne Show - keine Zahlen aus der
+ * Hirnforschung, keine Zitate Dritter (die Machart eines Rhetoriktrainers ist kein Zitat).
+ * Kostenfrei ist ihr Wort ("Kostenfrei mitmachen"); ein Preis kommt nur auf ihre Ansage.
+ * Der Einladungslink ist derselbe wie auf /unverwechselbar-du - aendert sie ihn, an beiden Stellen tauschen.
+ */
+
+const PFAD = '/challenge';
+const CHALLENGE_LINK = 'https://chat.whatsapp.com/IWSuqZ9ZrMn3dYNgVY1sp6?s=qt&p=i&mlu=4&ilr=4';
+
+const GOLD = 'bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]';
+const KACHEL = 'rounded-[10px] border border-[#D4AF37]/55 transition-[border-color,box-shadow] duration-200 hover:border-[#EBD197] hover:shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)]';
+
+/** Start immer montags - der naechste Montag wird berechnet, nie eingetragen (Datum nie ohne Ablauf). */
+function naechsterMontag(heute: Date): string {
+  const d = new Date(heute);
+  const tage = (8 - d.getDay()) % 7 || 7;
+  d.setDate(d.getDate() + tage);
+  return new Intl.DateTimeFormat('de-DE', { day: 'numeric', month: 'long' }).format(d);
+}
+
+const TAGE: { titel: string; aufgabe: string; tipps: string[] }[] = [
+  {
+    titel: 'Sag, was du tust',
+    aufgabe: 'Eine Minute: Was tust du – ohne ein einziges Fachwort. So, dass deine Nachbarin es versteht.',
+    tipps: [
+      'Ein Gedanke pro Satz. Wo ein „und" steht, versteckt sich meist ein zweiter Satz. Punkt setzen, atmen, weiter.',
+      'Fang beim Menschen an, nicht bei dir: „Wenn jemand …, dann …" – so hört jeder sofort, ob es ihn betrifft.',
+      'Sag es einmal so, wie du es am Telefon einer Freundin sagen würdest. Genau diese Fassung nimmst du auf – nicht die offizielle.',
+    ],
+  },
+  {
+    titel: 'Deine Stimme gegen die Maschine',
+    aufgabe: 'Lass dir von einer KI einen Satz über dich schreiben und sag ihn. Dann sag es so, wie du es wirklich sagen würdest. Nimm beides auf.',
+    tipps: [
+      'Streich jedes Wort, das du im Gespräch nie benutzt. „Innovativ", „ganzheitlich", „Lösungen" – das sagt die Maschine, nicht du.',
+      'Persönlich wird ein Satz durch ein Detail, das nur du kennst: ein Ort, ein Name, eine Zahl aus deinem Alltag.',
+      'Hör beide Aufnahmen mit geschlossenen Augen. Welchem Menschen würdest du glauben? Das ist deine Richtung.',
+    ],
+  },
+  {
+    titel: 'Wofür stehst du?',
+    aufgabe: 'Ein Satz: Wofür stehst du? Sag ihn dreimal – jedes Mal langsamer.',
+    tipps: [
+      'Langsam heißt nicht gedehnt. Sprich im normalen Tempo – und mach die Pausen länger. Die Pause gehört dem Zuhörer; dort versteht er dich.',
+      'Betone ein Wort, nicht drei. Wenn alles wichtig klingt, ist nichts wichtig.',
+      'Der Satz ist fertig, wenn er ohne „eigentlich", „irgendwie" und „ein bisschen" auskommt. Diese Wörter nehmen ihm das Rückgrat.',
+    ],
+  },
+  {
+    titel: 'Ein Moment statt Lebenslauf',
+    aufgabe: 'Erzähl den Moment, in dem du wusstest: Das ist mein Beruf. Eine Person, ein Ort, ein Satz, der fiel.',
+    tipps: [
+      'Beginn mittendrin: „Dienstag, acht Uhr, der Kunde sagt …" – keine Vorgeschichte, keine Einleitung.',
+      'Zeig, was zu sehen war, statt zu sagen, was zu fühlen ist. „Sie legte den Stift weg" wirkt stärker als „Sie war beeindruckt".',
+      'Ende mit dem, was sich seitdem geändert hat – ein Satz. Er ist der Grund, warum du die Geschichte erzählst.',
+    ],
+  },
+  {
+    titel: 'Die Stimme, die du hast',
+    aufgabe: 'Zwei Minuten aufwärmen: summen, bis die Lippen kribbeln, Lippen flattern lassen, drei Sätze überdeutlich lesen. Dann dieselbe Aufnahme wie an Tag 1. Vergleich beide.',
+    tipps: [
+      'Sprich zur letzten Reihe, auch wenn nur das Handy vor dir steht. Der Körper richtet sich auf, die Stimme trägt.',
+      'Atme vor dem ersten Wort aus, nicht ein. Wer mit vollen Lungen startet, presst. Wer ruhig einatmet, klingt ruhig.',
+      'Tiefer wird die Stimme nicht durch Drücken, sondern durch Ruhe. Ein Satz, eine Pause. Eile hört man.',
+    ],
+  },
+  {
+    titel: 'Dieselben Worte, drei Wirkungen',
+    aufgabe: 'Ein Satz, drei Absichten: einmal beruhigend, einmal weckend, einmal überzeugend. Dieselben Worte.',
+    tipps: [
+      'Entscheide vor dem Sprechen, was der Zuhörer danach tun soll. Die Absicht färbt die Stimme – ohne dass du an ihr herumbastelst.',
+      'Beruhigen: Tempo runter, Stimme am Satzende nach unten. Wecken: kürzere Sätze, direkter Blick. Überzeugen: eine Pause vor dem wichtigsten Wort.',
+      'Respekt ist hörbar. Wer den Zuhörer verstehen statt überreden will, klingt anders – das ist die überzeugende Fassung.',
+    ],
+  },
+  {
+    titel: 'Dein Satz zum Mitnehmen',
+    aufgabe: 'Der eine Satz, den du überall sagen kannst. Den schickst du mir – und bekommst eine Antwort von mir, keine Vorlage.',
+    tipps: [
+      'Kurz genug, dass ihn jemand weitererzählen kann, ohne nachzulesen. Test: Sag ihn einer Person und bitte sie, ihn morgen zu wiederholen.',
+      'Kein Superlativ. „Die Beste", „einzigartig", „führend" – das behauptet jeder. Ein konkretes Versprechen behauptet keiner.',
+      'Er muss nach dir klingen, nicht nach einem Slogan. Wenn du dich beim Sagen räusperst, ist es noch nicht deiner.',
+    ],
+  },
+];
+
+const ABLAUF = [
+  'Du trittst der WhatsApp-Gruppe bei und sagst „Ich bin dabei".',
+  'Ab Montag bekommst du jeden Morgen eine Aufgabe – die sieben stehen hier unten.',
+  'Du nimmst dich mit dem Handy auf, eine Minute, und teilst das Video in der Gruppe. Du bekommst Feedback von mir.',
+];
+
+function Kicker({ text, hell }: { text: string; hell?: boolean }) {
+  return (
+    <p className={`flex items-center gap-3 font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] ${hell ? 'text-midnight-blue' : 'text-[#EBD197]'}`}>
+      <span aria-hidden="true" className={`cc-linie h-[3px] w-7 rounded-full ${GOLD}`} />
+      {text}
+    </p>
+  );
+}
+
+function Haken() {
+  return <span aria-hidden="true" className="mt-2 h-2.5 w-2.5 flex-none rotate-[-45deg] border-b-2 border-r-2 border-[#D4AF37]" />;
+}
+
+/** Einblenden beim Scrollen (Klassen cc-r / da in index.css) - ohne JavaScript ist alles sofort da. */
+function useEinblenden() {
+  const ref = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      el.classList.add('da');
+      return;
+    }
+    const io = new IntersectionObserver(
+      (es) => {
+        if (es.some((e) => e.isIntersecting)) {
+          el.classList.add('da');
+          io.disconnect();
+        }
+      },
+      { rootMargin: '0px 0px -8% 0px' }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  return ref;
+}
+
+function Abschnitt({ id, className, style, label, children }: { id: string; className: string; style?: CSSProperties; label: string; children: ReactNode }) {
+  const ref = useEinblenden();
+  return (
+    <section id={id} ref={ref} className={`cc-r ${className}`} style={style} aria-labelledby={label}>
+      {children}
+    </section>
+  );
+}
+
+function Einstieg({ hell }: { hell?: boolean }) {
+  return (
+    <a
+      href={CHALLENGE_LINK}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold transition-transform hover:-translate-y-px ${
+        hell ? 'bg-midnight-blue text-pearl-white hover:bg-royal-navy' : `text-midnight-blue ${GOLD}`
+      }`}
+    >
+      Ich bin dabei – zur WhatsApp-Gruppe
+    </a>
+  );
+}
+
+export default function Challenge() {
+  // Beim Vorrendern steht hier das Bau-Datum; im Browser rechnet React mit dem echten Tag neu.
+  const montag = naechsterMontag(new Date());
+
+  const strukturierteDaten = {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: '7-Tage-Video-Challenge: Zeig dich. Sei dabei.',
+    description: 'Sieben Tage, jeden Tag eine Aufgabe und eine Minute Video mit dem Handy – mit Feedback von Claudia Conen. Kostenfrei, in einer WhatsApp-Gruppe.',
+    totalTime: 'P7D',
+    step: TAGE.map((t, i) => ({ '@type': 'HowToStep', position: i + 1, name: `Tag ${i + 1}: ${t.titel}`, text: t.aufgabe })),
+    url: `https://claudiaconen.com${PFAD}`,
+  };
+
+  return (
+    <div className="min-h-screen bg-pearl-white">
+      <SEO
+        title="7-Tage-Video-Challenge – Zeig dich. Sei dabei."
+        description="Sieben Tage, jeden Tag eine Aufgabe, eine Minute Video mit dem Handy, Feedback von Claudia Conen. Kostenfrei, in einer WhatsApp-Gruppe. Für alle, die gehört werden wollen – ohne Show."
+        path={PFAD}
+      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(strukturierteDaten) }} />
+      <Navigation />
+
+      {/* Kopf: kurz, Text neben kleinem Bild */}
+      <header
+        className="relative pt-36 pb-14 sm:pt-44 sm:pb-20"
+        style={{
+          background:
+            'radial-gradient(120% 85% at 12% 0%, rgba(26,43,76,0.95) 0%, rgba(10,22,40,0) 62%),' +
+            'radial-gradient(90% 70% at 88% 18%, rgba(212,175,55,0.16) 0%, rgba(10,22,40,0) 58%),' +
+            'linear-gradient(175deg, #0B1B33 0%, #0A1628 48%, #0C1E38 100%)',
+        }}
+      >
+        <div className="mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)] items-center gap-10 px-6 md:grid-cols-[minmax(0,1.3fr)_auto] md:gap-16">
+          <div className="min-w-0 text-pearl-white">
+            <div className="mb-7 text-pearl-white/75">
+              <Brotkrumen krumen={[{ name: '7-Tage-Video-Challenge' }]} />
+            </div>
+            <Kicker text="7-Tage-Video-Challenge · kostenfrei" />
+            <h1 className="mt-6 font-montserrat text-4xl font-black uppercase leading-[1.05] tracking-tight sm:text-6xl">
+              Zeig dich. <span className="gold-text-animated">Sei dabei.</span>
+            </h1>
+            <p className="mt-6 max-w-xl font-inter text-lg leading-relaxed text-pearl-white/90">
+              Sieben Tage. Jeden Tag eine Aufgabe, eine Minute Video mit dem Handy – und Feedback von mir. Keine Technik, keine Show. Nur du und deine Stimme.
+            </p>
+            <p className="mt-5 font-montserrat text-base font-bold text-white">
+              Start immer montags – nächster Start: Montag, {montag}.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <Einstieg />
+              <a href="#tage" className="font-montserrat text-sm font-semibold text-[#EBD197] underline decoration-[#D4AF37]/50 underline-offset-4 hover:decoration-[#F7E7CE]">
+                Die sieben Tage ansehen ↓
+              </a>
+            </div>
+            <p className="mt-5 max-w-xl font-inter text-sm text-pearl-white/75">
+              Die Challenge läuft in einer WhatsApp-Gruppe; dort sehen die Mitglieder gegenseitig die Handynummern. Wer das nicht möchte, schreibt mir direkt.
+            </p>
+          </div>
+          <figure className={`cc-schweben relative mx-auto aspect-[9/16] w-[clamp(170px,24vw,240px)] overflow-hidden bg-[#13233F] shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)] ${KACHEL}`}>
+            <img src="/unverwechselbar/selfie.webp" alt="Claudia Conen nimmt mit dem Handy ein Video auf, zwei Menschen lachen mit" width={360} height={640} className="h-full w-full object-cover" />
+            <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(10,22,40,0)_60%,rgba(10,22,40,0.9)_100%)]" />
+            <figcaption className="absolute inset-x-0 bottom-0 p-4 font-montserrat text-[11px] font-extrabold uppercase tracking-[0.14em] text-[#EBD197]">
+              Eine Minute am Tag
+              <span className="mt-1 block text-sm normal-case tracking-normal text-white">Handy reicht.</span>
+            </figcaption>
+          </figure>
+        </div>
+      </header>
+
+      {/* So läuft es - drei Zeilen, nicht mehr */}
+      <Abschnitt id="ablauf" className="bg-pearl-white py-12 sm:py-16" label="ablauf-titel">
+        <div className="mx-auto max-w-6xl px-6">
+          <Kicker text="So läuft es" hell />
+          <h2 id="ablauf-titel" className="sr-only">So läuft die Challenge</h2>
+          <ol className="mt-6 grid list-none gap-3 p-0 sm:grid-cols-3">
+            {ABLAUF.map((s, i) => (
+              <li key={s} style={{ ['--i' as string]: i }} className={`cc-stufe flex items-start gap-4 bg-white px-5 py-5 text-midnight-blue ${KACHEL}`}>
+                <span className={`flex h-9 w-9 flex-none items-center justify-center rounded-md font-montserrat text-sm font-black text-midnight-blue ${GOLD}`}>{i + 1}</span>
+                <span className="font-inter text-[15px] leading-relaxed">{s}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </Abschnitt>
+
+      {/* Die sieben Tage: je Aufgabe und drei Tipps */}
+      <Abschnitt id="tage" className="bg-pearl-white pb-16 sm:pb-24" label="tage-titel">
+        <div className="mx-auto max-w-6xl px-6">
+          <Kicker text="Die sieben Tage" hell />
+          <h2 id="tage-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
+            Jeden Tag eine Aufgabe. Dazu drei Tipps, die du behalten wirst.
+          </h2>
+          <ol className="mt-8 grid list-none gap-3 p-0">
+            {TAGE.map((t, i) => {
+              const letzter = i === TAGE.length - 1;
+              return (
+                <li key={t.titel} style={{ ['--i' as string]: i }} className={`cc-stufe grid gap-x-6 gap-y-3 bg-white px-5 py-5 text-midnight-blue sm:grid-cols-[auto_minmax(0,1fr)] sm:px-7 sm:py-6 ${KACHEL}`}>
+                  <span className={`self-start rounded-md px-2.5 py-2 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] ${letzter ? `${GOLD} text-midnight-blue` : 'bg-midnight-blue text-pearl-white'}`}>
+                    Tag {i + 1}
+                  </span>
+                  <div className="min-w-0">
+                    <h3 className="font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">{t.titel}</h3>
+                    <p className="mt-2 font-inter text-[15px] leading-relaxed sm:text-base">
+                      <b className="font-montserrat font-extrabold">Deine Aufgabe: </b>
+                      {t.aufgabe}
+                    </p>
+                    <ul className="mt-3 grid list-none gap-2 border-t border-[#D4AF37]/40 p-0 pt-3">
+                      {t.tipps.map((tipp) => (
+                        <li key={tipp} className="flex items-start gap-3 font-inter text-[15px] leading-relaxed">
+                          <Haken />
+                          <span>{tipp}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+          <div className="mt-8 flex flex-wrap items-center gap-4">
+            <Einstieg hell />
+            <span className="font-inter text-[15px] text-midnight-blue">Kostenfrei. Start Montag, {montag}.</span>
+          </div>
+        </div>
+      </Abschnitt>
+
+      {/* Nach Tag 7 - kurz */}
+      <Abschnitt id="danach" className="py-14 text-pearl-white sm:py-20" style={{ background: 'linear-gradient(180deg, #0A1628 0%, #0F1F3A 55%, #0A1628 100%)' }} label="danach-titel">
+        <div className="mx-auto max-w-6xl px-6">
+          <Kicker text="Nach Tag 7" />
+          <h2 id="danach-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">
+            Sieben Tage sind ein Anfang. Wer weiter will, hat zwei Türen.
+          </h2>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
+            <Link to="/1-zu-1-mentoring" className={`block bg-[#13233F] p-6 no-underline ${KACHEL}`}>
+              <p className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#EBD197]">Performance-Coaching</p>
+              <p className="mt-2 font-montserrat text-xl font-extrabold text-white">Deine Wirkung, mit mir, eins zu eins.</p>
+              <p className="mt-2 font-inter text-[15px] leading-relaxed text-pearl-white/85">Wir nehmen deinen Satz, deine Geschichte, deine Stimme – und machen daraus deinen Auftritt. Erstgespräch kostenlos.</p>
+              <p className="mt-4 font-montserrat text-sm font-bold text-[#F7E7CE]">Mehr dazu →</p>
+            </Link>
+            <a href="https://community.claudiaconen.com/" target="_blank" rel="noopener noreferrer" className={`block bg-[#13233F] p-6 no-underline ${KACHEL}`}>
+              <p className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#EBD197]">Netzwerk Mittelstand – deine Community</p>
+              <p className="mt-2 font-montserrat text-xl font-extrabold text-white">Die Unverwechselbaren.</p>
+              <p className="mt-2 font-inter text-[15px] leading-relaxed text-pearl-white/85">Menschen, die ihre Wirkung ernst nehmen – und sich gegenseitig eine Bühne geben. Dort wird aus sieben Tagen eine Gewohnheit.</p>
+              <p className="mt-4 font-montserrat text-sm font-bold text-[#F7E7CE]">Zur Community →</p>
+            </a>
+          </div>
+        </div>
+      </Abschnitt>
+
+      <Footer />
+    </div>
+  );
+}

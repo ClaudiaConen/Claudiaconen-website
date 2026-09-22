@@ -9,7 +9,6 @@ import MissionSection from '../components/MissionSection';
 import Timeline from '../components/Timeline';
 import About from '../components/About';
 import SocialProof from '../components/SocialProof';
-import ClaudiaAI from '../components/ClaudiaAI';
 import FrequentQuestions from '../components/FrequentQuestions';
 import ContactSection from '../components/ContactSection';
 import Momente from '../components/Momente';
@@ -46,7 +45,7 @@ export default function Home() {
         <Timeline />
         <About />
         <SocialProof />
-        <ClaudiaAI />
+        {/* Block "Claudia AI" entfernt (Claudia, 22.09.2026 17:08 UTC: "nimm das ganz raus") - die Seite /claudia-ai bleibt ueber Menue und Fusszeile erreichbar. */}
         <FrequentQuestions />
         <ContactSection />
         <Momente />

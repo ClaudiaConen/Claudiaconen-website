@@ -12,16 +12,16 @@ export default function FinalCTA() {
           transition={{ duration: 0.2 }}
           className="space-y-6 md:space-y-8"
         >
-          <h2 className="font-montserrat font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
-            <span className="text-midnight-blue">Bereit, gehört zu </span>
-            <span className="text-dark-gold">
-              werden?
-            </span>
+          {/* Schluss-Slogan nach Claudias Diktat vom 22.09.2026, 17:08 UTC ("nicht fuer KI, nicht gegen KI, sondern
+              Fortschritt"; "hinter jedem Kunden steckt eine Persoenlichkeit"), fuer Geschaeftsleute, warm. Gold nur als
+              Unterstreichung, nicht als Schriftfarbe auf Weiss (Designliste). */}
+          <h2 className="font-montserrat font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight text-midnight-blue">
+            Nutze den Fortschritt. Gewinne Zeit.
+            <span className="mt-2 block underline decoration-[#D4AF37] decoration-[4px] underline-offset-[6px]">Und schenk sie den Menschen, die dir vertrauen sollen.</span>
           </h2>
 
-          <p className="text-base md:text-xl text-midnight-blue/80 max-w-2xl mx-auto leading-relaxed">
-            Ob du Vertrauen gewinnst oder austauschbar bleibst, entscheidet sich früher, als
-            der Verstand mitkommt. Lass uns dafür sorgen, dass dieser Moment dir gehört.
+          <p className="font-cormorant text-2xl md:text-3xl italic leading-snug text-midnight-blue max-w-2xl mx-auto">
+            Denn hinter jedem Kunden steckt eine Persönlichkeit.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 items-center justify-center pt-2 md:pt-4">

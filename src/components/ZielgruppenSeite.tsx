@@ -88,6 +88,16 @@ export type ZielgruppenInhalt = {
    *  wegschickt, wirkt wie eine Einschaetzung statt wie Werbung. */
   nichtFuer?: string[];
   nichtFuerTitel?: string;
+  /** Eine Kundenstimme, die genau zu dieser Leistung gehoert (22.09.2026). Saetze woertlich
+   *  aus dem Video, nie umformuliert. Das Video laedt erst beim Klick auf Abspielen. */
+  kundenstimme?: {
+    titel: string;
+    name: string;
+    rolle: string;
+    saetze: string[];
+    video: { quelle: string; standbild: string; breite: number; hoehe: number };
+    verweis?: { text: string; ziel: string };
+  };
 };
 
 
@@ -266,6 +276,60 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
             </div>
           </div>
         </section>
+
+        {/* 3a. Eine Kundenstimme zu genau dieser Leistung. Deckende Flaeche, harte Kante, Goldrand -
+            Claudias Kacheln (DESIGN_PRAEFERENZEN.md), kein Glas. */}
+        {inhalt.kundenstimme && (
+          <section className="bg-pearl-white py-16 sm:py-24" aria-labelledby="kundenstimme">
+            <div className="mx-auto max-w-4xl px-6">
+              <p className="flex items-center gap-3 font-montserrat text-xs font-semibold uppercase tracking-[0.22em] text-midnight-blue">
+                <span aria-hidden="true" className="h-[3px] w-7 rounded-full bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]" />
+                Kundenstimme
+              </p>
+              <h2
+                id="kundenstimme"
+                className="mt-4 font-montserrat text-2xl font-bold text-midnight-blue sm:text-3xl"
+              >
+                {inhalt.kundenstimme.titel}
+              </h2>
+              <figure className="mt-8 grid overflow-hidden rounded-[10px] border border-[#D4AF37]/55 bg-[#13233F] text-pearl-white shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)] md:grid-cols-2">
+                <video
+                  controls
+                  playsInline
+                  preload="none"
+                  poster={inhalt.kundenstimme.video.standbild}
+                  width={inhalt.kundenstimme.video.breite}
+                  height={inhalt.kundenstimme.video.hoehe}
+                  className="block h-full w-full bg-[#0A1628] object-cover"
+                  aria-label={`Video: ${inhalt.kundenstimme.name} über die Zusammenarbeit`}
+                >
+                  <source src={inhalt.kundenstimme.video.quelle} type="video/mp4" />
+                </video>
+                <div className="flex flex-col justify-center gap-4 px-6 py-7 sm:px-8">
+                  <blockquote className="flex flex-col gap-3 font-inter text-base leading-relaxed text-pearl-white/90">
+                    {inhalt.kundenstimme.saetze.map((satz) => (
+                      <p key={satz.slice(0, 24)}>„{satz}“</p>
+                    ))}
+                  </blockquote>
+                  <figcaption className="border-t border-[#D4AF37]/40 pt-4">
+                    <p className="font-montserrat text-base font-bold text-[#EBD197]">{inhalt.kundenstimme.name}</p>
+                    <p className="font-inter text-sm text-pearl-white/80">{inhalt.kundenstimme.rolle}</p>
+                    {inhalt.kundenstimme.verweis && (
+                      <a
+                        href={inhalt.kundenstimme.verweis.ziel}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-2 inline-block font-inter text-sm text-pearl-white underline decoration-[#D4AF37] decoration-2 underline-offset-4 hover:text-[#EBD197]"
+                      >
+                        {inhalt.kundenstimme.verweis.text} ↗
+                      </a>
+                    )}
+                  </figcaption>
+                </div>
+              </figure>
+            </div>
+          </section>
+        )}
 
         {/* 3b. Wofuer gebucht wird */}
         {inhalt.anlaesse && inhalt.anlaesse.length > 0 && (

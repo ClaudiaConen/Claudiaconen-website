@@ -87,6 +87,20 @@ const inhalt: ZielgruppenInhalt = {
     },
   ],
 
+  // Claudias Ja vom 22.09.2026 ("ja bitte ..."). Saetze woertlich aus seinem Video, dieselben wie auf der Startseite.
+  kundenstimme: {
+    titel: 'Die Stimme am Telefon von Kloster Kitchen',
+    name: 'Mario Fürst',
+    rolle: 'Gründer von Kloster Kitchen',
+    saetze: [
+      'Wir wollten einen extrem guten Text besprochen auf unserem normalen Anrufbeantworter und auf anderen Medien nutzen.',
+      'Die Zusammenarbeit war echt gut und sehr harmonisch und hat auch sehr viel Spaß gemacht.',
+      'Ich kann nur die Zusammenarbeit mit Claudia wärmstens empfehlen.',
+    ],
+    video: { quelle: '/kundenstimmen/mario-fuerst.mp4', standbild: '/kundenstimmen/mario-fuerst-video.jpg', breite: 848, hoehe: 472 },
+    verweis: { text: 'Mario Fürst bei LinkedIn', ziel: 'https://www.linkedin.com/in/mario-f%C3%BCrst-0b644a208/' },
+  },
+
   nichtFuer: [
     'Es soll möglichst billig sein. Dann ist eine KI-Stimme die richtige Wahl, und ich sage Ihnen das auch.',
     'Der Text steht fest und darf nicht angefasst werden. Ich frage nach, wenn ein Satz beim Sprechen nicht trägt — das ist Teil der Arbeit.',

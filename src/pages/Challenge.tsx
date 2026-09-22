@@ -533,7 +533,7 @@ export default function Challenge() {
                 Jeden Tag ein Audio-Impuls von mir mit einem Gedanken, in dem du dich wiedererkennst, und einer konkreten Aufgabe – 30 Minuten am Tag, einschließlich Übung, Aufnahme und Reflexion. Wer seine Aufnahme in der Gruppe teilt, bekommt persönliches Feedback von mir – und alle lernen mit. Die Inhalte öffnen sich in der Challenge-Woche, jeden Tag einer.
               </p>
             </div>
-            <Kopfbild datei="keynote" alt="Claudia Conen auf der Bühne bei einer Keynote" />
+            <Kopfbild datei="programm" alt="Claudia Conen im hellblauen Blazer, Porträt" />
           </div>
           {/* Die finale Kachel geht ueber die volle Breite (Claudia, 22.09.2026 13:05 UTC: "so breit wie drei ... von ganz
               links bis ganz rechts, das ist ja der finale"); die Inhalte oeffnen sich je an ihrem Tag der Challenge-Woche. */}

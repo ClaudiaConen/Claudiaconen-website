@@ -20,7 +20,6 @@ const KARTEN: { datei: string; tag: string; text: string }[] = [
   { datei: 'messe', tag: 'Gespräch', text: 'Auf der Messe' },
   { datei: 'kopf-herz', tag: 'Wirkung', text: 'Kopf & Herz' },
   { datei: 'benefiz', tag: 'Bühne', text: 'Benefiz' },
-  { datei: 'avatare', tag: 'KI & Mensch', text: 'Avatare' },
   { datei: 'mantel', tag: 'Präsenz', text: 'Haltung' },
   { datei: 'buch', tag: 'Autorin', text: 'Das Buch' },
   { datei: 'anlaesse', tag: 'Anlässe', text: 'Besondere Momente' },
@@ -28,7 +27,8 @@ const KARTEN: { datei: string; tag: string; text: string }[] = [
   { datei: 'mappe', tag: 'Präsenz', text: 'Vorbereitet' },
 ];
 
-const REIHEN = [KARTEN.slice(0, 6), KARTEN.slice(6, 12), KARTEN.slice(12, 18)];
+// Ohne das Avatar-Bild (Claudia, 22.09.2026 11:21 UTC: 'wo ich sechsmal drauf bin, gefaellt mir nicht').
+const REIHEN = [KARTEN.slice(0, 6), KARTEN.slice(6, 12), KARTEN.slice(12, 17)];
 
 function Karte({ k }: { k: (typeof KARTEN)[number] }) {
   return (

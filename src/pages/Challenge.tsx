@@ -375,7 +375,7 @@ function Abschnitt({ id, className, style, label, welle, gold, children }: { id?
 /** Kleines Foto rechts neben der Ueberschrift eines Abschnitts - nie Text ueber einem riesigen Bild. */
 function Kopfbild({ datei, alt, quer }: { datei: string; alt: string; quer?: boolean }) {
   return (
-    <figure className={`m-0 overflow-hidden bg-[#13233F] shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)] sm:justify-self-end ${KACHEL} ${quer ? 'aspect-[3/2] w-[clamp(220px,36vw,380px)]' : 'aspect-[9/16] w-[clamp(150px,22vw,210px)]'}`}>
+    <figure className={`m-0 justify-self-center overflow-hidden bg-[#13233F] shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)] sm:justify-self-end ${KACHEL} ${quer ? 'aspect-[3/2] w-[clamp(220px,36vw,380px)]' : 'aspect-[9/16] w-[clamp(150px,22vw,210px)]'}`}>
       <img src={`/unverwechselbar/${datei}.webp`} alt={alt} width={quer ? 900 : 360} height={quer ? 600 : 640} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.04]" />
     </figure>
   );
@@ -727,10 +727,11 @@ export default function Challenge() {
           </h2>
           <p className="mt-4 max-w-2xl font-inter text-lg text-midnight-blue">Sieben Fragen zu Wirkung, Stimme und Performance. Ja oder Nein – und dann die Antwort.</p>
           <details className={`group mt-7 bg-white text-midnight-blue ${KACHEL}`}>
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 sm:px-7 [&::-webkit-details-marker]:hidden">
-              <span className="flex items-center gap-4">
+            {/* Auf dem Handy umbrechend statt gequetscht (Handy-Durchsicht 22.09.2026 22:05 UTC). */}
+            <summary className="flex cursor-pointer list-none flex-wrap items-center justify-between gap-x-4 gap-y-3 px-5 py-5 sm:flex-nowrap sm:px-7 [&::-webkit-details-marker]:hidden">
+              <span className="flex min-w-0 flex-1 flex-wrap items-center gap-3 sm:gap-4">
                 <span className={`rounded-md px-2.5 py-2 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-midnight-blue ${GOLD}`}>Lernbox</span>
-                <span className="font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">Sieben Fragen. Sieben Antworten.</span>
+                <span className="font-montserrat text-lg font-extrabold leading-tight sm:text-2xl">Sieben Fragen. Sieben Antworten.</span>
               </span>
               <span className="flex items-center gap-2 font-montserrat text-sm font-bold underline decoration-[#D4AF37] underline-offset-4">
                 <span className="group-open:hidden">Aufklappen</span>
@@ -1046,7 +1047,10 @@ export default function Challenge() {
             <span className="mt-1 block underline decoration-[#D4AF37] decoration-[4px] underline-offset-[6px]">Dann schließ dich unserem Netzwerk an: die Unverwechselbaren, die Community für den Mittelstand.</span>
           </p>
           <div className={`mt-8 bg-white px-6 py-10 text-center text-midnight-blue sm:px-10 sm:py-14 ${KACHEL} border-[#D4AF37] shadow-[0_18px_40px_-18px_rgba(212,175,55,0.5)]`}>
-            <h2 id="community-titel" className="font-montserrat text-4xl font-black leading-[1.05] tracking-tight sm:text-6xl">
+            {/* Schriftgroesse waechst mit der Bildschirmbreite: "Unverwechselbaren." ist ein einziges Wort und lief auf dem
+                Handy 43 px ueber den rechten Rand - dadurch wurde die ganze Seite breiter und das Menue abgeschnitten
+                (Claudia, 22.09.2026 21:59 UTC). */}
+            <h2 id="community-titel" className="font-montserrat text-[clamp(1.45rem,6.8vw,2.25rem)] font-black leading-[1.05] tracking-tight sm:text-6xl">
               Willkommen bei den
               <span className="block text-[#F1E2B3]" style={{ WebkitTextStroke: '1.5px #D4AF37' }}>Unverwechselbaren.</span>
               <span className="mt-2 block font-cormorant text-4xl font-semibold italic tracking-normal text-[#D4AF37] sm:text-6xl">Netzwerk Mittelstand</span>

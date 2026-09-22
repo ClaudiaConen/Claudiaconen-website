@@ -2526,3 +2526,8 @@ html, body { cursor: auto; }
 .cc-slogan:hover .cc-slogan-spur { animation-play-state: paused; }
 .cc-slogan-punkt { display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: linear-gradient(135deg, #C9A961, #F7E7CE 48%, #D4AF37); flex: none; }
 @media (prefers-reduced-motion: reduce) { .cc-slogan-spur { animation: none; flex-wrap: wrap; width: auto; } }
+
+/* Kein seitliches Ueberlaufen der Seite auf dem Handy: Ein einziges zu breites Element (z. B. ein langes Wort) macht sonst
+   die Layout-Breite groesser als den Bildschirm, und alle fixierten Leisten - auch das Menue - ragen rechts hinaus.
+   overflow-x: clip schneidet ab, ohne einen Scrollbereich zu erzeugen (position: sticky bleibt intakt). 22.09.2026. */
+html, body { overflow-x: clip; }

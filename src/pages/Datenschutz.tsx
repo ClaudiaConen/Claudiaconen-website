@@ -30,7 +30,7 @@ export default function Datenschutz() {
                   Claudia Conen<br />
                   Beisenweg 20<br />
                   58452 Witten<br />
-                  E-Mail: <a href="mailto:info@claudiaconen-akademie.de" className="text-bright-gold hover:underline">info@claudiaconen-akademie.de</a>
+                  E-Mail: <a href="mailto:claudiaconen@umsatzstimme.de" className="text-bright-gold hover:underline">claudiaconen@umsatzstimme.de</a>
                 </p>
               </section>
 

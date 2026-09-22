@@ -108,7 +108,7 @@ const TUEREN: Tuer[] = [
     ],
     knopf: 'Einfach mit KI starten',
     ziel: '/ki-einsteiger-coaching',
-    bild: { datei: 'ki', alt: 'Claudia Conen arbeitet am Laptop, die rote Mappe daneben' },
+    bild: { datei: 'ki', alt: 'Claudia Conen mit dem Magazin The Power of AI in der Hand' },
     zweiter: { text: 'Oder gleich tiefer: KI-Manager-Ausbildung', ziel: '/ki-manager-ausbildung' },
   },
 ];

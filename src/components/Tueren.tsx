@@ -73,7 +73,8 @@ const TUEREN: Tuer[] = [
     ],
     knopf: 'Unverwechselbar sprechen',
     ziel: '/redner-ausbildungen',
-    bild: { datei: 'unternehmen', alt: 'Claudia Conen im Workshop vor den Moderationswänden' },
+    /* Claudia, 22.09.2026 23:09 UTC: neues Buehnenfoto (grosse Buehne mit Leinwand) hierher, das Workshop-Foto auf Karte 3. */
+    bild: { datei: 'keynote', alt: 'Claudia Conen auf einer großen Bühne, hinter ihr die Leinwand mit ihrem Bild' },
   },
   {
     wer: 'Coaches & Trainer',
@@ -90,7 +91,7 @@ const TUEREN: Tuer[] = [
     ],
     knopf: 'Zur klaren Wahl werden',
     ziel: '/1-zu-1-mentoring',
-    bild: { datei: 'coaches', alt: 'Claudia Conen im Gespräch am Telefon' },
+    bild: { datei: 'unternehmen', alt: 'Claudia Conen im Workshop vor den Moderationswänden' },
   },
   {
     wer: 'KI-Einsteiger & Neugierige',

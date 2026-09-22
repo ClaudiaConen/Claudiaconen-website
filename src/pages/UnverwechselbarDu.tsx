@@ -333,6 +333,43 @@ export default function UnverwechselbarDu() {
         </div>
       </header>
 
+      {/* Sieben Schritte - Claudia, 22.09.2026 10:55 UTC: "dieser grau-braune Ton hinter dem Programm ... in Weiss
+          austauschen" und "viel weiter nach oben, damit die direkt wissen, warum sie dabei sein sollen". */}
+      <Abschnitt id="programm" className="bg-white py-16 text-midnight-blue sm:py-24" label="programm-titel">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className={KOPF}>
+            <div>
+              <Kicker text="Das Programm" hell />
+              <h2 id="programm-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">
+                Sieben Schritte. Ein Ergebnis: <span className="underline decoration-[#D4AF37] decoration-[4px] underline-offset-[6px]">Du bleibst im Kopf.</span>
+              </h2>
+              <p className="mt-4 max-w-2xl font-inter text-lg text-midnight-blue">
+                Jeder Schritt ist ein eigener Baustein – und zusammen sind sie der Weg vom „Ich rede" zum „Man erinnert sich an mich".
+              </p>
+            </div>
+            <Kopfbild datei="keynote" alt="Claudia Conen auf der Bühne bei einer Keynote" />
+          </div>
+          <ol className="mt-9 grid list-none gap-3.5 p-0 sm:grid-cols-2 lg:grid-cols-3">
+            {SCHRITTE.map((s, i) => {
+              const letzter = i === SCHRITTE.length - 1;
+              return (
+                <li
+                  key={s.titel}
+                  style={{ ['--i' as string]: i }}
+                  className={`cc-stufe min-h-[190px] p-6 hover:-translate-y-0.5 ${KACHEL} ${letzter ? `${GOLD} border-transparent text-midnight-blue` : 'bg-pearl-white text-midnight-blue'}`}
+                >
+                  <span aria-hidden="true" className={`font-montserrat text-4xl font-black ${letzter ? 'text-midnight-blue/40' : 'text-[#D4AF37]'}`}>
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <h3 className="mt-3 font-montserrat text-base font-extrabold uppercase tracking-wide">{s.titel}</h3>
+                  <p className="mt-2.5 font-inter text-[15px] leading-relaxed">{s.text}</p>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+      </Abschnitt>
+
       {/* Hand aufs Herz */}
       <Abschnitt className="bg-pearl-white py-16 sm:py-24" label="hand-aufs-herz">
         <div className="mx-auto max-w-6xl px-6">
@@ -447,42 +484,6 @@ export default function UnverwechselbarDu() {
         </div>
       </Abschnitt>
 
-      {/* Sieben Schritte */}
-      <Abschnitt id="programm" className="py-16 text-pearl-white sm:py-24" style={DUNKEL} label="programm-titel" gold>
-        <div className="mx-auto max-w-6xl px-6">
-          <div className={KOPF}>
-            <div>
-              <Kicker text="Das Programm" />
-              <h2 id="programm-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">
-                Sieben Schritte. Ein Ergebnis: <span className="gold-text-animated">Du bleibst im Kopf.</span>
-              </h2>
-              <p className="mt-4 max-w-2xl font-inter text-lg text-pearl-white/90">
-                Jeder Schritt ist ein eigener Baustein – und zusammen sind sie der Weg vom „Ich rede" zum „Man erinnert sich an mich".
-              </p>
-            </div>
-            <Kopfbild datei="keynote" alt="Claudia Conen auf der Bühne bei einer Keynote" />
-          </div>
-          <ol className="mt-9 grid list-none gap-3.5 p-0 sm:grid-cols-2 lg:grid-cols-3">
-            {SCHRITTE.map((s, i) => {
-              const letzter = i === SCHRITTE.length - 1;
-              return (
-                <li
-                  key={s.titel}
-                  style={{ ['--i' as string]: i }}
-                  className={`cc-stufe min-h-[190px] p-6 hover:-translate-y-0.5 ${KACHEL} ${letzter ? `${GOLD} border-transparent text-midnight-blue` : 'cc-glaskachel text-pearl-white'}`}
-                >
-                  <span aria-hidden="true" className={`font-montserrat text-4xl font-black ${letzter ? 'text-midnight-blue/40' : 'text-[#D4AF37]/45'}`}>
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <h3 className={`mt-3 font-montserrat text-base font-extrabold uppercase tracking-wide ${letzter ? '' : 'text-white'}`}>{s.titel}</h3>
-                  <p className={`mt-2.5 font-inter text-[15px] leading-relaxed ${letzter ? '' : 'text-pearl-white/80'}`}>{s.text}</p>
-                </li>
-              );
-            })}
-          </ol>
-        </div>
-      </Abschnitt>
-
       {/* Challenge */}
       <Abschnitt id="challenge" className="bg-pearl-white py-16 sm:py-24" label="challenge-titel">
         <div className="mx-auto max-w-6xl px-6">
@@ -529,12 +530,12 @@ export default function UnverwechselbarDu() {
       </Abschnitt>
 
       {/* Werkzeugkasten + Workbook */}
-      <Abschnitt className="py-16 text-pearl-white sm:py-24" style={DUNKEL} label="werkzeug-titel" gold welle>
+      <Abschnitt className="bg-white py-16 text-midnight-blue sm:py-24" label="werkzeug-titel">
         <div className="mx-auto max-w-6xl px-6">
           <div className={KOPF}>
             <div>
-              <Kicker text="Dein Werkzeugkasten für die Challenge" />
-              <h2 id="werkzeug-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">
+              <Kicker text="Dein Werkzeugkasten für die Challenge" hell />
+              <h2 id="werkzeug-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
                 Fünf Dinge, die du vor der ersten Aufnahme wissen solltest.
               </h2>
             </div>
@@ -542,7 +543,7 @@ export default function UnverwechselbarDu() {
           </div>
           <div className="mt-9 grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
             {WERKZEUG.map((w, i) => (
-              <article key={w.titel} style={{ ['--i' as string]: i }} className={`cc-stufe bg-white p-6 text-midnight-blue ${KACHEL}`}>
+              <article key={w.titel} style={{ ['--i' as string]: i }} className={`cc-stufe bg-pearl-white p-6 text-midnight-blue ${KACHEL}`}>
                 <span aria-hidden="true" className="grid h-11 w-11 place-items-center rounded-[10px] bg-midnight-blue font-montserrat font-black text-[#EBD197]">{i + 1}</span>
                 <h3 className="mt-4 font-montserrat text-base font-extrabold uppercase tracking-wide">{w.titel}</h3>
                 <p className="mt-2.5 font-inter text-[15px] leading-relaxed">{w.text}</p>
@@ -550,12 +551,12 @@ export default function UnverwechselbarDu() {
             ))}
           </div>
 
-          <div className="mt-12 grid items-center gap-8 md:grid-cols-[minmax(0,0.55fr)_minmax(0,1fr)] md:gap-12">
+          <div className="mt-14 grid items-center gap-10 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] md:gap-14">
             <button
               type="button"
               onClick={() => setBuchOffen(true)}
               aria-label="Workbook öffnen und blättern"
-              className={`group relative m-0 block max-w-[340px] -rotate-[1.5deg] overflow-hidden p-0 text-left shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)] ${KACHEL}`}
+              className={`group relative m-0 block w-full max-w-[520px] -rotate-[1.5deg] overflow-hidden bg-white p-0 text-left shadow-[0_30px_60px_-24px_rgba(10,22,40,0.55)] ${KACHEL}`}
             >
               <img src="/unverwechselbar/workbook/seite-01.webp" alt="Deckblatt des Workbooks Entdecke deine Stimmwirkung – Brainself, Buchauszug von Claudia Conen" width={900} height={1273} loading="lazy" decoding="async" className="h-auto w-full transition-transform duration-500 group-hover:scale-[1.03]" />
               <span className="absolute inset-x-0 bottom-0 bg-midnight-blue/80 px-4 py-3 font-montserrat text-xs font-extrabold uppercase tracking-[0.16em] text-[#EBD197]">
@@ -563,16 +564,19 @@ export default function UnverwechselbarDu() {
               </span>
             </button>
             <div>
-              <Kicker text="Zum Mitnehmen" />
-              <h3 className="mt-4 font-montserrat text-2xl font-extrabold uppercase">Workbook „Entdecke deine Stimmwirkung"</h3>
-              <p className="mt-3 font-inter leading-relaxed text-pearl-white/90">
-                Mein Buchauszug aus <em>Brainself</em> – aus der Angst zum Selbstbewusstsein – als Workbook zum Ausfüllen: deine akustische Visitenkarte, Übungen für Stimme und Wirkung, Platz für deine eigenen Sätze.
+              <Kicker text="Zum Mitnehmen" hell />
+              <h3 className="mt-4 font-montserrat text-2xl font-extrabold uppercase text-midnight-blue sm:text-3xl">Workbook „Entdecke deine Stimmwirkung"</h3>
+              <p className="mt-3 font-montserrat text-base font-bold text-midnight-blue">
+                Buchauszug aus dem <em>Brainself</em>-Buch – gemeinsam veröffentlicht mit Karsten Brocke und weiteren Experten.
+              </p>
+              <p className="mt-3 font-inter leading-relaxed text-midnight-blue">
+                Als Workbook zum Ausfüllen: deine akustische Visitenkarte, Übungen für Stimme und Wirkung, Platz für deine eigenen Sätze. 41 Seiten zum Blättern – oder als PDF.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <button type="button" onClick={() => setBuchOffen(true)} className={`inline-flex items-center rounded-full px-6 py-3.5 font-montserrat text-sm font-bold text-midnight-blue ${GOLD}`}>
                   Im Workbook blättern
                 </button>
-                <a href={WORKBOOK_PDF} download className="inline-flex items-center rounded-full border-2 border-[#D4AF37] px-6 py-3.5 font-montserrat text-sm font-bold text-pearl-white hover:text-[#EBD197]">
+                <a href={WORKBOOK_PDF} download className="inline-flex items-center rounded-full border-2 border-midnight-blue px-6 py-3.5 font-montserrat text-sm font-bold text-midnight-blue transition-colors hover:bg-midnight-blue hover:text-pearl-white">
                   Als PDF speichern
                 </a>
               </div>

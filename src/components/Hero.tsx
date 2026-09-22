@@ -136,12 +136,17 @@ export default function Hero() {
         }}
       />
       <div className="relative max-w-7xl mx-auto" style={{ zIndex: 10 }}>
-        <div className="grid lg:grid-cols-[1fr_auto] gap-8 items-start">
+        {/* minmax(0,1fr) statt 1fr und min-w-0 auf den Spalten: Ohne das darf eine Rasterspalte
+            nie schmaler werden als ihr Inhalt - und die sieben Wischkacheln unten sind auf dem
+            Telefon rund 1.300 px breit. Dann wurde der ganze Kopf breiter als der Bildschirm,
+            Safari zoomte heraus, und alles darunter wirkte winzig (Claudias Foto vom 22.09.2026,
+            03:32 Uhr: "Am Handy sieht das noch alles sehr verschoben aus"). */}
+        <div className="grid grid-cols-[minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_auto] gap-8 items-start">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.2 }}
-            className="space-y-5 sm:space-y-6"
+            className="min-w-0 space-y-5 sm:space-y-6"
           >
             <div className="space-y-3 sm:space-y-4">
               <div className="accent-line"></div>
@@ -272,7 +277,7 @@ export default function Hero() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.2 }}
-            className="relative group w-full lg:w-[400px] xl:w-[450px] video-nebel"
+            className="relative group min-w-0 w-full lg:w-[400px] xl:w-[450px] video-nebel"
           >
             {/* Vorher lag hinter dem Rahmen ein weichgezeichneter
                 Goldverlauf, der bei Maus darueber auf doppelte Staerke

@@ -34,20 +34,48 @@ function naechsterMontag(heute: Date): string {
   return new Intl.DateTimeFormat('de-DE', { day: 'numeric', month: 'long' }).format(d);
 }
 
-const TAGE: { titel: string; aufgabe: string; tipps: string[] }[] = [
+type Tag = {
+  titel: string;
+  /** Eine Zeile, die auf der zugeklappten Kachel steht. */
+  vorschau: string;
+  /** Die Aufgabe des Tages - steht oben in der aufgeklappten Kachel. */
+  aufgabe: string;
+  /** Der Satz, der eingesprochen wird (Tag 1 - Claudias Wortlaut). */
+  satz?: string;
+  /** Ueberschrift ueber den Schritten, z. B. "Dann weck deine Stimme auf - fuenf Minuten:". */
+  schrittTitel: string;
+  schritte: string[];
+  /** Der Abschluss, nach den Schritten. */
+  danach?: string;
+};
+
+/** Tag 1 ist Claudias Wortlaut (Discord, 22.09.2026, 09:19 UTC), nur geglaettet: ihr Satz, ihre Bilder
+ *  (Eisschollen, Raubkatze, Glas Wasser), ihre Reihenfolge. Tage 2 bis 7 sind meine Entwuerfe, bis
+ *  ihre Fassungen kommen - dann hier ersetzen. */
+const TAGE: Tag[] = [
   {
-    titel: 'Sag, was du tust',
-    aufgabe: 'Eine Minute: Was tust du – ohne ein einziges Fachwort. So, dass deine Nachbarin es versteht.',
-    tipps: [
-      'Ein Gedanke pro Satz. Wo ein „und" steht, versteckt sich meist ein zweiter Satz. Punkt setzen, atmen, weiter.',
-      'Fang beim Menschen an, nicht bei dir: „Wenn jemand …, dann …" – so hört jeder sofort, ob es ihn betrifft.',
-      'Sag es einmal so, wie du es am Telefon einer Freundin sagen würdest. Genau diese Fassung nimmst du auf – nicht die offizielle.',
+    titel: 'Lerne deine Stimmwirkung kennen',
+    vorschau: 'Der Satz am Morgen – und fünf Minuten, die deine Stimme aufwecken.',
+    aufgabe: 'Morgens, bevor du irgendetwas anderes tust: Handy in die Hand, Aufnahme an – und sprich diesen Satz ein.',
+    satz: 'Meine Stimme ist unaufhaltbar. Überall auf der Welt kann ich blitzschnell Menschen erreichen – sobald ich den Hörer in die Hand nehme, in ein Video spreche, auf einer Bühne stehe oder ins Radio rede. Deshalb lerne ich meine Stimme kennen.',
+    schrittTitel: 'Dann weck deine Stimme auf – fünf Minuten:',
+    schritte: [
+      'Stell dir vor: Du wirst wach, und deine Stimmlippen sind über Nacht eingefroren – wie Eisschollen auf dem Wasser. Sobald du dich streckst und die Lippen leckst, knackt das Eis. Es beginnt zu tauen.',
+      'Gib deinem Rachen, deinem Mund, deinem ganzen Sprechapparat Platz. Spiel mit der Zunge: Drück sie oben an den Gaumen – und sag dir dabei „Guten Morgen".',
+      'Streck die Zunge weit heraus, ganz weit – und zähl dabei bis zehn.',
+      'Kreise mit der Zunge jeden einzelnen Zahn ab – außen, hinter der Lippe.',
+      'Summ. Ungefähr eine Minute. Und beweg dich dabei in deinem Bett wie eine Raubkatze.',
+      'Trink ein Glas Wasser. Über Nacht verlierst du viel davon – und deine Stimmlippen sind fein und zart.',
+      'Bei jeder Bewegung: Die Eisschollen draußen auf dem Meer tauen, und das Meer beginnt, Wellen zu schlagen. Genau so schwingen deine Stimmlippen – zart, weich, in Wellen. Je freier sie schwingen, desto besser klingen sie.',
     ],
+    danach: 'Jetzt noch einmal den Satz. Fühl hinein: Klingt deine Stimme ein bisschen anders?',
   },
   {
     titel: 'Deine Stimme gegen die Maschine',
+    vorschau: 'Ein Satz von der KI, ein Satz von dir – und der Unterschied, den man hört.',
     aufgabe: 'Lass dir von einer KI einen Satz über dich schreiben und sag ihn. Dann sag es so, wie du es wirklich sagen würdest. Nimm beides auf.',
-    tipps: [
+    schrittTitel: 'Drei Tipps:',
+    schritte: [
       'Streich jedes Wort, das du im Gespräch nie benutzt. „Innovativ", „ganzheitlich", „Lösungen" – das sagt die Maschine, nicht du.',
       'Persönlich wird ein Satz durch ein Detail, das nur du kennst: ein Ort, ein Name, eine Zahl aus deinem Alltag.',
       'Hör beide Aufnahmen mit geschlossenen Augen. Welchem Menschen würdest du glauben? Das ist deine Richtung.',
@@ -55,8 +83,10 @@ const TAGE: { titel: string; aufgabe: string; tipps: string[] }[] = [
   },
   {
     titel: 'Wofür stehst du?',
+    vorschau: 'Ein Satz, dreimal gesagt – jedes Mal langsamer.',
     aufgabe: 'Ein Satz: Wofür stehst du? Sag ihn dreimal – jedes Mal langsamer.',
-    tipps: [
+    schrittTitel: 'Drei Tipps:',
+    schritte: [
       'Langsam heißt nicht gedehnt. Sprich im normalen Tempo – und mach die Pausen länger. Die Pause gehört dem Zuhörer; dort versteht er dich.',
       'Betone ein Wort, nicht drei. Wenn alles wichtig klingt, ist nichts wichtig.',
       'Der Satz ist fertig, wenn er ohne „eigentlich", „irgendwie" und „ein bisschen" auskommt. Diese Wörter nehmen ihm das Rückgrat.',
@@ -64,8 +94,10 @@ const TAGE: { titel: string; aufgabe: string; tipps: string[] }[] = [
   },
   {
     titel: 'Ein Moment statt Lebenslauf',
+    vorschau: 'Der Moment, in dem du wusstest: Das ist mein Beruf.',
     aufgabe: 'Erzähl den Moment, in dem du wusstest: Das ist mein Beruf. Eine Person, ein Ort, ein Satz, der fiel.',
-    tipps: [
+    schrittTitel: 'Drei Tipps:',
+    schritte: [
       'Beginn mittendrin: „Dienstag, acht Uhr, der Kunde sagt …" – keine Vorgeschichte, keine Einleitung.',
       'Zeig, was zu sehen war, statt zu sagen, was zu fühlen ist. „Sie legte den Stift weg" wirkt stärker als „Sie war beeindruckt".',
       'Ende mit dem, was sich seitdem geändert hat – ein Satz. Er ist der Grund, warum du die Geschichte erzählst.',
@@ -73,8 +105,10 @@ const TAGE: { titel: string; aufgabe: string; tipps: string[] }[] = [
   },
   {
     titel: 'Die Stimme, die du hast',
-    aufgabe: 'Zwei Minuten aufwärmen: summen, bis die Lippen kribbeln, Lippen flattern lassen, drei Sätze überdeutlich lesen. Dann dieselbe Aufnahme wie an Tag 1. Vergleich beide.',
-    tipps: [
+    vorschau: 'Aufgewärmt gegen kalt – dieselbe Aufnahme wie an Tag 1.',
+    aufgabe: 'Mach die Fünf-Minuten-Übung von Tag 1. Dann dieselbe Aufnahme wie am ersten Morgen. Vergleich beide.',
+    schrittTitel: 'Drei Tipps:',
+    schritte: [
       'Sprich zur letzten Reihe, auch wenn nur das Handy vor dir steht. Der Körper richtet sich auf, die Stimme trägt.',
       'Atme vor dem ersten Wort aus, nicht ein. Wer mit vollen Lungen startet, presst. Wer ruhig einatmet, klingt ruhig.',
       'Tiefer wird die Stimme nicht durch Drücken, sondern durch Ruhe. Ein Satz, eine Pause. Eile hört man.',
@@ -82,8 +116,10 @@ const TAGE: { titel: string; aufgabe: string; tipps: string[] }[] = [
   },
   {
     titel: 'Dieselben Worte, drei Wirkungen',
+    vorschau: 'Beruhigend, weckend, überzeugend – mit demselben Satz.',
     aufgabe: 'Ein Satz, drei Absichten: einmal beruhigend, einmal weckend, einmal überzeugend. Dieselben Worte.',
-    tipps: [
+    schrittTitel: 'Drei Tipps:',
+    schritte: [
       'Entscheide vor dem Sprechen, was der Zuhörer danach tun soll. Die Absicht färbt die Stimme – ohne dass du an ihr herumbastelst.',
       'Beruhigen: Tempo runter, Stimme am Satzende nach unten. Wecken: kürzere Sätze, direkter Blick. Überzeugen: eine Pause vor dem wichtigsten Wort.',
       'Respekt ist hörbar. Wer den Zuhörer verstehen statt überreden will, klingt anders – das ist die überzeugende Fassung.',
@@ -91,8 +127,10 @@ const TAGE: { titel: string; aufgabe: string; tipps: string[] }[] = [
   },
   {
     titel: 'Dein Satz zum Mitnehmen',
+    vorschau: 'Der eine Satz, den du überall sagen kannst – und meine Antwort darauf.',
     aufgabe: 'Der eine Satz, den du überall sagen kannst. Den schickst du mir – und bekommst eine Antwort von mir, keine Vorlage.',
-    tipps: [
+    schrittTitel: 'Drei Tipps:',
+    schritte: [
       'Kurz genug, dass ihn jemand weitererzählen kann, ohne nachzulesen. Test: Sag ihn einer Person und bitte sie, ihn morgen zu wiederholen.',
       'Kein Superlativ. „Die Beste", „einzigartig", „führend" – das behauptet jeder. Ein konkretes Versprechen behauptet keiner.',
       'Er muss nach dir klingen, nicht nach einem Slogan. Wenn du dich beim Sagen räusperst, ist es noch nicht deiner.',
@@ -100,9 +138,16 @@ const TAGE: { titel: string; aufgabe: string; tipps: string[] }[] = [
   },
 ];
 
+/** "Zuallererst" - Claudias Wegweiser-Tipp (22.09.2026): eine WhatsApp-Gruppe nur mit sich selbst. */
+const WEGWEISER = {
+  titel: 'Zuallererst: Leg dir eine Gruppe nur für dich an',
+  text: 'Bevor es losgeht, legst du in WhatsApp eine Gruppe an, in der nur du bist. Dort landen deine sieben Aufnahmen, deine Notizen und die Hinweise aus der Challenge. So übst du, ohne dass jemand zusieht – und am Ende hörst du im Vergleich, wie sich deine Stimme von Tag 1 bis Tag 7 verändert hat.',
+  wie: 'So geht es: Neue Gruppe anlegen, niemanden hinzufügen, Namen vergeben – zum Beispiel „Meine Stimme". Fertig.',
+};
+
 const ABLAUF = [
   'Du trittst der WhatsApp-Gruppe bei und sagst „Ich bin dabei".',
-  'Ab Montag bekommst du jeden Morgen eine Aufgabe – die sieben stehen hier unten.',
+  'Ab Montag bekommst du jeden Morgen eine Aufgabe – die sieben stehen hier unten zum Aufklappen.',
   'Du nimmst dich mit dem Handy auf, eine Minute, und teilst das Video in der Gruppe. Du bekommst Feedback von mir.',
 ];
 
@@ -168,6 +213,21 @@ function Einstieg({ hell }: { hell?: boolean }) {
   );
 }
 
+/** Der Einstieg zwischen den Kacheln: Knopf fuer das Handy, QR-Code fuer alle, die am Rechner lesen.
+ *  QR zeigt auf den Gruppenlink (public/challenge/qr-whatsapp.png, erzeugt 22.09.2026, zurueckgelesen). */
+function WhatsAppBlock() {
+  return (
+    <div className={`mt-3 grid items-center gap-5 px-5 py-5 text-midnight-blue sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:px-7 ${GOLD} ${KACHEL} border-transparent`}>
+      <img src="/challenge/qr-whatsapp.png" alt="QR-Code: Einladung in die WhatsApp-Gruppe der Challenge" width={328} height={328} loading="lazy" decoding="async" className="h-24 w-24 rounded-md bg-white sm:h-28 sm:w-28" />
+      <div className="min-w-0">
+        <p className="font-montserrat text-lg font-extrabold leading-tight sm:text-xl">Hier geht es in die Gruppe.</p>
+        <p className="mt-1 font-inter text-[15px] leading-relaxed">Am Handy: Knopf drücken. Am Rechner: Code mit dem Handy scannen. Kostenfrei.</p>
+      </div>
+      <Einstieg hell />
+    </div>
+  );
+}
+
 export default function Challenge() {
   // Beim Vorrendern steht hier das Bau-Datum; im Browser rechnet React mit dem echten Tag neu.
   const montag = naechsterMontag(new Date());
@@ -175,7 +235,7 @@ export default function Challenge() {
   const strukturierteDaten = {
     '@context': 'https://schema.org',
     '@type': 'HowTo',
-    name: '7-Tage-Video-Challenge: Zeig dich. Sei dabei.',
+    name: 'Sieben Tage für deine Wirkung – die Video-Challenge',
     description: 'Sieben Tage, jeden Tag eine Aufgabe und eine Minute Video mit dem Handy – mit Feedback von Claudia Conen. Kostenfrei, in einer WhatsApp-Gruppe.',
     totalTime: 'P7D',
     step: TAGE.map((t, i) => ({ '@type': 'HowToStep', position: i + 1, name: `Tag ${i + 1}: ${t.titel}`, text: t.aufgabe })),
@@ -185,7 +245,7 @@ export default function Challenge() {
   return (
     <div className="min-h-screen bg-pearl-white">
       <SEO
-        title="7-Tage-Video-Challenge – Zeig dich. Sei dabei."
+        title="Sieben Tage für deine Wirkung – die Video-Challenge"
         description="Sieben Tage, jeden Tag eine Aufgabe, eine Minute Video mit dem Handy, Feedback von Claudia Conen. Kostenfrei, in einer WhatsApp-Gruppe. Für alle, die gehört werden wollen – ohne Show."
         path={PFAD}
       />
@@ -205,14 +265,15 @@ export default function Challenge() {
         <div className="mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)] items-center gap-10 px-6 md:grid-cols-[minmax(0,1.3fr)_auto] md:gap-16">
           <div className="min-w-0 text-pearl-white">
             <div className="mb-7 text-pearl-white/75">
-              <Brotkrumen krumen={[{ name: '7-Tage-Video-Challenge' }]} />
+              <Brotkrumen krumen={[{ name: 'Sieben Tage für deine Wirkung' }]} />
             </div>
-            <Kicker text="7-Tage-Video-Challenge · kostenfrei" />
+            <Kicker text="Video-Challenge · kostenfrei" />
             <h1 className="mt-6 font-montserrat text-4xl font-black uppercase leading-[1.05] tracking-tight sm:text-6xl">
-              Zeig dich. <span className="gold-text-animated">Sei dabei.</span>
+              Sieben Tage <span className="gold-text-animated">für deine Wirkung.</span>
             </h1>
-            <p className="mt-6 max-w-xl font-inter text-lg leading-relaxed text-pearl-white/90">
-              Sieben Tage. Jeden Tag eine Aufgabe, eine Minute Video mit dem Handy – und Feedback von mir. Keine Technik, keine Show. Nur du und deine Stimme.
+            <p className="mt-5 font-cormorant text-2xl italic leading-snug text-[#F7E7CE] sm:text-3xl">Zeig dich. Sei dabei.</p>
+            <p className="mt-5 max-w-xl font-inter text-lg leading-relaxed text-pearl-white/90">
+              Jeden Tag eine Anleitung, eine Minute Video mit dem Handy – und Feedback von mir. Keine Technik, keine Show. Nur du und deine Stimme.
             </p>
             <p className="mt-5 font-montserrat text-base font-bold text-white">
               Start immer montags – nächster Start: Montag, {montag}.
@@ -254,46 +315,76 @@ export default function Challenge() {
         </div>
       </Abschnitt>
 
-      {/* Die sieben Tage: je Aufgabe und drei Tipps */}
+      {/* Die sieben Tage als Klapp-Kacheln (Claudia, 09:19 UTC: "damit die ganze Anleitung nicht die
+          Seite ueberflutet"), dazwischen der WhatsApp-Einstieg mit QR-Code. Vorschau bleibt sichtbar
+          (Designliste: nie alles hinter einem Klick). Tag 1 ist aufgeklappt. */}
       <Abschnitt id="tage" className="bg-pearl-white pb-16 sm:pb-24" label="tage-titel">
         <div className="mx-auto max-w-6xl px-6">
-          <Kicker text="Die sieben Tage" hell />
+          <Kicker text="Dein Wegweiser" hell />
           <h2 id="tage-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
-            Jeden Tag eine Aufgabe. Dazu drei Tipps, die du behalten wirst.
+            Sieben Tage. Jeden Tag eine Anleitung – zum Aufklappen.
           </h2>
-          <ol className="mt-8 grid list-none gap-3 p-0">
+
+          <div className={`mt-8 grid gap-x-6 gap-y-3 bg-white px-5 py-5 text-midnight-blue sm:grid-cols-[auto_minmax(0,1fr)] sm:px-7 sm:py-6 ${KACHEL}`}>
+            <span className={`self-start rounded-md px-2.5 py-2 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-midnight-blue ${GOLD}`}>Zuerst</span>
+            <div className="min-w-0">
+              <h3 className="font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">{WEGWEISER.titel}</h3>
+              <p className="mt-2 font-inter text-[15px] leading-relaxed sm:text-base">{WEGWEISER.text}</p>
+              <p className="mt-2 font-inter text-[15px] leading-relaxed text-midnight-blue/80">{WEGWEISER.wie}</p>
+            </div>
+          </div>
+
+          <ol className="mt-3 grid list-none gap-3 p-0">
             {TAGE.map((t, i) => {
               const letzter = i === TAGE.length - 1;
               return (
-                <li key={t.titel} style={{ ['--i' as string]: i }} className={`cc-stufe grid gap-x-6 gap-y-3 bg-white px-5 py-5 text-midnight-blue sm:grid-cols-[auto_minmax(0,1fr)] sm:px-7 sm:py-6 ${KACHEL}`}>
-                  <span className={`self-start rounded-md px-2.5 py-2 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] ${letzter ? `${GOLD} text-midnight-blue` : 'bg-midnight-blue text-pearl-white'}`}>
-                    Tag {i + 1}
-                  </span>
-                  <div className="min-w-0">
-                    <h3 className="font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">{t.titel}</h3>
-                    <p className="mt-2 font-inter text-[15px] leading-relaxed sm:text-base">
-                      <b className="font-montserrat font-extrabold">Deine Aufgabe: </b>
-                      {t.aufgabe}
-                    </p>
-                    <ul className="mt-3 grid list-none gap-2 border-t border-[#D4AF37]/40 p-0 pt-3">
-                      {t.tipps.map((tipp) => (
-                        <li key={tipp} className="flex items-start gap-3 font-inter text-[15px] leading-relaxed">
-                          <Haken />
-                          <span>{tipp}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                <li key={t.titel} style={{ ['--i' as string]: i }} className="cc-stufe">
+                  <details className={`group bg-white text-midnight-blue ${KACHEL}`} open={i === 0}>
+                    <summary className="grid cursor-pointer list-none gap-x-6 gap-y-2 px-5 py-5 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:items-center sm:px-7 sm:py-6 [&::-webkit-details-marker]:hidden">
+                      <span className={`self-start rounded-md px-2.5 py-2 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] ${letzter ? `${GOLD} text-midnight-blue` : 'bg-midnight-blue text-pearl-white'}`}>
+                        Tag {i + 1}
+                      </span>
+                      <span className="min-w-0">
+                        <span className="block font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">{t.titel}</span>
+                        <span className="mt-1 block font-inter text-[15px] leading-relaxed">{t.vorschau}</span>
+                      </span>
+                      <span className="flex items-center gap-2 font-montserrat text-sm font-bold text-midnight-blue underline decoration-[#D4AF37] underline-offset-4">
+                        <span className="group-open:hidden">Anleitung lesen</span>
+                        <span className="hidden group-open:inline">Zuklappen</span>
+                        <span aria-hidden="true" className="inline-block transition-transform group-open:rotate-180">▾</span>
+                      </span>
+                    </summary>
+                    <div className="border-t border-[#D4AF37]/40 px-5 pb-6 pt-4 sm:px-7 sm:pb-7">
+                      <p className="font-inter text-[15px] leading-relaxed sm:text-base">
+                        <b className="font-montserrat font-extrabold">Deine Aufgabe: </b>
+                        {t.aufgabe}
+                      </p>
+                      {t.satz && (
+                        <blockquote className="mt-4 border-l-4 border-[#D4AF37] bg-pearl-white px-5 py-4 font-cormorant text-2xl italic leading-snug text-midnight-blue sm:text-[1.7rem]">
+                          „{t.satz}"
+                        </blockquote>
+                      )}
+                      <p className="mt-4 font-montserrat text-sm font-extrabold uppercase tracking-[0.12em]">{t.schrittTitel}</p>
+                      <ul className="mt-2 grid list-none gap-2 p-0">
+                        {t.schritte.map((s) => (
+                          <li key={s} className="flex items-start gap-3 font-inter text-[15px] leading-relaxed">
+                            <Haken />
+                            <span>{s}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      {t.danach && <p className="mt-4 font-montserrat text-base font-bold">{t.danach}</p>}
+                    </div>
+                  </details>
+                  {i === 0 && <WhatsAppBlock />}
                 </li>
               );
             })}
           </ol>
-          <div className="mt-8 flex flex-wrap items-center gap-4">
-            <Einstieg hell />
-            <span className="font-inter text-[15px] text-midnight-blue">Kostenfrei. Start Montag, {montag}.</span>
-          </div>
+          <WhatsAppBlock />
         </div>
       </Abschnitt>
+
 
       {/* Nach Tag 7 - kurz */}
       <Abschnitt id="danach" className="py-14 text-pearl-white sm:py-20" style={{ background: 'linear-gradient(180deg, #0A1628 0%, #0F1F3A 55%, #0A1628 100%)' }} label="danach-titel">

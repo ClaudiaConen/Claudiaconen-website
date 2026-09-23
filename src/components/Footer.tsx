@@ -16,7 +16,9 @@ import { Mail, Linkedin, Phone, Calendar, Instagram, ArrowUp } from 'lucide-reac
  * Verweise: nur Seiten, die es gibt (Routen in App.tsx geprueft am 22.09.2026). Die zwei bolt.host-Adressen
  * sind ihre laufenden Angebote - nicht anfassen. Alle externen Adressen am 22.09.2026 mit 200 geprueft.
  */
-const GOLD = 'bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]';
+/* Der Goldverlauf wurde nur noch vom Erstgespraech-Knopf gebraucht; der traegt seit dem
+   23.09.2026 den Markenknopf .cc-knopf. Konstante entfernt, damit niemand eine zweite
+   Knopfbauart daraus baut. */
 
 const SPALTEN: { titel: string; links: { label: string; href: string; extern?: boolean }[] }[] = [
   {
@@ -95,7 +97,9 @@ export default function Footer() {
                   </a>
                 </li>
               </ul>
-              <Link to="/termin-buchen" className={`mt-6 inline-flex items-center gap-2 rounded-full px-6 py-3.5 font-montserrat text-sm font-bold text-midnight-blue transition-transform hover:-translate-y-px ${GOLD}`}>
+              {/* Derselbe Knopf wie ueberall (.cc-knopf) - er steht auf jeder Seite und war
+                  vorher die haeufigste Abweichung vom Markenknopf (48 statt 52 px, keine Versalien). */}
+              <Link to="/termin-buchen" className="cc-knopf mt-6">
                 <Calendar size={18} /> Kostenloses Erstgespräch
               </Link>
               <div className="mt-6 flex gap-3">

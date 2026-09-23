@@ -230,7 +230,7 @@ export default function Wissensmagazin() {
                         const articleSection = document.getElementById(`article-${article.id}`);
                         articleSection?.scrollIntoView({ behavior: 'smooth' });
                       }}
-                      className="inline-block px-6 py-2 bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform"
+                      className="cc-knopf"
                     >
                       Artikel lesen
                     </a>

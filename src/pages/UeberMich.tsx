@@ -253,7 +253,7 @@ export default function UeberMich() {
             </p>
             <Link
               to="/hoeren"
-              className="mt-8 inline-block rounded-sm bg-luxury-gold px-8 py-4 font-montserrat text-base font-semibold text-midnight-blue transition-colors hover:bg-bright-gold"
+              className="cc-knopf mt-8"
             >
               Zur Hören-Seite
             </Link>

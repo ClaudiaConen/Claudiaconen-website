@@ -385,7 +385,7 @@ export default function Wissensbibliothek() {
                               ))}
                             </div>
                           )}
-                          <button className="w-full px-4 sm:px-6 py-2 sm:py-2.5 text-sm sm:text-base bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform">
+                          <button className="cc-knopf cc-knopf--breit">
                             Artikel lesen
                           </button>
                         </div>

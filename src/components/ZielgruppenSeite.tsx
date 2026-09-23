@@ -784,10 +784,9 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
             <p className={`mt-4 max-w-2xl font-inter text-lg leading-relaxed ${s.fussLeise}`}>
               {inhalt.schrittText}
             </p>
-            <Link
-              to={inhalt.schrittZiel}
-              className={`mt-8 inline-block rounded-sm px-8 py-4 font-montserrat text-base font-semibold transition-colors ${s.knopf}`}
-            >
+            {/* Markenknopf statt eigener Bauart. s.knopf entfaellt damit fuer diesen Knopf -
+                der Goldverlauf mit nachtblauer Schrift liest sich auf hellem UND dunklem Grund. */}
+            <Link to={inhalt.schrittZiel} className="cc-knopf mt-8">
               {inhalt.schrittKnopf}
             </Link>
           </div>

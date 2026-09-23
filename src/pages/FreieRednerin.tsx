@@ -386,7 +386,7 @@ export default function FreieRednerin() {
                   </ul>
                   <Link
                     to={w.ziel}
-                    className="mt-7 inline-block self-start rounded-sm bg-luxury-gold px-5 py-3 font-montserrat text-sm font-semibold text-midnight-blue transition-colors hover:bg-bright-gold"
+                    className="cc-knopf mt-7 self-start"
                   >
                     {w.knopf}
                   </Link>

@@ -200,7 +200,7 @@ export default function KIManagerAusbildung() {
                   onClick={scrollToPricing}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="inline-flex items-center justify-center gap-2 px-10 py-5 bg-gradient-to-r from-luxury-gold to-bright-gold text-white font-bold text-lg rounded-full shadow-xl hover:shadow-2xl transition-all"
+                  className="cc-knopf"
                 >
                   Platz jetzt verbindlich sichern
                   <ArrowRight size={20} />
@@ -351,7 +351,7 @@ export default function KIManagerAusbildung() {
                     onClick={scrollToPricing}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="inline-flex items-center justify-center gap-2 px-10 py-5 bg-gradient-to-r from-luxury-gold to-bright-gold text-white font-bold text-lg rounded-full shadow-xl hover:shadow-2xl transition-all"
+                    className="cc-knopf"
                   >
                     Jetzt starten und durchstarten
                     <ArrowRight size={20} />
@@ -640,7 +640,7 @@ export default function KIManagerAusbildung() {
                 onClick={scrollToPricing}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center justify-center gap-2 px-10 py-5 bg-gradient-to-r from-luxury-gold to-bright-gold text-white font-bold text-lg rounded-full shadow-xl hover:shadow-2xl transition-all"
+                className="cc-knopf"
               >
                 Das passt zu mir – jetzt anmelden
                 <ArrowRight size={20} />
@@ -767,7 +767,7 @@ export default function KIManagerAusbildung() {
                     onClick={scrollToPricing}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="inline-flex items-center justify-center gap-2 px-10 py-5 bg-gradient-to-r from-luxury-gold to-bright-gold text-white font-bold text-lg rounded-full shadow-xl hover:shadow-2xl transition-all"
+                    className="cc-knopf"
                   >
                     Mit Claudia zusammenarbeiten
                     <ArrowRight size={20} />
@@ -890,7 +890,7 @@ export default function KIManagerAusbildung() {
                   onClick={scrollToPricing}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="inline-flex items-center justify-center gap-2 px-10 py-5 bg-gradient-to-r from-luxury-gold to-bright-gold text-white font-bold text-lg rounded-full shadow-xl hover:shadow-2xl transition-all"
+                  className="cc-knopf"
                 >
                   Platz jetzt verbindlich sichern
                   <ArrowRight size={20} />
@@ -920,7 +920,7 @@ export default function KIManagerAusbildung() {
                 onClick={scrollToPricing}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-3 px-12 py-6 bg-gradient-to-r from-luxury-gold to-bright-gold text-white font-bold text-xl rounded-full shadow-2xl"
+                className="cc-knopf"
               >
                 JETZT VERBINDLICH ANMELDEN
                 <ArrowRight size={24} />

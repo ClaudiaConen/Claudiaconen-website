@@ -222,7 +222,8 @@ export default function Hero() {
                         decoding="async"
                         className="h-11 w-11 flex-shrink-0 drop-shadow-[0_6px_10px_rgba(0,0,0,0.35)] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110"
                       />
-                      <div className="min-w-0 flex-1">
+                      {/* Platz rechts fuer den Abspielknopf - vorher lag er ueber dem Titel (Kachel "Klarheit", 23.09.2026). */}
+                      <div className={`min-w-0 flex-1 ${media ? 'pr-8' : ''}`}>
                         <p className="break-words text-[0.8rem] font-semibold leading-snug text-pearl-white [hyphens:auto]">
                           {point.title}
                         </p>

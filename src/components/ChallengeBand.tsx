@@ -41,7 +41,9 @@ export default function ChallengeBand() {
           ))}
         </span>
       </span>
-      <span className="hidden shrink-0 items-center pr-5 font-montserrat text-sm font-bold text-[#F7E7CE] transition-transform group-hover:translate-x-0.5 sm:flex">
+      {/* Deckender Grund mit weichem Uebergang nach links - vorher lief die Laufschrift unter "Mitmachen" durch
+          (Claudias Foto 23.09.2026 00:00 UTC). */}
+      <span className="relative z-10 hidden shrink-0 items-center bg-[linear-gradient(90deg,rgba(10,22,40,0)_0%,#0A1628_26%)] pl-9 pr-5 font-montserrat text-sm font-bold text-[#F7E7CE] transition-transform group-hover:translate-x-0.5 sm:flex">
         Mitmachen →
       </span>
     </Link>

@@ -92,13 +92,12 @@ export default function Timeline() {
             id="timeline-headline"
             className="font-montserrat text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl"
           >
-            {/* Claudias Text vom 23.09.2026, 00:11 UTC - Wort fuer Wort. */}
-            <span className="block">Klar sprechen.</span>
-            <span className="block">Glaubwürdig auftreten.</span>
-            <span className="block gold-text-animated">Vertrauen aufbauen.</span>
+            {/* Claudias Text vom 23.09.2026, 00:13 UTC ("tausche den Text gegen den") - Wort fuer Wort. */}
+            <span className="block">Worte vermitteln Wissen.</span>
+            <span className="block gold-text-animated">Persönlichkeit weckt Vertrauen.</span>
           </h2>
           <p className="max-w-md font-inter text-base leading-relaxed text-pearl-white/85 sm:text-lg">
-            Claudia Conen verbindet in ihren Coachings und Trainings Positionierung, Storytelling, Rhetorik und Stimmwirkung. Sie unterstützt Unternehmer, Führungskräfte, Coaches, Trainer und Teams dabei, ihre Botschaft verständlich zu vermitteln und ihre Persönlichkeit hörbar zu machen – im Kundengespräch, am Telefon, bei Präsentationen und vor der Kamera.
+            Bring Worte, Stimme und Haltung in Einklang – damit du Menschen erreichst und deine Botschaft im Gedächtnis bleibt.
           </p>
           <p className="font-montserrat text-sm font-bold tabular-nums text-pearl-white/80" aria-hidden="true">
             <span className="mr-1 text-2xl font-extrabold text-[#EBD197]">{erreicht + 1}</span>

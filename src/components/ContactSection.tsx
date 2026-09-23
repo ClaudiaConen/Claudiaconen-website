@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react';
+import { Calendar, useState } from 'react';
+import { Calendar, motion } from 'framer-motion';
+import { Calendar, Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
 export default function ContactSection() {
@@ -162,10 +162,10 @@ export default function ContactSection() {
                 href="https://claudiaconen.com/termin-buchen"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] text-midnight-blue font-bold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg"
+                className="cc-knopf cc-knopf--zweit"
               >
-                <Phone size={20} />
-                Termin vereinbaren
+                <Calendar size={18} />
+                Kostenloses Erstgespräch buchen
               </a>
             </div>
           </motion.div>
@@ -285,7 +285,7 @@ export default function ContactSection() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] text-midnight-blue font-bold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                className="cc-knopf cc-knopf--breit"
               >
                 {isSubmitting ? (
                   <>

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Calendar, ArrowRight } from 'lucide-react';
+import { Calendar } from 'lucide-react';
 
 export default function FinalCTA() {
   return (
@@ -44,11 +44,10 @@ export default function FinalCTA() {
               href="https://claudiaconen.com/termin-buchen"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300 shadow-2xl text-sm md:text-base"
+              className="cc-knopf"
             >
-              <Calendar size={20} />
+              <Calendar size={18} />
               Kostenloses Erstgespräch buchen
-              <ArrowRight size={20} />
             </a>
           </div>
 

@@ -137,11 +137,13 @@ export default function Tueren() {
 
             Eine Frage, kein Slogan. Sie trifft den Moment: Jemand ist
             gelandet und weiss noch nicht, wo er hingehoert. */}
+        {/* Claudias Dreiklang vom 23.09.2026 (00:11 UTC) als Ueberschrift ueber den Tueren; die sortierende Frage bleibt darunter. */}
         <h2
           id="tueren-frage"
-          className="mb-10 font-montserrat text-xl font-bold text-midnight-blue sm:mb-14 sm:text-3xl"
+          className="mb-10 font-montserrat text-2xl font-extrabold leading-tight text-midnight-blue sm:mb-14 sm:text-4xl"
         >
-          Wofür bist du hier?
+          Klar sprechen. Glaubwürdig auftreten. Vertrauen aufbauen.
+          <span className="mt-3 block font-montserrat text-lg font-semibold text-midnight-blue/80 sm:text-2xl">Wofür bist du hier?</span>
         </h2>
 
         {/* Gestapelte Kacheln. Der wachsende Abstand nach oben laesst sie beim

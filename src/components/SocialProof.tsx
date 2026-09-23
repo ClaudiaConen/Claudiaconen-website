@@ -475,7 +475,7 @@ export default function SocialProof() {
                 <button
                   type="button"
                   onClick={() => spiele(s, gewaehlt)}
-                  className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 font-montserrat text-sm font-extrabold text-midnight-blue transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#EBD197] motion-reduce:transition-none ${GOLD}`}
+                  className="cc-knopf cc-knopf--zweit cc-knopf--dunkel"
                 >
                   <span aria-hidden="true">▶</span>
                   Video ansehen{s.video ? ` · ${s.video.dauer}` : ''}

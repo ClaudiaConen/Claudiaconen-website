@@ -1,4 +1,6 @@
+import type { CSSProperties } from 'react';
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Calendar, Pause, Play } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import AudioButton from './AudioButton';
@@ -39,7 +41,16 @@ export const HERO_HELL = true;
  *  "die Buttons darunter bleiben auf blau, damit der Gold-Effekt passt". Gold-Schimmer und Goldrand wirken auf Nachtblau. */
 const STREIFEN_DUNKEL = true;
 const VIMEO_ID = '1143907515';
-const LOOP = { mp4: '', webm: '' };
+/** Der geschnittene Loop (13 s, nahtlos ueber 1 s Ueberblendung, ohne Ton) aus Claudias 7:48-Minuten-Video vom 23.09.2026.
+ *  BUEHNE = Keynote-Mitschnitt (102,5 s ab Start des Rohvideos), INTERVIEW = Buecherwand (62 s). Poster = erster Frame des Loops.
+ *  versatz = wie weit die Buehne am Rechner nach rechts rueckt, damit das Gesicht rechts der Schrift steht. */
+/* Claudias Wahl 23.09.2026 12:54 UTC: „ja Interview". Die Buehnen-Dateien liegen NICHT im Repo, sondern in
+   projects/claudiaconen/video/sichtung/webseite/ - vor einem Wechsel auf LOOPS.buehne dorthin greifen. */
+const LOOPS = {
+  buehne: { mp4: '/hero-video/hero-loop-buehne.mp4', webm: '/hero-video/hero-loop-buehne.webm', poster1280: '/hero-video/poster-buehne-1280.webp', poster768: '/hero-video/poster-buehne-768.webp', posterJpg: '/hero-video/poster-buehne-1280.jpg', versatz: '4%', fokus: '68% 15%' },
+  interview: { mp4: '/hero-video/hero-loop-interview.mp4', webm: '/hero-video/hero-loop-interview.webm', poster1280: '/hero-video/poster-interview-1280.webp', poster768: '/hero-video/poster-interview-768.webp', posterJpg: '/hero-video/poster-interview-1280.jpg', versatz: '15%', fokus: '50% 12%' },
+};
+const LOOP = LOOPS.interview;
 
 interface StepMedia {
   step_number: number;
@@ -213,12 +224,12 @@ export default function Hero() {
         aria-labelledby="hero-headline"
       >
         {/* Buehne: Standbild zuerst, Video darueber, sobald es laeuft. Rein dekorativ. */}
-        <div className="cc-hero-buehne" aria-hidden="true">
+        <div className="cc-hero-buehne" aria-hidden="true" style={{ ['--versatz' as string]: LOOP.versatz } as CSSProperties}>
           <picture>
-            <source media="(min-width: 768px)" srcSet="/hero-video/poster-1280.webp" type="image/webp" />
-            <source srcSet="/hero-video/poster-768.webp" type="image/webp" />
+            <source media="(min-width: 768px)" srcSet={LOOP.poster1280} type="image/webp" />
+            <source srcSet={LOOP.poster768} type="image/webp" />
             <img
-              src="/hero-video/poster-1280.jpg"
+              src={LOOP.posterJpg}
               alt=""
               width={1280}
               height={720}
@@ -227,6 +238,7 @@ export default function Hero() {
               // @ts-expect-error fetchpriority ist in React 18 noch nicht typisiert, der Browser kennt es.
               fetchpriority="high"
               className="cc-hero-bild"
+              style={{ objectPosition: LOOP.fokus }}
             />
           </picture>
           {videoEingehaengt && LOOP.mp4 && (
@@ -238,7 +250,8 @@ export default function Hero() {
               autoPlay
               loop
               preload="metadata"
-              poster="/hero-video/poster-1280.jpg"
+              poster={LOOP.posterJpg}
+              style={{ objectPosition: LOOP.fokus }}
               onPlaying={() => setVideoSichtbar(true)}
               tabIndex={-1}
             >
@@ -270,33 +283,43 @@ export default function Hero() {
             <div className="accent-line" />
             <h1 id="hero-headline" className="font-montserrat font-bold text-3xl leading-tight sm:text-4xl md:text-5xl lg:text-6xl">
               <span className={hell ? 'cc-hero-zeile1' : 'headline-line1'}>Würdest du DIR selbst zuhören?</span>
+              {/* Zeile 2: WAS sie anbietet - Claudias Vorgabe vom 23.09.2026, 10:37 UTC ("wenn Leute auf die Seite kommen, fehlt da nicht was?").
+                  "Beruehre das Herz. Bleib im Kopf." bleibt ihr Satz, steht aber nicht mehr im Kopf. */}
               <span className={`${hell ? 'cc-hero-zeile2' : 'headline-line2'} mt-3 block text-xl sm:text-2xl md:text-3xl`}>
-                Berühre das Herz. Bleib im Kopf.
+                Keynotes, Rhetoriktraining und Auftrittscoaching
               </span>
             </h1>
 
-            <p className={`cc-hero-satz mt-6 font-inter text-lg leading-relaxed sm:text-xl md:text-2xl ${hell ? 'text-midnight-blue' : 'text-pearl-white/90'}`}>
+            {/* FUER WEN (ihr Satz, 10:37 UTC, "Speaker" ergaenzt) und der KI-Satz als Gegensatz (ihre Frage 10:39 UTC:
+                "sollte ich KI erwaehnen" - ja, als Gegensatz, nie als Dienstleistung). */}
+            <p className={`cc-hero-satz mt-6 font-inter text-lg leading-relaxed sm:text-xl ${hell ? 'text-midnight-blue' : 'text-pearl-white/90'}`}>
               <span className="block">
-                KI liefert <strong className={hell ? 'cc-kw-hell' : 'keyword-highlight'}>Perfektion</strong> auf Mausklick.
+                Für Unternehmer, Führungskräfte, Speaker, Coaches und Teams, die klar sprechen und glaubwürdig auftreten wollen.
               </span>
-              <span className="mt-2 block">
-                Deine <strong className={hell ? 'cc-kw-hell' : 'keyword-highlight'}>Unverwechselbarkeit</strong> schafft{' '}
+              <span className="mt-3 block">
+                KI liefert <strong className={hell ? 'cc-kw-hell' : 'keyword-highlight'}>Perfektion</strong> auf Mausklick. Deine{' '}
+                <strong className={hell ? 'cc-kw-hell' : 'keyword-highlight'}>Unverwechselbarkeit</strong> schafft{' '}
                 <strong className={hell ? 'cc-kw-hell' : 'keyword-highlight'}>Vertrauen</strong>.
               </span>
             </p>
 
-            <div className="mt-8">
+            {/* Zwei Knoepfe (Claudia 10:43 UTC: "Jetzt die Wirkung steigern" statt "Unverwechselbar werden"; 10:37 UTC: "Keynote anfragen").
+                Erstknopf fuehrt zu den vier Tueren, Zweitknopf zur Keynote-Seite. Gleiches Design wie alle Knoepfe der Seite (.cc-knopf). */}
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
               <a
-                href="#schritt1"
-                className="inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-full bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] px-6 py-4 text-sm font-semibold text-midnight-blue sm:w-auto sm:px-8 sm:text-base shadow-[0_14px_30px_-14px_rgba(10,22,40,0.45)] transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D4AF37]"
+                href="#tueren-frage"
+                className="cc-knopf"
                 onClick={(e) => {
                   e.preventDefault();
-                  sanftZu('#schritt1');
+                  sanftZu('#tueren-frage');
                 }}
               >
-                <Calendar size={20} />
-                JETZT UNVERWECHSELBAR WERDEN
+                <Calendar size={18} />
+                Jetzt die Wirkung steigern
               </a>
+              <Link to="/keynote-und-buehnenperformance" className={`cc-knopf cc-knopf--zweit ${hell ? '' : 'cc-knopf--dunkel'}`}>
+                Keynote anfragen
+              </Link>
             </div>
           </div>
         </div>

@@ -158,10 +158,9 @@ export default function Timeline() {
             {/* Vorher "#offers" - diesen Anker gibt es auf der Startseite nicht. */}
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 rounded-full bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)] px-7 py-3.5 font-montserrat text-[15px] font-extrabold text-midnight-blue shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)] transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#EBD197] motion-reduce:transition-none"
+              className="cc-knopf"
             >
               Sprich mit mir
-              <span aria-hidden="true">&rarr;</span>
             </a>
           </div>
         </div>

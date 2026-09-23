@@ -139,9 +139,9 @@ export default function About() {
 
             <a
               href="/ueber-mich"
-              className="inline-block px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] text-midnight-blue font-bold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg mt-6"
+              className="cc-knopf cc-knopf--zweit mt-6"
             >
-              Mehr über Claudia erfahren
+              Mehr über Claudia
             </a>
           </motion.div>
         </div>

@@ -24,8 +24,9 @@ export default function Home() {
   return (
     <div className="relative">
       <SEO
-        title="Claudia Conen | Keynote-Speakerin, Trainerin & Coach"
-        description="Claudia Conen: Keynote-Speakerin, Trainerin, Coach und Autorin. Rhetorik, Storytelling, Präsentation und Kameratraining – seit 37 Jahren."
+        // Seitentitel und Suchbeschreibung: Claudias Vorgabe vom 23.09.2026 (10:37 UTC), Speaker ergaenzt (eine der vier Tueren).
+        title="Claudia Conen | Keynotes, Rhetoriktraining & Auftrittscoaching"
+        description="Keynotes, Rhetoriktraining und Auftrittscoaching für Unternehmer, Führungskräfte, Speaker, Coaches und Teams – klar sprechen, glaubwürdig auftreten, Menschen bewegen. Seit 37 Jahren."
         keywords={SEO_KEYWORDS}
       />
       <a href="#main" className="visually-hidden focusable">

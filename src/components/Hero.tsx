@@ -1,11 +1,45 @@
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Calendar } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { Calendar, Pause, Play } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import AudioButton from './AudioButton';
 import ChallengeBand from './ChallengeBand';
 import VideoButton from './VideoButton';
 import VideoModal from './VideoModal';
+
+/**
+ * Kopfbereich mit Video ueber die volle Breite (Claudia, 23.09.2026 09:23 UTC:
+ * "ein Vorschlag, wie es aussehen wuerde, wenn ein Video ueber die ganze Seite geht -
+ * ich moechte es nicht so dunkel").
+ *
+ * Aufbau, von hinten nach vorn:
+ *   1. Standbild (public/hero-video/poster-*.webp, das Vorschaubild des Vimeo-Videos
+ *      1143907515) - das ist der vollstaendige erste Zustand: ohne JavaScript, bei
+ *      abgeschalteter Bewegung, im Stromsparmodus und auf dem Telefon steht genau das.
+ *   2. Das Video, stumm und in Schleife, nur ab 1024 px Breite und nur, wenn niemand
+ *      Bewegung oder Datensparen eingestellt hat. Es wird erst nach dem Laden der Seite
+ *      eingehaengt und blendet ein, sobald es wirklich laeuft - vorher bleibt das Standbild.
+ *      Ausserhalb des Bildes und im versteckten Tab haelt es an. Ein kleiner Knopf unten
+ *      rechts haelt es an und startet es wieder.
+ *   3. Der Schleier: links deckend in der Farbe der Seite, nach rechts auslaufend. Die
+ *      Schrift steht immer auf dem deckenden Teil (gemessen am Standbild: linkes Drittel
+ *      Helligkeit 59/255, Mitte 118 - der Schleier ist auf den hellsten Frame ausgelegt).
+ *   4. Der Text: Ueberschrift, zwei Saetze, ein Knopf. Nicht mehr - alles Weitere steht
+ *      im hellen Streifen darunter (die sieben Schluessel, das Laufband).
+ *
+ * HELL = true: Seite in Pearl, Schrift Nachtblau, Gold nur als Linie, Knopf und Rand
+ * (Claudias Regel: Gold nie als Schrift auf Hell). HELL = false: Nachtblau-Schleier,
+ * Schrift Pearl, Gold-Schimmer wie bisher.
+ *
+ * Video-Quelle: Solange keine MP4-Datei vorliegt, laeuft der Vimeo-Hintergrundplayer
+ * (Konto ist "pro", background=1 ist damit erlaubt). Liegt spaeter ein geschnittener
+ * Loop in public/hero-video/, wird LOOP ausgefuellt und das <video>-Element uebernimmt.
+ */
+export const HERO_HELL = true;
+/** Der Kachelstreifen unter dem Video bleibt nachtblau, auch wenn der Kopf hell ist - Claudia, 23.09.2026 09:55 UTC:
+ *  "die Buttons darunter bleiben auf blau, damit der Gold-Effekt passt". Gold-Schimmer und Goldrand wirken auf Nachtblau. */
+const STREIFEN_DUNKEL = true;
+const VIMEO_ID = '1143907515';
+const LOOP = { mp4: '', webm: '' };
 
 interface StepMedia {
   step_number: number;
@@ -14,22 +48,56 @@ interface StepMedia {
   platform: 'youtube' | 'vimeo' | null;
 }
 
+const SCHLUESSEL = [
+  { icon: 'klarheit', title: 'KLARHEIT.', subtitle: 'Wofür du stehst.', href: '#schritt3', stepNumber: 3 },
+  { icon: 'botschaft', title: 'BOTSCHAFT.', subtitle: 'Die Vertrauen schafft.', href: '#schritt2', stepNumber: 2 },
+  { icon: 'story', title: 'STORY.', subtitle: 'Die Emotionen weckt.', href: '#schritt4', stepNumber: 4 },
+  { icon: 'stimme', title: 'STIMME.', subtitle: 'Die unaufhaltbar ist.', href: '#schritt6', stepNumber: 6 },
+  { icon: 'praesenz', title: 'PRÄSENZ.', subtitle: 'Die wirkt, bevor du sprichst.', href: '#schritt5', stepNumber: 5 },
+  { icon: 'ki', title: 'KI.', subtitle: 'Die dich beschleunigt.', href: '#schritt1', stepNumber: 1 },
+  { icon: 'wirkung', title: 'WIRKUNG.', subtitle: 'Die bleibt.', href: '#schritt7', stepNumber: 7 },
+];
+
+function sanftZu(selector: string) {
+  const target = document.querySelector(selector);
+  if (!target) return;
+  const y = target.getBoundingClientRect().top + window.pageYOffset - 100;
+  window.scrollTo({ top: y, behavior: 'smooth' });
+}
+
+/** Darf das Video ueberhaupt laufen? Nur breit, nur ohne Bewegungs- oder Datensparwunsch. */
+function videoErlaubt(): boolean {
+  if (typeof window === 'undefined') return false;
+  if (!window.matchMedia('(min-width: 1024px)').matches) return false;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
+  const verbindung = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+  if (verbindung && verbindung.saveData) return false;
+  return true;
+}
+
 export default function Hero() {
   const [stepMediaData, setStepMediaData] = useState<Record<number, StepMedia>>({});
   const [videoModalOpen, setVideoModalOpen] = useState(false);
   const [currentVideo, setCurrentVideo] = useState<{ url: string; platform: 'youtube' | 'vimeo'; title: string } | null>(null);
+
+  // Video-Zustand: eingehaengt (nach dem Laden), sichtbar (laeuft wirklich), angehalten (per Knopf).
+  const [videoEingehaengt, setVideoEingehaengt] = useState(false);
+  const [videoSichtbar, setVideoSichtbar] = useState(false);
+  const [angehalten, setAngehalten] = useState(false);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const iframeRef = useRef<HTMLIFrameElement | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const imBildRef = useRef(true);
+  const angehaltenRef = useRef(false);
+
   useEffect(() => {
     loadStepMedia();
   }, []);
 
   const loadStepMedia = async () => {
     try {
-      const { data, error } = await supabase
-        .from('step_media')
-        .select('*');
-
+      const { data, error } = await supabase.from('step_media').select('*');
       if (error) throw error;
-
       if (data) {
         const mediaMap: Record<number, StepMedia> = {};
         data.forEach((item) => {
@@ -42,278 +110,270 @@ export default function Hero() {
     }
   };
 
+  // Erst nach dem Laden der Seite einhaengen - das Standbild ist der erste Eindruck, nicht das Video.
+  useEffect(() => {
+    if (!videoErlaubt()) return;
+    let fertig = false;
+    const einhaengen = () => {
+      if (fertig) return;
+      fertig = true;
+      setVideoEingehaengt(true);
+    };
+    if (document.readyState === 'complete') {
+      const id = window.setTimeout(einhaengen, 400);
+      return () => window.clearTimeout(id);
+    }
+    window.addEventListener('load', einhaengen, { once: true });
+    return () => window.removeEventListener('load', einhaengen);
+  }, []);
+
+  // Vimeo meldet ueber postMessage, ob es laeuft. Erst dann blenden wir ein - sonst bleibt das Standbild.
+  const anVimeo = (method: string, value?: unknown) => {
+    const win = iframeRef.current?.contentWindow;
+    if (!win) return;
+    win.postMessage(JSON.stringify(value === undefined ? { method } : { method, value }), 'https://player.vimeo.com');
+  };
+
+  useEffect(() => {
+    if (!videoEingehaengt || LOOP.mp4) return;
+    const aufNachricht = (e: MessageEvent) => {
+      if (e.origin !== 'https://player.vimeo.com') return;
+      let daten: { event?: string; method?: string } = {};
+      try {
+        daten = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
+      } catch {
+        return;
+      }
+      if (daten.event === 'ready') {
+        anVimeo('addEventListener', 'play');
+        anVimeo('addEventListener', 'timeupdate');
+        anVimeo('setVolume', 0);
+      }
+      if (daten.event === 'play' || daten.event === 'timeupdate') {
+        setVideoSichtbar(true);
+      }
+    };
+    window.addEventListener('message', aufNachricht);
+    return () => window.removeEventListener('message', aufNachricht);
+  }, [videoEingehaengt]);
+
+  // Anhalten, sobald der Kopf aus dem Bild ist oder der Tab versteckt wird - eine Schleife, die niemand sieht, kostet nur.
+  const spielen = () => {
+    if (angehaltenRef.current || !imBildRef.current || document.hidden) return;
+    if (LOOP.mp4) videoRef.current?.play().catch(() => setVideoSichtbar(false));
+    else anVimeo('play');
+  };
+  const pausieren = () => {
+    if (LOOP.mp4) videoRef.current?.pause();
+    else anVimeo('pause');
+  };
+
+  useEffect(() => {
+    if (!videoEingehaengt || !sectionRef.current) return;
+    const beobachter = new IntersectionObserver(
+      ([eintrag]) => {
+        imBildRef.current = eintrag.isIntersecting;
+        if (eintrag.isIntersecting) spielen();
+        else pausieren();
+      },
+      { threshold: 0.05 }
+    );
+    beobachter.observe(sectionRef.current);
+    const aufSichtbarkeit = () => (document.hidden ? pausieren() : spielen());
+    document.addEventListener('visibilitychange', aufSichtbarkeit);
+    return () => {
+      beobachter.disconnect();
+      document.removeEventListener('visibilitychange', aufSichtbarkeit);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [videoEingehaengt]);
+
+  const knopfUmschalten = () => {
+    const neu = !angehaltenRef.current;
+    angehaltenRef.current = neu;
+    setAngehalten(neu);
+    if (neu) pausieren();
+    else spielen();
+  };
+
   const handleVideoClick = (url: string, platform: 'youtube' | 'vimeo', title: string) => {
     setCurrentVideo({ url, platform, title });
     setVideoModalOpen(true);
   };
 
-  const keyPoints = [
-    {
-      icon: 'klarheit',
-      title: 'KLARHEIT.',
-      subtitle: 'Wofür du stehst.',
-      href: '#schritt3',
-      stepNumber: 3,
-    },
-    {
-      icon: 'botschaft',
-      title: 'BOTSCHAFT.',
-      subtitle: 'Die Vertrauen schafft.',
-      href: '#schritt2',
-      stepNumber: 2,
-    },
-    {
-      icon: 'story',
-      title: 'STORY.',
-      subtitle: 'Die Emotionen weckt.',
-      href: '#schritt4',
-      stepNumber: 4,
-    },
-    {
-      icon: 'stimme',
-      title: 'STIMME.',
-      subtitle: 'Die unaufhaltbar ist.',
-      href: '#schritt6',
-      stepNumber: 6,
-    },
-    {
-      icon: 'praesenz',
-      title: 'PRÄSENZ.',
-      subtitle: 'Die wirkt, bevor du sprichst.',
-      href: '#schritt5',
-      stepNumber: 5,
-    },
-    {
-      icon: 'ki',
-      title: 'KI.',
-      subtitle: 'Die dich beschleunigt.',
-      href: '#schritt1',
-      stepNumber: 1,
-    },
-    {
-      icon: 'wirkung',
-      title: 'WIRKUNG.',
-      subtitle: 'Die bleibt.',
-      href: '#schritt7',
-      stepNumber: 7,
-    },
-  ];
+  const hell = HERO_HELL;
+  const streifenHell = hell && !STREIFEN_DUNKEL;
+  const vimeoSrc = `https://player.vimeo.com/video/${VIMEO_ID}?background=1&autoplay=1&muted=1&loop=1&autopause=0&dnt=1&quality=720p`;
 
   return (
-    <section
-      className="relative px-4 pb-10 pt-28 sm:px-6 sm:pt-32 lg:px-8 lg:pt-36"
-      aria-labelledby="hero-headline"
-    >
-      {/* Vorher lag hier ein Hintergrundfoto mit einem Schleier von 90
-          Prozent Deckkraft darueber. Das Foto
-          ("/photo_2025-07-09 16.44.30.jpeg") EXISTIERT NICHT - der
-          Abruf antwortet mit HTTP 200, liefert aber die Auffangseite.
-          Uebrig blieb ein fast undurchsichtiger Schleier ueber nichts:
-          genau das "riesige dunkle Feld".
-
-          Solange kein Buehnenfoto da ist, entsteht die Tiefe aus zwei
-          weichen Lichtquellen statt aus einer flachen Flaeche. Das ist
-          der Griff, mit dem Apple Tiefe ohne Bild erzeugt - nicht
-          heller machen, sondern ungleichmaessig. */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            'radial-gradient(120% 85% at 12% 0%, rgba(26,43,76,0.95) 0%, rgba(10,22,40,0) 62%),' +
-            'radial-gradient(90% 70% at 88% 18%, rgba(212,175,55,0.14) 0%, rgba(10,22,40,0) 58%),' +
-            'linear-gradient(175deg, #0B1B33 0%, #0A1628 48%, #0C1E38 100%)',
-          zIndex: 0,
-        }}
-      />
-      {/* Die Kante nach unten: kein harter Schnitt, sondern ein
-          Auslaufen. Ein Block, der abrupt endet, wirkt wie ein Kasten;
-          einer, der ausblendet, wie eine Seite. */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-28"
-        style={{
-          background: 'linear-gradient(180deg, rgba(10,22,40,0) 0%, rgba(255,254,249,0.06) 100%)',
-          zIndex: 1,
-        }}
-      />
-      <div className="relative max-w-7xl mx-auto" style={{ zIndex: 10 }}>
-        {/* minmax(0,1fr) statt 1fr und min-w-0 auf den Spalten: Ohne das darf eine Rasterspalte
-            nie schmaler werden als ihr Inhalt - und die sieben Wischkacheln unten sind auf dem
-            Telefon rund 1.300 px breit. Dann wurde der ganze Kopf breiter als der Bildschirm,
-            Safari zoomte heraus, und alles darunter wirkte winzig (Claudias Foto vom 22.09.2026,
-            03:32 Uhr: "Am Handy sieht das noch alles sehr verschoben aus"). */}
-        <div className="grid grid-cols-[minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_auto] gap-8 items-start">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.2 }}
-            className="min-w-0 space-y-5 sm:space-y-6"
-          >
-            <div className="space-y-3 sm:space-y-4">
-              <div className="accent-line"></div>
-              <h1 id="hero-headline" className="font-montserrat font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight">
-                <span className="headline-line1">Würdest du DIR selbst zuhören?</span>
-                <span className="headline-line2 text-xl sm:text-2xl md:text-3xl lg:text-4xl mb-6 block">
-                  Berühre das Herz. Bleib im Kopf.
-                </span>
-              </h1>
-
-              <motion.div
-                className="subline text-base sm:text-xl md:text-2xl mt-4 sm:mt-6"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.2 }}
-              >
-                <span className="subline-part1">
-                  KI liefert <span className="keyword-highlight">Perfektion</span> auf Mausklick.
-                </span>
-                <span className="subline-part2">
-                  Deine <span className="keyword-highlight">Unverwechselbarkeit</span> schafft <span className="keyword-highlight">Vertrauen</span>.
-                </span>
-              </motion.div>
-
-              {/* Hauchzart, damit klar ist: beides ist moeglich, mit KI und ohne. */}
-              <p className="mt-3 sm:mt-5 font-inter text-xs sm:text-sm font-light tracking-[0.22em] text-pearl-white/45">
-                mit und ohne KI
-              </p>
-
-              <p className="mt-4 sm:mt-6 font-montserrat text-xs sm:text-sm font-semibold uppercase tracking-[0.18em] text-pearl-white/60">
-                Rhetorik · Storytelling · Performance · Wirkung
-              </p>
-            </div>
-
-            <div className="hero-kacheln flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 sm:grid sm:grid-cols-3 sm:gap-3 sm:overflow-visible lg:grid-cols-4 2xl:grid-cols-7">
-              {keyPoints.map((point, index) => {
-                const media = stepMediaData[point.stepNumber];
-                return (
-                  <motion.a
-                    key={index}
-                    href={point.href}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="hero-glass-card group relative w-[11rem] flex-shrink-0 snap-start rounded-xl p-3.5 sm:w-auto sm:flex-shrink"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      const target = document.querySelector(point.href);
-                      if (target) {
-                        const yOffset = -100;
-                        const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
-                        window.scrollTo({ top: y, behavior: 'smooth' });
-                      }
-                    }}
-                  >
-                    {/* Titel links, Abspielknopf rechts auf gleicher Hoehe.
-                        Vorher waren es vier gestapelte Ebenen je Kachel -
-                        goldener Kreis, Titel, Unterzeile, Knopf - und das
-                        siebenmal nebeneinander. Sieben goldene Kreise sind
-                        sieben Betonungen, und sieben Betonungen sind keine.
-                        Das Gold bleibt jetzt dort, wo etwas passiert: am
-                        Abspielknopf. */}
-                    <div className="flex items-start gap-2.5 text-left">
-                      {/* 3-D-Icons (22.09.2026, ueber Claudias Gemini-Schluessel erzeugt, freigestellt):
-                          Nachtblau-Glas mit Goldfassung - eine Materialsprache fuer alle sieben Kacheln. */}
-                      <img
-                        src={`/icons/${point.icon}.webp`}
-                        alt=""
-                        width={256}
-                        height={256}
-                        loading="eager"
-                        decoding="async"
-                        className="h-11 w-11 flex-shrink-0 drop-shadow-[0_6px_10px_rgba(0,0,0,0.35)] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110"
-                      />
-                      {/* Platz rechts fuer den Abspielknopf - vorher lag er ueber dem Titel (Kachel "Klarheit", 23.09.2026). */}
-                      <div className={`min-w-0 flex-1 ${media ? 'pr-8' : ''}`}>
-                        <p className="break-words text-[0.8rem] font-semibold leading-snug text-pearl-white [hyphens:auto]">
-                          {point.title}
-                        </p>
-                        <p className="mt-0.5 text-[0.7rem] leading-snug text-pearl-white/60">
-                          {point.subtitle}
-                        </p>
-                      </div>
-                      {media && (
-                        <div className="absolute bottom-2 right-2 scale-[0.7] opacity-80 transition-opacity group-hover:opacity-100" onClick={(e) => e.stopPropagation()}>
-                          {media.media_type === 'audio' ? (
-                            <AudioButton audioUrl={media.media_url} ariaLabel={`Play ${point.title} audio`} />
-                          ) : media.media_type === 'video' && media.platform ? (
-                            <VideoButton
-                              onClick={() => handleVideoClick(media.media_url, media.platform as 'youtube' | 'vimeo', point.title)}
-                              ariaLabel={`Play ${point.title} video`}
-                            />
-                          ) : null}
-                        </div>
-                      )}
-                    </div>
-                  </motion.a>
-                );
-              })}
-            </div>
-
-            {/* Laufband "Aktuell: 7-Tage-Video-Challenge" - Claudia, 22.09.2026 (Wochenend-Buehnenprogramm). */}
-            <ChallengeBand />
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.2 }}
-              className="mt-6 flex flex-col sm:flex-row gap-3 md:gap-4"
+    <>
+      <section
+        ref={sectionRef}
+        className={`cc-hero ${hell ? 'cc-hero--hell' : 'cc-hero--dunkel'} relative overflow-hidden`}
+        aria-labelledby="hero-headline"
+      >
+        {/* Buehne: Standbild zuerst, Video darueber, sobald es laeuft. Rein dekorativ. */}
+        <div className="cc-hero-buehne" aria-hidden="true">
+          <picture>
+            <source media="(min-width: 768px)" srcSet="/hero-video/poster-1280.webp" type="image/webp" />
+            <source srcSet="/hero-video/poster-768.webp" type="image/webp" />
+            <img
+              src="/hero-video/poster-1280.jpg"
+              alt=""
+              width={1280}
+              height={720}
+              loading="eager"
+              decoding="async"
+              // @ts-expect-error fetchpriority ist in React 18 noch nicht typisiert, der Browser kennt es.
+              fetchpriority="high"
+              className="cc-hero-bild"
+            />
+          </picture>
+          {videoEingehaengt && LOOP.mp4 && (
+            <video
+              ref={videoRef}
+              className={`cc-hero-video ${videoSichtbar ? 'ist-sichtbar' : ''}`}
+              muted
+              playsInline
+              autoPlay
+              loop
+              preload="metadata"
+              poster="/hero-video/poster-1280.jpg"
+              onPlaying={() => setVideoSichtbar(true)}
+              tabIndex={-1}
             >
+              {LOOP.webm && <source src={LOOP.webm} type="video/webm" />}
+              <source src={LOOP.mp4} type="video/mp4" />
+            </video>
+          )}
+          {videoEingehaengt && !LOOP.mp4 && (
+            <iframe
+              ref={iframeRef}
+              src={vimeoSrc}
+              className={`cc-hero-video ${videoSichtbar ? 'ist-sichtbar' : ''}`}
+              title=""
+              tabIndex={-1}
+              allow="autoplay"
+              referrerPolicy="strict-origin-when-cross-origin"
+              onLoad={() => {
+                // Falls das "ready" des Players schon vor unserem Lauscher kam: Ereignisse nochmals anmelden.
+                anVimeo('addEventListener', 'play');
+                anVimeo('addEventListener', 'timeupdate');
+              }}
+            />
+          )}
+        </div>
+        <div className="cc-hero-schleier" aria-hidden="true" />
+
+        <div className="cc-hero-inhalt relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="cc-hero-text max-w-[40rem]">
+            <div className="accent-line" />
+            <h1 id="hero-headline" className="font-montserrat font-bold text-3xl leading-tight sm:text-4xl md:text-5xl lg:text-6xl">
+              <span className={hell ? 'cc-hero-zeile1' : 'headline-line1'}>Würdest du DIR selbst zuhören?</span>
+              <span className={`${hell ? 'cc-hero-zeile2' : 'headline-line2'} mt-3 block text-xl sm:text-2xl md:text-3xl`}>
+                Berühre das Herz. Bleib im Kopf.
+              </span>
+            </h1>
+
+            <p className={`cc-hero-satz mt-6 font-inter text-lg leading-relaxed sm:text-xl md:text-2xl ${hell ? 'text-midnight-blue' : 'text-pearl-white/90'}`}>
+              <span className="block">
+                KI liefert <strong className={hell ? 'cc-kw-hell' : 'keyword-highlight'}>Perfektion</strong> auf Mausklick.
+              </span>
+              <span className="mt-2 block">
+                Deine <strong className={hell ? 'cc-kw-hell' : 'keyword-highlight'}>Unverwechselbarkeit</strong> schafft{' '}
+                <strong className={hell ? 'cc-kw-hell' : 'keyword-highlight'}>Vertrauen</strong>.
+              </span>
+            </p>
+
+            <div className="mt-8">
               <a
                 href="#schritt1"
-                className="flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg whitespace-nowrap"
+                className="inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-full bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] px-6 py-4 text-sm font-semibold text-midnight-blue sm:w-auto sm:px-8 sm:text-base shadow-[0_14px_30px_-14px_rgba(10,22,40,0.45)] transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D4AF37]"
                 onClick={(e) => {
                   e.preventDefault();
-                  const target = document.querySelector('#schritt1');
-                  if (target) {
-                    const yOffset = -100;
-                    const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
-                    window.scrollTo({ top: y, behavior: 'smooth' });
-                  }
+                  sanftZu('#schritt1');
                 }}
               >
                 <Calendar size={20} />
                 JETZT UNVERWECHSELBAR WERDEN
               </a>
-              {/* Hier stand bis 21.09.2026 der Knopf "Zum Gratis Webinar" auf
-                  claudiaconen-akademie.de/workshop-claudia. Die Webseite dieser
-                  Domain antwortet seit mindestens 18.09.2026 nicht mehr - der
-                  zweite Knopf der Startseite fuehrte ins Leere. Bewusst ENTFERNT
-                  statt umgebogen: Claudias Knopf-Regel vom 18.09. sagt, der erste
-                  Klick verspricht einen Blick, keine Verpflichtung. Wieder
-                  einsetzen, sobald es ein Webinar mit lebender Adresse gibt. */}
-            </motion.div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.2 }}
-            className="relative group min-w-0 w-full lg:w-[400px] xl:w-[450px] video-nebel"
-          >
-            {/* Vorher lag hinter dem Rahmen ein weichgezeichneter
-                Goldverlauf, der bei Maus darueber auf doppelte Staerke
-                ging. Claudias Gestaltungsvorgabe vom 18.09.2026: "keine
-                unnoetigen Glow-, Neon-, Gold- oder Effektwelten". Eine
-                Haarlinie und ein ruhiger Schatten sagen dasselbe, ohne
-                zu leuchten. */}
-            <div
-              className="relative overflow-hidden rounded-2xl border border-luxury-gold/25"
-              style={{
-                aspectRatio: '16/9',
-                boxShadow: '0 24px 60px -24px rgba(0,0,0,0.65)',
-              }}
-            >
-              <iframe
-                src="https://player.vimeo.com/video/1143907515"
-                className="h-full w-full"
-                frameBorder="0"
-                loading="lazy"
-                allow="fullscreen; picture-in-picture"
-                allowFullScreen
-                title="Claudia Conen im Video"
-              ></iframe>
             </div>
-          </motion.div>
+          </div>
+        </div>
+
+        {videoEingehaengt && (
+          <button
+            type="button"
+            onClick={knopfUmschalten}
+            aria-pressed={angehalten}
+            aria-label={angehalten ? 'Hintergrundvideo abspielen' : 'Hintergrundvideo anhalten'}
+            className={`cc-hero-pause absolute bottom-24 right-6 z-20 flex h-11 w-11 items-center justify-center rounded-full border transition-colors ${
+              hell
+                ? 'border-[#D4AF37]/70 bg-white/85 text-midnight-blue hover:bg-white'
+                : 'border-[#D4AF37]/60 bg-[#0A1628]/70 text-[#F7E7CE] hover:bg-[#0A1628]'
+            }`}
+          >
+            {angehalten ? <Play size={18} className="ml-0.5" /> : <Pause size={18} />}
+          </button>
+        )}
+      </section>
+
+      {/* Der helle Streifen: die sieben Schluessel als Kacheln, darunter das Laufband. Liegt leicht ueber der
+          Unterkante des Videos. Kachel-Regeln vom 23.09.2026 ("die Schrift in den kleinen Audios ist nicht mehr
+          lesbar"): Titel bricht nie um, Unterzeile in voller Staerke, Abspielknopf hat seine eigene Ecke. */}
+      <div className={`cc-hero-streifen relative z-20 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 ${hell ? '' : 'cc-hero-streifen--dunkel'}`}>
+        <div className={`rounded-2xl border p-3 shadow-[0_24px_60px_-30px_rgba(10,22,40,0.35)] sm:p-4 ${streifenHell ? 'border-[#D4AF37]/45 bg-white/95' : 'border-[#D4AF37]/35 bg-[#0F1F3A]'}`}>
+          <div className="hero-kacheln flex snap-x snap-mandatory gap-3 overflow-x-auto pb-1 sm:grid sm:grid-cols-4 sm:overflow-visible sm:pb-0 lg:grid-cols-7">
+            {SCHLUESSEL.map((point) => {
+              const media = stepMediaData[point.stepNumber];
+              return (
+                <a
+                  key={point.icon}
+                  href={point.href}
+                  className={`cc-schluessel group relative flex w-[10.75rem] flex-shrink-0 snap-start flex-col gap-2 rounded-xl border p-3 text-left transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)] sm:w-auto sm:flex-shrink ${
+                    streifenHell ? 'border-[#D4AF37]/50 bg-white hover:border-[#D4AF37]' : 'border-[#D4AF37]/40 bg-[#13233F] hover:border-[#EBD197]'
+                  }`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    sanftZu(point.href);
+                  }}
+                >
+                  <div className="flex items-start justify-between gap-2">
+                    <img
+                      src={`/icons/${point.icon}.webp`}
+                      alt=""
+                      width={256}
+                      height={256}
+                      loading="eager"
+                      decoding="async"
+                      className="h-10 w-10 flex-shrink-0 drop-shadow-[0_6px_10px_rgba(0,0,0,0.3)] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110"
+                    />
+                    {media && (
+                      <div className="-mr-1 -mt-1 flex-shrink-0 scale-90" onClick={(e) => e.stopPropagation()}>
+                        {media.media_type === 'audio' ? (
+                          <AudioButton audioUrl={media.media_url} ariaLabel={`${point.title} anhören`} />
+                        ) : media.media_type === 'video' && media.platform ? (
+                          <VideoButton
+                            onClick={() => handleVideoClick(media.media_url, media.platform as 'youtube' | 'vimeo', point.title)}
+                            ariaLabel={`${point.title} als Video`}
+                          />
+                        ) : null}
+                      </div>
+                    )}
+                  </div>
+                  <p className={`whitespace-nowrap font-montserrat text-[0.92rem] font-bold uppercase leading-none tracking-[0.02em] ${streifenHell ? 'text-midnight-blue' : 'text-pearl-white'}`}>
+                    {point.title}
+                  </p>
+                  <p className={`text-[0.8rem] font-medium leading-snug ${streifenHell ? 'text-midnight-blue/85' : 'text-pearl-white/85'}`}>
+                    {point.subtitle}
+                  </p>
+                </a>
+              );
+            })}
+          </div>
+
+          {/* Laufband "Aktuell: 7-Tage-Video-Challenge" - Claudia, 22.09.2026 (unter die Audio-Kacheln). */}
+          <ChallengeBand hell={streifenHell} />
         </div>
       </div>
 
@@ -326,6 +386,6 @@ export default function Hero() {
           title={currentVideo.title}
         />
       )}
-    </section>
+    </>
   );
 }

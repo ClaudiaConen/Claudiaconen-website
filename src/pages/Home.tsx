@@ -1,5 +1,5 @@
 import Navigation from '../components/Navigation';
-import Hero from '../components/Hero';
+import Hero, { HERO_HELL } from '../components/Hero';
 import SituationsBand from '../components/SituationsBand';
 import SituationsKacheln from '../components/SituationsKacheln';
 import Tueren from '../components/Tueren';
@@ -32,7 +32,8 @@ export default function Home() {
         Zum Hauptinhalt springen
       </a>
       <header>
-        <Navigation />
+        {/* Helle Leiste, wenn der Kopf hell ist - kein Dunkel auf Dunkel am Seitenanfang (Claudia, 22.09.2026). */}
+        <Navigation hell={HERO_HELL} />
       </header>
       <main id="main">
         <Hero />

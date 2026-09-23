@@ -412,18 +412,16 @@ export default function SocialProof() {
         </p>
       </div>
 
-      <div className="mx-auto mt-8 grid max-w-7xl gap-6 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:items-start lg:px-8">
+      <div className="mx-auto mt-8 grid max-w-7xl gap-6 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:items-stretch lg:px-8">
         {/* Die Person - vorn. Alle Karten stehen unten noch einmal vollstaendig im HTML. */}
         <article
           key={s.id}
           aria-live="polite"
           className="cc-herein mx-4 flex min-h-[var(--h)] min-w-0 flex-col gap-4 rounded-[18px] border-2 border-[#D4AF37] bg-midnight-blue p-6 text-pearl-white shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)] sm:mx-6 sm:p-8 lg:mx-0"
         >
-          {s.ergebnis && (
-            <p className={`self-start rounded-md px-3.5 py-2 font-montserrat text-xs font-extrabold uppercase leading-snug tracking-[0.1em] text-midnight-blue ${GOLD}`}>
-              {s.ergebnis}
-            </p>
-          )}
+          <p className={`self-start rounded-md px-3.5 py-2 font-montserrat text-xs font-extrabold uppercase leading-snug tracking-[0.1em] text-midnight-blue ${GOLD}`}>
+            Worte von Menschen, mit denen ich gearbeitet habe
+          </p>
 
           {s.zitat ? (
             <blockquote className="font-cormorant text-[1.6rem] font-semibold italic leading-[1.28] text-white sm:text-[1.8rem]">
@@ -506,7 +504,7 @@ export default function SocialProof() {
               <div
                 key={`${runde}-${st.id}`}
                 aria-hidden={runde === 1 ? true : undefined}
-                className={`group relative aspect-[9/16] h-[var(--h)] flex-none overflow-hidden rounded-2xl bg-[#0F1F3A] transition-[border-color,box-shadow] duration-200 hover:shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)] ${
+                className={`group relative aspect-[9/16] h-[var(--h)] flex-none self-stretch overflow-hidden rounded-2xl bg-[#0F1F3A] transition-[border-color,box-shadow] duration-200 hover:shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)] lg:h-auto ${
                   i === gewaehlt ? 'border-[3px] border-[#D4AF37] shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)]' : 'border-[1.5px] border-midnight-blue/15 hover:border-[#D4AF37]'
                 }`}
               >

@@ -150,6 +150,8 @@ export default function MentoringOnline() {
 
   return (
     <SubpageTemplate
+      bild="/seiten/bildschirm.webp"
+      bildAlt="Claudia Conen in einer Online-Übertragung"
       title="Wo immer du bist"
       subtitle="Mentoring & Coaching"
       introText="Flexibles Online-Mentoring für deine persönliche und berufliche Entwicklung. Intensive Betreuung ohne geografische Grenzen."

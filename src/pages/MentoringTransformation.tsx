@@ -123,6 +123,8 @@ export default function MentoringTransformation() {
 
   return (
     <SubpageTemplate
+      bild="/seiten/steinmauer.webp"
+      bildAlt="Claudia Conen sitzt an einer alten Natursteinmauer"
       title="Transformation & Markenbrand"
       subtitle="Mentoring & Coaching"
       introText="Intensives 1:1 Mentoring für ambitionierte Unternehmer und Speaker. Entwickeln Sie Ihre authentische Marke und entfalten Sie Ihr volles Potenzial."

@@ -59,6 +59,8 @@ export default function AusbildungBeruf() {
 
   return (
     <SubpageTemplate
+      bild="/seiten/keynote.webp"
+      bildAlt="Claudia Conen bei einer Keynote auf der Bühne"
       kanonischPfad="/speaker-ausbildung"
       seoTitle="Redner werden als Beruf | Claudia Conen"
       title="Redner als Beruf"

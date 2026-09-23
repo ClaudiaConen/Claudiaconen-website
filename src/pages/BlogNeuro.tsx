@@ -49,6 +49,8 @@ export default function BlogNeuro() {
 
   return (
     <SubpageTemplate
+      bild="/seiten/buch.webp"
+      bildAlt="Claudia Conen mit einem aufgeschlagenen Buch"
       title="Neurowissenschaft & Verkauf"
       subtitle="Blog & Aktuelles"
       introText="Wie Menschen zu einer Entscheidung kommen — und wie man verkauft, ohne jemanden zu überreden."

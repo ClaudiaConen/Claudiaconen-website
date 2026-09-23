@@ -22,6 +22,13 @@ const WERTE = [
   'Überall ist Bühne.',
 ];
 
+/** Claudias siebter Wert (23.09.2026). Er steht bewusst allein über die volle Breite -
+ *  als siebte Kachel in einem Dreierraster waere er ein Rest, so ist er ein Schluss. */
+const SIEBTER = 'Achtsamkeit.';
+
+/** Der Satz darunter, in ihrer zarten Schrift, von ganz links bis ganz rechts. Ihre Worte. */
+const UNTERZEILE = 'Fortschritt nutzen, um mehr Zeit für Menschlichkeit zu gewinnen.';
+
 export default function Werte({ hell = true }: { hell?: boolean }) {
   const ref = useRef<HTMLElement>(null);
   useEffect(() => {
@@ -68,7 +75,24 @@ export default function Werte({ hell = true }: { hell?: boolean }) {
               {w}
             </li>
           ))}
+          <li
+            style={{ ['--i' as string]: WERTE.length }}
+            className={`cc-stufe border-t pt-5 font-montserrat text-2xl font-extrabold leading-tight tracking-tight sm:col-span-2 sm:text-[1.7rem] lg:col-span-3 ${
+              hell ? 'border-[#D4AF37]/60' : 'border-[#D4AF37]/50'
+            }`}
+          >
+            {SIEBTER}
+          </li>
         </ul>
+
+        <p
+          style={{ ['--i' as string]: 3 }}
+          className={`cc-schreib mt-12 border-t pt-8 text-center font-script text-[1.75rem] leading-[1.45] sm:text-[2.4rem] ${
+            hell ? 'border-[#D4AF37]/60 text-midnight-blue' : 'border-[#D4AF37]/50 text-[#EBD197]'
+          }`}
+        >
+          {UNTERZEILE}
+        </p>
       </div>
     </section>
   );

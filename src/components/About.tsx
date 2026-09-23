@@ -39,7 +39,12 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="py-12 md:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-midnight-blue via-[#1A2B4C]/60 to-white" aria-labelledby="about-claudia">
+    <section
+      id="about"
+      className="py-12 md:py-20 px-4 sm:px-6 lg:px-8"
+      style={{ background: 'linear-gradient(180deg, #0A1628 0%, #13233F 30%, #1A2B4C 58%, #FDFBF7 100%)' }}
+      aria-labelledby="about-claudia"
+    >
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-start">
           <motion.div
@@ -125,13 +130,13 @@ export default function About() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.3 }}
                     transition={{ duration: 0.2 }}
-                    className="bg-midnight-blue/50 backdrop-blur-sm p-3 md:p-4 rounded-xl border border-luxury-gold/10"
+                    className="bg-[#13233F] p-3 md:p-4 rounded-xl border border-[#D4AF37]/50 transition-[border-color,box-shadow] duration-200 hover:border-[#EBD197] hover:shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)]"
                   >
                     <Icon size={24} className="text-bright-gold mb-2" />
                     <div className="font-montserrat font-bold text-2xl text-pearl-white">
                       {stat.value}
                     </div>
-                    <div className="text-sm text-pearl-white/60">{stat.label}</div>
+                    <div className="text-sm text-pearl-white/85">{stat.label}</div>
                   </motion.div>
                 );
               })}

@@ -106,6 +106,8 @@ export default function SpeakerStorytelling() {
 
   return (
     <SubpageTemplate
+      bild="/seiten/mikrofon.webp"
+      bildAlt="Claudia Conen spricht ins Mikrofon"
       kanonischPfad="/storytelling-kurs"
       seoTitle="Storytelling lernen für Speaker | Claudia Conen"
       title="GESCHICHTEN SCHAFFEN GÄNSEHAUT"

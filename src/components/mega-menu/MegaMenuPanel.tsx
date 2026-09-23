@@ -138,13 +138,25 @@ export default function MegaMenuPanel({ item, onClose }: MegaMenuPanelProps) {
                   Liste eine Empfehlung - eine je Bereich, nie zwei. */}
               {cat.hinweis && (
                 <Link to={cat.hinweis.href} className="mega-menu-hinweis" onClick={onClose}>
-                  <div
-                    className="mega-menu-hinweis-bild"
-                    role="img"
-                    aria-label={`Bildplatz: ${cat.hinweis.bildMotiv}`}
-                  >
-                    <span>{cat.hinweis.bildMotiv}</span>
-                  </div>
+                  {cat.hinweis.bild ? (
+                    <img
+                      src={`/menue/${cat.hinweis.bild}.webp`}
+                      alt={cat.hinweis.bildAlt ?? ''}
+                      width={464}
+                      height={208}
+                      loading="lazy"
+                      decoding="async"
+                      className="mega-menu-hinweis-foto"
+                    />
+                  ) : (
+                    <div
+                      className="mega-menu-hinweis-bild"
+                      role="img"
+                      aria-label={`Bildplatz: ${cat.hinweis.bildMotiv}`}
+                    >
+                      <span>{cat.hinweis.bildMotiv}</span>
+                    </div>
+                  )}
                   <span className="mega-menu-hinweis-marke">{cat.hinweis.marke}</span>
                   <span className="mega-menu-hinweis-titel">{cat.hinweis.titel}</span>
                   <span className="mega-menu-hinweis-text">{cat.hinweis.text}</span>

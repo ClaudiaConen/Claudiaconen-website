@@ -93,7 +93,7 @@ export default function Timeline() {
             className="font-montserrat text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl"
           >
             {/* Claudias Text vom 23.09.2026, 00:13 UTC ("tausche den Text gegen den") - Wort fuer Wort. */}
-            <span className="block">Worte vermitteln Wissen.</span>
+            <span className="block text-pearl-white">Worte vermitteln Wissen.</span>
             <span className="block gold-text-animated">Persönlichkeit weckt Vertrauen.</span>
           </h2>
           <p className="max-w-md font-inter text-base leading-relaxed text-pearl-white/85 sm:text-lg">
@@ -152,7 +152,8 @@ export default function Timeline() {
           </ol>
 
           <div className="mt-10 flex flex-col items-start gap-4">
-            <p className="font-cormorant text-2xl font-semibold italic leading-snug sm:text-[1.6rem]">
+            {/* Stand ebenfalls in geerbtem #1e3a5f auf Nachtblau - war praktisch unsichtbar. */}
+            <p className="font-cormorant text-2xl font-semibold italic leading-snug text-pearl-white/90 sm:text-[1.6rem]">
               Bereit, diese sieben Schritte zu gehen?
             </p>
             {/* Vorher "#offers" - diesen Anker gibt es auf der Startseite nicht. */}

@@ -303,23 +303,24 @@ export default function Hero() {
               </span>
             </p>
 
-            {/* Zwei Knoepfe (Claudia 10:43 UTC: "Jetzt die Wirkung steigern" statt "Unverwechselbar werden"; 10:37 UTC: "Keynote anfragen").
-                Erstknopf fuehrt zu den vier Tueren, Zweitknopf zur Keynote-Seite. Gleiches Design wie alle Knoepfe der Seite (.cc-knopf). */}
+            {/* Zwei Knoepfe, Claudias Vorgabe vom 23.09.2026 (16:21 UTC): "Keynote anfragen" war zu eng -
+                wer hier landet, will vielleicht etwas ganz anderes. Erst der Kalender, dann der Weg nach unten.
+                Beide in derselben Form wie jeder Knopf der Seite (.cc-knopf) - ihre Marke, nicht mein Einfall. */}
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
+              <Link to="/termin-buchen" className="cc-knopf">
+                <Calendar size={18} />
+                Jetzt loslegen
+              </Link>
               <a
                 href="#tueren-frage"
-                className="cc-knopf"
+                className={`cc-knopf cc-knopf--zweit ${hell ? '' : 'cc-knopf--dunkel'}`}
                 onClick={(e) => {
                   e.preventDefault();
                   sanftZu('#tueren-frage');
                 }}
               >
-                <Calendar size={18} />
-                Jetzt die Wirkung steigern
+                Mehr erfahren
               </a>
-              <Link to="/keynote-und-buehnenperformance" className={`cc-knopf cc-knopf--zweit ${hell ? '' : 'cc-knopf--dunkel'}`}>
-                Keynote anfragen
-              </Link>
             </div>
           </div>
         </div>
@@ -378,7 +379,15 @@ export default function Hero() {
                       className="h-10 w-10 flex-shrink-0 drop-shadow-[0_6px_10px_rgba(0,0,0,0.3)] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110"
                     />
                     {media && (
-                      <div className="-mr-1 -mt-1 flex-shrink-0 scale-90" onClick={(e) => e.stopPropagation()}>
+                      <div
+                        className="-mr-1 -mt-1 flex-shrink-0 scale-90"
+                        onClick={(e) => {
+                          // preventDefault ist der Punkt: ohne ihn folgt der Browser dem href
+                          // der Kachel, obwohl unser eigener Behandler gestoppt wurde.
+                          e.preventDefault();
+                          e.stopPropagation();
+                        }}
+                      >
                         {media.media_type === 'audio' ? (
                           <AudioButton audioUrl={media.media_url} ariaLabel={`${point.title} anhören`} />
                         ) : media.media_type === 'video' && media.platform ? (

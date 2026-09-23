@@ -9,6 +9,41 @@ import RelatedArticles from '../components/RelatedArticles';
 import { supabase } from '../lib/supabase';
 import { articleMatchesSearch } from '../lib/searchSynonyms';
 
+/**
+ * Artikelbild mit Auffangnetz.
+ *
+ * Laedt das Bild nicht (falsche Adresse, geloeschte Datei, kein Netz), tritt an seine
+ * Stelle eine ruhige Markenflaeche in Nachtblau mit Goldschimmer - dieselbe Bildsprache
+ * wie ArtikelBild.tsx. Vorher zeigte der Browser den Alt-Text im leeren Kasten, Wort
+ * fuer Wort untereinander.
+ */
+function KachelBild({ quelle, titel, klasse }: { quelle?: string; titel: string; klasse: string }) {
+  const [kaputt, setKaputt] = useState(false);
+  if (!quelle || kaputt) {
+    return (
+      <div
+        className={klasse}
+        role="img"
+        aria-label={titel}
+        style={{
+          background:
+            'radial-gradient(60% 80% at 15% 20%, rgba(212,175,55,0.22), transparent 70%), radial-gradient(45% 70% at 85% 90%, rgba(201,169,97,0.16), transparent 70%), linear-gradient(135deg, #0A1628 0%, #13233F 45%, #1A2B4C 100%)',
+        }}
+      />
+    );
+  }
+  return (
+    <img
+      src={quelle}
+      alt={titel}
+      loading="lazy"
+      decoding="async"
+      onError={() => setKaputt(true)}
+      className={klasse}
+    />
+  );
+}
+
 interface Article {
   id: string;
   letter: string;
@@ -309,10 +344,10 @@ export default function Wissensbibliothek() {
                         onClick={() => setSelectedArticle(article)}
                       >
                         <div className="relative h-48 overflow-hidden">
-                          <img
-                            src={article.image_url}
-                            alt={article.title}
-                            className="w-full h-full object-cover object-center hover:scale-110 transition-transform duration-500"
+                          <KachelBild
+                            quelle={article.image_url}
+                            titel={article.title}
+                            klasse="w-full h-full object-cover object-center hover:scale-110 transition-transform duration-500"
                           />
                           {article.category && (
                             <div className="absolute top-4 left-4 bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] text-midnight-blue px-3 py-1 rounded-full text-xs font-bold">
@@ -389,10 +424,10 @@ export default function Wissensbibliothek() {
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="relative h-48 sm:h-72 md:h-96 overflow-hidden">
-                  <img
-                    src={selectedArticle.image_url}
-                    alt={selectedArticle.title}
-                    className="w-full h-full object-cover object-center"
+                  <KachelBild
+                    quelle={selectedArticle.image_url}
+                    titel={selectedArticle.title}
+                    klasse="w-full h-full object-cover object-center"
                   />
                   <button
                     onClick={() => setSelectedArticle(null)}

@@ -49,6 +49,9 @@ export default function StimmeHochzeit() {
 
   return (
     <SubpageTemplate
+      bild="/seiten/love.webp"
+      bildAlt="Claudia Conen im Freien vor dem Schriftzug LOVE"
+      bildQuer
       kanonischPfad="/freie-trauung"
       seoTitle="Hochzeitsrede und freie Trauung | Claudia Conen"
       title="VOM OHR INS HERZ"

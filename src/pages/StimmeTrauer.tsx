@@ -45,6 +45,9 @@ export default function StimmeTrauer() {
 
   return (
     <SubpageTemplate
+      bild="/seiten/veranda.webp"
+      bildAlt="Claudia Conen am Tisch auf einer ruhigen Veranda"
+      bildQuer
       kanonischPfad="/trauerrede"
       seoTitle="Trauerrede halten lassen | Claudia Conen"
       title="Trauerreden"

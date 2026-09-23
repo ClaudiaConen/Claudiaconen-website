@@ -1,5 +1,10 @@
-import { Calendar, useState } from 'react';
-import { Calendar, motion } from 'framer-motion';
+/* Das Kalender-Zeichen kommt aus lucide-react. Es stand hier zusaetzlich in den
+   Importen von react und framer-motion - dreimal derselbe Name in einer Datei.
+   Der Typpruefer meldete "Duplicate identifier"; dass die Seite trotzdem lief,
+   war Glueck des Baupackers, kein Zustand, auf den man sich verlassen sollte.
+   Gefunden am 23.09.2026 beim Umbau des Kontaktschlusses. */
+import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Calendar, Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
@@ -91,19 +96,23 @@ export default function ContactSection() {
           className="text-center mb-12 md:mb-16"
         >
           <div className="inline-block mb-4 px-6 py-2 bg-gradient-to-r from-[#D4AF37]/20 to-[#F7E7CE]/20 rounded-full border border-luxury-gold/30">
-            <span className="text-[#B8860B] font-semibold">Kontakt</span>
+            <span className="font-semibold text-midnight-blue">Kontakt</span>
           </div>
           <h2
             id="contact-headline"
-            className="font-montserrat font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-4"
+            className="font-montserrat font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-4 text-midnight-blue"
           >
-            <span className="text-midnight-blue">Lass uns </span>
-            <span className="text-dark-gold">
-              sprechen
+            {/* Gold auf Hell wird zu Braun (Designliste) - deshalb Nachtblau mit goldener Unterlegung. */}
+            Lass uns{' '}
+            <span className="bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)] bg-[length:100%_0.15em] bg-[position:0_96%] bg-no-repeat pb-[0.05em]">
+              reden
             </span>
           </h2>
-          <p className="text-lg md:text-xl text-midnight-blue/70 max-w-2xl mx-auto">
-            Bereit, deine Wirkung zu transformieren? Ich freue mich auf deine Nachricht!
+          <p className="mx-auto max-w-2xl font-script text-[1.6rem] leading-[1.65] text-midnight-blue sm:text-[2.1rem]">
+            Erst kennenlernen und dann entscheiden, ob wir miteinander arbeiten. Das ist für uns beide der bessere Weg.
+          </p>
+          <p className="mx-auto mt-5 max-w-2xl font-inter text-lg text-midnight-blue md:text-xl">
+            Kontaktiere mich auf einen Kaffee. Ich freue mich auf die Begegnung.
           </p>
         </motion.div>
 

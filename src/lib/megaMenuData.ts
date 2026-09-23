@@ -55,8 +55,11 @@ export interface SidebarCategory {
   uebersicht?: { name: string; href: string };
   /** Die hervorgehobene Kachel rechts im Feld - eine je Bereich.
    *  Zwei Empfehlungen nebeneinander sind keine Empfehlung.
-   *  bildMotiv beschreibt, was fuer ein Foto dorthin gehoert,
-   *  solange keines da ist. */
+   *  bildMotiv beschreibt, welches Foto dorthin gehoert; bild ist die Datei
+   *  (public/menue/, 464x208, aus ihren vorhandenen Fotos geschnitten mit
+   *  scratchpad/menuebilder.py). Claudia am 23.09.2026: "im Menue oben kommt
+   *  rechts immer ein Bild ... da muessten die Bilder noch eingefuegt werden,
+   *  weil ihr Mensch fehlt." */
   hinweis?: {
     marke: string;
     titel: string;
@@ -64,6 +67,9 @@ export interface SidebarCategory {
     knopf: string;
     href: string;
     bildMotiv: string;
+    /** Datei in public/menue/ ohne Endung. Fehlt sie, bleibt der beschriebene Platzhalter. */
+    bild?: string;
+    bildAlt?: string;
   };
 }
 
@@ -119,6 +125,8 @@ export const megaMenuItems: MegaMenuItem[] = [
           knopf: 'Zur Keynote',
           href: '/unternehmen-keynotes',
           bildMotiv: 'Claudia auf der Bühne, Publikum im Bild',
+          bild: 'keynote',
+          bildAlt: 'Claudia Conen auf einer großen Bühne, hinter ihr die Leinwand',
         },
         tiles: [
           { name: 'Keynote für Ihr Unternehmen', desc: 'Auch zum Thema Mensch und KI', href: '/unternehmen-keynotes', icon: Star },
@@ -149,6 +157,8 @@ export const megaMenuItems: MegaMenuItem[] = [
           knopf: 'Alle vier vergleichen',
           href: '/redner-ausbildungen',
           bildMotiv: 'Teilnehmerin spricht vor kleiner Gruppe',
+          bild: 'ausbildung',
+          bildAlt: 'Claudia Conen im Workshop an der Moderationswand',
         },
         tiles: [
           { name: 'Speaker werden', desc: 'Thema finden, Vortrag bauen, Honorar verlangen', href: '/speaker-ausbildung', icon: Star },
@@ -196,6 +206,8 @@ export const megaMenuItems: MegaMenuItem[] = [
           knopf: 'Freie Rednerin',
           href: '/freie-rednerin',
           bildMotiv: 'Claudia im Gespräch, nah, warmes Licht',
+          bild: 'rednerin',
+          bildAlt: 'Claudia Conen im Gespräch am Telefon, warmes Licht',
         },
         tiles: [
           { name: 'Trauerrede', desc: 'Ein Leben in Worten, keine Vorlage', href: '/trauerrede', icon: Shield },
@@ -228,6 +240,8 @@ export const megaMenuItems: MegaMenuItem[] = [
           knopf: 'Gold-Training',
           href: '/mentoring-gold',
           bildMotiv: 'Zwei Personen im Gespräch, Seitenlicht',
+          bild: 'mentoring',
+          bildAlt: 'Claudia Conen mit Laptop in einer Lounge',
         },
         tiles: [
           { name: '1:1 Mentoring', desc: 'Über mehrere Monate begleitet', href: '/1-zu-1-mentoring', icon: Compass },
@@ -293,6 +307,8 @@ export const megaMenuItems: MegaMenuItem[] = [
           knopf: 'Zur Wissensbibliothek',
           href: '/wissensbibliothek',
           bildMotiv: 'Schreibtisch mit Notizen, Detailaufnahme',
+          bild: 'wissen',
+          bildAlt: 'Claudia Conen am Fenster mit Laptop und aufgeschlagener Mappe',
         },
         tiles: [
           { name: 'Wie wird man Keynote Speaker?', href: '/wissen/keynote-speaker-werden', icon: Flag },
@@ -373,6 +389,8 @@ export const megaMenuItems: MegaMenuItem[] = [
           knopf: 'Über Claudia',
           href: '/ueber-mich',
           bildMotiv: 'Porträt, ruhig, direkter Blick',
+          bild: 'ueber',
+          bildAlt: 'Porträt von Claudia Conen, direkter Blick',
         },
         tiles: [
           { name: 'Über mich', desc: 'Weg, Arbeitsweise, Haltung', href: '/ueber-mich', icon: Eye },

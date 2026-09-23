@@ -48,6 +48,9 @@ export default function WissenWhatsapp() {
 
   return (
     <SubpageTemplate
+      bild="/seiten/schreibtisch.webp"
+      bildAlt="Claudia Conen am Schreibtisch mit roter Mappe"
+      bildQuer
       title="WhatsApp Community"
       subtitle="Wissen to go"
       introText="Vernetzen Sie sich mit Gleichgesinnten in unserer WhatsApp Community. Austausch, Motivation und gemeinsames Wachstum."

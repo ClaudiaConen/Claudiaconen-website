@@ -34,16 +34,29 @@
     --bg-card: #f5f5f5;
   }
 
+  /* HIER LAG DER FEHLER, gefunden am 23.09.2026 nach Claudias Durchgang.
+     Vorher stand hier eine feste Farbe: h1 in #1a2744, h2 und p in #1e3a5f.
+     Sie traf JEDE Ueberschrift und JEDEN Absatz ohne eigene Farbklasse - auch die
+     in den dunklen Abschnitten. Dort stand die Schrift damit Blau auf Blau.
+     Gemessen (jedes Element einzeln fotografiert, Helligkeitsspanne im Ausschnitt):
+     50 solche Stellen auf 34 Seiten, u. a. "Worte vermitteln Wissen.",
+     "Ueberall, wo wir den Mund aufmachen, ist Buehne.", die Zeile im Fuss jeder
+     Seite und die Kundenzitate auf /speaker-social und /stimme-voiceover.
+     Claudias Worte dazu: "nicht blau auf blau oder hell auf hell".
+
+     Jetzt erben die drei ihre Farbe vom umgebenden Abschnitt. Dunkle Abschnitte
+     setzen text-pearl-white, helle setzen Nachtblau - und wo nichts gesetzt ist,
+     gilt der Grundton unten am #root: Nachtblau in voller Staerke, wie es ihre
+     Designliste verlangt ("Text ist Nachtblau in voller Staerke oder Weiss").
+     Wer hier wieder eine feste Farbe eintraegt, baut den Fehler neu ein. */
   h1 {
     font-size: 36px;
-    color: var(--text-primary);
     font-weight: 600;
     margin-bottom: 24px;
   }
 
   h2 {
     font-size: 24px;
-    color: var(--text-secondary);
     font-weight: 600;
     margin-bottom: 24px;
   }
@@ -51,7 +64,13 @@
   p {
     font-size: 17px;
     line-height: 1.7;
-    color: var(--text-secondary);
+  }
+
+  /* Der Grundton der Seite. body bleibt Pearl auf Nachtblau (das ist die Farbe
+     ausserhalb des Inhalts, beim Ueberscrollen); innerhalb des Inhalts ist der
+     Grundton Nachtblau, weil die meisten Flaechen hell sind. */
+  #root {
+    color: #0A1628;
   }
 }
 
@@ -901,6 +920,26 @@ html, body { cursor: auto; }
   animation: megaMenuFadeIn 0.25s cubic-bezier(0.4,0,0.2,1);
 }
 
+/* Die beiden rechten Menuepunkte lassen ihr Feld am rechten Rand enden statt mittig
+   unter dem Punkt - sonst steht die Haelfte ausserhalb des Fensters. */
+.mega-menu-container--rechts {
+  left: auto;
+  right: 0;
+  transform: none;
+  animation-name: megaMenuFadeInRechts;
+}
+
+@keyframes megaMenuFadeInRechts {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes megaMenuFadeIn {
   from {
     opacity: 0;
@@ -1581,15 +1620,17 @@ html, body { cursor: auto; }
 }
 
 
-/* Nur die erste Tuer atmet. Vier pulsierende Kacheln waeren Unruhe, eine ist
-   ein Hinweis: Hier faengst du an. */
+/* Alle Etiketten atmen leicht - Claudias Wunsch vom 23.09.2026 ("ganz leicht pulsiert")
+   statt des goldenen Felds darunter. Schwaecher als vorher (6 statt 10 px, 30 statt 45 %),
+   langsamer, und jedes um 0,45 s versetzt: vier gleichzeitige Ringe waeren Unruhe. */
 .tuer-marke-puls {
-  animation: tuerMarkePuls 3.2s ease-in-out infinite;
+  animation: tuerMarkePuls 4.4s ease-in-out infinite;
+  animation-delay: calc(var(--i, 0) * 0.45s);
 }
 
 @keyframes tuerMarkePuls {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.45); }
-  60% { box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.3); }
+  55% { box-shadow: 0 0 0 6px rgba(212, 175, 55, 0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2073,6 +2114,18 @@ html, body { cursor: auto; }
   border-color: rgba(212, 175, 55, 0.6);
   transform: translateY(-3px);
   box-shadow: 0 12px 28px -10px rgba(26, 43, 76, 0.2);
+}
+
+/* Das echte Foto an der Stelle des Platzhalters - gleiche Hoehe, damit sich am
+   Aufbau des Feldes nichts verschiebt (Claudia: "es soll einheitlich sein"). */
+.mega-menu-hinweis-foto {
+  display: block;
+  width: 100%;
+  height: 104px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 0.75rem;
+  border: 1px solid rgba(212, 175, 55, 0.4);
 }
 
 .mega-menu-hinweis-bild {

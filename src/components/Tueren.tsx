@@ -37,7 +37,7 @@ type Tuer = {
   stimme?: string;
   /** Foto zum Thema, links neben dem Text (Claudia, 22.09.2026 21:31 UTC: "damit auch bessere Orientierung ist und die
    *  Kacheln nicht so untergehen"). Nur ihre eigenen Fotos, keine erkennbaren Dritten. Dateien in public/tueren/, 960x720. */
-  bild: { datei: string; alt: string };
+  bild: { datei: string; alt: string; /** Blickpunkt beim Beschnitt, z. B. '50% 30%'. Ohne Angabe: Mitte. */ fokus?: string };
 };
 
 const TUEREN: Tuer[] = [
@@ -57,7 +57,7 @@ const TUEREN: Tuer[] = [
     knopf: 'Mehr Wirkung im Unternehmen',
     ziel: '/unternehmen-keynotes',
     /* Claudia, 22.09.2026 22:49 UTC: "setze das 2. auf die 1. Karte" - Buehnenfoto hierher, Workshop-Foto auf die Speaker-Karte. */
-    bild: { datei: 'speaker', alt: 'Claudia Conen auf der Bühne einer Benefizveranstaltung' },
+    bild: { fokus: '50% 62%', datei: 'speaker', alt: 'Claudia Conen auf der Bühne einer Benefizveranstaltung' },
   },
   {
     wer: 'Speaker & freie Redner',
@@ -75,7 +75,7 @@ const TUEREN: Tuer[] = [
     knopf: 'Unverwechselbar sprechen',
     ziel: '/redner-ausbildungen',
     /* Claudia, 22.09.2026 23:09 UTC: neues Buehnenfoto (grosse Buehne mit Leinwand) hierher, das Workshop-Foto auf Karte 3. */
-    bild: { datei: 'keynote', alt: 'Claudia Conen auf einer großen Bühne, hinter ihr die Leinwand mit ihrem Bild' },
+    bild: { fokus: '50% 58%', datei: 'keynote', alt: 'Claudia Conen auf einer großen Bühne, hinter ihr die Leinwand mit ihrem Bild' },
   },
   {
     wer: 'Coaches & Trainer',
@@ -92,7 +92,7 @@ const TUEREN: Tuer[] = [
     ],
     knopf: 'Zur klaren Wahl werden',
     ziel: '/1-zu-1-mentoring',
-    bild: { datei: 'unternehmen', alt: 'Claudia Conen im Workshop vor den Moderationswänden' },
+    bild: { fokus: '42% 40%', datei: 'unternehmen', alt: 'Claudia Conen im Workshop vor den Moderationswänden' },
   },
   {
     wer: 'KI-Einsteiger & Neugierige',
@@ -109,7 +109,7 @@ const TUEREN: Tuer[] = [
     ],
     knopf: 'Einfach mit KI starten',
     ziel: '/ki-einsteiger-coaching',
-    bild: { datei: 'ki', alt: 'Claudia Conen mit dem Magazin The Power of AI in der Hand' },
+    bild: { fokus: '50% 38%', datei: 'ki', alt: 'Claudia Conen mit dem Magazin The Power of AI in der Hand' },
     zweiter: { text: 'Oder gleich tiefer: KI-Manager-Ausbildung', ziel: '/ki-manager-ausbildung' },
   },
 ];
@@ -144,7 +144,7 @@ export default function Tueren() {
         aria-hidden="true"
       />
 
-      <div className="relative mx-auto max-w-5xl px-6 py-20 sm:py-28">
+      <div className="relative mx-auto max-w-6xl px-6 py-20 sm:py-28">
 
         {/* Die Frage stand bisher NUR im aria-label des Abschnitts - also
             fuer Vorleseprogramme da und fuer sonst niemanden. Im
@@ -186,18 +186,16 @@ export default function Tueren() {
               >
                {/* Foto abwechselnd links und rechts, schmaler als der Text (Claudia, 23.09.2026 13:45 UTC: "Bilder wechseln mal
                    rechts und links", "nicht so viel fuer mein Bild ... eher die Botschaft") - auf dem Handy das Foto oben, 16:9. */}
-               <div className={`grid ${i % 2 === 0 ? 'md:grid-cols-[minmax(0,0.62fr)_minmax(0,1.38fr)]' : 'md:grid-cols-[minmax(0,1.38fr)_minmax(0,0.62fr)]'}`}>
+               <div className={`grid ${i % 2 === 0 ? 'md:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)]' : 'md:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)]'}`}>
                 <figure className={`m-0 aspect-[16/9] overflow-hidden md:aspect-auto md:h-full ${i % 2 === 0 ? '' : 'md:order-2'}`}>
-                  <img src={`/tueren/${t.bild.datei}.webp`} alt={t.bild.alt} width={960} height={720} loading="lazy" decoding="async" className="h-full w-full object-cover" />
+                  <img src={`/tueren/${t.bild.datei}.webp`} alt={t.bild.alt} width={960} height={720} loading="lazy" decoding="async" className="h-full w-full object-cover" style={{ objectPosition: t.bild.fokus ?? '50% 50%' }} />
                 </figure>
                 <div className="px-7 py-8 sm:px-10 sm:py-11">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <h3>
                     <span
-                      className={
-                        'inline-block rounded-sm bg-[#13233F] px-4 py-2 font-montserrat text-sm font-bold uppercase tracking-[0.12em] text-pearl-white sm:text-base' +
-                        (i === 0 ? ' tuer-marke-puls' : '')
-                      }
+                      className="tuer-marke-puls inline-block rounded-sm bg-[#13233F] px-4 py-2 font-montserrat text-sm font-bold uppercase tracking-[0.12em] text-pearl-white sm:text-base"
+                      style={{ ['--i' as string]: i }}
                     >
                       {t.wer}
                     </span>
@@ -254,12 +252,17 @@ export default function Tueren() {
               kleine Zeile, grosse Ueberschrift, Absatz, drei Haken, Knopf. Bild rechts und schmal - "eher die Botschaft". */}
           <div className="sticky mb-6 motion-reduce:static" style={{ top: `${72 + TUEREN.length * 18}px`, zIndex: TUEREN.length + 1 }}>
             <article className="tuer-karte overflow-hidden rounded-xl motion-reduce:transform-none">
-              <div className="grid md:grid-cols-[minmax(0,0.62fr)_minmax(0,1.38fr)]">
+              <div className="grid md:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)]">
                 <figure className="m-0 aspect-[16/9] overflow-hidden md:aspect-auto md:h-full">
                   <img src={`/tueren/${MENTORIN.bild.datei}.webp`} alt={MENTORIN.bild.alt} width={960} height={720} loading="lazy" decoding="async" className="h-full w-full object-cover" style={{ objectPosition: '50% 18%' }} />
                 </figure>
                 <div className="px-7 py-8 sm:px-10 sm:py-11">
                   <p className="font-montserrat text-xs font-bold uppercase tracking-[0.2em] text-midnight-blue/70 sm:text-sm">Über deine Mentorin</p>
+                  <p className="mt-3">
+                    <span className="tuer-marke-puls inline-block rounded-sm bg-[#13233F] px-4 py-2 font-montserrat text-sm font-bold uppercase tracking-[0.12em] text-pearl-white sm:text-base" style={{ ['--i' as string]: 4 }}>
+                      {MENTORIN.wer}
+                    </span>
+                  </p>
                   <h3 className="mt-3 font-montserrat text-2xl font-extrabold leading-tight text-midnight-blue sm:text-3xl">{MENTORIN.titel}</h3>
                   <p className="mt-5 max-w-2xl font-inter text-base leading-relaxed text-midnight-blue sm:text-lg">{MENTORIN.absatz}</p>
                   {MENTORIN.punkte.length > 0 && (

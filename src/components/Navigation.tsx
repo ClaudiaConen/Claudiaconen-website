@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown, Calendar } from 'lucide-react';
+import { Menu, X, ChevronDown, Calendar, Home } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { megaMenuItems } from '../lib/megaMenuData';
 import MegaMenuPanel from './mega-menu/MegaMenuPanel';
@@ -137,7 +137,20 @@ export default function Navigation({ hell = false }: { hell?: boolean } = {}) {
           </a>
 
           <ul className="hidden xl:flex items-center gap-1 list-none">
-            {megaMenuItems.map((item) => (
+            {/* Start: der Weg zurueck. Ein echter Verweis, kein Knopf - dann sieht ihn auch
+                ein Suchprogramm, und die mittlere Maustaste oeffnet ihn im neuen Reiter. */}
+            <li>
+              <a
+                href="/"
+                onClick={(e) => { e.preventDefault(); navigate('/'); closeMegaMenu(); }}
+                className={`mega-nav-link ${pathname === '/' ? 'hier' : ''}`}
+                aria-current={pathname === '/' ? 'page' : undefined}
+              >
+                <Home size={13} className="mr-1.5 -mt-px inline-block" aria-hidden="true" />
+                Start
+              </a>
+            </li>
+            {megaMenuItems.map((item, i) => (
               <li
                 key={item.id}
                 className="relative"
@@ -162,7 +175,9 @@ export default function Navigation({ hell = false }: { hell?: boolean } = {}) {
                     Suchprogramm nie einen einzigen Menuepunkt - es
                     oeffnet ja kein Menue. */}
                 <div
-                  className={`mega-menu-container ${activeMenuId === item.id ? '' : 'zu'}`}
+                  className={`mega-menu-container ${
+                    i >= megaMenuItems.length - 2 ? 'mega-menu-container--rechts' : ''
+                  } ${activeMenuId === item.id ? '' : 'zu'}`}
                   aria-hidden={activeMenuId !== item.id}
                   onMouseEnter={handlePanelEnter}
                   onMouseLeave={handlePanelLeave}

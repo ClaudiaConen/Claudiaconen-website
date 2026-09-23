@@ -41,6 +41,8 @@ export default function WissenCommunity() {
 
   return (
     <SubpageTemplate
+      bild="/seiten/messe.webp"
+      bildAlt="Claudia Conen mit dem Magazin The Power of AI"
       title="Community"
       subtitle="Wissen to go"
       introText="Werden Sie Teil unserer inspirierenden Community und wachsen Sie gemeinsam mit Gleichgesinnten."

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, ChevronRight, Calendar } from 'lucide-react';
+import { ChevronDown, ChevronRight, Calendar, Home } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { megaMenuItems } from '../../lib/megaMenuData';
 
@@ -45,6 +45,15 @@ export default function MobileMegaMenu({ onClose }: MobileMegaMenuProps) {
       className="xl:hidden bg-white border-t border-[rgba(26,43,76,0.08)] shadow-[0_20px_50px_-20px_rgba(26,43,76,0.25)] max-h-[80vh] overflow-y-auto"
     >
       <div className="px-4 py-5 space-y-1">
+        {/* Start steht ganz oben - am Telefon ist das Logo klein und wird nicht als Heimweg erkannt. */}
+        <a
+          href="/"
+          onClick={(e) => { e.preventDefault(); onClose(); navigate('/'); }}
+          className="flex items-center gap-3 w-full py-3 px-4 rounded-xl text-[#1A2B4C] font-semibold text-[0.95rem] hover:bg-[rgba(212,175,55,0.08)] transition-all duration-200 no-underline"
+        >
+          <Home size={17} className="text-[#B8860B] flex-shrink-0" aria-hidden="true" />
+          Start
+        </a>
         {megaMenuItems.map((item) => (
           <div key={item.id}>
             <button

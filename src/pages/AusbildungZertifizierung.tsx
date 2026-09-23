@@ -61,6 +61,8 @@ export default function AusbildungZertifizierung() {
 
   return (
     <SubpageTemplate
+      bild="/seiten/training.webp"
+      bildAlt="Claudia Conen im Training vor der Gruppe"
       title="Zertifizierung & Lizenzprogramm"
       subtitle="Redner-Ausbildungen"
       introText="Werden Sie autorisierter Voice-to-Impact® Trainer und geben Sie die Methode in Ihrer eigenen Arbeit weiter."

@@ -47,6 +47,9 @@ export default function WissenTelegram() {
 
   return (
     <SubpageTemplate
+      bild="/seiten/am-telefon.webp"
+      bildAlt="Claudia Conen mit dem Telefon in der Hand"
+      bildQuer
       title="Telegram & Audioimpulse"
       subtitle="Wissen to go"
       introText="Tägliche Audio-Inspiration direkt auf Ihr Handy. Praktische Tipps und Motivation für Ihren Erfolg."

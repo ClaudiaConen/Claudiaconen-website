@@ -155,6 +155,8 @@ export default function BlogKI() {
         description="Warum Einzigartigkeit im Zeitalter der künstlichen Intelligenz dein größter Wettbewerbsvorteil ist. Neurowissenschaft trifft Persönlichkeit – authentische Kommunikation schlägt perfekte Automation."
       />
       <SubpageTemplate
+      bild="/seiten/gehirn.webp"
+      bildAlt="Claudia Conen mit einem Gehirnmodell in der Hand"
         title="Perfektion ist klickbar – Persönlichkeit bleibt"
         subtitle="Mensch & KI"
         introText="Warum Einzigartigkeit im Zeitalter der künstlichen Intelligenz dein größter Wettbewerbsvorteil ist."

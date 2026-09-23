@@ -126,12 +126,12 @@ export default function SituationsKacheln() {
       aria-label="Überall, wo wir den Mund aufmachen, ist Bühne"
     >
       <div className="mx-auto mb-3.5 flex max-w-7xl flex-wrap items-baseline justify-between gap-x-5 gap-y-2 px-4 sm:px-6 lg:px-8">
-        <p className="font-cormorant text-xl font-semibold italic leading-tight sm:text-2xl">
+        <p className="font-cormorant text-xl font-semibold italic leading-tight text-pearl-white/80 sm:text-2xl">
           Überall, wo wir den Mund aufmachen, ist Bühne.
         </p>
         <p className="flex items-center gap-2.5 font-montserrat text-[11px] font-extrabold uppercase tracking-[0.18em] text-[#EBD197]">
           <span aria-hidden="true" className="h-[3px] w-6 rounded-full bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]" />
-          Mit Menschen. Mit KI.
+          Einblicke. Neue Möglichkeiten.
         </p>
       </div>
 

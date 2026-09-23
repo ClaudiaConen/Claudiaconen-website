@@ -87,7 +87,7 @@ export default function Momente() {
       </div>
 
       <div className="mx-auto max-w-6xl px-6">
-        <p className="mt-10 max-w-xl font-inter text-base leading-relaxed text-pearl-white/60">
+        <p className="mt-10 max-w-xl font-inter text-base leading-relaxed text-pearl-white/80">
           Wie das klingt, hörst du an anderer Stelle: sieben Gedanken, die meine Arbeit tragen,
           in meiner Stimme.
         </p>

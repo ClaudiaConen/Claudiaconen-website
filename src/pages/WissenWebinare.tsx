@@ -47,6 +47,9 @@ export default function WissenWebinare() {
 
   return (
     <SubpageTemplate
+      bild="/seiten/am-laptop.webp"
+      bildAlt="Claudia Conen am Fenster mit Laptop"
+      bildQuer
       title="Gratis-Webinare"
       subtitle="Wissen to go"
       introText="Kostenlose Webinare zu Stimme, Wirkung und Performance. Praktisches Wissen für Ihren Erfolg."

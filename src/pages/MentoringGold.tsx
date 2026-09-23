@@ -135,6 +135,8 @@ export default function MentoringGold() {
 
   return (
     <SubpageTemplate
+      bild="/seiten/zuhoeren.webp"
+      bildAlt="Claudia Conen hört im Gespräch aufmerksam zu"
       title="Gold-Training (90 min Fokus)"
       subtitle="Mentoring & Coaching"
       introText="90 Minuten geballte Expertise für Ihre konkrete Herausforderung. Intensiv, fokussiert, sofort umsetzbar."

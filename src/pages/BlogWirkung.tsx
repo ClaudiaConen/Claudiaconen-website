@@ -49,6 +49,8 @@ export default function BlogWirkung() {
 
   return (
     <SubpageTemplate
+      bild="/seiten/kamera.webp"
+      bildAlt="Claudia Conen im Porträt, Arme verschränkt"
       title="Wirkung & Persönlichkeit"
       subtitle="Blog & Aktuelles"
       introText="Artikel über authentische Präsenz, Persönlichkeitsentwicklung und die Kunst, mit Ihrer Einzigartigkeit zu überzeugen."

@@ -119,6 +119,8 @@ export default function SpeakerTraining() {
 
   return (
     <SubpageTemplate
+      bild="/seiten/grosse-buehne.webp"
+      bildAlt="Claudia Conen auf einer großen Bühne"
       title="Voice-to-Impact® Intensivtraining"
       subtitle="Für Speaker & Selbstständige"
       introText="Das ultimative Training für Speaker, die ihre Stimme, Präsenz und Wirkung maximieren wollen. Entwickeln Sie in 2-3 intensiven Tagen Ihre volle Performance-Power."

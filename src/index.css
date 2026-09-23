@@ -2343,7 +2343,8 @@ html, body { cursor: auto; }
   to { transform: translateX(-50%); }
 }
 /* Challenge-Laufband im Startseiten-Kopf (22.09.2026): kuerzere Strecke, also schneller durch. */
-.cc-chal-spur { animation-duration: 34s; }
+/* 23.09.2026, Claudia: "die Laufschrift muss nicht so schnell sein" - von 34 auf 64 s. */
+.cc-chal-spur { animation-duration: 64s; }
 .cc-chal-punkt { animation: cc-chal-punkt 1.8s ease-in-out infinite; }
 @keyframes cc-chal-punkt { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
 /* "Momente, die bleiben": eine Reihe, alle Bilder gleich hoch, Hochkant und Quer gemischt.
@@ -2600,11 +2601,9 @@ html, body { overflow-x: clip; }
 .cc-kw-hell { font-weight: 700; color: #0A1628; text-decoration: underline; text-decoration-color: #D4AF37; text-decoration-thickness: 3px; text-underline-offset: 4px; }
 
 /* Der Streifen mit den sieben Schluesseln liegt ueber der Unterkante des Kopfes. */
-.cc-hero-streifen { margin-top: -1.25rem; padding-bottom: 1.5rem; background: transparent; }
-@media (min-width: 1024px) { .cc-hero-streifen { margin-top: -4.5rem; padding-bottom: 2rem; } }
+.cc-hero-streifen { margin-top: -1.25rem; }
+@media (min-width: 1024px) { .cc-hero-streifen { margin-top: -4.5rem; } }
 .cc-hero-streifen--dunkel { background: linear-gradient(180deg, #0A1628 0%, #0A1628 45%, #FDFBF7 45%); }
-/* Etwas Boden unter dem Streifen, damit der Uebergang zur naechsten Sektion ruhig ist. */
-.cc-hero-streifen::after { content: ''; display: block; }
 
 @media (prefers-reduced-motion: reduce) {
   .cc-hero-zeile1, .cc-hero-satz, .headline-line1, .subline { animation: none; }

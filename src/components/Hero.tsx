@@ -318,11 +318,17 @@ export default function Hero() {
         )}
       </section>
 
-      {/* Der helle Streifen: die sieben Schluessel als Kacheln, darunter das Laufband. Liegt leicht ueber der
-          Unterkante des Videos. Kachel-Regeln vom 23.09.2026 ("die Schrift in den kleinen Audios ist nicht mehr
-          lesbar"): Titel bricht nie um, Unterzeile in voller Staerke, Abspielknopf hat seine eigene Ecke. */}
-      <div className={`cc-hero-streifen relative z-20 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 ${hell ? '' : 'cc-hero-streifen--dunkel'}`}>
-        <div className={`rounded-2xl border p-3 shadow-[0_24px_60px_-30px_rgba(10,22,40,0.35)] sm:p-4 ${streifenHell ? 'border-[#D4AF37]/45 bg-white/95' : 'border-[#D4AF37]/35 bg-[#0F1F3A]'}`}>
+      {/* Der Streifen: die sieben Schluessel als Kacheln, darunter das Laufband. Liegt leicht ueber der
+          Unterkante des Videos und laeuft von Rand zu Rand (Claudia, 23.09.2026 10:13 UTC: "ganz nach rechts
+          und links an den Rand ... einheitlicher"); der Inhalt sitzt in der Breite der Menueleiste (1600 px).
+          Kachel-Regeln vom 23.09.2026 ("die Schrift in den kleinen Audios ist nicht mehr lesbar"): Titel bricht
+          nie um, Unterzeile in voller Staerke, Abspielknopf hat seine eigene Ecke. */}
+      <div
+        className={`cc-hero-streifen relative z-20 border-y shadow-[0_24px_60px_-30px_rgba(10,22,40,0.35)] ${
+          streifenHell ? 'border-[#D4AF37]/45 bg-white/95' : 'border-[#D4AF37]/35 bg-[#0F1F3A]'
+        } ${hell ? '' : 'cc-hero-streifen--dunkel'}`}
+      >
+        <div className="mx-auto max-w-[1600px] px-4 py-3 sm:px-6 sm:py-4 lg:px-8">
           <div className="hero-kacheln flex snap-x snap-mandatory gap-3 overflow-x-auto pb-1 sm:grid sm:grid-cols-4 sm:overflow-visible sm:pb-0 lg:grid-cols-7">
             {SCHLUESSEL.map((point) => {
               const media = stepMediaData[point.stepNumber];

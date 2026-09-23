@@ -2644,7 +2644,9 @@ html, body { overflow-x: clip; }
 .cc-knopf--zweit.cc-knopf--dunkel:hover { background: rgba(212, 175, 55, 0.18); }
 .cc-knopf--breit { width: 100%; }
 @media (max-width: 639px) {
-  .cc-knopf { width: 100%; padding-inline: 1.25rem; font-size: 0.8125rem; }
+  /* Auf dem Telefon darf der Text umbrechen - "Kostenloses Erstgespraech buchen" passt sonst nicht in 390 px und
+     schiebt die Seite seitlich auf (23.09.2026, in der Vorschau gesehen). */
+  .cc-knopf { width: 100%; padding-inline: 1.1rem; font-size: 0.8125rem; letter-spacing: 0.06em; white-space: normal; }
 }
 @media (prefers-reduced-motion: reduce) {
   .cc-knopf, .cc-knopf:hover, .cc-knopf:active { transform: none; transition: none; }

@@ -39,7 +39,7 @@ export default function AdventLanding() {
       </div>
 
       <SEO
-        title="Adventskalender 2025 | 24 Tage Business-Wissen | Claudia Conen"
+        title="Adventskalender 2026 | 24 Tage Business-Wissen | Claudia Conen"
         description="Dein Adventskalender für mehr Erfolg, Sichtbarkeit und emotionale Intelligenz im Business. Vom 1. bis 24. Dezember täglich wertvolle Impulse."
         keywords={['Adventskalender', 'Business', 'Coaching', 'Persönlichkeitsentwicklung', 'Wissen']}
       />

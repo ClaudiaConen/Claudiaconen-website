@@ -113,7 +113,7 @@ export default function AdventCalendar() {
       </div>
 
       <SEO
-        title="Adventskalender 2025 | Claudia Conen"
+        title="Adventskalender 2026 | Claudia Conen"
         description="24 Tage Business-Wissen, das wirklich wirkt. Dein Adventskalender für mehr Erfolg, Sichtbarkeit und emotionale Intelligenz."
       />
 
@@ -136,7 +136,7 @@ export default function AdventCalendar() {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-midnight-blue mb-6">
               Dein Business-Adventskalender
               <span className="block mt-2 bg-gradient-to-r from-bright-gold to-luxury-gold bg-clip-text text-transparent">
-                2025
+                2026
               </span>
             </h1>
 

@@ -516,12 +516,12 @@ export default function UeberMich() {
                 <h2 id="videos" className="font-montserrat font-bold text-3xl sm:text-4xl text-midnight-blue text-center mb-10">
                   {VIDEO_UEBERSCHRIFT}
                 </h2>
-                <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="grid gap-8 md:grid-cols-2">
                   {videos
                     .filter((v) => VORSCHAU || v.vimeo)
                     .map((v, i) => (
                       <article key={i} className="bg-white rounded-2xl border border-luxury-gold/30 shadow-lg overflow-hidden">
-                        <div className="relative aspect-[9/16] bg-[#13233F]">
+                        <div className="relative aspect-video bg-[#13233F]">
                           {v.vimeo ? (
                             <iframe
                               src={`https://player.vimeo.com/video/${v.vimeo}?badge=0&autopause=0&dnt=1`}

@@ -23,9 +23,18 @@ const INHALT: ZielgruppenInhalt = {
   welle: true,
   wer: 'Ausbildung',
   zurueck: { text: 'Freie Rednerin', ziel: '/freie-rednerin' },
-  frage: 'Sie haben etwas zu sagen. Warum steht dann jemand anderes auf der Bühne?',
+  // Kopf: Claudias eigener Text, Discord 24.09.2026 09:01 UTC, woertlich. Die fruehere Frage
+  // ("Sie haben etwas zu sagen. Warum steht dann jemand anderes auf der Buehne?") ist dadurch ersetzt.
+  frage: 'Es kommt nicht darauf an, wie viel du sagst. Sondern was davon bleibt.',
   vorspann:
-    'Meistens nicht, weil der andere mehr weiß. Sondern weil er gelernt hat, sein Wissen so zu erzählen, dass ein Saal es behält.',
+    'Ein guter Auftritt beginnt nicht auf der Bühne. Er beginnt mit der Klarheit über das, was du anderen mitgeben möchtest.',
+  kopfAbsaetze: [
+    'Ob als Unternehmer, Führungskraft, Coach, Trainer oder angehender Redner: Wer Menschen erreichen will, braucht mehr als gute Worte. Er braucht Haltung, Persönlichkeit und die Fähigkeit, andere wirklich zu berühren.',
+    'Claudia Conen verbindet Rhetorik, Storytelling und persönliche Performance – als Keynote-Speakerin, Coach und Ausbilderin.',
+    'Für Bühne, Kamera, Unternehmen und besondere Lebensmomente.',
+    'Im gesamten deutschsprachigen Raum · Online & vor Ort',
+  ],
+  kopfSchluss: 'Perfektion ist klickbar. Persönlichkeit weckt Vertrauen.',
 
   problemTitel: 'Warum Fachleute selten gebucht werden',
   problemAbsaetze: [

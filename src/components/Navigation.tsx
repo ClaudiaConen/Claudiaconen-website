@@ -163,7 +163,11 @@ export default function Navigation({ hell = false }: { hell?: boolean } = {}) {
                   }`}
                   aria-current={hierBereich === item.id ? 'true' : undefined}
                 >
+                  {item.geschenk && (
+                    <img src="/icons/geschenk.webp" alt="" width={242} height={256} decoding="async" className="cc-geschenk" />
+                  )}
                   {item.label}
+                  {item.punkt && <span className="cc-geschenk-punkt" aria-hidden="true" />}
                   <ChevronDown
                     size={12}
                     className={`mega-nav-chevron ${activeMenuId === item.id ? 'rotate-180' : ''}`}

@@ -35,6 +35,10 @@ export type ZielgruppenInhalt = {
   wer: string;
   frage: string;
   vorspann: string;
+  /** Weitere Absaetze im Kopf unter dem Vorspann (Claudias Kopftext Speaker-Ausbildung, 24.09.2026). */
+  kopfAbsaetze?: string[];
+  /** Schlusszeile im Kopf, fein in Schreibschrift; schreibt sich beim Laden wie von Hand. */
+  kopfSchluss?: string;
   problemTitel: string;
   problemAbsaetze: string[];
   angebotName: string;
@@ -336,6 +340,23 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
           <p className={`mt-6 max-w-2xl font-inter text-lg leading-relaxed ${s.kopfLeise}`}>
             {inhalt.vorspann}
           </p>
+          {inhalt.kopfAbsaetze?.map((a) => (
+            <p key={a} className={`mt-4 max-w-2xl font-inter text-lg leading-relaxed ${s.kopfLeise}`}>
+              {a}
+            </p>
+          ))}
+          {inhalt.kopfSchluss && (
+            <div className="cc-r">
+              <p
+                style={{ ['--i' as string]: 1 }}
+                className={`cc-schreib mt-8 max-w-2xl font-script text-[1.9rem] font-normal leading-[1.4] sm:text-[2.5rem] ${
+                  (inhalt.stimmung ?? 'dunkel') === 'dunkel' ? 'text-[#EBD197]' : 'text-midnight-blue'
+                }`}
+              >
+                {inhalt.kopfSchluss}
+              </p>
+            </div>
+          )}
           {/* Auf einen Blick - nur, was feststeht (Recherche 22.09.2026: die vorne liegenden Seiten
               nennen Ort, Format, Gruppe oben). Dauer und Termine folgen, sobald Claudia sie nennt. */}
           {inhalt.formate && inhalt.formate.length > 0 && (

@@ -60,7 +60,13 @@ export default function MobileMegaMenu({ onClose }: MobileMegaMenuProps) {
               onClick={() => toggleMenu(item.id)}
               className="flex items-center justify-between w-full py-3 px-4 rounded-xl text-[#1A2B4C] hover:bg-[rgba(212,175,55,0.08)] transition-all duration-200"
             >
-              <span className="font-semibold text-[0.95rem]">{item.label}</span>
+              <span className="flex items-center gap-2 font-semibold text-[0.95rem]">
+                {item.geschenk && (
+                  <img src="/icons/geschenk.webp" alt="" width={242} height={256} decoding="async" className="cc-geschenk" />
+                )}
+                {item.label}
+                {item.punkt && <span className="cc-geschenk-punkt" aria-hidden="true" />}
+              </span>
               <ChevronDown
                 size={18}
                 className={`transition-transform duration-300 text-[#D4AF37]/60 ${expandedMenu === item.id ? 'rotate-180' : ''}`}

@@ -76,6 +76,10 @@ export interface SidebarCategory {
 export interface MegaMenuItem {
   label: string;
   id: string;
+  /** 3-D-Geschenk vor dem Wort; pulsiert beim Laden viermal (Claudia, 24.09.2026). */
+  geschenk?: boolean;
+  /** Goldener Punkt: es laeuft gerade etwas. Von Hand setzen und wieder entfernen. */
+  punkt?: boolean;
   categories: SidebarCategory[];
 }
 
@@ -338,6 +342,27 @@ export const megaMenuItems: MegaMenuItem[] = [
           { name: 'Was ist Storytelling?', desc: 'Warum eine Szene bleibt und eine Aufzählung nicht', href: '/wissen/storytelling', icon: BookOpen },
         ],
       },
+    ],
+  },
+
+  // ============================================ 7. Nimm mit (24.09.2026)
+  {
+    label: 'Nimm mit',
+    id: 'nimm-mit',
+    geschenk: true,
+    punkt: true,
+    categories: [
+      {
+        id: 'mitmachen',
+        label: 'Challenge & Adventskalender',
+        icon: Gift,
+        panelTitle: 'Zum Mitmachen',
+        panelSubtitle: 'Kostenlos, mit festem Start',
+        tiles: [
+          { name: '7 Tage für deine Wirkungskraft', desc: 'Die Video-Challenge', href: '/challenge', icon: Sparkles, fullWidth: true },
+          { name: 'Adventskalender 2026', desc: '24 Türchen, ab 1. Dezember', href: '/adventskalender', icon: Gift },
+        ],
+      },
       {
         id: 'kostenlos',
         label: 'Kostenlos mitnehmen',
@@ -351,7 +376,6 @@ export const megaMenuItems: MegaMenuItem[] = [
           { name: 'Gratis-Webinar', href: '/wissen-webinare', icon: Monitor },
           { name: 'Community', href: '/wissen-community', icon: Users },
           { name: 'Telegram-Audioimpulse', href: '/wissen-telegram', icon: Send },
-          { name: 'Adventskalender', href: '/adventskalender', icon: Gift },
         ],
         uebersicht: { name: 'Wissen to go — alles im Überblick', href: '/wissen-to-go' },
       },
@@ -371,7 +395,7 @@ export const megaMenuItems: MegaMenuItem[] = [
     ],
   },
 
-  // ============================================ 7. Ueber Claudia
+  // ============================================ 8. Ueber Claudia
   {
     label: 'Über Claudia',
     id: 'ueber',

@@ -15,7 +15,7 @@ import Werte from '../components/Werte';
  * Ein Platz ohne vimeo erscheint NUR in der Vorschau als Platzhalter und ist live
  * unsichtbar – so kann die Seite nie mit leeren Kästen online gehen.
  */
-const VORSCHAU = true; // vor dem Push auf false setzen
+const VORSCHAU = false; // true = leere Plaetze als Platzhalter zeigen (nur fuer Vorschauen)
 
 type Video = { vimeo?: string; titel: string; text: string };
 const videos: Video[] = [

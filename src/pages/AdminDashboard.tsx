@@ -22,6 +22,7 @@ export default function AdminDashboard() {
     betaWaitlist: 0,
     coachingInquiries: 0,
     contactInquiries: 0,
+    challenge: 0,
     adventRegistrations: 0,
     abkuerzungBookings: 0,
     checklistDownloads: 0,
@@ -74,10 +75,13 @@ export default function AdminDashboard() {
 
   const loadEmailStats = async () => {
     try {
-      const [beta, coaching, contact, advent, abkuerzung, checklist, linkedin, kiManager] = await Promise.all([
+      const [beta, coaching, contact, challenge, advent, abkuerzung, checklist, linkedin, kiManager] = await Promise.all([
         supabase.from('beta_waitlist').select('id', { count: 'exact', head: true }),
         supabase.from('coaching_inquiries').select('id', { count: 'exact', head: true }),
-        supabase.from('contact_inquiries').select('id', { count: 'exact', head: true }),
+        // Kontaktanfragen OHNE die Challenge-Anmeldungen (die haben "7-TAGE-CHALLENGE" in message)
+        supabase.from('contact_inquiries').select('id', { count: 'exact', head: true }).not('message', 'ilike', '%CHALLENGE%'),
+        // Challenge-Anmeldungen (eigene Kategorie)
+        supabase.from('contact_inquiries').select('id', { count: 'exact', head: true }).ilike('message', '%CHALLENGE%'),
         supabase.from('advent_registrations').select('id', { count: 'exact', head: true }),
         supabase.from('abkuerzung_bookings').select('id', { count: 'exact', head: true }),
         supabase.from('checklist_downloads').select('id', { count: 'exact', head: true }),
@@ -89,6 +93,7 @@ export default function AdminDashboard() {
         betaWaitlist: beta.count || 0,
         coachingInquiries: coaching.count || 0,
         contactInquiries: contact.count || 0,
+        challenge: challenge.count || 0,
         adventRegistrations: advent.count || 0,
         abkuerzungBookings: abkuerzung.count || 0,
         checklistDownloads: checklist.count || 0,
@@ -100,30 +105,34 @@ export default function AdminDashboard() {
     }
   };
 
-  const toggleSourceExpand = async (sourceKey: string, tableName: string) => {
-    if (expandedSource === sourceKey) {
+  const toggleSourceExpand = async (source: { key: string; table: string; filter?: (q: any) => any }) => {
+    if (expandedSource === source.key) {
       setExpandedSource(null);
       return;
     }
 
-    setExpandedSource(sourceKey);
-    if (!sourceData[sourceKey]) {
+    setExpandedSource(source.key);
+    if (!sourceData[source.key]) {
       try {
-        const { data } = await supabase
-          .from(tableName)
+        let query = supabase
+          .from(source.table)
           .select('*')
           .order('created_at', { ascending: false })
           .limit(20);
-        setSourceData(prev => ({ ...prev, [sourceKey]: data || [] }));
+        if (source.filter) query = source.filter(query);
+        const { data } = await query;
+        setSourceData(prev => ({ ...prev, [source.key]: data || [] }));
       } catch (error) {
         console.error('Error loading source data:', error);
       }
     }
   };
 
-  const exportSourceCSV = async (tableName: string, fileName: string) => {
+  const exportSourceCSV = async (source: { key: string; table: string; filter?: (q: any) => any }) => {
     try {
-      const { data } = await supabase.from(tableName).select('*').order('created_at', { ascending: false });
+      let query = supabase.from(source.table).select('*').order('created_at', { ascending: false });
+      if (source.filter) query = source.filter(query);
+      const { data } = await query;
       if (!data || data.length === 0) return;
 
       const headers = Object.keys(data[0]);
@@ -135,7 +144,7 @@ export default function AdminDashboard() {
       const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
-      link.download = `${fileName}-${new Date().toISOString().split('T')[0]}.csv`;
+      link.download = `${source.key}-${new Date().toISOString().split('T')[0]}.csv`;
       link.click();
     } catch (error) {
       console.error('Error exporting CSV:', error);
@@ -149,7 +158,9 @@ export default function AdminDashboard() {
     try {
       const results = await Promise.all(
         emailSources.map(async (source) => {
-          const { data } = await supabase.from(source.table).select('*').order('created_at', { ascending: false });
+          let query = supabase.from(source.table).select('*').order('created_at', { ascending: false });
+          if (source.filter) query = source.filter(query);
+          const { data } = await query;
           return (data || []).map((row: any) => ({
             email: row[source.emailField] || '',
             name: [row[source.nameField], row.last_name].filter(Boolean).join(' ') || '',
@@ -184,13 +195,19 @@ export default function AdminDashboard() {
 
   const totalEmails = Object.values(emailStats).reduce((a, b) => a + b, 0);
 
-  const emailSources = [
+  type EmailSource = {
+    key: string; label: string; table: string; count: number;
+    color: string; emailField: string; nameField: string;
+    filter?: (q: any) => any;
+  };
+  const emailSources: EmailSource[] = [
     { key: 'kiManagerBookings', label: 'KI-Manager Anmeldungen', table: 'ki_manager_bookings', count: emailStats.kiManagerBookings, color: 'bg-orange-100 text-orange-800', emailField: 'email', nameField: 'vorname' },
+    { key: 'challenge', label: 'Challenge-Anmeldungen', table: 'contact_inquiries', count: emailStats.challenge, color: 'bg-fuchsia-100 text-fuchsia-800', emailField: 'email', nameField: 'name', filter: (q: any) => q.ilike('message', '%CHALLENGE%') },
     { key: 'adventRegistrations', label: 'Adventskalender Registrierungen', table: 'advent_registrations', count: emailStats.adventRegistrations, color: 'bg-red-100 text-red-800', emailField: 'email', nameField: 'first_name' },
     { key: 'checklistDownloads', label: 'Checklisten Downloads', table: 'checklist_downloads', count: emailStats.checklistDownloads, color: 'bg-blue-100 text-blue-800', emailField: 'email', nameField: 'article_title' },
     { key: 'linkedinFreebie', label: 'LinkedIn Freebie Leads', table: 'linkedin_freebie_leads', count: emailStats.linkedinFreebie, color: 'bg-sky-100 text-sky-800', emailField: 'email', nameField: 'source' },
     { key: 'coachingInquiries', label: 'Coaching Anfragen', table: 'coaching_inquiries', count: emailStats.coachingInquiries, color: 'bg-green-100 text-green-800', emailField: 'email', nameField: 'first_name' },
-    { key: 'contactInquiries', label: 'Kontaktanfragen', table: 'contact_inquiries', count: emailStats.contactInquiries, color: 'bg-teal-100 text-teal-800', emailField: 'email', nameField: 'name' },
+    { key: 'contactInquiries', label: 'Kontaktanfragen', table: 'contact_inquiries', count: emailStats.contactInquiries, color: 'bg-teal-100 text-teal-800', emailField: 'email', nameField: 'name', filter: (q: any) => q.not('message', 'ilike', '%CHALLENGE%') },
     { key: 'abkuerzungBookings', label: 'Abkuerzung 1:1 Buchungen', table: 'abkuerzung_bookings', count: emailStats.abkuerzungBookings, color: 'bg-amber-100 text-amber-800', emailField: 'email', nameField: 'first_name' },
     { key: 'betaWaitlist', label: 'Beta Warteliste', table: 'beta_waitlist', count: emailStats.betaWaitlist, color: 'bg-gray-100 text-gray-800', emailField: 'email', nameField: 'first_name' },
   ];
@@ -363,7 +380,7 @@ export default function AdminDashboard() {
               <div key={source.key} className="border border-gray-100 rounded-lg overflow-hidden">
                 <div
                   className="flex items-center justify-between p-4 cursor-pointer hover:bg-gray-50 transition-colors"
-                  onClick={() => toggleSourceExpand(source.key, source.table)}
+                  onClick={() => toggleSourceExpand(source)}
                 >
                   <div className="flex items-center gap-3">
                     <span className={`px-3 py-1 rounded-full text-xs font-semibold ${source.color}`}>
@@ -373,7 +390,7 @@ export default function AdminDashboard() {
                   </div>
                   <div className="flex items-center gap-2">
                     <button
-                      onClick={(e) => { e.stopPropagation(); exportSourceCSV(source.table, source.key); }}
+                      onClick={(e) => { e.stopPropagation(); exportSourceCSV(source); }}
                       className="p-1.5 text-gray-400 hover:text-gray-600 transition-colors"
                       title="Als CSV exportieren"
                     >

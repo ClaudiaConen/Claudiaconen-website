@@ -400,13 +400,14 @@ function ParticipantStrip() {
   // Live-Count: Basis (vorgebuchte Plätze) + tatsächliche Anmeldungen aus der DB
   useEffect(() => {
     let cancelled = false;
+    // Anmeldungen sind aus Datenschutzgründen nicht mehr öffentlich lesbar – deshalb nur die
+    // anonyme Anzahl über die Funktion buchprojekt_anzahl() holen.
     supabase
-      .from('buchprojekt_anmeldungen')
-      .select('id', { count: 'exact', head: true })
-      .then(({ count, error }) => {
+      .rpc('buchprojekt_anzahl')
+      .then(({ data, error }) => {
         if (cancelled || error) return;
-        if (typeof count === 'number') {
-          setCurrent(Math.min(PARTICIPANTS_TARGET, PARTICIPANTS_BASE + count));
+        if (typeof data === 'number') {
+          setCurrent(Math.min(PARTICIPANTS_TARGET, PARTICIPANTS_BASE + data));
         }
       });
     return () => {

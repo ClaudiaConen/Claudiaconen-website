@@ -40,7 +40,7 @@ export default function SEO({
   title,
   description,
   keywords = [],
-  ogImage = 'https://claudiaconen.com/og-image.jpg',
+  ogImage = 'https://claudiaconen.com/og-claudia-conen.jpg',
   ogType = 'website',
   path,
   kanonischPfad,
@@ -111,7 +111,7 @@ export default function SEO({
           name: 'Claudia Conen',
           logo: {
             '@type': 'ImageObject',
-            url: 'https://claudiaconen.com/og-image.jpg'
+            url: 'https://claudiaconen.com/og-claudia-conen.jpg'
           }
         },
         mainEntityOfPage: {
@@ -133,7 +133,7 @@ export default function SEO({
         '@type': 'LocalBusiness',
         name: 'Claudia Conen',
         legalName: 'Conen UG (haftungsbeschränkt)',
-        image: 'https://claudiaconen.com/og-image.jpg',
+        image: 'https://claudiaconen.com/og-claudia-conen.jpg',
         '@id': 'https://claudiaconen.com/',
         url: 'https://claudiaconen.com/',
         telephone: '+49-160-99142208',

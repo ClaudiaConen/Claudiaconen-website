@@ -1208,7 +1208,7 @@ function Footer() {
   return (
     <footer className="relative border-t border-poai-line">
       <div className="mx-auto max-w-7xl px-5 md:px-8 py-10 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-poai-text-mute">
-        <div>© {new Date().getFullYear()} Claudia Conen &middot; Power of AI Buchprojekt</div>
+        <div>© {new Date().getFullYear()} Conen UG (haftungsbeschränkt) &middot; Beisenweg 20, 58452 Witten &middot; Power of AI Buchprojekt</div>
         <div className="flex items-center gap-5">
           <Link to="/impressum" className="hover:text-poai-text transition">Impressum</Link>
           <Link to="/datenschutz" className="hover:text-poai-text transition">Datenschutz</Link>

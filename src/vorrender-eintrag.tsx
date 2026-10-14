@@ -81,6 +81,8 @@ export const SEITEN: { pfad: string; laden: () => Promise<any> }[] = [
   { pfad: '/stimme-trauer', laden: () => import('./pages/StimmeTrauer') },
   { pfad: '/stimme-voiceover', laden: () => import('./pages/StimmeVoiceover') },
   { pfad: '/challenge', laden: () => import('./pages/Challenge') },
+  { pfad: '/dabei', laden: () => import('./pages/PowerOfAiCheckin') },
+  { pfad: '/anmeldung', laden: () => import('./pages/PowerOfAiCheckin') },
   { pfad: '/wissensbibliothek', laden: () => import('./pages/Wissensbibliothek') },
   { pfad: '/wissensmagazin', laden: () => import('./pages/Wissensbibliothek') },
   { pfad: '/experten', laden: () => import('./pages/Experten') },

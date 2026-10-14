@@ -30,10 +30,12 @@ const KARTEN: { datei: string; tag: string; text: string }[] = [
 // Ohne das Avatar-Bild (Claudia, 22.09.2026 11:21 UTC: 'wo ich sechsmal drauf bin, gefaellt mir nicht').
 const REIHEN = [KARTEN.slice(0, 6), KARTEN.slice(6, 12), KARTEN.slice(12, 17)];
 
-function Karte({ k }: { k: (typeof KARTEN)[number] }) {
+export type FotoKarte = { datei: string; tag: string; text: string; ordner?: string };
+
+function Karte({ k }: { k: FotoKarte }) {
   return (
     <div className="cc-fr-karte">
-      <img src={`/challenge/karten/${k.datei}.webp`} alt="" width={240} height={320} decoding="async" />
+      <img src={`${k.ordner ?? '/challenge/karten'}/${k.datei}.webp`} alt="" width={240} height={320} decoding="async" />
       <span className="cc-fr-schleier" aria-hidden="true" />
       <span className="cc-fr-tag">{k.tag}</span>
       <span className="cc-fr-text">{k.text}</span>
@@ -41,10 +43,14 @@ function Karte({ k }: { k: (typeof KARTEN)[number] }) {
   );
 }
 
-export default function FotoReihen() {
+/** karten: eigene Kacheln (z. B. Check-in THE POWER OF AI, 14.10.2026); ohne Angabe die Challenge-Kacheln. */
+export default function FotoReihen({ karten }: { karten?: FotoKarte[] } = {}) {
+  const reihen = karten
+    ? [karten.filter((_, i) => i % 3 === 0), karten.filter((_, i) => i % 3 === 1), karten.filter((_, i) => i % 3 === 2)]
+    : REIHEN;
   return (
     <div className="cc-fr" aria-hidden="true">
-      {REIHEN.map((reihe, i) => (
+      {reihen.map((reihe, i) => (
         <div key={i} className="cc-fr-reihe">
           <div className={`cc-fr-spur ${i === 1 ? 'cc-fr-spur--zurueck' : i === 2 ? 'cc-fr-spur--langsam' : ''}`}>
             {[...reihe, ...reihe].map((k, j) => (

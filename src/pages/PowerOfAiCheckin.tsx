@@ -1,7 +1,30 @@
 import { useState, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
-import FotoReihen from '../components/FotoReihen';
+import FotoReihen, { type FotoKarte } from '../components/FotoReihen';
+
+/** Laufende Kacheln im Kopf: THE POWER OF AI und Claudia gemischt (Claudia 14.10.2026 14:56). */
+const P = '/powerofai/karten';
+const KARTEN: FotoKarte[] = [
+  { datei: 'logo', tag: 'Event', text: 'THE POWER OF AI', ordner: P },
+  { datei: 'keynote', tag: 'Bühne', text: 'Keynote' },
+  { datei: 'ki', tag: 'Köln', text: 'Live in Köln', ordner: P },
+  { datei: 'anke', tag: 'Speakerin', text: 'Anke Delfs', ordner: P },
+  { datei: 'claudia', tag: 'Gastgeberin', text: 'Claudia Conen', ordner: P },
+  { datei: 'koeln', tag: 'Netzwerk', text: 'AI Connect', ordner: P },
+  { datei: 'thomas', tag: 'Speaker', text: 'Thomas Hruska', ordner: P },
+  { datei: 'kamera', tag: 'Video', text: 'Vor der Kamera' },
+  { datei: 'ronny', tag: 'Gastgeber', text: 'Ronny Barthel', ordner: P },
+  { datei: 'klon', tag: 'KI', text: 'Dein Klon schläft nie', ordner: P },
+  { datei: 'klaus', tag: 'Gastgeber', text: 'Klaus Offermann', ordner: P },
+  { datei: 'rampenlicht', tag: 'Bühne', text: 'Im Rampenlicht' },
+  { datei: 'begegnung', tag: 'Begegnung', text: 'Menschen treffen', ordner: P },
+  { datei: 'buehne', tag: 'Zukunft', text: 'Mensch & KI', ordner: P },
+  { datei: 'messe', tag: 'Gespräch', text: 'Kontakte knüpfen' },
+  { datei: 'connect', tag: 'Gastgeber', text: 'Gemeinsam stark', ordner: P },
+  { datei: 'zuhoeren', tag: 'Wirkung', text: 'Zuhören' },
+  { datei: 'tonstudio', tag: 'Stimme', text: 'Hörbar sein' },
+];
 import { supabase } from '../lib/supabase';
 
 /**
@@ -72,15 +95,16 @@ export default function PowerOfAiCheckin() {
   return (
     <div className="min-h-screen bg-pearl-white text-[#13233F]">
       <SEO
-        title="Check-in – THE POWER OF AI Köln"
-        description="Check-in für THE POWER OF AI am 18. Oktober 2026 in der Motorworld Köln-Rheinland."
+        title="Anmeldung – THE POWER OF AI Köln"
+        description="Du bist dabei bei THE POWER OF AI am 18. Oktober in der Motorworld Köln. Kurz eintragen, dann geht’s los."
         path="/dabei"
+        ogImage="https://claudiaconen.com/powerofai/vorschau.jpg"
         noindex
       />
       {/* Kopf dunkel mit den laufenden Foto-Reihen wie auf /challenge (Claudia 14.10.2026 14:32: "bewegten Hintergrund
           wie auf der Challenge-Seite", "so hell und dunkel wie vorher auf der Challenge-Seite"). Dunkelblau statt #0A1628. */}
       <header className="relative overflow-hidden bg-[#13233F] px-10 pt-12 pb-14 sm:pt-20 sm:pb-20">
-        <FotoReihen />
+        <FotoReihen karten={KARTEN} />
         <div className="relative z-10 mx-auto max-w-sm rounded-[12px] border border-[#D4AF37]/45 bg-[rgba(19,35,63,0.86)] px-5 py-5 text-pearl-white shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)] sm:px-8 sm:py-8" style={{ borderTopColor: '#F7E7CE' }}>
           {/* Foto der drei Gastgeber, von Claudia 14.10.2026 (3er_.png) */}
           <img src="/powerofai/team.webp" alt="Die Gastgeber von THE POWER OF AI" width={1100} height={619} className="aspect-video w-full rounded-md object-cover" />

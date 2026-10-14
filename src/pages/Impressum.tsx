@@ -23,7 +23,7 @@ export default function Impressum() {
                   Angaben gemäß § 5 DDG:
                 </h2>
                 <p className="leading-relaxed">
-                  Claudia Conen<br />
+                  Conen UG (haftungsbeschränkt)<br />
                   Beisenweg 20<br />
                   58452 Witten
                 </p>

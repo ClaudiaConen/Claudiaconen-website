@@ -132,7 +132,7 @@ export default function Footer() {
 
           {/* Unten: Rechtliches, Anschrift, nach oben */}
           <div className="flex flex-col gap-4 border-t border-[#D4AF37]/25 py-7 font-inter text-sm text-pearl-white/70 md:flex-row md:items-center md:justify-between">
-            <p>© 2026 Claudia Conen · Beisenweg 20, 58452 Witten</p>
+            <p>© 2026 Conen UG (haftungsbeschränkt) · Beisenweg 20, 58452 Witten</p>
             <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
               <Link to="/impressum" className="font-semibold transition-colors hover:text-[#F7E7CE]">Impressum</Link>
               <Link to="/datenschutz" className="font-semibold transition-colors hover:text-[#F7E7CE]">Datenschutz</Link>

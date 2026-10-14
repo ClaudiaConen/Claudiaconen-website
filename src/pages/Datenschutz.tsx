@@ -27,7 +27,7 @@ export default function Datenschutz() {
                   1. Verantwortliche Stelle
                 </h2>
                 <p className="leading-relaxed">
-                  Claudia Conen<br />
+                  Conen UG (haftungsbeschränkt)<br />
                   Beisenweg 20<br />
                   58452 Witten<br />
                   E-Mail: <a href="mailto:claudiaconen@umsatzstimme.de" className="text-bright-gold hover:underline">claudiaconen@umsatzstimme.de</a>

@@ -230,6 +230,11 @@ export default function PowerOfAiCheckin() {
           </form>
         )}
       </main>
+      <footer className="border-t border-[#D4AF37]/30 px-4 py-6 text-center font-inter text-xs leading-relaxed text-[#13233F]/70">
+        © 2026 Conen UG (haftungsbeschränkt) · Beisenweg 20, 58452 Witten ·{' '}
+        <Link to="/impressum" className="underline decoration-[#D4AF37] underline-offset-2">Impressum</Link> ·{' '}
+        <Link to="/datenschutz" className="underline decoration-[#D4AF37] underline-offset-2">Datenschutz</Link>
+      </footer>
     </div>
   );
 }

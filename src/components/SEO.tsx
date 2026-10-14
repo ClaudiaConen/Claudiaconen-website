@@ -132,6 +132,7 @@ export default function SEO({
         '@context': 'https://schema.org',
         '@type': 'LocalBusiness',
         name: 'Claudia Conen',
+        legalName: 'Conen UG (haftungsbeschränkt)',
         image: 'https://claudiaconen.com/og-image.jpg',
         '@id': 'https://claudiaconen.com/',
         url: 'https://claudiaconen.com/',

@@ -23,6 +23,7 @@ export default function AdminDashboard() {
     coachingInquiries: 0,
     contactInquiries: 0,
     challenge: 0,
+    powerofai: 0,
     adventRegistrations: 0,
     abkuerzungBookings: 0,
     checklistDownloads: 0,
@@ -75,13 +76,15 @@ export default function AdminDashboard() {
 
   const loadEmailStats = async () => {
     try {
-      const [beta, coaching, contact, challenge, advent, abkuerzung, checklist, linkedin, kiManager] = await Promise.all([
+      const [beta, coaching, contact, challenge, powerofai, advent, abkuerzung, checklist, linkedin, kiManager] = await Promise.all([
         supabase.from('beta_waitlist').select('id', { count: 'exact', head: true }),
         supabase.from('coaching_inquiries').select('id', { count: 'exact', head: true }),
         // Kontaktanfragen OHNE die Challenge-Anmeldungen (die haben "7-TAGE-CHALLENGE" in message)
-        supabase.from('contact_inquiries').select('id', { count: 'exact', head: true }).not('message', 'ilike', '%CHALLENGE%'),
+        supabase.from('contact_inquiries').select('id', { count: 'exact', head: true }).not('message', 'ilike', '%CHALLENGE%').not('message', 'ilike', '%POWER-OF-AI CHECK-IN%'),
         // Challenge-Anmeldungen (eigene Kategorie)
         supabase.from('contact_inquiries').select('id', { count: 'exact', head: true }).ilike('message', '%CHALLENGE%'),
+        // Check-in THE POWER OF AI Köln (Tür-Formular /powerofai)
+        supabase.from('contact_inquiries').select('id', { count: 'exact', head: true }).ilike('message', '%POWER-OF-AI CHECK-IN%'),
         supabase.from('advent_registrations').select('id', { count: 'exact', head: true }),
         supabase.from('abkuerzung_bookings').select('id', { count: 'exact', head: true }),
         supabase.from('checklist_downloads').select('id', { count: 'exact', head: true }),
@@ -94,6 +97,7 @@ export default function AdminDashboard() {
         coachingInquiries: coaching.count || 0,
         contactInquiries: contact.count || 0,
         challenge: challenge.count || 0,
+        powerofai: powerofai.count || 0,
         adventRegistrations: advent.count || 0,
         abkuerzungBookings: abkuerzung.count || 0,
         checklistDownloads: checklist.count || 0,
@@ -203,11 +207,12 @@ export default function AdminDashboard() {
   const emailSources: EmailSource[] = [
     { key: 'kiManagerBookings', label: 'KI-Manager Anmeldungen', table: 'ki_manager_bookings', count: emailStats.kiManagerBookings, color: 'bg-orange-100 text-orange-800', emailField: 'email', nameField: 'vorname' },
     { key: 'challenge', label: 'Challenge-Anmeldungen', table: 'contact_inquiries', count: emailStats.challenge, color: 'bg-fuchsia-100 text-fuchsia-800', emailField: 'email', nameField: 'name', filter: (q: any) => q.ilike('message', '%CHALLENGE%') },
+    { key: 'powerofai', label: 'Check-in THE POWER OF AI Köln', table: 'contact_inquiries', count: emailStats.powerofai, color: 'bg-amber-100 text-amber-800', emailField: 'email', nameField: 'name', filter: (q: any) => q.ilike('message', '%POWER-OF-AI CHECK-IN%') },
     { key: 'adventRegistrations', label: 'Adventskalender Registrierungen', table: 'advent_registrations', count: emailStats.adventRegistrations, color: 'bg-red-100 text-red-800', emailField: 'email', nameField: 'first_name' },
     { key: 'checklistDownloads', label: 'Checklisten Downloads', table: 'checklist_downloads', count: emailStats.checklistDownloads, color: 'bg-blue-100 text-blue-800', emailField: 'email', nameField: 'article_title' },
     { key: 'linkedinFreebie', label: 'LinkedIn Freebie Leads', table: 'linkedin_freebie_leads', count: emailStats.linkedinFreebie, color: 'bg-sky-100 text-sky-800', emailField: 'email', nameField: 'source' },
     { key: 'coachingInquiries', label: 'Coaching Anfragen', table: 'coaching_inquiries', count: emailStats.coachingInquiries, color: 'bg-green-100 text-green-800', emailField: 'email', nameField: 'first_name' },
-    { key: 'contactInquiries', label: 'Kontaktanfragen', table: 'contact_inquiries', count: emailStats.contactInquiries, color: 'bg-teal-100 text-teal-800', emailField: 'email', nameField: 'name', filter: (q: any) => q.not('message', 'ilike', '%CHALLENGE%') },
+    { key: 'contactInquiries', label: 'Kontaktanfragen', table: 'contact_inquiries', count: emailStats.contactInquiries, color: 'bg-teal-100 text-teal-800', emailField: 'email', nameField: 'name', filter: (q: any) => q.not('message', 'ilike', '%CHALLENGE%').not('message', 'ilike', '%POWER-OF-AI CHECK-IN%') },
     { key: 'abkuerzungBookings', label: 'Abkuerzung 1:1 Buchungen', table: 'abkuerzung_bookings', count: emailStats.abkuerzungBookings, color: 'bg-amber-100 text-amber-800', emailField: 'email', nameField: 'first_name' },
     { key: 'betaWaitlist', label: 'Beta Warteliste', table: 'beta_waitlist', count: emailStats.betaWaitlist, color: 'bg-gray-100 text-gray-800', emailField: 'email', nameField: 'first_name' },
   ];

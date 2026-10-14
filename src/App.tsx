@@ -61,6 +61,7 @@ const StimmeHochzeit = lazy(() => import('./pages/StimmeHochzeit'));
 const StimmeTrauer = lazy(() => import('./pages/StimmeTrauer'));
 const StimmeVoiceover = lazy(() => import('./pages/StimmeVoiceover'));
 const Challenge = lazy(() => import('./pages/Challenge'));
+const PowerOfAiCheckin = lazy(() => import('./pages/PowerOfAiCheckin'));
 
 const Wissensbibliothek = lazy(() => import('./pages/Wissensbibliothek'));
 const Experten = lazy(() => import('./pages/Experten'));
@@ -244,6 +245,7 @@ function App() {
         <Route path="/stimme-trauer" element={<StimmeTrauer />} />
         <Route path="/stimme-voiceover" element={<StimmeVoiceover />} />
         <Route path="/challenge" element={<Challenge />} />
+        <Route path="/powerofai" element={<PowerOfAiCheckin />} />
 
         <Route path="/wissensbibliothek" element={<Wissensbibliothek />} />
         <Route path="/wissensmagazin" element={<Wissensbibliothek />} />

@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
+import FotoReihen from '../components/FotoReihen';
 import { supabase } from '../lib/supabase';
 
 /**
@@ -16,7 +17,7 @@ import { supabase } from '../lib/supabase';
  */
 const GOLD = 'bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]';
 const FELD =
-  'w-full rounded-md border border-[#13233F]/25 bg-white px-4 py-4 font-inter text-[17px] text-[#13233F] placeholder:text-[#13233F]/45 focus:border-[#D4AF37] focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/40';
+  'w-full rounded-md border border-[#13233F]/30 bg-white px-4 py-4 font-inter text-[17px] text-[#13233F] placeholder:text-[#13233F]/45 focus:border-[#D4AF37] focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/40';
 const HAKEN = 'mt-1 h-5 w-5 flex-none accent-[#D4AF37]';
 const TEXTSTAND = '14.10.2026 v2';
 
@@ -67,84 +68,87 @@ export default function PowerOfAiCheckin() {
   }
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(120%_90%_at_78%_18%,#24406F_0%,#1A2B4C_48%,#13233F_100%)] px-4 py-10 text-pearl-white sm:py-16">
+    <div className="min-h-screen bg-pearl-white text-[#13233F]">
       <SEO
         title="Check-in – THE POWER OF AI Köln"
         description="Check-in für THE POWER OF AI am 18. Oktober 2026 in der Motorworld Köln-Rheinland."
         path="/powerofai"
         noindex
       />
-      <main className="mx-auto max-w-xl">
-        {/* Foto der drei Gastgeber, von Claudia 14.10.2026 (3er_.png) */}
-        <img src="/powerofai/team.webp" alt="Die Gastgeber von THE POWER OF AI" width={1100} height={619} className="mb-6 aspect-video w-full rounded-lg object-cover shadow-[0_18px_40px_rgba(0,0,0,.35)]" />
-        <p className="flex items-center gap-3 font-montserrat text-xs font-bold uppercase tracking-[0.26em] text-[#E4BC5D]">
-          <span aria-hidden="true" className="h-px w-8 bg-[#D4AF37]" />
-          THE POWER OF AI · Köln · 18.10.
-        </p>
-
-        {zustand === 'fertig' ? (
-          <section className="mt-6" aria-live="polite">
-            <h1 className="font-montserrat text-3xl font-bold leading-tight sm:text-4xl">
-              Danke, {eingetragen.name || 'du'}.{' '}
-              <em className="block font-cormorant font-semibold italic text-[#E4BC5D]">Du bist eingecheckt.</em>
+      {/* Kopf dunkel mit den laufenden Foto-Reihen wie auf /challenge (Claudia 14.10.2026 14:32: "bewegten Hintergrund
+          wie auf der Challenge-Seite", "so hell und dunkel wie vorher auf der Challenge-Seite"). Dunkelblau statt #0A1628. */}
+      <header className="relative overflow-hidden bg-[#13233F] px-4 pt-8 pb-10 sm:pt-14 sm:pb-14">
+        <FotoReihen />
+        <div className="relative z-10 mx-auto max-w-xl rounded-[12px] border border-[#D4AF37]/45 bg-[rgba(19,35,63,0.88)] px-5 py-6 text-pearl-white shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)] sm:px-8 sm:py-8" style={{ borderTopColor: '#F7E7CE' }}>
+          {/* Foto der drei Gastgeber, von Claudia 14.10.2026 (3er_.png) */}
+          <img src="/powerofai/team.webp" alt="Die Gastgeber von THE POWER OF AI" width={1100} height={619} className="aspect-video w-full rounded-md object-cover" />
+          <p className="mt-5 flex items-center gap-3 font-montserrat text-xs font-extrabold uppercase tracking-[0.24em] text-[#EBD197]">
+            <span aria-hidden="true" className={`h-[3px] w-7 rounded-full ${GOLD}`} />
+            THE POWER OF AI · Köln · 18.10.
+          </p>
+          {zustand === 'fertig' ? (
+            <h1 className="mt-4 font-montserrat text-3xl font-bold leading-tight sm:text-4xl" aria-live="polite">
+              Danke, {eingetragen.name || 'du'}.
+              <span className="gold-text-animated block font-cormorant text-[2.4rem] font-semibold italic leading-tight sm:text-5xl">Du bist eingecheckt.</span>
             </h1>
-            <p className="mt-5 font-inter text-[17px] leading-relaxed text-pearl-white/90">
-              Viel Freude heute! Das Foto- und Videomaterial vom Tag schicken wir dir nach dem Event an deine E-Mail-Adresse.
+          ) : (
+            <h1 id="checkin-titel" className="mt-4 font-montserrat text-3xl font-bold leading-tight sm:text-4xl">
+              Schön, dass du da bist.
+              <span className="gold-text-animated block font-cormorant text-[2.1rem] font-semibold italic leading-tight sm:text-5xl">Kurz eintragen, dann geht’s los.</span>
+            </h1>
+          )}
+        </div>
+      </header>
+
+      {/* Hell: das Formular, übersichtlich */}
+      <main className="mx-auto max-w-xl px-4 py-8 sm:py-12">
+        {zustand === 'fertig' ? (
+          <section>
+            <p className="font-inter text-[17px] leading-relaxed">
+              Viel Freude heute! Nach dem Event bekommst du per E-Mail den Link zum Foto- und Videomaterial vom Tag.
             </p>
             {eingetragen.challenge && (
-              <p className="mt-4 font-inter text-[17px] leading-relaxed text-pearl-white/90">
+              <p className="mt-4 font-inter text-[17px] leading-relaxed">
                 Zur kostenlosen 7-Tage-Video-Challenge geht es hier:{' '}
-                <Link to="/challenge" className="font-semibold text-[#F7E7CE] underline decoration-[#D4AF37] underline-offset-4">
-                  claudiaconen.com/challenge
-                </Link>
+                <Link to="/challenge" className="font-semibold underline decoration-[#D4AF37] decoration-2 underline-offset-4">claudiaconen.com/challenge</Link>
               </p>
             )}
-            <button
-              type="button"
-              onClick={naechstePerson}
-              className={`mt-8 inline-flex items-center rounded-full px-8 py-4 font-montserrat text-sm font-bold uppercase tracking-[0.12em] text-[#13233F] ${GOLD}`}
-            >
+            <button type="button" onClick={naechstePerson} className={`mt-8 inline-flex items-center rounded-full px-8 py-4 font-montserrat text-sm font-bold uppercase tracking-[0.12em] text-[#13233F] ${GOLD}`}>
               Nächste Person eintragen
             </button>
           </section>
         ) : (
-          <form onSubmit={absenden} className="mt-6" aria-labelledby="checkin-titel">
-            <h1 id="checkin-titel" className="font-montserrat text-3xl font-bold leading-tight sm:text-4xl">
-              Schön, dass du da bist.
-              <em className="block font-cormorant font-semibold italic text-[#E4BC5D]">Kurz eintragen, dann geht’s los.</em>
-            </h1>
-            <p className="mt-4 font-inter text-[17px] leading-relaxed text-pearl-white/85">
-              Dein Geschenk: Nach dem Event bekommst du per E-Mail den Link zum Foto- und Videomaterial vom Tag.
+          <form onSubmit={absenden} aria-labelledby="checkin-titel">
+            <p className="rounded-md border-l-4 border-[#D4AF37] bg-white px-4 py-3 font-inter text-[16px] leading-relaxed shadow-sm">
+              <strong className="font-semibold">Dein Geschenk:</strong> Nach dem Event bekommst du per E-Mail den Link zum Foto- und Videomaterial vom Tag.
             </p>
 
             <div className="mt-6 grid gap-3">
               <label className="block">
-                <span className="mb-1 block font-inter text-sm text-pearl-white/80">Vor- und Nachname</span>
+                <span className="mb-1 block font-inter text-sm font-medium">Vor- und Nachname</span>
                 <input name="name" type="text" required autoComplete="name" value={name} onChange={(e) => setName(e.target.value)} className={FELD} />
               </label>
               <label className="block">
-                <span className="mb-1 block font-inter text-sm text-pearl-white/80">E-Mail</span>
+                <span className="mb-1 block font-inter text-sm font-medium">E-Mail</span>
                 <input name="email" type="email" required autoComplete="email" inputMode="email" value={email} onChange={(e) => setEmail(e.target.value)} className={FELD} />
               </label>
               <label className="block">
-                <span className="mb-1 block font-inter text-sm text-pearl-white/80">
-                  Handynummer {whatsapp ? '(für die WhatsApp-Impulse)' : '(freiwillig)'}
-                </span>
+                <span className="mb-1 block font-inter text-sm font-medium">Handynummer {whatsapp ? '(für die WhatsApp-Impulse)' : '(freiwillig)'}</span>
                 <input name="telefon" type="tel" required={whatsapp} autoComplete="tel" inputMode="tel" value={telefon} onChange={(e) => setTelefon(e.target.value)} className={FELD} />
               </label>
             </div>
 
             {/* Einwilligung: kurzer Satz mit dem Wesentlichen (Fotos/Videos + Social Media), Details zum Aufklappen (Claudia 14.10.2026 14:19) */}
-            <div className="mt-6 rounded-md border border-[#D4AF37]/60 bg-white/5 p-4">
-              <label className="flex items-start gap-3 font-inter text-[16px] leading-relaxed text-pearl-white">
+            <div className="mt-6 rounded-md border-2 border-[#D4AF37] bg-white p-4">
+              <label className="flex items-start gap-3 font-inter text-[16px] leading-relaxed">
                 <input name="foto_video" type="checkbox" required checked={fotoVideo} onChange={(e) => setFotoVideo(e.target.checked)} className={HAKEN} />
                 <span><strong className="font-semibold">Ich bin einverstanden</strong>, dass heute Fotos und Videos von mir gemacht und auf Social Media gepostet werden.</span>
               </label>
               <details className="group mt-2 pl-8">
-                <summary className="cursor-pointer list-none font-inter text-sm text-[#EBD197] underline decoration-[#D4AF37]/60 underline-offset-2 [&::-webkit-details-marker]:hidden">
+                <summary className="cursor-pointer list-none font-inter text-sm font-medium underline decoration-[#D4AF37] underline-offset-2 [&::-webkit-details-marker]:hidden">
                   Was heißt das genau? <span aria-hidden="true" className="inline-block transition-transform group-open:rotate-180">▾</span>
                 </summary>
-                <p className="mt-2 font-inter text-sm leading-relaxed text-pearl-white/85">
+                <p className="mt-2 font-inter text-sm leading-relaxed text-[#13233F]/85">
                   Bei THE POWER OF AI am 18.10.2026 wird fotografiert und gefilmt. Die Veranstalter und alle Teilnehmenden dürfen die Beiträge
                   auf ihren Social-Media-Kanälen und Webseiten posten. Das Rohmaterial steht allen Teilnehmenden per Link zur Verfügung.
                   Widerruf jederzeit für die Zukunft an claudiaconen@umsatzstimme.de.
@@ -152,9 +156,9 @@ export default function PowerOfAiCheckin() {
               </details>
             </div>
 
-            <p className="mt-7 font-montserrat text-xs font-bold uppercase tracking-[0.2em] text-[#E4BC5D]">Freiwillig dazu</p>
-            {/* 7-Tage-Challenge als einladende Karte mit 3D-Icon */}
-            <label className={`mt-3 flex cursor-pointer items-center gap-4 rounded-lg border p-4 transition-colors ${challenge ? 'border-[#D4AF37] bg-[#D4AF37]/15' : 'border-[#D4AF37]/40 bg-white/5'}`}>
+            <p className="mt-8 font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] text-[#8C6A12]">Freiwillig dazu</p>
+            {/* 7-Tage-Challenge als einladende Karte mit 3D-Icon, dunkel wie die Kacheln der Challenge-Seite */}
+            <label className={`mt-3 flex cursor-pointer items-center gap-4 rounded-[10px] border-2 p-4 text-pearl-white transition-colors ${challenge ? 'border-[#F7E7CE] bg-[#1A2B4C]' : 'border-[#D4AF37]/60 bg-[#13233F]'}`}>
               <img src="/powerofai/icon-challenge.webp" alt="" width={64} height={64} className="h-16 w-16 flex-none object-contain" />
               <span className="flex-1">
                 <span className="block font-montserrat text-[17px] font-bold leading-snug text-white">7-Tage-Video-Challenge</span>
@@ -163,24 +167,20 @@ export default function PowerOfAiCheckin() {
               </span>
               <input name="challenge" type="checkbox" checked={challenge} onChange={(e) => setChallenge(e.target.checked)} className="h-6 w-6 flex-none accent-[#D4AF37]" aria-label="Ja, ich will bei der 7-Tage-Video-Challenge dabei sein" />
             </label>
-            <label className="mt-3 flex items-start gap-3 font-inter text-[15px] leading-relaxed text-pearl-white/90">
+            <label className="mt-4 flex items-start gap-3 font-inter text-[15px] leading-relaxed">
               <input name="whatsapp" type="checkbox" checked={whatsapp} onChange={(e) => setWhatsapp(e.target.checked)} className={HAKEN} />
               <span>Schick mir per WhatsApp kleine Impulse zur wirkungsvollen Kommunikation. Abmelden geht jederzeit.</span>
             </label>
 
-            <button
-              type="submit"
-              disabled={zustand === 'sendet'}
-              className={`mt-7 w-full rounded-full px-8 py-5 font-montserrat text-base font-bold uppercase tracking-[0.12em] text-[#13233F] disabled:opacity-70 ${GOLD}`}
-            >
+            <button type="submit" disabled={zustand === 'sendet'} className={`mt-8 w-full rounded-full px-8 py-5 font-montserrat text-base font-bold uppercase tracking-[0.12em] text-[#13233F] shadow-[0_10px_24px_-10px_rgba(140,106,18,.6)] disabled:opacity-70 ${GOLD}`}>
               {zustand === 'sendet' ? 'Wird eingetragen …' : 'Einchecken'}
             </button>
-            <p className="mt-4 font-inter text-sm leading-relaxed text-pearl-white/70">
+            <p className="mt-4 font-inter text-sm leading-relaxed text-[#13233F]/75">
               Deine Angaben nutzen wir, um dir das Material vom Tag zu schicken und, falls angehakt, für Impulse und Challenge.{' '}
-              <Link to="/datenschutz" className="underline decoration-[#D4AF37]/60 underline-offset-2">Datenschutz</Link>
+              <Link to="/datenschutz" className="underline decoration-[#D4AF37] underline-offset-2">Datenschutz</Link>
             </p>
             {zustand === 'fehler' && (
-              <p role="alert" className="mt-4 font-inter text-[15px] text-[#F7E7CE]">
+              <p role="alert" className="mt-4 font-inter text-[15px] font-semibold text-[#8C6A12]">
                 Das Eintragen hat gerade nicht geklappt. Bitte noch einmal versuchen oder kurz am Empfang Bescheid geben.
               </p>
             )}

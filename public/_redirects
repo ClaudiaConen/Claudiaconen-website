@@ -41,4 +41,8 @@
 # index.html ist die fertige Startseite.
 # 22.09.2026: Flyer-Seite und Challenge-Seite zu einer zusammengelegt (Claudia: 'die Seite soll Challenge heissen').
 /unverwechselbar-du    /challenge    301
+# 14.10.2026: Anmeldung THE POWER OF AI (Seite nur über QR/Link, noindex) – ehrlich 200 statt 404.
+/dabei                  /app.html   200
+/anmeldung              /app.html   200
+/powerofai              /app.html   200
 /*                      /app.html   404

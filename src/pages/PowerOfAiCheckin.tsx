@@ -8,7 +8,7 @@ import { supabase } from '../lib/supabase';
  * Check-in an der Tür bei THE POWER OF AI, Köln, 18.10.2026 – Claudias Auftrag vom 14.10.2026, 14:12 UTC:
  * Formular für die Menschen an der Tür, Lead-Magnet, Pflicht-Häkchen für Foto/Video auf Social Media
  * ("sonst haben wir nachher ein Problem"), Name + E-Mail, Telefon freiwillig, nicht aufdringlich.
- * Dazu freiwillig: WhatsApp-Impulse zur wirkungsvollen Kommunikation und die kostenlose 7-Tage-Challenge.
+ * Dazu freiwillig: Firma und die kostenlose 7-Tage-Challenge (WhatsApp und Geburtstag am 14.10. 14:54 auf Claudias Wunsch entfernt).
  *
  * Ablage wie ChallengeAnmeldung: Tabelle contact_inquiries (anonymes Einfügen erlaubt, Name + gültige E-Mail
  * Pflicht). Jede Zeile beginnt in message mit "POWER-OF-AI CHECK-IN", damit das Admin-Dashboard sie als eigene
@@ -19,16 +19,15 @@ const GOLD = 'bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]';
 const FELD =
   'w-full rounded-md border border-[#13233F]/30 bg-white px-4 py-4 font-inter text-[17px] text-[#13233F] placeholder:text-[#13233F]/45 focus:border-[#D4AF37] focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/40';
 const HAKEN = 'mt-1 h-5 w-5 flex-none accent-[#D4AF37]';
-const TEXTSTAND = '14.10.2026 v5';
+const TEXTSTAND = '14.10.2026 v6';
 
 export default function PowerOfAiCheckin() {
   const [vorname, setVorname] = useState('');
   const [name, setName] = useState('');
-  const [geburtstag, setGeburtstag] = useState('');
+  const [firma, setFirma] = useState('');
   const [email, setEmail] = useState('');
   const [telefon, setTelefon] = useState('');
   const [fotoVideo, setFotoVideo] = useState(false);
-  const [whatsapp, setWhatsapp] = useState(false);
   const [challenge, setChallenge] = useState(false);
   const [zustand, setZustand] = useState<'offen' | 'sendet' | 'fertig' | 'fehler'>('offen');
   const [eingetragen, setEingetragen] = useState({ name: '', challenge: false });
@@ -45,9 +44,8 @@ export default function PowerOfAiCheckin() {
         message:
           `POWER-OF-AI CHECK-IN – Köln, Motorworld, 18.10.2026 (claudiaconen.com/dabei)\n` +
           `Einwilligung Foto/Video, Veröffentlichung inkl. Social Media und Werbung durch Veranstalter und Teilnehmende: ja (Textstand ${TEXTSTAND})\n` +
-          `Geburtstag (für Geburtstagsgeschenk): ${geburtstag.trim() || '–'}\n` +
-          `Willkommensgeschenk 7 Tage Video-Training ab 26.10. (kostenlos): ${challenge ? 'ja' : 'nein'}\n` +
-          `WhatsApp-Gruppe für Impulse nach dem Video-Training: ${whatsapp ? 'ja' : 'nein'}`,
+          `Firma: ${firma.trim() || '–'}\n` +
+          `Willkommensgeschenk 7 Tage Video-Training ab 26.10. (kostenlos): ${challenge ? 'ja' : 'nein'}`,
       },
     ]);
     if (error) {
@@ -62,11 +60,10 @@ export default function PowerOfAiCheckin() {
   function naechstePerson() {
     setVorname('');
     setName('');
-    setGeburtstag('');
+    setFirma('');
     setEmail('');
     setTelefon('');
     setFotoVideo(false);
-    setWhatsapp(false);
     setChallenge(false);
     setZustand('offen');
     window.scrollTo({ top: 0 });
@@ -140,12 +137,12 @@ export default function PowerOfAiCheckin() {
                 <input name="email" type="email" required autoComplete="email" inputMode="email" value={email} onChange={(e) => setEmail(e.target.value)} className={FELD} />
               </label>
               <label className="block">
-                <span className="mb-1 block font-inter text-sm font-medium">Handynummer {whatsapp ? '(für die WhatsApp-Gruppe)' : '(freiwillig)'}</span>
-                <input name="telefon" type="tel" required={whatsapp} autoComplete="tel" inputMode="tel" value={telefon} onChange={(e) => setTelefon(e.target.value)} className={FELD} />
+                <span className="mb-1 block font-inter text-sm font-medium">Handynummer (freiwillig)</span>
+                <input name="telefon" type="tel" autoComplete="tel" inputMode="tel" value={telefon} onChange={(e) => setTelefon(e.target.value)} className={FELD} />
               </label>
               <label className="block">
-                <span className="mb-1 block font-inter text-sm font-medium">Geburtstag (freiwillig, wenn du mein Geschenk zum Geburtstag möchtest)</span>
-                <input name="geburtstag" type="text" inputMode="numeric" placeholder="TT.MM." maxLength={6} value={geburtstag} onChange={(e) => setGeburtstag(e.target.value)} className={FELD} />
+                <span className="mb-1 block font-inter text-sm font-medium">Firma (freiwillig)</span>
+                <input name="firma" type="text" autoComplete="organization" value={firma} onChange={(e) => setFirma(e.target.value)} className={FELD} />
               </label>
             </div>
 
@@ -193,16 +190,12 @@ export default function PowerOfAiCheckin() {
             <p className="mt-2 text-right">
               <a href="/challenge" target="_blank" rel="noopener noreferrer" className="font-inter text-sm font-medium underline decoration-[#D4AF37] underline-offset-2">Was ist die Challenge? →</a>
             </p>
-            <label className="mt-3 flex items-start gap-3 font-inter text-[15px] leading-relaxed">
-              <input name="whatsapp" type="checkbox" checked={whatsapp} onChange={(e) => setWhatsapp(e.target.checked)} className={HAKEN} />
-              <span>Ja, nimm mich gern in die WhatsApp-Gruppe für kleine Impulse nach der Challenge auf. Austreten geht jederzeit.</span>
-            </label>
 
             <button type="submit" disabled={zustand === 'sendet'} className={`mt-8 w-full rounded-full px-8 py-5 font-montserrat text-base font-bold uppercase tracking-[0.12em] text-[#13233F] shadow-[0_10px_24px_-10px_rgba(140,106,18,.6)] disabled:opacity-70 ${GOLD}`}>
               {zustand === 'sendet' ? 'Wird eingetragen …' : 'Einchecken'}
             </button>
             <p className="mt-4 font-inter text-sm leading-relaxed text-[#13233F]/75">
-              Deine Angaben nutzen wir für die Teilnehmerliste und, falls angegeben, für Challenge, WhatsApp-Gruppe und deinen Geburtstagsgruß.{' '}
+              Deine Angaben nutzen wir für die Teilnehmerliste und, falls angehakt, für die Challenge.{' '}
               <Link to="/datenschutz" className="underline decoration-[#D4AF37] underline-offset-2">Datenschutz</Link>
             </p>
             {zustand === 'fehler' && (

@@ -5,6 +5,7 @@ import AdminNavigation from '../components/AdminNavigation';
 import { Calendar, Video, MessageSquare, ArrowRight, BarChart, Brain, BookOpen, GraduationCap, Mail, Users, FileDown, ChevronDown, ChevronUp } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { supabaseBuchprojekt } from '../lib/supabaseBuchprojekt';
+import { supabaseCms } from '../lib/supabaseCms';
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
@@ -82,9 +83,9 @@ export default function AdminDashboard() {
         // Kontaktanfragen OHNE die Challenge-Anmeldungen (die haben "7-TAGE-CHALLENGE" in message)
         supabase.from('contact_inquiries').select('id', { count: 'exact', head: true }).not('message', 'ilike', '%CHALLENGE%').not('message', 'ilike', '%POWER-OF-AI CHECK-IN%'),
         // Challenge-Anmeldungen (eigene Kategorie)
-        supabase.from('contact_inquiries').select('id', { count: 'exact', head: true }).ilike('message', '%CHALLENGE%'),
+        supabaseCms.from('contact_inquiries').select('id', { count: 'exact', head: true }).ilike('message', '%CHALLENGE%'),
         // Check-in THE POWER OF AI Köln (Tür-Formular /powerofai)
-        supabase.from('contact_inquiries').select('id', { count: 'exact', head: true }).ilike('message', '%POWER-OF-AI CHECK-IN%'),
+        supabaseCms.from('contact_inquiries').select('id', { count: 'exact', head: true }).ilike('message', '%POWER-OF-AI CHECK-IN%'),
         supabase.from('advent_registrations').select('id', { count: 'exact', head: true }),
         supabase.from('abkuerzung_bookings').select('id', { count: 'exact', head: true }),
         supabase.from('checklist_downloads').select('id', { count: 'exact', head: true }),
@@ -109,7 +110,7 @@ export default function AdminDashboard() {
     }
   };
 
-  const toggleSourceExpand = async (source: { key: string; table: string; filter?: (q: any) => any }) => {
+  const toggleSourceExpand = async (source: { key: string; table: string; filter?: (q: any) => any; client?: any }) => {
     if (expandedSource === source.key) {
       setExpandedSource(null);
       return;
@@ -118,7 +119,7 @@ export default function AdminDashboard() {
     setExpandedSource(source.key);
     if (!sourceData[source.key]) {
       try {
-        let query = supabase
+        let query = (source.client ?? supabase)
           .from(source.table)
           .select('*')
           .order('created_at', { ascending: false })
@@ -132,9 +133,9 @@ export default function AdminDashboard() {
     }
   };
 
-  const exportSourceCSV = async (source: { key: string; table: string; filter?: (q: any) => any }) => {
+  const exportSourceCSV = async (source: { key: string; table: string; filter?: (q: any) => any; client?: any }) => {
     try {
-      let query = supabase.from(source.table).select('*').order('created_at', { ascending: false });
+      let query = (source.client ?? supabase).from(source.table).select('*').order('created_at', { ascending: false });
       if (source.filter) query = source.filter(query);
       const { data } = await query;
       if (!data || data.length === 0) return;
@@ -142,7 +143,7 @@ export default function AdminDashboard() {
       const headers = Object.keys(data[0]);
       const csvContent = [
         headers.join(','),
-        ...data.map(row => headers.map(h => `"${String(row[h] ?? '').replace(/"/g, '""')}"`).join(','))
+        ...data.map((row: any) => headers.map(h => `"${String(row[h] ?? '').replace(/"/g, '""')}"`).join(','))
       ].join('\n');
 
       const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
@@ -162,7 +163,7 @@ export default function AdminDashboard() {
     try {
       const results = await Promise.all(
         emailSources.map(async (source) => {
-          let query = supabase.from(source.table).select('*').order('created_at', { ascending: false });
+          let query = (source.client ?? supabase).from(source.table).select('*').order('created_at', { ascending: false });
           if (source.filter) query = source.filter(query);
           const { data } = await query;
           return (data || []).map((row: any) => ({
@@ -203,11 +204,12 @@ export default function AdminDashboard() {
     key: string; label: string; table: string; count: number;
     color: string; emailField: string; nameField: string;
     filter?: (q: any) => any;
+    client?: any;
   };
   const emailSources: EmailSource[] = [
     { key: 'kiManagerBookings', label: 'KI-Manager Anmeldungen', table: 'ki_manager_bookings', count: emailStats.kiManagerBookings, color: 'bg-orange-100 text-orange-800', emailField: 'email', nameField: 'vorname' },
-    { key: 'challenge', label: 'Challenge-Anmeldungen', table: 'contact_inquiries', count: emailStats.challenge, color: 'bg-fuchsia-100 text-fuchsia-800', emailField: 'email', nameField: 'name', filter: (q: any) => q.ilike('message', '%CHALLENGE%') },
-    { key: 'powerofai', label: 'Check-in THE POWER OF AI Köln', table: 'contact_inquiries', count: emailStats.powerofai, color: 'bg-amber-100 text-amber-800', emailField: 'email', nameField: 'name', filter: (q: any) => q.ilike('message', '%POWER-OF-AI CHECK-IN%') },
+    { key: 'challenge', label: 'Challenge-Anmeldungen', table: 'contact_inquiries', count: emailStats.challenge, color: 'bg-fuchsia-100 text-fuchsia-800', emailField: 'email', nameField: 'name', client: supabaseCms, filter: (q: any) => q.ilike('message', '%CHALLENGE%') },
+    { key: 'powerofai', label: 'EventKöln – THE POWER OF AI (Check-in)', table: 'contact_inquiries', count: emailStats.powerofai, color: 'bg-amber-100 text-amber-800', emailField: 'email', nameField: 'name', client: supabaseCms, filter: (q: any) => q.ilike('message', '%POWER-OF-AI CHECK-IN%') },
     { key: 'adventRegistrations', label: 'Adventskalender Registrierungen', table: 'advent_registrations', count: emailStats.adventRegistrations, color: 'bg-red-100 text-red-800', emailField: 'email', nameField: 'first_name' },
     { key: 'checklistDownloads', label: 'Checklisten Downloads', table: 'checklist_downloads', count: emailStats.checklistDownloads, color: 'bg-blue-100 text-blue-800', emailField: 'email', nameField: 'article_title' },
     { key: 'linkedinFreebie', label: 'LinkedIn Freebie Leads', table: 'linkedin_freebie_leads', count: emailStats.linkedinFreebie, color: 'bg-sky-100 text-sky-800', emailField: 'email', nameField: 'source' },

@@ -83,9 +83,7 @@ export default function WorkshopCTA() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.2 }}
-                href="https://claudiaconen-akademie.de/von-schatten-ins-licht"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/von-schatten-zu-licht#anmeldung"
                 className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg"
               >
                 Zur Workshop-Anmeldung

@@ -84,7 +84,7 @@ Deno.serve(async (req: Request) => {
       throw insertError;
     }
 
-    const resetUrl = `https://claudiaconen-akademie.de/admin/passwort-zuruecksetzen?token=${token}`;
+    const resetUrl = `https://claudiaconen.com/admin/passwort-zuruecksetzen?token=${token}`;
 
     if (RESEND_API_KEY) {
       try {

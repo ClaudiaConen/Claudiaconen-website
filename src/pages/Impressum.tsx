@@ -35,7 +35,7 @@ export default function Impressum() {
                 </h2>
                 <p className="leading-relaxed">
                   E-Mail: <a href="mailto:claudiaconen@umsatzstimme.de" className="text-bright-gold hover:underline">claudiaconen@umsatzstimme.de</a><br />
-                  Internet: <a href="https://claudiaconen-akademie.de" className="text-bright-gold hover:underline" target="_blank" rel="noopener noreferrer">https://claudiaconen-akademie.de</a>
+                  Internet: <a href="https://claudiaconen.com" className="text-bright-gold hover:underline">https://claudiaconen.com</a>
                 </p>
               </section>
 

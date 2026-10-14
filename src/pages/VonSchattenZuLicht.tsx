@@ -154,9 +154,7 @@ export default function VonSchattenZuLicht() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.8 }}
-                    href="https://claudiaconen-akademie.de/von-schatten-ins-licht"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="#anmeldung"
                     className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg"
                   >
                     Zur Workshop-Anmeldung
@@ -472,9 +470,7 @@ export default function VonSchattenZuLicht() {
                   Manche Wege geht man gemeinsam. In einer kleinen, geschützten Gruppe ab 3 Personen erarbeiten wir deine Botschaft Schritt für Schritt. Du erhältst persönliches Feedback, Impulse zur Stimmwirkung und Strategien, wie du Menschen berührst – im Leben, im Business oder auf der Bühne.
                 </p>
                 <a
-                  href="https://claudiaconen-akademie.de/von-schatten-ins-licht"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#anmeldung"
                   className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] text-midnight-blue font-semibold rounded-full hover:scale-105 transition-transform duration-300"
                 >
                   Zur Workshop-Anmeldung
@@ -552,7 +548,7 @@ export default function VonSchattenZuLicht() {
                 Willst du dabei sein? Dann trage dich hier ein.
               </h3>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form id="anmeldung" onSubmit={handleSubmit} className="space-y-6 scroll-mt-28">
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="firstName" className="block text-sm font-medium text-pearl-white/90 mb-2">
@@ -630,7 +626,7 @@ export default function VonSchattenZuLicht() {
                 )}
 
                 <p className="text-xs text-pearl-white/60 text-center">
-                  Wir vermeiden Spam und verwenden E-Mail Adressen ausschließlich in Verbindung mit diesem Projekt und für weiterführende Kampagnen der Claudia Conen Akademie. 🔒
+                  Wir vermeiden Spam und verwenden E-Mail Adressen ausschließlich in Verbindung mit diesem Projekt und für weiterführende Kampagnen von Claudia Conen (claudiaconen.com). 🔒
                 </p>
               </form>
             </motion.div>
@@ -811,10 +807,10 @@ export default function VonSchattenZuLicht() {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
-                { text: 'Direkter Zugang zur Workshop', link: 'https://claudiaconen-akademie.de/von-schatten-ins-licht' },
+                { text: 'Direkter Zugang zum Workshop', link: '#anmeldung' },
                 { text: 'Mein Terminkalender für ein persönliches Gespräch', link: 'https://claudiaconen.de/kontakt' },
                 { text: 'Zugang zu meiner kostenfreien Community bei Telegram', link: 'https://t.me/+tQBwOmBOhM01YmEy' },
-                { text: 'Überblick über meine weiteren Angebote-Claudia Conen Akademie', link: '/' },
+                { text: 'Überblick über meine weiteren Angebote: claudiaconen.com', link: '/' },
                 { text: 'Kleine kostbare Geschenke', link: '/wissen/to-go' }
               ].map((item, index) => (
                 <motion.a
@@ -909,9 +905,7 @@ export default function VonSchattenZuLicht() {
 
               <div className="pt-8">
                 <a
-                  href="https://claudiaconen-akademie.de/von-schatten-ins-licht"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#anmeldung"
                   className="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-[#D4AF37] to-[#F7E7CE] text-midnight-blue font-bold rounded-full hover:scale-105 transition-transform duration-300 text-xl shadow-2xl"
                 >
                   Jetzt starten

@@ -75,8 +75,8 @@ export default function PowerOfAiCheckin() {
         noindex
       />
       <main className="mx-auto max-w-xl">
-        {/* Foto von THE POWER OF AI – Platzhalter (Claudia + Ronny), Claudia schickt ein Bild zu dritt (14.10.2026) */}
-        <img src="/powerofai/team.webp" alt="Gastgeber von THE POWER OF AI" width={900} height={558} className="mb-6 aspect-[900/558] w-full rounded-lg object-cover shadow-[0_18px_40px_rgba(0,0,0,.35)]" />
+        {/* Foto der drei Gastgeber, von Claudia 14.10.2026 (3er_.png) */}
+        <img src="/powerofai/team.webp" alt="Die Gastgeber von THE POWER OF AI" width={1100} height={619} className="mb-6 aspect-video w-full rounded-lg object-cover shadow-[0_18px_40px_rgba(0,0,0,.35)]" />
         <p className="flex items-center gap-3 font-montserrat text-xs font-bold uppercase tracking-[0.26em] text-[#E4BC5D]">
           <span aria-hidden="true" className="h-px w-8 bg-[#D4AF37]" />
           THE POWER OF AI · Köln · 18.10.

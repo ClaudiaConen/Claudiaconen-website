@@ -25,7 +25,10 @@ const KARTEN: FotoKarte[] = [
   { datei: 'zuhoeren', tag: 'Wirkung', text: 'Zuhören' },
   { datei: 'tonstudio', tag: 'Stimme', text: 'Hörbar sein' },
 ];
-import { supabase } from '../lib/supabase';
+import { supabaseCms } from '../lib/supabaseCms';
+
+/** WhatsApp-Gruppe der 7-Tage-Video-Challenge – gleicher Link wie auf /challenge. */
+const CHALLENGE_WHATSAPP = 'https://chat.whatsapp.com/IWSuqZ9ZrMn3dYNgVY1sp6?s=qt&p=i&mlu=4&ilr=4';
 
 /**
  * Check-in an der Tür bei THE POWER OF AI, Köln, 18.10.2026 – Claudias Auftrag vom 14.10.2026, 14:12 UTC:
@@ -59,7 +62,7 @@ export default function PowerOfAiCheckin() {
     e.preventDefault();
     if (zustand === 'sendet') return;
     setZustand('sendet');
-    const { error } = await supabase.from('contact_inquiries').insert([
+    const { error } = await supabaseCms.from('contact_inquiries').insert([
       {
         name: `${vorname.trim()} ${name.trim()}`.trim(),
         email: email.trim(),
@@ -133,12 +136,21 @@ export default function PowerOfAiCheckin() {
             <p className="font-inter text-[17px] leading-relaxed">
               Schön, dass du da bist. Viel Freude heute, gute Gespräche und neue Kontakte!
             </p>
-            {eingetragen.challenge && (
-              <p className="mt-4 font-inter text-[17px] leading-relaxed">
-                Zur kostenlosen 7-Tage-Video-Challenge geht es hier:{' '}
-                <Link to="/challenge" className="font-semibold underline decoration-[#D4AF37] decoration-2 underline-offset-4">claudiaconen.com/challenge</Link>
-              </p>
-            )}
+
+            {/* Willkommensgeschenk: QR zur WhatsApp-Gruppe der Challenge – für alle sichtbar (Claudia 14.10.2026) */}
+            <div className={`mt-6 grid items-center gap-5 rounded-[12px] px-5 py-6 text-[#13233F] sm:grid-cols-[auto_minmax(0,1fr)] sm:px-7 ${GOLD}`}>
+              <img src="/challenge/qr-whatsapp.png" alt="QR-Code: WhatsApp-Gruppe der 7-Tage-Video-Challenge" width={328} height={328} className="h-32 w-32 flex-none rounded-md bg-white p-1 sm:h-36 sm:w-36" />
+              <div className="min-w-0">
+                <p className="font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">Dein Willkommensgeschenk: die 7-Tage-Video-Challenge</p>
+                <p className="mt-2 font-inter text-[15px] leading-relaxed sm:text-base">
+                  Scann den Code mit deinem Handy und komm in die WhatsApp-Gruppe. Start ist der 26. Oktober – 7 Tage, je 1 Minute.
+                </p>
+                <a href={CHALLENGE_WHATSAPP} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center rounded-full bg-[#13233F] px-7 py-4 font-montserrat text-sm font-bold text-pearl-white transition-colors hover:bg-[#1A2B4C]">
+                  Zur WhatsApp-Gruppe
+                </a>
+              </div>
+            </div>
+
             <button type="button" onClick={naechstePerson} className={`mt-8 inline-flex items-center rounded-full px-8 py-4 font-montserrat text-sm font-bold uppercase tracking-[0.12em] text-[#13233F] ${GOLD}`}>
               Nächste Person eintragen
             </button>

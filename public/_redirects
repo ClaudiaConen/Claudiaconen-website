@@ -43,4 +43,6 @@
 /unverwechselbar-du    /challenge    301
 # 14.10.2026: Anmeldung THE POWER OF AI (Seite nur über QR/Link, noindex) – ehrlich 200 statt 404.
 /powerofai              /app.html   200
+# 14.10.2026: QR-Codes auf Magneten/Zitat-Kacheln (…/geschenk?m=01–11) führen zur Challenge.
+/geschenk               /challenge   302
 /*                      /app.html   404

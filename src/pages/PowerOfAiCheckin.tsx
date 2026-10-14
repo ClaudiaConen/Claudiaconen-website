@@ -19,7 +19,7 @@ const GOLD = 'bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]';
 const FELD =
   'w-full rounded-md border border-[#13233F]/30 bg-white px-4 py-4 font-inter text-[17px] text-[#13233F] placeholder:text-[#13233F]/45 focus:border-[#D4AF37] focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/40';
 const HAKEN = 'mt-1 h-5 w-5 flex-none accent-[#D4AF37]';
-const TEXTSTAND = '14.10.2026 v4';
+const TEXTSTAND = '14.10.2026 v5';
 
 export default function PowerOfAiCheckin() {
   const [vorname, setVorname] = useState('');
@@ -170,8 +170,13 @@ export default function PowerOfAiCheckin() {
                   Content erstellen, sichtbar werden, Vertrauen aufbauen und Kunden gewinnen. Widerruf jederzeit für die Zukunft an
                   claudiaconen@umsatzstimme.de.
                 </p>
+                <p className="mt-3 font-inter text-sm leading-relaxed text-[#13233F]/85">
+                  <strong className="font-semibold">Du möchtest nicht aufs Bild?</strong> Kein Problem: Mal dir am Empfang einen roten Punkt aufs
+                  Namensschild. Die hinteren Reihen sind unsere kamerafreie Zone. Bitte trage selbst mit dafür Sorge, denn bei unserem Event geht
+                  es um Sichtbarkeit im KI-Zeitalter, um Kunden gewinnen zu können. Solltest du zufällig gefilmt oder fotografiert worden sein und
+                  es merken, sprich bitte die Person an der Kamera an. Das ist für uns mehr Aufwand, darum bitten wir um dein Verständnis.
+                </p>
               </details>
-              <p className="mt-2 pl-8 font-inter text-sm text-[#13233F]/75">Ausnahme? Sprich uns am Empfang an.</p>
             </div>
 
             <p className="mt-9 font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] text-[#8C6A12]">Obendrauf: dein Willkommensgeschenk</p>

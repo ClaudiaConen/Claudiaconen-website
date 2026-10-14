@@ -18,7 +18,7 @@ const GOLD = 'bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]';
 const FELD =
   'w-full rounded-md border border-[#13233F]/25 bg-white px-4 py-4 font-inter text-[17px] text-[#13233F] placeholder:text-[#13233F]/45 focus:border-[#D4AF37] focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/40';
 const HAKEN = 'mt-1 h-5 w-5 flex-none accent-[#D4AF37]';
-const TEXTSTAND = '14.10.2026';
+const TEXTSTAND = '14.10.2026 v2';
 
 export default function PowerOfAiCheckin() {
   const [name, setName] = useState('');
@@ -75,6 +75,8 @@ export default function PowerOfAiCheckin() {
         noindex
       />
       <main className="mx-auto max-w-xl">
+        {/* Foto von THE POWER OF AI – Platzhalter (Claudia + Ronny), Claudia schickt ein Bild zu dritt (14.10.2026) */}
+        <img src="/powerofai/team.webp" alt="Gastgeber von THE POWER OF AI" width={900} height={558} className="mb-6 aspect-[900/558] w-full rounded-lg object-cover shadow-[0_18px_40px_rgba(0,0,0,.35)]" />
         <p className="flex items-center gap-3 font-montserrat text-xs font-bold uppercase tracking-[0.26em] text-[#E4BC5D]">
           <span aria-hidden="true" className="h-px w-8 bg-[#D4AF37]" />
           THE POWER OF AI · Köln · 18.10.
@@ -112,7 +114,7 @@ export default function PowerOfAiCheckin() {
               <em className="block font-cormorant font-semibold italic text-[#E4BC5D]">Kurz eintragen, dann geht’s los.</em>
             </h1>
             <p className="mt-4 font-inter text-[17px] leading-relaxed text-pearl-white/85">
-              Dein Geschenk: Das Foto- und Videomaterial vom Tag kommt nach dem Event per E-Mail zu dir.
+              Dein Geschenk: Nach dem Event bekommst du per E-Mail den Link zum Foto- und Videomaterial vom Tag.
             </p>
 
             <div className="mt-6 grid gap-3">
@@ -132,24 +134,38 @@ export default function PowerOfAiCheckin() {
               </label>
             </div>
 
-            <label className="mt-6 flex items-start gap-3 rounded-md border border-[#D4AF37]/60 bg-white/5 p-4 font-inter text-[15px] leading-relaxed text-pearl-white">
-              <input name="foto_video" type="checkbox" required checked={fotoVideo} onChange={(e) => setFotoVideo(e.target.checked)} className={HAKEN} />
-              <span>
-                <strong className="font-semibold">Pflicht: Foto und Video.</strong> Ich bin einverstanden, dass bei THE POWER OF AI am 18.10.2026 Fotos und Videos
-                gemacht werden, auf denen ich zu sehen und zu hören bin, und dass die Veranstalter (Ronny Barthel, Klaus Offermann, Claudia Conen)
-                sie auf ihren Webseiten und Social-Media-Kanälen veröffentlichen. Das Rohmaterial bekommen alle Teilnehmenden.
-                Widerruf jederzeit für die Zukunft an claudiaconen@umsatzstimme.de.
-              </span>
-            </label>
+            {/* Einwilligung: kurzer Satz mit dem Wesentlichen (Fotos/Videos + Social Media), Details zum Aufklappen (Claudia 14.10.2026 14:19) */}
+            <div className="mt-6 rounded-md border border-[#D4AF37]/60 bg-white/5 p-4">
+              <label className="flex items-start gap-3 font-inter text-[16px] leading-relaxed text-pearl-white">
+                <input name="foto_video" type="checkbox" required checked={fotoVideo} onChange={(e) => setFotoVideo(e.target.checked)} className={HAKEN} />
+                <span><strong className="font-semibold">Ich bin einverstanden</strong>, dass heute Fotos und Videos von mir gemacht und auf Social Media gepostet werden.</span>
+              </label>
+              <details className="group mt-2 pl-8">
+                <summary className="cursor-pointer list-none font-inter text-sm text-[#EBD197] underline decoration-[#D4AF37]/60 underline-offset-2 [&::-webkit-details-marker]:hidden">
+                  Was heißt das genau? <span aria-hidden="true" className="inline-block transition-transform group-open:rotate-180">▾</span>
+                </summary>
+                <p className="mt-2 font-inter text-sm leading-relaxed text-pearl-white/85">
+                  Bei THE POWER OF AI am 18.10.2026 wird fotografiert und gefilmt. Die Veranstalter und alle Teilnehmenden dürfen die Beiträge
+                  auf ihren Social-Media-Kanälen und Webseiten posten. Das Rohmaterial steht allen Teilnehmenden per Link zur Verfügung.
+                  Widerruf jederzeit für die Zukunft an claudiaconen@umsatzstimme.de.
+                </p>
+              </details>
+            </div>
 
-            <p className="mt-6 font-montserrat text-xs font-bold uppercase tracking-[0.2em] text-[#E4BC5D]">Freiwillig</p>
-            <label className="mt-2 flex items-start gap-3 font-inter text-[15px] leading-relaxed text-pearl-white/90">
-              <input name="whatsapp" type="checkbox" checked={whatsapp} onChange={(e) => setWhatsapp(e.target.checked)} className={HAKEN} />
-              <span>Ja, schick mir per WhatsApp kleine Impulse zur wirkungsvollen Kommunikation. Abmelden geht jederzeit.</span>
+            <p className="mt-7 font-montserrat text-xs font-bold uppercase tracking-[0.2em] text-[#E4BC5D]">Freiwillig dazu</p>
+            {/* 7-Tage-Challenge als einladende Karte mit 3D-Icon */}
+            <label className={`mt-3 flex cursor-pointer items-center gap-4 rounded-lg border p-4 transition-colors ${challenge ? 'border-[#D4AF37] bg-[#D4AF37]/15' : 'border-[#D4AF37]/40 bg-white/5'}`}>
+              <img src="/powerofai/icon-challenge.webp" alt="" width={64} height={64} className="h-16 w-16 flex-none object-contain" />
+              <span className="flex-1">
+                <span className="block font-montserrat text-[17px] font-bold leading-snug text-white">7-Tage-Video-Challenge</span>
+                <span className="block font-inter text-[15px] leading-snug text-pearl-white/85">Gratis · ab 26.10. · 1 Minute am Tag</span>
+                <span className="mt-1 block font-cormorant text-[19px] font-semibold italic text-[#E4BC5D]">Wie wirkst du auf andere?</span>
+              </span>
+              <input name="challenge" type="checkbox" checked={challenge} onChange={(e) => setChallenge(e.target.checked)} className="h-6 w-6 flex-none accent-[#D4AF37]" aria-label="Ja, ich will bei der 7-Tage-Video-Challenge dabei sein" />
             </label>
             <label className="mt-3 flex items-start gap-3 font-inter text-[15px] leading-relaxed text-pearl-white/90">
-              <input name="challenge" type="checkbox" checked={challenge} onChange={(e) => setChallenge(e.target.checked)} className={HAKEN} />
-              <span>Ja, ich will bei der kostenlosen 7-Tage-Video-Challenge dabei sein.</span>
+              <input name="whatsapp" type="checkbox" checked={whatsapp} onChange={(e) => setWhatsapp(e.target.checked)} className={HAKEN} />
+              <span>Schick mir per WhatsApp kleine Impulse zur wirkungsvollen Kommunikation. Abmelden geht jederzeit.</span>
             </label>
 
             <button

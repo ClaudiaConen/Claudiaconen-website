@@ -19,7 +19,7 @@ const GOLD = 'bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]';
 const FELD =
   'w-full rounded-md border border-[#13233F]/30 bg-white px-4 py-4 font-inter text-[17px] text-[#13233F] placeholder:text-[#13233F]/45 focus:border-[#D4AF37] focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/40';
 const HAKEN = 'mt-1 h-5 w-5 flex-none accent-[#D4AF37]';
-const TEXTSTAND = '14.10.2026 v3';
+const TEXTSTAND = '14.10.2026 v4';
 
 export default function PowerOfAiCheckin() {
   const [vorname, setVorname] = useState('');
@@ -149,8 +149,13 @@ export default function PowerOfAiCheckin() {
               </label>
             </div>
 
+            {/* Zweck des Events, steht direkt über der Einwilligung (Claudia 14.10.2026 14:46) */}
+            <p className="mt-7 font-montserrat text-[17px] font-bold leading-snug">
+              Es geht um Sichtbarkeit.{' '}
+              <span className="font-cormorant text-[21px] font-semibold italic text-[#8C6A12]">Deshalb wird hier gefilmt und fotografiert, das Event dient diesem Zweck.</span>
+            </p>
             {/* Einwilligung: kurzer Satz mit dem Wesentlichen (Fotos/Videos + Social Media), Details zum Aufklappen (Claudia 14.10.2026 14:19) */}
-            <div className="mt-6 rounded-md border-2 border-[#D4AF37] bg-white p-4">
+            <div className="mt-3 rounded-md border-2 border-[#D4AF37] bg-white p-4">
               <label className="flex items-start gap-3 font-inter text-[16px] leading-relaxed">
                 <input name="foto_video" type="checkbox" required checked={fotoVideo} onChange={(e) => setFotoVideo(e.target.checked)} className={HAKEN} />
                 <span><strong className="font-semibold">Ich bin einverstanden</strong>, dass heute Fotos und Videos von mir gemacht und veröffentlicht werden.</span>
@@ -166,6 +171,7 @@ export default function PowerOfAiCheckin() {
                   claudiaconen@umsatzstimme.de.
                 </p>
               </details>
+              <p className="mt-2 pl-8 font-inter text-sm text-[#13233F]/75">Ausnahme? Sprich uns am Empfang an.</p>
             </div>
 
             <p className="mt-9 font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] text-[#8C6A12]">Obendrauf: dein Willkommensgeschenk</p>

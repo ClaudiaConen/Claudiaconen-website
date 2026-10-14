@@ -245,6 +245,8 @@ function App() {
         <Route path="/stimme-trauer" element={<StimmeTrauer />} />
         <Route path="/stimme-voiceover" element={<StimmeVoiceover />} />
         <Route path="/challenge" element={<Challenge />} />
+        <Route path="/dabei" element={<PowerOfAiCheckin />} />
+        <Route path="/anmeldung" element={<PowerOfAiCheckin />} />
         <Route path="/powerofai" element={<PowerOfAiCheckin />} />
 
         <Route path="/wissensbibliothek" element={<Wissensbibliothek />} />

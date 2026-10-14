@@ -65,7 +65,7 @@ export default function PowerOfAiCheckin() {
         email: email.trim(),
         phone: telefon.trim() || null,
         message:
-          `POWER-OF-AI CHECK-IN – Köln, Motorworld, 18.10.2026 (claudiaconen.com/dabei)\n` +
+          `POWER-OF-AI CHECK-IN – Köln, Motorworld, 18.10.2026 (claudiaconen.com/anmeldung)\n` +
           `Einwilligung Foto/Video, Veröffentlichung inkl. Social Media und Werbung durch Veranstalter und Teilnehmende: ja (Textstand ${TEXTSTAND})\n` +
           `Firma: ${firma.trim() || '–'}\n` +
           `Willkommensgeschenk 7 Tage Video-Training ab 26.10. (kostenlos): ${challenge ? 'ja' : 'nein'}`,
@@ -97,8 +97,8 @@ export default function PowerOfAiCheckin() {
       <SEO
         title="Anmeldung – THE POWER OF AI Köln"
         description="Du bist dabei bei THE POWER OF AI am 18. Oktober in der Motorworld Köln. Kurz eintragen, dann geht’s los."
-        path="/dabei"
-        ogImage="https://claudiaconen.com/powerofai/vorschau.jpg"
+        path="/anmeldung"
+        ogImage="https://claudiaconen.com/powerofai/vorschau-anmeldung.jpg"
         noindex
       />
       {/* Kopf dunkel mit den laufenden Foto-Reihen wie auf /challenge (Claudia 14.10.2026 14:32: "bewegten Hintergrund

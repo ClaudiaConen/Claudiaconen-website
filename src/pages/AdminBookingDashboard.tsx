@@ -4,6 +4,7 @@ import { Calendar, Clock, Mail, Phone, User, Check, X, Filter, Search, Edit2 } f
 import { supabase } from '../lib/supabase';
 import { checkAdminAuth } from '../lib/adminAuth';
 import AdminNavigation from '../components/AdminNavigation';
+import TeamTerminKalender from '../components/admin/TeamTerminKalender';
 
 interface Booking {
   id: string;
@@ -158,6 +159,8 @@ export default function AdminBookingDashboard() {
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Buchungsverwaltung</h1>
           <p className="text-gray-600">Verwalten Sie alle Terminbuchungen</p>
         </div>
+
+        <TeamTerminKalender />
 
         <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-8">
           <div className="bg-white rounded-lg shadow p-6">

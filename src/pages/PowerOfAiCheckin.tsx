@@ -155,15 +155,16 @@ export default function PowerOfAiCheckin() {
       <main className="mx-auto max-w-xl px-4 py-8 sm:py-12">
         {zustand === 'fertig' ? (
           <section>
-            <p className="font-inter text-[17px] leading-relaxed">
-              Schön, dass du da bist. Viel Freude heute, gute Gespräche und neue Kontakte!
+            <p className="font-montserrat text-2xl font-extrabold leading-tight sm:text-3xl">Nutze den Tag für echte Kontakte!</p>
+            <p className="mt-2 font-inter text-[17px] leading-relaxed">
+              Sprich die Menschen an, die dich weiterbringen. Heute zählt jede Begegnung.
             </p>
 
             {/* An der Tuer nur EIN Gedanke (Claudia 15.10.2026): kein zweiter QR-Code, keine Gruppe.
                 Wer das Geschenk angehakt hat, bekommt die Challenge in den naechsten Tagen per E-Mail. */}
             {!eingetragen.challenge && (
               <div className="mt-6 rounded-[12px] border border-[#C9A961]/60 bg-white px-5 py-5 text-[#13233F] sm:px-7">
-                <p className="font-montserrat text-lg font-extrabold leading-tight">Sichere dir dein Geschenk</p>
+                <p className="flex items-center gap-3 font-montserrat text-lg font-extrabold leading-tight"><img src="/icons/geschenk.webp" alt="" width={256} height={256} className="h-12 w-12 flex-none" />Sichere dir dein Geschenk</p>
                 <p className="mt-1 font-inter text-[15px] leading-relaxed">Die 7-Tage-Video-Challenge mit Claudia Conen, kostenlos. Infos kommen per E-Mail.</p>
                 <button type="button" onClick={geschenkNachtragen} disabled={nachtrag === 'sendet'} className={`mt-4 inline-flex items-center rounded-full px-7 py-3.5 font-montserrat text-sm font-bold text-[#13233F] disabled:opacity-70 ${GOLD}`}>
                   {nachtrag === 'sendet' ? 'Wird gesichert …' : 'Ja, Geschenk sichern'}
@@ -172,11 +173,14 @@ export default function PowerOfAiCheckin() {
               </div>
             )}
             {eingetragen.challenge && (
-              <div className={`mt-6 rounded-[12px] px-5 py-6 text-[#13233F] sm:px-7 ${GOLD}`}>
-                <p className="font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">Dein Geschenk ist gesichert.</p>
-                <p className="mt-2 font-inter text-[15px] leading-relaxed sm:text-base">
-                  Die 7-Tage-Video-Challenge mit Claudia Conen. Alles Weitere bekommst du in den nächsten Tagen per E-Mail. Du musst jetzt nichts tun.
-                </p>
+              <div className={`mt-6 grid grid-cols-[auto_minmax(0,1fr)] items-center gap-4 rounded-[12px] px-5 py-6 text-[#13233F] sm:px-7 ${GOLD}`}>
+                <img src="/icons/geschenk.webp" alt="" width={256} height={256} className="h-20 w-20 flex-none drop-shadow-[0_10px_14px_rgba(19,35,63,0.35)] sm:h-24 sm:w-24" />
+                <div className="min-w-0">
+                  <p className="font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">Dein Geschenk ist gesichert.</p>
+                  <p className="mt-2 font-inter text-[15px] leading-relaxed sm:text-base">
+                    Die 7-Tage-Video-Challenge mit Claudia Conen. Das bekommst du in den nächsten Tagen per E-Mail. Du musst jetzt nichts tun.
+                  </p>
+                </div>
               </div>
             )}
 

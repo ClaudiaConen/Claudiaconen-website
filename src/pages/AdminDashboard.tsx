@@ -82,8 +82,8 @@ export default function AdminDashboard() {
         supabase.from('coaching_inquiries').select('id', { count: 'exact', head: true }),
         // Kontaktanfragen OHNE die Challenge-Anmeldungen (die haben "7-TAGE-CHALLENGE" in message)
         supabase.from('contact_inquiries').select('id', { count: 'exact', head: true }).not('message', 'ilike', '%CHALLENGE%').not('message', 'ilike', '%POWER-OF-AI CHECK-IN%'),
-        // Challenge-Anmeldungen (eigene Kategorie)
-        supabaseCms.from('contact_inquiries').select('id', { count: 'exact', head: true }).ilike('message', '%CHALLENGE%'),
+        // Challenge-Anmeldungen (eigene Kategorie) - inkl. Event-Check-ins Koeln mit Haekchen fuer die Challenge (Claudia 15.10.2026)
+        supabaseCms.from('contact_inquiries').select('id', { count: 'exact', head: true }).or('message.ilike.*CHALLENGE*,message.ilike.*Video-Training ab 26.10.*: ja*'),
         // Check-in THE POWER OF AI Köln (Tür-Formular /powerofai)
         supabaseCms.from('contact_inquiries').select('id', { count: 'exact', head: true }).ilike('message', '%POWER-OF-AI CHECK-IN%'),
         supabase.from('advent_registrations').select('id', { count: 'exact', head: true }),
@@ -208,7 +208,7 @@ export default function AdminDashboard() {
   };
   const emailSources: EmailSource[] = [
     { key: 'kiManagerBookings', label: 'KI-Manager Anmeldungen', table: 'ki_manager_bookings', count: emailStats.kiManagerBookings, color: 'bg-orange-100 text-orange-800', emailField: 'email', nameField: 'vorname' },
-    { key: 'challenge', label: 'Challenge-Anmeldungen', table: 'contact_inquiries', count: emailStats.challenge, color: 'bg-fuchsia-100 text-fuchsia-800', emailField: 'email', nameField: 'name', client: supabaseCms, filter: (q: any) => q.ilike('message', '%CHALLENGE%') },
+    { key: 'challenge', label: 'Challenge-Anmeldungen', table: 'contact_inquiries', count: emailStats.challenge, color: 'bg-fuchsia-100 text-fuchsia-800', emailField: 'email', nameField: 'name', client: supabaseCms, filter: (q: any) => q.or('message.ilike.*CHALLENGE*,message.ilike.*Video-Training ab 26.10.*: ja*') },
     { key: 'powerofai', label: 'EventKöln – THE POWER OF AI (Check-in)', table: 'contact_inquiries', count: emailStats.powerofai, color: 'bg-amber-100 text-amber-800', emailField: 'email', nameField: 'name', client: supabaseCms, filter: (q: any) => q.ilike('message', '%POWER-OF-AI CHECK-IN%') },
     { key: 'adventRegistrations', label: 'Adventskalender Registrierungen', table: 'advent_registrations', count: emailStats.adventRegistrations, color: 'bg-red-100 text-red-800', emailField: 'email', nameField: 'first_name' },
     { key: 'checklistDownloads', label: 'Checklisten Downloads', table: 'checklist_downloads', count: emailStats.checklistDownloads, color: 'bg-blue-100 text-blue-800', emailField: 'email', nameField: 'article_title' },

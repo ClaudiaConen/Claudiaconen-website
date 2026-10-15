@@ -418,19 +418,30 @@ export default function AdminDashboard() {
                     ) : (
                       <div className="space-y-2 max-h-64 overflow-y-auto">
                         {sourceData[source.key].map((item: any, idx: number) => (
-                          <div key={idx} className="flex items-center justify-between bg-white rounded-lg px-3 py-2 text-sm">
-                            <div className="flex items-center gap-3 min-w-0">
-                              <Mail className="w-4 h-4 text-gray-400 flex-shrink-0" />
-                              <span className="text-gray-900 truncate">{item[source.emailField]}</span>
-                              {item[source.nameField] && (
-                                <span className="text-gray-500 truncate hidden sm:inline">
-                                  ({item[source.nameField]}{item.last_name ? ` ${item.last_name}` : ''}{item.name && source.nameField !== 'name' ? ` ${item.name}` : ''})
-                                </span>
-                              )}
+                          <div key={idx} className="bg-white rounded-lg px-3 py-2 text-sm">
+                            <div className="flex items-start justify-between gap-2">
+                              <div className="flex items-center gap-2 min-w-0">
+                                <Mail className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                                <span className="text-gray-900 font-medium break-all">{item[source.emailField]}</span>
+                              </div>
+                              <span className="text-xs text-gray-400 flex-shrink-0 ml-2 whitespace-nowrap">
+                                {item.created_at ? new Date(item.created_at).toLocaleDateString('de-DE') : ''}
+                              </span>
                             </div>
-                            <span className="text-xs text-gray-400 flex-shrink-0 ml-2">
-                              {item.created_at ? new Date(item.created_at).toLocaleDateString('de-DE') : ''}
-                            </span>
+                            {item[source.nameField] && (
+                              <div className="mt-1 pl-6 text-gray-700">
+                                {item[source.nameField]}{item.last_name ? ` ${item.last_name}` : ''}{item.name && source.nameField !== 'name' ? ` ${item.name}` : ''}
+                              </div>
+                            )}
+                            {item.phone && (
+                              <div className="mt-0.5 pl-6 text-gray-600">Telefon: {item.phone}</div>
+                            )}
+                            {item.company && (
+                              <div className="mt-0.5 pl-6 text-gray-600">Firma: {item.company}</div>
+                            )}
+                            {item.message && (
+                              <div className="mt-1 pl-6 whitespace-pre-line text-[13px] leading-relaxed text-gray-600">{item.message}</div>
+                            )}
                           </div>
                         ))}
                         {sourceData[source.key].length === 20 && (

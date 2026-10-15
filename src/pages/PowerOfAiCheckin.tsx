@@ -83,6 +83,27 @@ export default function PowerOfAiCheckin() {
     setZustand('fertig');
   }
 
+  // Geschenk nachtraeglich sichern, falls das Haekchen im Formular vergessen wurde (Claudia 15.10.2026).
+  // Eigene kurze Zeile in derselben Liste; die Admin-Challenge-Liste findet sie ueber "...: ja".
+  const [nachtrag, setNachtrag] = useState<'offen' | 'sendet' | 'fertig' | 'fehler'>('offen');
+  async function geschenkNachtragen() {
+    if (nachtrag === 'sendet' || nachtrag === 'fertig') return;
+    setNachtrag('sendet');
+    const { error } = await supabaseCms.from('contact_inquiries').insert([
+      {
+        name: `${vorname.trim()} ${name.trim()}`.trim(),
+        email: email.trim(),
+        phone: telefon.trim() || null,
+        message:
+          `POWER-OF-AI CHECK-IN – Köln, Motorworld, 18.10.2026 (claudiaconen.com/anmeldung) – NACHTRAG\n` +
+          `Willkommensgeschenk 7 Tage Video-Training ab 26.10. (kostenlos): ja (auf der Danke-Seite nachgetragen)`,
+      },
+    ]);
+    if (error) { console.error('Nachtrag fehlgeschlagen:', error); setNachtrag('fehler'); return; }
+    setNachtrag('fertig');
+    setEingetragen((alt) => ({ ...alt, challenge: true }));
+  }
+
   function naechstePerson() {
     setVorname('');
     setName('');
@@ -91,6 +112,7 @@ export default function PowerOfAiCheckin() {
     setTelefon('');
     setFotoVideo(false);
     setChallenge(false);
+    setNachtrag('offen');
     setZustand('offen');
     window.scrollTo({ top: 0 });
   }
@@ -139,6 +161,16 @@ export default function PowerOfAiCheckin() {
 
             {/* An der Tuer nur EIN Gedanke (Claudia 15.10.2026): kein zweiter QR-Code, keine Gruppe.
                 Wer das Geschenk angehakt hat, bekommt die Challenge in den naechsten Tagen per E-Mail. */}
+            {!eingetragen.challenge && (
+              <div className="mt-6 rounded-[12px] border border-[#C9A961]/60 bg-white px-5 py-5 text-[#13233F] sm:px-7">
+                <p className="font-montserrat text-lg font-extrabold leading-tight">Sichere dir dein Geschenk</p>
+                <p className="mt-1 font-inter text-[15px] leading-relaxed">Die 7-Tage-Video-Challenge mit Claudia Conen, kostenlos. Infos kommen per E-Mail.</p>
+                <button type="button" onClick={geschenkNachtragen} disabled={nachtrag === 'sendet'} className={`mt-4 inline-flex items-center rounded-full px-7 py-3.5 font-montserrat text-sm font-bold text-[#13233F] disabled:opacity-70 ${GOLD}`}>
+                  {nachtrag === 'sendet' ? 'Wird gesichert …' : 'Ja, Geschenk sichern'}
+                </button>
+                {nachtrag === 'fehler' && <p className="mt-2 font-inter text-sm text-red-700">Das hat nicht geklappt. Bitte noch einmal tippen.</p>}
+              </div>
+            )}
             {eingetragen.challenge && (
               <div className={`mt-6 rounded-[12px] px-5 py-6 text-[#13233F] sm:px-7 ${GOLD}`}>
                 <p className="font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">Dein Geschenk ist gesichert.</p>

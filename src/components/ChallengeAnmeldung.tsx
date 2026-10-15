@@ -23,7 +23,7 @@ const TELEGRAM_LINK = 'https://t.me/+0ePKVbpBySlmZWZi';
 const GOLD = 'bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]';
 
 const FELD =
-  'w-full rounded-md border border-midnight-blue/25 bg-white px-4 py-3 font-inter text-[15px] text-midnight-blue placeholder:text-midnight-blue/45 focus:border-[#D4AF37] focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/40';
+  'w-full rounded-md border border-midnight-blue/25 bg-white px-4 py-3 font-inter text-[15px] text-midnight-blue placeholder:text-midnight-blue/45 focus:border-[#C9A961] focus:outline-none focus:ring-2 focus:ring-[#C9A961]/40';
 
 /** Schluessel im Browser: nach dem Eintrag duerfen die sieben Schritte aufgeklappt werden (Claudias Idee 22.09.2026 12:28 UTC). */
 export const EINGETRAGEN_SCHLUESSEL = 'cc-challenge-eingetragen';
@@ -59,7 +59,7 @@ export default function ChallengeAnmeldung({ start, onEingetragen }: { start: st
 
   if (zustand === 'fertig') {
     return (
-      <div id="anmelden" className={`mt-3 grid items-center gap-5 rounded-[10px] px-5 py-6 text-midnight-blue sm:grid-cols-[auto_minmax(0,1fr)] sm:px-7 ${GOLD}`}>
+      <div id="anmelden" className={`mt-3 grid items-center gap-5 rounded-[10px] border border-[#C9A961]/60 bg-[linear-gradient(135deg,#FCF6EC,#F7E7CE)] px-5 py-6 text-midnight-blue sm:grid-cols-[auto_minmax(0,1fr)] sm:px-7`}>
         <div className="flex gap-3">
           <figure className="m-0 text-center">
             <img src="/challenge/qr-whatsapp.png" alt="QR-Code: Einladung in die WhatsApp-Gruppe der Challenge (empfohlen)" width={328} height={328} className="h-28 w-28 rounded-md bg-white" />
@@ -89,7 +89,7 @@ export default function ChallengeAnmeldung({ start, onEingetragen }: { start: st
   }
 
   return (
-    <form id="anmelden" onSubmit={absenden} className="mt-3 rounded-[10px] border border-[#D4AF37]/55 bg-[#13233F] px-5 py-6 text-pearl-white sm:px-7 sm:py-7" aria-labelledby="anmelden-titel">
+    <form id="anmelden" onSubmit={absenden} className="mt-3 rounded-[10px] border border-[#C9A961]/55 bg-[#13233F] px-5 py-6 text-pearl-white sm:px-7 sm:py-7" aria-labelledby="anmelden-titel">
       <p className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#EBD197]">Anmeldung · kostenfrei</p>
       <h3 id="anmelden-titel" className="mt-2 font-montserrat text-xl font-extrabold leading-tight text-white sm:text-2xl">
         Ich bin dabei.
@@ -115,10 +115,10 @@ export default function ChallengeAnmeldung({ start, onEingetragen }: { start: st
           Hinweis. Werbung bleibt ein eigenes, freiwilliges Haekchen (Art. 7 Abs. 2 DSGVO, § 7 UWG; nie buendeln, OLG Muenchen 29 U 599/24). */}
       <p className="mt-4 font-inter text-sm leading-relaxed text-pearl-white/85">
         Mit Klick auf „Eintragen“ meldest du dich zur Challenge an. Deine Angaben werden nur dafür gespeichert. Die Challenge läuft in einer WhatsApp-Gruppe (Meta) oder, wenn du magst, in einer Telegram-Gruppe: Dort sehen die anderen Teilnehmer deinen Namen, deine Nummer und deine Videos. Widerruf jederzeit an claudiaconen@umsatzstimme.de.{' '}
-          <Link to="/datenschutz" className="underline decoration-[#D4AF37]/60 underline-offset-2 hover:decoration-[#F7E7CE]">Datenschutz</Link>
+          <Link to="/datenschutz" className="underline decoration-[#C9A961]/60 underline-offset-2 hover:decoration-[#F7E7CE]">Datenschutz</Link>
       </p>
       <label className="mt-2 flex items-start gap-3 font-inter text-sm leading-relaxed text-pearl-white/85">
-        <input id="challenge-angebote" name="angebote" type="checkbox" checked={angebote} onChange={(e) => setAngebote(e.target.checked)} className="mt-1 h-4 w-4 flex-none accent-[#D4AF37]" />
+        <input id="challenge-angebote" name="angebote" type="checkbox" checked={angebote} onChange={(e) => setAngebote(e.target.checked)} className="mt-1 h-4 w-4 flex-none accent-[#C9A961]" />
         <span>Ja, schick mir nach der Challenge weitere Gratis-Aktionen und Angebote per E-Mail. Abmelden geht jederzeit mit einem Klick.</span>
       </label>
       <div className="mt-5 flex flex-wrap items-center gap-4">
@@ -128,12 +128,12 @@ export default function ChallengeAnmeldung({ start, onEingetragen }: { start: st
         {/* Claudia, 22.09.2026 16:19 UTC: "kleinen Button 'Vereinbarung widerrufen', der sich aufklappt - bedenke: was du
             selbst ins Netz gibst, kann ich nicht zurueckholen". Steht im Quelltext, nur per CSS zu. */}
         <details className="group w-full sm:w-auto">
-          <summary className="inline-flex cursor-pointer list-none items-center gap-2 rounded-full border border-[#D4AF37]/60 px-4 py-2 font-montserrat text-xs font-bold uppercase tracking-[0.12em] text-[#EBD197] transition-colors hover:border-[#F7E7CE] hover:text-[#F7E7CE] [&::-webkit-details-marker]:hidden">
+          <summary className="inline-flex cursor-pointer list-none items-center gap-2 rounded-full border border-[#C9A961]/60 px-4 py-2 font-montserrat text-xs font-bold uppercase tracking-[0.12em] text-[#EBD197] transition-colors hover:border-[#F7E7CE] hover:text-[#F7E7CE] [&::-webkit-details-marker]:hidden">
             Vereinbarung widerrufen <span aria-hidden="true" className="transition-transform group-open:rotate-180">▾</span>
           </summary>
           <p className="mt-3 max-w-xl font-inter text-sm leading-relaxed text-pearl-white/90">
             Jederzeit und ohne Begründung: eine kurze Nachricht an{' '}
-            <a href="mailto:claudiaconen@umsatzstimme.de?subject=Widerruf%20Challenge" className="underline decoration-[#D4AF37]/60 underline-offset-2 hover:decoration-[#F7E7CE]">claudiaconen@umsatzstimme.de</a>
+            <a href="mailto:claudiaconen@umsatzstimme.de?subject=Widerruf%20Challenge" className="underline decoration-[#C9A961]/60 underline-offset-2 hover:decoration-[#F7E7CE]">claudiaconen@umsatzstimme.de</a>
             {' '}– ich nehme dich aus der Gruppe und lösche deine Angaben. Bedenke: Was du selbst ins Netz gibst – deine Videos, deine Nummer in der Gruppe –, kann ich nicht zurückholen.
           </p>
         </details>

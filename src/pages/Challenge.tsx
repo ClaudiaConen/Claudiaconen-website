@@ -74,7 +74,9 @@ const MENSCH_KANN = [
 
 
 const GOLD = 'bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]';
-const KACHEL = 'rounded-[10px] border border-[#D4AF37]/55 transition-[border-color,box-shadow] duration-200 hover:border-[#EBD197] hover:shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)]';
+const KACHEL = 'cc-glanz-kachel rounded-[10px] border border-[#13233F]/[0.13] transition-[border-color,box-shadow] duration-200 hover:border-[#C9A961] hover:shadow-[0_18px_40px_-20px_rgba(19,35,63,0.35)]';
+/** Ruhige Champagner-Flaeche statt kraeftigem Gold fuer grosse Bloecke (Farben der neuen Seiten, Claudia 15.10.2026). */
+const FLAECHE = 'bg-[linear-gradient(135deg,#FCF6EC,#F7E7CE)] border border-[#C9A961]/60';
 /** Claudias Idee vom 22.09.2026, 02:13 UTC: vom Event per QR in eine Video-Challenge - sieben Tage,
  *  sieben Schritte, 60 Sekunden am Tag. Kanal: ihre WhatsApp-Gruppe "Video-Challenge" (Einladungslink
  *  von ihr am 22.09.2026, 02:20 UTC). Aendert sie den Link, hier tauschen. */
@@ -280,7 +282,7 @@ function Schiene() {
 /** Unter den Tagen: kein direkter Weg in die Gruppe, nur zurueck zum Eintragen (Claudia, 22.09.2026). */
 function EintragBlock() {
   return (
-    <div className={`mt-3 grid items-center gap-5 rounded-[10px] px-5 py-5 text-midnight-blue sm:grid-cols-[minmax(0,1fr)_auto] sm:px-7 ${GOLD}`}>
+    <div className={`mt-3 grid items-center gap-5 rounded-[10px] px-5 py-5 text-midnight-blue sm:grid-cols-[minmax(0,1fr)_auto] sm:px-7 ${FLAECHE}`}>
       <div className="min-w-0">
         <p className="font-montserrat text-lg font-extrabold leading-tight sm:text-xl">Noch nicht eingetragen?</p>
         <p className="mt-1 font-inter text-[15px] leading-relaxed">Erst eintragen, dann in die Gruppe – so weiß ich, wer dabei ist. Kostenfrei.</p>
@@ -298,7 +300,7 @@ function Schluessel() {
     <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" className="cc-puls flex-none drop-shadow-[0_1px_2px_rgba(0,0,0,0.25)]">
       <defs>
         <linearGradient id="cc-schluessel-gold" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#C9A961" /><stop offset=".48" stopColor="#F7E7CE" /><stop offset="1" stopColor="#D4AF37" />
+          <stop offset="0" stopColor="#C9A961" /><stop offset=".48" stopColor="#F7E7CE" /><stop offset="1" stopColor="#C9A961" />
         </linearGradient>
       </defs>
       <path fill="url(#cc-schluessel-gold)" d="M14.5 2a7.5 7.5 0 0 0-7.2 9.6L2 16.9V22h5.1v-2.6h2.6v-2.6h2.6l1.3-1.3A7.5 7.5 0 1 0 14.5 2Zm2 4.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4Z" />
@@ -314,7 +316,7 @@ function TagInhalt({ t }: { t: Tag }) {
       <p className="mt-3">{t.inhalt}</p>
       <p className="mt-3"><b className="font-montserrat font-extrabold">Deine Aufgabe: </b>{t.aufgabe}</p>
       {t.zusatz && <p className="mt-2 text-midnight-blue/85">{t.zusatz}</p>}
-      <p className="mt-3 border-l-4 border-[#D4AF37] bg-pearl-white px-4 py-2 font-montserrat text-sm font-bold">Übungssatz: „{UEBUNGSSATZ}"</p>
+      <p className="mt-3 border-l-4 border-[#C9A961] bg-pearl-white px-4 py-2 font-montserrat text-sm font-bold">Übungssatz: „{UEBUNGSSATZ}"</p>
       <p className="mt-3"><b className="font-montserrat font-extrabold">Reflexion: </b>{t.reflexion}</p>
       <p className="mt-3 text-[14px] text-midnight-blue/85">Wenn du magst, teile deinen Versuch in der Gruppe. Du bekommst persönliches Feedback von mir – und wir können miteinander und aneinander wachsen. Wer still mitübt, gehört genauso dazu.</p>
     </div>
@@ -383,7 +385,7 @@ function Kopfbild({ datei, alt, quer }: { datei: string; alt: string; quer?: boo
 const KOPF = 'grid items-end gap-6 sm:grid-cols-[minmax(0,1fr)_auto] sm:gap-10';
 
 function Haken() {
-  return <span aria-hidden="true" className="mt-2 h-2.5 w-2.5 flex-none rotate-[-45deg] border-b-2 border-r-2 border-[#D4AF37]" />;
+  return <span aria-hidden="true" className="mt-2 h-2.5 w-2.5 flex-none rotate-[-45deg] border-b-2 border-r-2 border-[#C9A961]" />;
 }
 
 export default function Challenge() {
@@ -439,7 +441,7 @@ export default function Challenge() {
   };
 
   return (
-    <div className="min-h-screen bg-pearl-white">
+    <div className="cc-2027 min-h-screen bg-pearl-white">
       <SEO
         title="7 Tage für deine Wirkungskraft – die Video-Challenge"
         description="Sieben Tage, jeden Tag eine Anleitung, eine Minute Video mit dem Handy, Feedback von Claudia Conen. Kostenfrei, in einer WhatsApp-Gruppe – mit den sieben Schritten, dem Workbook und dem Weg danach."
@@ -457,7 +459,7 @@ export default function Challenge() {
           <div className="mb-6 text-pearl-white/75">
             <Brotkrumen krumen={[{ name: '7 Tage für deine Wirkungskraft' }]} />
           </div>
-          <div className="max-w-3xl rounded-[12px] border border-[#D4AF37]/45 bg-[rgba(10,22,40,0.86)] px-6 py-8 text-pearl-white shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)] sm:px-10 sm:py-11" style={{ borderTopColor: '#F7E7CE' }}>
+          <div className="max-w-3xl rounded-[12px] border border-[#C9A961]/45 bg-[rgba(19,35,63,0.86)] px-6 py-8 text-pearl-white shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)] sm:px-10 sm:py-11" style={{ borderTopColor: '#F7E7CE' }}>
             {/* Claudia, 22.09.2026 11:16 UTC: Kicker groesser; "Sieben Tage" in derselben Schrift wie "fuer deine
                 Wirkung" (eine Zeile Gold-Schimmer, nicht zwei Schriften); weniger weisser Text; Punkte, was die
                 Challenge bringt; das Datum "damit es direkt auffaellt". */}
@@ -488,7 +490,7 @@ export default function Challenge() {
               <a href="#anmelden" className={`inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue transition-transform hover:-translate-y-px ${GOLD}`}>
                 Nutze die Video-Challenge →
               </a>
-              <a href="#tage" className="font-montserrat text-sm font-semibold text-[#EBD197] underline decoration-[#D4AF37]/50 underline-offset-4 hover:decoration-[#F7E7CE]">
+              <a href="#tage" className="font-montserrat text-sm font-semibold text-[#EBD197] underline decoration-[#C9A961]/50 underline-offset-4 hover:decoration-[#F7E7CE]">
                 Die 7 Tage ansehen ↓
               </a>
             </div>
@@ -527,7 +529,7 @@ export default function Challenge() {
               <Kicker text="Das Programm" hell />
               <h2 id="programm-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">
                 Sieben Schritte. Ein Ergebnis:
-                <span className="mt-1 block underline decoration-[#D4AF37] decoration-[4px] underline-offset-[6px]">Du bleibst im Kopf.</span>
+                <span className="mt-1 block underline decoration-[#C9A961] decoration-[4px] underline-offset-[6px]">Du bleibst im Kopf.</span>
               </h2>
               <p className="mt-4 max-w-2xl font-inter text-lg text-midnight-blue">
                 Jeden Tag ein Audio-Impuls von mir mit einem Gedanken, in dem du dich wiedererkennst, und einer konkreten Aufgabe – 30 Minuten am Tag, einschließlich Übung, Aufnahme und Reflexion. Wer seine Aufnahme in der Gruppe teilt, bekommt persönliches Feedback von mir – und alle lernen mit. Die Inhalte öffnen sich in der Challenge-Woche, jeden Tag einer.
@@ -544,13 +546,13 @@ export default function Challenge() {
                 <li
                   key={s.titel}
                   style={{ ['--i' as string]: i }}
-                  className={`cc-stufe p-6 hover:-translate-y-0.5 ${KACHEL} ${letzter ? `${GOLD} border-transparent text-midnight-blue sm:col-span-2 lg:col-span-3 lg:flex lg:items-start lg:gap-8` : 'bg-pearl-white text-midnight-blue'}`}
+                  className={`cc-stufe p-6 hover:-translate-y-0.5 ${KACHEL} ${letzter ? `${FLAECHE} text-midnight-blue sm:col-span-2 lg:col-span-3 lg:flex lg:items-start lg:gap-8` : 'bg-pearl-white text-midnight-blue'}`}
                 >
                   {/* 3-D-Icons nach den Flyer-Piktogrammen (Claudias Impuls 22.09.2026 11:48 UTC), erzeugt mit
                       skripte/schritt_icons.py ueber ihren Gemini-Schluessel. */}
                   <div className="flex flex-none items-center gap-4">
                     <img src={`/icons/${s.icon}.webp`} alt="" width={256} height={256} loading="lazy" decoding="async" className={`flex-none drop-shadow-[0_8px_12px_rgba(10,22,40,0.25)] ${letzter ? 'h-16 w-16 lg:h-24 lg:w-24' : 'h-16 w-16'}`} />
-                    <span aria-hidden="true" className={`font-montserrat text-3xl font-black ${letzter ? 'text-midnight-blue/40' : 'text-[#D4AF37]'}`}>{String(i + 1).padStart(2, '0')}</span>
+                    <span aria-hidden="true" className={`font-montserrat text-3xl font-black ${letzter ? 'text-midnight-blue/40' : 'text-[#C9A961]'}`}>{String(i + 1).padStart(2, '0')}</span>
                   </div>
                   <div className="min-w-0 flex-1">
                     {letzter && <p className="mt-3 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-midnight-blue/80 lg:mt-0">Das Finale · Dein Kopf. Ihr Gefühl.</p>}
@@ -558,7 +560,7 @@ export default function Challenge() {
                     <p className="mt-1 font-montserrat text-[11px] font-bold uppercase tracking-[0.14em] text-midnight-blue/70">{s.schwerpunkt}</p>
                     {frei[i] ? (
                       <details className="group mt-2">
-                        <summary className="cursor-pointer list-none font-montserrat text-sm font-bold underline decoration-[#D4AF37] underline-offset-4 [&::-webkit-details-marker]:hidden">
+                        <summary className="cursor-pointer list-none font-montserrat text-sm font-bold underline decoration-[#C9A961] underline-offset-4 [&::-webkit-details-marker]:hidden">
                           <span className="group-open:hidden">Aufklappen ▾</span><span className="hidden group-open:inline">Zuklappen ▴</span>
                         </summary>
                         <div className="mt-2.5"><TagInhalt t={s} /></div>
@@ -594,7 +596,7 @@ export default function Challenge() {
               </li>
             ))}
           </ol>
-          <p className="mt-5 max-w-3xl border-l-4 border-[#D4AF37] bg-white px-5 py-3 font-inter text-[15px] leading-relaxed text-midnight-blue">{ABLAUF_HINWEIS}</p>
+          <p className="mt-5 max-w-3xl border-l-4 border-[#C9A961] bg-white px-5 py-3 font-inter text-[15px] leading-relaxed text-midnight-blue">{ABLAUF_HINWEIS}</p>
         </div>
       </Abschnitt>
 
@@ -609,21 +611,21 @@ export default function Challenge() {
           <Kicker text="Dein Wegweiser" hell />
           <h2 id="tage-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
             Sieben Tage. Jeden Tag eine Anleitung zum Aufklappen –
-            <span className="mt-1 block underline decoration-[#D4AF37] decoration-[4px] underline-offset-[6px]">jeden Tag 30 Minuten für deine Wirkung.</span>
+            <span className="mt-1 block underline decoration-[#C9A961] decoration-[4px] underline-offset-[6px]">jeden Tag 30 Minuten für deine Wirkung.</span>
           </h2>
           <p className="mt-4 max-w-3xl font-inter text-lg leading-relaxed text-midnight-blue">
             Warum hören Menschen dir gerne zu? „Ich mag meine Stimme nicht." Story, Elevator Pitch, Keynote, Miteinander, jeden Tag telefonieren, Kaltakquise, Kundengewinnung – all das und noch viel mehr gehört dazu.
           </p>
-          <p className="mt-5 max-w-3xl border-l-4 border-[#D4AF37] bg-white px-5 py-4 font-cormorant text-2xl italic leading-snug text-midnight-blue sm:text-3xl">
+          <p className="mt-5 max-w-3xl border-l-4 border-[#C9A961] bg-white px-5 py-4 font-cormorant text-2xl italic leading-snug text-midnight-blue sm:text-3xl">
             „{UEBUNGSSATZ}"
             <span className="mt-1 block font-montserrat text-[11px] font-extrabold not-italic uppercase tracking-[0.16em] text-midnight-blue/70">Unser Satz – an allen sieben Tagen</span>
           </p>
-          <div className={`mt-7 flex flex-wrap items-center justify-between gap-x-6 gap-y-1 rounded-md px-5 py-2.5 font-montserrat text-[13px] font-extrabold uppercase tracking-[0.12em] text-midnight-blue ${GOLD}`}>
+          <div className={`mt-7 flex flex-wrap items-center justify-between gap-x-6 gap-y-1 rounded-md px-5 py-2.5 font-montserrat text-[13px] font-extrabold uppercase tracking-[0.12em] text-midnight-blue ${FLAECHE}`}>
             <span>Auftakt live im Zoom · Montag, 26. Oktober 2026 · 19:00 Uhr</span>
             <span>Abschluss · Montag, 2. November 2026 · 19:00–20:00 Uhr · Zoom freiwillig</span>
           </div>
 
-          <details className={`group mt-8 text-midnight-blue ${GOLD} ${KACHEL} border-transparent shadow-[0_18px_40px_-18px_rgba(212,175,55,0.7)]`}>
+          <details className={`group mt-8 text-midnight-blue ${FLAECHE} ${KACHEL} shadow-[0_18px_40px_-24px_rgba(19,35,63,0.35)]`}>
             <summary className="grid cursor-pointer list-none gap-x-6 gap-y-2 px-5 py-5 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:items-center sm:px-7 sm:py-6 [&::-webkit-details-marker]:hidden">
               <span className="self-start rounded-md bg-midnight-blue px-2.5 py-2 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-[#EBD197]">Tipp 1 · jetzt schon</span>
               <span className="min-w-0">
@@ -652,7 +654,7 @@ export default function Challenge() {
 
           {/* Kleiner Tipp am Morgen - Claudias Aufwachuebung (ihr Wortlaut vom 22.09.2026 09:19 UTC), vor den sieben
               Tagen zum Aufklappen; die Tage selbst bleiben Geheimnis (11:24 UTC). */}
-          <details className={`group mt-3 text-midnight-blue ${GOLD} ${KACHEL} border-transparent shadow-[0_18px_40px_-18px_rgba(212,175,55,0.7)]`}>
+          <details className={`group mt-3 text-midnight-blue ${FLAECHE} ${KACHEL} shadow-[0_18px_40px_-24px_rgba(19,35,63,0.35)]`}>
             <summary className="grid cursor-pointer list-none gap-x-6 gap-y-2 px-5 py-5 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:items-center sm:px-7 sm:py-6 [&::-webkit-details-marker]:hidden">
               <span className="self-start rounded-md bg-midnight-blue px-2.5 py-2 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-[#EBD197]">Tipp 2 · am Morgen</span>
               <span className="min-w-0">
@@ -686,7 +688,7 @@ export default function Challenge() {
               return (
                 <li key={t.titel} style={{ ['--i' as string]: i }} className="cc-stufe">
                   {!frei[i] ? (
-                    <div className={`flex items-center gap-4 bg-white/70 px-4 py-3 text-midnight-blue sm:px-6 ${KACHEL} border-[#D4AF37]/35`}>
+                    <div className={`flex items-center gap-4 bg-white/70 px-4 py-3 text-midnight-blue sm:px-6 ${KACHEL} border-[#C9A961]/35`}>
                       <span className="cc-puls rounded-md bg-midnight-blue/70 px-2.5 py-1.5 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-pearl-white">Tag {i + 1}</span>
                       <span className="min-w-0 flex-1 font-montserrat text-sm font-bold text-midnight-blue/80">{KURZ.format(freischaltung(heute, i))}</span>
                       <Schluessel />
@@ -701,7 +703,7 @@ export default function Challenge() {
                       <span className="hidden font-montserrat text-xs font-bold text-midnight-blue/70 sm:inline"><span className="group-open:hidden">Aufklappen</span><span className="hidden group-open:inline">Zuklappen</span></span>
                       <Schluessel />
                     </summary>
-                    <div className="border-t border-[#D4AF37]/40 px-5 pb-5 pt-4 sm:px-7 sm:pb-6">
+                    <div className="border-t border-[#C9A961]/40 px-5 pb-5 pt-4 sm:px-7 sm:pb-6">
                       <h3 className="font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">{t.titel}</h3>
                       <p className="mt-1 font-montserrat text-[11px] font-bold uppercase tracking-[0.14em] text-midnight-blue/70">{t.schwerpunkt}</p>
                       <div className="mt-3"><TagInhalt t={t} /></div>
@@ -733,18 +735,18 @@ export default function Challenge() {
                 <span className={`rounded-md px-2.5 py-2 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-midnight-blue ${GOLD}`}>Lernbox</span>
                 <span className="font-montserrat text-lg font-extrabold leading-tight sm:text-2xl">Sieben Fragen. Sieben Antworten.</span>
               </span>
-              <span className="flex items-center gap-2 font-montserrat text-sm font-bold underline decoration-[#D4AF37] underline-offset-4">
+              <span className="flex items-center gap-2 font-montserrat text-sm font-bold underline decoration-[#C9A961] underline-offset-4">
                 <span className="group-open:hidden">Aufklappen</span>
                 <span className="hidden group-open:inline">Zuklappen</span>
                 <span aria-hidden="true" className="inline-block transition-transform group-open:rotate-180">▾</span>
               </span>
             </summary>
-            <ol className="grid list-none gap-2.5 border-t border-[#D4AF37]/40 px-5 pb-5 pt-4 sm:px-7 sm:pb-6">
+            <ol className="grid list-none gap-2.5 border-t border-[#C9A961]/40 px-5 pb-5 pt-4 sm:px-7 sm:pb-6">
               {LERNBOX.map((f, i) => {
                 const a = antworten[i];
                 const richtig = a !== null && a === f.ja;
                 return (
-                  <li key={f.frage} className="rounded-[10px] border border-[#D4AF37]/35 bg-pearl-white px-4 py-3.5">
+                  <li key={f.frage} className="rounded-[10px] border border-[#C9A961]/35 bg-pearl-white px-4 py-3.5">
                     <div className="flex flex-wrap items-center justify-between gap-3">
                       <p className="font-montserrat text-[15px] font-bold leading-snug">{i + 1}. {f.frage}</p>
                       <span className="flex gap-2">
@@ -765,11 +767,11 @@ export default function Challenge() {
                 );
               })}
             </ol>
-            <p className="border-t border-[#D4AF37]/40 px-5 py-4 font-montserrat text-base font-bold sm:px-7" aria-live="polite">
+            <p className="border-t border-[#C9A961]/40 px-5 py-4 font-montserrat text-base font-bold sm:px-7" aria-live="polite">
               {nBeantwortet === 0 ? 'Fang einfach an – es gibt kein Falsch, nur ein Vorher und ein Nachher.' : `${nRichtig} von ${nBeantwortet} richtig.${nBeantwortet === LERNBOX.length ? ' Und alles, was du dafür brauchst, ist schon in dir.' : ''}`}
             </p>
           </details>
-          <div className={`mt-4 rounded-[10px] px-5 py-5 text-midnight-blue sm:px-7 ${GOLD}`}>
+          <div className={`mt-4 rounded-[10px] px-5 py-5 text-midnight-blue sm:px-7 ${FLAECHE}`}>
             <p className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.2em]">Warum deine Einzigartigkeit Gold wert ist</p>
             <p className="mt-2 font-inter text-[15px] leading-relaxed">Stell dir vor: „Alle sind gleich perfekt." – und da bist DU. Der Neurowissenschaftler Karsten Brocke bringt es auf sieben Merkworte – die 7 A's der modernen Vermarktung: <b>absolut angenehm anders als alle anderen auffallen.</b> Nicht lauter, nicht perfekter – erkennbar du.</p>
             <p className="mt-3 flex flex-wrap gap-x-2 gap-y-1 font-montserrat text-xl font-black uppercase leading-tight sm:text-2xl">
@@ -788,12 +790,12 @@ export default function Challenge() {
           <Kicker text="Dein KI-Agent ist effizient. Und du?" hell />
           <h2 id="ki-und-du" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
             Warum Menschen so gern mit der KI reden. Der Mensch ist das Unikat, die KI der Beschleuniger – wir nutzen beides.
-            <span className="mt-1 block underline decoration-[#D4AF37] decoration-[4px] underline-offset-[6px]">Lass dich überraschen.</span>
+            <span className="mt-1 block underline decoration-[#C9A961] decoration-[4px] underline-offset-[6px]">Lass dich überraschen.</span>
           </h2>
           {/* Zwei gleich breite, weisse Karten (Claudias Foto 22.09.2026 12:22 UTC: "unterschiedlich breit ... so schwarz ...
               Schrift schlecht lesbar"); die KI-Gruende auf sechs gekuerzt (Kritiker-Durchgang). */}
           <div className="mt-9 grid gap-4 md:grid-cols-2">
-            <div className={`bg-white p-6 text-midnight-blue sm:p-8 ${KACHEL} border-[#D4AF37]`}>
+            <div className={`bg-white p-6 text-midnight-blue sm:p-8 ${KACHEL} border-[#C9A961]`}>
               <h3 className="font-montserrat text-xs font-extrabold uppercase tracking-[0.2em] text-midnight-blue/80">Warum die KI so bequem ist</h3>
               <ul className="mt-5 grid list-none gap-3.5 p-0">
                 {KI_GRUENDE.map((g, i) => (
@@ -810,9 +812,9 @@ export default function Challenge() {
                 Und trotzdem: Keine Geschichte, kein Ego, keine Verletzlichkeit – genau deshalb erinnert sich niemand an einen Avatar.
               </p>
             </div>
-            <div className={`bg-white p-6 text-midnight-blue sm:p-8 ${KACHEL} border-[#D4AF37]`}>
+            <div className={`bg-white p-6 text-midnight-blue sm:p-8 ${KACHEL} border-[#C9A961]`}>
               <h3 className="font-montserrat text-xl font-black leading-tight sm:text-2xl">
-                Der Mensch ist das Unikat. Die KI der Beschleuniger – <span className="underline decoration-[#D4AF37] decoration-[3px] underline-offset-4">wenn wir Menschlichkeit zeigen.</span>
+                Der Mensch ist das Unikat. Die KI der Beschleuniger – <span className="underline decoration-[#C9A961] decoration-[3px] underline-offset-4">wenn wir Menschlichkeit zeigen.</span>
               </h3>
               <p className="mt-4 font-inter text-[15px] leading-relaxed">
                 Wir Menschen haben keine Reset-Taste. Was wir sagen, bleibt beim anderen. Und solange wir mit uns selbst beschäftigt sind, reden wir nicht mit ihm – sondern nur vor ihm.
@@ -851,10 +853,10 @@ export default function Challenge() {
                   <span className="min-w-0 flex-1">
                     <span className="block font-montserrat text-base font-extrabold uppercase tracking-wide">{w.titel}</span>
                     <span className="mt-1 block font-inter text-[15px] leading-relaxed">{w.vorschau}</span>
-                    <span className="mt-2 inline-block font-montserrat text-xs font-bold underline decoration-[#D4AF37] underline-offset-4"><span className="group-open:hidden">Mehr lesen ▾</span><span className="hidden group-open:inline">Zuklappen ▴</span></span>
+                    <span className="mt-2 inline-block font-montserrat text-xs font-bold underline decoration-[#C9A961] underline-offset-4"><span className="group-open:hidden">Mehr lesen ▾</span><span className="hidden group-open:inline">Zuklappen ▴</span></span>
                   </span>
                 </summary>
-                <p className="mt-3 border-t border-[#D4AF37]/40 pt-3 font-inter text-[15px] leading-relaxed">{w.text}</p>
+                <p className="mt-3 border-t border-[#C9A961]/40 pt-3 font-inter text-[15px] leading-relaxed">{w.text}</p>
               </details>
             ))}
           </div>
@@ -925,7 +927,7 @@ export default function Challenge() {
             <Kopfbild datei="geschenk" alt="Claudia Conen mit einer aufgeschlagenen roten Mappe, lächelnd" />
           </div>
           <div className="mt-9 grid gap-4 md:grid-cols-2">
-            <div className={`flex flex-col bg-white p-7 text-midnight-blue ${KACHEL} border-[#D4AF37]`}>
+            <div className={`flex flex-col bg-white p-7 text-midnight-blue ${KACHEL} border-[#C9A961]`}>
               <span className="self-start rounded-full bg-midnight-blue px-3 py-1.5 font-montserrat text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#EBD197]">Geschenk · kostenlos</span>
               <h3 className="mt-4 font-montserrat text-2xl font-extrabold uppercase">Der Wirkungs-Check</h3>
               <p className="mt-3 font-montserrat text-4xl font-black">0 €</p>
@@ -943,7 +945,7 @@ export default function Challenge() {
                 </Link>
               </div>
             </div>
-            <div className={`flex flex-col bg-midnight-blue p-7 text-pearl-white ${KACHEL} border-[#D4AF37]`}>
+            <div className={`flex flex-col bg-midnight-blue p-7 text-pearl-white ${KACHEL} border-[#C9A961]`}>
               <span className={`self-start rounded-full px-3 py-1.5 font-montserrat text-[10px] font-extrabold uppercase tracking-[0.18em] text-midnight-blue ${GOLD}`}>Der Schritt danach · 1:1</span>
               <h3 className="mt-4 font-montserrat text-2xl font-extrabold uppercase text-white">Ein Kaffee. Ein Rederaum.</h3>
               <p className="mt-4 font-inter leading-relaxed text-pearl-white/90">
@@ -969,7 +971,7 @@ export default function Challenge() {
           <Kicker text="Für wen das ist" hell />
           <h2 id="fuer-wen-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">
             Sieben Tage zur Selbsterkenntnis. Ein Anfang.
-            <span className="mt-1 block underline decoration-[#D4AF37] decoration-[4px] underline-offset-[6px]">Eine unsichtbare Brücke in die Zuhörer hinein.</span>
+            <span className="mt-1 block underline decoration-[#C9A961] decoration-[4px] underline-offset-[6px]">Eine unsichtbare Brücke in die Zuhörer hinein.</span>
           </h2>
           <p className={`mt-6 inline-block rounded-md px-4 py-3 font-montserrat text-sm font-extrabold uppercase tracking-[0.06em] text-midnight-blue ${GOLD}`}>
             30 Minuten am Tag – für dich, deine Wirkung.
@@ -993,7 +995,7 @@ export default function Challenge() {
               </div>
               <ul className="mt-4 grid list-none gap-2.5 p-0">
                 {NICHT_FUER.map((z) => (
-                  <li key={z} className="flex items-start gap-3 font-inter text-[15px] leading-relaxed"><span aria-hidden="true" className="mt-0.5 font-montserrat font-black text-[#D4AF37]">✕</span><span>{z}</span></li>
+                  <li key={z} className="flex items-start gap-3 font-inter text-[15px] leading-relaxed"><span aria-hidden="true" className="mt-0.5 font-montserrat font-black text-[#C9A961]">✕</span><span>{z}</span></li>
                 ))}
               </ul>
             </div>
@@ -1008,7 +1010,7 @@ export default function Challenge() {
           <div>
             <Kicker text="Warum ich" hell />
             <h2 id="warum" className="mt-5 font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">Menschen prägen Menschen.</h2>
-            <p className="mt-7 border-l-4 border-[#D4AF37] pl-5 font-cormorant text-3xl italic leading-snug sm:text-4xl">
+            <p className="mt-7 border-l-4 border-[#C9A961] pl-5 font-cormorant text-3xl italic leading-snug sm:text-4xl">
               Ich höre, was andere überhören. Und mache daraus deine Wirkung.
             </p>
           </div>
@@ -1025,7 +1027,7 @@ export default function Challenge() {
             </ul>
             <p className="mt-5 font-inter text-[15px] text-midnight-blue">
               Warum ich weiß, dass Menschen sich für immer im Gehirn verankern können, erzähle ich auf{' '}
-              <Link to="/ueber-mich" className="underline decoration-[#D4AF37] decoration-2 underline-offset-4 hover:text-royal-navy">„Über mich"</Link>.
+              <Link to="/ueber-mich" className="underline decoration-[#C9A961] decoration-2 underline-offset-4 hover:text-royal-navy">„Über mich"</Link>.
             </p>
           </div>
         </div>
@@ -1044,16 +1046,16 @@ export default function Challenge() {
           </p>
           <p className="mt-5 max-w-4xl font-montserrat text-2xl font-extrabold leading-tight text-midnight-blue sm:text-3xl">
             Willst du im KI-Zeitalter mit deiner Persönlichkeit punkten – statt vergleichbar über den Preis Kunden zu gewinnen?
-            <span className="mt-1 block underline decoration-[#D4AF37] decoration-[4px] underline-offset-[6px]">Dann schließ dich unserem Netzwerk an: die Unverwechselbaren, die Community für den Mittelstand.</span>
+            <span className="mt-1 block underline decoration-[#C9A961] decoration-[4px] underline-offset-[6px]">Dann schließ dich unserem Netzwerk an: die Unverwechselbaren, die Community für den Mittelstand.</span>
           </p>
-          <div className={`mt-8 bg-white px-6 py-10 text-center text-midnight-blue sm:px-10 sm:py-14 ${KACHEL} border-[#D4AF37] shadow-[0_18px_40px_-18px_rgba(212,175,55,0.5)]`}>
+          <div className={`mt-8 bg-white px-6 py-10 text-center text-midnight-blue sm:px-10 sm:py-14 ${KACHEL} border-[#C9A961] shadow-[0_18px_40px_-18px_rgba(212,175,55,0.5)]`}>
             {/* Schriftgroesse waechst mit der Bildschirmbreite: "Unverwechselbaren." ist ein einziges Wort und lief auf dem
                 Handy 43 px ueber den rechten Rand - dadurch wurde die ganze Seite breiter und das Menue abgeschnitten
                 (Claudia, 22.09.2026 21:59 UTC). */}
             <h2 id="community-titel" className="font-montserrat text-[clamp(1.45rem,6.8vw,2.25rem)] font-black leading-[1.05] tracking-tight sm:text-6xl">
               Willkommen bei den
-              <span className="block text-[#F1E2B3]" style={{ WebkitTextStroke: '1.5px #D4AF37' }}>Unverwechselbaren.</span>
-              <span className="mt-2 block font-cormorant text-4xl font-semibold italic tracking-normal text-[#D4AF37] sm:text-6xl">Netzwerk Mittelstand</span>
+              <span className="block text-[#F1E2B3]" style={{ WebkitTextStroke: '1.5px #C9A961' }}>Unverwechselbaren.</span>
+              <span className="mt-2 block font-cormorant text-4xl font-semibold italic tracking-normal text-[#C9A961] sm:text-6xl">Netzwerk Mittelstand</span>
             </h2>
             <p className="mx-auto mt-6 max-w-2xl rounded-2xl bg-pearl-white px-6 py-4 font-inter text-lg leading-relaxed">
               Menschen, die sich zusammentun und ein wachsendes Netzwerk bilden – weil sie wissen: Gemeinsam sind wir stärker. Hier zählt Empfehlung mehr als Werbung.
@@ -1076,7 +1078,7 @@ export default function Challenge() {
           </div>
           <p className="mt-6 text-center font-inter text-[15px] text-midnight-blue">
             Noch nicht in der Challenge?{' '}
-            <a href="#anmelden" className="font-montserrat font-bold underline decoration-[#D4AF37] decoration-2 underline-offset-4">Hier eintragen ↑</a>
+            <a href="#anmelden" className="font-montserrat font-bold underline decoration-[#C9A961] decoration-2 underline-offset-4">Hier eintragen ↑</a>
           </p>
         </div>
       </Abschnitt>

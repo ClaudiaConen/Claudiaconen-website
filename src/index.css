@@ -2721,3 +2721,29 @@ html, body { overflow-x: clip; }
 @media (min-width: 1536px) and (max-width: 1679px) {
   .mega-nav-link { padding: 0.55rem 0.62rem; }
 }
+
+/* Challenge-Seite in den Farben der neuen Seiten (Claudia 15.10.2026): nur Farbe + Mini-Glanz, Aufbau unveraendert.
+   Das fast schwarze #0A1628 wird auf dieser Seite zum Dunkelblau #13233F der neuen Seiten. */
+.cc-2027 .text-midnight-blue { color: #13233F; }
+.cc-2027 .text-midnight-blue\/80 { color: rgb(19 35 63 / .8); }
+.cc-2027 .text-midnight-blue\/85 { color: rgb(19 35 63 / .85); }
+.cc-2027 .text-midnight-blue\/70 { color: rgb(19 35 63 / .7); }
+.cc-2027 .text-midnight-blue\/60 { color: rgb(19 35 63 / .6); }
+.cc-2027 .text-midnight-blue\/40 { color: rgb(19 35 63 / .4); }
+.cc-2027 .bg-midnight-blue { background-color: #13233F; }
+.cc-2027 .border-midnight-blue { border-color: #13233F; }
+.cc-2027 .border-midnight-blue\/20 { border-color: rgb(19 35 63 / .2); }
+.cc-2027 .hover\:bg-royal-navy:hover { background-color: #1A2B4C; }
+.cc-2027 .cc-glanz-kachel { position: relative; overflow: hidden; }
+.cc-2027 .cc-glanz-kachel::after { content: ""; position: absolute; inset: -40%; transform: translateX(-125%) rotate(16deg); background: linear-gradient(90deg, transparent 42%, rgba(255,255,255,.55) 50%, transparent 58%); pointer-events: none; }
+.js .cc-2027 .cc-r.da .cc-glanz-kachel::after { animation: cc-glanz 1.6s ease .4s 1; }
+.cc-2027 .cc-glanz-kachel:hover::after { animation: cc-glanz 1.2s ease 1; }
+@keyframes cc-glanz { to { transform: translateX(125%) rotate(16deg); } }
+@media (prefers-reduced-motion: reduce) { .cc-2027 .cc-glanz-kachel::after { display: none; } }
+.cc-2027 .text-midnight-blue\/45 { color: rgb(19 35 63 / .45); }
+.cc-2027 .bg-midnight-blue\/70 { background-color: rgb(19 35 63 / .7); }
+.cc-2027 .bg-midnight-blue\/75 { background-color: rgb(19 35 63 / .75); }
+.cc-2027 .border-midnight-blue\/25 { border-color: rgb(19 35 63 / .25); }
+.cc-2027 .border-midnight-blue\/30 { border-color: rgb(19 35 63 / .3); }
+.cc-2027 .decoration-midnight-blue\/40 { text-decoration-color: rgb(19 35 63 / .4); }
+.cc-2027 .bg-\[\#0A1628\] { background-color: #13233F; }

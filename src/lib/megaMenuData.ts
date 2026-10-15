@@ -41,6 +41,8 @@ export interface TileItem {
   icon: LucideIcon;
   fullWidth?: boolean;
   external?: boolean;
+  /** Fertige Seite aus public/ - mit echtem Seitenaufruf oeffnen, nicht per React-Router. */
+  statisch?: boolean;
 }
 
 export interface SidebarCategory {
@@ -52,7 +54,7 @@ export interface SidebarCategory {
   columns?: 3;
   tiles: TileItem[];
   /** Die Zeile unten im Feld: "Alles dazu auf einer Seite". */
-  uebersicht?: { name: string; href: string };
+  uebersicht?: { name: string; href: string; statisch?: boolean };
   /** Die hervorgehobene Kachel rechts im Feld - eine je Bereich.
    *  Zwei Empfehlungen nebeneinander sind keine Empfehlung.
    *  bildMotiv beschreibt, welches Foto dorthin gehoert; bild ist die Datei
@@ -228,9 +230,24 @@ export const megaMenuItems: MegaMenuItem[] = [
   // Ausschliesslich Seiten, die "Mentoring & Coaching" ueber sich
   // schreiben, plus das 1:1-Mentoring.
   {
-    label: 'Mentoring',
-    id: 'mentoring',
+    // 15.10.2026: "Mentoring" heisst jetzt "Für Experten" (Zielgruppe statt Format, Recherche
+    // Top-Speaker) und zeigt zuerst die drei Wege; die bisherigen Einzel-Angebote bleiben darunter.
+    label: 'Für Experten',
+    id: 'experten',
     categories: [
+      {
+        id: 'experten-angebote',
+        label: 'Die drei Wege',
+        icon: Gift,
+        panelTitle: 'Für Experten und Selbstständige',
+        panelSubtitle: 'Erleben, erkennen, verankern',
+        tiles: [
+          { name: '7-Tage-Challenge', desc: 'Kostenfrei, Start 26. Oktober', href: '/challenge', icon: Gift },
+          { name: 'Live-Workshop Köln', desc: '4. Februar 2027, STARTPLATZ', href: '/live-workshop', icon: Mic, statisch: true },
+          { name: 'Unverwechselbar. Das 12-Wochen-Mentoring', desc: 'Start 10. November, bis zu 6 Personen', href: '/mentoring-programm', icon: Star, statisch: true },
+        ],
+        uebersicht: { name: 'Alle Angebote im Vergleich', href: '/angebote', statisch: true },
+      },
       {
         id: 'einzelarbeit',
         label: 'Zu zweit',

@@ -1,0 +1,191 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Claudia Conen//Unverwechselbar//DE
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:Europe/Berlin
+BEGIN:STANDARD
+DTSTART:19701025T030000
+RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+TZOFFSETFROM:+0200
+TZOFFSETTO:+0100
+TZNAME:CET
+END:STANDARD
+BEGIN:DAYLIGHT
+DTSTART:19700329T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU
+TZOFFSETFROM:+0100
+TZOFFSETTO:+0200
+TZNAME:CEST
+END:DAYLIGHT
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:unverwechselbar-2026-01@claudiaconen.com
+DTSTAMP:20261015T090000Z
+DTSTART;TZID=Europe/Berlin:20261110T090000
+DTEND;TZID=Europe/Berlin:20261110T110000
+SUMMARY:Unverwechselbar – Live-Training 1 von 12
+LOCATION:Zoom (Link im Mitgliederbereich)
+DESCRIPTION:Unverwechselbar. Das 12-Wochen-Mentoring mit Claudia Conen. Zoom-Link im Mitgliederbereich.
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Gleich geht's los: Unverwechselbar
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:unverwechselbar-2026-02@claudiaconen.com
+DTSTAMP:20261015T090000Z
+DTSTART;TZID=Europe/Berlin:20261117T090000
+DTEND;TZID=Europe/Berlin:20261117T110000
+SUMMARY:Unverwechselbar – Live-Training 2 von 12
+LOCATION:Zoom (Link im Mitgliederbereich)
+DESCRIPTION:Unverwechselbar. Das 12-Wochen-Mentoring mit Claudia Conen. Zoom-Link im Mitgliederbereich.
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Gleich geht's los: Unverwechselbar
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:unverwechselbar-2026-03@claudiaconen.com
+DTSTAMP:20261015T090000Z
+DTSTART;TZID=Europe/Berlin:20261124T090000
+DTEND;TZID=Europe/Berlin:20261124T110000
+SUMMARY:Unverwechselbar – Live-Training 3 von 12
+LOCATION:Zoom (Link im Mitgliederbereich)
+DESCRIPTION:Unverwechselbar. Das 12-Wochen-Mentoring mit Claudia Conen. Zoom-Link im Mitgliederbereich.
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Gleich geht's los: Unverwechselbar
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:unverwechselbar-2026-04@claudiaconen.com
+DTSTAMP:20261015T090000Z
+DTSTART;TZID=Europe/Berlin:20261201T090000
+DTEND;TZID=Europe/Berlin:20261201T110000
+SUMMARY:Unverwechselbar – Live-Training 4 von 12
+LOCATION:Zoom (Link im Mitgliederbereich)
+DESCRIPTION:Unverwechselbar. Das 12-Wochen-Mentoring mit Claudia Conen. Zoom-Link im Mitgliederbereich.
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Gleich geht's los: Unverwechselbar
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:unverwechselbar-2026-05@claudiaconen.com
+DTSTAMP:20261015T090000Z
+DTSTART;TZID=Europe/Berlin:20261208T090000
+DTEND;TZID=Europe/Berlin:20261208T110000
+SUMMARY:Unverwechselbar – Live-Training 5 von 12
+LOCATION:Zoom (Link im Mitgliederbereich)
+DESCRIPTION:Unverwechselbar. Das 12-Wochen-Mentoring mit Claudia Conen. Zoom-Link im Mitgliederbereich.
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Gleich geht's los: Unverwechselbar
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:unverwechselbar-2026-06@claudiaconen.com
+DTSTAMP:20261015T090000Z
+DTSTART;TZID=Europe/Berlin:20261215T090000
+DTEND;TZID=Europe/Berlin:20261215T110000
+SUMMARY:Unverwechselbar – Live-Training 6 von 12
+LOCATION:Zoom (Link im Mitgliederbereich)
+DESCRIPTION:Unverwechselbar. Das 12-Wochen-Mentoring mit Claudia Conen. Zoom-Link im Mitgliederbereich.
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Gleich geht's los: Unverwechselbar
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:unverwechselbar-2026-07@claudiaconen.com
+DTSTAMP:20261015T090000Z
+DTSTART;TZID=Europe/Berlin:20270105T090000
+DTEND;TZID=Europe/Berlin:20270105T110000
+SUMMARY:Unverwechselbar – Live-Training 7 von 12
+LOCATION:Zoom (Link im Mitgliederbereich)
+DESCRIPTION:Unverwechselbar. Das 12-Wochen-Mentoring mit Claudia Conen. Zoom-Link im Mitgliederbereich.
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Gleich geht's los: Unverwechselbar
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:unverwechselbar-2026-08@claudiaconen.com
+DTSTAMP:20261015T090000Z
+DTSTART;TZID=Europe/Berlin:20270112T090000
+DTEND;TZID=Europe/Berlin:20270112T110000
+SUMMARY:Unverwechselbar – Live-Training 8 von 12
+LOCATION:Zoom (Link im Mitgliederbereich)
+DESCRIPTION:Unverwechselbar. Das 12-Wochen-Mentoring mit Claudia Conen. Zoom-Link im Mitgliederbereich.
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Gleich geht's los: Unverwechselbar
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:unverwechselbar-2026-09@claudiaconen.com
+DTSTAMP:20261015T090000Z
+DTSTART;TZID=Europe/Berlin:20270119T090000
+DTEND;TZID=Europe/Berlin:20270119T110000
+SUMMARY:Unverwechselbar – Live-Training 9 von 12
+LOCATION:Zoom (Link im Mitgliederbereich)
+DESCRIPTION:Unverwechselbar. Das 12-Wochen-Mentoring mit Claudia Conen. Zoom-Link im Mitgliederbereich.
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Gleich geht's los: Unverwechselbar
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:unverwechselbar-2026-10@claudiaconen.com
+DTSTAMP:20261015T090000Z
+DTSTART;TZID=Europe/Berlin:20270126T090000
+DTEND;TZID=Europe/Berlin:20270126T110000
+SUMMARY:Unverwechselbar – Live-Training 10 von 12
+LOCATION:Zoom (Link im Mitgliederbereich)
+DESCRIPTION:Unverwechselbar. Das 12-Wochen-Mentoring mit Claudia Conen. Zoom-Link im Mitgliederbereich.
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Gleich geht's los: Unverwechselbar
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:unverwechselbar-2026-11@claudiaconen.com
+DTSTAMP:20261015T090000Z
+DTSTART;TZID=Europe/Berlin:20270202T090000
+DTEND;TZID=Europe/Berlin:20270202T110000
+SUMMARY:Unverwechselbar – Live-Training 11 von 12
+LOCATION:Zoom (Link im Mitgliederbereich)
+DESCRIPTION:Unverwechselbar. Das 12-Wochen-Mentoring mit Claudia Conen. Zoom-Link im Mitgliederbereich.
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Gleich geht's los: Unverwechselbar
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:unverwechselbar-2026-12@claudiaconen.com
+DTSTAMP:20261015T090000Z
+DTSTART;TZID=Europe/Berlin:20270209T090000
+DTEND;TZID=Europe/Berlin:20270209T110000
+SUMMARY:Unverwechselbar – Live-Training 12 von 12
+LOCATION:Zoom (Link im Mitgliederbereich)
+DESCRIPTION:Unverwechselbar. Das 12-Wochen-Mentoring mit Claudia Conen. Zoom-Link im Mitgliederbereich.
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Gleich geht's los: Unverwechselbar
+END:VALARM
+END:VEVENT
+END:VCALENDAR

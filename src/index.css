@@ -929,6 +929,17 @@ html, body { cursor: auto; }
   animation-name: megaMenuFadeInRechts;
 }
 
+/* Fuer Experten hat nur drei Kacheln und kein Bild - schmaleres Feld, sonst ragt es rechts hinaus. */
+.mega-menu-container.mega-menu-container--schmal { min-width: 820px; }
+
+/* Die beiden linken Menuepunkte (Fuer Unternehmen, Fuer Experten) beginnen am linken Rand des
+   Punktes - mittig darunter ragte das Feld links aus dem Fenster (15.10.2026). */
+.mega-menu-container--links {
+  left: 0;
+  transform: none;
+  animation-name: megaMenuFadeInRechts;
+}
+
 @keyframes megaMenuFadeInRechts {
   from {
     opacity: 0;
@@ -2747,3 +2758,4 @@ html, body { overflow-x: clip; }
 .cc-2027 .border-midnight-blue\/30 { border-color: rgb(19 35 63 / .3); }
 .cc-2027 .decoration-midnight-blue\/40 { text-decoration-color: rgb(19 35 63 / .4); }
 .cc-2027 .bg-\[\#0A1628\] { background-color: #13233F; }
+

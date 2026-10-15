@@ -180,7 +180,7 @@ export default function Navigation({ hell = false }: { hell?: boolean } = {}) {
                     oeffnet ja kein Menue. */}
                 <div
                   className={`mega-menu-container ${
-                    i >= megaMenuItems.length - 2 ? 'mega-menu-container--rechts' : ''
+                    i >= megaMenuItems.length - 2 ? 'mega-menu-container--rechts' : i === 0 ? 'mega-menu-container--links' : ''} ${item.id === 'experten' ? 'mega-menu-container--schmal' : ''
                   } ${activeMenuId === item.id ? '' : 'zu'}`}
                   aria-hidden={activeMenuId !== item.id}
                   onMouseEnter={handlePanelEnter}

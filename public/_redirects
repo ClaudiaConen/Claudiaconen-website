@@ -45,4 +45,7 @@
 /powerofai              /app.html   200
 # 14.10.2026: QR-Codes auf Magneten/Zitat-Kacheln (…/geschenk?m=01–11) führen zur Challenge.
 /geschenk               /challenge   302
+# Angebotsseiten im neuen Design (15.10.2026) liegen als public/<name>/index.html und gehen als
+# vorhandene Dateien ohnehin vor jeder Regel - deshalb hier KEINE Regel (Schraegstrich-Schleife).
+
 /*                      /app.html   404

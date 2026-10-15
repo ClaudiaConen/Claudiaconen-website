@@ -167,6 +167,7 @@ const AdminMiniTaskEdit = lazy(() => import('./pages/AdminMiniTaskEdit'));
 const AdminGapTextList = lazy(() => import('./pages/AdminGapTextList'));
 const AdminGapTextEdit = lazy(() => import('./pages/AdminGapTextEdit'));
 const NotFound = lazy(() => import('./pages/NotFound'));
+const StatischeSeite = lazy(() => import('./components/StatischeSeite'));
 import CustomCursor from './components/CustomCursor';
 // Umbauhinweis seit 22.09.2026 nicht mehr eingeblendet (Komponente bleibt fuer den naechsten grossen Umbau).
 import ScrollToTop from './components/ScrollToTop';
@@ -245,6 +246,11 @@ function App() {
         <Route path="/stimme-trauer" element={<StimmeTrauer />} />
         <Route path="/stimme-voiceover" element={<StimmeVoiceover />} />
         <Route path="/challenge" element={<Challenge />} />
+        {/* Angebotsseiten im neuen Design, fertig ausgeliefert aus public/ (Claudia 15.10.2026) */}
+        <Route path="/angebote" element={<StatischeSeite />} />
+        <Route path="/live-workshop" element={<StatischeSeite />} />
+        <Route path="/mentoring-programm" element={<StatischeSeite />} />
+        <Route path="/mentoring-inhalte" element={<StatischeSeite />} />
         <Route path="/dabei" element={<PowerOfAiCheckin />} />
         <Route path="/anmeldung" element={<PowerOfAiCheckin />} />
         <Route path="/powerofai" element={<PowerOfAiCheckin />} />

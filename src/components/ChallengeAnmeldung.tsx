@@ -60,7 +60,16 @@ export default function ChallengeAnmeldung({ start, onEingetragen }: { start: st
   if (zustand === 'fertig') {
     return (
       <div id="anmelden" className={`mt-3 grid items-center gap-5 rounded-[10px] px-5 py-6 text-midnight-blue sm:grid-cols-[auto_minmax(0,1fr)] sm:px-7 ${GOLD}`}>
-        <img src="/challenge/qr-whatsapp.png" alt="QR-Code: Einladung in die WhatsApp-Gruppe der Challenge (empfohlen)" width={328} height={328} className="h-28 w-28 rounded-md bg-white" />
+        <div className="flex gap-3">
+          <figure className="m-0 text-center">
+            <img src="/challenge/qr-whatsapp.png" alt="QR-Code: Einladung in die WhatsApp-Gruppe der Challenge (empfohlen)" width={328} height={328} className="h-28 w-28 rounded-md bg-white" />
+            <figcaption className="mt-1 font-montserrat text-[11px] font-bold uppercase tracking-wide">1. WhatsApp</figcaption>
+          </figure>
+          <figure className="m-0 text-center">
+            <img src="/challenge/qr-telegram.png" alt="QR-Code: Einladung in die Telegram-Gruppe der Challenge" width={328} height={328} className="h-28 w-28 rounded-md bg-white" />
+            <figcaption className="mt-1 font-montserrat text-[11px] font-bold uppercase tracking-wide">2. Telegram</figcaption>
+          </figure>
+        </div>
         <div className="min-w-0">
           <p className="font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">Danke, {vorname.trim() || 'du'} – du bist eingetragen.</p>
           <p className="mt-2 font-inter text-[15px] leading-relaxed sm:text-base">

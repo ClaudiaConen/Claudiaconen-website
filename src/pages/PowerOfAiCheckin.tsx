@@ -45,7 +45,7 @@ const GOLD = 'bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]';
 const FELD =
   'w-full rounded-md border border-[#13233F]/30 bg-white px-4 py-4 font-inter text-[17px] text-[#13233F] placeholder:text-[#13233F]/45 focus:border-[#D4AF37] focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/40';
 const HAKEN = 'mt-1 h-5 w-5 flex-none accent-[#D4AF37]';
-const TEXTSTAND = '14.10.2026 v6';
+const TEXTSTAND = '15.10.2026 v7';
 
 export default function PowerOfAiCheckin() {
   const [vorname, setVorname] = useState('');
@@ -227,7 +227,7 @@ export default function PowerOfAiCheckin() {
             <div className="mt-3 rounded-md border-2 border-[#D4AF37] bg-white p-4">
               <label className="flex items-start gap-3 font-inter text-[16px] leading-relaxed">
                 <input name="foto_video" type="checkbox" required checked={fotoVideo} onChange={(e) => setFotoVideo(e.target.checked)} className={HAKEN} />
-                <span><strong className="font-semibold">Ich bin einverstanden</strong>, dass heute Fotos und Videos von mir gemacht und veröffentlicht werden.</span>
+                <span>Mir ist bewusst, dass bei einem modernen Event Foto- und Videoaufnahmen entstehen und veröffentlicht werden. <strong className="font-semibold">Damit bin ich einverstanden.</strong></span>
               </label>
               <details className="group mt-2 pl-8">
                 <summary className="cursor-pointer list-none font-inter text-sm font-medium underline decoration-[#D4AF37] underline-offset-2 [&::-webkit-details-marker]:hidden">

@@ -18,6 +18,8 @@ import { supabaseCms } from '../lib/supabaseCms';
  * auf der Seite nicht mehr (Claudia, 22.09.2026 10:45 UTC: 'Nur in die Gruppe ohne eintragen geht nicht').
  */
 const CHALLENGE_LINK = 'https://chat.whatsapp.com/IWSuqZ9ZrMn3dYNgVY1sp6?s=qt&p=i&mlu=4&ilr=4';
+/** Alternative fuer alle ohne WhatsApp (Claudia, 15.10.2026). */
+const TELEGRAM_LINK = 'https://t.me/+0ePKVbpBySlmZWZi';
 const GOLD = 'bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]';
 
 const FELD =
@@ -30,7 +32,6 @@ export default function ChallengeAnmeldung({ start, onEingetragen }: { start: st
   const [vorname, setVorname] = useState('');
   const [email, setEmail] = useState('');
   const [telefon, setTelefon] = useState('');
-  const [einverstanden, setEinverstanden] = useState(false);
   const [angebote, setAngebote] = useState(false);
   const [zustand, setZustand] = useState<'offen' | 'sendet' | 'fertig' | 'fehler'>('offen');
 
@@ -43,7 +44,7 @@ export default function ChallengeAnmeldung({ start, onEingetragen }: { start: st
         name: vorname.trim(),
         email: email.trim(),
         phone: telefon.trim() || null,
-        message: `7-TAGE-CHALLENGE – Anmeldung über claudiaconen.com/challenge\nStart: Montag, ${start}\nEinwilligung Challenge + WhatsApp-Gruppe: ja\nEinwilligung Angebote/Newsletter: ${angebote ? 'ja' : 'nein'}`,
+        message: `7-TAGE-CHALLENGE – Anmeldung über claudiaconen.com/challenge\nStart: Montag, ${start}\nHinweis Challenge + Gruppe (WhatsApp/Telegram) gelesen: ja\nEinwilligung Angebote/Newsletter: ${angebote ? 'ja' : 'nein'}`,
       },
     ]);
     if (error) {
@@ -59,15 +60,20 @@ export default function ChallengeAnmeldung({ start, onEingetragen }: { start: st
   if (zustand === 'fertig') {
     return (
       <div id="anmelden" className={`mt-3 grid items-center gap-5 rounded-[10px] px-5 py-6 text-midnight-blue sm:grid-cols-[auto_minmax(0,1fr)] sm:px-7 ${GOLD}`}>
-        <img src="/challenge/qr-whatsapp.png" alt="QR-Code: Einladung in die WhatsApp-Gruppe der Challenge" width={328} height={328} className="h-28 w-28 rounded-md bg-white" />
+        <img src="/challenge/qr-whatsapp.png" alt="QR-Code: Einladung in die WhatsApp-Gruppe der Challenge (empfohlen)" width={328} height={328} className="h-28 w-28 rounded-md bg-white" />
         <div className="min-w-0">
           <p className="font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">Danke, {vorname.trim() || 'du'} – du bist eingetragen.</p>
           <p className="mt-2 font-inter text-[15px] leading-relaxed sm:text-base">
-            Jetzt noch in die Gruppe, dort läuft die Challenge: am Handy den Knopf drücken, am Rechner den Code scannen. Start: Montag, {start}.
+            Jetzt noch in deine Gruppe. Du hast die Wahl: Empfohlen ist die WhatsApp-Gruppe, dort ist am meisten los. Kein WhatsApp? Dann nimm die Telegram-Gruppe, gleiche Inhalte, gleiches Feedback. Start: Montag, {start}.
           </p>
-          <a href={CHALLENGE_LINK} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center rounded-full bg-midnight-blue px-7 py-4 font-montserrat text-sm font-bold text-pearl-white transition-colors hover:bg-royal-navy">
-            Zur WhatsApp-Gruppe
-          </a>
+          <div className="mt-4 flex flex-wrap gap-3">
+            <a href={CHALLENGE_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full bg-midnight-blue px-7 py-4 font-montserrat text-sm font-bold text-pearl-white transition-colors hover:bg-royal-navy">
+              1. Zur WhatsApp-Gruppe (empfohlen)
+            </a>
+            <a href={TELEGRAM_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full border-2 border-midnight-blue px-6 py-[14px] font-montserrat text-sm font-bold text-midnight-blue transition-colors hover:bg-white/40">
+              2. Ohne WhatsApp: Telegram-Gruppe
+            </a>
+          </div>
         </div>
       </div>
     );
@@ -96,18 +102,15 @@ export default function ChallengeAnmeldung({ start, onEingetragen }: { start: st
           <input id="challenge-telefon" name="telefon" type="tel" autoComplete="tel" placeholder="Handynummer (damit ich dich in der Gruppe erkenne)" value={telefon} onChange={(e) => setTelefon(e.target.value)} className={FELD} />
         </label>
       </div>
-      {/* Zwei Kaestchen statt einem (Kritiker-Durchgang 22.09.2026): Pflicht nur fuer die Challenge selbst, Werbung freiwillig
-          (Art. 7 Abs. 4 DSGVO, § 7 UWG); Widerruf mit Adresse; WhatsApp/Meta benannt. */}
-      <label className="mt-4 flex items-start gap-3 font-inter text-sm leading-relaxed text-pearl-white/85">
-        <input id="challenge-einverstanden" name="einverstanden" type="checkbox" required checked={einverstanden} onChange={(e) => setEinverstanden(e.target.checked)} className="mt-1 h-4 w-4 flex-none accent-[#D4AF37]" />
-        <span>
-          Ja, Claudia Conen darf meine Angaben speichern, um mich durch die Challenge zu begleiten. Mir ist klar: Die Challenge läuft in einer WhatsApp-Gruppe (Meta) – dort sehen die anderen Teilnehmer meine Nummer und meine Videos. Widerruf jederzeit an claudiaconen@umsatzstimme.de.{' '}
+      {/* Ein Haekchen (Claudia 15.10.2026): Die Challenge selbst braucht keine Einwilligung (Art. 6 Abs. 1 lit. b DSGVO), nur einen
+          Hinweis. Werbung bleibt ein eigenes, freiwilliges Haekchen (Art. 7 Abs. 2 DSGVO, § 7 UWG; nie buendeln, OLG Muenchen 29 U 599/24). */}
+      <p className="mt-4 font-inter text-sm leading-relaxed text-pearl-white/85">
+        Mit Klick auf „Eintragen“ meldest du dich zur Challenge an. Deine Angaben werden nur dafür gespeichert. Die Challenge läuft in einer WhatsApp-Gruppe (Meta) oder, wenn du magst, in einer Telegram-Gruppe: Dort sehen die anderen Teilnehmer deinen Namen, deine Nummer und deine Videos. Widerruf jederzeit an claudiaconen@umsatzstimme.de.{' '}
           <Link to="/datenschutz" className="underline decoration-[#D4AF37]/60 underline-offset-2 hover:decoration-[#F7E7CE]">Datenschutz</Link>
-        </span>
-      </label>
+      </p>
       <label className="mt-2 flex items-start gap-3 font-inter text-sm leading-relaxed text-pearl-white/85">
         <input id="challenge-angebote" name="angebote" type="checkbox" checked={angebote} onChange={(e) => setAngebote(e.target.checked)} className="mt-1 h-4 w-4 flex-none accent-[#D4AF37]" />
-        <span>Freiwillig: Claudia darf mich nach der Challenge per E-Mail zu Angeboten einladen (Rederaum, Coaching, Community).</span>
+        <span>Ja, schick mir nach der Challenge weitere Gratis-Aktionen und Angebote per E-Mail. Abmelden geht jederzeit mit einem Klick.</span>
       </label>
       <div className="mt-5 flex flex-wrap items-center gap-4">
         <button type="submit" disabled={zustand === 'sendet'} className={`inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue transition-transform hover:-translate-y-px disabled:opacity-70 ${GOLD}`}>

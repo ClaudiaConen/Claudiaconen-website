@@ -28,7 +28,7 @@ const KARTEN: FotoKarte[] = [
 import { supabaseCms } from '../lib/supabaseCms';
 
 /** WhatsApp-Gruppe der 7-Tage-Video-Challenge – gleicher Link wie auf /challenge. */
-const CHALLENGE_WHATSAPP = 'https://chat.whatsapp.com/IWSuqZ9ZrMn3dYNgVY1sp6?s=qt&p=i&mlu=4&ilr=4';
+// WhatsApp-Link der Challenge steht seit 15.10.2026 nicht mehr an der Tuer, sondern in der Mail danach.
 
 /**
  * Check-in an der Tür bei THE POWER OF AI, Köln, 18.10.2026 – Claudias Auftrag vom 14.10.2026, 14:12 UTC:
@@ -137,23 +137,23 @@ export default function PowerOfAiCheckin() {
               Schön, dass du da bist. Viel Freude heute, gute Gespräche und neue Kontakte!
             </p>
 
-            {/* Willkommensgeschenk: QR zur WhatsApp-Gruppe der Challenge – für alle sichtbar (Claudia 14.10.2026) */}
-            <div className={`mt-6 grid items-center gap-5 rounded-[12px] px-5 py-6 text-[#13233F] sm:grid-cols-[auto_minmax(0,1fr)] sm:px-7 ${GOLD}`}>
-              <img src="/challenge/qr-whatsapp.png" alt="QR-Code: WhatsApp-Gruppe der 7-Tage-Video-Challenge" width={328} height={328} className="h-32 w-32 flex-none rounded-md bg-white p-1 sm:h-36 sm:w-36" />
-              <div className="min-w-0">
-                <p className="font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">Dein Willkommensgeschenk: die 7-Tage-Video-Challenge</p>
+            {/* An der Tuer nur EIN Gedanke (Claudia 15.10.2026): kein zweiter QR-Code, keine Gruppe.
+                Wer das Geschenk angehakt hat, bekommt die Challenge in den naechsten Tagen per E-Mail. */}
+            {eingetragen.challenge && (
+              <div className={`mt-6 rounded-[12px] px-5 py-6 text-[#13233F] sm:px-7 ${GOLD}`}>
+                <p className="font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">Dein Geschenk ist gesichert.</p>
                 <p className="mt-2 font-inter text-[15px] leading-relaxed sm:text-base">
-                  Scann den Code mit deinem Handy und komm in die WhatsApp-Gruppe. Start ist der 26. Oktober – 7 Tage, je 1 Minute.
+                  Die 7-Tage-Video-Challenge mit Claudia Conen. Alles Weitere bekommst du in den nächsten Tagen per E-Mail. Du musst jetzt nichts tun.
                 </p>
-                <a href={CHALLENGE_WHATSAPP} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center rounded-full bg-[#13233F] px-7 py-4 font-montserrat text-sm font-bold text-pearl-white transition-colors hover:bg-[#1A2B4C]">
-                  Zur WhatsApp-Gruppe
-                </a>
               </div>
-            </div>
+            )}
 
-            <button type="button" onClick={naechstePerson} className={`mt-8 inline-flex items-center rounded-full px-8 py-4 font-montserrat text-sm font-bold uppercase tracking-[0.12em] text-[#13233F] ${GOLD}`}>
-              Nächste Person eintragen
-            </button>
+            <p className="mt-8 font-inter text-sm text-[#13233F]/70">
+              Jemand ohne Handy dabei?{' '}
+              <button type="button" onClick={naechstePerson} className="font-semibold text-[#13233F] underline decoration-[#C9A961] underline-offset-4">
+                Weitere Person eintragen
+              </button>
+            </p>
           </section>
         ) : (
           <form onSubmit={absenden} aria-labelledby="checkin-titel">

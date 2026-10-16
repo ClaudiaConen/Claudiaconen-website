@@ -251,6 +251,7 @@ function App() {
         <Route path="/live-workshop" element={<StatischeSeite />} />
         <Route path="/mentoring-programm" element={<StatischeSeite />} />
         <Route path="/mentoring-inhalte" element={<StatischeSeite />} />
+        <Route path="/1zu1-training" element={<StatischeSeite />} />
         <Route path="/dabei" element={<PowerOfAiCheckin />} />
         <Route path="/anmeldung" element={<PowerOfAiCheckin />} />
         <Route path="/powerofai" element={<PowerOfAiCheckin />} />

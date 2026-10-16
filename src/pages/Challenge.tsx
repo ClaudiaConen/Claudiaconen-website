@@ -517,6 +517,21 @@ export default function Challenge() {
       <section id="anmeldung" className="bg-pearl-white pt-6 pb-4 sm:pt-8" aria-label="Anmeldung zur Challenge">
         <div className="mx-auto max-w-6xl px-6">
           <ChallengeAnmeldung start={startKurz} />
+          {/* 1:1-Live-Training zum Sonderpreis - Claudia, 16.10.2026 23:09 UTC: „sofort sichtbar, nicht aufdringlich“,
+              Knopf fuehrt auf die eigene Seite /1zu1-training (dort Inhalt, Fuer wen, Kalender). */}
+          <a
+            href="/1zu1-training"
+            className="group mt-5 flex flex-col gap-3 rounded-2xl border border-[#D4AF37]/45 bg-white px-5 py-4 no-underline transition-colors hover:border-[#D4AF37] sm:flex-row sm:items-center sm:justify-between sm:px-7"
+          >
+            <span className="flex flex-col gap-1">
+              <span className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.2em] text-midnight-blue/70">Du willst es persönlich?</span>
+              <span className="font-montserrat text-base font-bold text-midnight-blue sm:text-lg">1:1-Live-Training online · 90 Minuten · Sonderpreis zur Challenge</span>
+              <span className="font-inter text-sm text-midnight-blue/80">173 € zzgl. MwSt. (205,87 € inkl. MwSt.)</span>
+            </span>
+            <span className="inline-flex shrink-0 items-center self-start rounded-full border border-midnight-blue/25 px-5 py-2.5 font-montserrat text-sm font-bold text-midnight-blue transition-colors group-hover:border-[#D4AF37] sm:self-auto">
+              Mehr erfahren →
+            </span>
+          </a>
         </div>
       </section>
 

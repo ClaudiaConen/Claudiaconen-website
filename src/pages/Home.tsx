@@ -1,6 +1,7 @@
 import Navigation from '../components/Navigation';
 import Hero, { HERO_HELL } from '../components/Hero';
-import SituationsBand from '../components/SituationsBand';
+import ChallengeZeile from '../components/ChallengeZeile';
+import SchluesselStreifen from '../components/SchluesselStreifen';
 import SituationsKacheln from '../components/SituationsKacheln';
 import Tueren from '../components/Tueren';
 import LogoBand from '../components/LogoBand';
@@ -37,12 +38,14 @@ export default function Home() {
       </header>
       <main id="main">
         <Hero />
-        <SituationsBand />
-        <SituationsKacheln />
+        {/* Ruhe unter dem Kopf (Claudia, 16.10.2026 23:06 UTC): nur noch eine leise Challenge-Zeile. Das Laufband
+            SituationsBand ist raus (Komponente bleibt im Code), Kacheln und Bilderleiste stehen weiter unten. */}
+        <ChallengeZeile />
         <Tueren />
         <Werte />
         <LogoBand />
         <MissionSection />
+        <SchluesselStreifen />
         <Timeline />
         <About />
         <SocialProof />
@@ -50,6 +53,7 @@ export default function Home() {
         {/* "Haeufige Fragen" entfernt (Claudia, 23.09.2026 16:21 UTC): Die Wissensbibliothek hat ihre
             eigene Seite; auf der Startseite lenkte der Block vom Kontakt ab. Die Komponente
             FrequentQuestions.tsx bleibt im Code, falls sie zurueckkommen soll. */}
+        <SituationsKacheln />
         <Momente />
         <ContactSection />
         <FinalCTA />

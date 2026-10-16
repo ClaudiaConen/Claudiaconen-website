@@ -2759,3 +2759,6 @@ html, body { overflow-x: clip; }
 .cc-2027 .decoration-midnight-blue\/40 { text-decoration-color: rgb(19 35 63 / .4); }
 .cc-2027 .bg-\[\#0A1628\] { background-color: #13233F; }
 
+
+/* Ruhige Challenge-Zeile unter dem Kopfvideo (Claudia, 16.10.2026: „Ruhe … viel zu schnell“). */
+.cc-chal-zeile-spur { animation-duration: 150s; }

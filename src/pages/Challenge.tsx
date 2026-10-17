@@ -985,10 +985,12 @@ export default function Challenge() {
                 <p className="mt-1 font-montserrat text-sm font-extrabold uppercase tracking-wide text-[#EBD197]">Sonderpreis für Challenge-Teilnehmende</p>
                 <div className="mt-7">
                   <a
-                    href={'mailto:claudiaconen@umsatzstimme.de?subject=' + encodeURIComponent('1:1-Intensiv-Training (90 Minuten)') + '&body=' + encodeURIComponent('Hallo Claudia, ich möchte das 1:1-Intensiv-Training (90 Minuten, 180 € netto) anfragen.')}
+                    href="https://umsatzstimme-claudiaconen.mytentary.com/p/zJYlWu/checkout"
+                    target="_blank"
+                    rel="noopener"
                     className={`inline-flex items-center rounded-full px-6 py-3.5 font-montserrat text-sm font-bold text-midnight-blue transition-transform hover:-translate-y-px ${GOLD}`}
                   >
-                    Auf Anfrage buchen
+                    Jetzt buchen
                   </a>
                 </div>
               </div>

@@ -2,11 +2,6 @@ import type { CSSProperties } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Calendar, Pause, Play } from 'lucide-react';
-import { supabase } from '../lib/supabase';
-import AudioButton from './AudioButton';
-import ChallengeBand from './ChallengeBand';
-import VideoButton from './VideoButton';
-import VideoModal from './VideoModal';
 
 /**
  * Kopfbereich mit Video ueber die volle Breite (Claudia, 23.09.2026 09:23 UTC:
@@ -37,9 +32,6 @@ import VideoModal from './VideoModal';
  * Loop in public/hero-video/, wird LOOP ausgefuellt und das <video>-Element uebernimmt.
  */
 export const HERO_HELL = true;
-/** Der Kachelstreifen unter dem Video bleibt nachtblau, auch wenn der Kopf hell ist - Claudia, 23.09.2026 09:55 UTC:
- *  "die Buttons darunter bleiben auf blau, damit der Gold-Effekt passt". Gold-Schimmer und Goldrand wirken auf Nachtblau. */
-const STREIFEN_DUNKEL = true;
 const VIMEO_ID = '1143907515';
 /** Der geschnittene Loop (13 s, nahtlos ueber 1 s Ueberblendung, ohne Ton) aus Claudias 7:48-Minuten-Video vom 23.09.2026.
  *  BUEHNE = Keynote-Mitschnitt (102,5 s ab Start des Rohvideos), INTERVIEW = Buecherwand (62 s). Poster = erster Frame des Loops.
@@ -51,23 +43,6 @@ const LOOPS = {
   interview: { mp4: '/hero-video/hero-loop-interview.mp4', webm: '/hero-video/hero-loop-interview.webm', poster1280: '/hero-video/poster-interview-1280.webp', poster768: '/hero-video/poster-interview-768.webp', posterJpg: '/hero-video/poster-interview-1280.jpg', versatz: '15%', fokus: '50% 12%' },
 };
 const LOOP = LOOPS.interview;
-
-interface StepMedia {
-  step_number: number;
-  media_type: 'audio' | 'video';
-  media_url: string;
-  platform: 'youtube' | 'vimeo' | null;
-}
-
-const SCHLUESSEL = [
-  { icon: 'klarheit', title: 'KLARHEIT.', subtitle: 'Wofür du stehst.', href: '#schritt3', stepNumber: 3 },
-  { icon: 'botschaft', title: 'BOTSCHAFT.', subtitle: 'Die Vertrauen schafft.', href: '#schritt2', stepNumber: 2 },
-  { icon: 'story', title: 'STORY.', subtitle: 'Die Emotionen weckt.', href: '#schritt4', stepNumber: 4 },
-  { icon: 'stimme', title: 'STIMME.', subtitle: 'Die unaufhaltbar ist.', href: '#schritt6', stepNumber: 6 },
-  { icon: 'praesenz', title: 'PRÄSENZ.', subtitle: 'Die wirkt, bevor du sprichst.', href: '#schritt5', stepNumber: 5 },
-  { icon: 'ki', title: 'KI.', subtitle: 'Die dich beschleunigt.', href: '#schritt1', stepNumber: 1 },
-  { icon: 'wirkung', title: 'WIRKUNG.', subtitle: 'Die bleibt.', href: '#schritt7', stepNumber: 7 },
-];
 
 function sanftZu(selector: string) {
   const target = document.querySelector(selector);
@@ -87,9 +62,6 @@ function videoErlaubt(): boolean {
 }
 
 export default function Hero() {
-  const [stepMediaData, setStepMediaData] = useState<Record<number, StepMedia>>({});
-  const [videoModalOpen, setVideoModalOpen] = useState(false);
-  const [currentVideo, setCurrentVideo] = useState<{ url: string; platform: 'youtube' | 'vimeo'; title: string } | null>(null);
 
   // Video-Zustand: eingehaengt (nach dem Laden), sichtbar (laeuft wirklich), angehalten (per Knopf).
   const [videoEingehaengt, setVideoEingehaengt] = useState(false);
@@ -101,25 +73,6 @@ export default function Hero() {
   const imBildRef = useRef(true);
   const angehaltenRef = useRef(false);
 
-  useEffect(() => {
-    loadStepMedia();
-  }, []);
-
-  const loadStepMedia = async () => {
-    try {
-      const { data, error } = await supabase.from('step_media').select('*');
-      if (error) throw error;
-      if (data) {
-        const mediaMap: Record<number, StepMedia> = {};
-        data.forEach((item) => {
-          mediaMap[item.step_number] = item;
-        });
-        setStepMediaData(mediaMap);
-      }
-    } catch (error) {
-      console.error('Error loading step media:', error);
-    }
-  };
 
   // Erst nach dem Laden der Seite einhaengen - das Standbild ist der erste Eindruck, nicht das Video.
   useEffect(() => {
@@ -207,13 +160,8 @@ export default function Hero() {
     else spielen();
   };
 
-  const handleVideoClick = (url: string, platform: 'youtube' | 'vimeo', title: string) => {
-    setCurrentVideo({ url, platform, title });
-    setVideoModalOpen(true);
-  };
 
   const hell = HERO_HELL;
-  const streifenHell = hell && !STREIFEN_DUNKEL;
   const vimeoSrc = `https://player.vimeo.com/video/${VIMEO_ID}?background=1&autoplay=1&muted=1&loop=1&autopause=0&dnt=1&quality=720p`;
 
   return (
@@ -336,88 +284,6 @@ export default function Hero() {
         )}
       </section>
 
-      {/* Der Streifen: die sieben Schluessel als Kacheln, darunter das Laufband. Liegt leicht ueber der
-          Unterkante des Videos und laeuft von Rand zu Rand (Claudia, 23.09.2026 10:13 UTC: "ganz nach rechts
-          und links an den Rand ... einheitlicher"); der Inhalt sitzt in der Breite der Menueleiste (1600 px).
-          Kachel-Regeln vom 23.09.2026 ("die Schrift in den kleinen Audios ist nicht mehr lesbar"): Titel bricht
-          nie um, Unterzeile in voller Staerke, Abspielknopf hat seine eigene Ecke. */}
-      <div
-        className={`cc-hero-streifen relative z-20 border-y shadow-[0_24px_60px_-30px_rgba(10,22,40,0.35)] ${
-          streifenHell ? 'border-[#D4AF37]/45 bg-white/95' : 'border-[#D4AF37]/35 bg-[#0F1F3A]'
-        } ${hell ? '' : 'cc-hero-streifen--dunkel'}`}
-      >
-        <div className="mx-auto max-w-[1600px] px-4 py-3 sm:px-6 sm:py-4 lg:px-8">
-          <div className="hero-kacheln flex snap-x snap-mandatory gap-3 overflow-x-auto pb-1 sm:grid sm:grid-cols-4 sm:overflow-visible sm:pb-0 lg:grid-cols-7">
-            {SCHLUESSEL.map((point) => {
-              const media = stepMediaData[point.stepNumber];
-              return (
-                <a
-                  key={point.icon}
-                  href={point.href}
-                  className={`cc-schluessel group relative flex w-[10.75rem] flex-shrink-0 snap-start flex-col gap-2 rounded-xl border p-3 text-left transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)] sm:w-auto sm:flex-shrink ${
-                    streifenHell ? 'border-[#D4AF37]/50 bg-white hover:border-[#D4AF37]' : 'border-[#D4AF37]/40 bg-[#13233F] hover:border-[#EBD197]'
-                  }`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    sanftZu(point.href);
-                  }}
-                >
-                  <div className="flex items-start justify-between gap-2">
-                    <img
-                      src={`/icons/${point.icon}.webp`}
-                      alt=""
-                      width={256}
-                      height={256}
-                      loading="eager"
-                      decoding="async"
-                      className="h-10 w-10 flex-shrink-0 drop-shadow-[0_6px_10px_rgba(0,0,0,0.3)] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110"
-                    />
-                    {media && (
-                      <div
-                        className="-mr-1 -mt-1 flex-shrink-0 scale-90"
-                        onClick={(e) => {
-                          // preventDefault ist der Punkt: ohne ihn folgt der Browser dem href
-                          // der Kachel, obwohl unser eigener Behandler gestoppt wurde.
-                          e.preventDefault();
-                          e.stopPropagation();
-                        }}
-                      >
-                        {media.media_type === 'audio' ? (
-                          <AudioButton audioUrl={media.media_url} ariaLabel={`${point.title} anhören`} />
-                        ) : media.media_type === 'video' && media.platform ? (
-                          <VideoButton
-                            onClick={() => handleVideoClick(media.media_url, media.platform as 'youtube' | 'vimeo', point.title)}
-                            ariaLabel={`${point.title} als Video`}
-                          />
-                        ) : null}
-                      </div>
-                    )}
-                  </div>
-                  <p className={`whitespace-nowrap font-montserrat text-[0.92rem] font-bold uppercase leading-none tracking-[0.02em] ${streifenHell ? 'text-midnight-blue' : 'text-pearl-white'}`}>
-                    {point.title}
-                  </p>
-                  <p className={`text-[0.8rem] font-medium leading-snug ${streifenHell ? 'text-midnight-blue/85' : 'text-pearl-white/85'}`}>
-                    {point.subtitle}
-                  </p>
-                </a>
-              );
-            })}
-          </div>
-
-          {/* Laufband "Aktuell: 7-Tage-Video-Challenge" - Claudia, 22.09.2026 (unter die Audio-Kacheln). */}
-          <ChallengeBand hell={streifenHell} />
-        </div>
-      </div>
-
-      {currentVideo && (
-        <VideoModal
-          isOpen={videoModalOpen}
-          onClose={() => setVideoModalOpen(false)}
-          videoUrl={currentVideo.url}
-          platform={currentVideo.platform}
-          title={currentVideo.title}
-        />
-      )}
     </>
   );
 }

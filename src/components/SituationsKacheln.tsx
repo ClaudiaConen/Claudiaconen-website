@@ -136,7 +136,7 @@ export default function SituationsKacheln() {
       </div>
 
       <div ref={band} className="cc-lauf cc-lauf-band">
-        <div className="cc-lauf-spur">
+        <div className="cc-lauf-spur cc-sit-spur">
           <Block />
           <Block still />
         </div>

@@ -110,6 +110,7 @@ const staticPages = [
   { path: '/angebote', priority: '0.9', changefreq: 'weekly' },
   { path: '/live-workshop', priority: '0.9', changefreq: 'weekly' },
   { path: '/mentoring-programm', priority: '0.9', changefreq: 'weekly' },
+  { path: '/1zu1-training', priority: '0.8', changefreq: 'weekly' },
   { path: '/shop/', priority: '0.8', changefreq: 'weekly' },
   { path: '/termin-buchen', priority: '0.8', changefreq: 'monthly' },
   { path: '/events', priority: '0.8', changefreq: 'weekly' },

@@ -41,7 +41,7 @@ export default function FinalCTA() {
 
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 items-center justify-center pt-2 md:pt-4">
             <a
-              href="https://claudiaconen.com/termin-buchen"
+              href="https://meet.brevo.com/claudia-conen"
               target="_blank"
               rel="noopener noreferrer"
               className="cc-knopf"

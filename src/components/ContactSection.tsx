@@ -168,7 +168,7 @@ export default function ContactSection() {
                 Buche jetzt einen kostenlosen Ersttermin und lass uns gemeinsam deine Wirkung entfalten.
               </p>
               <a
-                href="https://claudiaconen.com/termin-buchen"
+                href="https://meet.brevo.com/claudia-conen"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="cc-knopf cc-knopf--zweit"

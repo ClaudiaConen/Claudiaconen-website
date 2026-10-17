@@ -99,9 +99,9 @@ export default function Footer() {
               </ul>
               {/* Derselbe Knopf wie ueberall (.cc-knopf) - er steht auf jeder Seite und war
                   vorher die haeufigste Abweichung vom Markenknopf (48 statt 52 px, keine Versalien). */}
-              <Link to="/termin-buchen" className="cc-knopf mt-6">
+              <a href="https://meet.brevo.com/claudia-conen" target="_blank" rel="noopener noreferrer" className="cc-knopf mt-6">
                 <Calendar size={18} /> Kostenloses Erstgespräch
-              </Link>
+              </a>
               <div className="mt-6 flex gap-3">
                 <a href="https://www.linkedin.com/in/claudia-conen-die-stimme/" target="_blank" rel="noopener noreferrer" aria-label="Claudia Conen auf LinkedIn" className={RUND}><Linkedin size={18} /></a>
                 <a href="https://www.instagram.com/claudia_conen_umsatzstimme/" target="_blank" rel="noopener noreferrer" aria-label="Claudia Conen auf Instagram" className={RUND}><Instagram size={18} /></a>

@@ -940,9 +940,9 @@ export default function Challenge() {
                 ))}
               </ul>
               <div className="mt-auto pt-7">
-                <Link to="/buchen/erstgespraech" className="inline-flex items-center rounded-full bg-midnight-blue px-6 py-3.5 font-montserrat text-sm font-bold text-pearl-white transition-colors hover:bg-royal-navy">
+                <a href="https://meet.brevo.com/claudia-conen" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full bg-midnight-blue px-6 py-3.5 font-montserrat text-sm font-bold text-pearl-white transition-colors hover:bg-royal-navy">
                   Termin für den Wirkungs-Check
-                </Link>
+                </a>
               </div>
             </div>
             <div className={`flex flex-col bg-midnight-blue p-7 text-pearl-white ${KACHEL} border-[#C9A961]`}>
@@ -955,9 +955,9 @@ export default function Challenge() {
                 Buch dir in meinem Kalender einen Rederaum: 30 Minuten, kostenlos, nur wir zwei – bei einem Kaffee oder im Zoom. Wir schauen, wo du stehst, was du erreichen willst – und wie wir miteinander arbeiten können.
               </p>
               <div className="mt-auto pt-7">
-                <Link to="/buchen/erstgespraech" className={`inline-flex items-center rounded-full px-6 py-3.5 font-montserrat text-sm font-bold text-midnight-blue transition-transform hover:-translate-y-px ${GOLD}`}>
+                <a href="https://meet.brevo.com/claudia-conen" target="_blank" rel="noopener noreferrer" className={`inline-flex items-center rounded-full px-6 py-3.5 font-montserrat text-sm font-bold text-midnight-blue transition-transform hover:-translate-y-px ${GOLD}`}>
                   Rederaum buchen
-                </Link>
+                </a>
               </div>
             </div>
           </div>

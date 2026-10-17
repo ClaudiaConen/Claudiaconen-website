@@ -251,11 +251,14 @@ const ABLAUF: { titel: string; text: React.ReactNode }[] = [
   { titel: 'Der Auftakt', text: 'Montag, 26. Oktober, 19 Uhr, 60 Minuten im Zoom: kennenlernen, miteinander lachen, den Wegweiser in die Hand bekommen. Dann geht es los.' },
   { titel: 'Jeden Tag ein Impuls', text: <>Ein Audio von mir und dein Workbook, damit du täglich am Ball bleibst. Für deine <strong className={ROT}>1-Minuten-Aufnahme</strong> hast du 24 Stunden Zeit.</> },
   { titel: 'Dein Feedback', text: <>Zu deinem <strong className="font-bold">ersten und deinem letzten Video</strong> bekommst du ein ganz persönliches Feedback mit Verbesserungsvorschlägen – wenn du sie innerhalb von 24 Stunden postest.</> },
-  { titel: 'Zwischendurch', text: <>Impulse zu: <span className="mt-1 block">1. Positionierung</span><span className="block">2. Storytelling</span><span className="block">3. Erkenntnisse aus der Wissenschaft</span><span className="block">4. Ein persönlicher Impuls für deine Motivation</span><span className="block">5. Rhetorik-Tipps, um Aufmerksamkeit und Vertrauen zu gewinnen</span></> },
+  { titel: 'Zwischendurch', text: <>Impulse zu:<ul className="mt-2 grid list-none gap-1.5 p-0">{['Positionierung', 'Storytelling', 'Elevator Pitch', 'Keynote präsentieren', 'Stimmwirkung', 'Neueste Wissenschaft des Zuhörens', 'Rhetorik-Tipps'].map((z) => (<li key={z} className="flex items-center gap-2.5"><span aria-hidden="true" className="h-2.5 w-2.5 flex-none rounded-full bg-[#C62828]" />{z}</li>))}</ul></> },
   { titel: 'Das Workbook', text: 'Schnapp dir das Workbook für einen ersten Einblick. Dazu PDFs – und am Ende dein Zertifikat.' },
   { titel: 'Tag 8 · Der Ausklang', text: 'Montag, 2. November, 19 Uhr im Zoom: Erfahrungen austauschen, Menschen kennenlernen. Dein Werbetag: Zeig, was du anbietest, und genieß die neuen Kontakte.' },
 ];
-const ABLAUF_HINWEIS = 'Mein Tipp: Nimm dir täglich 30 Minuten Zeit – wann auch immer. Alles läuft in der WhatsApp-Gruppe, bis unsere Plattform fertig ist. Dann lade ich euch alle dazu ein.';
+// Tipp 1 + 2 am 17.10.2026 auf Claudias Wunsch von der Seite genommen (zu kompliziert); Texte bleiben fuer spaeter.
+void MORGEN; void WEGWEISER;
+
+const ABLAUF_HINWEIS = 'Mein Tipp: Nimm dir täglich 30 Minuten Zeit – und lass dich überraschen, was wir danach für dich haben. Du darfst Werbung machen, und das sogar kostenfrei.';
 
 const FUER = [
   'gehört werden willst – im Meeting, am Telefon, vor Kunden, auf der Bühne',
@@ -681,6 +684,10 @@ export default function Challenge() {
               </li>
             ))}
           </ol>
+          <div className="mt-8 text-center text-midnight-blue">
+            <p className="font-montserrat text-[13px] font-extrabold uppercase tracking-[0.14em] sm:text-sm">Aus der Selbsterkenntnis <span className="text-[#C62828]">→</span> zur Selbstwirksamkeit <span className="text-[#C62828]">→</span> zum Selbstbewusstsein <span className="text-[#C62828]">→</span> zur Kundengewinnung</p>
+            <p className="mt-3 font-cormorant text-3xl font-semibold italic leading-tight sm:text-4xl">Wer sich selbst vertraut, gewinnt.</p>
+          </div>
           <p className="mt-5 max-w-3xl border-l-4 border-[#C9A961] bg-white px-5 py-3 font-inter text-[15px] leading-relaxed text-midnight-blue">{ABLAUF_HINWEIS}</p>
         </div>
       </Abschnitt>
@@ -710,60 +717,6 @@ export default function Challenge() {
             <span>Abschluss · Montag, 2. November 2026 · 19:00–20:00 Uhr · Zoom freiwillig</span>
           </div>
 
-          <details className={`group mt-8 text-midnight-blue ${FLAECHE} ${KACHEL} shadow-[0_18px_40px_-24px_rgba(19,35,63,0.35)]`}>
-            <summary className="grid cursor-pointer list-none gap-x-6 gap-y-2 px-5 py-5 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:items-center sm:px-7 sm:py-6 [&::-webkit-details-marker]:hidden">
-              <span className="self-start rounded-md bg-midnight-blue px-2.5 py-2 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-[#EBD197]">Tipp 1 · jetzt schon</span>
-              <span className="min-w-0">
-                <span className="block font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">{WEGWEISER.titel}</span>
-                <span className="mt-1 block font-inter text-[15px] leading-relaxed">{WEGWEISER.vorschau}</span>
-              </span>
-              <span className="flex items-center gap-2 font-montserrat text-sm font-bold underline decoration-midnight-blue/40 underline-offset-4">
-                <span className="group-open:hidden">Anleitung lesen</span>
-                <span className="hidden group-open:inline">Zuklappen</span>
-                <span aria-hidden="true" className="inline-block transition-transform group-open:rotate-180">▾</span>
-              </span>
-            </summary>
-            <div className="border-t border-midnight-blue/20 px-5 pb-5 pt-4 sm:px-7 sm:pb-6">
-              <p className="font-inter text-[15px] leading-relaxed">{WEGWEISER.text}</p>
-              <p className="mt-3 font-montserrat text-[11px] font-extrabold uppercase tracking-[0.14em]">So legst du die Gruppe an:</p>
-              <ol className="mt-1.5 grid list-none gap-1.5 p-0">
-                {WEGWEISER.schritte.map((s, i) => (
-                  <li key={s} className="flex items-start gap-3 font-inter text-[15px] leading-normal">
-                    <span className="mt-0.5 flex h-5 w-5 flex-none items-center justify-center rounded-full bg-midnight-blue font-montserrat text-[11px] font-black text-[#EBD197]">{i + 1}</span>
-                    <span>{s}</span>
-                  </li>
-                ))}
-              </ol>
-            </div>
-          </details>
-
-          {/* Kleiner Tipp am Morgen - Claudias Aufwachuebung (ihr Wortlaut vom 22.09.2026 09:19 UTC), vor den sieben
-              Tagen zum Aufklappen; die Tage selbst bleiben Geheimnis (11:24 UTC). */}
-          <details className={`group mt-3 text-midnight-blue ${FLAECHE} ${KACHEL} shadow-[0_18px_40px_-24px_rgba(19,35,63,0.35)]`}>
-            <summary className="grid cursor-pointer list-none gap-x-6 gap-y-2 px-5 py-5 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:items-center sm:px-7 sm:py-6 [&::-webkit-details-marker]:hidden">
-              <span className="self-start rounded-md bg-midnight-blue px-2.5 py-2 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-[#EBD197]">Tipp 2 · am Morgen</span>
-              <span className="min-w-0">
-                <span className="block font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">Lerne deine Stimmwirkung kennen</span>
-                <span className="mt-1 block font-inter text-[15px] leading-relaxed">Ein kleiner Tipp am Morgen, vorweg: ein Satz, fünf Minuten – und du hörst, was sich verändert.</span>
-              </span>
-              <span className="flex items-center gap-2 font-montserrat text-sm font-bold underline decoration-midnight-blue/40 underline-offset-4">
-                <span className="group-open:hidden">Aufklappen</span>
-                <span className="hidden group-open:inline">Zuklappen</span>
-                <span aria-hidden="true" className="inline-block transition-transform group-open:rotate-180">▾</span>
-              </span>
-            </summary>
-            <div className="border-t border-midnight-blue/20 px-5 pb-5 pt-4 sm:px-7 sm:pb-6">
-              <p className="font-inter text-[15px] leading-relaxed">{MORGEN.aufgabe}</p>
-              <blockquote className="mt-3 border-l-4 border-midnight-blue bg-white/60 px-5 py-3 font-cormorant text-xl italic leading-snug sm:text-2xl">„{MORGEN.satz}"</blockquote>
-              <p className="mt-3 font-montserrat text-[11px] font-extrabold uppercase tracking-[0.14em]">{MORGEN.schrittTitel}</p>
-              <ul className="mt-1.5 grid list-none gap-1.5 p-0">
-                {MORGEN.schritte.map((s) => (
-                  <li key={s} className="flex items-start gap-3 font-inter text-[15px] leading-normal"><Haken />{s}</li>
-                ))}
-              </ul>
-              <p className="mt-3 font-montserrat text-base font-bold">{MORGEN.danach}</p>
-            </div>
-          </details>
 
           <p className="mt-6 font-montserrat text-[12px] font-bold uppercase tracking-[0.16em] text-midnight-blue/60">Der Inhalt wird täglich freigegeben</p>
           <div className="mt-2 grid gap-5 md:grid-cols-[34px_minmax(0,1fr)]">
@@ -801,9 +754,9 @@ export default function Challenge() {
             })}
             {/* Tag 8 - Claudia, Discord 17.10.2026 09:15 UTC: „in blau mit goldener Schrift: dein Werbetag in unserer Challenge-Gruppe“. */}
             <li className="cc-stufe">
-              <div className={`flex flex-wrap items-center gap-x-4 gap-y-1 bg-midnight-blue px-4 py-3.5 sm:px-6 ${KACHEL} border-[#C9A961]`}>
+              <div className={`cc-werbetag flex flex-wrap items-center gap-x-4 gap-y-1 bg-midnight-blue px-4 py-4 sm:px-6 ${KACHEL} border-[#C9A961]`}>
                 <span className={`rounded-md px-2.5 py-1.5 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-midnight-blue ${GOLD}`}>Tag 8</span>
-                <span className="min-w-0 flex-1 font-montserrat text-base font-extrabold text-[#EBD197]">Dein Werbetag in unserer Challenge-Gruppe</span>
+                <span className="gold-text-animated min-w-0 flex-1 font-montserrat text-lg font-extrabold">Dein persönlicher Werbetag in unserer Challenge-Gruppe</span>
                 <span className="font-montserrat text-sm font-bold text-pearl-white/80">Mo., 2. Nov.</span>
               </div>
             </li>

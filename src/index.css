@@ -2765,3 +2765,11 @@ html, body { overflow-x: clip; }
 .cc-chal-zeile-spur { animation-duration: 300s; }
 .cc-sit-spur { animation-duration: 180s; }
 .cc-chal-spur { animation-duration: 180s; }
+
+/* Tag 8 „Dein persoenlicher Werbetag“ leuchtet sanft (Claudia 17.10.2026: „ein bisschen leuchten lassen … animieren“). */
+.cc-werbetag { animation: cc-werbetag-glanz 3.2s ease-in-out infinite; }
+@keyframes cc-werbetag-glanz {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.0), 0 10px 30px -18px rgba(19, 35, 63, 0.5); }
+  50% { box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.35), 0 0 34px 4px rgba(212, 175, 55, 0.35); }
+}
+@media (prefers-reduced-motion: reduce) { .cc-werbetag { animation: none; } }

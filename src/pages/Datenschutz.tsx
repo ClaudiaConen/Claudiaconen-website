@@ -192,8 +192,8 @@ export default function Datenschutz() {
                 </h3>
                 <p className="leading-relaxed mb-4">
                   Einige unserer Produkte, Dienstleistungen und Inhalte werden von Digistore24 als Reseller angeboten. Anbieter und Vertragspartner ist die Digistore24 GmbH, St.-Godehard-Straße 32 in 31139 Hildesheim. Welche Daten Digistore24 bei diesem Website-Aufruf speichert und verarbeitet, legt die Digistore24 GmbH als Verantwortlicher in der eigenen Datenschutzerklärung dar. Weitere Informationen erhalten Sie in der Datenschutzerklärung von Digistore24:{' '}
-                  <a href="https://www.digistore24.com/dataschutz" target="_blank" rel="noopener noreferrer" className="text-bright-gold hover:underline">
-                    https://www.digistore24.com/dataschutz
+                  <a href="https://www.digistore24.com/datenschutz" target="_blank" rel="noopener noreferrer" className="text-bright-gold hover:underline">
+                    https://www.digistore24.com/datenschutz
                   </a>
                 </p>
 
@@ -208,8 +208,8 @@ export default function Datenschutz() {
                 </p>
                 <p className="leading-relaxed">
                   Welche Daten Digistore24 bei diesem Webseiten-Aufruf speichert und verarbeitet, legt die Digistore24 GmbH als Verantwortlicher in der eigenen Datenschutzerklärung dar. Die Datenschutzerklärung von Digistore24 finden Sie hier:{' '}
-                  <a href="https://www.digistore24.com/dataschutz" target="_blank" rel="noopener noreferrer" className="text-bright-gold hover:underline">
-                    https://www.digistore24.com/dataschutz
+                  <a href="https://www.digistore24.com/datenschutz" target="_blank" rel="noopener noreferrer" className="text-bright-gold hover:underline">
+                    https://www.digistore24.com/datenschutz
                   </a>
                 </p>
               </section>

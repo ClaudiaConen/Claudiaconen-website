@@ -520,64 +520,81 @@ export default function Challenge() {
         </div>
       </section>
 
-      {/* Worum es geht + Treppe - Claudia, Discord 17.10.2026 08:07/08:18 UTC: „Die Challenge muss klarer sein“,
-          „Mach 1 Minute Video bitte in rot“, rechts „wie so ne Treppe“: Challenge -> 1:1 -> Mentoring. */}
-      <Abschnitt id="worum" className="bg-pearl-white pt-10 pb-6 sm:pt-14" label="worum-titel">
-        <div className="mx-auto grid max-w-6xl gap-8 px-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:gap-12">
-          <div className="text-midnight-blue">
-            <Kicker text="Worum es geht" hell />
-            <h2 id="worum-titel" className="mt-5 font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">Entdecke deine Wirkungskraft.</h2>
-            <p className="mt-4 font-inter text-lg leading-relaxed">
-              In dieser Challenge geht es um dich: deine Identität, deine Unverwechselbarkeit. Was zieht Kunden zu dir? Was bietest du? Wo ist dein Expertenstatus?
-              {' '}Welche Story kannst du erzählen? Und wann vertrauen Menschen dir überhaupt?
-            </p>
-            <h3 className="mt-8 font-montserrat text-xl font-extrabold sm:text-2xl">Die Challenge ist deine Bühne.</h3>
-            <p className="mt-3 font-inter text-lg leading-relaxed">
-              Die anderen sehen deine Videos, und du siehst ihre. Alle wissen mehr als einer. Vielleicht ist in der Challenge sogar dein bester zukünftiger Kunde.
-              {' '}Wir brauchen viele Kontaktpunkte, um Vertrauen aufzubauen. Hier sehen wir miteinander, wie wir wachsen, wofür wir stehen und wofür wir brennen.
-              {' '}So hebst du dich aus der Masse der Angebote heraus und definierst dich nicht nur über den Preis.
-            </p>
-            <h3 className="mt-8 font-montserrat text-xl font-extrabold sm:text-2xl">Das bekommst du</h3>
-            <ol className="mt-4 grid list-none gap-3 p-0 font-inter text-[17px] leading-relaxed">
-              {[
-                <>Ein Live-Zoom-Call zum Start (Montag, 26. Oktober, 19 Uhr) und zum Abschluss (Montag, 2. November, 19 Uhr), dazu ein Workbook</>,
-                <>Jeden Tag einen Impuls und eine klare Anleitung</>,
-                <>24 Stunden Zeit für jedes <strong className="whitespace-nowrap font-extrabold text-[#C62828]">1-Minuten-Video</strong>. Dann kommt die neue Anleitung.</>,
-                <>Ein persönliches Feedback als Audio zu deinem ersten und letzten Video, wenn du alle sieben Tage durchziehst</>,
-                <>Dein Zertifikat zur 7-Tage-Video-Challenge</>,
-              ].map((z, i) => (
-                <li key={i} className={`flex items-start gap-4 bg-white px-4 py-3 ${KACHEL}`}>
-                  <span aria-hidden="true" className="mt-0.5 flex h-7 w-7 flex-none items-center justify-center rounded-full bg-midnight-blue font-montserrat text-sm font-extrabold text-[#F7E7CE]">{i + 1}</span>
-                  <span>{z}</span>
-                </li>
-              ))}
-            </ol>
-            <p className="mt-6 border-l-4 border-[#C9A961] bg-white px-5 py-3 font-inter text-[17px] leading-relaxed">
-              Das ist dein Invest für deine Wirkungskraft. Echt, authentisch, mit Leichtigkeit: So gestaltest du künftig deine eigene Werbung.{" "}<strong className="font-extrabold">Gerade im Zeitalter der künstlichen Intelligenz sind Klarheit und Vertrauen wichtiger denn je.</strong>
-            </p>
-          </div>
+      {/* Worum es geht / Das bekommst du / Dein Weg - Claudia, Discord 17.10.2026 08:07-08:26 UTC: „Die Challenge muss
+          klarer sein“, „1 Minute Video bitte in rot“, „wie so ne Treppe“, „stell dir vor du waerst Apple“. Ein Gedanke je Block. */}
+      <Abschnitt id="worum" className="bg-white py-16 text-midnight-blue sm:py-24" label="worum-titel">
+        <div className="mx-auto max-w-3xl px-6 text-center">
+          <div className="flex justify-center"><Kicker text="Worum es geht" hell /></div>
+          <h2 id="worum-titel" className="mt-5 font-montserrat text-4xl font-extrabold leading-[1.08] sm:text-6xl">Entdecke deine<br />Wirkungskraft.</h2>
+          <p className="mx-auto mt-6 max-w-2xl font-inter text-lg leading-relaxed sm:text-xl">
+            In dieser Challenge geht es um dich: deine Identität, deine Unverwechselbarkeit. Was zieht Kunden zu dir? Was bietest du? Wo ist dein Expertenstatus?
+            {' '}Welche Story kannst du erzählen? Und wann vertrauen Menschen dir überhaupt?
+          </p>
+          <h3 className="mt-14 font-montserrat text-2xl font-extrabold sm:text-3xl">Die Challenge ist deine Bühne.</h3>
+          <p className="mx-auto mt-4 max-w-2xl font-inter text-lg leading-relaxed sm:text-xl">
+            Die anderen sehen deine Videos, und du siehst ihre. Alle wissen mehr als einer. <strong className="font-bold">Vielleicht ist in der Challenge sogar dein bester zukünftiger Kunde.</strong>
+            {' '}Wir brauchen viele Kontaktpunkte, um Vertrauen aufzubauen. Hier sehen wir miteinander, wie wir wachsen, wofür wir stehen und wofür wir brennen.
+            {' '}So hebst du dich aus der Masse der Angebote heraus und definierst dich nicht nur über den Preis.
+          </p>
+        </div>
+      </Abschnitt>
 
-          {/* Die Treppe: jede Stufe ein Stueck hoeher (lg: nach oben versetzt), Gold nur als Linie, nie als Schrift auf Hell. */}
-          <div className="flex flex-col-reverse justify-end gap-4 lg:flex-col lg:pb-2" aria-label="Dein Weg nach der Challenge">
-            <div className={`relative bg-white p-6 text-midnight-blue lg:ml-16 ${KACHEL}`}>
-              <p className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.2em] text-midnight-blue/70">Stufe 3 · Dauerhafte Wirkungskraft</p>
-              <h3 className="mt-2 font-montserrat text-lg font-extrabold">Unverwechselbar. Das 12-Wochen-Mentoring</h3>
-              <p className="mt-2 font-inter text-[15px] leading-relaxed">Etwas zur Gewohnheit machen dauert circa drei Monate. Ich begleite dich.</p>
-              <a href="/mentoring-programm" className="mt-4 inline-flex items-center rounded-full border border-midnight-blue/25 px-5 py-2.5 font-montserrat text-sm font-bold text-midnight-blue no-underline transition-colors hover:border-[#D4AF37]">Zum Mentoring →</a>
-            </div>
-            <div className={`relative bg-midnight-blue p-6 text-pearl-white lg:ml-8 ${KACHEL} border-[#C9A961]`}>
-              <p className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#F7E7CE]">Stufe 2 · Du willst die Abkürzung?</p>
-              <h3 className="mt-2 font-montserrat text-lg font-extrabold text-white">1:1-Live-Training online</h3>
-              <p className="mt-2 font-inter text-[15px] leading-relaxed text-pearl-white/90">90 Minuten, nur du und Claudia. Sonderpreis zur Challenge.</p>
-              <p className="mt-2 font-inter text-sm text-pearl-white/85">173 € zzgl. MwSt. (205,87 € inkl. MwSt.)</p>
-              <a href="/1zu1-training" className={`mt-4 inline-flex items-center rounded-full px-5 py-2.5 font-montserrat text-sm font-bold text-midnight-blue no-underline transition-transform hover:-translate-y-px ${GOLD}`}>Mehr erfahren →</a>
-            </div>
-            <div className={`relative p-6 text-midnight-blue ${FLAECHE} rounded-[10px]`}>
-              <p className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.2em] text-midnight-blue/75">Stufe 1 · Du bist dabei</p>
-              <h3 className="mt-2 font-montserrat text-lg font-extrabold">Die 7-Tage-Video-Challenge</h3>
-              <p className="mt-2 font-inter text-[15px] leading-relaxed">Sieben Tage, jeden Tag ein Video, eine Minute.</p>
-            </div>
+      <Abschnitt id="bekommst" className="bg-pearl-white py-16 text-midnight-blue sm:py-24" label="bekommst-titel">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="text-center">
+            <div className="flex justify-center"><Kicker text="Sieben Tage" hell /></div>
+            <h2 id="bekommst-titel" className="mt-5 font-montserrat text-3xl font-extrabold leading-tight sm:text-5xl">Das bekommst du.</h2>
           </div>
+          <ol className="mt-10 grid list-none gap-3.5 p-0 sm:grid-cols-2 lg:grid-cols-5">
+            {[
+              { k: 'Live im Zoom', t: <>Zum Start (Mo 26.10., 19 Uhr) und zum Abschluss (Mo 2.11., 19 Uhr). Dazu ein Workbook.</> },
+              { k: 'Jeden Tag', t: <>Ein Impuls und eine klare Anleitung.</> },
+              { k: '24 Stunden', t: <>Zeit für jedes <strong className="whitespace-nowrap font-extrabold text-[#C62828]">1-Minuten-Video</strong>. Dann kommt die neue Anleitung.</> },
+              { k: 'Wenn du durchziehst', t: <>Ein persönliches Feedback als Audio zu deinem ersten und letzten Video.</> },
+              { k: 'Am Ende', t: <>Dein Zertifikat zur 7-Tage-Video-Challenge.</> },
+            ].map((z, i) => (
+              <li key={z.k} className={`flex flex-col bg-white p-6 ${KACHEL}`}>
+                <span aria-hidden="true" className="font-montserrat text-4xl font-black text-midnight-blue/15">{String(i + 1).padStart(2, '0')}</span>
+                <span className="mt-3 font-montserrat text-[12px] font-extrabold uppercase tracking-[0.16em] text-midnight-blue">{z.k}</span>
+                <span className="mt-2 font-inter text-[16px] leading-relaxed">{z.t}</span>
+              </li>
+            ))}
+          </ol>
+          <p className="mx-auto mt-10 max-w-3xl text-center font-inter text-lg leading-relaxed sm:text-xl">
+            Das ist dein Invest für deine Wirkungskraft. Echt, authentisch, mit Leichtigkeit: So gestaltest du künftig deine eigene Werbung.
+            <strong className="mt-3 block font-montserrat text-xl font-extrabold sm:text-2xl">Gerade im Zeitalter der künstlichen Intelligenz sind Klarheit und Vertrauen wichtiger denn je.</strong>
+          </p>
+        </div>
+      </Abschnitt>
+
+      {/* Dein Weg: die Treppe quer, jede Stufe hoeher (lg: items-end + wachsende Hoehe). Gold nur als Flaeche/Linie. */}
+      <Abschnitt id="weg" className="bg-white py-16 text-midnight-blue sm:py-24" label="weg-titel">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="text-center">
+            <div className="flex justify-center"><Kicker text="Dein Weg" hell /></div>
+            <h2 id="weg-titel" className="mt-5 font-montserrat text-3xl font-extrabold leading-tight sm:text-5xl">Drei Stufen. Du bestimmst das Tempo.</h2>
+          </div>
+          <ol className="mt-12 grid list-none gap-4 p-0 lg:grid-cols-3 lg:items-end">
+            <li className={`flex flex-col p-7 lg:min-h-[260px] ${FLAECHE} rounded-[10px]`}>
+              <span className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.2em] text-midnight-blue/80">Stufe 1 · Du bist dabei</span>
+              <h3 className="mt-3 font-montserrat text-2xl font-extrabold">Die 7-Tage-Video-Challenge</h3>
+              <p className="mt-3 font-inter text-[16px] leading-relaxed">Sieben Tage, jeden Tag ein Video, eine Minute.</p>
+              <a href="#anmelden" className="mt-auto inline-flex self-start pt-6 font-montserrat text-sm font-bold text-midnight-blue underline decoration-[#C9A961] decoration-2 underline-offset-4">Jetzt eintragen ↑</a>
+            </li>
+            <li className={`flex flex-col bg-midnight-blue p-7 text-pearl-white lg:min-h-[330px] ${KACHEL} border-[#C9A961]`}>
+              <span className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#F7E7CE]">Stufe 2 · Du willst die Abkürzung?</span>
+              <h3 className="mt-3 font-montserrat text-2xl font-extrabold text-white">1:1-Live-Training online</h3>
+              <p className="mt-3 font-inter text-[16px] leading-relaxed text-pearl-white/90">90 Minuten, nur du und Claudia. Sonderpreis zur Challenge.</p>
+              <p className="mt-2 font-inter text-sm text-pearl-white/85">173 € zzgl. MwSt. (205,87 € inkl. MwSt.)</p>
+              <a href="/1zu1-training" className={`mt-auto inline-flex self-start rounded-full px-6 py-3 font-montserrat text-sm font-bold text-midnight-blue no-underline transition-transform hover:-translate-y-px ${GOLD}`}>Mehr erfahren →</a>
+            </li>
+            <li className={`flex flex-col bg-white p-7 lg:min-h-[400px] ${KACHEL}`}>
+              <span className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.2em] text-midnight-blue/75">Stufe 3 · Dauerhafte Wirkungskraft</span>
+              <h3 className="mt-3 font-montserrat text-2xl font-extrabold">Unverwechselbar. Das 12-Wochen-Mentoring</h3>
+              <p className="mt-3 font-inter text-[16px] leading-relaxed">Etwas zur Gewohnheit machen dauert circa drei Monate. Ich begleite dich.</p>
+              <a href="/mentoring-programm" className="mt-auto inline-flex self-start rounded-full border border-midnight-blue/25 px-6 py-3 font-montserrat text-sm font-bold text-midnight-blue no-underline transition-colors hover:border-[#D4AF37]">Zum Mentoring →</a>
+            </li>
+          </ol>
         </div>
       </Abschnitt>
 

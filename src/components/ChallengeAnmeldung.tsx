@@ -73,7 +73,7 @@ export default function ChallengeAnmeldung({ start, onEingetragen }: { start: st
         <div className="min-w-0">
           <p className="font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">Danke, {vorname.trim() || 'du'} – du bist eingetragen.</p>
           <p className="mt-2 font-inter text-[15px] leading-relaxed sm:text-base">
-            Jetzt noch in deine Gruppe. Du hast die Wahl: Empfohlen ist die WhatsApp-Gruppe, dort ist am meisten los. Kein WhatsApp? Dann nimm die Telegram-Gruppe, gleiche Inhalte, gleiches Feedback. Start: Montag, {start}.
+            Jetzt noch in deine Gruppe. Du hast die Wahl: Empfohlen ist die WhatsApp-Gruppe, dort ist am meisten los. Kein WhatsApp? Dann nimm die Telegram-Gruppe, gleiche Inhalte, gleiche Anleitungen. Start: Montag, {start}.
           </p>
           <div className="mt-4 flex flex-wrap gap-3">
             <a href={CHALLENGE_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full bg-midnight-blue px-7 py-4 font-montserrat text-sm font-bold text-pearl-white transition-colors hover:bg-royal-navy">

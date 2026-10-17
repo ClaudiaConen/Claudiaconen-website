@@ -553,7 +553,7 @@ export default function Challenge() {
               ))}
             </ol>
             <p className="mt-6 border-l-4 border-[#C9A961] bg-white px-5 py-3 font-inter text-[17px] leading-relaxed">
-              Das ist dein Invest für deine Wirkungskraft. Echt, authentisch, mit Leichtigkeit: So gestaltest du künftig deine eigene Werbung, gerade im Zeitalter der künstlichen Intelligenz.
+              Das ist dein Invest für deine Wirkungskraft. Echt, authentisch, mit Leichtigkeit: So gestaltest du künftig deine eigene Werbung.{" "}<strong className="font-extrabold">Gerade im Zeitalter der künstlichen Intelligenz sind Klarheit und Vertrauen wichtiger denn je.</strong>
             </p>
           </div>
 

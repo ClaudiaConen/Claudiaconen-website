@@ -519,6 +519,11 @@ export default function Challenge() {
       <section id="anmeldung" className="bg-pearl-white pt-6 pb-4 sm:pt-8" aria-label="Anmeldung zur Challenge">
         <div className="mx-auto max-w-6xl px-6">
           <ChallengeAnmeldung start={startKurz} />
+          {/* Fuer alle, die nicht an der Challenge teilnehmen wollen (Claudia, Discord 17.10.2026 09:24 UTC). Leise, nur ein Satz. */}
+          <p className="mt-4 text-center font-inter text-[15px] text-midnight-blue/80">
+            Keine sieben Tage, lieber gleich persönlich?{' '}
+            <a href="/1zu1-training" className="font-bold text-midnight-blue underline decoration-[#C9A961] decoration-2 underline-offset-4">Direkt zum 1:1-Intensiv-Training →</a>
+          </p>
         </div>
       </section>
 

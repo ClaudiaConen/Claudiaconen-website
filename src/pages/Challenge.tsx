@@ -937,24 +937,24 @@ export default function Challenge() {
           <ol className="mt-16 grid list-none gap-4 p-0 lg:grid-cols-3 lg:items-start">
             <li className={`flex flex-col p-5 sm:p-6 ${FLAECHE} rounded-[10px]`}>
               <img src="/challenge/produkte/challenge.webp" alt="Produktbild 7-Tage-Video-Challenge" width={800} height={800} loading="lazy" decoding="async" className="mb-5 w-full rounded-[8px] border border-[#13233F]/10" />
-              <span className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.2em] text-midnight-blue/80">Stufe 1 · Du bist dabei</span>
-              <h3 className="mt-3 font-montserrat text-2xl font-extrabold">Die 7-Tage-Video-Challenge</h3>
-              <p className="mt-3 font-inter text-[16px] leading-relaxed">Sieben Tage, jeden Tag ein Video, eine Minute.</p>
+              <span className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.2em] text-midnight-blue/80">Stufe 1 · Die Methode</span>
+              <h3 className="mt-3 font-montserrat text-2xl font-extrabold">Die 7-Tage-Challenge</h3>
+              <p className="mt-3 font-inter text-[16px] leading-relaxed">Dein Gratis-Programm für mehr Wirkungskraft.</p>
               <a href="#anmelden" className="mt-auto inline-flex self-start pt-6 font-montserrat text-sm font-bold text-midnight-blue underline decoration-[#C9A961] decoration-2 underline-offset-4">Jetzt eintragen ↑</a>
             </li>
             <li className={`flex flex-col bg-midnight-blue p-5 text-pearl-white sm:p-6 lg:-translate-y-6 ${KACHEL} border-[#C9A961]`}>
-              <div className="mb-5 grid grid-cols-2 gap-2"><img src="/challenge/produkte/1zu1.webp" alt="Produktbild 1:1-Intensiv-Training, 90 Minuten" width={800} height={800} loading="lazy" decoding="async" className="w-full rounded-[8px]" /><img src="/challenge/produkte/paket.webp" alt="Produktbild 1:1-Intensiv-Training, 3 × 90 Minuten" width={800} height={800} loading="lazy" decoding="async" className="w-full rounded-[8px]" /></div>
-              <span className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#F7E7CE]">Stufe 2 · Du willst die Abkürzung?</span>
+              <img src="/challenge/produkte/1zu1.webp" alt="Produktbild 1:1-Intensiv-Training" width={800} height={800} loading="lazy" decoding="async" className="mb-5 w-full rounded-[8px]" />
+              <span className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#F7E7CE]">Stufe 2 · Die Abkürzung</span>
               <h3 className="mt-3 font-montserrat text-2xl font-extrabold text-white">1:1-Intensiv-Training</h3>
-              <p className="mt-3 font-inter text-[16px] leading-relaxed text-pearl-white/90">Von der Selbsterkenntnis zum Selbstbewusstsein zur Kundengewinnung. 90 Minuten, nur du und Claudia, oder 3 × 90 Minuten im Paket.</p>
-              <p className="mt-2 font-inter text-sm text-pearl-white/85">Sonderpreis zur Challenge: ab 173 € zzgl. MwSt. (205,87 € inkl. MwSt.)</p>
+              <p className="mt-3 font-inter text-[16px] leading-relaxed text-pearl-white/90">Nur du und Claudia. Von der Selbsterkenntnis zum Selbstbewusstsein zur Kundengewinnung.</p>
+              <p className="mt-2 font-inter text-sm text-pearl-white/85">Sonderpreis zur Challenge: 173 € zzgl. MwSt. (205,87 € inkl. MwSt.)</p>
               <a href="/1zu1-training" className={`mt-auto inline-flex self-start rounded-full px-6 py-3 font-montserrat text-sm font-bold text-midnight-blue no-underline transition-transform hover:-translate-y-px ${GOLD}`}>Mehr erfahren →</a>
             </li>
             <li className={`flex flex-col bg-white p-5 sm:p-6 lg:-translate-y-12 ${KACHEL}`}>
-              <img src="/challenge/produkte/mentoring.webp" alt="Produktbild Unverwechselbar. Das 12-Wochen-Mentoring" width={800} height={800} loading="lazy" decoding="async" className="mb-5 w-full rounded-[8px] border border-[#13233F]/10" />
-              <span className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.2em] text-midnight-blue/75">Stufe 3 · Dauerhafte Wirkungskraft</span>
-              <h3 className="mt-3 font-montserrat text-2xl font-extrabold">Unverwechselbar. Das 12-Wochen-Mentoring</h3>
-              <p className="mt-3 font-inter text-[16px] leading-relaxed">Etwas zur Gewohnheit machen dauert circa drei Monate. Ich begleite dich.</p>
+              <img src="/challenge/produkte/mentoring.webp?v=2" alt="Produktbild Unverwechselbar. Das 12-Wochen-Mentoring" width={800} height={800} loading="lazy" decoding="async" className="mb-5 w-full rounded-[8px] border border-[#13233F]/10" />
+              <span className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.2em] text-midnight-blue/75">Stufe 3 · Dauerhaft verinnerlichen</span>
+              <h3 className="mt-3 font-montserrat text-2xl font-extrabold">Das 12-Wochen-Mentoring · live online</h3>
+              <p className="mt-3 font-inter text-[16px] leading-relaxed">Weil deine Bühne überall ist, wo du den Mund aufmachst. Zwölf Wochen, dabei begleite ich dich.</p>
               <a href="/mentoring-programm" className="mt-auto inline-flex self-start rounded-full border border-midnight-blue/25 px-6 py-3 font-montserrat text-sm font-bold text-midnight-blue no-underline transition-colors hover:border-[#D4AF37]">Zum Mentoring →</a>
             </li>
           </ol>

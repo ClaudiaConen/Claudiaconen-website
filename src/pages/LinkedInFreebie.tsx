@@ -289,7 +289,7 @@ export default function LinkedInFreebie() {
                     Oder buche direkt ein kostenloses Erstgespräch:
                   </p>
                   <a
-                    href="https://claudiaconen.com/termin-buchen"
+                    href="https://meet.brevo.com/claudia-conen"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full py-3 bg-midnight-blue text-white font-semibold rounded-full hover:scale-105 transition-transform text-center flex items-center justify-center gap-2"

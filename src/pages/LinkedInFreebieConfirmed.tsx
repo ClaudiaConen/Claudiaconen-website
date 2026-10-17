@@ -229,7 +229,7 @@ export default function LinkedInFreebieConfirmed() {
                 Ich begleite dich gerne persönlich auf deinem Weg zur Unverwechselbarkeit. Lass uns gemeinsam daran arbeiten, dass deine Geschichte hörbar, sichtbar und unvergesslich wird.
               </p>
               <a
-                href="https://claudiaconen.com/termin-buchen"
+                href="https://meet.brevo.com/claudia-conen"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-midnight-blue text-white font-semibold rounded-full hover:scale-105 transition-transform"

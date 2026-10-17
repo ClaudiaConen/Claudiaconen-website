@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { FileText, Plus, Edit2, Trash2, Save, X, Search, Filter } from 'lucide-react';
 import { checkAdminAuth } from '../lib/adminAuth';
 import AdminLayout from '../components/AdminLayout';
-import { supabaseCms, type SiteContent } from '../lib/supabaseCms';
+import { type SiteContent } from '../lib/supabaseCms';
+import { cmsList, cmsInsert, cmsUpdate, cmsDelete } from '../lib/cmsAdmin';
 
 const PAGE_OPTIONS = [
   { value: 'home', label: 'Startseite' },
@@ -63,16 +64,11 @@ export default function AdminSiteContent() {
 
   const loadContents = async () => {
     setLoading(true);
-    const { data, error } = await supabaseCms
-      .from('site_content')
-      .select('*')
-      .order('page_slug', { ascending: true })
-      .order('section_key', { ascending: true });
-
-    if (error) {
-      setError('Fehler beim Laden: ' + error.message);
-    } else {
-      setContents(data || []);
+    try {
+      const data = await cmsList<SiteContent>('site_content');
+      setContents(data);
+    } catch (err) {
+      setError('Fehler beim Laden: ' + (err instanceof Error ? err.message : String(err)));
     }
     setLoading(false);
   };
@@ -80,17 +76,18 @@ export default function AdminSiteContent() {
   const handleAdd = async () => {
     setSaving(true);
     setError('');
-    const { error } = await supabaseCms.from('site_content').insert(formData);
-    if (error) {
-      if (error.message.includes('unique') || error.message.includes('duplicate')) {
-        setError('Diese Kombination aus Seite und Bereich existiert bereits.');
-      } else {
-        setError('Fehler: ' + error.message);
-      }
-    } else {
+    try {
+      await cmsInsert('site_content', formData);
       setFormData(emptyContent);
       setShowAddForm(false);
       await loadContents();
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      if (msg.includes('unique') || msg.includes('duplicate')) {
+        setError('Diese Kombination aus Seite und Bereich existiert bereits.');
+      } else {
+        setError('Fehler: ' + msg);
+      }
     }
     setSaving(false);
   };
@@ -99,27 +96,23 @@ export default function AdminSiteContent() {
     if (!editingId) return;
     setSaving(true);
     setError('');
-    const { error } = await supabaseCms
-      .from('site_content')
-      .update({ ...formData, updated_at: new Date().toISOString() })
-      .eq('id', editingId);
-
-    if (error) {
-      setError('Fehler: ' + error.message);
-    } else {
+    try {
+      await cmsUpdate('site_content', editingId, { ...formData, updated_at: new Date().toISOString() });
       setEditingId(null);
       await loadContents();
+    } catch (err) {
+      setError('Fehler: ' + (err instanceof Error ? err.message : String(err)));
     }
     setSaving(false);
   };
 
   const handleDelete = async (id: string) => {
     if (!confirm('Inhalt wirklich löschen?')) return;
-    const { error } = await supabaseCms.from('site_content').delete().eq('id', id);
-    if (error) {
-      setError('Fehler: ' + error.message);
-    } else {
+    try {
+      await cmsDelete('site_content', id);
       await loadContents();
+    } catch (err) {
+      setError('Fehler: ' + (err instanceof Error ? err.message : String(err)));
     }
   };
 

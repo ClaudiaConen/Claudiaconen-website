@@ -961,6 +961,39 @@ export default function Challenge() {
               </div>
             </div>
           </div>
+
+          {/* 1:1-Intensiv-Training – Sonderpreis für Challenge-Teilnehmende (Claudia, 17.10.2026):
+              90 Min, 180 € netto, Buchung auf Anfrage per E-Mail. Bild liegt in public/challenge/. */}
+          <div className={`mt-4 overflow-hidden bg-midnight-blue ${KACHEL} border-[#C9A961]`}>
+            <div className="grid items-center md:grid-cols-2">
+              <img
+                src="/challenge/1zu1-intensiv-training.jpg"
+                alt="1:1-Intensiv-Training mit Claudia Conen – persönlich, online, live"
+                width={1200}
+                height={1200}
+                loading="lazy"
+                decoding="async"
+                className="h-full w-full object-cover"
+              />
+              <div className="p-7 text-pearl-white sm:p-9">
+                <span className={`inline-block rounded-full px-3 py-1.5 font-montserrat text-[10px] font-extrabold uppercase tracking-[0.18em] text-midnight-blue ${GOLD}`}>Neu · 1:1</span>
+                <h3 className="mt-4 font-montserrat text-2xl font-extrabold uppercase text-white sm:text-3xl">1:1-Intensiv-Training</h3>
+                <p className="mt-3 font-inter leading-relaxed text-pearl-white/90">
+                  Nur du und Claudia – 90 Minuten an deinen Stärken, deinem Ausdruck und deiner Rhetorik. Persönlich, online, live.
+                </p>
+                <p className="mt-5 font-montserrat text-3xl font-black text-white">180 € <span className="text-lg font-bold text-pearl-white/70">netto</span></p>
+                <p className="mt-1 font-montserrat text-sm font-extrabold uppercase tracking-wide text-[#EBD197]">Sonderpreis für Challenge-Teilnehmende</p>
+                <div className="mt-7">
+                  <a
+                    href={'mailto:claudiaconen@umsatzstimme.de?subject=' + encodeURIComponent('1:1-Intensiv-Training (90 Minuten)') + '&body=' + encodeURIComponent('Hallo Claudia, ich möchte das 1:1-Intensiv-Training (90 Minuten, 180 € netto) anfragen.')}
+                    className={`inline-flex items-center rounded-full px-6 py-3.5 font-montserrat text-sm font-bold text-midnight-blue transition-transform hover:-translate-y-px ${GOLD}`}
+                  >
+                    Auf Anfrage buchen
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </Abschnitt>
 

@@ -583,9 +583,9 @@ export default function Challenge() {
             </li>
             <li className={`flex flex-col bg-midnight-blue p-7 text-pearl-white lg:min-h-[330px] ${KACHEL} border-[#C9A961]`}>
               <span className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#F7E7CE]">Stufe 2 · Du willst die Abkürzung?</span>
-              <h3 className="mt-3 font-montserrat text-2xl font-extrabold text-white">1:1-Live-Training online</h3>
-              <p className="mt-3 font-inter text-[16px] leading-relaxed text-pearl-white/90">90 Minuten, nur du und Claudia. Sonderpreis zur Challenge.</p>
-              <p className="mt-2 font-inter text-sm text-pearl-white/85">173 € zzgl. MwSt. (205,87 € inkl. MwSt.)</p>
+              <h3 className="mt-3 font-montserrat text-2xl font-extrabold text-white">1:1-Intensiv-Training</h3>
+              <p className="mt-3 font-inter text-[16px] leading-relaxed text-pearl-white/90">Von der Selbsterkenntnis zum Selbstbewusstsein zur Kundengewinnung. 90 Minuten, nur du und Claudia, oder 3 × 90 Minuten im Paket.</p>
+              <p className="mt-2 font-inter text-sm text-pearl-white/85">Sonderpreis zur Challenge: ab 173 € zzgl. MwSt. (205,87 € inkl. MwSt.)</p>
               <a href="/1zu1-training" className={`mt-auto inline-flex self-start rounded-full px-6 py-3 font-montserrat text-sm font-bold text-midnight-blue no-underline transition-transform hover:-translate-y-px ${GOLD}`}>Mehr erfahren →</a>
             </li>
             <li className={`flex flex-col bg-white p-7 lg:min-h-[400px] ${KACHEL}`}>

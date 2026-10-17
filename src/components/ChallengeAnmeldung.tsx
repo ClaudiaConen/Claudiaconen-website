@@ -28,12 +28,33 @@ const FELD =
 /** Schluessel im Browser: nach dem Eintrag duerfen die sieben Schritte aufgeklappt werden (Claudias Idee 22.09.2026 12:28 UTC). */
 export const EINGETRAGEN_SCHLUESSEL = 'cc-challenge-eingetragen';
 
+/** Erkennungszeichen (vereinfacht, eigene Zeichnung): gruener Kreis mit Hoerer bzw. blauer Kreis mit Papierflieger. */
+function WhatsAppZeichen({ gross = 28 }: { gross?: number }) {
+  return (
+    <svg width={gross} height={gross} viewBox="0 0 32 32" aria-hidden="true">
+      <circle cx="16" cy="16" r="16" fill="#25D366" />
+      <path fill="#fff" d="M16 7.2a8.8 8.8 0 0 0-7.6 13.2L7.2 24.8l4.5-1.2A8.8 8.8 0 1 0 16 7.2Zm0 16a7.2 7.2 0 0 1-3.7-1l-.3-.2-2.6.7.7-2.5-.2-.3A7.2 7.2 0 1 1 16 23.2Zm4-5.4c-.2-.1-1.3-.6-1.5-.7-.2-.1-.3-.1-.5.1l-.7.8c-.1.2-.3.2-.5.1a5.9 5.9 0 0 1-2.9-2.5c-.2-.4.2-.4.6-1.2.1-.1 0-.3 0-.4l-.7-1.6c-.2-.4-.4-.4-.5-.4h-.4a.8.8 0 0 0-.6.3 2.5 2.5 0 0 0-.8 1.9 4.4 4.4 0 0 0 .9 2.3 10 10 0 0 0 3.8 3.4c1.4.6 2 .7 2.7.6.4-.1 1.3-.5 1.5-1.1.2-.5.2-1 .1-1.1l-.5-.5Z" />
+    </svg>
+  );
+}
+function TelegramZeichen({ gross = 28 }: { gross?: number }) {
+  return (
+    <svg width={gross} height={gross} viewBox="0 0 32 32" aria-hidden="true">
+      <circle cx="16" cy="16" r="16" fill="#229ED9" />
+      <path fill="#fff" d="M7.4 15.6c4.7-2 7.8-3.4 9.4-4 4.5-1.9 5.4-2.2 6-2.2.1 0 .4 0 .6.2.2.1.2.3.2.4v.6c-.2 2.6-1.3 8.9-1.8 11.8-.2 1.2-.7 1.6-1.1 1.7-1 .1-1.7-.6-2.6-1.2l-3.7-2.5c-1.6-1.1-.6-1.7.4-2.6.2-.3 4.4-4 4.5-4.4v-.3a.4.4 0 0 0-.4 0c-.2 0-2.9 1.9-8.2 5.4-.8.5-1.5.8-2.1.8-.7 0-2-.4-3-.7-1.2-.4-2.1-.6-2-1.2 0-.3.5-.6 1.2-.9Z" />
+    </svg>
+  );
+}
+
 export default function ChallengeAnmeldung({ start, onEingetragen }: { start: string; onEingetragen?: () => void }) {
   const [vorname, setVorname] = useState('');
   const [email, setEmail] = useState('');
   const [telefon, setTelefon] = useState('');
   const [angebote, setAngebote] = useState(false);
-  const [zustand, setZustand] = useState<'offen' | 'sendet' | 'fertig' | 'fehler'>('offen');
+  const [zustand, setZustand] = useState<'offen' | 'sendet' | 'fertig' | 'fehler'>(() => {
+    // Zurueck aus WhatsApp/Telegram (Claudia 17.10.2026: „komme nicht mehr zurueck“): die Gruppenwahl bleibt stehen.
+    try { return window.localStorage.getItem(EINGETRAGEN_SCHLUESSEL) === '1' ? 'fertig' : 'offen'; } catch { return 'offen'; }
+  });
 
   async function absenden(e: FormEvent) {
     e.preventDefault();
@@ -60,29 +81,37 @@ export default function ChallengeAnmeldung({ start, onEingetragen }: { start: st
   if (zustand === 'fertig') {
     return (
       <div id="anmelden" className={`mt-3 grid items-center gap-5 rounded-[10px] border border-[#C9A961]/60 bg-[linear-gradient(135deg,#FCF6EC,#F7E7CE)] px-5 py-6 text-midnight-blue sm:grid-cols-[auto_minmax(0,1fr)] sm:px-7`}>
-        <div className="flex gap-3">
+        <div className="flex gap-4">
           <figure className="m-0 text-center">
-            <img src="/challenge/qr-whatsapp.png" alt="QR-Code: Einladung in die WhatsApp-Gruppe der Challenge (empfohlen)" width={328} height={328} className="h-28 w-28 rounded-md bg-white" />
-            <figcaption className="mt-1 font-montserrat text-[11px] font-bold uppercase tracking-wide">1. WhatsApp</figcaption>
+            <div className="mb-1.5 flex justify-center"><WhatsAppZeichen /></div>
+            <img src="/challenge/qr-whatsapp.png" alt="QR-Code: Einladung in die WhatsApp-Gruppe der Challenge" width={328} height={328} className="h-28 w-28 rounded-md bg-white" />
+            <figcaption className="mt-1 font-montserrat text-[11px] font-bold uppercase tracking-wide">WhatsApp</figcaption>
           </figure>
           <figure className="m-0 text-center">
+            <div className="mb-1.5 flex justify-center"><TelegramZeichen /></div>
             <img src="/challenge/qr-telegram.png" alt="QR-Code: Einladung in die Telegram-Gruppe der Challenge" width={328} height={328} className="h-28 w-28 rounded-md bg-white" />
-            <figcaption className="mt-1 font-montserrat text-[11px] font-bold uppercase tracking-wide">2. Telegram</figcaption>
+            <figcaption className="mt-1 font-montserrat text-[11px] font-bold uppercase tracking-wide">Telegram</figcaption>
           </figure>
         </div>
         <div className="min-w-0">
-          <p className="font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">Danke, {vorname.trim() || 'du'} – du bist eingetragen.</p>
+          <p className="font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">{vorname.trim() ? `Danke, ${vorname.trim()} – du bist eingetragen.` : 'Du bist eingetragen.'}</p>
           <p className="mt-2 font-inter text-[15px] leading-relaxed sm:text-base">
-            Jetzt noch in deine Gruppe. Du hast die Wahl: Empfohlen ist die WhatsApp-Gruppe, dort ist am meisten los. Kein WhatsApp? Dann nimm die Telegram-Gruppe, gleiche Inhalte, gleiches Feedback. Start: Montag, {start}.
+            Jetzt noch in deine Gruppe. <b>Du hast die Wahl:</b> WhatsApp oder Telegram – gleiche Inhalte, gleiche Anleitungen. Start: Montag, {start}.
           </p>
           <div className="mt-4 flex flex-wrap gap-3">
-            <a href={CHALLENGE_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full bg-midnight-blue px-7 py-4 font-montserrat text-sm font-bold text-pearl-white transition-colors hover:bg-royal-navy">
-              1. Zur WhatsApp-Gruppe (empfohlen)
+            <a href={CHALLENGE_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 rounded-full bg-midnight-blue py-3 pl-3 pr-6 font-montserrat text-sm font-bold text-pearl-white transition-colors hover:bg-royal-navy">
+              <WhatsAppZeichen gross={26} /> Zur WhatsApp-Gruppe
             </a>
-            <a href={TELEGRAM_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full border-2 border-midnight-blue px-6 py-[14px] font-montserrat text-sm font-bold text-midnight-blue transition-colors hover:bg-white/40">
-              2. Ohne WhatsApp: Telegram-Gruppe
+            <a href={TELEGRAM_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 rounded-full bg-midnight-blue py-3 pl-3 pr-6 font-montserrat text-sm font-bold text-pearl-white transition-colors hover:bg-royal-navy">
+              <TelegramZeichen gross={26} /> Zur Telegram-Gruppe
             </a>
           </div>
+          <p className="mt-4 font-inter text-sm leading-relaxed text-midnight-blue/85">
+            <b>Und zurück?</b> Die Gruppe öffnet sich in der App, diese Seite bleibt offen. Wechsle danach einfach zurück in deinen Browser – deine Auswahl steht hier weiter für dich bereit.
+          </p>
+          <button type="button" onClick={() => { try { window.localStorage.removeItem(EINGETRAGEN_SCHLUESSEL); } catch { /* egal */ } setZustand('offen'); }} className="mt-2 font-inter text-xs text-midnight-blue/70 underline underline-offset-2 hover:text-midnight-blue">
+            Jemand anderen eintragen
+          </button>
         </div>
       </div>
     );

@@ -243,15 +243,17 @@ const WEGWEISER = {
 
 /** So laeuft es ab - Claudias Diktate vom 22.09.2026, 13:07 und 13:10 UTC ("Wie kann ich das ein bisschen sortieren",
  *  "schreib das kuerzer"), in ihrer Reihenfolge, ein Gedanke je Satz. Termine aus START/ENDE. */
-const ABLAUF: { titel: string; text: string }[] = [
-  { titel: 'Eintragen', text: 'Du trägst dich hier ein. Danach kommst du in die WhatsApp-Gruppe.' },
-  { titel: 'Die Gruppe', text: 'Austausch untereinander ist gern gesehen. Werbung nicht – dafür gibt es am letzten Tag Werbezeit, für jeden.' },
+const ROT = 'whitespace-nowrap font-extrabold text-[#C62828]';
+const ABLAUF: { titel: string; text: React.ReactNode }[] = [
+  // Neu nach Claudias Diktat, Discord 17.10.2026 09:15 UTC: nirgends taegliches Video-Feedback; Werbung erst an Tag 8.
+  { titel: 'Eintragen', text: 'Du trägst dich hier ein und kommst in die WhatsApp-Gruppe. Nach dem Start geht es los.' },
+  { titel: 'Die Gruppe', text: <>Austausch untereinander ist gern gesehen. <span className="font-bold underline decoration-2 underline-offset-2">Keine Werbung</span> – an Tag 8 ist Werbung für alle freigegeben.</> },
   { titel: 'Der Auftakt', text: 'Montag, 26. Oktober, 19 Uhr, 60 Minuten im Zoom: kennenlernen, miteinander lachen, den Wegweiser in die Hand bekommen. Dann geht es los.' },
-  { titel: 'Jeden Tag ein Impuls', text: 'Ein Audio von mir in der Gruppe: Hinweise, eine kleine Lektion, deine Aufgabe des Tages. Dein Video dazu: eine Minute. Du hast 24 Stunden Zeit zum Posten.' },
-  { titel: 'Dein Feedback', text: 'Wer innerhalb der 24 Stunden postet, bekommt persönliches Feedback von mir. Danach darfst du dein Video verbessern – für dich, um daran zu wachsen.' },
-  { titel: 'Zwischendurch', text: 'Impulse zu Storytelling und Prompts für die KI, die du direkt nutzen kannst – um deine Positionierung zu schärfen und deine innere Haltung nach außen zu tragen.' },
-  { titel: 'Das Workbook', text: 'Wenn dir danach ist: Schnapp dir das Workbook weiter unten und genieß es an einem ruhigen Abend. Alles kann, nichts muss.' },
-  { titel: 'Der Ausklang', text: 'Montag, 2. November, 19 Uhr im Zoom: Erfahrungen austauschen, Feedback untereinander. Danach darfst du dein Business in der Community-Gruppe vorstellen.' },
+  { titel: 'Jeden Tag ein Impuls', text: <>Ein Audio von mir und dein Workbook, damit du täglich am Ball bleibst. Für deine <strong className={ROT}>1-Minuten-Aufnahme</strong> hast du 24 Stunden Zeit.</> },
+  { titel: 'Dein Feedback', text: <>Zu deinem <strong className="font-bold">ersten und deinem letzten Video</strong> bekommst du ein ganz persönliches Feedback mit Verbesserungsvorschlägen – wenn du sie innerhalb von 24 Stunden postest.</> },
+  { titel: 'Zwischendurch', text: <>Impulse zu: <span className="mt-1 block">1. Positionierung</span><span className="block">2. Storytelling</span><span className="block">3. Erkenntnisse aus der Wissenschaft</span><span className="block">4. Ein persönlicher Impuls für deine Motivation</span><span className="block">5. Rhetorik-Tipps, um Aufmerksamkeit und Vertrauen zu gewinnen</span></> },
+  { titel: 'Das Workbook', text: 'Schnapp dir das Workbook für einen ersten Einblick. Dazu PDFs – und am Ende dein Zertifikat.' },
+  { titel: 'Tag 8 · Der Ausklang', text: 'Montag, 2. November, 19 Uhr im Zoom: Erfahrungen austauschen, Menschen kennenlernen. Dein Werbetag: Zeig, was du anbietest, und genieß die neuen Kontakte.' },
 ];
 const ABLAUF_HINWEIS = 'Mein Tipp: Nimm dir täglich 30 Minuten Zeit – wann auch immer. Alles läuft in der WhatsApp-Gruppe, bis unsere Plattform fertig ist. Dann lade ich euch alle dazu ein.';
 
@@ -318,7 +320,7 @@ function TagInhalt({ t }: { t: Tag }) {
       {t.zusatz && <p className="mt-2 text-midnight-blue/85">{t.zusatz}</p>}
       <p className="mt-3 border-l-4 border-[#C9A961] bg-pearl-white px-4 py-2 font-montserrat text-sm font-bold">Übungssatz: „{UEBUNGSSATZ}"</p>
       <p className="mt-3"><b className="font-montserrat font-extrabold">Reflexion: </b>{t.reflexion}</p>
-      <p className="mt-3 text-[14px] text-midnight-blue/85">Wenn du magst, teile deinen Versuch in der Gruppe. Du bekommst persönliches Feedback von mir – und wir können miteinander und aneinander wachsen. Wer still mitübt, gehört genauso dazu.</p>
+      <p className="mt-3 text-[14px] text-midnight-blue/85">Wenn du magst, teile deinen Versuch in der Gruppe – wir können miteinander und aneinander wachsen. Wer alle sieben Tage durchzieht, bekommt am Ende mein persönliches Feedback als Audio. Wer still mitübt, gehört genauso dazu.</p>
     </div>
   );
 }
@@ -434,7 +436,7 @@ export default function Challenge() {
     '@context': 'https://schema.org',
     '@type': 'HowTo',
     name: '7 Tage für deine Wirkungskraft – die Video-Challenge',
-    description: 'Sieben Tage, jeden Tag eine Aufgabe und eine Minute Video mit dem Handy – mit Feedback von Claudia Conen. Kostenfrei, in einer WhatsApp-Gruppe.',
+    description: 'Sieben Tage, jeden Tag eine Aufgabe und eine Minute Video mit dem Handy – mit persönlichem Audio-Feedback von Claudia Conen für alle, die durchziehen. Kostenfrei, in einer WhatsApp-Gruppe.',
     totalTime: 'P7D',
     step: TAGE.map((t, i) => ({ '@type': 'HowToStep', position: i + 1, name: `Tag ${i + 1}: ${t.titel} (${t.schwerpunkt})`, text: t.aufgabe })),
     url: `https://claudiaconen.com${PFAD}`,
@@ -444,7 +446,7 @@ export default function Challenge() {
     <div className="cc-2027 min-h-screen bg-pearl-white">
       <SEO
         title="7 Tage für deine Wirkungskraft – die Video-Challenge"
-        description="Sieben Tage, jeden Tag eine Anleitung, eine Minute Video mit dem Handy, Feedback von Claudia Conen. Kostenfrei, in einer WhatsApp-Gruppe – mit den sieben Schritten, dem Workbook und dem Weg danach."
+        description="Sieben Tage, jeden Tag eine Anleitung, eine Minute Video mit dem Handy, persönliches Audio-Feedback von Claudia Conen für alle, die durchziehen. Kostenfrei, in einer WhatsApp-Gruppe – mit den sieben Schritten, dem Workbook und dem Weg danach."
         path={PFAD}
         ogImage="https://claudiaconen.com/a27/og/og-challenge.jpg"
       />
@@ -520,6 +522,84 @@ export default function Challenge() {
         </div>
       </section>
 
+      {/* Worum es geht / Das bekommst du / Dein Weg - Claudia, Discord 17.10.2026 08:07-08:26 UTC: „Die Challenge muss
+          klarer sein“, „1 Minute Video bitte in rot“, „wie so ne Treppe“, „stell dir vor du waerst Apple“. Ein Gedanke je Block. */}
+      <Abschnitt id="worum" className="bg-white py-16 text-midnight-blue sm:py-24" label="worum-titel">
+        <div className="mx-auto max-w-3xl px-6 text-center">
+          <div className="flex justify-center"><Kicker text="Worum es geht" hell /></div>
+          <h2 id="worum-titel" className="mt-5 font-montserrat text-4xl font-extrabold leading-[1.08] sm:text-6xl">Entdecke deine<br />Wirkungskraft.</h2>
+          <p className="mx-auto mt-6 max-w-2xl font-inter text-lg leading-relaxed sm:text-xl">
+            In dieser Challenge geht es um dich: deine Identität, deine Unverwechselbarkeit. Was zieht Kunden zu dir? Was bietest du? Wo ist dein Expertenstatus?
+            {' '}Welche Story kannst du erzählen? Und wann vertrauen Menschen dir überhaupt?
+          </p>
+          <h3 className="mt-14 font-montserrat text-2xl font-extrabold sm:text-3xl">Die Challenge ist deine Bühne.</h3>
+          <p className="mx-auto mt-4 max-w-2xl font-inter text-lg leading-relaxed sm:text-xl">
+            Die anderen sehen deine Videos, und du siehst ihre. Alle wissen mehr als einer. <strong className="font-bold">Vielleicht ist in der Challenge sogar dein bester zukünftiger Kunde.</strong>
+            {' '}Wir brauchen viele Kontaktpunkte, um Vertrauen aufzubauen. Hier sehen wir miteinander, wie wir wachsen, wofür wir stehen und wofür wir brennen.
+            {' '}So hebst du dich aus der Masse der Angebote heraus und definierst dich nicht nur über den Preis.
+          </p>
+        </div>
+      </Abschnitt>
+
+      <Abschnitt id="bekommst" className="bg-pearl-white py-16 text-midnight-blue sm:py-24" label="bekommst-titel">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="text-center">
+            <div className="flex justify-center"><Kicker text="Sieben Tage" hell /></div>
+            <h2 id="bekommst-titel" className="mt-5 font-montserrat text-3xl font-extrabold leading-tight sm:text-5xl">Das bekommst du.</h2>
+          </div>
+          <ol className="mt-10 grid list-none gap-3.5 p-0 sm:grid-cols-2 lg:grid-cols-5">
+            {[
+              { k: 'Live im Zoom', t: <>Zum Start (Mo 26.10., 19 Uhr) und zum Abschluss (Mo 2.11., 19 Uhr). Dazu ein Workbook.</> },
+              { k: 'Jeden Tag', t: <>Ein Impuls und eine klare Anleitung.</> },
+              { k: '24 Stunden', t: <>Zeit für jedes <strong className="whitespace-nowrap font-extrabold text-[#C62828]">1-Minuten-Video</strong>. Dann kommt die neue Anleitung.</> },
+              { k: 'Wenn du durchziehst', t: <>Ein persönliches Feedback als Audio zu deinem ersten und letzten Video.</> },
+              { k: 'Am Ende', t: <>Dein Zertifikat zur 7-Tage-Video-Challenge.</> },
+            ].map((z, i) => (
+              <li key={z.k} className={`flex flex-col bg-white p-6 ${KACHEL}`}>
+                <span aria-hidden="true" className="font-montserrat text-4xl font-black text-midnight-blue/15">{String(i + 1).padStart(2, '0')}</span>
+                <span className="mt-3 font-montserrat text-[12px] font-extrabold uppercase tracking-[0.16em] text-midnight-blue">{z.k}</span>
+                <span className="mt-2 font-inter text-[16px] leading-relaxed">{z.t}</span>
+              </li>
+            ))}
+          </ol>
+          <p className="mx-auto mt-10 max-w-3xl text-center font-inter text-lg leading-relaxed sm:text-xl">
+            Dein Invest: 30 Minuten am Tag, für deine Wirkungskraft. Echt, authentisch, mit Leichtigkeit: So gestaltest du künftig deine eigene Werbung.
+            <strong className="mt-3 block font-montserrat text-xl font-extrabold sm:text-2xl">Gerade im Zeitalter der künstlichen Intelligenz sind Klarheit und Vertrauen wichtiger denn je.</strong>
+          </p>
+        </div>
+      </Abschnitt>
+
+      {/* Dein Weg: die Treppe quer, jede Stufe hoeher (lg: items-end + wachsende Hoehe). Gold nur als Flaeche/Linie. */}
+      <Abschnitt id="weg" className="bg-white py-16 text-midnight-blue sm:py-24" label="weg-titel">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="text-center">
+            <div className="flex justify-center"><Kicker text="Dein Weg" hell /></div>
+            <h2 id="weg-titel" className="mt-5 font-montserrat text-3xl font-extrabold leading-tight sm:text-5xl">Drei Stufen. Du bestimmst das Tempo.</h2>
+          </div>
+          <ol className="mt-12 grid list-none gap-4 p-0 lg:grid-cols-3 lg:items-end">
+            <li className={`flex flex-col p-7 lg:min-h-[260px] ${FLAECHE} rounded-[10px]`}>
+              <span className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.2em] text-midnight-blue/80">Stufe 1 · Du bist dabei</span>
+              <h3 className="mt-3 font-montserrat text-2xl font-extrabold">Die 7-Tage-Video-Challenge</h3>
+              <p className="mt-3 font-inter text-[16px] leading-relaxed">Sieben Tage, jeden Tag ein Video, eine Minute.</p>
+              <a href="#anmelden" className="mt-auto inline-flex self-start pt-6 font-montserrat text-sm font-bold text-midnight-blue underline decoration-[#C9A961] decoration-2 underline-offset-4">Jetzt eintragen ↑</a>
+            </li>
+            <li className={`flex flex-col bg-midnight-blue p-7 text-pearl-white lg:min-h-[330px] ${KACHEL} border-[#C9A961]`}>
+              <span className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#F7E7CE]">Stufe 2 · Du willst die Abkürzung?</span>
+              <h3 className="mt-3 font-montserrat text-2xl font-extrabold text-white">1:1-Intensiv-Training</h3>
+              <p className="mt-3 font-inter text-[16px] leading-relaxed text-pearl-white/90">Von der Selbsterkenntnis zum Selbstbewusstsein zur Kundengewinnung. 90 Minuten, nur du und Claudia, oder 3 × 90 Minuten im Paket.</p>
+              <p className="mt-2 font-inter text-sm text-pearl-white/85">Sonderpreis zur Challenge: ab 173 € zzgl. MwSt. (205,87 € inkl. MwSt.)</p>
+              <a href="/1zu1-training" className={`mt-auto inline-flex self-start rounded-full px-6 py-3 font-montserrat text-sm font-bold text-midnight-blue no-underline transition-transform hover:-translate-y-px ${GOLD}`}>Mehr erfahren →</a>
+            </li>
+            <li className={`flex flex-col bg-white p-7 lg:min-h-[400px] ${KACHEL}`}>
+              <span className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.2em] text-midnight-blue/75">Stufe 3 · Dauerhafte Wirkungskraft</span>
+              <h3 className="mt-3 font-montserrat text-2xl font-extrabold">Unverwechselbar. Das 12-Wochen-Mentoring</h3>
+              <p className="mt-3 font-inter text-[16px] leading-relaxed">Etwas zur Gewohnheit machen dauert circa drei Monate. Ich begleite dich.</p>
+              <a href="/mentoring-programm" className="mt-auto inline-flex self-start rounded-full border border-midnight-blue/25 px-6 py-3 font-montserrat text-sm font-bold text-midnight-blue no-underline transition-colors hover:border-[#D4AF37]">Zum Mentoring →</a>
+            </li>
+          </ol>
+        </div>
+      </Abschnitt>
+
       {/* Sieben Schritte - Claudia, 22.09.2026 10:55 UTC: "dieser grau-braune Ton hinter dem Programm ... in Weiss
           austauschen" und "viel weiter nach oben, damit die direkt wissen, warum sie dabei sein sollen". */}
       <Abschnitt id="programm" className="bg-white py-16 text-midnight-blue sm:py-24" label="programm-titel">
@@ -532,7 +612,7 @@ export default function Challenge() {
                 <span className="mt-1 block underline decoration-[#C9A961] decoration-[4px] underline-offset-[6px]">Du bleibst im Kopf.</span>
               </h2>
               <p className="mt-4 max-w-2xl font-inter text-lg text-midnight-blue">
-                Jeden Tag ein Audio-Impuls von mir mit einem Gedanken, in dem du dich wiedererkennst, und einer konkreten Aufgabe – 30 Minuten am Tag, einschließlich Übung, Aufnahme und Reflexion. Wer seine Aufnahme in der Gruppe teilt, bekommt persönliches Feedback von mir – und alle lernen mit. Die Inhalte öffnen sich in der Challenge-Woche, jeden Tag einer.
+                Jeden Tag ein Audio-Impuls von mir mit einem Gedanken, in dem du dich wiedererkennst, und einer konkreten Aufgabe – 30 Minuten am Tag, einschließlich Übung, Aufnahme und Reflexion. Wer alle sieben Tage durchzieht, bekommt von mir ein persönliches Feedback als Audio zu seinem ersten und letzten Video – und in der Gruppe lernen alle mit. Die Inhalte öffnen sich in der Challenge-Woche, jeden Tag einer.
               </p>
             </div>
             <Kopfbild datei="programm" alt="Claudia Conen im hellblauen Blazer, Porträt" />
@@ -680,7 +760,8 @@ export default function Challenge() {
             </div>
           </details>
 
-          <div className="mt-3 grid gap-5 md:grid-cols-[34px_minmax(0,1fr)]">
+          <p className="mt-6 font-montserrat text-[12px] font-bold uppercase tracking-[0.16em] text-midnight-blue/60">Der Inhalt wird täglich freigegeben</p>
+          <div className="mt-2 grid gap-5 md:grid-cols-[34px_minmax(0,1fr)]">
           <Schiene />
           <ol ref={listeRef} className="grid list-none gap-3 p-0">
             {TAGE.map((t, i) => {
@@ -713,6 +794,14 @@ export default function Challenge() {
                 </li>
               );
             })}
+            {/* Tag 8 - Claudia, Discord 17.10.2026 09:15 UTC: „in blau mit goldener Schrift: dein Werbetag in unserer Challenge-Gruppe“. */}
+            <li className="cc-stufe">
+              <div className={`flex flex-wrap items-center gap-x-4 gap-y-1 bg-midnight-blue px-4 py-3.5 sm:px-6 ${KACHEL} border-[#C9A961]`}>
+                <span className={`rounded-md px-2.5 py-1.5 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-midnight-blue ${GOLD}`}>Tag 8</span>
+                <span className="min-w-0 flex-1 font-montserrat text-base font-extrabold text-[#EBD197]">Dein Werbetag in unserer Challenge-Gruppe</span>
+                <span className="font-montserrat text-sm font-bold text-pearl-white/80">Mo., 2. Nov.</span>
+              </div>
+            </li>
           </ol>
           </div>
           <EintragBlock />

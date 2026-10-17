@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 /**
- * Die Angebotsseiten (/angebote, /live-workshop, /mentoring-programm, /mentoring-inhalte)
+ * Die Angebotsseiten (/angebote, /live-workshop, /mentoring-programm, /mentoring-inhalte, /1zu1-training)
  * liegen als fertige Seiten im neuen Design als public/<name>.html (Claudia 15.10.2026).
  * Kommt man per Klick im Menue hierher, hat React die Adresse uebernommen und kennt sie nicht -
  * dann einmal richtig laden, damit Netlify die fertige Seite ausliefert. Ein Merker in der

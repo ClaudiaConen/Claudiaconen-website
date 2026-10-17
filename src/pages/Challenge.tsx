@@ -572,29 +572,6 @@ export default function Challenge() {
         </div>
       </section>
 
-      {/* Worum es geht / Das bekommst du / Dein Weg - Claudia, Discord 17.10.2026 08:07-08:26 UTC: „Die Challenge muss
-          klarer sein“, „1 Minute Video bitte in rot“, „wie so ne Treppe“, „stell dir vor du waerst Apple“. Ein Gedanke je Block. */}
-      <Abschnitt id="worum" className="bg-white py-16 text-midnight-blue sm:py-24" label="worum-titel">
-        <div className="mx-auto max-w-3xl px-6 text-center">
-          <div className="flex justify-center"><Kicker text="Worum es geht" hell /></div>
-          <h2 id="worum-titel" className="mt-5 font-montserrat text-4xl font-extrabold leading-[1.08] sm:text-6xl">Entdecke deine<br />Wirkungskraft.</h2>
-          <p className="mx-auto mt-6 max-w-2xl font-inter text-lg leading-relaxed sm:text-xl">
-            In dieser Challenge geht es um dich: deine Identität, deine Unverwechselbarkeit. Was zieht Kunden zu dir? Was bietest du? Wo ist dein Expertenstatus?
-            {' '}Welche Story kannst du erzählen? Und wann vertrauen Menschen dir überhaupt?
-          </p>
-          <h3 className="mt-14 font-montserrat text-2xl font-extrabold sm:text-3xl">Die Challenge ist deine Bühne.</h3>
-          <p className="mx-auto mt-4 max-w-2xl font-inter text-lg leading-relaxed sm:text-xl">
-            Die anderen sehen deine Videos, und du siehst ihre. Alle wissen mehr als einer. <strong className="font-bold">Vielleicht ist in der Challenge sogar dein bester zukünftiger Kunde.</strong>
-            {' '}Wir brauchen viele Kontaktpunkte, um Vertrauen aufzubauen. Hier sehen wir miteinander, wie wir wachsen, wofür wir stehen und wofür wir brennen.
-            {' '}So hebst du dich aus der Masse der Angebote heraus und definierst dich nicht nur über den Preis.
-          </p>
-          <p className="mx-auto mt-12 max-w-3xl text-center font-inter text-lg leading-relaxed sm:text-xl">
-            Dein Invest: 30 Minuten am Tag, für deine Wirkungskraft. Echt, authentisch, mit Leichtigkeit: So gestaltest du künftig deine eigene Werbung.
-            <strong className="mt-3 block font-montserrat text-xl font-extrabold sm:text-2xl">Gerade im Zeitalter der künstlichen Intelligenz sind Klarheit und Vertrauen wichtiger denn je.</strong>
-          </p>
-        </div>
-      </Abschnitt>
-
       {/* So laeuft es ab - Claudias Diktate 13:07 + 13:10 UTC, sortiert (ABLAUF). */}
       <Abschnitt id="ablauf" className="bg-pearl-white py-12 sm:py-16" label="ablauf-titel">
         <div className="mx-auto max-w-6xl px-6">
@@ -618,6 +595,29 @@ export default function Challenge() {
             <p className="mt-3 font-cormorant text-3xl font-semibold italic leading-tight sm:text-4xl">Wer sich selbst vertraut, gewinnt.</p>
           </div>
           <p className="mt-5 max-w-3xl border-l-4 border-[#C9A961] bg-white px-5 py-3 font-inter text-[15px] leading-relaxed text-midnight-blue">{ABLAUF_HINWEIS}</p>
+        </div>
+      </Abschnitt>
+
+      {/* Worum es geht / Das bekommst du / Dein Weg - Claudia, Discord 17.10.2026 08:07-08:26 UTC: „Die Challenge muss
+          klarer sein“, „1 Minute Video bitte in rot“, „wie so ne Treppe“, „stell dir vor du waerst Apple“. Ein Gedanke je Block. */}
+      <Abschnitt id="worum" className="bg-white py-16 text-midnight-blue sm:py-24" label="worum-titel">
+        <div className="mx-auto max-w-3xl px-6 text-center">
+          <div className="flex justify-center"><Kicker text="Worum es geht" hell /></div>
+          <h2 id="worum-titel" className="mt-5 font-montserrat text-4xl font-extrabold leading-[1.08] sm:text-6xl">Entdecke deine<br />Wirkungskraft.</h2>
+          <p className="mx-auto mt-6 max-w-2xl font-inter text-lg leading-relaxed sm:text-xl">
+            In dieser Challenge geht es um dich: deine Identität, deine Unverwechselbarkeit. Was zieht Kunden zu dir? Was bietest du? Wo ist dein Expertenstatus?
+            {' '}Welche Story kannst du erzählen? Und wann vertrauen Menschen dir überhaupt?
+          </p>
+          <h3 className="mt-14 font-montserrat text-2xl font-extrabold sm:text-3xl">Die Challenge ist deine Bühne.</h3>
+          <p className="mx-auto mt-4 max-w-2xl font-inter text-lg leading-relaxed sm:text-xl">
+            Die anderen sehen deine Videos, und du siehst ihre. Alle wissen mehr als einer. <strong className="font-bold">Vielleicht ist in der Challenge sogar dein bester zukünftiger Kunde.</strong>
+            {' '}Wir brauchen viele Kontaktpunkte, um Vertrauen aufzubauen. Hier sehen wir miteinander, wie wir wachsen, wofür wir stehen und wofür wir brennen.
+            {' '}So hebst du dich aus der Masse der Angebote heraus und definierst dich nicht nur über den Preis.
+          </p>
+          <p className="mx-auto mt-12 max-w-3xl text-center font-inter text-lg leading-relaxed sm:text-xl">
+            Echt, authentisch, mit Leichtigkeit: So gestaltest du künftig deine eigene Werbung.
+            <strong className="mt-3 block font-montserrat text-xl font-extrabold sm:text-2xl">Gerade im Zeitalter der künstlichen Intelligenz sind Klarheit und Vertrauen wichtiger denn je.</strong>
+          </p>
         </div>
       </Abschnitt>
 

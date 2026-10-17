@@ -248,7 +248,7 @@ const ABLAUF: { titel: string; text: string }[] = [
   { titel: 'Die Gruppe', text: 'Austausch untereinander ist gern gesehen. Werbung nicht – dafür gibt es am letzten Tag Werbezeit, für jeden.' },
   { titel: 'Der Auftakt', text: 'Montag, 26. Oktober, 19 Uhr, 60 Minuten im Zoom: kennenlernen, miteinander lachen, den Wegweiser in die Hand bekommen. Dann geht es los.' },
   { titel: 'Jeden Tag ein Impuls', text: 'Ein Audio von mir in der Gruppe: Hinweise, eine kleine Lektion, deine Aufgabe des Tages. Dein Video dazu: eine Minute. Du hast 24 Stunden Zeit zum Posten.' },
-  { titel: 'Dein Feedback', text: 'Wer innerhalb der 24 Stunden postet, bekommt persönliches Feedback von mir. Danach darfst du dein Video verbessern – für dich, um daran zu wachsen.' },
+  { titel: 'Dein Feedback', text: 'Zwischendurch gibt es immer wieder Impulse und Hinweise. Wer alle sieben Tage durchzieht und mir sein erstes und letztes Video schickt, bekommt von mir ein ganz persönliches Feedback als Audioaufnahme.' },
   { titel: 'Zwischendurch', text: 'Impulse zu Storytelling und Prompts für die KI, die du direkt nutzen kannst – um deine Positionierung zu schärfen und deine innere Haltung nach außen zu tragen.' },
   { titel: 'Das Workbook', text: 'Wenn dir danach ist: Schnapp dir das Workbook weiter unten und genieß es an einem ruhigen Abend. Alles kann, nichts muss.' },
   { titel: 'Der Ausklang', text: 'Montag, 2. November, 19 Uhr im Zoom: Erfahrungen austauschen, Feedback untereinander. Danach darfst du dein Business in der Community-Gruppe vorstellen.' },
@@ -318,7 +318,7 @@ function TagInhalt({ t }: { t: Tag }) {
       {t.zusatz && <p className="mt-2 text-midnight-blue/85">{t.zusatz}</p>}
       <p className="mt-3 border-l-4 border-[#C9A961] bg-pearl-white px-4 py-2 font-montserrat text-sm font-bold">Übungssatz: „{UEBUNGSSATZ}"</p>
       <p className="mt-3"><b className="font-montserrat font-extrabold">Reflexion: </b>{t.reflexion}</p>
-      <p className="mt-3 text-[14px] text-midnight-blue/85">Wenn du magst, teile deinen Versuch in der Gruppe. Du bekommst persönliches Feedback von mir – und wir können miteinander und aneinander wachsen. Wer still mitübt, gehört genauso dazu.</p>
+      <p className="mt-3 text-[14px] text-midnight-blue/85">Wenn du magst, teile deinen Versuch in der Gruppe – wir können miteinander und aneinander wachsen. Wer alle sieben Tage durchzieht, bekommt am Ende mein persönliches Feedback als Audio. Wer still mitübt, gehört genauso dazu.</p>
     </div>
   );
 }
@@ -434,7 +434,7 @@ export default function Challenge() {
     '@context': 'https://schema.org',
     '@type': 'HowTo',
     name: '7 Tage für deine Wirkungskraft – die Video-Challenge',
-    description: 'Sieben Tage, jeden Tag eine Aufgabe und eine Minute Video mit dem Handy – mit Feedback von Claudia Conen. Kostenfrei, in einer WhatsApp-Gruppe.',
+    description: 'Sieben Tage, jeden Tag eine Aufgabe und eine Minute Video mit dem Handy – mit persönlichem Audio-Feedback von Claudia Conen für alle, die durchziehen. Kostenfrei, in einer WhatsApp-Gruppe.',
     totalTime: 'P7D',
     step: TAGE.map((t, i) => ({ '@type': 'HowToStep', position: i + 1, name: `Tag ${i + 1}: ${t.titel} (${t.schwerpunkt})`, text: t.aufgabe })),
     url: `https://claudiaconen.com${PFAD}`,
@@ -444,7 +444,7 @@ export default function Challenge() {
     <div className="cc-2027 min-h-screen bg-pearl-white">
       <SEO
         title="7 Tage für deine Wirkungskraft – die Video-Challenge"
-        description="Sieben Tage, jeden Tag eine Anleitung, eine Minute Video mit dem Handy, Feedback von Claudia Conen. Kostenfrei, in einer WhatsApp-Gruppe – mit den sieben Schritten, dem Workbook und dem Weg danach."
+        description="Sieben Tage, jeden Tag eine Anleitung, eine Minute Video mit dem Handy, persönliches Audio-Feedback von Claudia Conen für alle, die durchziehen. Kostenfrei, in einer WhatsApp-Gruppe – mit den sieben Schritten, dem Workbook und dem Weg danach."
         path={PFAD}
         ogImage="https://claudiaconen.com/a27/og/og-challenge.jpg"
       />
@@ -517,23 +517,69 @@ export default function Challenge() {
       <section id="anmeldung" className="bg-pearl-white pt-6 pb-4 sm:pt-8" aria-label="Anmeldung zur Challenge">
         <div className="mx-auto max-w-6xl px-6">
           <ChallengeAnmeldung start={startKurz} />
-          {/* 1:1-Live-Training zum Sonderpreis - Claudia, 16.10.2026 23:09 UTC: „sofort sichtbar, nicht aufdringlich“,
-              Knopf fuehrt auf die eigene Seite /1zu1-training (dort Inhalt, Fuer wen, Kalender). */}
-          <a
-            href="/1zu1-training"
-            className="group mt-5 flex flex-col gap-3 rounded-2xl border border-[#D4AF37]/45 bg-white px-5 py-4 no-underline transition-colors hover:border-[#D4AF37] sm:flex-row sm:items-center sm:justify-between sm:px-7"
-          >
-            <span className="flex flex-col gap-1">
-              <span className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.2em] text-midnight-blue/70">Du willst es persönlich?</span>
-              <span className="font-montserrat text-base font-bold text-midnight-blue sm:text-lg">1:1-Live-Training online · 90 Minuten · Sonderpreis zur Challenge</span>
-              <span className="font-inter text-sm text-midnight-blue/80">173 € zzgl. MwSt. (205,87 € inkl. MwSt.)</span>
-            </span>
-            <span className="inline-flex shrink-0 items-center self-start rounded-full border border-midnight-blue/25 px-5 py-2.5 font-montserrat text-sm font-bold text-midnight-blue transition-colors group-hover:border-[#D4AF37] sm:self-auto">
-              Mehr erfahren →
-            </span>
-          </a>
         </div>
       </section>
+
+      {/* Worum es geht + Treppe - Claudia, Discord 17.10.2026 08:07/08:18 UTC: „Die Challenge muss klarer sein“,
+          „Mach 1 Minute Video bitte in rot“, rechts „wie so ne Treppe“: Challenge -> 1:1 -> Mentoring. */}
+      <Abschnitt id="worum" className="bg-pearl-white pt-10 pb-6 sm:pt-14" label="worum-titel">
+        <div className="mx-auto grid max-w-6xl gap-8 px-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:gap-12">
+          <div className="text-midnight-blue">
+            <Kicker text="Worum es geht" hell />
+            <h2 id="worum-titel" className="mt-5 font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">Entdecke deine Wirkungskraft.</h2>
+            <p className="mt-4 font-inter text-lg leading-relaxed">
+              In dieser Challenge geht es um dich: deine Identität, deine Unverwechselbarkeit. Was zieht Kunden zu dir? Was bietest du? Wo ist dein Expertenstatus?
+              {' '}Welche Story kannst du erzählen? Und wann vertrauen Menschen dir überhaupt?
+            </p>
+            <h3 className="mt-8 font-montserrat text-xl font-extrabold sm:text-2xl">Die Challenge ist deine Bühne.</h3>
+            <p className="mt-3 font-inter text-lg leading-relaxed">
+              Die anderen sehen deine Videos, und du siehst ihre. Alle wissen mehr als einer. Vielleicht ist in der Challenge sogar dein bester zukünftiger Kunde.
+              {' '}Wir brauchen viele Kontaktpunkte, um Vertrauen aufzubauen. Hier sehen wir miteinander, wie wir wachsen, wofür wir stehen und wofür wir brennen.
+              {' '}So hebst du dich aus der Masse der Angebote heraus und definierst dich nicht nur über den Preis.
+            </p>
+            <h3 className="mt-8 font-montserrat text-xl font-extrabold sm:text-2xl">Das bekommst du</h3>
+            <ol className="mt-4 grid list-none gap-3 p-0 font-inter text-[17px] leading-relaxed">
+              {[
+                <>Ein Live-Zoom-Call zum Start (Montag, 26. Oktober, 19 Uhr) und zum Abschluss (Montag, 2. November, 19 Uhr), dazu ein Workbook</>,
+                <>Jeden Tag einen Impuls und eine klare Anleitung</>,
+                <>24 Stunden Zeit für jedes <strong className="whitespace-nowrap font-extrabold text-[#C62828]">1-Minuten-Video</strong>. Dann kommt die neue Anleitung.</>,
+                <>Ein persönliches Feedback als Audio zu deinem ersten und letzten Video, wenn du alle sieben Tage durchziehst</>,
+                <>Dein Zertifikat zur 7-Tage-Video-Challenge</>,
+              ].map((z, i) => (
+                <li key={i} className={`flex items-start gap-4 bg-white px-4 py-3 ${KACHEL}`}>
+                  <span aria-hidden="true" className="mt-0.5 flex h-7 w-7 flex-none items-center justify-center rounded-full bg-midnight-blue font-montserrat text-sm font-extrabold text-[#F7E7CE]">{i + 1}</span>
+                  <span>{z}</span>
+                </li>
+              ))}
+            </ol>
+            <p className="mt-6 border-l-4 border-[#C9A961] bg-white px-5 py-3 font-inter text-[17px] leading-relaxed">
+              Das ist dein Invest für deine Wirkungskraft. Echt, authentisch, mit Leichtigkeit: So gestaltest du künftig deine eigene Werbung, gerade im Zeitalter der künstlichen Intelligenz.
+            </p>
+          </div>
+
+          {/* Die Treppe: jede Stufe ein Stueck hoeher (lg: nach oben versetzt), Gold nur als Linie, nie als Schrift auf Hell. */}
+          <div className="flex flex-col-reverse justify-end gap-4 lg:flex-col lg:pb-2" aria-label="Dein Weg nach der Challenge">
+            <div className={`relative bg-white p-6 text-midnight-blue lg:ml-16 ${KACHEL}`}>
+              <p className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.2em] text-midnight-blue/70">Stufe 3 · Dauerhafte Wirkungskraft</p>
+              <h3 className="mt-2 font-montserrat text-lg font-extrabold">Unverwechselbar. Das 12-Wochen-Mentoring</h3>
+              <p className="mt-2 font-inter text-[15px] leading-relaxed">Etwas zur Gewohnheit machen dauert circa drei Monate. Ich begleite dich.</p>
+              <a href="/mentoring-programm" className="mt-4 inline-flex items-center rounded-full border border-midnight-blue/25 px-5 py-2.5 font-montserrat text-sm font-bold text-midnight-blue no-underline transition-colors hover:border-[#D4AF37]">Zum Mentoring →</a>
+            </div>
+            <div className={`relative bg-midnight-blue p-6 text-pearl-white lg:ml-8 ${KACHEL} border-[#C9A961]`}>
+              <p className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#F7E7CE]">Stufe 2 · Du willst die Abkürzung?</p>
+              <h3 className="mt-2 font-montserrat text-lg font-extrabold text-white">1:1-Live-Training online</h3>
+              <p className="mt-2 font-inter text-[15px] leading-relaxed text-pearl-white/90">90 Minuten, nur du und Claudia. Sonderpreis zur Challenge.</p>
+              <p className="mt-2 font-inter text-sm text-pearl-white/85">173 € zzgl. MwSt. (205,87 € inkl. MwSt.)</p>
+              <a href="/1zu1-training" className={`mt-4 inline-flex items-center rounded-full px-5 py-2.5 font-montserrat text-sm font-bold text-midnight-blue no-underline transition-transform hover:-translate-y-px ${GOLD}`}>Mehr erfahren →</a>
+            </div>
+            <div className={`relative p-6 text-midnight-blue ${FLAECHE} rounded-[10px]`}>
+              <p className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.2em] text-midnight-blue/75">Stufe 1 · Du bist dabei</p>
+              <h3 className="mt-2 font-montserrat text-lg font-extrabold">Die 7-Tage-Video-Challenge</h3>
+              <p className="mt-2 font-inter text-[15px] leading-relaxed">Sieben Tage, jeden Tag ein Video, eine Minute.</p>
+            </div>
+          </div>
+        </div>
+      </Abschnitt>
 
       {/* Sieben Schritte - Claudia, 22.09.2026 10:55 UTC: "dieser grau-braune Ton hinter dem Programm ... in Weiss
           austauschen" und "viel weiter nach oben, damit die direkt wissen, warum sie dabei sein sollen". */}
@@ -547,7 +593,7 @@ export default function Challenge() {
                 <span className="mt-1 block underline decoration-[#C9A961] decoration-[4px] underline-offset-[6px]">Du bleibst im Kopf.</span>
               </h2>
               <p className="mt-4 max-w-2xl font-inter text-lg text-midnight-blue">
-                Jeden Tag ein Audio-Impuls von mir mit einem Gedanken, in dem du dich wiedererkennst, und einer konkreten Aufgabe – 30 Minuten am Tag, einschließlich Übung, Aufnahme und Reflexion. Wer seine Aufnahme in der Gruppe teilt, bekommt persönliches Feedback von mir – und alle lernen mit. Die Inhalte öffnen sich in der Challenge-Woche, jeden Tag einer.
+                Jeden Tag ein Audio-Impuls von mir mit einem Gedanken, in dem du dich wiedererkennst, und einer konkreten Aufgabe – 30 Minuten am Tag, einschließlich Übung, Aufnahme und Reflexion. Wer alle sieben Tage durchzieht, bekommt von mir ein persönliches Feedback als Audio zu seinem ersten und letzten Video – und in der Gruppe lernen alle mit. Die Inhalte öffnen sich in der Challenge-Woche, jeden Tag einer.
               </p>
             </div>
             <Kopfbild datei="programm" alt="Claudia Conen im hellblauen Blazer, Porträt" />

@@ -243,15 +243,17 @@ const WEGWEISER = {
 
 /** So laeuft es ab - Claudias Diktate vom 22.09.2026, 13:07 und 13:10 UTC ("Wie kann ich das ein bisschen sortieren",
  *  "schreib das kuerzer"), in ihrer Reihenfolge, ein Gedanke je Satz. Termine aus START/ENDE. */
-const ABLAUF: { titel: string; text: string }[] = [
-  { titel: 'Eintragen', text: 'Du trägst dich hier ein. Danach kommst du in die WhatsApp-Gruppe.' },
-  { titel: 'Die Gruppe', text: 'Austausch untereinander ist gern gesehen. Werbung nicht – dafür gibt es am letzten Tag Werbezeit, für jeden.' },
+const ROT = 'whitespace-nowrap font-extrabold text-[#C62828]';
+const ABLAUF: { titel: string; text: React.ReactNode }[] = [
+  // Neu nach Claudias Diktat, Discord 17.10.2026 09:15 UTC: nirgends taegliches Video-Feedback; Werbung erst an Tag 8.
+  { titel: 'Eintragen', text: 'Du trägst dich hier ein und kommst in die WhatsApp-Gruppe. Nach dem Start geht es los.' },
+  { titel: 'Die Gruppe', text: <>Austausch untereinander ist gern gesehen. <span className="font-bold underline decoration-2 underline-offset-2">Keine Werbung</span> – an Tag 8 ist Werbung für alle freigegeben.</> },
   { titel: 'Der Auftakt', text: 'Montag, 26. Oktober, 19 Uhr, 60 Minuten im Zoom: kennenlernen, miteinander lachen, den Wegweiser in die Hand bekommen. Dann geht es los.' },
-  { titel: 'Jeden Tag ein Impuls', text: 'Ein Audio von mir in der Gruppe: Hinweise, eine kleine Lektion, deine Aufgabe des Tages. Dein Video dazu: eine Minute. Du hast 24 Stunden Zeit zum Posten.' },
-  { titel: 'Dein Feedback', text: 'Zwischendurch gibt es immer wieder Impulse und Hinweise. Wer alle sieben Tage durchzieht und mir sein erstes und letztes Video schickt, bekommt von mir ein ganz persönliches Feedback als Audioaufnahme.' },
-  { titel: 'Zwischendurch', text: 'Impulse zu Storytelling und Prompts für die KI, die du direkt nutzen kannst – um deine Positionierung zu schärfen und deine innere Haltung nach außen zu tragen.' },
-  { titel: 'Das Workbook', text: 'Wenn dir danach ist: Schnapp dir das Workbook weiter unten und genieß es an einem ruhigen Abend. Alles kann, nichts muss.' },
-  { titel: 'Der Ausklang', text: 'Montag, 2. November, 19 Uhr im Zoom: Erfahrungen austauschen, Feedback untereinander. Danach darfst du dein Business in der Community-Gruppe vorstellen.' },
+  { titel: 'Jeden Tag ein Impuls', text: <>Ein Audio von mir und dein Workbook, damit du täglich am Ball bleibst. Für deine <strong className={ROT}>1-Minuten-Aufnahme</strong> hast du 24 Stunden Zeit.</> },
+  { titel: 'Dein Feedback', text: <>Zu deinem <strong className="font-bold">ersten und deinem letzten Video</strong> bekommst du ein ganz persönliches Feedback mit Verbesserungsvorschlägen – wenn du sie innerhalb von 24 Stunden postest.</> },
+  { titel: 'Zwischendurch', text: <>Impulse zu: <span className="mt-1 block">1. Positionierung</span><span className="block">2. Storytelling</span><span className="block">3. Erkenntnisse aus der Wissenschaft</span><span className="block">4. Ein persönlicher Impuls für deine Motivation</span><span className="block">5. Rhetorik-Tipps, um Aufmerksamkeit und Vertrauen zu gewinnen</span></> },
+  { titel: 'Das Workbook', text: 'Schnapp dir das Workbook für einen ersten Einblick. Dazu PDFs – und am Ende dein Zertifikat.' },
+  { titel: 'Tag 8 · Der Ausklang', text: 'Montag, 2. November, 19 Uhr im Zoom: Erfahrungen austauschen, Menschen kennenlernen. Dein Werbetag: Zeig, was du anbietest, und genieß die neuen Kontakte.' },
 ];
 const ABLAUF_HINWEIS = 'Mein Tipp: Nimm dir täglich 30 Minuten Zeit – wann auch immer. Alles läuft in der WhatsApp-Gruppe, bis unsere Plattform fertig ist. Dann lade ich euch alle dazu ein.';
 
@@ -758,7 +760,8 @@ export default function Challenge() {
             </div>
           </details>
 
-          <div className="mt-3 grid gap-5 md:grid-cols-[34px_minmax(0,1fr)]">
+          <p className="mt-6 font-montserrat text-[12px] font-bold uppercase tracking-[0.16em] text-midnight-blue/60">Der Inhalt wird täglich freigegeben</p>
+          <div className="mt-2 grid gap-5 md:grid-cols-[34px_minmax(0,1fr)]">
           <Schiene />
           <ol ref={listeRef} className="grid list-none gap-3 p-0">
             {TAGE.map((t, i) => {
@@ -791,6 +794,14 @@ export default function Challenge() {
                 </li>
               );
             })}
+            {/* Tag 8 - Claudia, Discord 17.10.2026 09:15 UTC: „in blau mit goldener Schrift: dein Werbetag in unserer Challenge-Gruppe“. */}
+            <li className="cc-stufe">
+              <div className={`flex flex-wrap items-center gap-x-4 gap-y-1 bg-midnight-blue px-4 py-3.5 sm:px-6 ${KACHEL} border-[#C9A961]`}>
+                <span className={`rounded-md px-2.5 py-1.5 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-midnight-blue ${GOLD}`}>Tag 8</span>
+                <span className="min-w-0 flex-1 font-montserrat text-base font-extrabold text-[#EBD197]">Dein Werbetag in unserer Challenge-Gruppe</span>
+                <span className="font-montserrat text-sm font-bold text-pearl-white/80">Mo., 2. Nov.</span>
+              </div>
+            </li>
           </ol>
           </div>
           <EintragBlock />

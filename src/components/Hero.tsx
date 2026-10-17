@@ -229,26 +229,20 @@ export default function Hero() {
         <div className="cc-hero-inhalt relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="cc-hero-text max-w-[40rem]">
             <div className="accent-line" />
-            <h1 id="hero-headline" className="font-montserrat font-bold text-3xl leading-tight sm:text-4xl md:text-5xl lg:text-6xl">
-              <span className={hell ? 'cc-hero-zeile1' : 'headline-line1'}>Würdest du DIR selbst zuhören?</span>
-              {/* Zeile 2: WAS sie anbietet - Claudias Vorgabe vom 23.09.2026, 10:37 UTC ("wenn Leute auf die Seite kommen, fehlt da nicht was?").
-                  "Beruehre das Herz. Bleib im Kopf." bleibt ihr Satz, steht aber nicht mehr im Kopf. */}
-              <span className={`${hell ? 'cc-hero-zeile2' : 'headline-line2'} mt-3 block text-xl sm:text-2xl md:text-3xl`}>
-                Keynotes, Rhetoriktraining und Auftrittscoaching
-              </span>
+            {/* Kopftext getauscht - Claudia, Discord 17.10.2026 07:44 UTC, ihr Wortlaut. Der alte Kopf
+                ("Wuerdest du DIR selbst zuhoeren?" / Keynotes, Rhetoriktraining ... / Fuer Unternehmer ...) steht in der Git-Historie. */}
+            <p className={`font-montserrat text-[11px] font-extrabold uppercase tracking-[0.2em] sm:text-xs ${hell ? 'text-midnight-blue/75' : 'text-[#F7E7CE]'}`}>
+              Wirkung zeigen · Vertrauen wecken · Unverwechselbar bleiben
+            </p>
+            <h1 id="hero-headline" className="mt-4 font-montserrat font-bold text-3xl leading-tight sm:text-4xl md:text-5xl lg:text-6xl">
+              <span className={hell ? 'cc-hero-zeile1' : 'headline-line1'}>Du wirkst immer.</span>
+              <span className={`${hell ? 'cc-hero-zeile1' : 'headline-line1'} block`}>Die Frage ist nur: wie?</span>
             </h1>
-
-            {/* FUER WEN (ihr Satz, 10:37 UTC, "Speaker" ergaenzt) und der KI-Satz als Gegensatz (ihre Frage 10:39 UTC:
-                "sollte ich KI erwaehnen" - ja, als Gegensatz, nie als Dienstleistung). */}
-            <p className={`cc-hero-satz mt-6 font-inter text-lg leading-relaxed sm:text-xl ${hell ? 'text-midnight-blue' : 'text-pearl-white/90'}`}>
-              <span className="block">
-                Für Unternehmer, Führungskräfte, Speaker, Coaches und Teams, die klar sprechen und glaubwürdig auftreten wollen.
-              </span>
-              <span className="mt-3 block">
-                KI liefert <strong className={hell ? 'cc-kw-hell' : 'keyword-highlight'}>Perfektion</strong> auf Mausklick. Deine{' '}
-                <strong className={hell ? 'cc-kw-hell' : 'keyword-highlight'}>Unverwechselbarkeit</strong> schafft{' '}
-                <strong className={hell ? 'cc-kw-hell' : 'keyword-highlight'}>Vertrauen</strong>.
-              </span>
+            <p className={`mt-5 font-cormorant text-2xl italic leading-snug sm:text-3xl ${hell ? 'text-midnight-blue' : 'text-[#F7E7CE]'}`}>
+              Wer <strong className={hell ? 'cc-kw-hell' : 'keyword-highlight'}>Vertrauen</strong> weckt, gewinnt.
+            </p>
+            <p className={`cc-hero-satz mt-5 font-inter text-lg leading-relaxed sm:text-xl ${hell ? 'text-midnight-blue' : 'text-pearl-white/90'}`}>
+              Du willst deinen Expertenstatus, dein Business und dein Produkt selbstbewusst präsentieren, Menschen begeistern und dich aus der Masse der Angebote herausheben? Dann ist Claudia Conen die Expertin an deiner Seite.
             </p>
 
             {/* Zwei Knoepfe, Claudias Vorgabe vom 23.09.2026 (16:21 UTC): "Keynote anfragen" war zu eng -

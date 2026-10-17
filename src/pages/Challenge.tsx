@@ -561,7 +561,7 @@ export default function Challenge() {
             ))}
           </ol>
           <p className="mx-auto mt-10 max-w-3xl text-center font-inter text-lg leading-relaxed sm:text-xl">
-            Das ist dein Invest für deine Wirkungskraft. Echt, authentisch, mit Leichtigkeit: So gestaltest du künftig deine eigene Werbung.
+            Dein Invest: 30 Minuten am Tag, für deine Wirkungskraft. Echt, authentisch, mit Leichtigkeit: So gestaltest du künftig deine eigene Werbung.
             <strong className="mt-3 block font-montserrat text-xl font-extrabold sm:text-2xl">Gerade im Zeitalter der künstlichen Intelligenz sind Klarheit und Vertrauen wichtiger denn je.</strong>
           </p>
         </div>

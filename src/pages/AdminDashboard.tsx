@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { checkAdminAuth } from '../lib/adminAuth';
 import AdminNavigation from '../components/AdminNavigation';
-import { Calendar, Video, MessageSquare, ArrowRight, BarChart, Brain, BookOpen, GraduationCap, Mail, Users, FileDown, ChevronDown, ChevronUp } from 'lucide-react';
+import { Calendar, Video, MessageSquare, ArrowRight, BarChart, Brain, BookOpen, GraduationCap, Mail, Users, FileDown, ChevronDown, ChevronUp, Trash2, Copy } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { supabaseBuchprojekt } from '../lib/supabaseBuchprojekt';
 import { supabaseCms } from '../lib/supabaseCms';
+import { deleteContacts } from '../lib/adminContacts';
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
@@ -33,6 +34,7 @@ export default function AdminDashboard() {
   });
   const [expandedSource, setExpandedSource] = useState<string | null>(null);
   const [sourceData, setSourceData] = useState<Record<string, any[]>>({});
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   useEffect(() => {
     checkAuth();
@@ -122,8 +124,7 @@ export default function AdminDashboard() {
         let query = (source.client ?? supabase)
           .from(source.table)
           .select('*')
-          .order('created_at', { ascending: false })
-          .limit(20);
+          .order('created_at', { ascending: false });
         if (source.filter) query = source.filter(query);
         const { data } = await query;
         setSourceData(prev => ({ ...prev, [source.key]: data || [] }));
@@ -131,6 +132,28 @@ export default function AdminDashboard() {
         console.error('Error loading source data:', error);
       }
     }
+  };
+
+  // Einen Eintrag löschen (doppelt oder falsch) – über die sichere Server-Funktion admin-contacts.
+  const handleDeleteEntry = async (
+    source: { key: string; table: string; emailField: string },
+    item: any,
+  ) => {
+    if (!item?.id) {
+      alert('Dieser Eintrag hat keine ID und kann nicht gelöscht werden.');
+      return;
+    }
+    const label = item[source.emailField] || item.id;
+    if (!confirm(`Diesen Eintrag wirklich endgültig löschen?\n\n${label}`)) return;
+    setDeletingId(item.id);
+    try {
+      await deleteContacts(source.table, [item.id]);
+      setSourceData(prev => ({ ...prev, [source.key]: (prev[source.key] || []).filter((r: any) => r.id !== item.id) }));
+      loadEmailStats();
+    } catch (error) {
+      alert('Löschen fehlgeschlagen: ' + (error instanceof Error ? error.message : String(error)));
+    }
+    setDeletingId(null);
   };
 
   const exportSourceCSV = async (source: { key: string; table: string; filter?: (q: any) => any; client?: any }) => {
@@ -398,10 +421,12 @@ export default function AdminDashboard() {
                   <div className="flex items-center gap-2">
                     <button
                       onClick={(e) => { e.stopPropagation(); exportSourceCSV(source); }}
-                      className="p-1.5 text-gray-400 hover:text-gray-600 transition-colors"
-                      title="Als CSV exportieren"
+                      disabled={source.count === 0}
+                      className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-lg hover:bg-emerald-100 transition-colors text-xs font-semibold disabled:opacity-40 disabled:cursor-not-allowed"
+                      title="Diese Liste als CSV herunterladen"
                     >
                       <FileDown className="w-4 h-4" />
+                      CSV
                     </button>
                     {expandedSource === source.key ? (
                       <ChevronUp className="w-4 h-4 text-gray-400" />
@@ -411,35 +436,65 @@ export default function AdminDashboard() {
                   </div>
                 </div>
 
-                {expandedSource === source.key && sourceData[source.key] && (
+                {expandedSource === source.key && sourceData[source.key] && (() => {
+                  const rows = sourceData[source.key];
+                  const emailCounts: Record<string, number> = {};
+                  rows.forEach((r: any) => {
+                    const e = String(r[source.emailField] ?? '').toLowerCase().trim();
+                    if (e) emailCounts[e] = (emailCounts[e] || 0) + 1;
+                  });
+                  const dupTotal = Object.values(emailCounts).filter((n) => n > 1).reduce((a, n) => a + (n - 1), 0);
+                  return (
                   <div className="border-t border-gray-100 bg-gray-50 px-4 py-3">
-                    {sourceData[source.key].length === 0 ? (
+                    {rows.length === 0 ? (
                       <p className="text-sm text-gray-500 text-center py-2">Keine Eintraege vorhanden</p>
                     ) : (
-                      <div className="space-y-2 max-h-64 overflow-y-auto">
-                        {sourceData[source.key].map((item: any, idx: number) => (
-                          <div key={idx} className="flex items-center justify-between bg-white rounded-lg px-3 py-2 text-sm">
-                            <div className="flex items-center gap-3 min-w-0">
-                              <Mail className="w-4 h-4 text-gray-400 flex-shrink-0" />
-                              <span className="text-gray-900 truncate">{item[source.emailField]}</span>
-                              {item[source.nameField] && (
-                                <span className="text-gray-500 truncate hidden sm:inline">
-                                  ({item[source.nameField]}{item.last_name ? ` ${item.last_name}` : ''}{item.name && source.nameField !== 'name' ? ` ${item.name}` : ''})
-                                </span>
-                              )}
-                            </div>
-                            <span className="text-xs text-gray-400 flex-shrink-0 ml-2">
-                              {item.created_at ? new Date(item.created_at).toLocaleDateString('de-DE') : ''}
-                            </span>
-                          </div>
-                        ))}
-                        {sourceData[source.key].length === 20 && (
-                          <p className="text-xs text-gray-400 text-center pt-1">Zeigt die letzten 20 Eintraege</p>
-                        )}
-                      </div>
+                      <>
+                        <p className="text-xs text-gray-500 mb-2">
+                          {rows.length} Eintr&auml;ge{dupTotal > 0 ? ` · ${dupTotal} doppelt (gelb markiert)` : ''}
+                        </p>
+                        <div className="space-y-2 max-h-80 overflow-y-auto">
+                          {rows.map((item: any) => {
+                            const email = String(item[source.emailField] ?? '').toLowerCase().trim();
+                            const isDup = !!email && emailCounts[email] > 1;
+                            return (
+                              <div key={item.id} className={`flex items-center justify-between rounded-lg px-3 py-2 text-sm ${isDup ? 'bg-amber-50 border border-amber-200' : 'bg-white'}`}>
+                                <div className="flex items-center gap-2 min-w-0">
+                                  <Mail className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                                  <span className="text-gray-900 truncate">{item[source.emailField]}</span>
+                                  {isDup && (
+                                    <span className="flex items-center gap-1 text-[10px] font-semibold text-amber-700 bg-amber-100 rounded-full px-2 py-0.5 flex-shrink-0">
+                                      <Copy className="w-3 h-3" />doppelt
+                                    </span>
+                                  )}
+                                  {item[source.nameField] && (
+                                    <span className="text-gray-500 truncate hidden sm:inline">
+                                      ({item[source.nameField]}{item.last_name ? ` ${item.last_name}` : ''}{item.name && source.nameField !== 'name' ? ` ${item.name}` : ''})
+                                    </span>
+                                  )}
+                                </div>
+                                <div className="flex items-center gap-2 flex-shrink-0 ml-2">
+                                  <span className="text-xs text-gray-400">
+                                    {item.created_at ? new Date(item.created_at).toLocaleDateString('de-DE') : ''}
+                                  </span>
+                                  <button
+                                    onClick={(e) => { e.stopPropagation(); handleDeleteEntry(source, item); }}
+                                    disabled={deletingId === item.id}
+                                    className="p-1.5 text-gray-300 hover:text-red-600 transition-colors disabled:opacity-50"
+                                    title="Eintrag löschen"
+                                  >
+                                    <Trash2 className="w-4 h-4" />
+                                  </button>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </>
                     )}
                   </div>
-                )}
+                  );
+                })()}
               </div>
             ))}
           </div>

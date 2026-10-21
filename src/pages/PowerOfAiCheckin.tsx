@@ -25,7 +25,7 @@ const KARTEN: FotoKarte[] = [
   { datei: 'zuhoeren', tag: 'Wirkung', text: 'Zuhören' },
   { datei: 'tonstudio', tag: 'Stimme', text: 'Hörbar sein' },
 ];
-import { supabaseCms } from '../lib/supabaseCms';
+import { supabase } from '../lib/supabase';
 
 /** WhatsApp-Gruppe der 7-Tage-Video-Challenge – gleicher Link wie auf /challenge. */
 // WhatsApp-Link der Challenge steht seit 15.10.2026 nicht mehr an der Tuer, sondern in der Mail danach.
@@ -62,7 +62,7 @@ export default function PowerOfAiCheckin() {
     e.preventDefault();
     if (zustand === 'sendet') return;
     setZustand('sendet');
-    const { error } = await supabaseCms.from('contact_inquiries').insert([
+    const { error } = await supabase.from('contact_inquiries').insert([
       {
         name: `${vorname.trim()} ${name.trim()}`.trim(),
         email: email.trim(),
@@ -89,7 +89,7 @@ export default function PowerOfAiCheckin() {
   async function geschenkNachtragen() {
     if (nachtrag === 'sendet' || nachtrag === 'fertig') return;
     setNachtrag('sendet');
-    const { error } = await supabaseCms.from('contact_inquiries').insert([
+    const { error } = await supabase.from('contact_inquiries').insert([
       {
         name: `${vorname.trim()} ${name.trim()}`.trim(),
         email: email.trim(),

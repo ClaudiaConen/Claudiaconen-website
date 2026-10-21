@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
-import { supabaseCms } from '../lib/supabaseCms';
+import { supabase } from '../lib/supabase';
 
 /**
  * Anmeldung zur 7-Tage-Video-Challenge - Claudias Wunsch vom 22.09.2026, 09:35 UTC: "ein
@@ -39,7 +39,7 @@ export default function ChallengeAnmeldung({ start, onEingetragen }: { start: st
     e.preventDefault();
     if (zustand === 'sendet') return;
     setZustand('sendet');
-    const { error } = await supabaseCms.from('contact_inquiries').insert([
+    const { error } = await supabase.from('contact_inquiries').insert([
       {
         name: vorname.trim(),
         email: email.trim(),

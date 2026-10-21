@@ -5,8 +5,7 @@ import AdminNavigation from '../components/AdminNavigation';
 import { Calendar, Video, MessageSquare, ArrowRight, BarChart, Brain, BookOpen, GraduationCap, Mail, Users, FileDown, ChevronDown, ChevronUp, Trash2, Copy, Plus } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { supabaseBuchprojekt } from '../lib/supabaseBuchprojekt';
-import { supabaseCms } from '../lib/supabaseCms';
-import { deleteContacts, addContact } from '../lib/adminContacts';
+import { deleteContacts, addContact, listContacts, getContactCounts } from '../lib/adminContacts';
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
@@ -81,40 +80,27 @@ export default function AdminDashboard() {
 
   const loadEmailStats = async () => {
     try {
-      const [beta, coaching, contact, challenge, powerofai, advent, abkuerzung, checklist, linkedin, kiManager] = await Promise.all([
-        supabase.from('beta_waitlist').select('id', { count: 'exact', head: true }),
-        supabase.from('coaching_inquiries').select('id', { count: 'exact', head: true }),
-        // Kontaktanfragen OHNE die Challenge-Anmeldungen (die haben "7-TAGE-CHALLENGE" in message)
-        supabase.from('contact_inquiries').select('id', { count: 'exact', head: true }).not('message', 'ilike', '%CHALLENGE%').not('message', 'ilike', '%POWER-OF-AI CHECK-IN%'),
-        // Challenge-Anmeldungen (eigene Kategorie) - inkl. Event-Check-ins Koeln mit Haekchen fuer die Challenge (Claudia 15.10.2026)
-        supabaseCms.from('contact_inquiries').select('id', { count: 'exact', head: true }).or('message.ilike.*CHALLENGE*,message.ilike.*Video-Training ab 26.10.*: ja*'),
-        // Check-in THE POWER OF AI Köln (Tür-Formular /powerofai)
-        supabaseCms.from('contact_inquiries').select('id', { count: 'exact', head: true }).ilike('message', '%POWER-OF-AI CHECK-IN%'),
-        supabase.from('advent_registrations').select('id', { count: 'exact', head: true }),
-        supabase.from('abkuerzung_bookings').select('id', { count: 'exact', head: true }),
-        supabase.from('checklist_downloads').select('id', { count: 'exact', head: true }),
-        supabase.from('linkedin_freebie_leads').select('id', { count: 'exact', head: true }),
-        supabase.from('ki_manager_bookings').select('id', { count: 'exact', head: true }),
-      ]);
-
+      // Zählen läuft über die Server-Funktion (die Tabellen sind per RLS geschützt und
+      // für den öffentlichen Schlüssel nicht lesbar).
+      const counts = await getContactCounts();
       setEmailStats({
-        betaWaitlist: beta.count || 0,
-        coachingInquiries: coaching.count || 0,
-        contactInquiries: contact.count || 0,
-        challenge: challenge.count || 0,
-        powerofai: powerofai.count || 0,
-        adventRegistrations: advent.count || 0,
-        abkuerzungBookings: abkuerzung.count || 0,
-        checklistDownloads: checklist.count || 0,
-        linkedinFreebie: linkedin.count || 0,
-        kiManagerBookings: kiManager.count || 0,
+        betaWaitlist: counts.betaWaitlist || 0,
+        coachingInquiries: counts.coachingInquiries || 0,
+        contactInquiries: counts.contactInquiries || 0,
+        challenge: counts.challenge || 0,
+        powerofai: counts.powerofai || 0,
+        adventRegistrations: counts.adventRegistrations || 0,
+        abkuerzungBookings: counts.abkuerzungBookings || 0,
+        checklistDownloads: counts.checklistDownloads || 0,
+        linkedinFreebie: counts.linkedinFreebie || 0,
+        kiManagerBookings: counts.kiManagerBookings || 0,
       });
     } catch (error) {
       console.error('Error loading email stats:', error);
     }
   };
 
-  const toggleSourceExpand = async (source: { key: string; table: string; filter?: (q: any) => any; client?: any }) => {
+  const toggleSourceExpand = async (source: { key: string; table: string }) => {
     if (expandedSource === source.key) {
       setExpandedSource(null);
       return;
@@ -124,13 +110,8 @@ export default function AdminDashboard() {
     setNewEntry({ email: '', firstName: '', lastName: '' });
     if (!sourceData[source.key]) {
       try {
-        let query = (source.client ?? supabase)
-          .from(source.table)
-          .select('*')
-          .order('created_at', { ascending: false });
-        if (source.filter) query = source.filter(query);
-        const { data } = await query;
-        setSourceData(prev => ({ ...prev, [source.key]: data || [] }));
+        const data = await listContacts(source.table, source.key);
+        setSourceData(prev => ({ ...prev, [source.key]: data }));
       } catch (error) {
         console.error('Error loading source data:', error);
       }
@@ -179,11 +160,9 @@ export default function AdminDashboard() {
     setAdding(false);
   };
 
-  const exportSourceCSV = async (source: { key: string; table: string; filter?: (q: any) => any; client?: any }) => {
+  const exportSourceCSV = async (source: { key: string; table: string }) => {
     try {
-      let query = (source.client ?? supabase).from(source.table).select('*').order('created_at', { ascending: false });
-      if (source.filter) query = source.filter(query);
-      const { data } = await query;
+      const data = await listContacts(source.table, source.key);
       if (!data || data.length === 0) return;
 
       const headers = Object.keys(data[0]);
@@ -209,9 +188,7 @@ export default function AdminDashboard() {
     try {
       const results = await Promise.all(
         emailSources.map(async (source) => {
-          let query = (source.client ?? supabase).from(source.table).select('*').order('created_at', { ascending: false });
-          if (source.filter) query = source.filter(query);
-          const { data } = await query;
+          const data = await listContacts(source.table, source.key);
           return (data || []).map((row: any) => ({
             email: row[source.emailField] || '',
             name: [row[source.nameField], row.last_name].filter(Boolean).join(' ') || '',
@@ -254,8 +231,8 @@ export default function AdminDashboard() {
   };
   const emailSources: EmailSource[] = [
     { key: 'kiManagerBookings', label: 'KI-Manager Anmeldungen', table: 'ki_manager_bookings', count: emailStats.kiManagerBookings, color: 'bg-orange-100 text-orange-800', emailField: 'email', nameField: 'vorname' },
-    { key: 'challenge', label: 'Challenge-Anmeldungen', table: 'contact_inquiries', count: emailStats.challenge, color: 'bg-fuchsia-100 text-fuchsia-800', emailField: 'email', nameField: 'name', client: supabaseCms, filter: (q: any) => q.or('message.ilike.*CHALLENGE*,message.ilike.*Video-Training ab 26.10.*: ja*') },
-    { key: 'powerofai', label: 'EventKöln – THE POWER OF AI (Check-in)', table: 'contact_inquiries', count: emailStats.powerofai, color: 'bg-amber-100 text-amber-800', emailField: 'email', nameField: 'name', client: supabaseCms, filter: (q: any) => q.ilike('message', '%POWER-OF-AI CHECK-IN%') },
+    { key: 'challenge', label: 'Challenge-Anmeldungen', table: 'contact_inquiries', count: emailStats.challenge, color: 'bg-fuchsia-100 text-fuchsia-800', emailField: 'email', nameField: 'name', filter: (q: any) => q.or('message.ilike.*CHALLENGE*,message.ilike.*Video-Training ab 26.10.*: ja*') },
+    { key: 'powerofai', label: 'EventKöln – THE POWER OF AI (Check-in)', table: 'contact_inquiries', count: emailStats.powerofai, color: 'bg-amber-100 text-amber-800', emailField: 'email', nameField: 'name', filter: (q: any) => q.ilike('message', '%POWER-OF-AI CHECK-IN%') },
     { key: 'adventRegistrations', label: 'Adventskalender Registrierungen', table: 'advent_registrations', count: emailStats.adventRegistrations, color: 'bg-red-100 text-red-800', emailField: 'email', nameField: 'first_name' },
     { key: 'checklistDownloads', label: 'Checklisten Downloads', table: 'checklist_downloads', count: emailStats.checklistDownloads, color: 'bg-blue-100 text-blue-800', emailField: 'email', nameField: 'article_title' },
     { key: 'linkedinFreebie', label: 'LinkedIn Freebie Leads', table: 'linkedin_freebie_leads', count: emailStats.linkedinFreebie, color: 'bg-sky-100 text-sky-800', emailField: 'email', nameField: 'source' },

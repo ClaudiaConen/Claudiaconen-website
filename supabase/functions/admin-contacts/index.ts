@@ -2,9 +2,10 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
 import * as jose from "npm:jose@5";
 
-// admin-contacts — sicheres Laden, Hinzufügen und Löschen von Kontakt-/Registrierungs-Listen
-// im Admin-Dashboard der Hauptseite. Prüft das Admin-Login (gleicher JWT wie admin-module-operations)
-// und arbeitet dann mit dem Server-Schlüssel. Nur die unten gelisteten Tabellen sind erlaubt.
+// admin-contacts — sicheres Laden, Zählen, Hinzufügen und Löschen der Kontakt-/Registrierungs-Listen
+// im Admin-Dashboard der Hauptseite. Die Tabellen sind per RLS geschützt (nur "authenticated" darf lesen),
+// das Admin-Login läuft aber über ein eigenes JWT. Darum prüft diese Funktion das Admin-Login und arbeitet
+// danach mit dem Server-Schlüssel (umgeht RLS sauber). Nur die unten gelisteten Tabellen sind erlaubt.
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -48,8 +49,14 @@ async function verifyAdmin(req: Request, supabase: any) {
   }
 }
 
-// Baut aus E-Mail + Name die nötigen Pflichtfelder je Liste (sinnvolle Platzhalter, damit der
-// Eintrag angelegt werden kann). listKey unterscheidet die Unterlisten von contact_inquiries.
+// Kategorie-Filter für die drei Unterlisten von contact_inquiries (identisch zur Admin-Ansicht).
+function applyListKeyFilter(q: any, listKey: string) {
+  if (listKey === "challenge") return q.or("message.ilike.*CHALLENGE*,message.ilike.*Video-Training ab 26.10.*: ja*");
+  if (listKey === "powerofai") return q.ilike("message", "%POWER-OF-AI CHECK-IN%");
+  if (listKey === "contactInquiries") return q.not("message", "ilike", "%CHALLENGE%").not("message", "ilike", "%POWER-OF-AI CHECK-IN%");
+  return q;
+}
+
 function buildInsert(table: string, email: string, first: string, last: string, listKey: string) {
   const full = [first, last].filter(Boolean).join(" ") || email;
   switch (table) {
@@ -78,6 +85,33 @@ function buildInsert(table: string, email: string, first: string, last: string, 
   }
 }
 
+// Zählt alle Listen des Dashboards in einem Aufruf (Schlüssel wie im Dashboard).
+async function allCounts(supabase: any) {
+  const countTable = async (t: string, apply?: (q: any) => any) => {
+    try {
+      let q = supabase.from(t).select("*", { count: "exact", head: true });
+      if (apply) q = apply(q);
+      const { count } = await q;
+      return count || 0;
+    } catch {
+      return 0;
+    }
+  };
+  const [challenge, powerofai, contactInquiries, adventRegistrations, checklistDownloads, linkedinFreebie, coachingInquiries, abkuerzungBookings, betaWaitlist, kiManagerBookings] = await Promise.all([
+    countTable("contact_inquiries", (q) => applyListKeyFilter(q, "challenge")),
+    countTable("contact_inquiries", (q) => applyListKeyFilter(q, "powerofai")),
+    countTable("contact_inquiries", (q) => applyListKeyFilter(q, "contactInquiries")),
+    countTable("advent_registrations"),
+    countTable("checklist_downloads"),
+    countTable("linkedin_freebie_leads"),
+    countTable("coaching_inquiries"),
+    countTable("abkuerzung_bookings"),
+    countTable("beta_waitlist"),
+    countTable("ki_manager_bookings"),
+  ]);
+  return { challenge, powerofai, contactInquiries, adventRegistrations, checklistDownloads, linkedinFreebie, coachingInquiries, abkuerzungBookings, betaWaitlist, kiManagerBookings };
+}
+
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") return new Response(null, { status: 200, headers: corsHeaders });
   const json = (status: number, body: unknown) =>
@@ -93,11 +127,19 @@ Deno.serve(async (req: Request) => {
   let body: { action?: string; table?: string; id?: string; ids?: string[]; email?: string; firstName?: string; lastName?: string; listKey?: string };
   try { body = await req.json(); } catch { return json(400, { error: "Ungültige Anfrage." }); }
 
+  // Alle Zähler auf einmal
+  if (body.action === "counts") {
+    return json(200, { counts: await allCounts(supabase) });
+  }
+
   const table = String(body.table || "");
   if (!ALLOWED.has(table)) return json(400, { error: "Diese Liste ist nicht erlaubt." });
+  const listKey = String(body.listKey || "");
 
   if (body.action === "list") {
-    const { data, error } = await supabase.from(table).select("*").order("created_at", { ascending: false });
+    let q = supabase.from(table).select("*").order("created_at", { ascending: false });
+    if (table === "contact_inquiries") q = applyListKeyFilter(q, listKey);
+    const { data, error } = await q;
     if (error) return json(500, { error: error.message });
     return json(200, { data });
   }
@@ -105,7 +147,7 @@ Deno.serve(async (req: Request) => {
   if (body.action === "add") {
     const email = String(body.email || "").trim();
     if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return json(400, { error: "Bitte eine gültige E-Mail angeben." });
-    const values = buildInsert(table, email, String(body.firstName || "").trim(), String(body.lastName || "").trim(), String(body.listKey || ""));
+    const values = buildInsert(table, email, String(body.firstName || "").trim(), String(body.lastName || "").trim(), listKey);
     if (!values) return json(400, { error: "Diese Liste ist nicht erlaubt." });
     const { data, error } = await supabase.from(table).insert(values).select().single();
     if (error) return json(500, { error: error.message });

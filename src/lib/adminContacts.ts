@@ -36,3 +36,15 @@ export async function addContact(
   const result = await call({ action: 'add', table, listKey, ...fields });
   return result.data;
 }
+
+// Lädt alle Einträge einer Liste (mit Kategorie-Filter) über die Server-Funktion.
+export async function listContacts<T = any>(table: string, listKey: string): Promise<T[]> {
+  const result = await call({ action: 'list', table, listKey });
+  return (result.data as T[]) ?? [];
+}
+
+// Holt alle Zähler des Dashboards in einem Aufruf.
+export async function getContactCounts(): Promise<Record<string, number>> {
+  const result = await call({ action: 'counts' });
+  return (result.counts as Record<string, number>) ?? {};
+}

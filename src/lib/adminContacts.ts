@@ -4,7 +4,7 @@ import { getToken } from './adminAuth';
 // admin-contacts (prüft das Admin-Login und arbeitet dann mit dem Server-Schlüssel).
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 
-export async function deleteContacts(table: string, ids: string[]): Promise<void> {
+async function call(payload: Record<string, unknown>) {
   const token = getToken();
   if (!token) throw new Error('Keine Anmeldung gefunden. Bitte neu einloggen.');
 
@@ -14,11 +14,25 @@ export async function deleteContacts(table: string, ids: string[]): Promise<void
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ action: 'delete', table, ids }),
+    body: JSON.stringify(payload),
   });
 
   const result = await response.json().catch(() => ({}));
   if (!response.ok) {
-    throw new Error(result.error || 'Löschen fehlgeschlagen.');
+    throw new Error(result.error || 'Aktion fehlgeschlagen.');
   }
+  return result;
+}
+
+export async function deleteContacts(table: string, ids: string[]): Promise<void> {
+  await call({ action: 'delete', table, ids });
+}
+
+export async function addContact(
+  table: string,
+  listKey: string,
+  fields: { email: string; firstName?: string; lastName?: string },
+): Promise<any> {
+  const result = await call({ action: 'add', table, listKey, ...fields });
+  return result.data;
 }

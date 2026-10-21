@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { checkAdminAuth } from '../lib/adminAuth';
 import AdminNavigation from '../components/AdminNavigation';
-import { Calendar, Video, MessageSquare, ArrowRight, BarChart, Brain, BookOpen, GraduationCap, Mail, Users, FileDown, ChevronDown, ChevronUp, Trash2, Copy } from 'lucide-react';
+import { Calendar, Video, MessageSquare, ArrowRight, BarChart, Brain, BookOpen, GraduationCap, Mail, Users, FileDown, ChevronDown, ChevronUp, Trash2, Copy, Plus } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { supabaseBuchprojekt } from '../lib/supabaseBuchprojekt';
 import { supabaseCms } from '../lib/supabaseCms';
-import { deleteContacts } from '../lib/adminContacts';
+import { deleteContacts, addContact } from '../lib/adminContacts';
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
@@ -35,6 +35,8 @@ export default function AdminDashboard() {
   const [expandedSource, setExpandedSource] = useState<string | null>(null);
   const [sourceData, setSourceData] = useState<Record<string, any[]>>({});
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [newEntry, setNewEntry] = useState({ email: '', firstName: '', lastName: '' });
+  const [adding, setAdding] = useState(false);
 
   useEffect(() => {
     checkAuth();
@@ -119,6 +121,7 @@ export default function AdminDashboard() {
     }
 
     setExpandedSource(source.key);
+    setNewEntry({ email: '', firstName: '', lastName: '' });
     if (!sourceData[source.key]) {
       try {
         let query = (source.client ?? supabase)
@@ -154,6 +157,26 @@ export default function AdminDashboard() {
       alert('Löschen fehlgeschlagen: ' + (error instanceof Error ? error.message : String(error)));
     }
     setDeletingId(null);
+  };
+
+  // Eine E-Mail manuell zu einer Liste hinzufügen (Pflichtfelder füllt die Server-Funktion).
+  const handleAddEntry = async (source: { key: string; table: string }) => {
+    const email = newEntry.email.trim();
+    if (!email) { alert('Bitte eine E-Mail eingeben.'); return; }
+    setAdding(true);
+    try {
+      const row = await addContact(source.table, source.key, {
+        email,
+        firstName: newEntry.firstName.trim(),
+        lastName: newEntry.lastName.trim(),
+      });
+      setSourceData(prev => ({ ...prev, [source.key]: [row, ...(prev[source.key] || [])] }));
+      setNewEntry({ email: '', firstName: '', lastName: '' });
+      loadEmailStats();
+    } catch (error) {
+      alert('Hinzufügen fehlgeschlagen: ' + (error instanceof Error ? error.message : String(error)));
+    }
+    setAdding(false);
   };
 
   const exportSourceCSV = async (source: { key: string; table: string; filter?: (q: any) => any; client?: any }) => {
@@ -446,6 +469,39 @@ export default function AdminDashboard() {
                   const dupTotal = Object.values(emailCounts).filter((n) => n > 1).reduce((a, n) => a + (n - 1), 0);
                   return (
                   <div className="border-t border-gray-100 bg-gray-50 px-4 py-3">
+                    <div className="flex flex-wrap items-center gap-2 mb-3 pb-3 border-b border-gray-200">
+                      <input
+                        type="email"
+                        placeholder="E-Mail hinzufügen *"
+                        value={newEntry.email}
+                        onClick={(e) => e.stopPropagation()}
+                        onChange={(e) => setNewEntry(p => ({ ...p, email: e.target.value }))}
+                        className="flex-1 min-w-[180px] px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                      />
+                      <input
+                        type="text"
+                        placeholder="Vorname"
+                        value={newEntry.firstName}
+                        onClick={(e) => e.stopPropagation()}
+                        onChange={(e) => setNewEntry(p => ({ ...p, firstName: e.target.value }))}
+                        className="w-28 px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                      />
+                      <input
+                        type="text"
+                        placeholder="Nachname"
+                        value={newEntry.lastName}
+                        onClick={(e) => e.stopPropagation()}
+                        onChange={(e) => setNewEntry(p => ({ ...p, lastName: e.target.value }))}
+                        className="w-28 px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                      />
+                      <button
+                        onClick={(e) => { e.stopPropagation(); handleAddEntry(source); }}
+                        disabled={adding || !newEntry.email.trim()}
+                        className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        <Plus className="w-4 h-4" />{adding ? 'Fügt hinzu…' : 'Hinzufügen'}
+                      </button>
+                    </div>
                     {rows.length === 0 ? (
                       <p className="text-sm text-gray-500 text-center py-2">Keine Eintraege vorhanden</p>
                     ) : (

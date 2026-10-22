@@ -37,7 +37,7 @@ const PFAD = '/challenge';
 /** Lernbox - Claudia, 22.09.2026 11:27 UTC: "so ein kleiner Test ... Feld zum Aufklappen, Lernbox, Ja- und
  *  Nein-Fragen mit einer Antwort, alle zu Wirkung, Stimme, Performance - sieben Fragen". Ohne Hirnforschungszahlen. */
 const LERNBOX: { frage: string; ja: boolean; antwort: string }[] = [
-  { frage: 'Entscheiden Zuhörer, ob sie dir zuhören, bevor du deinen ersten Satz beendet hast?', ja: true, antwort: 'Ja. Die Stimme wirkt, bevor der Inhalt ankommt – deshalb beginnt die Challenge mit deiner Stimme.' },
+  { frage: 'Entscheiden Zuhörer, ob sie dir zuhören, bevor du deinen ersten Satz beendet hast?', ja: true, antwort: 'Ja. Die Stimme wirkt, bevor der Inhalt ankommt – deshalb arbeitest du ab Tag 1 an dem einen Satz, der sofort ankommt.' },
   { frage: 'Klingt eine Stimme tiefer, wenn man sie nach unten drückt?', ja: false, antwort: 'Nein. Tiefer wird sie durch Ruhe und Atmung. Drücken macht sie eng und angestrengt.' },
   { frage: 'Ist eine Pause im Satz ein Zeichen von Unsicherheit?', ja: false, antwort: 'Nein. Die Pause ist der Moment, in dem der andere versteht. Profis machen mehr Pausen, nicht weniger.' },
   { frage: 'Bleibt eine perfekt vorgetragene Rede besser im Kopf als eine mit einem Versprecher?', ja: false, antwort: 'Nein. Perfektion ist klickbar. Ein Mensch, der echt ist, bleibt – der Versprecher, über den du lachst, macht dich glaubwürdiger.' },
@@ -77,6 +77,11 @@ const GOLD = 'bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]';
 const KACHEL = 'cc-glanz-kachel rounded-[10px] border border-[#13233F]/[0.13] transition-[border-color,box-shadow] duration-200 hover:border-[#C9A961] hover:shadow-[0_18px_40px_-20px_rgba(19,35,63,0.35)]';
 /** Ruhige Champagner-Flaeche statt kraeftigem Gold fuer grosse Bloecke (Farben der neuen Seiten, Claudia 15.10.2026). */
 const FLAECHE = 'bg-[linear-gradient(135deg,#FCF6EC,#F7E7CE)] border border-[#C9A961]/60';
+/** Plakette wie in der Wochen-Grafik: nur an Tag 2 und 6 (Claudia, 22.10.2026 05:45 UTC: "dass die Leute nicht denken,
+ *  sie bekommen jeden Tag ein Feedback"). */
+function FeedbackPlakette() {
+  return <span className={`flex-none rounded-md px-2.5 py-1.5 font-montserrat text-[10px] font-black uppercase tracking-[0.16em] text-midnight-blue ${GOLD}`}>Feedback</span>;
+}
 /** Claudias Idee vom 22.09.2026, 02:13 UTC: vom Event per QR in eine Video-Challenge - sieben Tage,
  *  sieben Schritte, 60 Sekunden am Tag. Kanal: ihre WhatsApp-Gruppe "Video-Challenge" (Einladungslink
  *  von ihr am 22.09.2026, 02:20 UTC). Aendert sie den Link, hier tauschen. */
@@ -97,7 +102,27 @@ const WERKZEUG: { titel: string; vorschau: string; text: string; icon: string }[
 
 /** Die Punkte aus dem Kopf, jetzt hell darunter (Claudia, 22.09.2026 13:01/13:05 UTC: "damit das oben nicht so voll
  *  gepackt ist ... unter den Slider kommt dann hell und da werden die Punkte aufgelistet"). */
-const ENTDECKE = ['Deine Wirkung', 'Deine Keynote-Möglichkeiten', 'Warum Menschen dir zuhören', 'Was wirklich zählt', 'Tipps, wie KI deine echte Kommunikation unterstützt', 'Das Workbook „Entdecke deine Stimmwirkung" – zum Blättern und Mitnehmen'];
+/** Ergebnis, Leistungen und Ablauf auf einen Blick (Claudia, 21.10.2026 10:48-10:53 UTC). */
+const ERGEBNIS = [
+  'Deine Kernbotschaft in einem Satz, der sofort verstanden wird',
+  'Deinen Elevator Pitch in drei Sätzen – fertig für dein nächstes Kundengespräch',
+  'Dein Vorher- und dein Nachher-Video – dein sichtbarer Beweis',
+  'Das Gefühl, sicher aufzutreten – wo auch immer du den Mund aufmachst',
+];
+const LEISTUNGEN = [
+  'Jeden Tag einen Audio-Impuls von Claudia',
+  'Zwei Live-Termine im Zoom – zum Abschluss dein 60-Sekunden-Pitch (freiwillig)',
+  'Persönliches Feedback an Tag 2 und Tag 6',
+  'Das Workbook zum Blättern und Mitnehmen',
+];
+const AUF_EINEN_BLICK: { wann: string; was: string; text: string }[] = [
+  { wann: 'Montag, 26. Oktober · 19 Uhr', was: 'Auftakt live im Zoom', text: 'Kennenlernen, deine tägliche Übungszeit festlegen – und noch am selben Abend dein Vorher-Video.' },
+  { wann: 'Sieben Tage', was: 'Jeden Tag ein Impuls', text: 'Audio anhören, eine Minute Video aufnehmen. Für jedes Video hast du 24 Stunden Zeit zum Posten.' },
+  { wann: 'Montag, 2. November · 19 Uhr', was: 'Abschluss live im Zoom', text: 'Dein 60-Sekunden-Pitch, live vor der Gruppe, freiwillig – vielleicht sitzt dort schon dein nächster Kunde. Danach bekommst du dein Zertifikat.' },
+];
+
+// Claudia 21.10.2026 14:18 UTC: hier die ausgearbeiteten Punkte (die sieben Tage + KI-Tipps + Workbook).
+const ENTDECKE = ['Deine Kernbotschaft – Positionierung in einem Satz', 'Die Zielgruppenbrille – dein Video mit Kundenaugen', 'Raus aus der Redeangst – auch vor der Kamera', 'Deine Stimme – Betonung und Pause', 'Storytelling – der Kunde ist der Held', 'Wie Kunden entscheiden – Zuhören und Call to Action', 'Dein Elevator Pitch – die Generalprobe', 'Tipps, wie KI deine echte Kommunikation unterstützt', 'Das Workbook zum Blättern und Mitnehmen'];
 
 
 /** Der Durchgang: Montag, 26.10.2026 bis Montag, 02.11.2026 (Claudia, 22.09.2026 11:02 UTC). Vorher ist nur
@@ -141,6 +166,8 @@ type Tag = {
   /** Freiwilliger Zusatz zur Aufgabe (z. B. Aufnahme). */
   zusatz?: string;
   reflexion: string;
+  /** Tag mit persoenlichem Feedback von Claudia (Tag 2 und 6 - Claudia, 21.10.2026 10:12 UTC). */
+  feedback?: boolean;
   /** Icon in public/icons/ */
   icon: string;
 };
@@ -148,62 +175,65 @@ type Tag = {
 /** Der Uebungssatz - an allen sieben Tagen wortgleich (Claudias Briefing, 22.09.2026 12:54 UTC). */
 const UEBUNGSSATZ = 'Wo ich spreche, ist meine Bühne – mit Persönlichkeit, Achtsamkeit und Leichtigkeit berühre ich Menschen.';
 
-/** Die sieben Tage - Wortlaut aus Claudias Briefing "Sieben Schritte zu deinem selbstbewussteren Business-Auftritt"
- *  (Discord, 22.09.2026 12:54 UTC), nur in Du-Ansprache geglaettet. Keine Zahlen, keine Versprechen dazu. */
+/** Die sieben Tage - Claudias Aufbau vom 21.10.2026 (Vinci-App + Discord, 10:42-11:34 UTC): Tag 1 und 2 in ihren
+ *  Worten (Diktat in projects/claudiaconen/challenge/diktat_tage_2026-10-21.md), Tag 3 Redeangst, Tag 6 Kaufentscheidung
+ *  + Call to Action, Tag 7 Generalprobe vor dem Pitch im Abschluss-Zoom. Tag 3-7 inhaltlich aus dem App-Plan von 09:49 UTC,
+ *  bis Claudia sie diktiert. Keine Hirnforschungs-Behauptungen ohne Quelle (siehe Kopfkommentar). */
 const TAGE: Tag[] = [
   {
-    titel: 'Was möchtest du wirklich sagen?', schwerpunkt: 'Innere Klarheit', icon: 'schritt-1',
-    einstieg: 'Kennst du das? Das Gespräch ist vorbei. Erst danach fällt dir ein, was du eigentlich sagen wolltest.',
-    inhalt: 'Den eigenen Beitrag ernst nehmen. Klären, was beim Gegenüber ankommen soll.',
-    aufgabe: 'Denk an eine berufliche Situation, in der du dich deutlicher ausdrücken möchtest. Ergänze: „Mir ist wichtig, dass mein Gegenüber versteht …"',
-    zusatz: 'Wenn du möchtest, nimm den Übungssatz und anschließend deine Aussage in höchstens 30 Sekunden auf. Bewahre diese erste Aufnahme für dich auf.',
-    reflexion: 'Hast du ausgesprochen, was dir wichtig ist?',
+    // Tag 1 in Claudias Worten (Vinci-App, 21.10.2026 10:42-10:45 UTC), nur geordnet und geglaettet.
+    titel: 'Deine Kernbotschaft', schwerpunkt: 'Positionierung in einem Satz · dein Vorher-Video', icon: 'schritt-1',
+    einstieg: 'Die beste Positionierung bringt nichts, wenn niemand davon weiß.',
+    inhalt: 'Klarheit im Kopf bringt Klarheit in deine Worte – und in deine Selbstsicherheit. Verkauf keine Erklärung, sondern ein Ergebnis: das, was du für deinen Kunden kreierst. Von der Selbsterkenntnis zum selbstsicheren Auftritt – wo auch immer du den Mund aufmachst.',
+    aufgabe: 'Fixiere deine Kernbotschaft. Wer bist du? Für wen hast du eine Lösung? Welches Problem löst du – ohne Fachbegriffe, so dass es jeder versteht? Frag dich: Welches Bild, welches Gefühl kannst du dabei in anderen Menschen schnell wecken? Am ersten Tag darfst du es auch einfach erzählen. Nimm es als Video auf. Hau raus.',
+    zusatz: 'Bonus: Sag, warum du das überhaupt tust – und wie lange schon. Speicher dein Video: Es ist dein Vorher-Video. Daran entdeckst du selbst, wie du dich entwickelst.',
+    reflexion: 'Würde ein Fremder nach deinem Video wissen, ob er dich braucht?',
   },
   {
-    titel: 'Gib dir einen sicheren Stand', schwerpunkt: 'Haltung', icon: 'schritt-3',
-    einstieg: 'Wie viel Kraft kostet es dich, gleichzeitig zu sprechen und darüber nachzudenken, wie du wirkst?',
-    inhalt: 'Eine angenehme Haltung finden, in der du dich auf deine Aussage konzentrieren kannst.',
-    aufgabe: 'Spür den Boden unter deinen Füßen oder die Sitzfläche unter dir. Richte dich bequem auf und lass die Schultern locker. Sprich den Übungssatz und deine Aussage von Tag 1 erneut.',
-    reflexion: 'In welcher Haltung fällt dir das Sprechen leichter?',
+    // Tag 2 in Claudias Worten (Vinci-App, 21.10.2026 10:46 UTC), nur geglaettet.
+    titel: 'Die Zielgruppenbrille', schwerpunkt: 'Dein Video mit Kundenaugen', icon: 'schritt-3', feedback: true,
+    einstieg: 'Würdest du bei dir kaufen?',
+    inhalt: 'Setz die Brille deiner Zielgruppe auf. Stell dir vor, du bist dein Kunde: Du hast einen Schmerz, ein Problem, einen Wunsch – und du willst, dass er erfüllt wird.',
+    aufgabe: 'Schau dir ganz objektiv dein Video von Tag 1 an. Frag dich: Ist sofort klar, welches Problem du löst? Hörst du heraus, dass du als Kunde hier gut bedient wirst? Wenn nicht, schauen wir genauer hin – dann brauchst du ein Story-Gerüst. Nimm dein Video neu auf, mit dem, was du entdeckt hast.',
+    reflexion: 'Was hat dein Kunde in deinem ersten Video vermisst?',
   },
   {
-    titel: 'Du darfst sichtbar sein', schwerpunkt: 'Gestik und Ausdruck', icon: 'schritt-8',
-    einstieg: 'Wohin mit den Händen? Sobald die Kamera läuft, werden sie plötzlich zur Hauptsache.',
-    inhalt: 'Den Händen erlauben, einen Gedanken zu begleiten. Gestik darf natürlich entstehen.',
-    aufgabe: 'Sprich den Übungssatz. Erkläre anschließend deine berufliche Aussage und lass eine Geste entstehen, die dazu passt: etwas zeigen, einen Unterschied verdeutlichen oder einen Gedanken öffnen.',
-    zusatz: 'Probier es spielerisch aus. Du musst keine bestimmte Bewegung nachmachen.',
-    reflexion: 'Welche Geste unterstützt dich, ohne sich gespielt anzufühlen?',
+    titel: 'Raus aus der Redeangst – auch vor der Kamera', schwerpunkt: 'Körper vor Kopf · Stand, Atem, Hände', icon: 'schritt-8',
+    einstieg: 'Festgehaltene Hände halten die Stimme fest. Wer oben atmet, klingt dünn und wird schnell.',
+    inhalt: 'Redeangst beginnt im Körper – und dort lässt sie sich auch lösen. Stand, Atem und Hände gehören zusammen.',
+    aufgabe: 'Stell dich hin. Atme viermal langsam aus, länger aus als ein. Dann sprich deine Kernbotschaft mit freien Händen. Das ist dein erstes Video im Stehen.',
+    zusatz: 'Eine Hauptübung reicht: das Ausatmen. Stand und Hände folgen meist von allein.',
+    reflexion: 'Was hat sich verändert, als du nach dem Ausatmen gesprochen hast?',
   },
   {
-    titel: 'Du darfst dir Zeit nehmen', schwerpunkt: 'Atmung und Ruhe', icon: 'schritt-6',
-    einstieg: 'Das Telefon klingelt. Du gehst ran – und bist gedanklich noch bei der Aufgabe davor.',
-    inhalt: 'Vor dem ersten Satz ankommen. Atempausen zulassen.',
-    aufgabe: 'Stell dir vor, du beginnst ein wichtiges Telefonat. Lass vorher einige ruhige, ungezwungene Atemzüge zu. Sprich deinen Übungssatz und anschließend die ersten zwei Sätze des Gesprächs.',
-    zusatz: 'Du brauchst nicht alles auf einen Atemzug zu sagen.',
-    reflexion: 'Wie klingt dein Einstieg, wenn du dir einen Moment Zeit gibst?',
+    titel: 'Deine Stimme', schwerpunkt: 'Betonung und Pause', icon: 'schritt-9',
+    einstieg: 'Der Tag, an dem du dich zum ersten Mal wirklich hörst.',
+    inhalt: 'Derselbe Satz klingt unsicher oder überzeugt – je nachdem, wie du ihn meinst. Dann die drei Wörter, die Gewicht bekommen, und die Pause danach. Die besten Redner reden nicht mehr als andere, sie schweigen mehr.',
+    aufgabe: 'Sprich deine Kernbotschaft zweimal: einmal unsicher, einmal überzeugt. Dann markiere die drei Wörter, die Gewicht bekommen, und setz nach dem wichtigsten eine Pause. Poste die überzeugte Fassung.',
+    reflexion: 'Wo hast du die Pause gesetzt – und was macht sie mit deinem Satz?',
   },
   {
-    titel: 'Hörst du dich selbst darin?', schwerpunkt: 'Stimme und Persönlichkeit', icon: 'schritt-5',
-    einstieg: 'Mit vertrauten Menschen sprichst du lebendig. Was passiert mit dieser Stimme, wenn es beruflich wichtig wird?',
-    inhalt: 'Einen angenehmen Klang erkunden und die eigene Beteiligung am Thema hörbar machen.',
-    aufgabe: 'Summ kurz und sanft „Mhm" in einer angenehmen Tonhöhe. Sprich den Übungssatz. Erzähl anschließend einer vorgestellten, interessierten Person in zwei oder drei Sätzen, warum dir deine Arbeit wichtig ist.',
-    zusatz: 'Keine tiefere Stimme erzwingen.',
-    reflexion: 'An welcher Stelle klingst du für dich besonders natürlich?',
+    titel: 'Storytelling', schwerpunkt: 'Der Kunde ist der Held', icon: 'schritt-4',
+    einstieg: 'Wer sich selbst zum Helden macht, erzählt einen Lebenslauf.',
+    inhalt: 'Ab hier wird aus dem Video eine Geschichte. Wer den Kunden zum Helden macht, erzählt etwas, das weitererzählt wird.',
+    aufgabe: 'Erzähl eine Geschichte in fünf Stationen: ein Kunde, ein Moment, ein Satz, den er gesagt hat, was sich verändert hat, was er heute sagt. Eine Minute, nicht länger.',
+    reflexion: 'Wer ist in deiner Geschichte der Held – du oder dein Kunde?',
   },
   {
-    titel: 'Gib deinen Worten Gewicht', schwerpunkt: 'Betonung, Klarheit und Pausen', icon: 'schritt-9',
-    einstieg: 'Du hast etwas Wichtiges gesagt. Hast du deinem Gegenüber auch Zeit gelassen, es aufzunehmen?',
-    inhalt: 'Wichtige Gedanken hervorheben und verständlich gliedern.',
-    aufgabe: 'Sprich den Übungssatz und betone zuerst „Persönlichkeit", dann „Achtsamkeit", dann „Leichtigkeit". Hör, wie sich die Bedeutung verändert. Übertrag das auf deine berufliche Aussage: Wähle ein Schlüsselwort und setze nach dem wichtigsten Gedanken eine Pause.',
-    reflexion: 'Was soll dein Gegenüber mitnehmen – und hört man das?',
+    titel: 'Wie Kunden entscheiden', schwerpunkt: 'Zuhören und Call to Action', icon: 'schritt-5', feedback: true,
+    einstieg: 'Menschen kaufen das Gefühl, verstanden zu sein.',
+    inhalt: 'Menschen entscheiden, bevor sie verstehen. Wer zuhört, merkt, wann der andere innerlich Ja sagt. Und dann braucht er einen klaren nächsten Schritt: Menschen müssen wissen, wo es langgeht.',
+    aufgabe: 'Lass heute einen echten Menschen zwei Minuten erzählen – Kollegin, Partner oder Kunde – und merk dir einen Satz von ihm. Dann erzähl deine Geschichte von Tag 5 noch einmal: mit der Pause nach dem Satz deines Kunden und einer klaren Handlungsaufforderung am Ende.',
+    zusatz: 'Zuhören übt man nicht allein vor der Kamera. Ein echtes Gespräch zählt mehr als ein perfektes Video.',
+    reflexion: 'Weiß dein Zuhörer am Ende genau, was er jetzt tun soll?',
   },
   {
-    titel: 'Jetzt geht es um dein Gegenüber', schwerpunkt: 'Verbindung und Zuhören', icon: 'schritt-7',
-    einstieg: 'Wie verändert sich ein Gespräch, wenn du deine Aufmerksamkeit dem anderen schenkst?',
-    inhalt: 'Die bisherigen Übungen verbinden und wahrnehmen, was tatsächlich ankommt.',
-    aufgabe: 'Sprich den Übungssatz und deine berufliche Aussage zu einer vertrauten Person oder in die Kamera. Nutze, was dir diese Woche geholfen hat. Wenn jemand zuhört, frag anschließend: „Was ist bei dir angekommen?" Lass die Antwort stehen und hör zu.',
-    zusatz: 'Wenn du Aufnahmen gemacht hast, vergleiche den Übungssatz von Tag 1 und Tag 7.',
-    reflexion: 'Was gelingt dir bewusster – und was möchtest du weiter üben?',
+    titel: 'Dein Elevator Pitch: die Generalprobe', schwerpunkt: 'Alles in drei Sätzen · dein Nachher-Video', icon: 'schritt-7',
+    einstieg: 'Sein Problem. Dein Beweis. Warum du.',
+    inhalt: 'Alles in drei Sätzen, zu einem Menschen gesprochen, nicht in eine Linse. Das ist deine Generalprobe für die Bühne beim Abschluss.',
+    aufgabe: 'Sprich deinen Pitch in drei Sätzen – sein Problem, dein Beweis, warum du – mit deinem Call to Action am Ende. Leg danach dein Vorher-Video von Tag 1 daneben und poste beide zusammen, mit #unverwechselbar.',
+    zusatz: 'Schau dir beide Videos an. Das ist Selbstsicherheit: das Ergebnis von sieben Videos. Am Montag beim Abschluss kannst du ihn live vor der Gruppe halten, 60 Sekunden, freiwillig – vielleicht sitzt dort schon dein nächster Kunde.',
+    reflexion: 'Was hörst und siehst du heute, das an Tag 1 noch nicht da war?',
   },
 ];
 
@@ -248,10 +278,10 @@ const ABLAUF: { titel: string; text: string }[] = [
   { titel: 'Die Gruppe', text: 'Austausch untereinander ist gern gesehen. Werbung nicht – dafür gibt es am letzten Tag Werbezeit, für jeden.' },
   { titel: 'Der Auftakt', text: 'Montag, 26. Oktober, 19 Uhr, 60 Minuten im Zoom: kennenlernen, miteinander lachen, den Wegweiser in die Hand bekommen. Dann geht es los.' },
   { titel: 'Jeden Tag ein Impuls', text: 'Ein Audio von mir in der Gruppe: Hinweise, eine kleine Lektion, deine Aufgabe des Tages. Dein Video dazu: eine Minute. Du hast 24 Stunden Zeit zum Posten.' },
-  { titel: 'Dein Feedback', text: 'Wer innerhalb der 24 Stunden postet, bekommt persönliches Feedback von mir. Danach darfst du dein Video verbessern – für dich, um daran zu wachsen.' },
+  { titel: 'Dein Feedback', text: 'An Tag 2 und Tag 6 bekommst du persönliches Feedback von mir, wenn du dein Video innerhalb der 24 Stunden postest. Danach darfst du dein Video verbessern – für dich, um daran zu wachsen.' },
   { titel: 'Zwischendurch', text: 'Impulse zu Storytelling und Prompts für die KI, die du direkt nutzen kannst – um deine Positionierung zu schärfen und deine innere Haltung nach außen zu tragen.' },
   { titel: 'Das Workbook', text: 'Wenn dir danach ist: Schnapp dir das Workbook weiter unten und genieß es an einem ruhigen Abend. Alles kann, nichts muss.' },
-  { titel: 'Der Ausklang', text: 'Montag, 2. November, 19 Uhr im Zoom: Erfahrungen austauschen, Feedback untereinander. Danach darfst du dein Business in der Community-Gruppe vorstellen.' },
+  { titel: 'Der Abschluss', text: 'Montag, 2. November, 19 Uhr live im Zoom: dein 60-Sekunden-Pitch vor Publikum, freiwillig, und Erfahrungen austauschen. Danach bekommst du dein Zertifikat und darfst dein Business in der Community-Gruppe vorstellen.' },
 ];
 const ABLAUF_HINWEIS = 'Mein Tipp: Nimm dir täglich 30 Minuten Zeit – wann auch immer. Alles läuft in der WhatsApp-Gruppe, bis unsere Plattform fertig ist. Dann lade ich euch alle dazu ein.';
 
@@ -316,9 +346,9 @@ function TagInhalt({ t }: { t: Tag }) {
       <p className="mt-3">{t.inhalt}</p>
       <p className="mt-3"><b className="font-montserrat font-extrabold">Deine Aufgabe: </b>{t.aufgabe}</p>
       {t.zusatz && <p className="mt-2 text-midnight-blue/85">{t.zusatz}</p>}
-      <p className="mt-3 border-l-4 border-[#C9A961] bg-pearl-white px-4 py-2 font-montserrat text-sm font-bold">Übungssatz: „{UEBUNGSSATZ}"</p>
+      <p className="mt-3 border-l-4 border-[#C9A961] bg-pearl-white px-4 py-2 font-montserrat text-sm font-bold">Zum Warmwerden: „{UEBUNGSSATZ}"</p>
       <p className="mt-3"><b className="font-montserrat font-extrabold">Reflexion: </b>{t.reflexion}</p>
-      <p className="mt-3 text-[14px] text-midnight-blue/85">Wenn du magst, teile deinen Versuch in der Gruppe. Du bekommst persönliches Feedback von mir – und wir können miteinander und aneinander wachsen. Wer still mitübt, gehört genauso dazu.</p>
+      <p className="mt-3 text-[14px] text-midnight-blue/85">Wenn du magst, teile deinen Versuch in der Gruppe. {t.feedback ? 'Heute bekommst du persönliches Feedback von mir' : 'Persönliches Feedback von mir gibt es an Tag 2 und Tag 6'} – und wir können miteinander und aneinander wachsen. Wer still mitübt, gehört genauso dazu.</p>
     </div>
   );
 }
@@ -434,7 +464,7 @@ export default function Challenge() {
     '@context': 'https://schema.org',
     '@type': 'HowTo',
     name: '7 Tage für deine Wirkungskraft – die Video-Challenge',
-    description: 'Sieben Tage, jeden Tag eine Aufgabe und eine Minute Video mit dem Handy – mit Feedback von Claudia Conen. Kostenfrei, in einer WhatsApp-Gruppe.',
+    description: 'Sieben Tage, jeden Tag ein Audio-Impuls und eine Minute Video mit dem Handy – persönliches Feedback von Claudia Conen an Tag 2 und Tag 6. Kostenfrei, in einer WhatsApp-Gruppe.',
     totalTime: 'P7D',
     step: TAGE.map((t, i) => ({ '@type': 'HowToStep', position: i + 1, name: `Tag ${i + 1}: ${t.titel} (${t.schwerpunkt})`, text: t.aufgabe })),
     url: `https://claudiaconen.com${PFAD}`,
@@ -444,7 +474,7 @@ export default function Challenge() {
     <div className="cc-2027 min-h-screen bg-pearl-white">
       <SEO
         title="7 Tage für deine Wirkungskraft – die Video-Challenge"
-        description="Sieben Tage, jeden Tag eine Anleitung, eine Minute Video mit dem Handy, Feedback von Claudia Conen. Kostenfrei, in einer WhatsApp-Gruppe – mit den sieben Schritten, dem Workbook und dem Weg danach."
+        description="Sieben Tage, jeden Tag ein Audio-Impuls, eine Minute Video mit dem Handy, persönliches Feedback von Claudia Conen an Tag 2 und Tag 6. Kostenfrei, in einer WhatsApp-Gruppe – mit den sieben Schritten, dem Workbook und dem Weg danach."
         path={PFAD}
         ogImage="https://claudiaconen.com/a27/og/og-challenge.jpg"
       />
@@ -475,6 +505,8 @@ export default function Challenge() {
               <span className="gold-text-animated text-[1.45rem] leading-[1.04] sm:text-5xl">Tage für deine<br />Wirkungskraft</span>
             </h1>
             <p className="mt-5 font-cormorant text-2xl italic leading-snug text-[#F7E7CE] sm:text-3xl">– weil Perfektion klickbar ist<br className="hidden sm:block" /> und Persönlichkeit Vertrauen weckt.</p>
+            {/* Suchwoerter (Claudia 21.10.2026 11:53 UTC "ja"): selbstbewusst auftreten, vor der Kamera. */}
+            <p className="mt-3 font-montserrat text-lg font-extrabold leading-snug text-[#EBD197] sm:text-xl">Selbstbewusst auftreten – vor Kunden und vor der Kamera.</p>
             {/* Claudia, 22.09.2026 13:01 UTC: "auf dem Banner ist mir zu viel Text" - ein Satz zur Dauer, der Fingerabdruck-
                 Satz, "mehr nicht". Die Punkte stehen hell unter dem Kopf, der WhatsApp-Hinweis steht im Formular. */}
             <p className="mt-4 max-w-xl font-montserrat text-base font-extrabold leading-snug text-white sm:text-lg">
@@ -497,6 +529,48 @@ export default function Challenge() {
           </div>
         </div>
       </header>
+
+      {/* Ergebnis + Leistungen + Ablauf auf einen Blick (Claudia, 21.10.2026 10:48-10:53 UTC: "hebe hervor, was das Ergebnis
+          ist", "dass sie zusaetzlich Videos, Audios bekommen", Teilnahmebestaetigung "mehr rausheben", Zoom-Termine und
+          24 Stunden je Video). Recherche: recherche/2026-10-21_challenge-markt.md. */}
+      <Abschnitt id="ergebnis" className="bg-pearl-white pt-12 sm:pt-16" label="ergebnis-titel">
+        <div className="mx-auto max-w-6xl px-6">
+          <Kicker text="Dein Ergebnis" hell />
+          <h2 id="ergebnis-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
+            Nach sieben Tagen hast du:
+          </h2>
+          <ul className="mt-6 grid list-none gap-3 p-0 sm:grid-cols-2">
+            {ERGEBNIS.map((z, i) => (
+              <li key={z} style={{ ['--i' as string]: i }} className={`cc-stufe flex items-start gap-3 bg-white px-5 py-4 font-montserrat text-base font-bold leading-snug text-midnight-blue sm:text-lg ${KACHEL}`}><Haken />{z}</li>
+            ))}
+          </ul>
+
+          <h3 className="mt-10 font-montserrat text-xl font-extrabold text-midnight-blue sm:text-2xl">Das bekommst du dazu – kostenfrei</h3>
+          <ul className="mt-4 grid list-none gap-3 p-0 sm:grid-cols-2 lg:grid-cols-4">
+            {LEISTUNGEN.map((z, i) => (
+              <li key={z} style={{ ['--i' as string]: i }} className={`cc-stufe flex items-start gap-3 bg-white px-4 py-3.5 font-inter text-[15px] font-semibold leading-snug text-midnight-blue ${KACHEL}`}><Haken />{z}</li>
+            ))}
+          </ul>
+          <div className={`mt-3 grid items-center gap-4 rounded-[10px] px-5 py-5 text-midnight-blue sm:grid-cols-[auto_minmax(0,1fr)] sm:px-7 ${GOLD}`}>
+            <span aria-hidden="true" className="flex h-14 w-14 items-center justify-center rounded-full bg-[#13233F] font-montserrat text-2xl font-black text-[#EBD197]">✓</span>
+            <div className="min-w-0">
+              <p className="font-montserrat text-lg font-extrabold uppercase tracking-wide sm:text-xl">Dein Zertifikat – deine persönliche Teilnahmebestätigung</p>
+              <p className="mt-1 font-inter text-[15px] font-semibold leading-relaxed">Für alle, die sieben Tage dabeibleiben und ihre sieben Videos posten. Für deine persönliche Wirkungskraft – und das Vertrauen, das du damit gewinnst.</p>
+            </div>
+          </div>
+
+          <h3 className="mt-10 font-montserrat text-xl font-extrabold text-midnight-blue sm:text-2xl">Dein Ablauf auf einen Blick</h3>
+          <ol className="mt-4 grid list-none gap-3 p-0 md:grid-cols-3">
+            {AUF_EINEN_BLICK.map((a, i) => (
+              <li key={a.wann} style={{ ['--i' as string]: i }} className={`cc-stufe px-5 py-5 ${i === 1 ? 'bg-white text-midnight-blue' : 'bg-[#13233F] text-pearl-white'} ${KACHEL}`}>
+                <p className={`font-montserrat text-[11px] font-black uppercase tracking-[0.16em] ${i === 1 ? 'text-midnight-blue/70' : 'text-[#EBD197]'}`}>{a.wann}</p>
+                <p className="mt-1 font-montserrat text-lg font-extrabold leading-tight">{a.was}</p>
+                <p className="mt-2 font-inter text-[15px] leading-relaxed">{a.text}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </Abschnitt>
 
       {/* Die Punkte, hell unter dem Kopf (Claudia, 22.09.2026 13:05 UTC). */}
       <Abschnitt className="bg-pearl-white pt-10 sm:pt-14" label="entdecke-titel">
@@ -532,7 +606,7 @@ export default function Challenge() {
                 <span className="mt-1 block underline decoration-[#C9A961] decoration-[4px] underline-offset-[6px]">Du bleibst im Kopf.</span>
               </h2>
               <p className="mt-4 max-w-2xl font-inter text-lg text-midnight-blue">
-                Jeden Tag ein Audio-Impuls von mir mit einem Gedanken, in dem du dich wiedererkennst, und einer konkreten Aufgabe – 30 Minuten am Tag, einschließlich Übung, Aufnahme und Reflexion. Wer seine Aufnahme in der Gruppe teilt, bekommt persönliches Feedback von mir – und alle lernen mit. Die Inhalte öffnen sich in der Challenge-Woche, jeden Tag einer.
+                Jeden Tag ein Audio-Impuls von mir mit einem Gedanken, in dem du dich wiedererkennst, und einer konkreten Aufgabe – 30 Minuten am Tag, einschließlich Übung, Aufnahme und Reflexion. An Tag 2 und Tag 6 bekommst du persönliches Feedback von mir, wenn du deine Aufnahme in der Gruppe teilst – und alle lernen mit. Die Inhalte öffnen sich in der Challenge-Woche, jeden Tag einer.
               </p>
             </div>
             <Kopfbild datei="programm" alt="Claudia Conen im hellblauen Blazer, Porträt" />
@@ -555,9 +629,10 @@ export default function Challenge() {
                     <span aria-hidden="true" className={`font-montserrat text-3xl font-black ${letzter ? 'text-midnight-blue/40' : 'text-[#C9A961]'}`}>{String(i + 1).padStart(2, '0')}</span>
                   </div>
                   <div className="min-w-0 flex-1">
-                    {letzter && <p className="mt-3 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-midnight-blue/80 lg:mt-0">Das Finale · Dein Kopf. Ihr Gefühl.</p>}
+                    {letzter && <p className="mt-3 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-midnight-blue/80 lg:mt-0">Das Finale · Vorher und Nachher</p>}
                     <h3 className={`font-montserrat font-extrabold uppercase tracking-wide ${letzter ? 'mt-1 text-lg sm:text-xl' : 'mt-3 text-base'}`}>{s.titel}</h3>
                     <p className="mt-1 font-montserrat text-[11px] font-bold uppercase tracking-[0.14em] text-midnight-blue/70">{s.schwerpunkt}</p>
+                    {s.feedback && <p className="mt-2"><FeedbackPlakette /></p>}
                     {frei[i] ? (
                       <details className="group mt-2">
                         <summary className="cursor-pointer list-none font-montserrat text-sm font-bold underline decoration-[#C9A961] underline-offset-4 [&::-webkit-details-marker]:hidden">
@@ -614,15 +689,15 @@ export default function Challenge() {
             <span className="mt-1 block underline decoration-[#C9A961] decoration-[4px] underline-offset-[6px]">jeden Tag 30 Minuten für deine Wirkung.</span>
           </h2>
           <p className="mt-4 max-w-3xl font-inter text-lg leading-relaxed text-midnight-blue">
-            Warum hören Menschen dir gerne zu? „Ich mag meine Stimme nicht." Story, Elevator Pitch, Keynote, Miteinander, jeden Tag telefonieren, Kaltakquise, Kundengewinnung – all das und noch viel mehr gehört dazu.
+            Warum hören Menschen dir gerne zu? Kernbotschaft, Zielgruppenbrille, raus aus der Redeangst, deine Stimme, Storytelling, wie Kunden entscheiden und dein Elevator Pitch – jeden Tag ein Thema.
           </p>
           <p className="mt-5 max-w-3xl border-l-4 border-[#C9A961] bg-white px-5 py-4 font-cormorant text-2xl italic leading-snug text-midnight-blue sm:text-3xl">
             „{UEBUNGSSATZ}"
-            <span className="mt-1 block font-montserrat text-[11px] font-extrabold not-italic uppercase tracking-[0.16em] text-midnight-blue/70">Unser Satz – an allen sieben Tagen</span>
+            <span className="mt-1 block font-montserrat text-[11px] font-extrabold not-italic uppercase tracking-[0.16em] text-midnight-blue/70">Zum Warmwerden – an allen sieben Tagen. Dazu kommt ab Tag 1 dein eigener Satz.</span>
           </p>
           <div className={`mt-7 flex flex-wrap items-center justify-between gap-x-6 gap-y-1 rounded-md px-5 py-2.5 font-montserrat text-[13px] font-extrabold uppercase tracking-[0.12em] text-midnight-blue ${FLAECHE}`}>
             <span>Auftakt live im Zoom · Montag, 26. Oktober 2026 · 19:00 Uhr</span>
-            <span>Abschluss · Montag, 2. November 2026 · 19:00–20:00 Uhr · Zoom freiwillig</span>
+            <span>Abschluss live im Zoom · Montag, 2. November 2026 · 19:00 Uhr · 60-Sekunden-Pitch freiwillig</span>
           </div>
 
           <details className={`group mt-8 text-midnight-blue ${FLAECHE} ${KACHEL} shadow-[0_18px_40px_-24px_rgba(19,35,63,0.35)]`}>
@@ -691,6 +766,7 @@ export default function Challenge() {
                     <div className={`flex items-center gap-4 bg-white/70 px-4 py-3 text-midnight-blue sm:px-6 ${KACHEL} border-[#C9A961]/35`}>
                       <span className="cc-puls rounded-md bg-midnight-blue/70 px-2.5 py-1.5 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-pearl-white">Tag {i + 1}</span>
                       <span className="min-w-0 flex-1 font-montserrat text-sm font-bold text-midnight-blue/80">{KURZ.format(freischaltung(heute, i))}</span>
+                      {t.feedback && <FeedbackPlakette />}
                       <Schluessel />
                     </div>
                   ) : (
@@ -700,6 +776,7 @@ export default function Challenge() {
                       <span className="min-w-0 flex-1 font-montserrat text-sm font-bold text-midnight-blue/80">
                         {KURZ.format(freischaltung(heute, i))}
                       </span>
+                      {t.feedback && <FeedbackPlakette />}
                       <span className="hidden font-montserrat text-xs font-bold text-midnight-blue/70 sm:inline"><span className="group-open:hidden">Aufklappen</span><span className="hidden group-open:inline">Zuklappen</span></span>
                       <Schluessel />
                     </summary>

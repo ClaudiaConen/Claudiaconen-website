@@ -988,60 +988,24 @@ export default function Challenge() {
         </div>
       </Abschnitt>
 
-      {/* Geschenk, Rederaum, Online-Buehne - Claudia, 22.09.2026 10:59-11:00 UTC: "Mein Geschenk fuer deine
+      {/* Wirkungs-Check und Kaffee/Rederaum entfernt auf Claudias Anweisung (22.10.2026, 11:25 UTC). Frueher: Geschenk, Rederaum, Online-Buehne - Claudia, 22.09.2026 10:59-11:00 UTC: "Mein Geschenk fuer deine
           Wirkung und der Schritt danach: 1:1-Gespraech bei einem Kaffee ... Rederaum, das heisst bei mir immer
           Rederaum"; "Willst du sofort eine Online-Buehne nutzen ... dann folge dem Link". */}
       <Abschnitt id="geschenk" className="bg-pearl-white py-16 sm:py-24" label="angebot-titel">
         <div className="mx-auto max-w-6xl px-6">
           <div className={KOPF}>
             <div>
-              <Kicker text="Zwei Wege. Ein Anfang." hell />
+              <Kicker text="Der Schritt danach" hell />
               <h2 id="angebot-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
-                Mein Geschenk für deine Wirkung – und der Schritt danach.
+                Wenn du nach den sieben Tagen weitergehen willst.
               </h2>
             </div>
             {/* Claudias Foto vom 22.09.2026 16:16 UTC (rote Mappe), Original in projects/claudiaconen/ablage/claudia-rote-mappe-2026-09-22.jpg */}
             <Kopfbild datei="geschenk" alt="Claudia Conen mit einer aufgeschlagenen roten Mappe, lächelnd" />
           </div>
-          <div className="mt-9 grid gap-4 md:grid-cols-2">
-            <div className={`flex flex-col bg-white p-7 text-midnight-blue ${KACHEL} border-[#C9A961]`}>
-              <span className="self-start rounded-full bg-midnight-blue px-3 py-1.5 font-montserrat text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#EBD197]">Geschenk · kostenlos</span>
-              <h3 className="mt-4 font-montserrat text-2xl font-extrabold uppercase">Der Wirkungs-Check</h3>
-              <p className="mt-3 font-montserrat text-4xl font-black">0 €</p>
-              <p className="mt-4 font-inter leading-relaxed">
-                20 Minuten am Telefon oder per Zoom, ohne Vorbereitung: Du sprichst eine Minute über dein Thema – so, wie du es im Alltag tust. Dann hörst du von mir drei Dinge:
-              </p>
-              <ul className="mt-4 grid list-none gap-2.5 p-0 font-inter">
-                {['Was von dir hängen bleibt.', 'Was verpufft – und warum.', 'Was du morgen anders machst.'].map((z) => (
-                  <li key={z} className="flex gap-3"><Haken />{z}</li>
-                ))}
-              </ul>
-              <div className="mt-auto pt-7">
-                <a href="https://meet.brevo.com/claudia-conen" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full bg-midnight-blue px-6 py-3.5 font-montserrat text-sm font-bold text-pearl-white transition-colors hover:bg-royal-navy">
-                  Termin für den Wirkungs-Check
-                </a>
-              </div>
-            </div>
-            <div className={`flex flex-col bg-midnight-blue p-7 text-pearl-white ${KACHEL} border-[#C9A961]`}>
-              <span className={`self-start rounded-full px-3 py-1.5 font-montserrat text-[10px] font-extrabold uppercase tracking-[0.18em] text-midnight-blue ${GOLD}`}>Der Schritt danach · 1:1</span>
-              <h3 className="mt-4 font-montserrat text-2xl font-extrabold uppercase text-white">Ein Kaffee. Ein Rederaum.</h3>
-              <p className="mt-4 font-inter leading-relaxed text-pearl-white/90">
-                Möchtest du weitergehen – deine Performance, dein Auftreten, deine Selbstsicherheit, dein Elevator-Story-Training, deine Keynote-Performance ausarbeiten? Dann bin ich da für dich.
-              </p>
-              <p className="mt-3 font-inter leading-relaxed text-pearl-white/90">
-                Buch dir in meinem Kalender einen Rederaum: 30 Minuten, kostenlos, nur wir zwei – bei einem Kaffee oder im Zoom. Wir schauen, wo du stehst, was du erreichen willst – und wie wir miteinander arbeiten können.
-              </p>
-              <div className="mt-auto pt-7">
-                <a href="https://meet.brevo.com/claudia-conen" target="_blank" rel="noopener noreferrer" className={`inline-flex items-center rounded-full px-6 py-3.5 font-montserrat text-sm font-bold text-midnight-blue transition-transform hover:-translate-y-px ${GOLD}`}>
-                  Rederaum buchen
-                </a>
-              </div>
-            </div>
-          </div>
-
           {/* 1:1-Intensiv-Training – Sonderpreis für Challenge-Teilnehmende (Claudia, 17.10.2026):
               90 Min, 180 € netto, Buchung auf Anfrage per E-Mail. Bild liegt in public/challenge/. */}
-          <div className={`mt-4 overflow-hidden bg-midnight-blue ${KACHEL} border-[#C9A961]`}>
+          <div className={`mt-9 overflow-hidden bg-midnight-blue ${KACHEL} border-[#C9A961]`}>
             <div className="grid items-center md:grid-cols-2">
               <img
                 src="/challenge/1zu1-intensiv-training.jpg"

@@ -19,7 +19,9 @@ import { supabase } from '../lib/supabase';
  */
 const CHALLENGE_LINK = 'https://chat.whatsapp.com/IWSuqZ9ZrMn3dYNgVY1sp6?s=qt&p=i&mlu=4&ilr=4';
 /** Alternative fuer alle ohne WhatsApp (Claudia, 15.10.2026). */
-const TELEGRAM_LINK = 'https://t.me/+0ePKVbpBySlmZWZi';
+const TELEGRAM_LINK = 'https://t.me/+Tn_rHmElfidjYzcy';
+/** Zoom-Raum fuer Auftakt und Finale (Claudia, 23.10.2026) - steht nur im Danke-Bereich, nicht offen auf der Seite. */
+const ZOOM_LINK = 'https://us02web.zoom.us/j/3240814498';
 const GOLD = 'bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]';
 
 const FELD =
@@ -73,7 +75,13 @@ export default function ChallengeAnmeldung({ start, onEingetragen }: { start: st
         <div className="min-w-0">
           <p className="font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">Danke, {vorname.trim() || 'du'} – du bist eingetragen.</p>
           <p className="mt-2 font-inter text-[15px] leading-relaxed sm:text-base">
-            Jetzt noch in deine Gruppe. Du hast die Wahl: Empfohlen ist die WhatsApp-Gruppe, dort ist am meisten los. Kein WhatsApp? Dann nimm die Telegram-Gruppe, gleiche Inhalte, gleiches Feedback. Start: Montag, {start}.
+            Start: Montag, {start}, 19 Uhr, live im Zoom. Speichere dir den Link gleich:
+          </p>
+          <a href={ZOOM_LINK} target="_blank" rel="noopener noreferrer" className={`mt-3 inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue transition-transform hover:-translate-y-px ${GOLD}`}>
+            Zum Zoom-Raum
+          </a>
+          <p className="mt-4 font-inter text-[15px] leading-relaxed sm:text-base">
+            Und jetzt in deine Gruppe. Du hast die Wahl: Empfohlen ist die WhatsApp-Gruppe, dort ist am meisten los. Kein WhatsApp? Dann nimm die Telegram-Gruppe, gleiche Inhalte, gleiches Feedback.
           </p>
           <div className="mt-4 flex flex-wrap gap-3">
             <a href={CHALLENGE_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full bg-midnight-blue px-7 py-4 font-montserrat text-sm font-bold text-pearl-white transition-colors hover:bg-royal-navy">
@@ -95,7 +103,7 @@ export default function ChallengeAnmeldung({ start, onEingetragen }: { start: st
         Ich bin dabei.
       </h3>
       <p className="mt-2 max-w-2xl font-inter text-[15px] leading-relaxed text-pearl-white/85">
-        Trag dich ein, damit ich weiß, wer mitmacht – auch wenn du schon in der Gruppe bist. Danach geht es direkt in die WhatsApp-Gruppe.
+        Trag dich ein, damit ich weiß, wer mitmacht – auch wenn du schon in der Gruppe bist. Danach geht es direkt in deine Gruppe, bei WhatsApp oder Telegram.
       </p>
       <div className="mt-5 grid gap-3 sm:grid-cols-3">
         <label className="block">

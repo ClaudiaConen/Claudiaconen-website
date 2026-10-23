@@ -124,10 +124,10 @@ export default function Navigation({ hell = false }: { hell?: boolean } = {}) {
                 JEDER Seite, deshalb zaehlt hier jedes Kilobyte:
                 7 statt 112 KB. */}
             <picture>
-              <source srcSet="/logo-192.webp" type="image/webp" />
+              <source srcSet="/logo-cc-192.webp" type="image/webp" />
               <img
-                src="/logo-192.jpg"
-                alt="Claudia Conen – KI & Mensch"
+                src="/logo-cc-192.jpg"
+                alt="Claudia Conen – Logo"
                 width={48}
                 height={48}
                 className="h-12 w-12 rounded-full object-cover"

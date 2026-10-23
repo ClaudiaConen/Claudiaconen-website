@@ -67,8 +67,8 @@ export default function Footer() {
             <div>
               <div className="flex items-center gap-4">
                 <picture>
-                  <source srcSet="/logo-192.webp" type="image/webp" />
-                  <img src="/logo-192.jpg" alt="Claudia Conen" width={56} height={56} loading="lazy" decoding="async" className="h-14 w-14 flex-none rounded-full object-cover ring-2 ring-[#D4AF37]/60" />
+                  <source srcSet="/logo-cc-192.webp" type="image/webp" />
+                  <img src="/logo-cc-192.jpg" alt="Claudia Conen" width={56} height={56} loading="lazy" decoding="async" className="h-14 w-14 flex-none rounded-full object-cover ring-2 ring-[#D4AF37]/60" />
                 </picture>
                 <div>
                   <p className="font-montserrat text-2xl font-extrabold text-[#EBD197]">Claudia Conen</p>
@@ -106,6 +106,14 @@ export default function Footer() {
                 <a href="https://www.linkedin.com/in/claudia-conen-die-stimme/" target="_blank" rel="noopener noreferrer" aria-label="Claudia Conen auf LinkedIn" className={RUND}><Linkedin size={18} /></a>
                 <a href="https://www.instagram.com/claudia_conen_umsatzstimme/" target="_blank" rel="noopener noreferrer" aria-label="Claudia Conen auf Instagram" className={RUND}><Instagram size={18} /></a>
                 <a href="mailto:claudiaconen@umsatzstimme.de" aria-label="E-Mail an Claudia Conen" className={RUND}><Mail size={18} /></a>
+                {/* Zeichen "KI & Mensch": zeigt, dass mit KI gearbeitet wird - NICHT Claudias Logo,
+                    deshalb klein bei den Kanaelen (Claudia, 23.10.2026). */}
+                <span title="KI & Mensch – wir arbeiten mit KI" className="flex h-10 w-10 flex-none overflow-hidden rounded-full border border-[#D4AF37]/40">
+                  <picture>
+                    <source srcSet="/logo-ki-mensch-192.webp" type="image/webp" />
+                    <img src="/logo-ki-mensch-192.jpg" alt="Zeichen KI & Mensch" width={40} height={40} loading="lazy" decoding="async" className="h-full w-full object-cover" />
+                  </picture>
+                </span>
               </div>
             </div>
           </div>

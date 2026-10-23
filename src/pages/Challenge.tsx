@@ -74,6 +74,13 @@ const MENSCH_KANN = [
 
 
 const GOLD = 'bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]';
+/** 1:1-Intensiv-Training, Sonderpreise fuer Challenge-Teilnehmende (netto). Paket: Vorschlag 23.10.2026, Claudias Ja offen. */
+const EINZEL_NETTO = 180;
+const PAKET_NETTO = 435;
+const EINZEL_LINK = 'https://umsatzstimme-claudiaconen.mytentary.com/p/zJYlWu/checkout';
+// Bis das Tentary-Produkt fuer das Paket existiert: Anfrage per E-Mail (Claudia 23.10.2026).
+const PAKET_LINK = 'mailto:claudiaconen@umsatzstimme.de?subject=Paket%203%20%C3%97%2090%20Minuten%20(Challenge-Sonderpreis)';
+const brutto = (netto: number) => (netto * 1.19).toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const KACHEL = 'cc-glanz-kachel rounded-[10px] border border-[#13233F]/[0.13] transition-[border-color,box-shadow] duration-200 hover:border-[#C9A961] hover:shadow-[0_18px_40px_-20px_rgba(19,35,63,0.35)]';
 /** Ruhige Champagner-Flaeche statt kraeftigem Gold fuer grosse Bloecke (Farben der neuen Seiten, Claudia 15.10.2026). */
 const FLAECHE = 'bg-[linear-gradient(135deg,#FCF6EC,#F7E7CE)] border border-[#C9A961]/60';
@@ -103,26 +110,12 @@ const WERKZEUG: { titel: string; vorschau: string; text: string; icon: string }[
 /** Die Punkte aus dem Kopf, jetzt hell darunter (Claudia, 22.09.2026 13:01/13:05 UTC: "damit das oben nicht so voll
  *  gepackt ist ... unter den Slider kommt dann hell und da werden die Punkte aufgelistet"). */
 /** Ergebnis, Leistungen und Ablauf auf einen Blick (Claudia, 21.10.2026 10:48-10:53 UTC). */
-const ERGEBNIS = [
-  'Deine Kernbotschaft in einem Satz, der sofort verstanden wird',
-  'Deinen Elevator Pitch in drei Sätzen – fertig für dein nächstes Kundengespräch',
-  'Dein Vorher- und dein Nachher-Video – dein sichtbarer Beweis',
-  'Das Gefühl, sicher aufzutreten – wo auch immer du den Mund aufmachst',
-];
-const LEISTUNGEN = [
-  'Jeden Tag einen Audio-Impuls von Claudia',
-  'Zwei Live-Termine im Zoom – zum Abschluss dein 60-Sekunden-Pitch (freiwillig)',
-  'Persönliches Feedback an Tag 2 und Tag 6',
-  'Das Workbook zum Blättern und Mitnehmen',
-];
 const AUF_EINEN_BLICK: { wann: string; was: string; text: string }[] = [
   { wann: 'Montag, 26. Oktober · 19 Uhr', was: 'Auftakt live im Zoom', text: 'Kennenlernen, deine tägliche Übungszeit festlegen – und noch am selben Abend dein Vorher-Video.' },
   { wann: 'Sieben Tage', was: 'Jeden Tag ein Impuls', text: 'Audio anhören, eine Minute Video aufnehmen. Für jedes Video hast du 24 Stunden Zeit zum Posten.' },
-  { wann: 'Montag, 2. November · 19 Uhr', was: 'Abschluss live im Zoom', text: 'Dein 60-Sekunden-Pitch, live vor der Gruppe, freiwillig – vielleicht sitzt dort schon dein nächster Kunde. Danach bekommst du dein Zertifikat.' },
+  { wann: 'Montag, 2. November · 19 Uhr', was: 'Abschluss live im Zoom', text: 'Dein 60-Sekunden-Pitch, live und freiwillig: Ihr netzwerkt und pitcht untereinander – und wer weiß, vielleicht sitzt dort dein bester Kunde. Danach bekommst du dein Zertifikat.' },
 ];
 
-// Claudia 21.10.2026 14:18 UTC: hier die ausgearbeiteten Punkte (die sieben Tage + KI-Tipps + Workbook).
-const ENTDECKE = ['Deine Kernbotschaft – Positionierung in einem Satz', 'Die Zielgruppenbrille – dein Video mit Kundenaugen', 'Raus aus der Redeangst – auch vor der Kamera', 'Deine Stimme – Betonung und Pause', 'Storytelling – der Kunde ist der Held', 'Wie Kunden entscheiden – Zuhören und Call to Action', 'Dein Elevator Pitch – die Generalprobe', 'Tipps, wie KI deine echte Kommunikation unterstützt', 'Das Workbook zum Blättern und Mitnehmen'];
 
 
 /** Der Durchgang: Montag, 26.10.2026 bis Montag, 02.11.2026 (Claudia, 22.09.2026 11:02 UTC). Vorher ist nur
@@ -274,16 +267,14 @@ const WEGWEISER = {
 /** So laeuft es ab - Claudias Diktate vom 22.09.2026, 13:07 und 13:10 UTC ("Wie kann ich das ein bisschen sortieren",
  *  "schreib das kuerzer"), in ihrer Reihenfolge, ein Gedanke je Satz. Termine aus START/ENDE. */
 const ABLAUF: { titel: string; text: string }[] = [
-  { titel: 'Eintragen', text: 'Du trägst dich hier ein. Danach kommst du in die WhatsApp-Gruppe.' },
-  { titel: 'Die Gruppe', text: 'Austausch untereinander ist gern gesehen. Werbung nicht – dafür gibt es am letzten Tag Werbezeit, für jeden.' },
-  { titel: 'Der Auftakt', text: 'Montag, 26. Oktober, 19 Uhr, 60 Minuten im Zoom: kennenlernen, miteinander lachen, den Wegweiser in die Hand bekommen. Dann geht es los.' },
-  { titel: 'Jeden Tag ein Impuls', text: 'Ein Audio von mir in der Gruppe: Hinweise, eine kleine Lektion, deine Aufgabe des Tages. Dein Video dazu: eine Minute. Du hast 24 Stunden Zeit zum Posten.' },
+  // Gekuerzt am 23.10.2026 (Claudia: "nicht so viele Sachen doppelt"): Auftakt, Jeden Tag ein Impuls und Abschluss
+  // stehen schon in "Dein Ablauf auf einen Blick", das Workbook als Kachel beim Programm.
+  { titel: 'Eintragen', text: 'Du trägst dich hier ein. Danach kommst du in deine Gruppe, bei WhatsApp oder Telegram.' },
+  { titel: 'Die Gruppe', text: 'Austausch untereinander ist gern gesehen. Werbung nicht – dafür gibt es am letzten Tag Werbezeit, für jeden. Danach darfst du dein Business in der Community-Gruppe vorstellen.' },
   { titel: 'Dein Feedback', text: 'An Tag 2 und Tag 6 bekommst du persönliches Feedback von mir, wenn du dein Video innerhalb der 24 Stunden postest. Danach darfst du dein Video verbessern – für dich, um daran zu wachsen.' },
   { titel: 'Zwischendurch', text: 'Impulse zu Storytelling und Prompts für die KI, die du direkt nutzen kannst – um deine Positionierung zu schärfen und deine innere Haltung nach außen zu tragen.' },
-  { titel: 'Das Workbook', text: 'Wenn dir danach ist: Schnapp dir das Workbook weiter unten und genieß es an einem ruhigen Abend. Alles kann, nichts muss.' },
-  { titel: 'Der Abschluss', text: 'Montag, 2. November, 19 Uhr live im Zoom: dein 60-Sekunden-Pitch vor Publikum, freiwillig, und Erfahrungen austauschen. Danach bekommst du dein Zertifikat und darfst dein Business in der Community-Gruppe vorstellen.' },
 ];
-const ABLAUF_HINWEIS = 'Mein Tipp: Nimm dir täglich 30 Minuten Zeit – wann auch immer. Alles läuft in der WhatsApp-Gruppe, bis unsere Plattform fertig ist. Dann lade ich euch alle dazu ein.';
+const ABLAUF_HINWEIS = 'Mein Tipp: Nimm dir täglich 30 Minuten Zeit – wann auch immer. Alles läuft in der Gruppe bei WhatsApp oder Telegram, bis unsere Plattform fertig ist. Dann lade ich euch alle dazu ein.';
 
 const FUER = [
   'gehört werden willst – im Meeting, am Telefon, vor Kunden, auf der Bühne',
@@ -530,71 +521,7 @@ export default function Challenge() {
         </div>
       </header>
 
-      {/* Ergebnis + Leistungen + Ablauf auf einen Blick (Claudia, 21.10.2026 10:48-10:53 UTC: "hebe hervor, was das Ergebnis
-          ist", "dass sie zusaetzlich Videos, Audios bekommen", Teilnahmebestaetigung "mehr rausheben", Zoom-Termine und
-          24 Stunden je Video). Recherche: recherche/2026-10-21_challenge-markt.md. */}
-      <Abschnitt id="ergebnis" className="bg-pearl-white pt-12 sm:pt-16" label="ergebnis-titel">
-        <div className="mx-auto max-w-6xl px-6">
-          <Kicker text="Dein Ergebnis" hell />
-          <h2 id="ergebnis-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
-            Nach sieben Tagen hast du:
-          </h2>
-          <ul className="mt-6 grid list-none gap-3 p-0 sm:grid-cols-2">
-            {ERGEBNIS.map((z, i) => (
-              <li key={z} style={{ ['--i' as string]: i }} className={`cc-stufe flex items-start gap-3 bg-white px-5 py-4 font-montserrat text-base font-bold leading-snug text-midnight-blue sm:text-lg ${KACHEL}`}><Haken />{z}</li>
-            ))}
-          </ul>
-
-          <h3 className="mt-10 font-montserrat text-xl font-extrabold text-midnight-blue sm:text-2xl">Das bekommst du dazu – kostenfrei</h3>
-          <ul className="mt-4 grid list-none gap-3 p-0 sm:grid-cols-2 lg:grid-cols-4">
-            {LEISTUNGEN.map((z, i) => (
-              <li key={z} style={{ ['--i' as string]: i }} className={`cc-stufe flex items-start gap-3 bg-white px-4 py-3.5 font-inter text-[15px] font-semibold leading-snug text-midnight-blue ${KACHEL}`}><Haken />{z}</li>
-            ))}
-          </ul>
-          <div className={`mt-3 grid items-center gap-4 rounded-[10px] px-5 py-5 text-midnight-blue sm:grid-cols-[auto_minmax(0,1fr)] sm:px-7 ${GOLD}`}>
-            <span aria-hidden="true" className="flex h-14 w-14 items-center justify-center rounded-full bg-[#13233F] font-montserrat text-2xl font-black text-[#EBD197]">✓</span>
-            <div className="min-w-0">
-              <p className="font-montserrat text-lg font-extrabold uppercase tracking-wide sm:text-xl">Dein Zertifikat – deine persönliche Teilnahmebestätigung</p>
-              <p className="mt-1 font-inter text-[15px] font-semibold leading-relaxed">Für alle, die sieben Tage dabeibleiben und ihre sieben Videos posten. Für deine persönliche Wirkungskraft – und das Vertrauen, das du damit gewinnst.</p>
-            </div>
-          </div>
-
-          <h3 className="mt-10 font-montserrat text-xl font-extrabold text-midnight-blue sm:text-2xl">Dein Ablauf auf einen Blick</h3>
-          <ol className="mt-4 grid list-none gap-3 p-0 md:grid-cols-3">
-            {AUF_EINEN_BLICK.map((a, i) => (
-              <li key={a.wann} style={{ ['--i' as string]: i }} className={`cc-stufe px-5 py-5 ${i === 1 ? 'bg-white text-midnight-blue' : 'bg-[#13233F] text-pearl-white'} ${KACHEL}`}>
-                <p className={`font-montserrat text-[11px] font-black uppercase tracking-[0.16em] ${i === 1 ? 'text-midnight-blue/70' : 'text-[#EBD197]'}`}>{a.wann}</p>
-                <p className="mt-1 font-montserrat text-lg font-extrabold leading-tight">{a.was}</p>
-                <p className="mt-2 font-inter text-[15px] leading-relaxed">{a.text}</p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </Abschnitt>
-
-      {/* Die Punkte, hell unter dem Kopf (Claudia, 22.09.2026 13:05 UTC). */}
-      <Abschnitt className="bg-pearl-white pt-10 sm:pt-14" label="entdecke-titel">
-        <div className="mx-auto max-w-6xl px-6">
-          <h2 id="entdecke-titel" className="flex items-center gap-3 font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] text-midnight-blue">
-            <span aria-hidden="true" className={`cc-linie h-[3px] w-7 rounded-full ${GOLD}`} />
-            Entdecke in der Challenge
-          </h2>
-          <ul className="mt-4 grid list-none gap-3 p-0 sm:grid-cols-2 lg:grid-cols-3">
-            {ENTDECKE.map((z, i) => (
-              <li key={z} style={{ ['--i' as string]: i }} className={`cc-stufe flex items-start gap-3 bg-white px-4 py-3.5 font-montserrat text-[15px] font-bold text-midnight-blue ${KACHEL}`}><Haken />{z}</li>
-            ))}
-          </ul>
-        </div>
-      </Abschnitt>
-
-      {/* Anmeldung direkt unter dem Kopf (Kritiker-Durchgang 22.09.2026, Claudias Ja 12:22 UTC: "mach das alles so"). */}
-      <section id="anmeldung" className="bg-pearl-white pt-6 pb-4 sm:pt-8" aria-label="Anmeldung zur Challenge">
-        <div className="mx-auto max-w-6xl px-6">
-          <ChallengeAnmeldung start={startKurz} />
-        </div>
-      </section>
-
-      {/* Sieben Schritte - Claudia, 22.09.2026 10:55 UTC: "dieser grau-braune Ton hinter dem Programm ... in Weiss
+      {/* Sieben Schritte - direkt unter dem Kopf (Claudia, 23.10.2026: "bring die 3-D-Icons weiter nach oben"). Claudia, 22.09.2026 10:55 UTC: "dieser grau-braune Ton hinter dem Programm ... in Weiss
           austauschen" und "viel weiter nach oben, damit die direkt wissen, warum sie dabei sein sollen". */}
       <Abschnitt id="programm" className="bg-white py-16 text-midnight-blue sm:py-24" label="programm-titel">
         <div className="mx-auto max-w-6xl px-6">
@@ -606,7 +533,7 @@ export default function Challenge() {
                 <span className="mt-1 block underline decoration-[#C9A961] decoration-[4px] underline-offset-[6px]">Du bleibst im Kopf.</span>
               </h2>
               <p className="mt-4 max-w-2xl font-inter text-lg text-midnight-blue">
-                Jeden Tag ein Audio-Impuls von mir mit einem Gedanken, in dem du dich wiedererkennst, und einer konkreten Aufgabe – 30 Minuten am Tag, einschließlich Übung, Aufnahme und Reflexion. An Tag 2 und Tag 6 bekommst du persönliches Feedback von mir, wenn du deine Aufnahme in der Gruppe teilst – und alle lernen mit. Die Inhalte öffnen sich in der Challenge-Woche, jeden Tag einer.
+                Jeden Tag ein Audio-Impuls von mir mit einem Gedanken, in dem du dich wiedererkennst, und einer konkreten Aufgabe. Die Inhalte öffnen sich in der Challenge-Woche, jeden Tag einer.
               </p>
             </div>
             <Kopfbild datei="programm" alt="Claudia Conen im hellblauen Blazer, Porträt" />
@@ -620,7 +547,7 @@ export default function Challenge() {
                 <li
                   key={s.titel}
                   style={{ ['--i' as string]: i }}
-                  className={`cc-stufe p-6 hover:-translate-y-0.5 ${KACHEL} ${letzter ? `${FLAECHE} text-midnight-blue sm:col-span-2 lg:col-span-3 lg:flex lg:items-start lg:gap-8` : 'bg-pearl-white text-midnight-blue'}`}
+                  className={`cc-stufe p-6 hover:-translate-y-0.5 ${KACHEL} ${letzter ? `${FLAECHE} text-midnight-blue sm:col-span-2 lg:flex lg:items-start lg:gap-8` : 'bg-pearl-white text-midnight-blue'}`}
                 >
                   {/* 3-D-Icons nach den Flyer-Piktogrammen (Claudias Impuls 22.09.2026 11:48 UTC), erzeugt mit
                       skripte/schritt_icons.py ueber ihren Gemini-Schluessel. */}
@@ -649,9 +576,65 @@ export default function Challenge() {
                 </li>
               );
             })}
+            {/* Workbook-Kachel neben dem Finale - ersetzt die Zeile aus "Entdecke in der Challenge" (Claudia, 23.10.2026). */}
+            <li className={`cc-stufe flex flex-col bg-pearl-white p-6 text-midnight-blue hover:-translate-y-0.5 ${KACHEL}`}>
+              <div className="flex items-center gap-4">
+                <img src="/unverwechselbar/workbook/seite-01.webp" alt="" width={900} height={1273} loading="lazy" decoding="async" className="h-20 w-auto flex-none rounded-sm shadow-[0_8px_16px_-6px_rgba(10,22,40,0.45)]" />
+                <span aria-hidden="true" className="font-montserrat text-3xl font-black text-[#C9A961]">+</span>
+              </div>
+              <h3 className="mt-3 font-montserrat text-base font-extrabold uppercase tracking-wide">Dein Workbook</h3>
+              <p className="mt-1 font-montserrat text-[11px] font-bold uppercase tracking-[0.14em] text-midnight-blue/70">Zum Blättern und Mitnehmen</p>
+              <button type="button" onClick={() => setBuchOffen(true)} className="mt-auto self-start pt-3 font-montserrat text-sm font-bold underline decoration-[#C9A961] underline-offset-4">
+                Im Workbook blättern →
+              </button>
+            </li>
           </ol>
         </div>
       </Abschnitt>
+
+      {/* Ergebnis + Zertifikat + Ablauf (Claudia, 21.10.2026; umgebaut 23.10.2026: "Nach sieben Tagen hast du sieht
+          voll langweilig aus", Ablauf "mit Laufline wie unten bei den Tagen, von links nach rechts, nicht so langweilig").
+          Die Leistungsliste ist raus - jeder Punkt steht schon im Programm, im Ablauf oder als Workbook-Kachel. */}
+      <Abschnitt id="ergebnis" className="bg-pearl-white pt-12 sm:pt-16" label="ergebnis-titel">
+        <div className="mx-auto max-w-6xl px-6">
+          {/* "Nach sieben Tagen hast du" und "Das bekommst du dazu" raus (Claudia, 23.10.2026 16:05: "das alles raus").
+              Es bleiben Zertifikat und Ablauf. */}
+          <div className={`grid items-center gap-4 rounded-[10px] px-5 py-5 text-midnight-blue sm:grid-cols-[auto_minmax(0,1fr)] sm:px-7 ${GOLD}`}>
+              <span aria-hidden="true" className="flex h-14 w-14 items-center justify-center rounded-full bg-[#13233F] font-montserrat text-2xl font-black text-[#C9A961]">✓</span>
+              <div className="min-w-0">
+                <p className="font-montserrat text-lg font-extrabold uppercase tracking-wide sm:text-xl">Dein Zertifikat – deine persönliche Teilnahmebestätigung</p>
+                <p className="mt-1 font-inter text-[15px] font-semibold leading-relaxed">Für alle, die sieben Tage dabeibleiben und ihre sieben Videos posten. Für deine persönliche Wirkungskraft – und das Vertrauen, das du damit gewinnst.</p>
+              </div>
+          </div>
+
+          <h3 id="ergebnis-titel" className="mt-14 font-montserrat text-2xl font-extrabold text-midnight-blue sm:text-3xl">Dein Ablauf auf einen Blick</h3>
+          {/* Laufline von links nach rechts wie die Schiene bei den Tagen; auf dem Handy senkrecht links. */}
+          <ol className="relative mt-8 grid list-none gap-8 p-0 pl-12 md:grid-cols-3 md:gap-8 md:pl-0 md:pt-14">
+            <span aria-hidden="true" className="absolute bottom-2 left-[19px] top-2 w-[2px] rounded bg-[linear-gradient(180deg,rgba(212,175,55,.8),rgba(212,175,55,.15))] md:bottom-auto md:left-[16%] md:right-[16%] md:top-[19px] md:h-[2px] md:w-auto md:bg-[linear-gradient(90deg,rgba(212,175,55,.8),rgba(212,175,55,.8))]" />
+            {AUF_EINEN_BLICK.map((a, i) => (
+              <li key={a.wann} style={{ ['--i' as string]: i }} className="cc-stufe relative">
+                <span aria-hidden="true" className={`absolute -left-12 top-0 flex h-10 w-10 items-center justify-center rounded-full border border-[#F7E7CE] font-montserrat text-base font-black text-midnight-blue shadow-[0_0_0_6px_rgba(212,175,55,0.16),0_8px_20px_-6px_rgba(184,134,11,0.7)] md:left-1/2 md:-top-14 md:-translate-x-1/2 ${GOLD}`}>{i + 1}</span>
+                <div className={`h-full px-6 py-6 ${i === 1 ? 'bg-white text-midnight-blue' : 'bg-[#13233F] text-pearl-white'} ${KACHEL}`}>
+                  <p className={`inline-block rounded-md px-3 py-1.5 font-montserrat text-[12px] font-black uppercase tracking-[0.14em] ${i === 1 ? 'bg-midnight-blue/10 text-midnight-blue' : `text-midnight-blue ${GOLD}`}`}>{a.wann}</p>
+                  <p className="mt-3 font-montserrat text-xl font-extrabold leading-tight">{a.was}</p>
+                  <p className="mt-2 font-inter text-[15px] leading-relaxed">{a.text}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </Abschnitt>
+
+      {/* "Entdecke in der Challenge" entfernt (Claudia, 23.10.2026): wiederholte die sieben Tage mit Icons weiter unten.
+          Das Workbook steht jetzt als eigene Kachel bei den Tagen. */}
+
+      {/* Anmeldung direkt unter dem Kopf (Kritiker-Durchgang 22.09.2026, Claudias Ja 12:22 UTC: "mach das alles so"). */}
+      <section id="anmeldung" className="bg-pearl-white pt-6 pb-4 sm:pt-8" aria-label="Anmeldung zur Challenge">
+        <div className="mx-auto max-w-6xl px-6">
+          <ChallengeAnmeldung start={startKurz} />
+        </div>
+      </section>
+
 
       {/* So laeuft es ab - Claudias Diktate 13:07 + 13:10 UTC, sortiert (ABLAUF). */}
       <Abschnitt id="ablauf" className="bg-pearl-white py-12 sm:py-16" label="ablauf-titel">
@@ -688,18 +671,10 @@ export default function Challenge() {
             Sieben Tage. Jeden Tag eine Anleitung zum Aufklappen –
             <span className="mt-1 block underline decoration-[#C9A961] decoration-[4px] underline-offset-[6px]">jeden Tag 30 Minuten für deine Wirkung.</span>
           </h2>
-          <p className="mt-4 max-w-3xl font-inter text-lg leading-relaxed text-midnight-blue">
-            Warum hören Menschen dir gerne zu? Kernbotschaft, Zielgruppenbrille, raus aus der Redeangst, deine Stimme, Storytelling, wie Kunden entscheiden und dein Elevator Pitch – jeden Tag ein Thema.
-          </p>
           <p className="mt-5 max-w-3xl border-l-4 border-[#C9A961] bg-white px-5 py-4 font-cormorant text-2xl italic leading-snug text-midnight-blue sm:text-3xl">
             „{UEBUNGSSATZ}"
             <span className="mt-1 block font-montserrat text-[11px] font-extrabold not-italic uppercase tracking-[0.16em] text-midnight-blue/70">Zum Warmwerden – an allen sieben Tagen. Dazu kommt ab Tag 1 dein eigener Satz.</span>
           </p>
-          <div className={`mt-7 flex flex-wrap items-center justify-between gap-x-6 gap-y-1 rounded-md px-5 py-2.5 font-montserrat text-[13px] font-extrabold uppercase tracking-[0.12em] text-midnight-blue ${FLAECHE}`}>
-            <span>Auftakt live im Zoom · Montag, 26. Oktober 2026 · 19:00 Uhr</span>
-            <span>Abschluss live im Zoom · Montag, 2. November 2026 · 19:00 Uhr · 60-Sekunden-Pitch freiwillig</span>
-          </div>
-
           <details className={`group mt-8 text-midnight-blue ${FLAECHE} ${KACHEL} shadow-[0_18px_40px_-24px_rgba(19,35,63,0.35)]`}>
             <summary className="grid cursor-pointer list-none gap-x-6 gap-y-2 px-5 py-5 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:items-center sm:px-7 sm:py-6 [&::-webkit-details-marker]:hidden">
               <span className="self-start rounded-md bg-midnight-blue px-2.5 py-2 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-[#EBD197]">Tipp 1 · jetzt schon</span>
@@ -1005,36 +980,32 @@ export default function Challenge() {
           </div>
           {/* 1:1-Intensiv-Training – Sonderpreis für Challenge-Teilnehmende (Claudia, 17.10.2026):
               90 Min, 180 € netto, Buchung auf Anfrage per E-Mail. Bild liegt in public/challenge/. */}
-          <div className={`mt-9 overflow-hidden bg-midnight-blue ${KACHEL} border-[#C9A961]`}>
-            <div className="grid items-center md:grid-cols-2">
-              <img
-                src="/challenge/1zu1-intensiv-training.jpg"
-                alt="1:1-Intensiv-Training mit Claudia Conen – persönlich, online, live"
-                width={1200}
-                height={1200}
-                loading="lazy"
-                decoding="async"
-                className="h-full w-full object-cover"
-              />
-              <div className="p-7 text-pearl-white sm:p-9">
-                <span className={`inline-block rounded-full px-3 py-1.5 font-montserrat text-[10px] font-extrabold uppercase tracking-[0.18em] text-midnight-blue ${GOLD}`}>Neu · 1:1</span>
-                <h3 className="mt-4 font-montserrat text-2xl font-extrabold uppercase text-white sm:text-3xl">1:1-Intensiv-Training</h3>
-                <p className="mt-3 font-inter leading-relaxed text-pearl-white/90">
-                  Nur du und Claudia – 90 Minuten an deinen Stärken, deinem Ausdruck und deiner Rhetorik. Persönlich, online, live.
-                </p>
-                <p className="mt-5 font-montserrat text-3xl font-black text-white">180 € <span className="text-lg font-bold text-pearl-white/70">netto</span></p>
-                <p className="mt-1 font-montserrat text-sm font-extrabold uppercase tracking-wide text-[#EBD197]">Sonderpreis für Challenge-Teilnehmende</p>
-                <div className="mt-7">
-                  <a
-                    href="https://umsatzstimme-claudiaconen.mytentary.com/p/zJYlWu/checkout"
-                    target="_blank"
-                    rel="noopener"
-                    className={`inline-flex items-center rounded-full px-6 py-3.5 font-montserrat text-sm font-bold text-midnight-blue transition-transform hover:-translate-y-px ${GOLD}`}
-                  >
-                    Jetzt buchen
-                  </a>
+          {/* Zwei Angebote nebeneinander, jedes mit eigenem Bild, Preis und Tentary-Knopf
+              (Claudia 23.10.2026: "auf jeder Seite ein Bild … Angebot eins, Angebot zwei … es muss klar sein"). */}
+          <div className="mt-9">
+            <p className="text-center font-montserrat text-[11px] font-extrabold uppercase tracking-[0.18em] text-[#C9A961]">1:1-Intensiv-Training · Sonderpreise für Challenge-Teilnehmende</p>
+            <div className="mt-5 grid gap-6 md:grid-cols-2">
+              {[
+                { nr: 'Angebot 1', titel: 'Einzeltermin · 90 Minuten', text: 'Stärken, Ausdruck und Rhetorik. Nur du und Claudia, online und live.', bild: '1zu1-einzeltermin', netto: EINZEL_NETTO, link: EINZEL_LINK, knopf: 'Einzeltermin buchen', special: false },
+                { nr: 'Angebot 2 · Special', titel: 'Paket · 3 × 90 Minuten', text: 'Positionierung, Storytelling, Selbstbewusstsein. Drei Termine, nur du und Claudia.', bild: '1zu1-paket-3x90', netto: PAKET_NETTO, link: PAKET_LINK, knopf: PAKET_LINK.startsWith('mailto:') ? 'Paket per E-Mail anfragen' : 'Paket buchen', special: true },
+              ].map((a) => (
+                <div key={a.bild} className={`flex flex-col overflow-hidden bg-white ${KACHEL} ${a.special ? 'border-2 border-[#C9A961]' : ''}`}>
+                  <img src={`/challenge/${a.bild}.jpg`} alt={`${a.titel} mit Claudia Conen`} width={900} height={900} loading="lazy" decoding="async" className="aspect-square w-full object-cover" />
+                  <div className="flex flex-1 flex-col p-6 text-midnight-blue sm:p-7">
+                    <span className={`self-start rounded-full px-3 py-1.5 font-montserrat text-[10px] font-extrabold uppercase tracking-[0.18em] ${a.special ? `text-midnight-blue ${GOLD}` : 'bg-midnight-blue text-white'}`}>{a.nr}</span>
+                    <h3 className="mt-3 font-montserrat text-xl font-extrabold sm:text-2xl">{a.titel}</h3>
+                    <p className="mt-2 font-inter leading-relaxed text-midnight-blue/80">{a.text}</p>
+                    <p className="mt-4 font-montserrat text-3xl font-black">{a.netto} € <span className="text-base font-bold text-midnight-blue/60">zzgl. MwSt.</span></p>
+                    <p className="font-inter text-sm text-midnight-blue/70">{brutto(a.netto)} € inkl. 19 % MwSt.</p>
+                    {a.special && <p className="mt-1 font-montserrat text-sm font-extrabold text-[#9A7B2F]">Du sparst {3 * EINZEL_NETTO - PAKET_NETTO} € gegenüber drei Einzelterminen.</p>}
+                    <div className="mt-auto pt-6">
+                      <a href={a.link} target="_blank" rel="noopener" className={`inline-flex items-center rounded-full px-6 py-3.5 font-montserrat text-sm font-bold transition-transform hover:-translate-y-px ${a.special ? `text-midnight-blue ${GOLD}` : 'bg-midnight-blue text-white'}`}>
+                        {a.knopf}
+                      </a>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>

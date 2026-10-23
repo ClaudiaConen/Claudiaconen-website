@@ -2759,3 +2759,11 @@ html, body { overflow-x: clip; }
 .cc-2027 .decoration-midnight-blue\/40 { text-decoration-color: rgb(19 35 63 / .4); }
 .cc-2027 .bg-\[\#0A1628\] { background-color: #13233F; }
 
+
+/* Bewegtes Glas um die Mentoring-Liste (Challenge, 23.10.2026): Goldschimmer wandert langsam um den Rand,
+   innen helles Glas (.cc-glas-hell). Deutlicher bewegt als .cc-goldnebel, aber ruhig. */
+.cc-glas-bewegt { position: relative; overflow: hidden; background: linear-gradient(120deg, rgba(212,175,55,.25), rgba(247,231,206,.9), rgba(201,169,97,.35), rgba(212,175,55,.25)); background-size: 300% 300%; animation: cc-glas-wandern 7s ease-in-out infinite alternate; box-shadow: 0 14px 34px -18px rgba(184,134,11,.55); }
+.cc-glas-bewegt::before { content: ""; position: absolute; inset: -40%; pointer-events: none; background: radial-gradient(30% 40% at 30% 30%, rgba(247,231,206,.55), transparent 70%); animation: cc-nebel 6s ease-in-out infinite alternate; }
+.cc-glas-bewegt > * { position: relative; }
+@keyframes cc-glas-wandern { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
+@media (prefers-reduced-motion: reduce) { .cc-glas-bewegt, .cc-glas-bewegt::before { animation: none; } }

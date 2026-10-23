@@ -1,3 +1,4 @@
+import { Calendar, Users } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from '../components/Navigation';
@@ -372,6 +373,10 @@ function Kopfbild({ datei, alt, quer }: { datei: string; alt: string; quer?: boo
 }
 const KOPF = 'grid items-end gap-6 sm:grid-cols-[minmax(0,1fr)_auto] sm:gap-10';
 
+/** Goldener Kreis mit Haken (Angebotskarten, nach Claudias Entwurf 23.10.2026). */
+function GoldHaken() {
+  return <span aria-hidden="true" className="flex h-6 w-6 flex-none items-center justify-center rounded-full bg-[#C9A961] text-[12px] font-black text-white">✓</span>;
+}
 function Haken() {
   return <span aria-hidden="true" className="mt-2 h-2.5 w-2.5 flex-none rotate-[-45deg] border-b-2 border-r-2 border-[#C9A961]" />;
 }
@@ -815,78 +820,88 @@ export default function Challenge() {
         </div>
       </Abschnitt>
 
-      {/* Wirkungs-Check und Kaffee/Rederaum entfernt auf Claudias Anweisung (22.10.2026, 11:25 UTC). Frueher: Geschenk, Rederaum, Online-Buehne - Claudia, 22.09.2026 10:59-11:00 UTC: "Mein Geschenk fuer deine
-          Wirkung und der Schritt danach: 1:1-Gespraech bei einem Kaffee ... Rederaum, das heisst bei mir immer
-          Rederaum"; "Willst du sofort eine Online-Buehne nutzen ... dann folge dem Link". */}
+      {/* Der Schritt danach - nach Claudias eigenem Entwurf (Bild, Discord 23.10.2026 18:18): Kopf "Dein naechster Schritt
+          zu mehr Wirkung.", Portraet, Zitat, zwei Text-Karten ohne Produktbild, Mentoring als "Meine Empfehlung". */}
       <Abschnitt id="geschenk" className="bg-pearl-white py-16 sm:py-24" label="angebot-titel">
         <div className="mx-auto max-w-6xl px-6">
-          <div className={KOPF}>
+          <div className="grid items-center gap-8 sm:grid-cols-[minmax(0,1fr)_auto] sm:gap-12">
             <div>
               <Kicker text="Der Schritt danach" hell />
-              <h2 id="angebot-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
-                Du suchst die Abkürzung?
-                <span className="mt-1 block underline decoration-[#C9A961] decoration-[4px] underline-offset-[6px]">Oder willst du es dauerhaft verinnerlichen?</span>
+              <h2 id="angebot-titel" className="mt-5 max-w-3xl font-montserrat text-4xl font-extrabold leading-[1.08] text-midnight-blue sm:text-5xl">
+                Dein nächster Schritt zu mehr <span className="underline decoration-[#C9A961] decoration-[5px] underline-offset-[8px]">Wirkung.</span>
               </h2>
+              <p className="mt-6 font-inter text-xl leading-relaxed text-midnight-blue">
+                Ein Thema gezielt lösen.<br />Oder deine Wirkung in zwölf Wochen vertiefen.
+              </p>
             </div>
-            {/* Claudias Foto vom 22.09.2026 16:16 UTC (rote Mappe), Original in projects/claudiaconen/ablage/claudia-rote-mappe-2026-09-22.jpg */}
-            <Kopfbild datei="geschenk" alt="Claudia Conen mit einer aufgeschlagenen roten Mappe, lächelnd" />
+            <figure className={`m-0 aspect-[4/5] w-[clamp(200px,30vw,330px)] justify-self-center overflow-hidden border-2 border-[#C9A961] shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)] sm:justify-self-end ${KACHEL}`}>
+              <img src="/unverwechselbar/mentoring-portraet.webp" alt="Claudia Conen im dunklen Blazer, lächelnd" width={720} height={900} loading="lazy" decoding="async" className="h-full w-full object-cover" />
+            </figure>
           </div>
-          {/* 1:1-Intensiv-Training – Sonderpreis für Challenge-Teilnehmende (Claudia, 17.10.2026):
-              90 Min, 180 € netto, Buchung auf Anfrage per E-Mail. Bild liegt in public/challenge/. */}
-          {/* Zwei Wege nach der Challenge (Claudia, 23.10.2026 17:09: "Abkuerzung 1 Stunde und dauerhaft verinnerlichen
-              beim Mentoring ... wie ein Vollprofi"). Aufbau je Karte: Bild, Etikett, Titel, ein Satz, drei Haken, Preis,
-              ein Knopf. Das Mentoring ist als "Empfohlen" hervorgehoben (Ankerangebot); nur belegte Fakten (Tentary/Produktbild). */}
-          {/* Claudias Zitat als Bruecke zu den Angeboten (ihr Wortlaut, geglaettet, Fassung A, Ja 23.10.2026 17:22). */}
-          <figure className="mx-auto mt-10 max-w-3xl border-l-4 border-[#C9A961] bg-white px-6 py-5 sm:px-8">
+
+          <figure className="mt-10 border-l-4 border-[#C9A961] bg-white px-6 py-5 sm:px-8">
             <blockquote className="font-cormorant text-2xl italic leading-snug text-midnight-blue sm:text-3xl">
               „Niemand klingt wie du. Nutze deine Einzigartigkeit – sie ist das Gold von morgen. Denn wer Vertrauen weckt, gewinnt.“
             </blockquote>
             <figcaption className="mt-2 font-montserrat text-[11px] font-extrabold uppercase tracking-[0.16em] text-midnight-blue/70">Claudia Conen</figcaption>
           </figure>
-          <div className="mt-10 grid items-center gap-6 md:grid-cols-2">
-            {[
-              { etikett: 'Die Abkürzung', titel: '1:1-Intensiv-Training · 90 Minuten', leitsatz: '', fuerWen: 'Für dich, wenn du an einem Punkt gezielt weiterkommen willst.', satz: 'Du willst einen der sieben Schritte vertiefen? In 90 Minuten arbeiten wir nur an deinem Thema.', proWoche: '', haken: ['Deine Kernbotschaft, dein Pitch oder dein Auftritt vor der Kamera', 'Nur du und ich – volle Aufmerksamkeit für dich', 'Online und live im Zoom'], bild: '1zu1-einzeltermin', netto: EINZEL_NETTO, link: EINZEL_LINK, knopf: 'Einzeltermin buchen', hinweis: 'Sonderpreis für Challenge-Teilnehmende', empfohlen: false },
-              { etikett: 'Dauerhaft verinnerlichen', titel: 'Unverwechselbar. Das 12-Wochen-Mentoring', leitsatz: 'Von der Selbsterkenntnis zum Selbstvertrauen – zum selbstbewussten Auftreten.', fuerWen: '', satz: 'Wo auch immer du redest – du wirkst. Die Frage ist nur: wie? In drei Monaten gibst du deinem Gehirn die Chance, es zur Gewohnheit zu machen. Und ich begleite dich auf diesem Weg.', proWoche: `das sind rund ${Math.round(MENTORING_NETTO / 12)} € pro Woche`, haken: ['Start Montag, 16. November · 12 Live-Trainings online', 'Alle sieben Schritte der Challenge – vertieft: Kernbotschaft, Zielgruppenbrille, raus aus der Redeangst, Stimme, Storytelling, wie Kunden entscheiden, Elevator Pitch', 'Deine Positionierung schärfen', 'Storytelling, das Kino im Kopf erzeugt', 'Speaker-Tipps aus der Keynote-Praxis', 'Inklusive Speaker-Workbook', 'KI als Unterstützung in allen Bereichen – mit deiner eigenen Tone of Voice', 'Üben, wiederholen, verankern – bis es in deinem Unterbewusstsein sitzt'], bild: 'mentoring-12-wochen', netto: MENTORING_NETTO, link: MENTORING_LINK, knopf: 'Platz im Mentoring sichern', hinweis: 'Frühbucherpreis endet am 2. November, am Abend unseres Finales · höchstens 6 Plätze', empfohlen: true },
-            ].map((a) => (
-              <div key={a.bild} className={`relative flex flex-col overflow-hidden bg-white ${KACHEL} ${a.empfohlen ? 'border-2 border-[#C9A961] shadow-[0_30px_60px_-24px_rgba(19,35,63,0.5)] md:scale-[1.03]' : ''}`}>
-                {a.empfohlen && <span className={`absolute right-4 top-4 z-10 rounded-full px-4 py-2 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-midnight-blue shadow-md ${GOLD}`}>Meine Empfehlung</span>}
-                <img src={`/challenge/${a.bild}.jpg`} alt={`${a.titel} mit Claudia Conen`} width={900} height={900} loading="lazy" decoding="async" className="aspect-square w-full object-cover" />
-                <div className="flex flex-1 flex-col p-6 text-midnight-blue sm:p-8">
-                  <p className="font-montserrat text-[12px] font-black uppercase tracking-[0.18em] text-[#9A7B2F]">{a.etikett}</p>
-                  <h3 className="mt-2 font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">{a.titel}</h3>
-                  {/* Leitsatz Mentoring: Claudias Wortlaut (23.10.2026 17:44). */}
-                  {a.leitsatz && <p className="mt-2 font-cormorant text-xl italic leading-snug text-midnight-blue sm:text-2xl">{a.leitsatz}</p>}
-                  {a.fuerWen && <p className="mt-2 font-montserrat text-[15px] font-bold leading-snug text-[#9A7B2F]">{a.fuerWen}</p>}
-                  <p className="mt-3 font-inter text-[17px] leading-relaxed">{a.satz}</p>
-                  {/* Mentoring-Liste in bewegtem Glas (Claudia, 23.10.2026: "ausfuehrlicher ... Glas-Effekt, dass es sich ein
-                      bisschen mehr bewegt"). Ohne Bewegung bei prefers-reduced-motion. */}
-                  <div className={a.empfohlen ? 'cc-glas-bewegt mt-4 rounded-[12px] p-[1px]' : 'mt-4'}>
-                    <ul className={`grid list-none gap-2.5 ${a.empfohlen ? 'cc-glas-hell rounded-[11px] p-4 sm:p-5' : 'p-0'}`}>
-                      {a.haken.map((h) => (
-                        <li key={h} className="flex items-start gap-3 font-inter text-[15px] font-semibold leading-snug"><Haken />{h}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="mt-6 border-t border-midnight-blue/10 pt-5">
-                    <p className="font-montserrat text-3xl font-black">{a.netto.toLocaleString('de-DE')} € <span className="text-base font-bold text-midnight-blue/60">zzgl. MwSt.</span></p>
-                    <p className="font-inter text-sm text-midnight-blue/70">{brutto(a.netto)} € inkl. 19 % MwSt.{a.proWoche && <> · {a.proWoche} (netto)</>}</p>
-                    <p className="mt-1 font-montserrat text-sm font-extrabold text-[#9A7B2F]">{a.hinweis}</p>
-                  </div>
-                  <div className="mt-auto pt-6">
-                    <a href={a.link} target="_blank" rel="noopener" className={`flex w-full items-center justify-center rounded-full px-6 py-4 font-montserrat text-sm font-bold transition-transform hover:-translate-y-px ${a.empfohlen ? `text-midnight-blue ${GOLD}` : 'bg-midnight-blue text-white'}`}>
-                      {a.knopf} →
-                    </a>
-                    <p className="mt-2.5 text-center font-inter text-xs text-midnight-blue/60">Sichere Zahlung über Tentary{a.empfohlen ? '' : ' · Termin danach selbst im Kalender wählen'}</p>
-                  </div>
-                </div>
+
+          {/* "Zwei Wege fuer dich: 1. Die Abkuerzung, 2. Performance dauerhaft, 3. Reden wir?" (Claudia, 23.10.2026 18:20) */}
+          <h3 className="mt-12 text-center font-montserrat text-2xl font-extrabold text-midnight-blue sm:text-3xl">Zwei Wege für dich</h3>
+          <div className="mt-6 grid items-stretch gap-6 md:grid-cols-2">
+            {/* Karte 1: Die Abkuerzung */}
+            <div className={`flex flex-col bg-white p-7 text-midnight-blue sm:p-9 ${KACHEL}`}>
+              <p className="flex items-center gap-3 font-montserrat text-[11px] font-extrabold uppercase tracking-[0.16em]"><span aria-hidden="true" className={`flex h-7 w-7 items-center justify-center rounded-full text-[13px] font-black text-midnight-blue ${GOLD}`}>1</span>Die Abkürzung</p>
+              <h3 className="mt-4 font-montserrat text-3xl font-black leading-tight sm:text-[2.1rem]">1:1-Intensiv-Training</h3>
+              <p className="mt-2 font-inter text-xl">90 Minuten. Nur du und Claudia.</p>
+              <p className="mt-5 font-inter text-lg leading-relaxed">Für dich, wenn du an einem konkreten Thema arbeiten möchtest.</p>
+              <ul className="mt-6 grid list-none gap-3.5 border-t border-[#C9A961]/40 p-0 pt-6">
+                {['Deine Kernbotschaft auf den Punkt bringen', 'Stimme, Ausdruck und Auftritt stärken', 'Volle Aufmerksamkeit für dein Anliegen', 'Persönlich und live über Zoom'].map((h) => (
+                  <li key={h} className="flex items-center gap-3 font-inter text-[16px]"><GoldHaken />{h}</li>
+                ))}
+              </ul>
+              <div className="mb-6" />
+              <div className="mt-auto border-t border-[#C9A961]/40 pt-6">
+                <p className="font-montserrat text-4xl font-black">{EINZEL_NETTO} € <span className="font-inter text-base font-normal">zzgl. MwSt.</span></p>
+                <p className="font-inter text-sm text-midnight-blue/70">{brutto(EINZEL_NETTO)} € inkl. 19 % MwSt.</p>
+                <p className="mt-1 font-montserrat text-sm font-extrabold text-[#9A7B2F]">Sonderpreis für Challenge-Teilnehmende</p>
               </div>
-            ))}
+              <a href={EINZEL_LINK} target="_blank" rel="noopener" className="mt-6 flex w-full items-center justify-center rounded-full bg-midnight-blue px-6 py-4 font-montserrat text-base font-bold text-white transition-transform hover:-translate-y-px">
+                Einzeltermin buchen →
+              </a>
+            </div>
+
+            {/* Karte 2: Mentoring, empfohlen */}
+            <div className={`relative flex flex-col border-2 border-[#C9A961] bg-white p-7 text-midnight-blue shadow-[0_30px_60px_-24px_rgba(19,35,63,0.45)] sm:p-9 ${KACHEL}`}>
+              <span className={`absolute right-5 top-5 rounded-full px-4 py-2 font-montserrat text-[11px] font-black uppercase tracking-[0.14em] text-midnight-blue ${GOLD}`}>Meine Empfehlung</span>
+              <p className="flex items-center gap-3 font-montserrat text-[11px] font-extrabold uppercase tracking-[0.16em]"><span aria-hidden="true" className={`flex h-7 w-7 items-center justify-center rounded-full text-[13px] font-black text-midnight-blue ${GOLD}`}>2</span>Performance dauerhaft</p>
+              <h3 className="mt-4 font-montserrat text-3xl font-black leading-tight sm:text-[2.1rem]">Unverwechselbar.</h3>
+              <p className="mt-1 font-inter text-2xl">Das 12-Wochen-Mentoring</p>
+              <p className="mt-4 font-inter text-lg leading-relaxed">Für dich, wenn du deine Persönlichkeit, deine Marke und deinen Auftritt nachhaltig stärken möchtest.</p>
+              <div className="mt-5 grid gap-2.5 border-y border-[#C9A961]/40 py-4 font-inter text-[15px]">
+                <p className="flex items-center gap-3"><Calendar size={20} className="flex-none text-[#C9A961]" aria-hidden="true" />Start: 16. November 2026</p>
+                <p className="flex items-center gap-3"><Users size={20} className="flex-none text-[#C9A961]" aria-hidden="true" />12 Live-Trainings online · Bis zu 6 Personen</p>
+              </div>
+              <ul className="mt-5 grid list-none gap-3.5 p-0">
+                {['Deine Positionierung und Kernbotschaft schärfen', 'Mit deiner Stimme und deinen Geschichten überzeugen', 'Üben, vertiefen und mit persönlichem Feedback wachsen', 'Mit Begleitbuch und KI-Unterstützung in deiner Sprache'].map((h) => (
+                  <li key={h} className="flex items-center gap-3 font-inter text-[16px]"><GoldHaken />{h}</li>
+                ))}
+              </ul>
+              <div className="mt-6 border-t border-[#C9A961]/40 pt-6">
+                <p className="font-montserrat text-4xl font-black">{MENTORING_NETTO.toLocaleString('de-DE')} € <span className="font-inter text-base font-normal">zzgl. MwSt.</span></p>
+                <p className="font-inter text-sm text-midnight-blue/70">{brutto(MENTORING_NETTO)} € inkl. 19 % MwSt.</p>
+                <p className="mt-1 font-montserrat text-sm font-extrabold text-[#9A7B2F]">Frühbucherpreis bis 2. November 2026</p>
+              </div>
+              <a href={MENTORING_LINK} target="_blank" rel="noopener" className={`mt-6 flex w-full items-center justify-center rounded-full px-6 py-4 font-montserrat text-base font-bold text-midnight-blue transition-transform hover:-translate-y-px ${GOLD}`}>
+                Platz im Mentoring sichern →
+              </a>
+            </div>
           </div>
-          {/* Dritter Weg fuer Unentschlossene: kostenloses Erstgespraech (derselbe Link wie im Fuss). */}
-          <p className="mt-8 text-center font-inter text-[15px] text-midnight-blue">
-            Unsicher, was zu dir passt?{' '}
-            <a href="https://meet.brevo.com/claudia-conen" target="_blank" rel="noopener noreferrer" className="font-montserrat font-bold underline decoration-[#C9A961] decoration-2 underline-offset-4">Kostenloses Erstgespräch vereinbaren →</a>
-          </p>
+          <div className={`mt-6 flex flex-col items-center justify-center gap-3 bg-white px-6 py-5 text-center text-midnight-blue sm:flex-row sm:gap-5 ${KACHEL}`}>
+            <p className="flex items-center gap-3 font-montserrat text-[11px] font-extrabold uppercase tracking-[0.16em]"><span aria-hidden="true" className={`flex h-7 w-7 items-center justify-center rounded-full text-[13px] font-black text-midnight-blue ${GOLD}`}>3</span>Reden wir?</p>
+            <p className="font-inter text-[15px]">Unsicher, welcher Weg zu dir passt? Lass uns bei einem Kaffee 1:1 sprechen.</p>
+            <a href="https://meet.brevo.com/claudia-conen" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full border-2 border-midnight-blue px-5 py-2.5 font-montserrat text-sm font-bold transition-colors hover:bg-midnight-blue hover:text-white">Kaffee-Termin im Kalender buchen →</a>
+          </div>
         </div>
       </Abschnitt>
 

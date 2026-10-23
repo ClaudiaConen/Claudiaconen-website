@@ -34,14 +34,6 @@ const PFAD = '/challenge';
 /** Zehn Saetze zum Ankreuzen - Claudias Wunsch vom 22.09.2026, 10:50 UTC: statt der ChatGPT-Liste vom Flyer
  *  Fragen zur Kommunikation im KI-Zeitalter (Pausen, Selbstsicherheit, Perfektion), "wie ein Rhetorik-Profi
  *  sie stellen wuerde". Eigene Formulierungen, keine Zitate. Die letzten zwei sind die persoenlichen. */
-/** Lernbox - Claudia, 22.09.2026 11:27 UTC: "so ein kleiner Test ... Feld zum Aufklappen, Lernbox, Ja- und
- *  Nein-Fragen mit einer Antwort, alle zu Wirkung, Stimme, Performance - sieben Fragen". Ohne Hirnforschungszahlen.
- *  Am 23.10.2026 auf die drei staerksten Fragen gekuerzt (Claudia: "aktualisiere"). */
-const LERNBOX: { frage: string; ja: boolean; antwort: string }[] = [
-  { frage: 'Entscheiden Zuhörer, ob sie dir zuhören, bevor du deinen ersten Satz beendet hast?', ja: true, antwort: 'Ja. Die Stimme wirkt, bevor der Inhalt ankommt – deshalb arbeitest du ab Tag 1 an dem einen Satz, der sofort ankommt.' },
-  { frage: 'Ist eine Pause im Satz ein Zeichen von Unsicherheit?', ja: false, antwort: 'Nein. Die Pause ist der Moment, in dem der andere versteht. Profis machen mehr Pausen, nicht weniger.' },
-  { frage: 'Bleibt eine perfekt vorgetragene Rede besser im Kopf als eine mit einem Versprecher?', ja: false, antwort: 'Nein. Perfektion ist klickbar. Ein Mensch, der echt ist, bleibt – der Versprecher, über den du lachst, macht dich glaubwürdiger.' },
-];
 
 
 
@@ -382,10 +374,7 @@ function Haken() {
 }
 
 export default function Challenge() {
-  const [antworten, setAntworten] = useState<(boolean | null)[]>(() => LERNBOX.map(() => null));
   const [buchOffen, setBuchOffen] = useState(false);
-  const nBeantwortet = antworten.filter((a) => a !== null).length;
-  const nRichtig = antworten.filter((a, i) => a === LERNBOX[i].ja).length;
   // Sprungmarke aus der Adresse (z. B. /challenge#anmelden vom Laufband der Startseite):
   // ScrollToTop springt bei jedem Seitenwechsel nach oben, deshalb hier nach dem Aufbau zum Ziel.
   useEffect(() => {
@@ -682,63 +671,7 @@ export default function Challenge() {
         </div>
       </Abschnitt>
 
-      {/* Hand aufs Herz - Lernbox (Claudia, 22.09.2026 11:27 UTC): sieben Ja/Nein-Fragen zum Aufklappen, jede mit
-          Antwort; darunter die 7 A's vom Flyer: "es ist alles schon in dir". */}
-      <Abschnitt className="bg-pearl-white py-16 sm:py-24" label="hand-aufs-herz">
-        <div className="mx-auto max-w-6xl px-6">
-          <Kicker text="Hand aufs Herz" hell />
-          <h2 id="hand-aufs-herz" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
-            Was denkst du – was ist richtig?
-          </h2>
-          <p className="mt-4 max-w-2xl font-inter text-lg text-midnight-blue">Drei Fragen zu Wirkung und Stimme. Ja oder Nein – und dann die Antwort.</p>
-          <details className={`group mt-7 bg-white text-midnight-blue ${KACHEL}`}>
-            {/* Auf dem Handy umbrechend statt gequetscht (Handy-Durchsicht 22.09.2026 22:05 UTC). */}
-            <summary className="flex cursor-pointer list-none flex-wrap items-center justify-between gap-x-4 gap-y-3 px-5 py-5 sm:flex-nowrap sm:px-7 [&::-webkit-details-marker]:hidden">
-              <span className="flex min-w-0 flex-1 flex-wrap items-center gap-3 sm:gap-4">
-                <span className={`rounded-md px-2.5 py-2 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-midnight-blue ${GOLD}`}>Lernbox</span>
-                <span className="font-montserrat text-lg font-extrabold leading-tight sm:text-2xl">Drei Fragen. Drei Antworten.</span>
-              </span>
-              <span className="flex items-center gap-2 font-montserrat text-sm font-bold underline decoration-[#C9A961] underline-offset-4">
-                <span className="group-open:hidden">Aufklappen</span>
-                <span className="hidden group-open:inline">Zuklappen</span>
-                <span aria-hidden="true" className="inline-block transition-transform group-open:rotate-180">▾</span>
-              </span>
-            </summary>
-            <ol className="grid list-none gap-2.5 border-t border-[#C9A961]/40 px-5 pb-5 pt-4 sm:px-7 sm:pb-6">
-              {LERNBOX.map((f, i) => {
-                const a = antworten[i];
-                const richtig = a !== null && a === f.ja;
-                return (
-                  <li key={f.frage} className="rounded-[10px] border border-[#C9A961]/35 bg-pearl-white px-4 py-3.5">
-                    <div className="flex flex-wrap items-center justify-between gap-3">
-                      <p className="font-montserrat text-[15px] font-bold leading-snug">{i + 1}. {f.frage}</p>
-                      <span className="flex gap-2">
-                        {[true, false].map((wert) => (
-                          <button key={String(wert)} type="button" onClick={() => setAntworten((alle) => alle.map((v, j) => (j === i ? wert : v)))} className={`rounded-full border px-4 py-1.5 font-montserrat text-sm font-bold transition-colors ${a === wert ? 'border-midnight-blue bg-midnight-blue text-pearl-white' : 'border-midnight-blue/30 bg-white text-midnight-blue hover:border-midnight-blue'}`}>
-                            {wert ? 'Ja' : 'Nein'}
-                          </button>
-                        ))}
-                      </span>
-                    </div>
-                    {a !== null && (
-                      <p className="mt-2.5 flex items-start gap-3 font-inter text-[15px] leading-relaxed" aria-live="polite">
-                        <span aria-hidden="true" className={`mt-0.5 font-montserrat font-black ${richtig ? 'text-[#B8860B]' : 'text-midnight-blue/60'}`}>{richtig ? '✓' : '✕'}</span>
-                        <span>{f.antwort}</span>
-                      </p>
-                    )}
-                  </li>
-                );
-              })}
-            </ol>
-            <p className="border-t border-[#C9A961]/40 px-5 py-4 font-montserrat text-base font-bold sm:px-7" aria-live="polite">
-              {nBeantwortet === 0 ? 'Fang einfach an – es gibt kein Falsch, nur ein Vorher und ein Nachher.' : `${nRichtig} von ${nBeantwortet} richtig.${nBeantwortet === LERNBOX.length ? ' Und alles, was du dafür brauchst, ist schon in dir.' : ''}`}
-            </p>
-          </details>
-          {/* Block "Warum deine Einzigartigkeit Gold wert ist" mit den 7 A's entfernt (23.10.2026): doppelte sich mit
-              Claudias Zitat "... das Gold von morgen" bei den Angeboten. Der Schlusssatz bleibt. */}
-          <p className="mt-5 font-cormorant text-2xl italic leading-snug text-midnight-blue sm:text-3xl">Es ist alles schon in dir.</p>
-        </div>
-      </Abschnitt>
+      {/* Abschnitt "Hand aufs Herz" (Lernbox) entfernt auf Claudias Anweisung (23.10.2026 18:31). */}
 
       {/* Abschnitt "Dein KI-Agent ist effizient. Und du?" entfernt (Claudia, 23.10.2026: lenkt ab, doppelt). Text in der Git-Historie (f94af50). */}
 

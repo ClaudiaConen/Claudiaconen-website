@@ -34,18 +34,13 @@ const PFAD = '/challenge';
  *  Fragen zur Kommunikation im KI-Zeitalter (Pausen, Selbstsicherheit, Perfektion), "wie ein Rhetorik-Profi
  *  sie stellen wuerde". Eigene Formulierungen, keine Zitate. Die letzten zwei sind die persoenlichen. */
 /** Lernbox - Claudia, 22.09.2026 11:27 UTC: "so ein kleiner Test ... Feld zum Aufklappen, Lernbox, Ja- und
- *  Nein-Fragen mit einer Antwort, alle zu Wirkung, Stimme, Performance - sieben Fragen". Ohne Hirnforschungszahlen. */
+ *  Nein-Fragen mit einer Antwort, alle zu Wirkung, Stimme, Performance - sieben Fragen". Ohne Hirnforschungszahlen.
+ *  Am 23.10.2026 auf die drei staerksten Fragen gekuerzt (Claudia: "aktualisiere"). */
 const LERNBOX: { frage: string; ja: boolean; antwort: string }[] = [
   { frage: 'Entscheiden Zuhörer, ob sie dir zuhören, bevor du deinen ersten Satz beendet hast?', ja: true, antwort: 'Ja. Die Stimme wirkt, bevor der Inhalt ankommt – deshalb arbeitest du ab Tag 1 an dem einen Satz, der sofort ankommt.' },
-  { frage: 'Klingt eine Stimme tiefer, wenn man sie nach unten drückt?', ja: false, antwort: 'Nein. Tiefer wird sie durch Ruhe und Atmung. Drücken macht sie eng und angestrengt.' },
   { frage: 'Ist eine Pause im Satz ein Zeichen von Unsicherheit?', ja: false, antwort: 'Nein. Die Pause ist der Moment, in dem der andere versteht. Profis machen mehr Pausen, nicht weniger.' },
   { frage: 'Bleibt eine perfekt vorgetragene Rede besser im Kopf als eine mit einem Versprecher?', ja: false, antwort: 'Nein. Perfektion ist klickbar. Ein Mensch, der echt ist, bleibt – der Versprecher, über den du lachst, macht dich glaubwürdiger.' },
-  { frage: 'Merken sich Menschen Zahlen besser als Geschichten?', ja: false, antwort: 'Nein. Geschichten bleiben, Daten nicht. Ein Moment, eine Person, ein Satz, der fiel.' },
-  { frage: 'Reicht es, eine Rede gut zu schreiben, damit sie gut wirkt?', ja: false, antwort: 'Nein. Wirkung entsteht beim Sprechen: Stimme, Haltung, Blick. Deshalb nimmst du dich in der Challenge auf – Text allein reicht nicht.' },
-  { frage: 'Kann man Wirkung trainieren?', ja: true, antwort: 'Ja. Wirkung ist kein Zufall. Sie ist trainierbar, sichtbar, entscheidbar – in sieben Tagen fängst du an.' },
 ];
-/** Die 7 A's vom Flyer (nach Karsten Brocke) - Claudias ausdrueckliche Ansage vom 22.09.2026, 11:27 UTC. */
-const SIEBEN_A = ['A-bsolut', 'A-ngenehm', 'A-nders', 'A-ls', 'A-lle', 'A-nderen', 'A-uffallen'];
 
 
 
@@ -255,11 +250,11 @@ const ABLAUF: { titel: string; text: string }[] = [
   { titel: 'Dein Feedback', text: 'An Tag 2 und Tag 6 bekommst du persönliches Feedback von mir, wenn du dein Video innerhalb der 24 Stunden postest. Danach darfst du dein Video verbessern – für dich, um daran zu wachsen.' },
   { titel: 'Zwischendurch', text: 'Impulse zu Storytelling und Prompts für die KI, die du direkt nutzen kannst – um deine Positionierung zu schärfen und deine innere Haltung nach außen zu tragen.' },
 ];
-const ABLAUF_HINWEIS = 'Mein Tipp: Nimm dir täglich 30 Minuten Zeit – wann auch immer. Alles läuft in der Gruppe bei WhatsApp oder Telegram, bis unsere Plattform fertig ist. Dann lade ich euch alle dazu ein.';
+const ABLAUF_HINWEIS = 'Mein Tipp: Such dir eine feste Zeit am Tag – wann auch immer. Alles läuft in der Gruppe bei WhatsApp oder Telegram, bis unsere Plattform fertig ist. Dann lade ich euch alle dazu ein.';
 
 const FUER = [
   'gehört werden willst – im Meeting, am Telefon, vor Kunden, auf der Bühne',
-  'täglich 30 Minuten und ein Handy hast',
+  'ein Handy hast und jeden Tag ein bisschen Zeit',
   'dich selbst hören willst, auch wenn es am Anfang unangenehm ist',
   'Feedback willst statt Applaus',
   'eine Woche lang jeden Tag einen kleinen Schritt gehst',
@@ -697,13 +692,13 @@ export default function Challenge() {
           <h2 id="hand-aufs-herz" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
             Was denkst du – was ist richtig?
           </h2>
-          <p className="mt-4 max-w-2xl font-inter text-lg text-midnight-blue">Sieben Fragen zu Wirkung, Stimme und Performance. Ja oder Nein – und dann die Antwort.</p>
+          <p className="mt-4 max-w-2xl font-inter text-lg text-midnight-blue">Drei Fragen zu Wirkung und Stimme. Ja oder Nein – und dann die Antwort.</p>
           <details className={`group mt-7 bg-white text-midnight-blue ${KACHEL}`}>
             {/* Auf dem Handy umbrechend statt gequetscht (Handy-Durchsicht 22.09.2026 22:05 UTC). */}
             <summary className="flex cursor-pointer list-none flex-wrap items-center justify-between gap-x-4 gap-y-3 px-5 py-5 sm:flex-nowrap sm:px-7 [&::-webkit-details-marker]:hidden">
               <span className="flex min-w-0 flex-1 flex-wrap items-center gap-3 sm:gap-4">
                 <span className={`rounded-md px-2.5 py-2 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-midnight-blue ${GOLD}`}>Lernbox</span>
-                <span className="font-montserrat text-lg font-extrabold leading-tight sm:text-2xl">Sieben Fragen. Sieben Antworten.</span>
+                <span className="font-montserrat text-lg font-extrabold leading-tight sm:text-2xl">Drei Fragen. Drei Antworten.</span>
               </span>
               <span className="flex items-center gap-2 font-montserrat text-sm font-bold underline decoration-[#C9A961] underline-offset-4">
                 <span className="group-open:hidden">Aufklappen</span>
@@ -741,14 +736,9 @@ export default function Challenge() {
               {nBeantwortet === 0 ? 'Fang einfach an – es gibt kein Falsch, nur ein Vorher und ein Nachher.' : `${nRichtig} von ${nBeantwortet} richtig.${nBeantwortet === LERNBOX.length ? ' Und alles, was du dafür brauchst, ist schon in dir.' : ''}`}
             </p>
           </details>
-          <div className={`mt-4 rounded-[10px] px-5 py-5 text-midnight-blue sm:px-7 ${FLAECHE}`}>
-            <p className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.2em]">Warum deine Einzigartigkeit Gold wert ist</p>
-            <p className="mt-2 font-inter text-[15px] leading-relaxed">Stell dir vor: „Alle sind gleich perfekt." – und da bist DU. Der Neurowissenschaftler Karsten Brocke bringt es auf sieben Merkworte – die 7 A's der modernen Vermarktung: <b>absolut angenehm anders als alle anderen auffallen.</b> Nicht lauter, nicht perfekter – erkennbar du.</p>
-            <p className="mt-3 flex flex-wrap gap-x-2 gap-y-1 font-montserrat text-xl font-black uppercase leading-tight sm:text-2xl">
-              {SIEBEN_A.map((a) => (<span key={a}>{a}</span>))}
-            </p>
-            <p className="mt-3 font-cormorant text-2xl italic leading-snug sm:text-3xl">Es ist alles schon in dir.</p>
-          </div>
+          {/* Block "Warum deine Einzigartigkeit Gold wert ist" mit den 7 A's entfernt (23.10.2026): doppelte sich mit
+              Claudias Zitat "... das Gold von morgen" bei den Angeboten. Der Schlusssatz bleibt. */}
+          <p className="mt-5 font-cormorant text-2xl italic leading-snug text-midnight-blue sm:text-3xl">Es ist alles schon in dir.</p>
         </div>
       </Abschnitt>
 
@@ -960,7 +950,7 @@ export default function Challenge() {
           <div>
             <ul className="grid list-none gap-3 p-0 font-inter text-midnight-blue">
               {[
-                'Claudia Conen ist Keynote-Speakerin, Trainerin, Coach und Autorin für unverwechselbare persönliche Wirkung.',
+                'Claudia Conen ist Expertin für menschliche Wirkungskraft.',
                 'Sie trainiert Rhetorik, Storytelling, Präsentation und den Auftritt vor der Kamera – seit 37 Jahren.',
                 'Ihr Schwerpunkt ist die hörbare Persönlichkeit: das Zusammenspiel von Worten, Stimme und Haltung.',
                 'Bekannt als „Die Umsatzstimme" – zu hören unter anderem bei Sat.1 und RTL, gefragt auf Bühnen und in Unternehmen.',

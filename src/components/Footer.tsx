@@ -72,7 +72,7 @@ export default function Footer() {
                 </picture>
                 <div>
                   <p className="font-montserrat text-2xl font-extrabold text-[#EBD197]">Claudia Conen</p>
-                  <p className="font-montserrat text-[11px] font-bold uppercase tracking-[0.18em] text-pearl-white/80">Keynote-Speakerin | Trainerin | Coach | Autorin</p>
+                  <p className="font-montserrat text-[11px] font-bold uppercase tracking-[0.18em] text-pearl-white/80">Expertin für menschliche Wirkungskraft</p>
                 </div>
               </div>
               <p className="mt-6 max-w-lg font-cormorant text-2xl italic leading-snug text-[#F7E7CE] sm:text-3xl">

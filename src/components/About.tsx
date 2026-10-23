@@ -97,7 +97,7 @@ export default function About() {
                 ("Warum sie hoert, was andere ueberhoeren" empfand sie als Unterstellung).
               */}
               <p className="text-white">
-                Claudia Conen ist Keynote-Speakerin, Trainerin, Coach und Autorin für unverwechselbare persönliche Wirkung – bekannt als „Die Umsatzstimme".
+                Claudia Conen ist Expertin für menschliche Wirkungskraft – bekannt als „Die Umsatzstimme".
               </p>
               <p className="text-white">
                 Sie trainiert Rhetorik, Storytelling, Präsentation und den Auftritt vor der Kamera. Sie arbeitet mit Unternehmern, Führungskräften, Speakern und Teams – seit 37 Jahren.

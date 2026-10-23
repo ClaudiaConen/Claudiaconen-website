@@ -60,18 +60,15 @@ export default function ChallengeAnmeldung({ start, onEingetragen }: { start: st
   }
 
   if (zustand === 'fertig') {
+    // Danke-Bereich mit Wappen aus dem Gruppenbild und klickbaren QR-Codes (Claudia, 23.10.2026).
+    // Weiss statt Creme (Designregel 22.10.2026). Die Gruppen-Links stehen nur hier, nicht offen auf der Seite.
+    const GRUPPEN = [
+      { name: 'WhatsApp', zusatz: 'empfohlen – dort ist am meisten los', link: CHALLENGE_LINK, qr: '/challenge/qr-whatsapp.png', knopf: 'Zur WhatsApp-Gruppe', voll: true },
+      { name: 'Telegram', zusatz: 'ohne WhatsApp – gleiche Inhalte, gleiches Feedback', link: TELEGRAM_LINK, qr: '/challenge/qr-telegram.png', knopf: 'Zur Telegram-Gruppe', voll: false },
+    ];
     return (
-      <div id="anmelden" className={`mt-3 grid items-center gap-5 rounded-[10px] border border-[#C9A961]/60 bg-[linear-gradient(135deg,#FCF6EC,#F7E7CE)] px-5 py-6 text-midnight-blue sm:grid-cols-[auto_minmax(0,1fr)] sm:px-7`}>
-        <div className="flex gap-3">
-          <figure className="m-0 text-center">
-            <img src="/challenge/qr-whatsapp.png" alt="QR-Code: Einladung in die WhatsApp-Gruppe der Challenge (empfohlen)" width={328} height={328} className="h-28 w-28 rounded-md bg-white" />
-            <figcaption className="mt-1 font-montserrat text-[11px] font-bold uppercase tracking-wide">1. WhatsApp</figcaption>
-          </figure>
-          <figure className="m-0 text-center">
-            <img src="/challenge/qr-telegram.png" alt="QR-Code: Einladung in die Telegram-Gruppe der Challenge" width={328} height={328} className="h-28 w-28 rounded-md bg-white" />
-            <figcaption className="mt-1 font-montserrat text-[11px] font-bold uppercase tracking-wide">2. Telegram</figcaption>
-          </figure>
-        </div>
+      <div id="anmelden" className="mt-3 grid items-start gap-6 rounded-[10px] border-2 border-[#C9A961] bg-white px-5 py-6 text-midnight-blue sm:px-7 sm:py-8 md:grid-cols-[220px_minmax(0,1fr)]">
+        <img src="/challenge/wappen.webp" alt="Wappen der Challenge-Gruppe UNVERWECHSELBAR" width={560} height={684} className="mx-auto w-44 drop-shadow-[0_16px_24px_rgba(19,35,63,0.35)] md:w-full" />
         <div className="min-w-0">
           <p className="font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">Danke, {vorname.trim() || 'du'} – du bist eingetragen.</p>
           <p className="mt-2 font-inter text-[15px] leading-relaxed sm:text-base">
@@ -80,17 +77,24 @@ export default function ChallengeAnmeldung({ start, onEingetragen }: { start: st
           <a href={ZOOM_LINK} target="_blank" rel="noopener noreferrer" className={`mt-3 inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue transition-transform hover:-translate-y-px ${GOLD}`}>
             Zum Zoom-Raum
           </a>
-          <p className="mt-4 font-inter text-[15px] leading-relaxed sm:text-base">
-            Und jetzt in deine Gruppe. Du hast die Wahl: Empfohlen ist die WhatsApp-Gruppe, dort ist am meisten los. Kein WhatsApp? Dann nimm die Telegram-Gruppe, gleiche Inhalte, gleiches Feedback.
-          </p>
-          <div className="mt-4 flex flex-wrap gap-3">
-            <a href={CHALLENGE_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full bg-midnight-blue px-7 py-4 font-montserrat text-sm font-bold text-pearl-white transition-colors hover:bg-royal-navy">
-              1. Zur WhatsApp-Gruppe (empfohlen)
-            </a>
-            <a href={TELEGRAM_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full border-2 border-midnight-blue px-6 py-[14px] font-montserrat text-sm font-bold text-midnight-blue transition-colors hover:bg-white/40">
-              2. Ohne WhatsApp: Telegram-Gruppe
-            </a>
+          <p className="mt-6 font-montserrat text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#9A7B2F]">Und jetzt in deine Gruppe – du hast die Wahl</p>
+          <div className="mt-3 grid gap-4 sm:grid-cols-2">
+            {GRUPPEN.map((g) => (
+              <div key={g.name} className="flex items-center gap-4 rounded-[10px] border border-midnight-blue/15 p-4">
+                <a href={g.link} target="_blank" rel="noopener noreferrer" aria-label={`QR-Code: ${g.knopf}`} className="flex-none">
+                  <img src={g.qr} alt={`QR-Code ${g.name}-Gruppe`} width={328} height={328} className="h-24 w-24 rounded-md bg-white ring-1 ring-midnight-blue/10" />
+                </a>
+                <div className="min-w-0">
+                  <p className="font-montserrat text-base font-extrabold">{g.name}</p>
+                  <p className="font-inter text-xs leading-snug text-midnight-blue/70">{g.zusatz}</p>
+                  <a href={g.link} target="_blank" rel="noopener noreferrer" className={`mt-2 inline-flex items-center rounded-full px-4 py-2 font-montserrat text-xs font-bold transition-colors ${g.voll ? 'bg-midnight-blue text-pearl-white hover:bg-royal-navy' : 'border-2 border-midnight-blue text-midnight-blue hover:bg-midnight-blue/5'}`}>
+                    {g.knopf} →
+                  </a>
+                </div>
+              </div>
+            ))}
           </div>
+          <p className="mt-3 font-inter text-xs text-midnight-blue/60">Am Handy: Knopf antippen. Am Computer: QR-Code mit dem Handy scannen.</p>
         </div>
       </div>
     );

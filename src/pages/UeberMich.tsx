@@ -70,7 +70,7 @@ export default function UeberMich() {
     <>
       <SEO
         title="Über mich | Claudia Conen"
-        description="Claudia Conen ist Keynote-Speakerin, Trainerin, Coach und Autorin für unverwechselbare persönliche Wirkung. Woher das kommt und was daraus wurde."
+        description="Claudia Conen ist Expertin für menschliche Wirkungskraft. Woher das kommt und was daraus wurde."
         path="/ueber-mich"
       />
 
@@ -87,7 +87,7 @@ export default function UeberMich() {
               '@type': 'Person',
               '@id': 'https://claudiaconen.com/#claudia-conen',
               name: 'Claudia Conen',
-              description: 'Keynote-Speakerin, Trainerin, Coach und Autorin für unverwechselbare persönliche Wirkung – seit 37 Jahren.',
+              description: 'Expertin für menschliche Wirkungskraft.',
               image: 'https://claudiaconen.com/Claudia14.png',
               sameAs: [
                 'https://www.linkedin.com/in/claudia-conen-die-stimme/',

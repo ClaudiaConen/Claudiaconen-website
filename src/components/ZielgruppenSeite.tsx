@@ -178,7 +178,7 @@ function Autorenzeile({ hell }: { hell: boolean }) {
           <p className="font-montserrat text-xs font-extrabold uppercase tracking-[0.2em] text-midnight-blue">Wer diese Seite verantwortet</p>
           <p className="mt-2 font-montserrat text-lg font-bold text-midnight-blue">Claudia Conen</p>
           <p className="mt-1 font-inter text-[15px] leading-relaxed text-midnight-blue/85">
-            Keynote-Speakerin, Trainerin, Coach und Autorin für unverwechselbare persönliche Wirkung. Sie trainiert Rhetorik, Storytelling,
+            Expertin für menschliche Wirkungskraft. Sie trainiert Rhetorik, Storytelling,
             Präsentation und den Auftritt vor der Kamera – seit 37 Jahren, mit Unternehmern, Führungskräften, Speakern und Teams. Zu hören
             unter anderem bei Sat.1 und RTL; Autorin des „Trauerreden Ratgebers" und Mitautorin von fünf weiteren Büchern.
           </p>
@@ -264,7 +264,7 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
           '@id': 'https://claudiaconen.com/#claudia-conen',
           name: 'Claudia Conen',
           url: 'https://claudiaconen.com/ueber-mich',
-          jobTitle: 'Keynote-Speakerin, Trainerin, Coach und Autorin für unverwechselbare persönliche Wirkung',
+          jobTitle: 'Expertin für menschliche Wirkungskraft',
           sameAs: [
             'https://www.linkedin.com/in/claudia-conen-die-stimme/',
             'https://www.instagram.com/claudia_conen_umsatzstimme/',

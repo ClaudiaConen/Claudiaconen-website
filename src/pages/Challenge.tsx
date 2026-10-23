@@ -539,17 +539,9 @@ export default function Challenge() {
           Die Leistungsliste ist raus - jeder Punkt steht schon im Programm, im Ablauf oder als Workbook-Kachel. */}
       <Abschnitt id="ergebnis" className="bg-pearl-white pt-12 sm:pt-16" label="ergebnis-titel">
         <div className="mx-auto max-w-6xl px-6">
-          {/* "Nach sieben Tagen hast du" und "Das bekommst du dazu" raus (Claudia, 23.10.2026 16:05: "das alles raus").
-              Es bleiben Zertifikat und Ablauf. */}
-          <div className={`grid items-center gap-4 rounded-[10px] px-5 py-5 text-midnight-blue sm:grid-cols-[auto_minmax(0,1fr)] sm:px-7 ${GOLD}`}>
-              <span aria-hidden="true" className="flex h-14 w-14 items-center justify-center rounded-full bg-[#13233F] font-montserrat text-2xl font-black text-[#C9A961]">✓</span>
-              <div className="min-w-0">
-                <p className="font-montserrat text-lg font-extrabold uppercase tracking-wide sm:text-xl">Dein Zertifikat – deine persönliche Teilnahmebestätigung</p>
-                <p className="mt-1 font-inter text-[15px] font-semibold leading-relaxed">Für alle, die sieben Tage dabeibleiben und ihre sieben Videos posten. Für deine persönliche Wirkungskraft – und das Vertrauen, das du damit gewinnst.</p>
-              </div>
-          </div>
-
-          <h3 id="ergebnis-titel" className="mt-14 font-montserrat text-2xl font-extrabold text-midnight-blue sm:text-3xl">Dein Ablauf auf einen Blick</h3>
+          {/* Zertifikats-Balken mit Text geloescht (Claudia, 23.10.2026 18:07: "loesche das"). Das Zertifikat steht als
+              Grafik in der Abschluss-Kachel. Muster: projects/claudiaconen/challenge/zertifikat/zertifikat.html */}
+          <h3 id="ergebnis-titel" className="font-montserrat text-2xl font-extrabold text-midnight-blue sm:text-3xl">Dein Ablauf auf einen Blick</h3>
           {/* Laufline von links nach rechts wie die Schiene bei den Tagen; auf dem Handy senkrecht links. */}
           <ol className="relative mt-8 grid list-none gap-8 p-0 pl-12 md:grid-cols-3 md:gap-8 md:pl-0 md:pt-14">
             <span aria-hidden="true" className="absolute bottom-2 left-[19px] top-2 w-[2px] rounded bg-[linear-gradient(180deg,rgba(212,175,55,.8),rgba(212,175,55,.15))] md:bottom-auto md:left-[16%] md:right-[16%] md:top-[19px] md:h-[2px] md:w-auto md:bg-[linear-gradient(90deg,rgba(212,175,55,.8),rgba(212,175,55,.8))]" />
@@ -567,6 +559,7 @@ export default function Challenge() {
                       </li>
                     ))}
                   </ul>
+                  {i === 2 && <img src="/challenge/zertifikat.webp" alt="Muster des Zertifikats UNVERWECHSELBAR – 7 Tage für deine Wirkungskraft" width={1000} height={707} loading="lazy" decoding="async" className="mt-5 w-full -rotate-1 rounded-sm shadow-[0_18px_34px_-16px_rgba(0,0,0,0.6)]" />}
                 </div>
               </li>
             ))}

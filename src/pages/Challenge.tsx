@@ -90,10 +90,12 @@ const WERKZEUG: { titel: string; vorschau: string; text: string; icon: string }[
 /** Die Punkte aus dem Kopf, jetzt hell darunter (Claudia, 22.09.2026 13:01/13:05 UTC: "damit das oben nicht so voll
  *  gepackt ist ... unter den Slider kommt dann hell und da werden die Punkte aufgelistet"). */
 /** Ergebnis, Leistungen und Ablauf auf einen Blick (Claudia, 21.10.2026 10:48-10:53 UTC). */
-const AUF_EINEN_BLICK: { wann: string; was: string; text: string }[] = [
-  { wann: 'Montag, 26. Oktober · 19 Uhr', was: 'Auftakt live im Zoom', text: 'Kennenlernen, deine tägliche Übungszeit festlegen – und noch am selben Abend dein Vorher-Video.' },
-  { wann: 'Sieben Tage', was: 'Jeden Tag ein Impuls', text: 'Audio anhören, eine Minute Video aufnehmen. Für jedes Video hast du 24 Stunden Zeit zum Posten.' },
-  { wann: 'Montag, 2. November · 19 Uhr', was: 'Abschluss live im Zoom', text: 'Dein 60-Sekunden-Pitch, live und freiwillig: Ihr netzwerkt und pitcht untereinander – und wer weiß, vielleicht sitzt dort dein bester Kunde. Danach bekommst du dein Zertifikat.' },
+/** Ablauf auf einen Blick als Listen (Claudia, 23.10.2026 17:38: "alles untereinander gelistet ... in der Mitte der
+ *  Mehrwert der Woche"). Die Mitte ist hervorgehoben. */
+const AUF_EINEN_BLICK: { wann: string; was: string; punkte: string[] }[] = [
+  { wann: 'Montag, 26. Oktober · 19 Uhr', was: 'Auftakt live im Zoom', punkte: ['Erstes Kennenlernen', 'Deinen Übungsplan für die Woche festlegen', 'Dein Vorher-Video aufnehmen'] },
+  { wann: '26. Oktober bis 2. November', was: 'Deine sieben Tage', punkte: ['7 Audio-Impulse von mir – jeden Tag einer', '7 Workbooks – jeden Tag eins', 'Jeden Tag dein 1-Minuten-Video – 24 Stunden Zeit', '2 persönliche Feedbacks von mir – an Tag 2 und Tag 6', '2 Live-Termine im Zoom – Auftakt und Abschluss'] },
+  { wann: 'Montag, 2. November · 19 Uhr', was: 'Abschluss live im Zoom', punkte: ['Deine Chance, vor allen Teilnehmern zu pitchen – freiwillig', 'Netzwerken untereinander – vielleicht sitzt dort dein bester Kunde', 'Dein Zertifikat'] },
 ];
 
 
@@ -589,10 +591,17 @@ export default function Challenge() {
             {AUF_EINEN_BLICK.map((a, i) => (
               <li key={a.wann} style={{ ['--i' as string]: i }} className="cc-stufe relative">
                 <span aria-hidden="true" className={`absolute -left-12 top-0 flex h-10 w-10 items-center justify-center rounded-full border border-[#F7E7CE] font-montserrat text-base font-black text-midnight-blue shadow-[0_0_0_6px_rgba(212,175,55,0.16),0_8px_20px_-6px_rgba(184,134,11,0.7)] md:left-1/2 md:-top-14 md:-translate-x-1/2 ${GOLD}`}>{i + 1}</span>
-                <div className={`h-full px-6 py-6 ${i === 1 ? 'bg-white text-midnight-blue' : 'bg-[#13233F] text-pearl-white'} ${KACHEL}`}>
-                  <p className={`inline-block rounded-md px-3 py-1.5 font-montserrat text-[12px] font-black uppercase tracking-[0.14em] ${i === 1 ? 'bg-midnight-blue/10 text-midnight-blue' : `text-midnight-blue ${GOLD}`}`}>{a.wann}</p>
+                <div className={`h-full px-6 py-6 ${i === 1 ? 'border-2 border-[#C9A961] bg-white text-midnight-blue shadow-[0_24px_50px_-24px_rgba(19,35,63,0.45)] md:-mt-3 md:pb-9' : 'bg-[#13233F] text-pearl-white'} ${KACHEL}`}>
+                  <p className={`inline-block rounded-md px-3 py-1.5 font-montserrat text-[12px] font-black uppercase tracking-[0.14em] text-midnight-blue ${GOLD}`}>{a.wann}</p>
                   <p className="mt-3 font-montserrat text-xl font-extrabold leading-tight">{a.was}</p>
-                  <p className="mt-2 font-inter text-[15px] leading-relaxed">{a.text}</p>
+                  <ul className="mt-3 grid list-none gap-2 p-0">
+                    {a.punkte.map((pk) => (
+                      <li key={pk} className="flex items-start gap-2.5 font-inter text-[15px] font-semibold leading-snug">
+                        <span aria-hidden="true" className={`mt-[3px] flex h-4 w-4 flex-none items-center justify-center rounded-full text-[10px] font-black text-midnight-blue ${GOLD}`}>✓</span>
+                        <span>{pk}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </li>
             ))}

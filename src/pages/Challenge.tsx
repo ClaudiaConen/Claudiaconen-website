@@ -272,15 +272,6 @@ const NICHT_FUER = [
   'erwartest, dass die KI das Sprechen für dich übernimmt',
 ];
 
-/** Goldene Linie links neben den sieben Tagen; der Pfeil wandert beim Scrollen mit (setzt --p). */
-function Schiene() {
-  return (
-    <div className="cc-schiene" aria-hidden="true">
-      <span className="cc-schiene-wort">Deine sieben Tage</span>
-      <span className="cc-schiene-linie"><span className="cc-schiene-pfeil" data-pfeil>➜</span></span>
-    </div>
-  );
-}
 
 /** Unter den Tagen: kein direkter Weg in die Gruppe, nur zurueck zum Eintragen (Claudia, 22.09.2026). */
 function EintragBlock() {
@@ -412,26 +403,6 @@ export default function Challenge() {
   // "nicht 'nach dem Eintragen', sondern 'in der Challenge-Woche' - vorher nicht") - siehe `frei`.
   // Welche Tage sind freigeschaltet? Beim Vorrendern gilt das Bau-Datum, im Browser der echte Tag.
   const frei = TAGE.map((_, i) => heute >= freischaltung(heute, i));
-  const listeRef = useRef<HTMLOListElement>(null);
-  // Pfeil auf der Schiene folgt dem Scrollen: 0 % am Anfang der Liste, 100 % am Ende.
-  useEffect(() => {
-    const liste = listeRef.current;
-    const pfeil = liste?.parentElement?.querySelector<HTMLElement>('[data-pfeil]');
-    if (!liste || !pfeil || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    let raf = 0;
-    const setzen = () => {
-      raf = 0;
-      const r = liste.getBoundingClientRect();
-      const mitte = window.innerHeight * 0.45;
-      const p = Math.min(1, Math.max(0, (mitte - r.top) / Math.max(1, r.height)));
-      pfeil.style.setProperty('--p', `${(p * 100).toFixed(1)}%`);
-    };
-    const onScroll = () => { if (!raf) raf = window.requestAnimationFrame(setzen); };
-    setzen();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-    return () => { window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll); if (raf) window.cancelAnimationFrame(raf); };
-  }, []);
 
   const strukturierteDaten = {
     '@context': 'https://schema.org',
@@ -625,7 +596,7 @@ export default function Challenge() {
         <div className="mx-auto max-w-6xl px-6">
           <Kicker text="So läuft es ab" hell />
           <h2 id="ablauf-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
-            7 Tage für deine Wirkungskraft – Schritt für Schritt.
+            Gut zu wissen, bevor es losgeht.
           </h2>
           <ol className="mt-7 grid list-none gap-3 p-0 sm:grid-cols-2 lg:grid-cols-4">
             {ABLAUF.map((a, i) => (
@@ -650,10 +621,9 @@ export default function Challenge() {
           {/* Claudia, 22.09.2026 11:21 UTC: "Dein Wegweiser: sieben Tage, jeden Tag eine Anleitung zum Aufklappen,
               jeden Tag 5 Minuten fuer deine Wirkung", Themen als Vorgeschmack, dann "ganz schlanke Banner in Gold"
               mit Datum und Uhrzeit des Gruppentreffens, darunter sieben duenne Streifen: nur Zahl, Datum, Schluessel. */}
-          <Kicker text="Dein Wegweiser" hell />
+          <Kicker text="Vorab" hell />
           <h2 id="tage-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
-            Sieben Tage. Jeden Tag eine Anleitung zum Aufklappen –
-            <span className="mt-1 block underline decoration-[#C9A961] decoration-[4px] underline-offset-[6px]">jeden Tag 30 Minuten für deine Wirkung.</span>
+            Zwei Tipps, die du schon heute nutzen kannst.
           </h2>
           <p className="mt-5 max-w-3xl border-l-4 border-[#C9A961] bg-white px-5 py-4 font-cormorant text-2xl italic leading-snug text-midnight-blue sm:text-3xl">
             „{UEBUNGSSATZ}"
@@ -714,43 +684,8 @@ export default function Challenge() {
             </div>
           </details>
 
-          <div className="mt-3 grid gap-5 md:grid-cols-[34px_minmax(0,1fr)]">
-          <Schiene />
-          <ol ref={listeRef} className="grid list-none gap-3 p-0">
-            {TAGE.map((t, i) => {
-              const letzter = i === TAGE.length - 1;
-              return (
-                <li key={t.titel} style={{ ['--i' as string]: i }} className="cc-stufe">
-                  {!frei[i] ? (
-                    <div className={`flex items-center gap-4 bg-white/70 px-4 py-3 text-midnight-blue sm:px-6 ${KACHEL} border-[#C9A961]/35`}>
-                      <span className="cc-puls rounded-md bg-midnight-blue/70 px-2.5 py-1.5 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-pearl-white">Tag {i + 1}</span>
-                      <span className="min-w-0 flex-1 font-montserrat text-sm font-bold text-midnight-blue/80">{KURZ.format(freischaltung(heute, i))}</span>
-                      {t.feedback && <FeedbackPlakette />}
-                      <Schluessel />
-                    </div>
-                  ) : (
-                  <details className={`group bg-white text-midnight-blue ${KACHEL}`}>
-                    <summary className="flex cursor-pointer list-none items-center gap-4 px-4 py-3 sm:px-6 [&::-webkit-details-marker]:hidden">
-                      <span className={`cc-puls rounded-md px-2.5 py-1.5 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] ${letzter ? `${GOLD} text-midnight-blue` : 'bg-midnight-blue text-pearl-white'}`}>Tag {i + 1}</span>
-                      <span className="min-w-0 flex-1 font-montserrat text-sm font-bold text-midnight-blue/80">
-                        {KURZ.format(freischaltung(heute, i))}
-                      </span>
-                      {t.feedback && <FeedbackPlakette />}
-                      <span className="hidden font-montserrat text-xs font-bold text-midnight-blue/70 sm:inline"><span className="group-open:hidden">Aufklappen</span><span className="hidden group-open:inline">Zuklappen</span></span>
-                      <Schluessel />
-                    </summary>
-                    <div className="border-t border-[#C9A961]/40 px-5 pb-5 pt-4 sm:px-7 sm:pb-6">
-                      <h3 className="font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">{t.titel}</h3>
-                      <p className="mt-1 font-montserrat text-[11px] font-bold uppercase tracking-[0.14em] text-midnight-blue/70">{t.schwerpunkt}</p>
-                      <div className="mt-3"><TagInhalt t={t} /></div>
-                    </div>
-                  </details>
-                  )}
-                </li>
-              );
-            })}
-          </ol>
-          </div>
+          {/* Die Tagesstreifen sind raus (Claudia, 23.10.2026: "zu viele Wiederholungen"): Die sieben Tage stehen oben bei
+              den 3-D-Icons und oeffnen sich dort an ihrem Tag. */}
           <EintragBlock />
         </div>
       </Abschnitt>
@@ -929,7 +864,7 @@ export default function Challenge() {
           <div className="mt-10 grid items-center gap-6 md:grid-cols-2">
             {[
               { etikett: 'Die Abkürzung', titel: '1:1-Intensiv-Training · 90 Minuten', fuerWen: 'Für dich, wenn du an einer Stelle hängst und schnell weiterwillst.', satz: 'Du willst einen der sieben Schritte vertiefen? Nur du und ich, online und live.', proWoche: '', haken: ['Deine Kernbotschaft, dein Pitch oder dein Auftritt vor der Kamera', 'Wir arbeiten Schritt für Schritt an deinem Thema', 'Termin nach der Buchung selbst im Kalender wählen'], bild: '1zu1-einzeltermin', netto: EINZEL_NETTO, link: EINZEL_LINK, knopf: 'Einzeltermin buchen', hinweis: 'Sonderpreis für Challenge-Teilnehmende', empfohlen: false },
-              { etikett: 'Dauerhaft verinnerlichen', titel: 'Unverwechselbar. Das 12-Wochen-Mentoring', fuerWen: 'Für dich, wenn du es nicht nur verstehen, sondern leben willst.', satz: 'Du willst alles rund um die sieben Schritte vertiefen und dauerhaft verinnerlichen?', proWoche: `das sind rund ${Math.round(MENTORING_NETTO / 12)} € pro Woche`, haken: ['Start Montag, 16. November · 12 Live-Trainings online', 'Die sieben Schritte der Challenge in der Tiefe – Schritt für Schritt', 'Storytelling und der Blick deiner Kunden', 'KI als Unterstützung in allen Bereichen – mit deiner eigenen Tone of Voice', 'Üben, wiederholen, verankern – bis es in deinem Unterbewusstsein sitzt und selbstbewusstes Auftreten zu deiner Gewohnheit werden kann'], bild: 'mentoring-12-wochen', netto: MENTORING_NETTO, link: MENTORING_LINK, knopf: 'Platz im Mentoring sichern', hinweis: 'Frühbucherpreis endet am 2. November, am Abend unseres Finales · höchstens 6 Plätze', empfohlen: true },
+              { etikett: 'Dauerhaft verinnerlichen', titel: 'Unverwechselbar. Das 12-Wochen-Mentoring', fuerWen: 'Für dich, wenn du es nicht nur verstehen, sondern leben willst.', satz: 'Du willst alles rund um die sieben Schritte vertiefen und dauerhaft verinnerlichen?', proWoche: `das sind rund ${Math.round(MENTORING_NETTO / 12)} € pro Woche`, haken: ['Start Montag, 16. November · 12 Live-Trainings online', 'Alle sieben Schritte der Challenge – vertieft: Kernbotschaft, Zielgruppenbrille, raus aus der Redeangst, Stimme, Storytelling, wie Kunden entscheiden, Elevator Pitch', 'Deine Positionierung schärfen', 'Storytelling, das Kino im Kopf erzeugt', 'Speaker-Tipps aus der Keynote-Praxis', 'Inklusive Speaker-Workbook', 'KI als Unterstützung in allen Bereichen – mit deiner eigenen Tone of Voice', 'Üben, wiederholen, verankern – bis es in deinem Unterbewusstsein sitzt und selbstbewusstes Auftreten zu deiner Gewohnheit werden kann'], bild: 'mentoring-12-wochen', netto: MENTORING_NETTO, link: MENTORING_LINK, knopf: 'Platz im Mentoring sichern', hinweis: 'Frühbucherpreis endet am 2. November, am Abend unseres Finales · höchstens 6 Plätze', empfohlen: true },
             ].map((a) => (
               <div key={a.bild} className={`relative flex flex-col overflow-hidden bg-white ${KACHEL} ${a.empfohlen ? 'border-2 border-[#C9A961] shadow-[0_30px_60px_-24px_rgba(19,35,63,0.5)] md:scale-[1.03]' : ''}`}>
                 {a.empfohlen && <span className={`absolute right-4 top-4 z-10 rounded-full px-4 py-2 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-midnight-blue shadow-md ${GOLD}`}>Meine Empfehlung</span>}

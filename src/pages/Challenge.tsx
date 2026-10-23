@@ -8,7 +8,6 @@ import WorkbookBlaettern from '../components/WorkbookBlaettern';
 import Stimmwelle from '../components/Stimmwelle';
 import ChallengeAnmeldung from '../components/ChallengeAnmeldung';
 import FotoReihen from '../components/FotoReihen';
-import { Ban, Smile, Clock, EyeOff, Database, Bot } from 'lucide-react';
 
 /**
  * Die Challenge-Seite - EINE Seite aus zwei (Claudia, 22.09.2026 11:00 UTC: "jetzt hast du von beiden
@@ -48,38 +47,19 @@ const LERNBOX: { frage: string; ja: boolean; antwort: string }[] = [
 /** Die 7 A's vom Flyer (nach Karsten Brocke) - Claudias ausdrueckliche Ansage vom 22.09.2026, 11:27 UTC. */
 const SIEBEN_A = ['A-bsolut', 'A-ngenehm', 'A-nders', 'A-ls', 'A-lle', 'A-nderen', 'A-uffallen'];
 
-/** Wie auf dem Flyer: Piktogramm, Titel, eine Zeile (Claudia, 22.09.2026 11:24 UTC: "nicht diese runden
- *  Bubble-Dinger ... eher so wie auf dem Flyer, auch mit den Icons"). */
-const KI_GRUENDE: { titel: string; text: string; Icon: typeof Ban }[] = [
-  { titel: 'Keine Bewertung.', text: 'Der Avatar urteilt nicht. Nie.', Icon: Ban },
-  { titel: 'Keine Peinlichkeit.', text: 'Du kannst „dumme Fragen" stellen – ohne Scham.', Icon: Smile },
-  { titel: 'Immer verfügbar.', text: '24/7 erreichbar. Kein Termin nötig.', Icon: Clock },
-  { titel: 'Keine Körpersprache. Keine Unsicherheit.', text: 'Kein Flackern der Augen, keine nervöse Haltung.', Icon: EyeOff },
-  { titel: 'Datenspeicher statt Emotionen.', text: 'Der Avatar vergisst nicht. Und er verzeiht sofort.', Icon: Database },
-  { titel: 'Keine Geschichte. Kein Ego.', text: 'Kein Gepäck. Kein Stolz, keine Verletzlichkeit – nur Funktion.', Icon: Bot },
-];
 
 
-/** Vorteile des Menschen in der Kommunikation - die ersten zwei nach Claudias Diktat (22.09.2026, 10:52 UTC:
- *  "wir spueren die Emotionen eines Menschen, bevor wir die Worte verstehen", "Redepausen geben Platz fuer
- *  Verstaendnis und Wirkung"), der Rest in derselben Tonlage. Keine Hirnforschungs-Behauptungen. */
-const MENSCH_KANN = [
-  'Wir spüren, was ein Mensch fühlt – bevor wir seine Worte verstehen.',
-  'Redepausen geben Platz. Für Verständnis und für Wirkung.',
-  'Eine Stimme, die meint, was sie sagt, hört man. Wissen klingt anders als Überzeugung.',
-  'Ein Blick, der den anderen meint. Wer angesehen wird, fühlt sich gemeint – und bleibt.',
-];
 
 
 
 
 const GOLD = 'bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]';
-/** 1:1-Intensiv-Training, Sonderpreise fuer Challenge-Teilnehmende (netto). Paket: Vorschlag 23.10.2026, Claudias Ja offen. */
+/** Der Schritt danach (Claudia, 23.10.2026 17:07: "entweder die 1 Stunde oder das Mentoring-Programm").
+ *  Einzeltermin = Tentary "1:1 Training 90 min" (180 EUR Net), Mentoring = Tentary p/b95rPm (1.990 EUR Net, Fruehbucher bis 2.11.). */
 const EINZEL_NETTO = 180;
-const PAKET_NETTO = 435;
 const EINZEL_LINK = 'https://umsatzstimme-claudiaconen.mytentary.com/p/zJYlWu/checkout';
-// Bis das Tentary-Produkt fuer das Paket existiert: Anfrage per E-Mail (Claudia 23.10.2026).
-const PAKET_LINK = 'mailto:claudiaconen@umsatzstimme.de?subject=Paket%203%20%C3%97%2090%20Minuten%20(Challenge-Sonderpreis)';
+const MENTORING_NETTO = 1990;
+const MENTORING_LINK = 'https://umsatzstimme-claudiaconen.mytentary.com/p/b95rPm/checkout';
 const brutto = (netto: number) => (netto * 1.19).toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const KACHEL = 'cc-glanz-kachel rounded-[10px] border border-[#13233F]/[0.13] transition-[border-color,box-shadow] duration-200 hover:border-[#C9A961] hover:shadow-[0_18px_40px_-20px_rgba(19,35,63,0.35)]';
 /** Ruhige Champagner-Flaeche statt kraeftigem Gold fuer grosse Bloecke (Farben der neuen Seiten, Claudia 15.10.2026). */
@@ -577,16 +557,11 @@ export default function Challenge() {
               );
             })}
             {/* Workbook-Kachel neben dem Finale - ersetzt die Zeile aus "Entdecke in der Challenge" (Claudia, 23.10.2026). */}
+            {/* Die sieben Tages-Workbooks aufgefaechert (Deckblaetter aus challenge/workbooks/Tag1-7.pdf, Claudia 23.10.2026). */}
             <li className={`cc-stufe flex flex-col bg-pearl-white p-6 text-midnight-blue hover:-translate-y-0.5 ${KACHEL}`}>
-              <div className="flex items-center gap-4">
-                <img src="/unverwechselbar/workbook/seite-01.webp" alt="" width={900} height={1273} loading="lazy" decoding="async" className="h-20 w-auto flex-none rounded-sm shadow-[0_8px_16px_-6px_rgba(10,22,40,0.45)]" />
-                <span aria-hidden="true" className="font-montserrat text-3xl font-black text-[#C9A961]">+</span>
-              </div>
-              <h3 className="mt-3 font-montserrat text-base font-extrabold uppercase tracking-wide">Dein Workbook</h3>
-              <p className="mt-1 font-montserrat text-[11px] font-bold uppercase tracking-[0.14em] text-midnight-blue/70">Zum Blättern und Mitnehmen</p>
-              <button type="button" onClick={() => setBuchOffen(true)} className="mt-auto self-start pt-3 font-montserrat text-sm font-bold underline decoration-[#C9A961] underline-offset-4">
-                Im Workbook blättern →
-              </button>
+              <img src="/challenge/sieben-workbooks.webp" alt="Die sieben Challenge-Workbooks, Tag 1 bis Tag 7" width={1000} height={472} loading="lazy" decoding="async" className="w-full" />
+              <h3 className="mt-3 font-montserrat text-base font-extrabold uppercase tracking-wide">7 Workbooks</h3>
+              <p className="mt-1 font-montserrat text-[11px] font-bold uppercase tracking-[0.14em] text-midnight-blue/70">Jeden Tag eins · in deiner Gruppe</p>
             </li>
           </ol>
         </div>
@@ -834,56 +809,7 @@ export default function Challenge() {
         </div>
       </Abschnitt>
 
-      {/* KI und du - Claudia, 22.09.2026 10:51-10:52 UTC: weniger Text ("die Leute lesen nicht mehr so viel"),
-          Text soll "mitlaufen wie beim Schreiben" (cc-schreib: Zeilen wischen beim Scrollen nacheinander auf),
-          rechts die Ueberschrift "Der Mensch ist das Unikat ..." und darunter die Vorteile des Menschen. */}
-      <Abschnitt className="bg-pearl-white py-16 text-midnight-blue sm:py-24" label="ki-und-du">
-        <div className="mx-auto max-w-6xl px-6">
-          <Kicker text="Dein KI-Agent ist effizient. Und du?" hell />
-          <h2 id="ki-und-du" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
-            Warum Menschen so gern mit der KI reden. Der Mensch ist das Unikat, die KI der Beschleuniger – wir nutzen beides.
-            <span className="mt-1 block underline decoration-[#C9A961] decoration-[4px] underline-offset-[6px]">Lass dich überraschen.</span>
-          </h2>
-          {/* Zwei gleich breite, weisse Karten (Claudias Foto 22.09.2026 12:22 UTC: "unterschiedlich breit ... so schwarz ...
-              Schrift schlecht lesbar"); die KI-Gruende auf sechs gekuerzt (Kritiker-Durchgang). */}
-          <div className="mt-9 grid gap-4 md:grid-cols-2">
-            <div className={`bg-white p-6 text-midnight-blue sm:p-8 ${KACHEL} border-[#C9A961]`}>
-              <h3 className="font-montserrat text-xs font-extrabold uppercase tracking-[0.2em] text-midnight-blue/80">Warum die KI so bequem ist</h3>
-              <ul className="mt-5 grid list-none gap-3.5 p-0">
-                {KI_GRUENDE.map((g, i) => (
-                  <li key={g.titel} style={{ ['--i' as string]: i }} className="cc-stufe flex items-start gap-3">
-                    <span className="grid h-9 w-9 flex-none place-items-center rounded-md bg-midnight-blue text-[#EBD197]"><g.Icon size={18} strokeWidth={2} aria-hidden="true" /></span>
-                    <span className="min-w-0">
-                      <b className="block font-montserrat text-[14px] font-extrabold leading-tight">{g.titel}</b>
-                      <span className="font-inter text-[14px] leading-snug">{g.text}</span>
-                    </span>
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-6 font-inter text-[15px] leading-relaxed">
-                Und trotzdem: Keine Geschichte, kein Ego, keine Verletzlichkeit – genau deshalb erinnert sich niemand an einen Avatar.
-              </p>
-            </div>
-            <div className={`bg-white p-6 text-midnight-blue sm:p-8 ${KACHEL} border-[#C9A961]`}>
-              <h3 className="font-montserrat text-xl font-black leading-tight sm:text-2xl">
-                Der Mensch ist das Unikat. Die KI der Beschleuniger – <span className="underline decoration-[#C9A961] decoration-[3px] underline-offset-4">wenn wir Menschlichkeit zeigen.</span>
-              </h3>
-              <p className="mt-4 font-inter text-[15px] leading-relaxed">
-                Wir Menschen haben keine Reset-Taste. Was wir sagen, bleibt beim anderen. Und solange wir mit uns selbst beschäftigt sind, reden wir nicht mit ihm – sondern nur vor ihm.
-              </p>
-              <p className="mt-5 font-montserrat text-[11px] font-extrabold uppercase tracking-[0.2em] text-midnight-blue/80">Was der Mensch kann</p>
-              <ul className="mt-2 grid list-none gap-2.5 p-0">
-                {MENSCH_KANN.map((s, i) => (
-                  <li key={s} style={{ ['--i' as string]: i }} className="cc-schreib flex gap-3 font-inter text-[15px] leading-relaxed">
-                    <Haken />
-                    <span>{s}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </Abschnitt>
+      {/* Abschnitt "Dein KI-Agent ist effizient. Und du?" entfernt (Claudia, 23.10.2026: lenkt ab, doppelt). Text in der Git-Historie (f94af50). */}
 
       {/* Werkzeugkasten + Workbook */}
       <Abschnitt className="bg-white py-16 text-midnight-blue sm:py-24" label="werkzeug-titel">
@@ -972,7 +898,8 @@ export default function Challenge() {
             <div>
               <Kicker text="Der Schritt danach" hell />
               <h2 id="angebot-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
-                Wenn du nach den sieben Tagen weitergehen willst.
+                Du suchst die Abkürzung?
+                <span className="mt-1 block underline decoration-[#C9A961] decoration-[4px] underline-offset-[6px]">Oder willst du es dauerhaft verinnerlichen?</span>
               </h2>
             </div>
             {/* Claudias Foto vom 22.09.2026 16:16 UTC (rote Mappe), Original in projects/claudiaconen/ablage/claudia-rote-mappe-2026-09-22.jpg */}
@@ -980,33 +907,39 @@ export default function Challenge() {
           </div>
           {/* 1:1-Intensiv-Training – Sonderpreis für Challenge-Teilnehmende (Claudia, 17.10.2026):
               90 Min, 180 € netto, Buchung auf Anfrage per E-Mail. Bild liegt in public/challenge/. */}
-          {/* Zwei Angebote nebeneinander, jedes mit eigenem Bild, Preis und Tentary-Knopf
-              (Claudia 23.10.2026: "auf jeder Seite ein Bild … Angebot eins, Angebot zwei … es muss klar sein"). */}
-          <div className="mt-9">
-            <p className="text-center font-montserrat text-[11px] font-extrabold uppercase tracking-[0.18em] text-[#C9A961]">1:1-Intensiv-Training · Sonderpreise für Challenge-Teilnehmende</p>
-            <div className="mt-5 grid gap-6 md:grid-cols-2">
-              {[
-                { nr: 'Angebot 1', titel: 'Einzeltermin · 90 Minuten', text: 'Stärken, Ausdruck und Rhetorik. Nur du und Claudia, online und live.', bild: '1zu1-einzeltermin', netto: EINZEL_NETTO, link: EINZEL_LINK, knopf: 'Einzeltermin buchen', special: false },
-                { nr: 'Angebot 2 · Special', titel: 'Paket · 3 × 90 Minuten', text: 'Positionierung, Storytelling, Selbstbewusstsein. Drei Termine, nur du und Claudia.', bild: '1zu1-paket-3x90', netto: PAKET_NETTO, link: PAKET_LINK, knopf: PAKET_LINK.startsWith('mailto:') ? 'Paket per E-Mail anfragen' : 'Paket buchen', special: true },
-              ].map((a) => (
-                <div key={a.bild} className={`flex flex-col overflow-hidden bg-white ${KACHEL} ${a.special ? 'border-2 border-[#C9A961]' : ''}`}>
-                  <img src={`/challenge/${a.bild}.jpg`} alt={`${a.titel} mit Claudia Conen`} width={900} height={900} loading="lazy" decoding="async" className="aspect-square w-full object-cover" />
-                  <div className="flex flex-1 flex-col p-6 text-midnight-blue sm:p-7">
-                    <span className={`self-start rounded-full px-3 py-1.5 font-montserrat text-[10px] font-extrabold uppercase tracking-[0.18em] ${a.special ? `text-midnight-blue ${GOLD}` : 'bg-midnight-blue text-white'}`}>{a.nr}</span>
-                    <h3 className="mt-3 font-montserrat text-xl font-extrabold sm:text-2xl">{a.titel}</h3>
-                    <p className="mt-2 font-inter leading-relaxed text-midnight-blue/80">{a.text}</p>
-                    <p className="mt-4 font-montserrat text-3xl font-black">{a.netto} € <span className="text-base font-bold text-midnight-blue/60">zzgl. MwSt.</span></p>
+          {/* Zwei Wege nach der Challenge (Claudia, 23.10.2026 17:09: "Abkuerzung 1 Stunde und dauerhaft verinnerlichen
+              beim Mentoring ... wie ein Vollprofi"). Aufbau je Karte: Bild, Etikett, Titel, ein Satz, drei Haken, Preis,
+              ein Knopf. Das Mentoring ist als "Empfohlen" hervorgehoben (Ankerangebot); nur belegte Fakten (Tentary/Produktbild). */}
+          <div className="mt-10 grid items-stretch gap-6 md:grid-cols-2">
+            {[
+              { etikett: 'Die Abkürzung', titel: '1:1-Intensiv-Training · 90 Minuten', satz: 'Du willst einen der sieben Schritte vertiefen? Nur du und ich, online und live.', haken: ['Deine Kernbotschaft, dein Pitch oder dein Auftritt vor der Kamera', 'Wir arbeiten Schritt für Schritt an deinem Thema', 'Termin nach der Buchung selbst im Kalender wählen'], bild: '1zu1-einzeltermin', netto: EINZEL_NETTO, link: EINZEL_LINK, knopf: 'Einzeltermin buchen', hinweis: 'Sonderpreis für Challenge-Teilnehmende', empfohlen: false },
+              { etikett: 'Dauerhaft verinnerlichen', titel: 'Unverwechselbar. Das 12-Wochen-Mentoring', satz: 'Du willst alles rund um die sieben Schritte vertiefen und dauerhaft verinnerlichen?', haken: ['12 Live-Trainings online · Start 10. November', 'Deine Positionierung, deine Geschichte, dein Pitch', 'Mit KI deine eigene Tone of Voice – damit deine Texte klingen wie du'], bild: 'mentoring-12-wochen', netto: MENTORING_NETTO, link: MENTORING_LINK, knopf: 'Platz im Mentoring sichern', hinweis: 'Frühbucherpreis bis 2. November · höchstens 6 Plätze', empfohlen: true },
+            ].map((a) => (
+              <div key={a.bild} className={`relative flex flex-col overflow-hidden bg-white ${KACHEL} ${a.empfohlen ? 'border-2 border-[#C9A961] shadow-[0_24px_50px_-24px_rgba(19,35,63,0.45)]' : ''}`}>
+                {a.empfohlen && <span className={`absolute right-4 top-4 z-10 rounded-full px-4 py-2 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-midnight-blue shadow-md ${GOLD}`}>Empfohlen</span>}
+                <img src={`/challenge/${a.bild}.jpg`} alt={`${a.titel} mit Claudia Conen`} width={900} height={900} loading="lazy" decoding="async" className="aspect-square w-full object-cover" />
+                <div className="flex flex-1 flex-col p-6 text-midnight-blue sm:p-8">
+                  <p className="font-montserrat text-[12px] font-black uppercase tracking-[0.18em] text-[#9A7B2F]">{a.etikett}</p>
+                  <h3 className="mt-2 font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">{a.titel}</h3>
+                  <p className="mt-3 font-inter text-[17px] leading-relaxed">{a.satz}</p>
+                  <ul className="mt-4 grid list-none gap-2.5 p-0">
+                    {a.haken.map((h) => (
+                      <li key={h} className="flex items-start gap-3 font-inter text-[15px] font-semibold leading-snug"><Haken />{h}</li>
+                    ))}
+                  </ul>
+                  <div className="mt-6 border-t border-midnight-blue/10 pt-5">
+                    <p className="font-montserrat text-3xl font-black">{a.netto.toLocaleString('de-DE')} € <span className="text-base font-bold text-midnight-blue/60">zzgl. MwSt.</span></p>
                     <p className="font-inter text-sm text-midnight-blue/70">{brutto(a.netto)} € inkl. 19 % MwSt.</p>
-                    {a.special && <p className="mt-1 font-montserrat text-sm font-extrabold text-[#9A7B2F]">Du sparst {3 * EINZEL_NETTO - PAKET_NETTO} € gegenüber drei Einzelterminen.</p>}
-                    <div className="mt-auto pt-6">
-                      <a href={a.link} target="_blank" rel="noopener" className={`inline-flex items-center rounded-full px-6 py-3.5 font-montserrat text-sm font-bold transition-transform hover:-translate-y-px ${a.special ? `text-midnight-blue ${GOLD}` : 'bg-midnight-blue text-white'}`}>
-                        {a.knopf}
-                      </a>
-                    </div>
+                    <p className="mt-1 font-montserrat text-sm font-extrabold text-[#9A7B2F]">{a.hinweis}</p>
+                  </div>
+                  <div className="mt-auto pt-6">
+                    <a href={a.link} target="_blank" rel="noopener" className={`flex w-full items-center justify-center rounded-full px-6 py-4 font-montserrat text-sm font-bold transition-transform hover:-translate-y-px ${a.empfohlen ? `text-midnight-blue ${GOLD}` : 'bg-midnight-blue text-white'}`}>
+                      {a.knopf} →
+                    </a>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </Abschnitt>

@@ -251,7 +251,6 @@ const WEGWEISER = {
 const ABLAUF: { titel: string; text: string }[] = [
   // Gekuerzt am 23.10.2026 (Claudia: "nicht so viele Sachen doppelt"): Auftakt, Jeden Tag ein Impuls und Abschluss
   // stehen schon in "Dein Ablauf auf einen Blick", das Workbook als Kachel beim Programm.
-  { titel: 'Eintragen', text: 'Du trägst dich hier ein. Danach kommst du in deine Gruppe, bei WhatsApp oder Telegram.' },
   { titel: 'Die Gruppe', text: 'Austausch untereinander ist gern gesehen. Werbung nicht – dafür gibt es am letzten Tag Werbezeit, für jeden. Danach darfst du dein Business in der Community-Gruppe vorstellen.' },
   { titel: 'Dein Feedback', text: 'An Tag 2 und Tag 6 bekommst du persönliches Feedback von mir, wenn du dein Video innerhalb der 24 Stunden postest. Danach darfst du dein Video verbessern – für dich, um daran zu wachsen.' },
   { titel: 'Zwischendurch', text: 'Impulse zu Storytelling und Prompts für die KI, die du direkt nutzen kannst – um deine Positionierung zu schärfen und deine innere Haltung nach außen zu tragen.' },
@@ -466,7 +465,7 @@ export default function Challenge() {
               <a href="#anmelden" className={`inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue transition-transform hover:-translate-y-px ${GOLD}`}>
                 Nutze die Video-Challenge →
               </a>
-              <a href="#tage" className="font-montserrat text-sm font-semibold text-[#EBD197] underline decoration-[#C9A961]/50 underline-offset-4 hover:decoration-[#F7E7CE]">
+              <a href="#programm" className="font-montserrat text-sm font-semibold text-[#EBD197] underline decoration-[#C9A961]/50 underline-offset-4 hover:decoration-[#F7E7CE]">
                 Die 7 Tage ansehen ↓
               </a>
             </div>
@@ -598,7 +597,7 @@ export default function Challenge() {
           <h2 id="ablauf-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
             Gut zu wissen, bevor es losgeht.
           </h2>
-          <ol className="mt-7 grid list-none gap-3 p-0 sm:grid-cols-2 lg:grid-cols-4">
+          <ol className="mt-7 grid list-none gap-3 p-0 sm:grid-cols-2 lg:grid-cols-3">
             {ABLAUF.map((a, i) => (
               <li key={a.titel} style={{ ['--i' as string]: i }} className={`cc-stufe bg-white px-5 py-5 text-midnight-blue ${KACHEL}`}>
                 <div className="flex items-center gap-3">
@@ -863,8 +862,8 @@ export default function Challenge() {
           </figure>
           <div className="mt-10 grid items-center gap-6 md:grid-cols-2">
             {[
-              { etikett: 'Die Abkürzung', titel: '1:1-Intensiv-Training · 90 Minuten', leitsatz: '', fuerWen: 'Für dich, wenn du an einer Stelle hängst und schnell weiterwillst.', satz: 'Du willst einen der sieben Schritte vertiefen? Nur du und ich, online und live.', proWoche: '', haken: ['Deine Kernbotschaft, dein Pitch oder dein Auftritt vor der Kamera', 'Wir arbeiten Schritt für Schritt an deinem Thema', 'Termin nach der Buchung selbst im Kalender wählen'], bild: '1zu1-einzeltermin', netto: EINZEL_NETTO, link: EINZEL_LINK, knopf: 'Einzeltermin buchen', hinweis: 'Sonderpreis für Challenge-Teilnehmende', empfohlen: false },
-              { etikett: 'Dauerhaft verinnerlichen', titel: 'Unverwechselbar. Das 12-Wochen-Mentoring', leitsatz: 'Von der Selbsterkenntnis zum Selbstvertrauen – zum selbstbewussten Auftreten.', fuerWen: 'Für dich, wenn du es nicht nur verstehen, sondern leben willst.', satz: 'Du willst alles rund um die sieben Schritte vertiefen und dauerhaft verinnerlichen?', proWoche: `das sind rund ${Math.round(MENTORING_NETTO / 12)} € pro Woche`, haken: ['Start Montag, 16. November · 12 Live-Trainings online', 'Alle sieben Schritte der Challenge – vertieft: Kernbotschaft, Zielgruppenbrille, raus aus der Redeangst, Stimme, Storytelling, wie Kunden entscheiden, Elevator Pitch', 'Deine Positionierung schärfen', 'Storytelling, das Kino im Kopf erzeugt', 'Speaker-Tipps aus der Keynote-Praxis', 'Inklusive Speaker-Workbook', 'KI als Unterstützung in allen Bereichen – mit deiner eigenen Tone of Voice', 'Üben, wiederholen, verankern – bis es in deinem Unterbewusstsein sitzt und selbstbewusstes Auftreten zu deiner Gewohnheit werden kann'], bild: 'mentoring-12-wochen', netto: MENTORING_NETTO, link: MENTORING_LINK, knopf: 'Platz im Mentoring sichern', hinweis: 'Frühbucherpreis endet am 2. November, am Abend unseres Finales · höchstens 6 Plätze', empfohlen: true },
+              { etikett: 'Die Abkürzung', titel: '1:1-Intensiv-Training · 90 Minuten', leitsatz: '', fuerWen: 'Für dich, wenn du an einem Punkt gezielt weiterkommen willst.', satz: 'Du willst einen der sieben Schritte vertiefen? In 90 Minuten arbeiten wir nur an deinem Thema.', proWoche: '', haken: ['Deine Kernbotschaft, dein Pitch oder dein Auftritt vor der Kamera', 'Nur du und ich – volle Aufmerksamkeit für dich', 'Online und live im Zoom'], bild: '1zu1-einzeltermin', netto: EINZEL_NETTO, link: EINZEL_LINK, knopf: 'Einzeltermin buchen', hinweis: 'Sonderpreis für Challenge-Teilnehmende', empfohlen: false },
+              { etikett: 'Dauerhaft verinnerlichen', titel: 'Unverwechselbar. Das 12-Wochen-Mentoring', leitsatz: 'Von der Selbsterkenntnis zum Selbstvertrauen – zum selbstbewussten Auftreten.', fuerWen: '', satz: 'Wo auch immer du redest – du wirkst. Die Frage ist nur: wie? In drei Monaten gibst du deinem Gehirn die Chance, es zur Gewohnheit zu machen. Und ich begleite dich auf diesem Weg.', proWoche: `das sind rund ${Math.round(MENTORING_NETTO / 12)} € pro Woche`, haken: ['Start Montag, 16. November · 12 Live-Trainings online', 'Alle sieben Schritte der Challenge – vertieft: Kernbotschaft, Zielgruppenbrille, raus aus der Redeangst, Stimme, Storytelling, wie Kunden entscheiden, Elevator Pitch', 'Deine Positionierung schärfen', 'Storytelling, das Kino im Kopf erzeugt', 'Speaker-Tipps aus der Keynote-Praxis', 'Inklusive Speaker-Workbook', 'KI als Unterstützung in allen Bereichen – mit deiner eigenen Tone of Voice', 'Üben, wiederholen, verankern – bis es in deinem Unterbewusstsein sitzt'], bild: 'mentoring-12-wochen', netto: MENTORING_NETTO, link: MENTORING_LINK, knopf: 'Platz im Mentoring sichern', hinweis: 'Frühbucherpreis endet am 2. November, am Abend unseres Finales · höchstens 6 Plätze', empfohlen: true },
             ].map((a) => (
               <div key={a.bild} className={`relative flex flex-col overflow-hidden bg-white ${KACHEL} ${a.empfohlen ? 'border-2 border-[#C9A961] shadow-[0_30px_60px_-24px_rgba(19,35,63,0.5)] md:scale-[1.03]' : ''}`}>
                 {a.empfohlen && <span className={`absolute right-4 top-4 z-10 rounded-full px-4 py-2 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-midnight-blue shadow-md ${GOLD}`}>Meine Empfehlung</span>}
@@ -874,7 +873,7 @@ export default function Challenge() {
                   <h3 className="mt-2 font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">{a.titel}</h3>
                   {/* Leitsatz Mentoring: Claudias Wortlaut (23.10.2026 17:44). */}
                   {a.leitsatz && <p className="mt-2 font-cormorant text-xl italic leading-snug text-midnight-blue sm:text-2xl">{a.leitsatz}</p>}
-                  <p className="mt-2 font-montserrat text-[15px] font-bold leading-snug text-[#9A7B2F]">{a.fuerWen}</p>
+                  {a.fuerWen && <p className="mt-2 font-montserrat text-[15px] font-bold leading-snug text-[#9A7B2F]">{a.fuerWen}</p>}
                   <p className="mt-3 font-inter text-[17px] leading-relaxed">{a.satz}</p>
                   {/* Mentoring-Liste in bewegtem Glas (Claudia, 23.10.2026: "ausfuehrlicher ... Glas-Effekt, dass es sich ein
                       bisschen mehr bewegt"). Ohne Bewegung bei prefers-reduced-motion. */}
@@ -894,7 +893,7 @@ export default function Challenge() {
                     <a href={a.link} target="_blank" rel="noopener" className={`flex w-full items-center justify-center rounded-full px-6 py-4 font-montserrat text-sm font-bold transition-transform hover:-translate-y-px ${a.empfohlen ? `text-midnight-blue ${GOLD}` : 'bg-midnight-blue text-white'}`}>
                       {a.knopf} →
                     </a>
-                    <p className="mt-2.5 text-center font-inter text-xs text-midnight-blue/60">Sichere Zahlung über Tentary{a.empfohlen ? ' · Start am 16. November' : ' · Termin danach selbst im Kalender wählen'}</p>
+                    <p className="mt-2.5 text-center font-inter text-xs text-midnight-blue/60">Sichere Zahlung über Tentary{a.empfohlen ? '' : ' · Termin danach selbst im Kalender wählen'}</p>
                   </div>
                 </div>
               </div>

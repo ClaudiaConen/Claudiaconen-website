@@ -534,20 +534,25 @@ export default function Challenge() {
                 );
                 return (
                   <li key={t.titel} style={{ ['--i' as string]: i }} className="cc-stufe">
-                    {frei[i] ? (
-                      <details className={`group bg-white text-midnight-blue ${KACHEL}`}>
-                        <summary className="flex cursor-pointer list-none items-center gap-4 px-4 py-3.5 sm:px-6 [&::-webkit-details-marker]:hidden">
-                          {kopf}
-                          <span className="hidden font-montserrat text-xs font-bold text-midnight-blue/70 sm:inline"><span className="group-open:hidden">Aufklappen ▾</span><span className="hidden group-open:inline">Zuklappen ▴</span></span>
-                        </summary>
-                        <div className="border-t border-[#C9A961]/40 px-5 pb-5 pt-4 sm:px-7 sm:pb-6"><TagInhalt t={t} /></div>
-                      </details>
-                    ) : (
-                      <div className={`flex items-center gap-4 bg-white px-4 py-3.5 text-midnight-blue sm:px-6 ${KACHEL}`}>
+                    {/* Jeder Tag laesst sich jederzeit aufklappen: Gedanke und Inhalt sind sichtbar (Claudia, 24.10.2026: "alle
+                        Erklaerungen und persoenlichen Worte entfernt"); Aufgabe und Reflexion oeffnen sich erst an ihrem Tag. */}
+                    <details className={`group bg-white text-midnight-blue ${KACHEL}`}>
+                      <summary className="flex cursor-pointer list-none items-center gap-4 px-4 py-3.5 sm:px-6 [&::-webkit-details-marker]:hidden">
                         {kopf}
-                        <Schluessel />
+                        <span className="flex flex-none items-center gap-2 font-montserrat text-xs font-bold text-midnight-blue/70"><span className="hidden sm:inline"><span className="group-open:hidden">Aufklappen</span><span className="hidden group-open:inline">Zuklappen</span></span><span aria-hidden="true" className="inline-block transition-transform group-open:rotate-180">▾</span></span>
+                      </summary>
+                      <div className="border-t border-[#C9A961]/40 px-5 pb-5 pt-4 sm:px-7 sm:pb-6">
+                        {frei[i] ? (
+                          <TagInhalt t={t} />
+                        ) : (
+                          <div className="font-inter text-[15px] leading-relaxed text-midnight-blue">
+                            <p className="font-cormorant text-xl italic leading-snug sm:text-2xl">„{t.einstieg}"</p>
+                            <p className="mt-3">{t.inhalt}</p>
+                            <p className="mt-3 flex items-center gap-2 font-montserrat text-xs font-bold uppercase tracking-[0.12em] text-midnight-blue/70"><Schluessel /> Deine Aufgabe öffnet sich am {KURZ.format(freischaltung(heute, i))}</p>
+                          </div>
+                        )}
                       </div>
-                    )}
+                    </details>
                   </li>
                 );
               })}

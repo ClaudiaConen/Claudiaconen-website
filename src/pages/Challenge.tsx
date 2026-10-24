@@ -488,8 +488,9 @@ export default function Challenge() {
               <p className="mt-4 max-w-xl font-inter text-lg leading-relaxed text-midnight-blue/85">
                 Überzeugende Rhetorik, die Vertrauen weckt – authentisch, echt, mit Leichtigkeit und mit KI-Abkürzungen.
               </p>
-              <p className={`mt-6 inline-block rounded-md px-4 py-3 font-montserrat text-sm font-extrabold uppercase tracking-[0.06em] text-midnight-blue sm:text-base ${GOLD}`}>
-                {stand}
+              {/* Ohne Goldflaeche, dafuer groessere Schrift (Claudia, 24.10.2026 23:32); feine Goldlinie links als Markierung. */}
+              <p className="mt-6 whitespace-pre-line border-l-4 border-[#C9A961] pl-4 font-montserrat text-lg font-extrabold uppercase leading-snug tracking-[0.04em] text-midnight-blue sm:text-2xl">
+                {stand.replace(' · 19 Uhr', '\n19 Uhr')}
               </p>
               <div className="mt-7 flex flex-wrap items-center gap-4">
                 <a href="#anmelden" className={`inline-flex items-center justify-center gap-2.5 rounded-full px-9 py-5 font-montserrat text-base font-extrabold text-midnight-blue shadow-[0_10px_24px_-12px_rgba(19,35,63,0.45)] transition-transform hover:-translate-y-px sm:text-lg ${GOLD}`}>

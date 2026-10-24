@@ -197,6 +197,39 @@ const NICHT_FUER = [
 /** Unter den Tagen: kein direkter Weg in die Gruppe, nur zurueck zum Eintragen (Claudia, 22.09.2026). */
 /** Mobile Leiste "Kostenfrei dabei sein": erscheint nach dem Kopf, verschwindet, sobald das Formular im Bild ist.
  *  Der Weg zur Anmeldung ist so auf dem Handy nie weiter als ein Daumen entfernt. */
+/** Spirale neben den sieben Tagen (Claudias Vorbild-Video 24.10.2026 21:10: DNA-Linie, der aktuelle Schritt leuchtet).
+ *  Jede Sprosse sitzt genau neben ihrem Tag; ruhig: feine Linien, sanftes Schweben, nur der aktive Tag in Gold mit Schatten. */
+function Helix({ aktiv, ys, hoehe }: { aktiv: number; ys: number[]; hoehe: number }) {
+  if (!hoehe || ys.length < 2) return <div className="hidden md:block" />;
+  const b = 120, a = 38, mitte = b / 2;
+  const welle = ((ys[ys.length - 1] - ys[0]) / (ys.length - 1)) * 2;
+  const x = (y: number, vorn: boolean) => mitte + (vorn ? 1 : -1) * a * Math.sin((2 * Math.PI * (y - ys[0])) / welle + Math.PI / 2);
+  const pfad = (vorn: boolean) => {
+    const p: string[] = [];
+    for (let y = 0; y <= hoehe; y += 6) p.push(`${p.length ? 'L' : 'M'}${x(y, vorn).toFixed(1)} ${y}`);
+    return p.join(' ');
+  };
+  return (
+    <div className="hidden md:block" aria-hidden="true">
+      <svg viewBox={`0 0 ${b} ${hoehe}`} width={b} height={hoehe} className="cc-helix mx-auto overflow-visible">
+        <path d={pfad(false)} fill="none" stroke="#13233F" strokeOpacity="0.16" strokeWidth="2" />
+        <path d={pfad(true)} fill="none" stroke="#13233F" strokeOpacity="0.32" strokeWidth="2" />
+        {ys.map((y, i) => {
+          const an = i === aktiv;
+          const x1 = x(y, true), x2 = x(y, false);
+          return (
+            <g key={i}>
+              <line x1={x1} y1={y} x2={x2} y2={y} stroke={an ? '#C9A961' : '#13233F'} strokeOpacity={an ? 1 : 0.22} strokeWidth={an ? 5 : 2} strokeLinecap="round" style={{ transition: 'all .45s ease', filter: an ? 'drop-shadow(0 4px 8px rgba(201,169,97,.6))' : 'none' }} />
+              <circle cx={x1} cy={y} r={an ? 9 : 4.5} fill={an ? '#C9A961' : '#13233F'} fillOpacity={an ? 1 : 0.55} style={{ transition: 'all .45s ease', filter: an ? 'drop-shadow(0 4px 10px rgba(201,169,97,.75))' : 'none' }} />
+              <circle cx={x2} cy={y} r={an ? 6 : 3.5} fill={an ? '#F7E7CE' : '#13233F'} fillOpacity={an ? 1 : 0.35} style={{ transition: 'all .45s ease' }} />
+            </g>
+          );
+        })}
+      </svg>
+    </div>
+  );
+}
+
 function MobilLeiste() {
   const [zeigen, setZeigen] = useState(false);
   useEffect(() => {
@@ -356,6 +389,31 @@ export default function Challenge() {
   // "nicht 'nach dem Eintragen', sondern 'in der Challenge-Woche' - vorher nicht") - siehe `frei`.
   // Welche Tage sind freigeschaltet? Beim Vorrendern gilt das Bau-Datum, im Browser der echte Tag.
   const frei = TAGE.map((_, i) => heute >= freischaltung(heute, i));
+  const tageRef = useRef<HTMLOListElement>(null);
+  const [aktiverTag, setAktiverTag] = useState(0);
+  const [sprossen, setSprossen] = useState<{ ys: number[]; h: number }>({ ys: [], h: 0 });
+  // Sprossen neben die Zeilen setzen; der Tag, dessen Zeile die Bildschirmmitte passiert hat, leuchtet.
+  useEffect(() => {
+    const liste = tageRef.current;
+    if (!liste) return;
+    const messen = () => {
+      const oben = liste.getBoundingClientRect().top;
+      const ys = [...liste.querySelectorAll<HTMLElement>('[data-tag]')].map((z) => {
+        const r = z.querySelector('summary')?.getBoundingClientRect() ?? z.getBoundingClientRect();
+        return r.top - oben + r.height / 2;
+      });
+      setSprossen({ ys, h: liste.offsetHeight });
+    };
+    const pruefen = () => {
+      let n = 0;
+      liste.querySelectorAll<HTMLElement>('[data-tag]').forEach((z) => { if (z.getBoundingClientRect().top < window.innerHeight * 0.55) n = Number(z.dataset.tag); });
+      setAktiverTag(n);
+    };
+    messen(); pruefen();
+    const ro = new ResizeObserver(messen); ro.observe(liste);
+    window.addEventListener('scroll', pruefen, { passive: true });
+    return () => { ro.disconnect(); window.removeEventListener('scroll', pruefen); };
+  }, []);
 
   const strukturierteDaten = {
     '@context': 'https://schema.org',
@@ -468,7 +526,9 @@ export default function Challenge() {
               Scrollen mitwandert (Claudia, 24.10.2026: "Icons untereinander ... aufklappen ... Schritt fuer Schritt nach unten"). */}
           {/* Eine ruhige, breite Linie: Auftakt, Tag 1-7, Tag 8 - mit dem frueheren "Ablauf auf einen Blick" darin
               (Claudia, 24.10.2026 20:20: "kombiniere das in die 7-Tage-Linie ... Spalten breiter, genauer beschrieben"). */}
-          <ol className="mt-10 grid list-none gap-3 p-0">
+          <div className="mt-10 grid gap-6 md:grid-cols-[140px_minmax(0,1fr)]">
+          <Helix aktiv={aktiverTag} ys={sprossen.ys} hoehe={sprossen.h} />
+          <ol ref={tageRef} className="grid list-none gap-3 p-0">
             <li className={`grid gap-1 bg-white px-5 py-5 text-midnight-blue sm:grid-cols-[170px_minmax(0,1fr)] sm:gap-6 sm:px-7 ${KACHEL}`}>
               <p className="font-montserrat text-sm font-extrabold">Start<span className="block font-bold text-midnight-blue/65">Mo., 26. Okt. · 19 Uhr</span></p>
               <div className="min-w-0">
@@ -479,8 +539,8 @@ export default function Challenge() {
             {TAGE.map((t, i) => {
               const letzter = i === TAGE.length - 1;
               return (
-                <li key={t.titel}>
-                  <details className={`group bg-white text-midnight-blue ${KACHEL}`}>
+                <li key={t.titel} data-tag={i}>
+                  <details className={`group bg-white text-midnight-blue transition-shadow duration-500 ${KACHEL} ${i === aktiverTag ? 'md:border-[#C9A961] md:shadow-[0_14px_34px_-18px_rgba(201,169,97,0.75)]' : ''}`}>
                     <summary className="grid cursor-pointer list-none gap-1 px-5 py-5 sm:grid-cols-[170px_minmax(0,1fr)_auto] sm:items-center sm:gap-6 sm:px-7 [&::-webkit-details-marker]:hidden">
                       <p className="font-montserrat text-sm font-extrabold">Tag {i + 1}<span className="block font-bold text-midnight-blue/65">{letzter ? 'Mo., 2. Nov. · 19 Uhr' : KURZ.format(freischaltung(heute, i))}</span></p>
                       <div className="min-w-0">
@@ -514,6 +574,7 @@ export default function Challenge() {
               </div>
             </li>
           </ol>
+          </div>
           <p className="mt-5 font-inter text-[15px] text-midnight-blue/80">Jeden Tag: ein Audio-Impuls von mir, ein Workbook und dein 1-Minuten-Video – mit 24 Stunden Zeit.</p>
           <p className="mt-2 font-inter text-[15px] text-midnight-blue/80">Zusatz-Geschenk: der Buchauszug „Entdecke deine Stimmwirkung“ aus dem Brainself-Buch.</p>
           {/* Formular direkt nach dem Wegweiser: dort faellt die Entscheidung (Claudia, 24.10.2026 20:08: "an welcher Stelle optimal"). */}

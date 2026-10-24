@@ -2783,3 +2783,8 @@ html, body { overflow-x: clip; }
 @keyframes ccAbkGlanz { 0%,40% { transform: translateX(-120%); } 80%,100% { transform: translateX(120%); } }
 @keyframes ccAbkPfeil { 0%,100% { transform: translateX(0); } 50% { transform: translateX(6px); } }
 @media (prefers-reduced-motion: reduce) { .cc-abk-knopf, .cc-abk-knopf::after, .cc-abk-pfeil { animation: none; } }
+
+/* Spirale neben den 7 Tagen: sanftes Schweben (Claudia, 24.10.2026). */
+@keyframes ccHelixSchweben { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+.cc-helix { animation: ccHelixSchweben 6s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .cc-helix { animation: none; } }

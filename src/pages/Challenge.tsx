@@ -8,7 +8,6 @@ import SEO from '../components/SEO';
 import Brotkrumen from '../components/Brotkrumen';
 import Stimmwelle from '../components/Stimmwelle';
 import ChallengeAnmeldung from '../components/ChallengeAnmeldung';
-import FotoReihen from '../components/FotoReihen';
 
 /**
  * Die Challenge-Seite - EINE Seite aus zwei (Claudia, 22.09.2026 11:00 UTC: "jetzt hast du von beiden
@@ -194,15 +193,6 @@ const NICHT_FUER = [
 ];
 
 
-/** Goldene Linie links neben den sieben Tagen; der Pfeil wandert beim Scrollen mit (setzt --p). */
-function Schiene() {
-  return (
-    <div className="cc-schiene" aria-hidden="true">
-      <span className="cc-schiene-wort">Sieben Tage – sieben Schritte</span>
-      <span className="cc-schiene-linie"><span className="cc-schiene-pfeil" data-pfeil>➜</span></span>
-    </div>
-  );
-}
 
 /** Unter den Tagen: kein direkter Weg in die Gruppe, nur zurueck zum Eintragen (Claudia, 22.09.2026). */
 /** Mobile Leiste "Kostenfrei dabei sein": erscheint nach dem Kopf, verschwindet, sobald das Formular im Bild ist.
@@ -370,26 +360,6 @@ export default function Challenge() {
   // "nicht 'nach dem Eintragen', sondern 'in der Challenge-Woche' - vorher nicht") - siehe `frei`.
   // Welche Tage sind freigeschaltet? Beim Vorrendern gilt das Bau-Datum, im Browser der echte Tag.
   const frei = TAGE.map((_, i) => heute >= freischaltung(heute, i));
-  const listeRef = useRef<HTMLOListElement>(null);
-  // Pfeil auf der Schiene folgt dem Scrollen: 0 % am Anfang der Liste, 100 % am Ende.
-  useEffect(() => {
-    const liste = listeRef.current;
-    const pfeil = liste?.parentElement?.querySelector<HTMLElement>('[data-pfeil]');
-    if (!liste || !pfeil || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    let raf = 0;
-    const setzen = () => {
-      raf = 0;
-      const r = liste.getBoundingClientRect();
-      const mitte = window.innerHeight * 0.45;
-      const p = Math.min(1, Math.max(0, (mitte - r.top) / Math.max(1, r.height)));
-      pfeil.style.setProperty('--p', `${(p * 100).toFixed(1)}%`);
-    };
-    const onScroll = () => { if (!raf) raf = window.requestAnimationFrame(setzen); };
-    setzen();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-    return () => { window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll); if (raf) window.cancelAnimationFrame(raf); };
-  }, []);
 
   const strukturierteDaten = {
     '@context': 'https://schema.org',
@@ -414,52 +384,40 @@ export default function Challenge() {
 
       {/* Kopf: Foto-Reihen laufen hinter dem Text (Claudia, 22.09.2026 10:38 UTC: "dass diese Kacheln
           von der Webinar-Seite im Hintergrund hier auch laufen"), davor eine deckende Text-Kachel. */}
-      <header className="relative overflow-hidden bg-[#13233F] pt-28 pb-12 sm:pt-32 sm:pb-16">
-        <FotoReihen />
-        <div className="relative z-10 mx-auto max-w-6xl px-6">
-          <div className="mb-6 text-pearl-white/75">
+      {/* Kopf im Stil der Startseite (Claudia, 24.10.2026 20:13: "durch den Hintergrund zu unruhig ... mehr der
+          Hauptseite anpassen ... schick, klar, elegant"): heller Grund, links Text, rechts ihr Video. Keine Foto-Reihen. */}
+      <header className="relative overflow-hidden bg-pearl-white pt-28 pb-14 sm:pt-32 sm:pb-20">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="mb-8 text-midnight-blue/70">
             <Brotkrumen krumen={[{ name: '7 Tage für deine Wirkungskraft' }]} />
           </div>
-          {/* Kopf gekuerzt (Claudia, 24.10.2026 18:51: "der erste Slider eventuell nicht optimal in der Hoehe und
-              Beschriftung, das Logo dafuer ist besser"): links Titel, ein Satz, Datum, Knopf; rechts ihr rundes
-              Challenge-Logo ohne Rahmen. Der Satz "7 Tage. 30 Minuten..." steht direkt darunter im Block "Die Challenge". */}
-          <div className="grid items-center gap-6 rounded-[12px] border border-[#C9A961]/45 bg-[rgba(19,35,63,0.9)] px-6 py-7 text-pearl-white shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)] sm:px-10 sm:py-9 md:grid-cols-[1fr_auto] md:gap-10" style={{ borderTopColor: '#F7E7CE' }}>
-            <div className="min-w-0">
-              <p className="flex items-center gap-3 font-montserrat text-sm font-extrabold uppercase tracking-[0.14em] text-[#C9A961] sm:text-base sm:tracking-[0.22em]">
-                <span aria-hidden="true" className={`cc-linie h-[3px] w-7 rounded-full ${GOLD}`} />
-                Video-Challenge · kostenfrei
-              </p>
-              {/* Die grosse 7 steckt jetzt im Logo daneben, deshalb hier einzeilig statt doppelt. */}
-              <h1 className="mt-5 font-montserrat font-black uppercase leading-[1.05] tracking-tight">
-                <span className="gold-text-animated text-[1.9rem] sm:text-5xl">7 Tage für deine<br />Wirkungskraft</span>
-              </h1>
-              <p className="mt-5 font-cormorant text-2xl italic leading-snug text-[#F7E7CE] sm:text-3xl">– weil Perfektion klickbar ist<br className="hidden sm:block" /> und Persönlichkeit Vertrauen weckt.</p>
-              <p className="mt-4 max-w-xl font-inter text-lg leading-relaxed text-white">
+          <div className="grid items-center gap-10 md:grid-cols-[minmax(0,1fr)_auto] md:gap-16">
+            <div className="min-w-0 text-midnight-blue">
+              <span aria-hidden="true" className={`block h-[3px] w-16 rounded-full ${GOLD}`} />
+              <p className="mt-5 font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] sm:text-sm">Video-Challenge · kostenfrei</p>
+              <h1 className="mt-4 font-montserrat text-[2.4rem] font-extrabold leading-[1.04] tracking-tight sm:text-6xl">7 Tage für deine Wirkungskraft</h1>
+              <p className="mt-5 font-cormorant text-2xl italic leading-snug sm:text-3xl">– weil Perfektion klickbar ist<br className="hidden sm:block" /> und Persönlichkeit Vertrauen weckt.</p>
+              <p className="mt-4 max-w-xl font-inter text-lg leading-relaxed text-midnight-blue/85">
                 Selbstbewusst auftreten – vor Kunden und vor der Kamera. Mit deinem akustischen Fingerabdruck. Weil du ein Unikat bist.
               </p>
               <p className={`mt-6 inline-block rounded-md px-4 py-3 font-montserrat text-sm font-extrabold uppercase tracking-[0.06em] text-midnight-blue sm:text-base ${GOLD}`}>
                 {stand}
               </p>
-              <div className="mt-6 flex flex-wrap items-center gap-4">
-                <a href="#anmelden" className={`inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue transition-transform hover:-translate-y-px ${GOLD}`}>
+              <div className="mt-7 flex flex-wrap items-center gap-4">
+                <a href="#anmelden" className={`inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue shadow-[0_10px_24px_-12px_rgba(19,35,63,0.45)] transition-transform hover:-translate-y-px ${GOLD}`}>
                   Nutze die Video-Challenge →
                 </a>
-                <a href="#programm" className="font-montserrat text-sm font-semibold text-[#C9A961] underline decoration-[#C9A961]/50 underline-offset-4 hover:decoration-[#F7E7CE]">
-                  Die 7 Tage ansehen ↓
+                <a href="#programm" className="inline-flex items-center rounded-full border-2 border-[#C9A961] px-6 py-3.5 font-montserrat text-sm font-bold text-midnight-blue transition-colors hover:bg-white">
+                  Die 7 Tage ansehen
                 </a>
               </div>
-              {/* Vertrauen dort, wo die Entscheidung faellt: ihre belegten Eckdaten aus "Deine Trainerin". */}
-              <p className="mt-6 border-t border-[#C9A961]/30 pt-4 font-inter text-sm text-pearl-white/85">
-                Mit Claudia Conen · 37 Jahre Coach und Trainerin · zu hören bei Sat.1 und RTL
-              </p>
+              <p className="mt-7 font-inter text-sm text-midnight-blue/70">Mit Claudia Conen · 37 Jahre Coach und Trainerin · zu hören bei Sat.1 und RTL</p>
             </div>
-            {/* Claudias Video komplett (Claudia, 24.10.2026 19:26: "dieses Video komplett einbringen"), statt des Logos.
-                Auf der Seite ohne Text auf dem Bild, spielt erst nach Tippen, mit Ton. */}
-            <figure className="order-first mx-auto w-56 sm:w-64 md:order-none md:w-[300px]">
+            {/* Claudias Video komplett (Claudia, 24.10.2026 19:26), darunter der Weg zum Kalender (19:47). */}
+            <figure className="order-first mx-auto w-60 sm:w-72 md:order-none md:w-[320px]">
               <VideoKopf />
-              {/* Claudia, 24.10.2026 19:47: "ruf mich einfach an" bleibt im Video, daneben der Weg zum Kalender. */}
-              <figcaption className="mt-3 text-center">
-                <a href="https://meet.brevo.com/claudia-conen" target="_blank" rel="noopener" className="inline-flex items-center gap-2 rounded-full border border-[#C9A961]/70 px-5 py-2.5 font-montserrat text-sm font-bold text-pearl-white transition-colors hover:border-[#F7E7CE] hover:text-[#F7E7CE]">
+              <figcaption className="mt-4 text-center">
+                <a href="https://meet.brevo.com/claudia-conen" target="_blank" rel="noopener" className="inline-flex items-center gap-2 font-montserrat text-sm font-bold text-midnight-blue underline decoration-[#C9A961] decoration-2 underline-offset-4 hover:text-royal-navy">
                   Ruf mich an – zum Kalender →
                 </a>
               </figcaption>
@@ -512,65 +470,55 @@ export default function Challenge() {
               links bis ganz rechts, das ist ja der finale"); die Inhalte oeffnen sich je an ihrem Tag der Challenge-Woche. */}
           {/* Die sieben Tage untereinander, mit 3-D-Icon, zum Aufklappen; links die goldene Schiene mit Pfeil, der beim
               Scrollen mitwandert (Claudia, 24.10.2026: "Icons untereinander ... aufklappen ... Schritt fuer Schritt nach unten"). */}
-          <div className="mt-9 grid gap-5 md:grid-cols-[34px_minmax(0,1fr)]">
-            <Schiene />
-            <ol ref={listeRef} className="grid list-none gap-3 p-0">
-              {TAGE.map((t, i) => {
-                const letzter = i === TAGE.length - 1;
-                const kopf = (
-                  <>
-                    <span aria-hidden="true" className="flex h-11 w-11 flex-none items-center justify-center rounded-full border border-[#C9A961] font-montserrat text-base font-extrabold text-midnight-blue">{i + 1}</span>
-                    <span className="min-w-0 flex-1">
-                      <span className="flex flex-wrap items-center gap-2">
-                        <span className={`rounded-md px-2.5 py-1 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] ${letzter ? `${GOLD} text-midnight-blue` : 'bg-midnight-blue text-pearl-white'}`}>Tag {i + 1}</span>
-                        <span className="font-montserrat text-xs font-bold text-midnight-blue/70">{letzter ? 'Mo., 2. Nov. · 19 Uhr live im Zoom' : KURZ.format(freischaltung(heute, i))}</span>
-                        {t.feedback && <FeedbackPlakette />}
-                      </span>
-                      <span className="mt-1.5 block font-montserrat text-base font-extrabold uppercase leading-tight tracking-wide sm:text-lg">{t.titel}</span>
-                      <span className="mt-0.5 block font-montserrat text-[11px] font-bold uppercase tracking-[0.14em] text-midnight-blue/70">{t.schwerpunkt}</span>
-                    </span>
-                  </>
-                );
-                return (
-                  <li key={t.titel} style={{ ['--i' as string]: i }} className="cc-stufe">
-                    {/* Jeder Tag laesst sich jederzeit aufklappen: Gedanke und Inhalt sind sichtbar (Claudia, 24.10.2026: "alle
-                        Erklaerungen und persoenlichen Worte entfernt"); Aufgabe und Reflexion oeffnen sich erst an ihrem Tag. */}
-                    <details className={`group bg-white text-midnight-blue ${KACHEL}`}>
-                      <summary className="flex cursor-pointer list-none items-center gap-4 px-4 py-3.5 sm:px-6 [&::-webkit-details-marker]:hidden">
-                        {kopf}
-                        <span className="flex flex-none items-center gap-2 font-montserrat text-xs font-bold text-midnight-blue/70"><span className="hidden sm:inline"><span className="group-open:hidden">Aufklappen</span><span className="hidden group-open:inline">Zuklappen</span></span><span aria-hidden="true" className="inline-block transition-transform group-open:rotate-180">▾</span></span>
-                      </summary>
-                      <div className="border-t border-[#C9A961]/40 px-5 pb-5 pt-4 sm:px-7 sm:pb-6">
-                        {frei[i] ? (
-                          <TagInhalt t={t} />
-                        ) : (
-                          <div className="font-inter text-[15px] leading-relaxed text-midnight-blue">
-                            <p className="font-cormorant text-xl italic leading-snug sm:text-2xl">„{t.einstieg}"</p>
-                            <p className="mt-3">{t.inhalt}</p>
-                            <p className="mt-3 flex items-center gap-2 font-montserrat text-xs font-bold uppercase tracking-[0.12em] text-midnight-blue/70"><Schluessel /> Deine Aufgabe öffnet sich am {KURZ.format(freischaltung(heute, i))}</p>
-                          </div>
-                        )}
+          {/* Eine ruhige, breite Linie: Auftakt, Tag 1-7, Tag 8 - mit dem frueheren "Ablauf auf einen Blick" darin
+              (Claudia, 24.10.2026 20:20: "kombiniere das in die 7-Tage-Linie ... Spalten breiter, genauer beschrieben"). */}
+          <ol className="mt-10 grid list-none gap-3 p-0">
+            <li className={`grid gap-1 bg-white px-5 py-5 text-midnight-blue sm:grid-cols-[170px_minmax(0,1fr)] sm:gap-6 sm:px-7 ${KACHEL}`}>
+              <p className="font-montserrat text-sm font-extrabold">Start<span className="block font-bold text-midnight-blue/65">Mo., 26. Okt. · 19 Uhr</span></p>
+              <div className="min-w-0">
+                <p className="font-montserrat text-lg font-extrabold">Auftakt live im Zoom</p>
+                <p className="mt-1 font-inter text-[15px] leading-relaxed text-midnight-blue/80">Erstes Kennenlernen, deinen Übungsplan für die Woche festlegen und dein Vorher-Video aufnehmen.</p>
+              </div>
+            </li>
+            {TAGE.map((t, i) => {
+              const letzter = i === TAGE.length - 1;
+              return (
+                <li key={t.titel}>
+                  <details className={`group bg-white text-midnight-blue ${KACHEL}`}>
+                    <summary className="grid cursor-pointer list-none gap-1 px-5 py-5 sm:grid-cols-[170px_minmax(0,1fr)_auto] sm:items-center sm:gap-6 sm:px-7 [&::-webkit-details-marker]:hidden">
+                      <p className="font-montserrat text-sm font-extrabold">Tag {i + 1}<span className="block font-bold text-midnight-blue/65">{letzter ? 'Mo., 2. Nov. · 19 Uhr' : KURZ.format(freischaltung(heute, i))}</span></p>
+                      <div className="min-w-0">
+                        <p className="flex flex-wrap items-center gap-2 font-montserrat text-lg font-extrabold">{t.titel}{t.feedback && <FeedbackPlakette />}</p>
+                        <p className="mt-1 font-inter text-[15px] leading-relaxed text-midnight-blue/80">
+                          {letzter ? 'Live im Zoom: deine Chance, vor allen Teilnehmern zu pitchen – freiwillig. Netzwerken untereinander und deine Auszeichnung fürs Durchziehen.' : t.schwerpunkt}
+                        </p>
                       </div>
-                    </details>
-                  </li>
-                );
-              })}
-              {/* Tag 8 (Claudia, 24.10.2026: Werbetag in der Gruppe am Dienstag danach). */}
-              <li className="cc-stufe">
-                <div className={`flex items-center gap-4 bg-pearl-white px-4 py-3.5 text-midnight-blue sm:px-6 ${KACHEL}`}>
-                  <span aria-hidden="true" className="flex h-11 w-11 flex-none items-center justify-center rounded-full border border-[#C9A961] font-montserrat text-base font-extrabold text-midnight-blue">8</span>
-                  <span className="min-w-0 flex-1">
-                    <span className="flex flex-wrap items-center gap-2">
-                      <span className="rounded-md bg-midnight-blue px-2.5 py-1 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-pearl-white">Zusätzlich · Tag 8</span>
-                      <span className="font-montserrat text-xs font-bold text-midnight-blue/70">Di., 3. Nov.</span>
-                    </span>
-                    <span className="mt-1.5 block font-montserrat text-base font-extrabold uppercase leading-tight tracking-wide sm:text-lg">Netzwerken</span>
-                    <span className="mt-0.5 block font-montserrat text-[11px] font-bold uppercase tracking-[0.14em] text-midnight-blue/70">Dein Werbetag in der Gruppe · stell dein Business vor</span>
-                  </span>
-                </div>
-              </li>
-            </ol>
-          </div>
+                      <span className="font-montserrat text-xs font-bold text-midnight-blue/60"><span className="group-open:hidden">Mehr ↓</span><span className="hidden group-open:inline">Weniger ↑</span></span>
+                    </summary>
+                    <div className="border-t border-[#C9A961]/40 px-5 pb-5 pt-4 sm:px-7 sm:pb-6 sm:pl-[218px]">
+                      {frei[i] ? (
+                        <TagInhalt t={t} />
+                      ) : (
+                        <div className="font-inter text-[15px] leading-relaxed text-midnight-blue">
+                          <p className="font-cormorant text-xl italic leading-snug sm:text-2xl">„{t.einstieg}"</p>
+                          <p className="mt-3">{t.inhalt}</p>
+                          <p className="mt-3 flex items-center gap-2 font-montserrat text-xs font-bold uppercase tracking-[0.12em] text-midnight-blue/70"><Schluessel /> Deine Aufgabe öffnet sich am {KURZ.format(freischaltung(heute, i))}</p>
+                        </div>
+                      )}
+                    </div>
+                  </details>
+                </li>
+              );
+            })}
+            <li className={`grid gap-1 bg-white px-5 py-5 text-midnight-blue sm:grid-cols-[170px_minmax(0,1fr)] sm:gap-6 sm:px-7 ${KACHEL}`}>
+              <p className="font-montserrat text-sm font-extrabold">Tag 8 · zusätzlich<span className="block font-bold text-midnight-blue/65">Di., 3. Nov.</span></p>
+              <div className="min-w-0">
+                <p className="font-montserrat text-lg font-extrabold">Netzwerken</p>
+                <p className="mt-1 font-inter text-[15px] leading-relaxed text-midnight-blue/80">Dein Werbetag in der Gruppe: Stell dein Business vor.</p>
+              </div>
+            </li>
+          </ol>
+          <p className="mt-5 font-inter text-[15px] text-midnight-blue/80">Jeden Tag: ein Audio-Impuls von mir, ein Workbook und dein 1-Minuten-Video – mit 24 Stunden Zeit.</p>
           {/* Formular direkt nach dem Wegweiser: dort faellt die Entscheidung (Claudia, 24.10.2026 20:08: "an welcher Stelle optimal"). */}
           <div id="anmeldung" className="mt-10">
             <ChallengeAnmeldung start={startKurz} />

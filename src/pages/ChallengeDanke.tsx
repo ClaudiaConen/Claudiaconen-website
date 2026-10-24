@@ -100,7 +100,7 @@ export default function ChallengeDanke() {
       <section className="bg-pearl-white py-14 sm:py-20" aria-labelledby="zoom-titel">
         <div className="mx-auto grid max-w-4xl items-center gap-6 px-6 sm:grid-cols-[minmax(0,1fr)_auto]">
           <div className="min-w-0">
-            <p className="font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] text-midnight-blue/70">Schritt 2 · Auftakt</p>
+            <p className="font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] text-midnight-blue/70">Danach · dein Auftakt</p>
             <h2 id="zoom-titel" className="mt-3 font-montserrat text-2xl font-extrabold sm:text-3xl">Montag, 26. Oktober, 19 Uhr, live im Zoom</h2>
             <p className="mt-2 font-inter text-base">Speichere dir den Link gleich.</p>
           </div>

@@ -1,111 +1,80 @@
 import ZielgruppenSeite, { ZielgruppenInhalt } from '../components/ZielgruppenSeite';
 
 /**
- * Tuer 3: Coaches und Trainer. Das 1:1 ist laut Strategie das
- * Referenzprodukt und liefert die Geschichten, die Motor A auf der Buehne
- * verkauft.
- *
- * Preis bewusst OFFEN. Die Marketingstrategie sagt dazu ausdruecklich "von
- * Claudia zu setzen", die Angebotstreppe nennt nur einen Entwurf von 5.000
- * bis 7.500 Euro. Bei einem Betrag dieser Groesse ist eine geratene Zahl
- * auf einer oeffentlichen Seite nicht vertretbar.
- *
- * Der Kritiker-Check verlangt fuer dieses Format ein messbares oder
- * sichtbares Ergebnis. Deshalb steht am Ende ein Ergebnis, das man vorzeigen
- * kann, und nicht nur ein Gefuehl.
+ * Deine Abkuerzung - 1:1-Coaching, 90 Minuten (Claudia, 24.10.2026: "wir koennen die Mentoring-Seite nutzen und
+ * anpassen"; "erfinde keine Sprueche"). Texte nur aus drei Quellen: Claudias Ueberschrift vom 24.10.2026 13:05,
+ * ihr Satz zum Treffen vor Ort (13:04) und das PDF "Website-Texte & Launchplan" (Kapitel 4), ein Ergebnisversprechen
+ * entschaerft. Die fruehere Zwoelf-Wochen-Einzelbegleitung (Preis im Erstgespraech) stand bis hierher auf dieser Seite.
+ * Preis wie in Tentary: 180 EUR netto fuer 90 Minuten. Das 3er-Paket wird nicht gezeigt.
  */
+const TENTARY_1ZU1 = 'https://umsatzstimme-claudiaconen.mytentary.com/p/zJYlWu';
+
 const INHALT: ZielgruppenInhalt = {
   pfad: '/1-zu-1-mentoring',
-  wer: 'Coaches & Trainer',
-  frage: 'Warum sollte man dich buchen – und nicht den nächsten Experten?',
+  wer: '1:1-Coaching mit Claudia',
+  frage: 'Du weißt, was du kannst. Nimm die Abkürzung. Und zeig es.',
   vorspann:
-    'Kompetenz allein macht noch keine unverwechselbare Marke. Entscheidend ist, ob Menschen erkennen, wofür du stehst, dir vertrauen und dich im Kopf behalten.',
+    'Stell dir deinen nächsten Auftritt vor. Du stehst da, ruhig und klar, und spürst: Sie hören dir zu. Genau dahin arbeiten wir – gezielt an dem, was dich gerade noch zurückhält. Ich höre, was andere überhören. Du nimmst den direkten Weg.',
 
-  problemTitel: 'Dein Problem ist nicht Können. Es ist Vergleichbarkeit.',
+  problemTitel: 'Kein Standardprogramm. Keine Schablone. Wir arbeiten an deinem echten Anliegen.',
   problemAbsaetze: [
-    'Du bist gut in dem, was du tust. Das bestreitet niemand. Nur steht neben dir jemand, der dasselbe verspricht, und für den, der bucht, sieht beides gleich aus.',
-    'Je mehr Texte, Bilder und Angebote auf Knopfdruck entstehen, desto ähnlicher wird alles. Perfektion ist klickbar geworden. Was nicht klickbar ist, bist du.',
-    'Die Frage ist also nicht, wie du besser wirst. Sie lautet, woran man dich erkennt, wenn dein Name nicht danebensteht.',
+    'Du brauchst keine zwölf Wochen, um ein konkretes Problem anzupacken. Manchmal brauchst du jemanden, der genau hinhört, die entscheidenden Fragen stellt und mit dir auf den Punkt bringt, was bisher noch nicht sitzt.',
+    'Du hast einen wichtigen Auftritt vor dir? Du möchtest deinen Elevator Pitch schärfen? Du brauchst eine Keynote, die deine Botschaft trägt? Oder du willst in Gesprächen souveräner auftreten?',
   ],
 
-  angebotName: 'Voice-to-Brain® Intensiv, zwölf Wochen',
-  angebotZeile:
-    'Eine Einzelbegleitung über zwölf Wochen. Am Ende steht kein gutes Gefühl, sondern etwas, das du vorzeigen kannst.',
-  angebotPreis: 'Preis im Erstgespräch',
-  angebotPreisHinweis:
-    'Der Umfang wird vorher gemeinsam festgelegt. Ohne Gespräch wäre jede Zahl geraten.',
+  angebotName: 'Deine Abkürzung. 1:1 mit Claudia',
+  angebotZeile: '90 Minuten, nur du und ich. Online per Zoom.',
+  angebotPreis: '180 € zzgl. MwSt. · 214,20 € inkl. MwSt.',
+  angebotPreisHinweis: 'Den Termin wählst du nach der Buchung in meinem Kalender.',
   angebotPunkte: [
-    'Zwölf Wochen, feste Termine, dazwischen Arbeit an deinen echten Auftritten',
-    'Die drei Phasen der Methode: erkennen, formen, wirken',
-    'Am Ende ein vorzeigbares Ergebnis: eine fertige Keynote, ein sitzender Pitch oder ein Kameraauftritt',
-    'Deine Positionierung in einem Satz, den du selbst überzeugend sagen kannst',
+    'Dein Elevator Pitch: verständlich machen, wer du bist, wofür du stehst und warum das relevant ist.',
+    'Deine Keynote oder Präsentation: einen roten Faden entwickeln, Geschichten gezielt einsetzen und deine Kernbotschaft herausarbeiten.',
+    'Deine Stimme und Präsenz: Sprechtempo, Pausen, Betonung und Haltung bewusst einsetzen.',
+    'Deine persönliche Wirkung: erkennen, was bereits überzeugt und was deine Kompetenz noch verdeckt.',
+    'Deine Kommunikation mit KI: Ideen strukturieren, Varianten entwickeln und Texte verdichten, ohne dass deine persönliche Stimme verloren geht.',
   ],
 
-  ablaufTitel: 'Die drei Phasen',
+  ablaufTitel: 'So läuft die Zusammenarbeit ab',
   ablauf: [
-    {
-      schritt: 'Erkennen',
-      text:
-        'Klarheit und Geschichte. Woher dein Wert kommt, und welche deiner Erfahrungen dafür tragen. Das ist der unbequemste Teil und der wichtigste.',
-    },
-    {
-      schritt: 'Formen',
-      text:
-        'Botschaft, Stimme, Präsenz. Aus dem, was du erkannt hast, wird etwas, das andere hören und behalten.',
-    },
-    {
-      schritt: 'Wirken',
-      text:
-        'Brücke und Wirkung. Wie du KI nutzt, ohne austauschbar zu werden, und woran du merkst, dass es ankommt.',
-    },
-    {
-      schritt: 'Danach',
-      text:
-        'Du hast ein fertiges Stück Arbeit in der Hand. Kein Zertifikat, sondern etwas, das du buchstäblich vorzeigen kannst.',
-    },
+    { schritt: 'Wir klären dein Ziel', text: 'Was möchtest du erreichen? Was steht an? Was soll nach unserer Zusammenarbeit anders sein?' },
+    { schritt: 'Wir arbeiten an deinem konkreten Fall', text: 'Du bekommst direktes, ehrliches und wertschätzendes Feedback. Wir formulieren um, strukturieren neu, trainieren und probieren aus.' },
+    { schritt: 'Dein nächster Schritt', text: 'Du weißt, was du verändern kannst, worauf du achten solltest und wie du deinen nächsten Schritt umsetzt.' },
   ],
 
-  brotkrumen: [
-    { name: 'Mentoring' },
-  ],
+  brotkrumen: [{ name: '3 Wege', ziel: '/3-wege' }, { name: 'Deine Abkürzung' }],
 
   fragen: [
     {
       frage: 'Was kostet das?',
-      antwort:
-        'Das wird im Erstgespräch festgelegt, weil der Umfang sich unterscheidet. Es handelt sich um eine Begleitung über zwölf Wochen im vierstelligen Bereich, nicht um ein Paket von der Stange. Wer eine schnelle günstige Lösung sucht, ist mit dem Online-Kurs oder einem Workshoptag besser bedient.',
+      antwort: '180 € zzgl. MwSt. (214,20 € inkl. MwSt.) für 90 Minuten.',
     },
     {
-      frage: 'Ist das Stimmtraining?',
+      frage: 'Reicht ein Termin?',
       antwort:
-        'Nein. Die Stimme ist der Zugang, die Persönlichkeit ist das Ergebnis. Über die Stimme wird erkennbar, wie jemand zu sich steht. Daran wird gearbeitet, nicht an Tonhöhe und Atemtechnik allein.',
+        'Du kannst einen einzelnen Termin buchen, wenn du gezielte Unterstützung brauchst. Wenn dein Anliegen umfangreicher ist, klären wir in einem persönlichen Gespräch, welches Format sinnvoll ist und wie viele Termine du benötigst.',
     },
     {
-      frage: 'Woher weiß ich, dass die Methode wissenschaftlich fundiert ist?',
-      antwort:
-        'Sie ist Erfahrungswissen aus über siebenunddreißig Jahren Arbeit mit Stimme, Bühne und Menschen. Wissenschaftliche Versprechen werden hier keine gemacht. Was zählt, ist, ob sich dein Auftritt verändert — und das hörst du selbst, wenn du deine Aufnahme aus Woche eins neben die aus Woche zwölf legst.',
+      frage: 'Geht das auch vor Ort?',
+      antwort: 'Oder an einem Ort deiner Wahl. Lass uns auf einen Kaffee treffen und herausfinden, wo du dich am wohlsten fühlst.',
     },
     {
-      frage: 'Ich habe wenig Zeit. Wie viel muss ich einplanen?',
-      antwort:
-        'Feste Termine über zwölf Wochen, dazwischen Arbeit an Auftritten, die du ohnehin hast. Es kommt also nichts zusätzlich auf den Kalender, es wird anders vorbereitet.',
+      frage: 'Was soll ich mitbringen?',
+      antwort: 'Ein Thema, an dem dir etwas liegt: dein Angebot, eine Präsentation oder ein Gespräch, das bald ansteht.',
     },
   ],
 
-  schrittTitel: 'Erst reden, dann entscheiden',
-  schrittText:
-    'Ein Gespräch, in dem geklärt wird, woran es bei dir wirklich hakt. Wenn etwas anderes besser passt als zwölf Wochen Einzelbegleitung, hörst du das auch.',
-  schrittKnopf: 'Erstgespräch vereinbaren',
-  schrittZiel: '/termin-buchen',
+  schrittTitel: 'Du entscheidest, wie intensiv du arbeiten möchtest',
+  schrittText: 'Buche deine 90 Minuten und wähle danach deinen Termin.',
+  schrittKnopf: 'Meinen Termin buchen',
+  schrittZiel: TENTARY_1ZU1,
 
-  // Kopfbild (22.09.2026): Claudia Conen lächelt mit dem Telefon in der Hand
-  bild: '/seiten/am-telefon.webp',
-  bildAlt: 'Claudia Conen lächelt mit dem Telefon in der Hand',
+  bild: '/a27/p/angebote/mentoring-tisch.webp',
+  bildAlt: 'Claudia Conen im Gespräch am Tisch',
   bildQuer: true,
 
-  seoTitel: '1:1-Mentoring und Rhetorik-Coaching in Witten und Köln | Claudia Conen',
+  seoTitel: '1:1-Coaching mit Claudia Conen: Pitch, Rede, Video, Kundengespräch',
   seoText:
-    'Einzelbegleitung über zwölf Wochen für Coaches und Trainer, die unverwechselbar werden wollen. Positionierung, Persönlichkeit, Vertrauen, Kundengewinnung.',
+    '1:1-Coaching online, 90 Minuten: Elevator Pitch, Keynote, Stimme und persönliche Wirkung. Mit Claudia Conen, Expertin für menschliche Wirkungskraft im KI-Zeitalter.',
 };
 
 export default function EinsZuEinsMentoring() {

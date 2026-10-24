@@ -34,7 +34,7 @@ const SPALTEN: { titel: string; links: { label: string; href: string; extern?: b
     titel: 'Angebote',
     links: [
       { label: 'Speaker-Ausbildung', href: '/speaker-ausbildung' },
-      { label: '1:1-Mentoring', href: '/1-zu-1-mentoring' },
+      { label: '1:1-Coaching', href: '/1-zu-1-mentoring' },
       { label: 'Premium-Workshop', href: '/premiumangebote' },
       { label: 'Voice to Impact', href: 'https://voice-to-impact-conv-h10m.bolt.host', extern: true },
       { label: 'Voice-to-Brain Mentoring', href: 'https://claudia-conen-voice-ui2e.bolt.host', extern: true },

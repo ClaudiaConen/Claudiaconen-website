@@ -807,9 +807,16 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
             </p>
             {/* Markenknopf statt eigener Bauart. s.knopf entfaellt damit fuer diesen Knopf -
                 der Goldverlauf mit nachtblauer Schrift liest sich auf hellem UND dunklem Grund. */}
-            <Link to={inhalt.schrittZiel} className="cc-knopf mt-8">
-              {inhalt.schrittKnopf}
-            </Link>
+            {/* Externes Ziel (z. B. Tentary-Kasse) als echter Link, interne Ziele weiter ueber den Router. */}
+            {inhalt.schrittZiel.startsWith('http') ? (
+              <a href={inhalt.schrittZiel} target="_blank" rel="noopener" className="cc-knopf mt-8">
+                {inhalt.schrittKnopf}
+              </a>
+            ) : (
+              <Link to={inhalt.schrittZiel} className="cc-knopf mt-8">
+                {inhalt.schrittKnopf}
+              </Link>
+            )}
           </div>
         </section>
       </main>

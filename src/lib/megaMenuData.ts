@@ -265,7 +265,7 @@ export const megaMenuItems: MegaMenuItem[] = [
           bildAlt: 'Claudia Conen mit Laptop in einer Lounge',
         },
         tiles: [
-          { name: '1:1 Mentoring', desc: 'Über mehrere Monate begleitet', href: '/1-zu-1-mentoring', icon: Compass },
+          { name: '1:1-Coaching', desc: 'Deine Abkürzung · 90 Minuten', href: '/1-zu-1-mentoring', icon: Compass },
           { name: 'Gold-Training (90 Minuten)', desc: 'Eine Sitzung, ein Anliegen', href: '/mentoring-gold', icon: Star },
           { name: 'Marke & eigene Sprache', desc: 'Was Sie sagen, wenn niemand vorgibt wie', href: '/mentoring-transformation', icon: Sun },
           { name: 'Wo immer Sie sind', desc: 'Dieselbe Arbeit über Bildschirm', href: '/mentoring-online', icon: Globe },

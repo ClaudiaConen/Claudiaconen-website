@@ -691,7 +691,7 @@ export default function Challenge() {
         <div className="mx-auto max-w-6xl px-6 text-center">
           <p className="font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] text-midnight-blue/70">Du willst nicht warten?</p>
           <p className="mx-auto mt-3 max-w-xl font-montserrat text-2xl font-extrabold leading-snug text-midnight-blue sm:text-3xl">Abkürzung und Vertiefung.</p>
-          <a href="/angebote" className={`cc-abk-knopf mt-5 inline-flex items-center gap-3 rounded-full px-9 py-5 font-montserrat text-lg font-extrabold text-midnight-blue sm:text-xl ${GOLD}`}>
+          <a href="/3-wege" className={`cc-abk-knopf mt-5 inline-flex items-center gap-3 rounded-full px-9 py-5 font-montserrat text-lg font-extrabold text-midnight-blue sm:text-xl ${GOLD}`}>
             Nutze die Abkürzung – 3 Wege zum Ziel <span aria-hidden="true" className="cc-abk-pfeil">→</span>
           </a>
         </div>

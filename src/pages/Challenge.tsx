@@ -264,7 +264,7 @@ const NICHT_FUER = [
 function Schiene() {
   return (
     <div className="cc-schiene" aria-hidden="true">
-      <span className="cc-schiene-wort">Deine sieben Tage</span>
+      <span className="cc-schiene-wort">Sieben Tage – sieben Schritte</span>
       <span className="cc-schiene-linie"><span className="cc-schiene-pfeil" data-pfeil>➜</span></span>
     </div>
   );
@@ -501,7 +501,7 @@ export default function Challenge() {
               <h2 id="programm-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">
                 {/* Kein Ergebnisversprechen (Claudia, 24.10.2026: "du bleibst im Kopf ... ist zu hoch gegriffen"). */}
                 Du wirkst immer. Die Frage ist nur: wie?
-                <span className="mt-1 block underline decoration-[#C9A961] decoration-[4px] underline-offset-[6px]">Sieben Schritte. Wir arbeiten dran.</span>
+                <span className="mt-1 block underline decoration-[#C9A961] decoration-[4px] underline-offset-[6px]">Sieben Tage – sieben Schritte.</span>
               </h2>
               <p className="mt-4 max-w-2xl font-inter text-lg text-midnight-blue">
                 Jeden Tag ein Audio-Impuls von mir mit einem Gedanken, in dem du dich wiedererkennst, und einer konkreten Aufgabe. Die Inhalte öffnen sich in der Challenge-Woche, jeden Tag einer.

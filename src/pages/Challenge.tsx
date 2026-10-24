@@ -231,6 +231,28 @@ function MobilLeiste() {
   );
 }
 
+/** Kopf-Video: erst nur das Startbild mit kleinem Abspielknopf in der Ecke (nie auf dem Gesicht, Claudias Regel),
+ *  nach dem Tippen das Video mit Ton und Steuerung. So verdeckt keine Steuerleiste den Satz auf dem Startbild. */
+function VideoKopf() {
+  const [an, setAn] = useState(false);
+  const cls = 'block aspect-[9/16] w-full rounded-[12px] border border-[#C9A961]/60 bg-[#13233F] object-cover shadow-[0_24px_60px_-24px_rgba(0,0,0,0.8)]';
+  if (an) {
+    return (
+      <video controls autoPlay playsInline width={540} height={960} poster="/challenge/video-claudia-start.jpg" className={cls} aria-label="Video: Claudia Conen über die erste Emotion im Gespräch">
+        <source src="/challenge/video-claudia.mp4" type="video/mp4" />
+      </video>
+    );
+  }
+  return (
+    <button type="button" onClick={() => setAn(true)} className="group relative block w-full" aria-label="Video abspielen: Claudia Conen über die erste Emotion im Gespräch, 1 Minute 38">
+      <img src="/challenge/video-claudia-start.jpg" alt="" width={540} height={960} className={cls} />
+      <span aria-hidden="true" className={`absolute right-3 top-3 flex items-center gap-2 rounded-full px-3.5 py-2 font-montserrat text-xs font-extrabold text-midnight-blue shadow-lg transition-transform group-hover:scale-105 ${GOLD}`}>
+        <span className="inline-block h-0 w-0 border-y-[6px] border-l-[9px] border-y-transparent border-l-[#13233F]" /> 1:38
+      </span>
+    </button>
+  );
+}
+
 function EintragBlock() {
   return (
     <div className={`mt-3 grid items-center gap-5 rounded-[10px] px-5 py-5 text-midnight-blue sm:grid-cols-[minmax(0,1fr)_auto] sm:px-7 ${FLAECHE}`}>
@@ -443,7 +465,17 @@ export default function Challenge() {
                 Mit Claudia Conen · 37 Jahre Coach und Trainerin · zu hören bei Sat.1 und RTL
               </p>
             </div>
-            <img src="/challenge/logo-challenge.webp" alt="Logo: 7 Tage Unverwechselbar – Video-Challenge mit Claudia Conen" width={720} height={720} className="order-first mx-auto w-48 [mask-image:radial-gradient(circle_closest-side,#000_90%,transparent_114%)] sm:w-60 md:order-none md:w-[340px]" />
+            {/* Claudias Video komplett (Claudia, 24.10.2026 19:26: "dieses Video komplett einbringen"), statt des Logos.
+                Startbild nach ihrer Regel (1,5 s vorn im Video und als Poster), spielt erst nach Tippen, mit Ton. */}
+            <figure className="order-first mx-auto w-56 sm:w-64 md:order-none md:w-[300px]">
+              <VideoKopf />
+              {/* Claudia, 24.10.2026 19:47: "ruf mich einfach an" bleibt im Video, daneben der Weg zum Kalender. */}
+              <figcaption className="mt-3 text-center">
+                <a href="https://meet.brevo.com/claudia-conen" target="_blank" rel="noopener" className="inline-flex items-center gap-2 rounded-full border border-[#C9A961]/70 px-5 py-2.5 font-montserrat text-sm font-bold text-pearl-white transition-colors hover:border-[#F7E7CE] hover:text-[#F7E7CE]">
+                  Ruf mich an – zum Kalender →
+                </a>
+              </figcaption>
+            </figure>
           </div>
         </div>
       </header>
@@ -504,7 +536,7 @@ export default function Challenge() {
                 Jeden Tag ein Audio-Impuls von mir mit einem Gedanken, in dem du dich wiedererkennst, und einer konkreten Aufgabe. Die Inhalte öffnen sich in der Challenge-Woche, jeden Tag einer.
               </p>
             </div>
-            <Kopfbild datei="programm" alt="Claudia Conen im hellblauen Blazer, Porträt" />
+            <Kopfbild datei="challenge-handy" alt="Claudia Conen nimmt sich mit dem Handy auf" />
           </div>
           {/* Die finale Kachel geht ueber die volle Breite (Claudia, 22.09.2026 13:05 UTC: "so breit wie drei ... von ganz
               links bis ganz rechts, das ist ja der finale"); die Inhalte oeffnen sich je an ihrem Tag der Challenge-Woche. */}

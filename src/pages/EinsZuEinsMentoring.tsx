@@ -86,8 +86,8 @@ const INHALT: ZielgruppenInhalt = {
   schrittKnopf: 'Meinen Termin buchen',
   schrittZiel: TENTARY_1ZU1,
 
-  bild: '/a27/p/angebote/mentoring-tisch.webp',
-  bildAlt: 'Claudia Conen im Gespräch am Tisch',
+  bild: '/a27/p/angebote/einzel-coaching.webp',
+  bildAlt: 'Claudia Conen im 1:1-Gespräch mit einer Kundin',
   bildQuer: true,
 
   seoTitel: '1:1-Coaching mit Claudia Conen: Pitch, Rede, Video, Kundengespräch',

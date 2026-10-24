@@ -689,12 +689,12 @@ export default function Challenge() {
         <div className="mx-auto max-w-6xl px-6">
           <div className="grid items-center gap-8 sm:grid-cols-[minmax(0,1fr)_auto] sm:gap-12">
             <div>
-              <Kicker text="Der Schritt danach" hell />
+              <Kicker text="3 Wege zu deiner Wirkung" hell />
               <h2 id="angebot-titel" className="mt-5 max-w-3xl font-montserrat text-4xl font-extrabold leading-[1.08] text-midnight-blue sm:text-5xl">
-                Dein nächster Schritt zu mehr <span className="underline decoration-[#C9A961] decoration-[5px] underline-offset-[8px]">Wirkung.</span>
+                Was brauchst du wirklich, um zu <span className="underline decoration-[#C9A961] decoration-[5px] underline-offset-[8px]">performen?</span>
               </h2>
               <p className="mt-6 font-inter text-xl leading-relaxed text-midnight-blue">
-                Ein Thema gezielt lösen.<br />Oder deine Wirkung in zwölf Wochen vertiefen.
+                Von der Challenge zur Wirkungskraft, die verinnerlicht wird.
               </p>
             </div>
             <figure className={`m-0 aspect-[4/5] w-[clamp(200px,30vw,330px)] justify-self-center overflow-hidden border-2 border-[#C9A961] shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)] sm:justify-self-end ${KACHEL}`}>
@@ -710,7 +710,7 @@ export default function Challenge() {
           </figure>
 
           {/* "Zwei Wege fuer dich: 1. Die Abkuerzung, 2. Performance dauerhaft, 3. Reden wir?" (Claudia, 23.10.2026 18:20) */}
-          <h3 className="mt-12 text-center font-montserrat text-2xl font-extrabold text-midnight-blue sm:text-3xl">Zwei Wege für dich</h3>
+          <h3 className="mt-12 text-center font-montserrat text-2xl font-extrabold text-midnight-blue sm:text-3xl">Drei Wege für dich</h3>
           <div className="mt-6 grid items-stretch gap-6 md:grid-cols-2">
             {/* Karte 1: Die Abkuerzung */}
             <div className={`flex flex-col bg-white p-7 text-midnight-blue sm:p-9 ${KACHEL}`}>

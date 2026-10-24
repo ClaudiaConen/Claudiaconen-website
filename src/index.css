@@ -2788,3 +2788,8 @@ html, body { overflow-x: clip; }
 @keyframes ccHelixSchweben { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 .cc-helix { animation: ccHelixSchweben 6s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) { .cc-helix { animation: none; } }
+
+/* Sanft einblendende Zeilen (Challenge, Claudia 24.10.2026): nacheinander, ohne Sprung. */
+.js .cc-r .cc-zeile { opacity: 0; transform: translateY(10px); }
+.js .cc-r.da .cc-zeile { opacity: 1; transform: none; transition: opacity 1s ease, transform 1s ease; transition-delay: calc(0.3s + var(--z, 0) * 0.55s); }
+@media (prefers-reduced-motion: reduce) { .js .cc-r .cc-zeile { opacity: 1; transform: none; transition: none; } }

@@ -529,21 +529,19 @@ export default function Challenge() {
           Reihenfolge: Kopf -> Kennst du das? -> Loesung -> Sieben Tage -> Das bekommst du -> Fuer wen -> Trainerin -> Fragen -> Anmeldung. */}
       {/* Abschnitt "Kennst du das? / Du weisst so viel" entfernt (Claudia, 24.10.2026 20:02: "frei erfunden, kann ganz raus"). */}
 
+      {/* Claudias Text als sanft einblendende Stufen statt der drei weissen Kaestchen (Claudia, 24.10.2026 22:28:
+          "animierte Schrift, nicht ballermaessig, die sich leicht einblendet"). */}
       <Abschnitt id="loesung" className="bg-[#13233F] py-14 text-pearl-white sm:py-20" label="loesung-titel">
-        <div className="mx-auto max-w-6xl px-6 text-center">
-          <Kicker text="Die Challenge" />
-          {/* Einleitung nach Claudias Diktat (Vinci-App, 24.10.2026 21:46): eine Woche, 30 Minuten am Tag, Selbsterkenntnis,
-              Selbstvertrauen, Vertrauen - "Vertrauen ist das Ganze". Wartet auf ihr Ja zum Wortlaut. */}
-          <h2 id="loesung-titel" className="mx-auto mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">Sieben Tage. 30 Minuten am Tag. Eine Woche lang für deine Wirkung.</h2>
-          <p className="mx-auto mt-4 max-w-2xl font-inter text-lg leading-relaxed text-pearl-white/85">Selbsterkenntnis, Selbstvertrauen und Vertrauen aufbauen. Denn Vertrauen ist das Ganze.</p>
-          <div className="mx-auto mt-9 grid max-w-4xl gap-4 sm:grid-cols-3">
-            {[['7 Tage', 'jeden Tag ein Schritt, ein Audio-Impuls, ein Video'], ['30 Minuten', 'am Tag, wann es dir passt'], ['Kostenfrei', 'Kein Verkaufsdruck · Start und Abschluss live im Zoom']].map(([a, b]) => (
-              <div key={a} className={`bg-pearl-white px-5 py-6 text-midnight-blue ${KACHEL}`}>
-                <p className="font-montserrat text-3xl font-black">{a}</p>
-                <p className="mt-1 font-inter text-[15px] text-midnight-blue/80">{b}</p>
-              </div>
+        <div className="mx-auto max-w-4xl px-6 text-center">
+          <div className="flex justify-center"><Kicker text="Die sieben Tage" /></div>
+          <h2 id="loesung-titel" className="cc-zeile mx-auto mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl" style={{ ['--z' as string]: 0 }}>
+            Du entscheidest: eine Minute bis 30 Minuten am Tag – investiert in deine Wirkungskraft.
+          </h2>
+          <ol className="mx-auto mt-10 grid max-w-2xl list-none gap-3 p-0 font-cormorant text-2xl italic leading-snug sm:text-3xl">
+            {['Aus der Selbsterkenntnis', 'entsteht Selbstbewusstsein,', 'für Selbstwirksamkeit,', 'für Selbstvertrauen –', 'um Vertrauen bei Kunden zu wecken.'].map((z, k) => (
+              <li key={z} className={`cc-zeile ${k === 4 ? 'not-italic font-montserrat text-xl font-extrabold text-[#C9A961] sm:text-2xl' : 'text-pearl-white/90'}`} style={{ ['--z' as string]: k + 1 }}>{z}</li>
             ))}
-          </div>
+          </ol>
         </div>
       </Abschnitt>
 
@@ -677,8 +675,9 @@ export default function Challenge() {
             <Kicker text="Deine Trainerin" hell />
             {/* Nur Claudias eigene Worte (Claudia, 24.10.2026: "das Warum ... auf der Über-mich-Seite holen und nicht irgendwas
                 schreiben"): Positionierung vom 09.10.2026 + Saetze aus UeberMich.tsx, wortgleich. */}
-            <h2 id="warum" className="mt-5 font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">Die Brücke zwischen Mensch und Maschine.</h2>
-            <p className="mt-3 font-montserrat text-lg font-bold text-midnight-blue/80">Deine Persönlichkeit schafft Vertrauen. Vertrauen gewinnt Kunden.</p>
+            {/* "Bruecke zwischen Mensch und Maschine" raus (Claudia, 24.10.2026 22:28: "mehr ueber Claudia Conen, genannt die Umsatzstimme"). */}
+            <h2 id="warum" className="mt-5 font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">Claudia Conen,<br />genannt „die Umsatzstimme“</h2>
+            <p className="mt-3 font-montserrat text-lg font-bold text-midnight-blue/80">Expertin für menschliche Wirkungskraft im KI-Zeitalter.</p>
             <p className="mt-7 border-l-4 border-[#C9A961] pl-5 font-cormorant text-3xl italic leading-snug sm:text-4xl">
               Alles, was wir erleben, formt uns. Mich hat es ganze 39 Jahre gekostet, um zu erkennen, warum ich diesen Job mache und warum ich so gut darin bin.
             </p>

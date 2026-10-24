@@ -306,7 +306,7 @@ function VideoKopf() {
         <img src="/challenge/video-claudia-poster.jpg" alt="" width={540} height={960} className={cls} />
       </button>
       {/* Knopf unter dem Video (Claudias Liste 24.10.2026 22:58, Punkt 2), gleiche Bauart wie die Knoepfe links. */}
-      <button type="button" onClick={() => setAn(true)} className={`mt-4 inline-flex w-full items-center justify-center gap-2.5 rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue shadow-[0_10px_24px_-12px_rgba(19,35,63,0.45)] transition-transform hover:-translate-y-px ${GOLD}`}>
+      <button type="button" onClick={() => setAn(true)} className={`w-full mt-4 inline-flex items-center justify-center gap-2.5 rounded-full px-9 py-5 font-montserrat text-base font-extrabold text-midnight-blue shadow-[0_10px_24px_-12px_rgba(19,35,63,0.45)] transition-transform hover:-translate-y-px sm:text-lg ${GOLD}`}>
         <span aria-hidden="true" className="inline-block h-0 w-0 border-y-[6px] border-l-[10px] border-y-transparent border-l-[#13233F]" /> Video abspielen
       </button>
     </div>
@@ -490,10 +490,10 @@ export default function Challenge() {
                 {stand}
               </p>
               <div className="mt-7 flex flex-wrap items-center gap-4">
-                <a href="#anmelden" className={`inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue shadow-[0_10px_24px_-12px_rgba(19,35,63,0.45)] transition-transform hover:-translate-y-px ${GOLD}`}>
+                <a href="#anmelden" className={`cc-puls-knopf inline-flex items-center justify-center gap-2.5 rounded-full px-9 py-5 font-montserrat text-base font-extrabold text-midnight-blue shadow-[0_10px_24px_-12px_rgba(19,35,63,0.45)] transition-transform hover:-translate-y-px sm:text-lg ${GOLD}`}>
                   Nutze die Video-Challenge →
                 </a>
-                <a href="#programm" className="inline-flex items-center rounded-full border-2 border-[#C9A961] px-7 py-[14px] font-montserrat text-sm font-bold text-midnight-blue transition-colors hover:bg-white">
+                <a href="#programm" className="inline-flex items-center justify-center gap-2.5 rounded-full border-2 border-[#C9A961] bg-white px-9 py-[18px] font-montserrat text-base font-extrabold text-midnight-blue transition-colors hover:bg-pearl-white sm:text-lg">
                   Die 7 Tage ansehen
                 </a>
               </div>
@@ -669,7 +669,7 @@ export default function Challenge() {
               <p>Mein ganzes Leben lang beschäftige ich mich damit, dass manche Menschen eine Wirkungskraft haben, die unvergesslich ist, und andere nicht.</p>
               <p className="font-semibold">Und das habe ich zu meinem Beruf gemacht und darum begleite ich dich.</p>
             </div>
-            <a href="/ueber-mich" className="mt-8 inline-flex items-center rounded-full border-2 border-[#C9A961] px-7 py-[14px] font-montserrat text-sm font-bold text-midnight-blue transition-colors hover:bg-pearl-white">Mehr über Claudia – die Umsatzstimme →</a>
+            <a href="/ueber-mich" className="mt-8 inline-flex items-center justify-center gap-2.5 rounded-full border-2 border-[#C9A961] bg-white px-9 py-[18px] font-montserrat text-base font-extrabold text-midnight-blue transition-colors hover:bg-pearl-white sm:text-lg">Mehr über Claudia – die Umsatzstimme →</a>
           </div>
         </div>
       </Abschnitt>
@@ -683,7 +683,7 @@ export default function Challenge() {
       <section className="bg-pearl-white pt-16 pb-4 sm:pt-20" aria-label="Eintragen">
         <div className="mx-auto max-w-6xl px-6 text-center">
           {/* Hauptknopf unten golden (Anmeldung zaehlt vor dem Start), die drei Wege darunter ruhiger (Vorschlag 24.10.2026 23:20). */}
-          <a href="#anmelden" className={`inline-flex items-center rounded-full px-9 py-5 font-montserrat text-base font-extrabold text-midnight-blue shadow-[0_10px_24px_-12px_rgba(19,35,63,0.45)] transition-transform hover:-translate-y-px sm:text-lg ${GOLD}`}>
+          <a href="#anmelden" className={`cc-puls-knopf inline-flex items-center justify-center gap-2.5 rounded-full px-9 py-5 font-montserrat text-base font-extrabold text-midnight-blue shadow-[0_10px_24px_-12px_rgba(19,35,63,0.45)] transition-transform hover:-translate-y-px sm:text-lg ${GOLD}`}>
             Jetzt kostenfrei anmelden ↑
           </a>
         </div>
@@ -694,7 +694,7 @@ export default function Challenge() {
         <div className="mx-auto max-w-6xl px-6 text-center">
           <p className="font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] text-midnight-blue/70">Du willst nicht warten?</p>
           <p className="mx-auto mt-3 max-w-xl font-montserrat text-2xl font-extrabold leading-snug text-midnight-blue sm:text-3xl">Abkürzung und Vertiefung.</p>
-          <a href="/3-wege" className="cc-abk-knopf mt-5 inline-flex items-center gap-3 rounded-full border-2 border-[#C9A961] bg-white px-9 py-4 font-montserrat text-base font-extrabold text-midnight-blue sm:text-lg">
+          <a href="/3-wege" className="cc-abk-knopf mt-5 inline-flex items-center justify-center gap-2.5 rounded-full border-2 border-[#C9A961] bg-white px-9 py-[18px] font-montserrat text-base font-extrabold text-midnight-blue transition-colors hover:bg-pearl-white sm:text-lg">
             Nutze die Abkürzung – 3 Wege zum Ziel <span aria-hidden="true" className="cc-abk-pfeil">→</span>
           </a>
         </div>

@@ -2793,3 +2793,8 @@ html, body { overflow-x: clip; }
 .js .cc-r .cc-zeile { opacity: 0; transform: translateY(10px); }
 .js .cc-r.da .cc-zeile { opacity: 1; transform: none; transition: opacity 1s ease, transform 1s ease; transition-delay: calc(0.3s + var(--z, 0) * 0.55s); }
 @media (prefers-reduced-motion: reduce) { .js .cc-r .cc-zeile { opacity: 1; transform: none; transition: none; } }
+
+/* Anmelde-Knoepfe pulsieren sanft (Claudia, 24.10.2026 23:24: "sollte pulsieren, klar zum Eintragen"). */
+@keyframes ccKnopfPuls { 0% { box-shadow: 0 0 0 0 rgba(201,169,97,.55); } 70% { box-shadow: 0 0 0 14px rgba(201,169,97,0); } 100% { box-shadow: 0 0 0 0 rgba(201,169,97,0); } }
+.cc-puls-knopf { animation: ccKnopfPuls 2.4s ease-out infinite; }
+@media (prefers-reduced-motion: reduce) { .cc-puls-knopf { animation: none; } }

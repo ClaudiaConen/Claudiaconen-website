@@ -142,7 +142,7 @@ export default function ChallengeAnmeldung({ start, onEingetragen }: { start: st
         <span>Ja, schick mir nach der Challenge weitere Gratis-Aktionen und Angebote per E-Mail. Abmelden geht jederzeit mit einem Klick.</span>
       </label>
       <div className="mt-5 flex flex-wrap items-center gap-4">
-        <button type="submit" disabled={zustand === 'sendet'} className={`inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue transition-transform hover:-translate-y-px disabled:opacity-70 ${GOLD}`}>
+        <button type="submit" disabled={zustand === 'sendet'} className={`cc-puls-knopf inline-flex items-center justify-center rounded-full px-9 py-5 font-montserrat text-base font-extrabold text-midnight-blue transition-transform hover:-translate-y-px disabled:opacity-70 sm:text-lg ${GOLD}`}>
           {zustand === 'sendet' ? 'Wird angemeldet …' : 'Jetzt kostenfrei anmelden'}
         </button>
         {/* Letzte Huerde vor dem Klick: Kosten und Druck ausraeumen ("Kein Verkaufsdruck", Claudias Wortlaut 24.10.2026). */}

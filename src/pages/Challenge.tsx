@@ -669,34 +669,26 @@ export default function Challenge() {
       </Abschnitt>
 
       {/* Warum ich - hell (Claudia, 22.09.2026 15:00 UTC: "der Bereich ist viel zu dunkel", "zu viel und zu dunkel"). */}
+      {/* Trainerin, neu formatiert (Claudia, 24.10.2026 22:43: Entfuehrungs-Teil komplett raus, "formatiere besser"):
+          links ihr Foto mit Blickkontakt, rechts Name, Positionierung, ihr Satz, Eckdaten. Platz fuer ihren eigenen Satz folgt. */}
       <Abschnitt className="bg-white py-16 text-midnight-blue sm:py-24" label="warum">
-        <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2 md:gap-14">
-          <div>
+        <div className="mx-auto grid max-w-5xl items-center gap-10 px-6 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-16">
+          <figure className="mx-auto w-full max-w-sm overflow-hidden rounded-[14px] shadow-[0_24px_50px_-28px_rgba(19,35,63,0.6)]">
+            <img src="/a27/p/ueber-claudia/erfahrung.webp" alt="Claudia Conen im dunkelblauen Blazer, lächelnd" width={900} height={1350} decoding="async" className="aspect-[4/5] w-full object-cover object-top" />
+          </figure>
+          <div className="min-w-0">
             <Kicker text="Deine Trainerin" hell />
-            {/* Nur Claudias eigene Worte (Claudia, 24.10.2026: "das Warum ... auf der Über-mich-Seite holen und nicht irgendwas
-                schreiben"): Positionierung vom 09.10.2026 + Saetze aus UeberMich.tsx, wortgleich. */}
-            {/* "Bruecke zwischen Mensch und Maschine" raus (Claudia, 24.10.2026 22:28: "mehr ueber Claudia Conen, genannt die Umsatzstimme"). */}
             <h2 id="warum" className="mt-5 font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">Claudia Conen,<br />genannt „die Umsatzstimme“</h2>
             <p className="mt-3 font-montserrat text-lg font-bold text-midnight-blue/80">Expertin für menschliche Wirkungskraft im KI-Zeitalter.</p>
-            <p className="mt-7 border-l-4 border-[#C9A961] pl-5 font-cormorant text-3xl italic leading-snug sm:text-4xl">
+            <p className="mt-7 border-l-4 border-[#C9A961] pl-5 font-cormorant text-2xl italic leading-snug sm:text-3xl">
               Alles, was wir erleben, formt uns. Mich hat es ganze 39 Jahre gekostet, um zu erkennen, warum ich diesen Job mache und warum ich so gut darin bin.
             </p>
-          </div>
-          <div>
-            <h3 className="font-montserrat text-base font-extrabold uppercase tracking-wide">Die Entführung, die meine Berufung prägte</h3>
-            <div className="mt-3 grid gap-3 font-inter text-[17px] leading-relaxed text-midnight-blue">
-              <p>72 Stunden kann sie nichts sehen, nur diese Stimmen hören.</p>
-              <p>Wie besessen hört sie hin, wenn Menschen miteinander reden.</p>
-              <p>Unbewusst ist sie fokussiert auf die Wahrnehmung der hörbaren Emotionen.</p>
-              <p className="font-semibold italic">Dieses kleine Mädchen steckt heute noch in mir.</p>
-            </div>
-            <p className="mt-6 font-inter text-[15px] text-midnight-blue">
-              37 Jahre als Coach und Trainerin. Auf Bühnen, vor Kameras, in Unternehmen. Zu hören unter anderem bei Sat.1 und RTL.
-            </p>
-            <p className="mt-3 font-inter text-[15px] text-midnight-blue">
-              Die ganze Geschichte findest du auf{' '}
-              <Link to="/ueber-mich" className="underline decoration-[#C9A961] decoration-2 underline-offset-4 hover:text-royal-navy">„Über mich"</Link>.
-            </p>
+            <ul className="mt-7 grid list-none gap-2 p-0 font-inter text-[16px] text-midnight-blue">
+              <li className="flex items-center gap-3"><span aria-hidden="true" className="h-2 w-2 flex-none rotate-45 bg-[#C9A961]" />37 Jahre als Coach und Trainerin</li>
+              <li className="flex items-center gap-3"><span aria-hidden="true" className="h-2 w-2 flex-none rotate-45 bg-[#C9A961]" />Auf Bühnen, vor Kameras, in Unternehmen</li>
+              <li className="flex items-center gap-3"><span aria-hidden="true" className="h-2 w-2 flex-none rotate-45 bg-[#C9A961]" />Zu hören unter anderem bei Sat.1 und RTL</li>
+            </ul>
+            <Link to="/ueber-mich" className="mt-7 inline-flex items-center font-montserrat text-sm font-bold underline decoration-[#C9A961] decoration-2 underline-offset-4 hover:text-royal-navy">Mehr über Claudia →</Link>
           </div>
         </div>
       </Abschnitt>

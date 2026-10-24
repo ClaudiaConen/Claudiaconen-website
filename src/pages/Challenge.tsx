@@ -83,7 +83,7 @@ const WERKZEUG: { titel: string; vorschau: string; text: string; icon: string }[
 const AUF_EINEN_BLICK: { wann: string; was: string; punkte: string[] }[] = [
   { wann: 'Montag, 26. Oktober · 19 Uhr', was: 'Auftakt live im Zoom', punkte: ['Erstes Kennenlernen', 'Deinen Übungsplan für die Woche festlegen', 'Dein Vorher-Video aufnehmen'] },
   { wann: '26. Oktober bis 2. November', was: 'Deine sieben Tage', punkte: ['7 Audio-Impulse von mir – jeden Tag einer', '7 Workbooks – jeden Tag eins', 'Jeden Tag dein 1-Minuten-Video – 24 Stunden Zeit', '2 persönliche Feedbacks von mir – an Tag 2 und Tag 6', '2 Live-Termine im Zoom – Auftakt und Abschluss'] },
-  { wann: 'Montag, 2. November · 19 Uhr', was: 'Abschluss live im Zoom', punkte: ['Deine Chance, vor allen Teilnehmern zu pitchen – freiwillig', 'Netzwerken untereinander – vielleicht sitzt dort dein bester Kunde', 'Dein Zertifikat'] },
+  { wann: 'Montag, 2. November · 19 Uhr', was: 'Abschluss live im Zoom', punkte: ['Deine Chance, vor allen Teilnehmern zu pitchen – freiwillig', 'Netzwerken untereinander – vielleicht sitzt dort dein bester Kunde', 'Deine Auszeichnung fürs Durchziehen'] },
 ];
 
 
@@ -191,11 +191,11 @@ const TAGE: Tag[] = [
     reflexion: 'Weiß dein Zuhörer am Ende genau, was er jetzt tun soll?',
   },
   {
-    titel: 'Dein Elevator Pitch: die Generalprobe', schwerpunkt: 'Alles in drei Sätzen · dein Nachher-Video', icon: 'schritt-7',
+    titel: 'Dein Elevator Pitch', schwerpunkt: 'In 30–60 Sekunden · live im Zoom-Call', icon: 'schritt-7',
     einstieg: 'Sein Problem. Dein Beweis. Warum du.',
     inhalt: 'Alles in drei Sätzen, zu einem Menschen gesprochen, nicht in eine Linse. Das ist deine Generalprobe für die Bühne beim Abschluss.',
     aufgabe: 'Sprich deinen Pitch in drei Sätzen – sein Problem, dein Beweis, warum du – mit deinem Call to Action am Ende. Leg danach dein Vorher-Video von Tag 1 daneben und poste beide zusammen, mit #unverwechselbar.',
-    zusatz: 'Schau dir beide Videos an. Das ist Selbstsicherheit: das Ergebnis von sieben Videos. Am Montag beim Abschluss kannst du ihn live vor der Gruppe halten, 60 Sekunden, freiwillig – vielleicht sitzt dort schon dein nächster Kunde.',
+    zusatz: 'Schau dir beide Videos an. Das ist Selbstsicherheit: das Ergebnis von sieben Videos. Am Montag beim Abschluss kannst du ihn live vor der Gruppe halten, 30–60 Sekunden, freiwillig – vielleicht sitzt dort schon dein nächster Kunde.',
     reflexion: 'Was hörst und siehst du heute, das an Tag 1 noch nicht da war?',
   },
 ];
@@ -239,18 +239,21 @@ const WEGWEISER = {
 const ABLAUF: { titel: string; text: string }[] = [
   // Gekuerzt am 23.10.2026 (Claudia: "nicht so viele Sachen doppelt"): Auftakt, Jeden Tag ein Impuls und Abschluss
   // stehen schon in "Dein Ablauf auf einen Blick", das Workbook als Kachel beim Programm.
-  { titel: 'Die Gruppe', text: 'Austausch untereinander ist gern gesehen. Werbung nicht – dafür gibt es am letzten Tag Werbezeit, für jeden. Danach darfst du dein Business in der Community-Gruppe vorstellen.' },
+  { titel: 'Die Gruppe', text: 'Austausch untereinander ist gern gesehen. Werbung nicht – dafür gibt es an Tag 8, Dienstag, 3. November, deinen Werbetag: Dann darfst du dein Business in der Gruppe vorstellen.' },
   { titel: 'Dein Feedback', text: 'An Tag 2 und Tag 6 bekommst du persönliches Feedback von mir, wenn du dein Video innerhalb der 24 Stunden postest. Danach darfst du dein Video verbessern – für dich, um daran zu wachsen.' },
   { titel: 'Zwischendurch', text: 'Impulse zu Storytelling und Prompts für die KI, die du direkt nutzen kannst – um deine Positionierung zu schärfen und deine innere Haltung nach außen zu tragen.' },
 ];
 const ABLAUF_HINWEIS = 'Mein Tipp: Such dir eine feste Zeit am Tag – wann auch immer. Alles läuft in der Gruppe bei WhatsApp oder Telegram, bis unsere Plattform fertig ist. Dann lade ich euch alle dazu ein.';
 
+/** Nach Claudias Diktat vom 24.10.2026 09:32 UTC. */
 const FUER = [
-  'gehört werden willst – im Meeting, am Telefon, vor Kunden, auf der Bühne',
-  'ein Handy hast und jeden Tag ein bisschen Zeit',
-  'dich selbst hören willst, auch wenn es am Anfang unangenehm ist',
-  'Feedback willst statt Applaus',
-  'eine Woche lang jeden Tag einen kleinen Schritt gehst',
+  'dein Wissen präsentieren willst',
+  'dich von der Masse abheben möchtest – mit Persönlichkeit, die Vertrauen schafft',
+  'bereit bist, sieben Tage lang 30 Minuten am Tag in deine Weiterentwicklung zu investieren',
+  'bereit bist, jeden Tag ein Video von mindestens einer Minute aufzunehmen, um dich bestens vorzustellen und Vertrauen aufzubauen',
+  'aktives Feedback möchtest statt Applaus',
+  'bereit bist, jeden Tag einen kleinen Schritt zu gehen – für mehr Vertrauen bei Interessenten und Kunden',
+  'respektvoll und achtsam kommunizierst und die Regeln achtest: kein ungebetenes Feedback, Werbung nur beim Abschluss im Zoom-Call am 2. November und an Tag 8 nach Aufforderung in der Gruppe',
 ];
 const NICHT_FUER = [
   'eine perfekte Aufnahme willst statt einer echten',
@@ -470,8 +473,9 @@ export default function Challenge() {
             <div>
               <Kicker text="Das Programm" hell />
               <h2 id="programm-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">
-                Sieben Schritte. Ein Ergebnis:
-                <span className="mt-1 block underline decoration-[#C9A961] decoration-[4px] underline-offset-[6px]">Du bleibst im Kopf.</span>
+                {/* Kein Ergebnisversprechen (Claudia, 24.10.2026: "du bleibst im Kopf ... ist zu hoch gegriffen"). */}
+                Du wirkst immer. Die Frage ist nur: wie?
+                <span className="mt-1 block underline decoration-[#C9A961] decoration-[4px] underline-offset-[6px]">Sieben Schritte. Wir arbeiten dran.</span>
               </h2>
               <p className="mt-4 max-w-2xl font-inter text-lg text-midnight-blue">
                 Jeden Tag ein Audio-Impuls von mir mit einem Gedanken, in dem du dich wiedererkennst, und einer konkreten Aufgabe. Die Inhalte öffnen sich in der Challenge-Woche, jeden Tag einer.
@@ -497,7 +501,7 @@ export default function Challenge() {
                     <span aria-hidden="true" className={`font-montserrat text-3xl font-black ${letzter ? 'text-midnight-blue/40' : 'text-[#C9A961]'}`}>{String(i + 1).padStart(2, '0')}</span>
                   </div>
                   <div className="min-w-0 flex-1">
-                    {letzter && <p className="mt-3 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-midnight-blue/80 lg:mt-0">Das Finale · Vorher und Nachher</p>}
+                    {letzter && <p className="mt-3 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-midnight-blue/80 lg:mt-0">Das Finale · Montag, 2. November · 19 Uhr live im Zoom</p>}
                     <h3 className={`font-montserrat font-extrabold uppercase tracking-wide ${letzter ? 'mt-1 text-lg sm:text-xl' : 'mt-3 text-base'}`}>{s.titel}</h3>
                     <p className="mt-1 font-montserrat text-[11px] font-bold uppercase tracking-[0.14em] text-midnight-blue/70">{s.schwerpunkt}</p>
                     {s.feedback && <p className="mt-2"><FeedbackPlakette /></p>}
@@ -508,8 +512,9 @@ export default function Challenge() {
                         </summary>
                         <div className="mt-2.5"><TagInhalt t={s} /></div>
                       </details>
-                    ) : (
-                      <p className={`mt-2.5 flex items-center gap-2 font-montserrat text-xs font-bold uppercase tracking-[0.12em] ${letzter ? 'text-midnight-blue/80' : 'text-midnight-blue/70'}`}>
+                    ) : letzter ? null : (
+                      // Beim Finale keine Freischalt-Zeile: der Termin steht schon darueber (Claudia, 24.10.2026).
+                      <p className="mt-2.5 flex items-center gap-2 font-montserrat text-xs font-bold uppercase tracking-[0.12em] text-midnight-blue/70">
                         <Schluessel /> Entdecke den Inhalt in der Challenge-Woche · Tag {i + 1} · {KURZ.format(freischaltung(heute, i))}
                       </p>
                     )}
@@ -523,6 +528,18 @@ export default function Challenge() {
               <img src="/challenge/sieben-workbooks.webp" alt="Die sieben Challenge-Workbooks, Tag 1 bis Tag 7" width={1000} height={472} loading="lazy" decoding="async" className="w-full" />
               <h3 className="mt-3 font-montserrat text-base font-extrabold uppercase tracking-wide">7 Workbooks</h3>
               <p className="mt-1 font-montserrat text-[11px] font-bold uppercase tracking-[0.14em] text-midnight-blue/70">Jeden Tag eins · in deiner Gruppe</p>
+            </li>
+            {/* Tag 8 ueber die volle Breite unter den Schritten (Claudia, 24.10.2026: "Tag acht Dienstag danach ... Werbetag in der Gruppe"). */}
+            <li className={`cc-stufe p-6 text-midnight-blue hover:-translate-y-0.5 sm:col-span-2 lg:col-span-3 lg:flex lg:items-center lg:gap-8 ${KACHEL} bg-pearl-white`}>
+              <div className="flex flex-none items-center gap-4">
+                <img src="/icons/schritt-2.webp" alt="" width={256} height={256} loading="lazy" decoding="async" className="h-16 w-16 flex-none drop-shadow-[0_8px_12px_rgba(10,22,40,0.25)] lg:h-20 lg:w-20" />
+                <span aria-hidden="true" className="font-montserrat text-3xl font-black text-[#C9A961]">08</span>
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="mt-3 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-midnight-blue/80 lg:mt-0">Zusätzlich · Tag 8 · Dienstag, 3. November</p>
+                <h3 className="mt-1 font-montserrat text-lg font-extrabold uppercase tracking-wide sm:text-xl">Netzwerken</h3>
+                <p className="mt-1 font-montserrat text-[11px] font-bold uppercase tracking-[0.14em] text-midnight-blue/70">Dein Werbetag in der Gruppe · stell dein Business vor</p>
+              </div>
             </li>
           </ol>
         </div>
@@ -553,7 +570,7 @@ export default function Challenge() {
                       </li>
                     ))}
                   </ul>
-                  {i === 2 && <img src="/challenge/zertifikat.webp" alt="Muster des Zertifikats UNVERWECHSELBAR – 7 Tage für deine Wirkungskraft" width={1000} height={707} loading="lazy" decoding="async" className="mt-5 w-full -rotate-1 rounded-sm shadow-[0_18px_34px_-16px_rgba(0,0,0,0.6)]" />}
+                  {i === 2 && <img src="/challenge/auszeichnung.webp" alt="Muster der Auszeichnung UNVERWECHSELBAR – 7 Tage für deine Wirkungskraft" width={1000} height={707} loading="lazy" decoding="async" className="mt-5 w-full -rotate-1 rounded-sm shadow-[0_18px_34px_-16px_rgba(0,0,0,0.6)]" />}
                 </div>
               </li>
             ))}
@@ -883,24 +900,24 @@ export default function Challenge() {
         <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2 md:gap-14">
           <div>
             <Kicker text="Warum ich" hell />
-            <h2 id="warum" className="mt-5 font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">Menschen prägen Menschen.</h2>
+            {/* Nur Claudias eigene Worte (Claudia, 24.10.2026: "das Warum ... auf der Über-mich-Seite holen und nicht irgendwas
+                schreiben"): Positionierung vom 09.10.2026 + Saetze aus UeberMich.tsx, wortgleich. */}
+            <h2 id="warum" className="mt-5 font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">Die Brücke zwischen Mensch und Maschine.</h2>
+            <p className="mt-3 font-montserrat text-lg font-bold text-midnight-blue/80">Deine Persönlichkeit schafft Vertrauen. Vertrauen gewinnt Kunden.</p>
             <p className="mt-7 border-l-4 border-[#C9A961] pl-5 font-cormorant text-3xl italic leading-snug sm:text-4xl">
-              Ich höre, was andere überhören. Und mache daraus deine Wirkung.
+              Alles, was wir erleben, formt uns. Mich hat es ganze 39 Jahre gekostet, um zu erkennen, warum ich diesen Job mache und warum ich so gut darin bin.
             </p>
           </div>
           <div>
-            <ul className="grid list-none gap-3 p-0 font-inter text-midnight-blue">
-              {[
-                'Claudia Conen ist Expertin für menschliche Wirkungskraft.',
-                'Sie trainiert Rhetorik, Storytelling, Präsentation und den Auftritt vor der Kamera – seit 37 Jahren.',
-                'Ihr Schwerpunkt ist die hörbare Persönlichkeit: das Zusammenspiel von Worten, Stimme und Haltung.',
-                'Bekannt als „Die Umsatzstimme" – zu hören unter anderem bei Sat.1 und RTL, gefragt auf Bühnen und in Unternehmen.',
-              ].map((z) => (
-                <li key={z} className="flex gap-3"><Haken />{z}</li>
-              ))}
-            </ul>
-            <p className="mt-5 font-inter text-[15px] text-midnight-blue">
-              Warum ich weiß, dass Menschen sich für immer im Gehirn verankern können, erzähle ich auf{' '}
+            <h3 className="font-montserrat text-base font-extrabold uppercase tracking-wide">Die Entführung, die meine Berufung prägte</h3>
+            <div className="mt-3 grid gap-3 font-inter text-[17px] leading-relaxed text-midnight-blue">
+              <p>72 Stunden kann sie nichts sehen, nur diese Stimmen hören.</p>
+              <p>Wie besessen hört sie hin, wenn Menschen miteinander reden.</p>
+              <p>Unbewusst ist sie fokussiert auf die Wahrnehmung der hörbaren Emotionen.</p>
+              <p className="font-semibold italic">Dieses kleine Mädchen steckt heute noch in mir.</p>
+            </div>
+            <p className="mt-6 font-inter text-[15px] text-midnight-blue">
+              Die ganze Geschichte findest du auf{' '}
               <Link to="/ueber-mich" className="underline decoration-[#C9A961] decoration-2 underline-offset-4 hover:text-royal-navy">„Über mich"</Link>.
             </p>
           </div>

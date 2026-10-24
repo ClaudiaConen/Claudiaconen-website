@@ -19,6 +19,9 @@
  * ACHTUNG NAMENSVETTERIN: "Wirtschaftsmediation" (Peter Lang, 2014) stammt von Dr. iur. Claudia
  * Conen, einer anderen Person - gehoert NICHT hierher.
  *
+ * Reihenfolge (Claudia, 24.10.2026): Brainself zuerst, der Trauerreden Ratgeber zuletzt - er soll nicht der
+ * erste Eindruck sein.
+ *
  * Bewusst KEINE Kaufknoepfe: Die Seite "Ueber mich" traegt ihre Geschichte, und ihre Regel lautet:
  * nie ein Verkaufsangebot in deren Naehe. Deshalb nur zwei leise Verweise bei den Titeln, die sie
  * selbst schon verlinkt hat.
@@ -27,6 +30,8 @@
  */
 
 type Buch = {
+  /** Kleine Zeile ueber dem Titel (Claudia, 24.10.2026). */
+  vorzeile?: string;
   titel: string;
   untertitel?: string;
   jahr: string;
@@ -37,19 +42,11 @@ type Buch = {
 
 export const BUECHER: Buch[] = [
   {
-    titel: 'Trauerreden Ratgeber',
-    untertitel: 'Todsicher einzigartig wie der Mensch selbst',
-    jahr: '2022',
-    rolle: 'Autorin',
-    angabe: 'Taschenbuch und E-Book',
-    verweis: 'https://www.amazon.de/dp/3982487803',
-  },
-  {
     titel: 'Brainself',
     untertitel: 'Es geht um dich selbst',
     jahr: '2022',
     rolle: 'Mitautorin',
-    angabe: 'Gemeinschaftswerk mehrerer Autorinnen und Autoren',
+    angabe: 'Gemeinschaftsbuch mit dem Wissenschaftler Karsten Brocke und weiteren Autorinnen und Autoren',
     verweis: 'https://www.amazon.de/dp/3981611888',
   },
   {
@@ -79,6 +76,15 @@ export const BUECHER: Buch[] = [
     rolle: 'Mitautorin',
     angabe: 'Herausgegeben von Dr. Stefan Frädrich und Alexander Müller, GEDANKENtanken',
   },
+  {
+    vorzeile: 'Unverwechselbar – der Mensch',
+    titel: 'Trauerreden Ratgeber',
+    untertitel: 'Todsicher einzigartig wie der Mensch selbst',
+    jahr: '2022',
+    rolle: 'Autorin',
+    angabe: 'Taschenbuch und E-Book',
+    verweis: 'https://www.amazon.de/dp/3982487803',
+  },
 ];
 
 export default function Buecher() {
@@ -104,6 +110,7 @@ export default function Buecher() {
             >
               <span className="font-montserrat text-sm font-bold tabular-nums text-midnight-blue/70">{b.jahr}</span>
               <div>
+                {b.vorzeile && <p className="mb-1 font-montserrat text-[11px] font-bold uppercase tracking-[0.16em] text-[#C9A961]">{b.vorzeile}</p>}
                 <p className="font-cormorant text-2xl font-semibold italic leading-snug text-midnight-blue">
                   {b.titel}
                   {b.untertitel && (

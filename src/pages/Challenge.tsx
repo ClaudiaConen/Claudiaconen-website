@@ -43,8 +43,6 @@ const PFAD = '/challenge';
 
 const GOLD = 'bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]';
 const KACHEL = 'cc-glanz-kachel rounded-[10px] border border-[#13233F]/[0.13] transition-[border-color,box-shadow] duration-200 hover:border-[#C9A961] hover:shadow-[0_18px_40px_-20px_rgba(19,35,63,0.35)]';
-/** Ruhige Champagner-Flaeche statt kraeftigem Gold fuer grosse Bloecke (Farben der neuen Seiten, Claudia 15.10.2026). */
-const FLAECHE = 'bg-white border border-[#C9A961]/60';
 /** Plakette wie in der Wochen-Grafik: nur an Tag 2 und 6 (Claudia, 22.10.2026 05:45 UTC: "dass die Leute nicht denken,
  *  sie bekommen jeden Tag ein Feedback"). */
 function FeedbackPlakette() {
@@ -214,7 +212,8 @@ function MobilLeiste() {
   useEffect(() => {
     const pruefen = () => {
       const form = document.getElementById('anmeldung');
-      const formSichtbar = form ? form.getBoundingClientRect().top < window.innerHeight : false;
+      const r = form?.getBoundingClientRect();
+      const formSichtbar = r ? r.top < window.innerHeight && r.bottom > 0 : false;
       setZeigen(window.scrollY > 650 && !formSichtbar);
     };
     pruefen();
@@ -238,36 +237,23 @@ function VideoKopf() {
   const cls = 'block aspect-[9/16] w-full rounded-[12px] border border-[#C9A961]/60 bg-[#13233F] object-cover shadow-[0_24px_60px_-24px_rgba(0,0,0,0.8)]';
   if (an) {
     return (
-      <video controls autoPlay playsInline width={540} height={960} poster="/challenge/video-claudia-start.jpg" className={cls} aria-label="Video: Claudia Conen über die erste Emotion im Gespräch">
+      <video controls autoPlay playsInline width={540} height={960} poster="/challenge/video-claudia-poster.jpg" className={cls} aria-label="Video: Claudia Conen über die erste Emotion im Gespräch">
         <source src="/challenge/video-claudia.mp4" type="video/mp4" />
       </video>
     );
   }
   return (
-    <button type="button" onClick={() => setAn(true)} className="group relative block w-full" aria-label="Video abspielen: Claudia Conen über die erste Emotion im Gespräch, 1 Minute 38">
-      <img src="/challenge/video-claudia-start.jpg" alt="" width={540} height={960} className={cls} />
-      {/* Deutlich zum Abspielen (Claudia, 24.10.2026 20:04), aber nicht auf dem Gesicht: grosser Goldknopf oben in der Ecke. */}
-      <span aria-hidden="true" className={`absolute left-1/2 top-3 flex -translate-x-1/2 items-center gap-2.5 whitespace-nowrap rounded-full py-2.5 pl-2.5 pr-5 font-montserrat text-sm font-extrabold text-midnight-blue shadow-[0_10px_30px_-8px_rgba(0,0,0,0.7)] ring-4 ring-[#C9A961]/35 transition-transform group-hover:scale-105 motion-safe:animate-pulse ${GOLD}`}>
+    <button type="button" onClick={() => setAn(true)} className="group relative block w-full" aria-label="Video abspielen: Claudia Conen über die erste Emotion im Gespräch">
+      <img src="/challenge/video-claudia-poster.jpg" alt="" width={540} height={960} className={cls} />
+      {/* Nur unten "Video abspielen", kein Text auf dem Bild (Claudia, 24.10.2026 20:11: "das wirkt alles ueberladen"). */}
+      <span aria-hidden="true" className={`absolute bottom-4 left-1/2 flex -translate-x-1/2 items-center gap-2.5 whitespace-nowrap rounded-full py-2.5 pl-2.5 pr-5 font-montserrat text-sm font-extrabold text-midnight-blue shadow-[0_10px_30px_-8px_rgba(0,0,0,0.7)] transition-transform group-hover:scale-105 ${GOLD}`}>
         <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#13233F]"><span className="ml-0.5 inline-block h-0 w-0 border-y-[7px] border-l-[11px] border-y-transparent border-l-[#F7E7CE]" /></span>
-        Video abspielen · 1:38
+        Video abspielen
       </span>
     </button>
   );
 }
 
-function EintragBlock() {
-  return (
-    <div className={`mt-3 grid items-center gap-5 rounded-[10px] px-5 py-5 text-midnight-blue sm:grid-cols-[minmax(0,1fr)_auto] sm:px-7 ${FLAECHE}`}>
-      <div className="min-w-0">
-        <p className="font-montserrat text-lg font-extrabold leading-tight sm:text-xl">Noch nicht eingetragen?</p>
-        <p className="mt-1 font-inter text-[15px] leading-relaxed">Erst eintragen, dann in die Gruppe – so weiß ich, wer dabei ist. Kostenfrei.</p>
-      </div>
-      <a href="#anmelden" className="inline-flex items-center rounded-full bg-midnight-blue px-7 py-4 font-montserrat text-sm font-bold text-pearl-white transition-colors hover:bg-royal-navy">
-        Ich bin dabei – eintragen
-      </a>
-    </div>
-  );
-}
 
 /** Goldener Schluessel auf den Tages-Streifen (Claudia: "immer einen goldenen Schluessel mit drauf ... so Geheimnis"). */
 function Schluessel() {
@@ -468,7 +454,7 @@ export default function Challenge() {
               </p>
             </div>
             {/* Claudias Video komplett (Claudia, 24.10.2026 19:26: "dieses Video komplett einbringen"), statt des Logos.
-                Startbild nach ihrer Regel (1,5 s vorn im Video und als Poster), spielt erst nach Tippen, mit Ton. */}
+                Auf der Seite ohne Text auf dem Bild, spielt erst nach Tippen, mit Ton. */}
             <figure className="order-first mx-auto w-56 sm:w-64 md:order-none md:w-[300px]">
               <VideoKopf />
               {/* Claudia, 24.10.2026 19:47: "ruf mich einfach an" bleibt im Video, daneben der Weg zum Kalender. */}
@@ -533,7 +519,7 @@ export default function Challenge() {
                 const letzter = i === TAGE.length - 1;
                 const kopf = (
                   <>
-                    <img src={`/icons/${t.icon}.webp`} alt="" width={256} height={256} loading="lazy" decoding="async" className="h-14 w-14 flex-none drop-shadow-[0_8px_12px_rgba(10,22,40,0.25)] sm:h-16 sm:w-16" />
+                    <span aria-hidden="true" className="flex h-11 w-11 flex-none items-center justify-center rounded-full border border-[#C9A961] font-montserrat text-base font-extrabold text-midnight-blue">{i + 1}</span>
                     <span className="min-w-0 flex-1">
                       <span className="flex flex-wrap items-center gap-2">
                         <span className={`rounded-md px-2.5 py-1 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] ${letzter ? `${GOLD} text-midnight-blue` : 'bg-midnight-blue text-pearl-white'}`}>Tag {i + 1}</span>
@@ -572,7 +558,7 @@ export default function Challenge() {
               {/* Tag 8 (Claudia, 24.10.2026: Werbetag in der Gruppe am Dienstag danach). */}
               <li className="cc-stufe">
                 <div className={`flex items-center gap-4 bg-pearl-white px-4 py-3.5 text-midnight-blue sm:px-6 ${KACHEL}`}>
-                  <img src="/icons/schritt-2.webp" alt="" width={256} height={256} loading="lazy" decoding="async" className="h-14 w-14 flex-none drop-shadow-[0_8px_12px_rgba(10,22,40,0.25)] sm:h-16 sm:w-16" />
+                  <span aria-hidden="true" className="flex h-11 w-11 flex-none items-center justify-center rounded-full border border-[#C9A961] font-montserrat text-base font-extrabold text-midnight-blue">8</span>
                   <span className="min-w-0 flex-1">
                     <span className="flex flex-wrap items-center gap-2">
                       <span className="rounded-md bg-midnight-blue px-2.5 py-1 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-pearl-white">Zusätzlich · Tag 8</span>
@@ -585,7 +571,10 @@ export default function Challenge() {
               </li>
             </ol>
           </div>
-          <EintragBlock />
+          {/* Formular direkt nach dem Wegweiser: dort faellt die Entscheidung (Claudia, 24.10.2026 20:08: "an welcher Stelle optimal"). */}
+          <div id="anmeldung" className="mt-10">
+            <ChallengeAnmeldung start={startKurz} />
+          </div>
         </div>
       </Abschnitt>
 
@@ -684,10 +673,12 @@ export default function Challenge() {
 
       {/* "Gut zu wissen, bevor es losgeht" entfernt (Claudia, 24.10.2026 20:06: zu viel Ablenkung, gehoert als Tipp-Box in die Challenge). */}
 
-      {/* Anmeldung direkt unter dem Kopf (Kritiker-Durchgang 22.09.2026, Claudias Ja 12:22 UTC: "mach das alles so"). */}
-      <section id="anmeldung" className="bg-pearl-white pt-6 pb-4 sm:pt-8" aria-label="Anmeldung zur Challenge">
-        <div className="mx-auto max-w-6xl px-6">
-          <ChallengeAnmeldung start={startKurz} />
+      {/* Schluss: zurueck zum Formular (steht nach dem Wegweiser). */}
+      <section className="bg-pearl-white pt-16 pb-4 sm:pt-20" aria-label="Eintragen">
+        <div className="mx-auto max-w-6xl px-6 text-center">
+          <a href="#anmelden" className="inline-flex items-center rounded-full bg-midnight-blue px-8 py-4 font-montserrat text-sm font-bold text-pearl-white transition-colors hover:bg-royal-navy">
+            Ich bin dabei – eintragen ↑
+          </a>
         </div>
       </section>
 

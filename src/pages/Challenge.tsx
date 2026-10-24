@@ -566,9 +566,9 @@ export default function Challenge() {
               Scrollen mitwandert (Claudia, 24.10.2026: "Icons untereinander ... aufklappen ... Schritt fuer Schritt nach unten"). */}
           {/* Eine ruhige, breite Linie: Auftakt, Tag 1-7, Tag 8 - mit dem frueheren "Ablauf auf einen Blick" darin
               (Claudia, 24.10.2026 20:20: "kombiniere das in die 7-Tage-Linie ... Spalten breiter, genauer beschrieben"). */}
-          <div className="mt-10 grid gap-6 md:grid-cols-[140px_minmax(0,1fr)]">
+          <div className="mt-10 grid items-start gap-6 md:grid-cols-[140px_minmax(0,1fr)]">
           <Helix aktiv={aktiverTag} ys={sprossen.ys} hoehe={sprossen.h} />
-          <ol ref={tageRef} className="grid list-none gap-3 p-0">
+          <ol ref={tageRef} className="grid list-none content-start gap-3 self-start p-0">
             <li className={`grid gap-1 bg-white px-5 py-5 text-midnight-blue sm:grid-cols-[170px_minmax(0,1fr)] sm:gap-6 sm:px-7 ${KACHEL}`}>
               <p className="font-montserrat text-sm font-extrabold">Start<span className="block font-bold text-midnight-blue/65">Mo., 26. Okt. · 19 Uhr</span></p>
               <div className="min-w-0">

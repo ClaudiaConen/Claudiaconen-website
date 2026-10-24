@@ -63,19 +63,23 @@ const INHALT: ZielgruppenInhalt = {
     },
   ],
 
-  // Kundenstimme aus einer 1:1-Zusammenarbeit, Saetze woertlich wie in SocialProof.tsx (Freigabe 22.09.2026).
+  // Drei Kundenstimmen statt einer (Claudia, 24.10.2026 18:42). Saetze woertlich wie in SocialProof.tsx (Freigabe 21./22.09.2026).
   kundenstimme: {
-    titel: 'Eine Rede vor technischem Publikum',
-    name: 'Dr.-Ing. Ann-Kathrin Andresen',
-    rolle: 'Verfahrenstechnikerin, Mentorin und Beraterin · Ing.-up',
+    titel: 'Die Scheu vor der Kamera abgelegt',
+    name: 'Verena Sommerfeld',
+    rolle: 'Bauingenieurin und Energieberaterin, Esslingen',
     saetze: [
-      'Ich habe mit Claudia zusammen eine Rede erstellt und einstudiert, die ich vor einem technischen Publikum halte. Ich bin Ingenieurin.',
-      'Die Atmosphäre ist sehr herzlich, sehr direkt und sehr intensiv, aber wir lachen auch viel gemeinsam und es macht sehr viel Spaß.',
-      'Mit vollem Herzblut dabei und fordert dich auch gerne heraus.',
+      'Ich habe sie wirklich abgelegt, diese Scheu vor der Kamera.',
+      'Ich interessiere mich für den Menschen dahinter, und zu dem rede ich. Und nicht dieses ganze Kopfkino. Das hast du mir wirklich sehr deutlich beigebracht.',
+      'Du bist wahnsinnig vertrauensvoll, und ich habe mich gleich gut aufgehoben gefühlt.',
     ],
-    video: { quelle: '/kundenstimmen/ann-kathrin-andresen.mp4', standbild: '/kundenstimmen/ann-kathrin-andresen-video.jpg', breite: 464, hoehe: 848 },
-    verweis: { text: 'Zur Webseite von Ann-Kathrin Andresen', ziel: 'https://ing-up.de/' },
+    video: { quelle: '/kundenstimmen/verena-sommerfeld.mp4', standbild: '/kundenstimmen/verena-sommerfeld-video.jpg', breite: 848, hoehe: 472 },
+    verweis: { text: 'Zur Webseite von Verena Sommerfeld', ziel: 'https://sommerfeld-energieberatung.de/' },
   },
+  weitereStimmen: [
+    { zitat: 'Die Texte fühlen sich für mich so an, als hätte ich sie selber gesagt.', name: 'Melanie Miniaci', rolle: 'Gründerin von Miderma' },
+    { zitat: 'Ich kann nur die Zusammenarbeit mit Claudia wärmstens empfehlen.', name: 'Mario Fürst', rolle: 'Gründer von Kloster Kitchen' },
+  ],
 
   schrittTitel: 'Du entscheidest, wie intensiv du arbeiten möchtest',
   schrittText: 'Buche deine 90 Minuten und wähle danach deinen Termin.',

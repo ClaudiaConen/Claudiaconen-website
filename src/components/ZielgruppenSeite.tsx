@@ -107,6 +107,8 @@ export type ZielgruppenInhalt = {
   fragenZusatz?: ('ausbildung' | 'redner')[];
   /** Telefonnummer im Kopfbereich - bei Trauerfall und Trauung entscheidet Erreichbarkeit. */
   telefonImKopf?: boolean;
+  /** Weitere kurze Zitate unter der Video-Stimme (Claudia, 24.10.2026: "Feedback von jemand anderem oder 3"). */
+  weitereStimmen?: { zitat: string; name: string; rolle: string }[];
   kundenstimme?: {
     titel: string;
     name: string;
@@ -493,7 +495,7 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
             <div className="mx-auto max-w-4xl px-6">
               <p className="flex items-center gap-3 font-montserrat text-xs font-semibold uppercase tracking-[0.22em] text-midnight-blue">
                 <span aria-hidden="true" className="h-[3px] w-7 rounded-full bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]" />
-                Kundenstimme
+                {inhalt.weitereStimmen?.length ? 'Kundenstimmen' : 'Kundenstimme'}
               </p>
               <h2
                 id="kundenstimme"
@@ -536,6 +538,19 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
                   </figcaption>
                 </div>
               </figure>
+              {inhalt.weitereStimmen && inhalt.weitereStimmen.length > 0 && (
+                <div className="mt-5 grid gap-5 md:grid-cols-2">
+                  {inhalt.weitereStimmen.map((w) => (
+                    <figure key={w.name} className="rounded-[10px] border border-[#D4AF37]/55 bg-white px-6 py-5">
+                      <blockquote className="font-inter text-base leading-relaxed text-midnight-blue">„{w.zitat}“</blockquote>
+                      <figcaption className="mt-3 border-t border-[#D4AF37]/40 pt-3">
+                        <p className="font-montserrat text-sm font-bold text-midnight-blue">{w.name}</p>
+                        <p className="font-inter text-sm text-midnight-blue/75">{w.rolle}</p>
+                      </figcaption>
+                    </figure>
+                  ))}
+                </div>
+              )}
             </div>
           </section>
         )}

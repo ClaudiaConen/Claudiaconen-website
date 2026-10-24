@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import LogoBand from '../components/LogoBand';
 import SocialProof from '../components/SocialProof';
-import { Link } from 'react-router-dom';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
@@ -141,14 +140,14 @@ const TAGE: Tag[] = [
     reflexion: 'Was hat sich verändert, als du nach dem Ausatmen gesprochen hast?',
   },
   {
-    titel: 'Deine Stimme', schwerpunkt: 'Betonung und Pause', icon: 'schritt-9',
+    titel: 'Deine Stimme', schwerpunkt: 'Niemand klingt wie du – nutze deine Betonung und Pausen.', icon: 'schritt-9',
     einstieg: 'Der Tag, an dem du dich zum ersten Mal wirklich hörst.',
     inhalt: 'Derselbe Satz klingt unsicher oder überzeugt – je nachdem, wie du ihn meinst. Dann die drei Wörter, die Gewicht bekommen, und die Pause danach. Die besten Redner reden nicht mehr als andere, sie schweigen mehr.',
     aufgabe: 'Sprich deine Kernbotschaft zweimal: einmal unsicher, einmal überzeugt. Dann markiere die drei Wörter, die Gewicht bekommen, und setz nach dem wichtigsten eine Pause. Poste die überzeugte Fassung.',
     reflexion: 'Wo hast du die Pause gesetzt – und was macht sie mit deinem Satz?',
   },
   {
-    titel: 'Storytelling', schwerpunkt: 'Der Kunde ist der Held', icon: 'schritt-4',
+    titel: 'Storytelling', schwerpunkt: 'Bilder können Lösungen aufzeigen – erwecke sie.', icon: 'schritt-4',
     einstieg: 'Wer sich selbst zum Helden macht, erzählt einen Lebenslauf.',
     inhalt: 'Ab hier wird aus dem Video eine Geschichte. Wer den Kunden zum Helden macht, erzählt etwas, das weitererzählt wird.',
     aufgabe: 'Erzähl eine Geschichte in fünf Stationen: ein Kunde, ein Moment, ein Satz, den er gesagt hat, was sich verändert hat, was er heute sagt. Eine Minute, nicht länger.',
@@ -303,14 +302,15 @@ function VideoKopf() {
     );
   }
   return (
-    <button type="button" onClick={() => setAn(true)} className="group relative block w-full" aria-label="Video abspielen: Claudia Conen über die erste Emotion im Gespräch">
-      <img src="/challenge/video-claudia-poster.jpg" alt="" width={540} height={960} className={cls} />
-      {/* Nur unten "Video abspielen", kein Text auf dem Bild (Claudia, 24.10.2026 20:11: "das wirkt alles ueberladen"). */}
-      <span aria-hidden="true" className={`absolute bottom-4 left-1/2 flex -translate-x-1/2 items-center gap-2.5 whitespace-nowrap rounded-full py-2.5 pl-2.5 pr-5 font-montserrat text-sm font-extrabold text-midnight-blue shadow-[0_10px_30px_-8px_rgba(0,0,0,0.7)] transition-transform group-hover:scale-105 ${GOLD}`}>
-        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#13233F]"><span className="ml-0.5 inline-block h-0 w-0 border-y-[7px] border-l-[11px] border-y-transparent border-l-[#F7E7CE]" /></span>
-        Video abspielen
-      </span>
-    </button>
+    <div>
+      <button type="button" onClick={() => setAn(true)} className="block w-full" aria-label="Video abspielen: Claudia Conen über die erste Emotion im Gespräch">
+        <img src="/challenge/video-claudia-poster.jpg" alt="" width={540} height={960} className={cls} />
+      </button>
+      {/* Knopf unter dem Video (Claudias Liste 24.10.2026 22:58, Punkt 2), gleiche Bauart wie die Knoepfe links. */}
+      <button type="button" onClick={() => setAn(true)} className={`mt-4 inline-flex w-full items-center justify-center gap-2.5 rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue shadow-[0_10px_24px_-12px_rgba(19,35,63,0.45)] transition-transform hover:-translate-y-px ${GOLD}`}>
+        <span aria-hidden="true" className="inline-block h-0 w-0 border-y-[6px] border-l-[10px] border-y-transparent border-l-[#13233F]" /> Video abspielen
+      </button>
+    </div>
   );
 }
 
@@ -394,16 +394,6 @@ function Abschnitt({ id, className, style, label, welle, gold, children }: { id?
     </section>
   );
 }
-
-/** Kleines Foto rechts neben der Ueberschrift eines Abschnitts - nie Text ueber einem riesigen Bild. */
-function Kopfbild({ datei, alt, quer }: { datei: string; alt: string; quer?: boolean }) {
-  return (
-    <figure className={`m-0 justify-self-center overflow-hidden bg-[#13233F] shadow-[0_18px_40px_-18px_rgba(212,175,55,0.6)] sm:justify-self-end ${KACHEL} ${quer ? 'aspect-[3/2] w-[clamp(220px,36vw,380px)]' : 'aspect-[9/16] w-[clamp(150px,22vw,210px)]'}`}>
-      <img src={`/unverwechselbar/${datei}.webp`} alt={alt} width={quer ? 900 : 360} height={quer ? 600 : 640} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.04]" />
-    </figure>
-  );
-}
-const KOPF = 'grid items-end gap-6 sm:grid-cols-[minmax(0,1fr)_auto] sm:gap-10';
 
 function Haken() {
   return <span aria-hidden="true" className="mt-2 h-2.5 w-2.5 flex-none rotate-[-45deg] border-b-2 border-r-2 border-[#C9A961]" />;
@@ -492,7 +482,8 @@ export default function Challenge() {
                 <span className="gold-text-animated text-[6rem] leading-[0.85] sm:text-[9rem]">7</span>
                 <span className="text-[2.1rem] leading-[1.04] sm:text-5xl">Tage für deine<br />Wirkungskraft</span>
               </h1>
-              <p className="mt-5 font-cormorant text-2xl italic leading-snug sm:text-3xl">– weil Perfektion klickbar ist<br className="hidden sm:block" /> und Persönlichkeit Vertrauen weckt.</p>
+              {/* Nur zwei Schriften im Kopf: Montserrat und Inter (Claudias Liste 24.10.2026 22:58, Punkt 1). */}
+              <p className="mt-5 font-montserrat text-xl font-bold leading-snug text-midnight-blue/85 sm:text-2xl">Weil Perfektion klickbar ist und Persönlichkeit Vertrauen weckt.</p>
               <p className="mt-4 max-w-xl font-inter text-lg leading-relaxed text-midnight-blue/85">
                 Überzeugende Rhetorik, die Vertrauen weckt – authentisch, echt, mit Leichtigkeit und mit KI-Abkürzungen.
               </p>
@@ -503,19 +494,16 @@ export default function Challenge() {
                 <a href="#anmelden" className={`inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue shadow-[0_10px_24px_-12px_rgba(19,35,63,0.45)] transition-transform hover:-translate-y-px ${GOLD}`}>
                   Nutze die Video-Challenge →
                 </a>
-                <a href="#programm" className="inline-flex items-center rounded-full border-2 border-[#C9A961] px-6 py-3.5 font-montserrat text-sm font-bold text-midnight-blue transition-colors hover:bg-white">
+                <a href="#programm" className="inline-flex items-center rounded-full border-2 border-[#C9A961] px-7 py-[14px] font-montserrat text-sm font-bold text-midnight-blue transition-colors hover:bg-white">
                   Die 7 Tage ansehen
                 </a>
               </div>
-              <p className="mt-7 font-inter text-sm text-midnight-blue/70">Mit Claudia Conen · 37 Jahre Coach und Trainerin · zu hören bei Sat.1 und RTL</p>
             </div>
             {/* Claudias Video komplett (Claudia, 24.10.2026 19:26), darunter der Weg zum Kalender (19:47). */}
             <figure className="order-first mx-auto w-60 sm:w-72 md:order-none md:w-[320px]">
               <VideoKopf />
-              <figcaption className="mt-4 text-center">
-                <a href="https://meet.brevo.com/claudia-conen" target="_blank" rel="noopener" className="inline-flex items-center gap-2 font-montserrat text-sm font-bold text-midnight-blue underline decoration-[#C9A961] decoration-2 underline-offset-4 hover:text-royal-navy">
-                  Ruf mich an – zum Kalender →
-                </a>
+              <figcaption className="mt-4 text-center font-inter text-[15px] text-midnight-blue">
+                Du bist unsicher? <a href="tel:+4916093102073" className="font-bold underline decoration-[#C9A961] decoration-2 underline-offset-4 hover:text-royal-navy">Dann ruf mich an.</a>
               </figcaption>
             </figure>
           </div>
@@ -534,35 +522,21 @@ export default function Challenge() {
       <Abschnitt id="loesung" className="bg-[#13233F] py-14 text-pearl-white sm:py-20" label="loesung-titel">
         <div className="mx-auto max-w-4xl px-6 text-center">
           <div className="flex justify-center"><Kicker text="Die sieben Tage" /></div>
-          <h2 id="loesung-titel" className="cc-zeile mx-auto mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl" style={{ ['--z' as string]: 0 }}>
-            Du entscheidest: eine Minute bis 30 Minuten am Tag – investiert in deine Wirkungskraft.
-          </h2>
-          <ol className="mx-auto mt-10 grid max-w-2xl list-none gap-3 p-0 font-cormorant text-2xl italic leading-snug sm:text-3xl">
-            {['Aus der Selbsterkenntnis', 'entsteht Selbstbewusstsein,', 'für Selbstwirksamkeit,', 'für Selbstvertrauen –', 'um Vertrauen bei Kunden zu wecken.'].map((z, k) => (
-              <li key={z} className={`cc-zeile ${k === 4 ? 'not-italic font-montserrat text-xl font-extrabold text-[#C9A961] sm:text-2xl' : 'text-pearl-white/90'}`} style={{ ['--z' as string]: k + 1 }}>{z}</li>
-            ))}
-          </ol>
+          {/* Claudias Wortlaut (Liste 24.10.2026 22:58, Punkt 4); die Pointe darunter ist mein Vorschlag (Punkt 6, offen). */}
+          <h2 id="loesung-titel" className="cc-zeile mt-5 font-montserrat text-5xl font-extrabold leading-none sm:text-7xl" style={{ ['--z' as string]: 0 }}>Du entscheidest.</h2>
+          <p className="cc-zeile mx-auto mt-6 max-w-2xl font-inter text-xl leading-relaxed text-pearl-white/90 sm:text-2xl" style={{ ['--z' as string]: 1 }}>Ob du eine Minute oder 30 Minuten am Tag in deine Wirkungskraft investierst.</p>
+          <p className="cc-zeile mx-auto mt-8 max-w-2xl font-inter text-lg leading-relaxed text-pearl-white/80" style={{ ['--z' as string]: 2 }}>Wer sich selbst erkennt, tritt sicherer auf. Wer sicher auftritt, weckt Vertrauen.</p>
+          <p className="cc-zeile mt-3 font-montserrat text-xl font-extrabold text-[#C9A961] sm:text-2xl" style={{ ['--z' as string]: 3 }}>Und Vertrauen ist das Gold von morgen.</p>
         </div>
       </Abschnitt>
 
       {/* Sieben Schritte - direkt unter dem Kopf (Claudia, 23.10.2026: "bring die 3-D-Icons weiter nach oben"). Claudia, 22.09.2026 10:55 UTC: "dieser grau-braune Ton hinter dem Programm ... in Weiss
           austauschen" und "viel weiter nach oben, damit die direkt wissen, warum sie dabei sein sollen". */}
-      <Abschnitt id="programm" className="bg-white py-16 text-midnight-blue sm:py-24" label="programm-titel">
+      <Abschnitt id="programm" className="bg-white py-12 text-midnight-blue sm:py-16" label="programm-titel">
         <div className="mx-auto max-w-6xl px-6">
-          <div className={KOPF}>
-            <div>
-              <Kicker text="Das Programm" hell />
-              <h2 id="programm-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">
-                {/* Kein Ergebnisversprechen (Claudia, 24.10.2026: "du bleibst im Kopf ... ist zu hoch gegriffen"). */}
-                Du wirkst immer. Die Frage ist nur: wie?
-                <span className="mt-1 block underline decoration-[#C9A961] decoration-[4px] underline-offset-[6px]">Sieben Tage – sieben Schritte.</span>
-              </h2>
-              <p className="mt-4 max-w-2xl font-inter text-lg text-midnight-blue">
-                Jeden Tag ein Audio-Impuls von mir mit einem Gedanken, in dem du dich wiedererkennst, und einer konkreten Aufgabe. Die Inhalte öffnen sich in der Challenge-Woche, jeden Tag einer.
-              </p>
-            </div>
-            <Kopfbild datei="challenge-handy" alt="Claudia Conen nimmt sich mit dem Handy auf" />
-          </div>
+          {/* Wegweiser weiter nach oben (Liste Punkt 4): nur noch eine knappe Ueberschrift ueber der Linie. */}
+          <Kicker text="Dein Wegweiser" hell />
+          <h2 id="programm-titel" className="mt-4 font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">Sieben Tage – sieben Schritte.</h2>
           {/* Die finale Kachel geht ueber die volle Breite (Claudia, 22.09.2026 13:05 UTC: "so breit wie drei ... von ganz
               links bis ganz rechts, das ist ja der finale"); die Inhalte oeffnen sich je an ihrem Tag der Challenge-Woche. */}
           {/* Die sieben Tage untereinander, mit 3-D-Icon, zum Aufklappen; links die goldene Schiene mit Pfeil, der beim
@@ -616,14 +590,25 @@ export default function Challenge() {
             <li className={`grid gap-1 bg-white px-5 py-5 text-midnight-blue sm:grid-cols-[170px_minmax(0,1fr)] sm:gap-6 sm:px-7 ${KACHEL}`}>
               <p className="font-montserrat text-sm font-extrabold">Tag 8 · zusätzlich<span className="block font-bold text-midnight-blue/65">Di., 3. Nov.</span></p>
               <div className="min-w-0">
-                <p className="font-montserrat text-lg font-extrabold">Netzwerken</p>
-                <p className="mt-1 font-inter text-[15px] leading-relaxed text-midnight-blue/80">Dein Werbetag in der Gruppe: Stell dein Business vor.</p>
+                <div className="flex items-start gap-4">
+                  <img src="/icons/schritt-2.webp" alt="" width={256} height={256} loading="lazy" decoding="async" className="mt-0.5 h-11 w-11 flex-none" />
+                  <div className="min-w-0">
+                    <p className="font-montserrat text-lg font-extrabold">Netzwerken</p>
+                    <p className="mt-1 font-inter text-[15px] leading-relaxed text-midnight-blue/80">Dein Werbetag in der Gruppe: Stell dein Business vor.</p>
+                  </div>
+                </div>
               </div>
             </li>
           </ol>
           </div>
-          <p className="mt-5 font-inter text-[15px] text-midnight-blue/80">Jeden Tag bis 9 Uhr: Audio-Impuls und Workbook in deiner Gruppe – wahlweise bei WhatsApp oder Telegram. Für dein 1-Minuten-Video hast du 24 Stunden Zeit.</p>
+          <div className="mt-8 grid items-center gap-6 sm:grid-cols-[180px_minmax(0,1fr)]">
+            {/* Die sieben Workbooks (Claudia, 24.10.2026 23:00: "das fehlt noch"). */}
+            <img src="/challenge/sieben-workbooks.webp" alt="Die sieben Workbooks der Challenge" width={600} height={400} loading="lazy" decoding="async" className="mx-auto w-44 sm:w-full" />
+            <div className="min-w-0">
+              <p className="font-inter text-[15px] text-midnight-blue/80">Jeden Tag bis 9 Uhr: Audio-Impuls und Workbook in deiner Gruppe – wahlweise bei WhatsApp oder Telegram. Für dein 1-Minuten-Video hast du 24 Stunden Zeit.</p>
           <p className="mt-2 font-inter text-[15px] text-midnight-blue/80">Zusatz-Geschenk: der Buchauszug „Entdecke deine Stimmwirkung“ aus dem Brainself-Buch.</p>
+            </div>
+          </div>
           {/* Formular direkt nach dem Wegweiser: dort faellt die Entscheidung (Claudia, 24.10.2026 20:08: "an welcher Stelle optimal"). */}
           <div id="anmeldung" className="mt-10">
             {/* Echte Zahl von Claudia (24.10.2026 21:59: "Es sind 32 Personen eingetragen") - bis zum Start nachtragen. */}
@@ -678,14 +663,14 @@ export default function Challenge() {
           </figure>
           <div className="min-w-0">
             <Kicker text="Deine Trainerin" hell />
-            <h2 id="warum" className="mt-5 font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">Claudia Conen,<br />genannt „die Umsatzstimme“</h2>
-            <p className="mt-3 font-montserrat text-lg font-bold text-midnight-blue/80">Expertin für menschliche Wirkungskraft im KI-Zeitalter.</p>
-            {/* Satz zu den 39 Jahren raus (gehoert zur Entfuehrungs-Geschichte; Claudia 24.10.2026 22:47: "der Text stimmt nicht"). Hier kommt ihr eigener Satz hin. */}
-            <ul className="mt-7 grid list-none gap-2 p-0 font-inter text-[16px] text-midnight-blue">
-              <li className="flex items-center gap-3"><span aria-hidden="true" className="h-2 w-2 flex-none rotate-45 bg-[#C9A961]" />37 Jahre als Coach und Trainerin</li>
-              <li className="flex items-center gap-3"><span aria-hidden="true" className="h-2 w-2 flex-none rotate-45 bg-[#C9A961]" />Zu hören unter anderem bei Sat.1 und RTL</li>
-            </ul>
-            <Link to="/ueber-mich" className="mt-7 inline-flex items-center font-montserrat text-sm font-bold underline decoration-[#C9A961] decoration-2 underline-offset-4 hover:text-royal-navy">Mehr über Claudia →</Link>
+            <h2 id="warum" className="mt-5 font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">Claudia Conen</h2>
+            {/* Claudias Originaltext, wortgleich (Liste 24.10.2026 22:58, Punkt 7) - nicht umformulieren. */}
+            <div className="mt-6 grid gap-4 font-inter text-lg leading-relaxed text-midnight-blue">
+              <p>Stell dir vor, es gibt Menschen, die sich im Gehirn speichern, die begeistern, faszinieren, motivieren und schockieren.</p>
+              <p>Mein ganzes Leben lang beschäftige ich mich damit, dass manche Menschen eine Wirkungskraft haben, die unvergesslich ist, und andere nicht.</p>
+              <p className="font-semibold">Und das habe ich zu meinem Beruf gemacht und darum begleite ich dich.</p>
+            </div>
+            <a href="/ueber-mich" className="mt-8 inline-flex items-center rounded-full border-2 border-[#C9A961] px-7 py-[14px] font-montserrat text-sm font-bold text-midnight-blue transition-colors hover:bg-pearl-white">Mehr über Claudia – die Umsatzstimme →</a>
           </div>
         </div>
       </Abschnitt>

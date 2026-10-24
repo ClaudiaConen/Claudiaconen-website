@@ -59,7 +59,7 @@ export default function ChallengeAnmeldung({ start, onEingetragen }: { start: st
     try { window.localStorage.setItem(EINGETRAGEN_SCHLUESSEL, '1'); } catch { /* privater Modus o. ae. */ }
     onEingetragen?.();
     // Eigene Danke-Seite mit Gruppenwahl und Wegweiser (Claudia, 24.10.2026 20:00).
-    navigate('/challenge/danke', { state: { vorname: vorname.trim() } });
+    navigate('/challenge/danke', { state: { vorname: vorname.trim(), angemeldet: true } });
   }
 
   if (zustand === 'fertig') {
@@ -105,31 +105,36 @@ export default function ChallengeAnmeldung({ start, onEingetragen }: { start: st
 
   return (
     <form id="anmelden" onSubmit={absenden} className="mt-3 rounded-[10px] border border-[#C9A961]/55 bg-[#13233F] px-5 py-6 text-pearl-white sm:px-7 sm:py-7" aria-labelledby="anmelden-titel">
-      <p className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#C9A961]">Anmeldung · kostenfrei</p>
-      <h3 id="anmelden-titel" className="mt-2 font-montserrat text-xl font-extrabold leading-tight text-white sm:text-2xl">
+      {/* Zwei Schritte sichtbar machen (Claudias Liste 24.10.2026 22:58, Punkt 8). */}
+      <ol className="flex flex-wrap items-center gap-3 p-0 font-montserrat text-xs font-extrabold uppercase tracking-[0.14em]" aria-label="Zwei Schritte">
+        <li className="flex items-center gap-2 text-[#C9A961]"><span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#C9A961] text-[#13233F]">1</span>Anmelden</li>
+        <li aria-hidden="true" className="h-px w-8 bg-pearl-white/30" />
+        <li className="flex items-center gap-2 text-pearl-white/60"><span className="flex h-6 w-6 items-center justify-center rounded-full border border-pearl-white/40">2</span>Gruppe wählen</li>
+      </ol>
+      <h3 id="anmelden-titel" className="mt-4 font-montserrat text-xl font-extrabold leading-tight text-white sm:text-2xl">
         Ich bin dabei.
       </h3>
       <p className="mt-2 max-w-2xl font-inter text-[15px] leading-relaxed text-pearl-white/85">
-        Trag dich ein, damit ich weiß, wer mitmacht – auch wenn du schon in der Gruppe bist. Danach geht es direkt in deine Gruppe, bei WhatsApp oder Telegram.
+        Melde dich zur kostenfreien 7-Tage-Challenge an. Nach deiner Anmeldung kannst du deine Gruppe wählen: WhatsApp oder Telegram.
       </p>
       <div className="mt-5 grid gap-3 sm:grid-cols-3">
         <label className="block">
-          <span className="sr-only">Vorname</span>
-          <input id="challenge-vorname" name="vorname" type="text" required autoComplete="given-name" placeholder="Vorname" value={vorname} onChange={(e) => setVorname(e.target.value)} className={FELD} />
+          <span className="mb-1.5 block font-montserrat text-xs font-bold text-pearl-white">Vorname <span className="font-inter font-normal text-pearl-white/70">(Pflichtfeld)</span></span>
+          <input id="challenge-vorname" name="vorname" type="text" required autoComplete="given-name" placeholder="z. B. Anna" value={vorname} onInvalid={(e) => e.currentTarget.setCustomValidity('Bitte trag deinen Vornamen ein.')} onInput={(e) => e.currentTarget.setCustomValidity('')} onChange={(e) => setVorname(e.target.value)} className={FELD} />
         </label>
         <label className="block">
-          <span className="sr-only">E-Mail</span>
-          <input id="challenge-email" name="email" type="email" required autoComplete="email" placeholder="E-Mail" value={email} onChange={(e) => setEmail(e.target.value)} className={FELD} />
+          <span className="mb-1.5 block font-montserrat text-xs font-bold text-pearl-white">E-Mail <span className="font-inter font-normal text-pearl-white/70">(Pflichtfeld)</span></span>
+          <input id="challenge-email" name="email" type="email" required autoComplete="email" placeholder="name@beispiel.de" value={email} onInvalid={(e) => e.currentTarget.setCustomValidity('Bitte trag eine gültige E-Mail-Adresse ein, z. B. name@beispiel.de.')} onInput={(e) => e.currentTarget.setCustomValidity('')} onChange={(e) => setEmail(e.target.value)} className={FELD} />
         </label>
         <label className="block">
-          <span className="sr-only">Handynummer (freiwillig)</span>
-          <input id="challenge-telefon" name="telefon" type="tel" autoComplete="tel" placeholder="Handynummer (damit ich dich in der Gruppe erkenne)" value={telefon} onChange={(e) => setTelefon(e.target.value)} className={FELD} />
+          <span className="mb-1.5 block font-montserrat text-xs font-bold text-pearl-white">Handynummer <span className="font-inter font-normal text-pearl-white/70">(freiwillig)</span></span>
+          <input id="challenge-telefon" name="telefon" type="tel" autoComplete="tel" placeholder="damit ich dich in der Gruppe erkenne" value={telefon} onChange={(e) => setTelefon(e.target.value)} className={FELD} />
         </label>
       </div>
       {/* Ein Haekchen (Claudia 15.10.2026): Die Challenge selbst braucht keine Einwilligung (Art. 6 Abs. 1 lit. b DSGVO), nur einen
           Hinweis. Werbung bleibt ein eigenes, freiwilliges Haekchen (Art. 7 Abs. 2 DSGVO, § 7 UWG; nie buendeln, OLG Muenchen 29 U 599/24). */}
       <p className="mt-4 font-inter text-sm leading-relaxed text-pearl-white/85">
-        Mit Klick auf „Eintragen“ meldest du dich zur Challenge an. Deine Angaben werden nur dafür gespeichert. Die Challenge läuft in einer WhatsApp-Gruppe (Meta) oder, wenn du magst, in einer Telegram-Gruppe: Dort sehen die anderen Teilnehmer deinen Namen, deine Nummer und deine Videos. Widerruf jederzeit an claudiaconen@umsatzstimme.de.{' '}
+        Mit Klick auf „Jetzt kostenfrei anmelden“ meldest du dich zur Challenge an. Deine Angaben werden nur dafür gespeichert. Die Challenge läuft in einer WhatsApp-Gruppe (Meta) oder, wenn du magst, in einer Telegram-Gruppe: Dort sehen die anderen Teilnehmer deinen Namen, deine Nummer und deine Videos. Widerruf jederzeit an claudiaconen@umsatzstimme.de.{' '}
           <Link to="/datenschutz" className="underline decoration-[#C9A961]/60 underline-offset-2 hover:decoration-[#F7E7CE]">Datenschutz</Link>
       </p>
       <label className="mt-2 flex items-start gap-3 font-inter text-sm leading-relaxed text-pearl-white/85">
@@ -138,7 +143,7 @@ export default function ChallengeAnmeldung({ start, onEingetragen }: { start: st
       </label>
       <div className="mt-5 flex flex-wrap items-center gap-4">
         <button type="submit" disabled={zustand === 'sendet'} className={`inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue transition-transform hover:-translate-y-px disabled:opacity-70 ${GOLD}`}>
-          {zustand === 'sendet' ? 'Wird eingetragen …' : 'Eintragen und in die Gruppe'}
+          {zustand === 'sendet' ? 'Wird angemeldet …' : 'Jetzt kostenfrei anmelden'}
         </button>
         {/* Letzte Huerde vor dem Klick: Kosten und Druck ausraeumen ("Kein Verkaufsdruck", Claudias Wortlaut 24.10.2026). */}
         <span className="font-montserrat text-xs font-bold uppercase tracking-[0.12em] text-pearl-white/85">Kostenfrei · Kein Verkaufsdruck</span>
@@ -157,7 +162,7 @@ export default function ChallengeAnmeldung({ start, onEingetragen }: { start: st
       </div>
       {zustand === 'fehler' && (
         <p role="alert" className="mt-4 font-inter text-sm text-[#F7E7CE]">
-          Das Eintragen hat gerade nicht geklappt. Geh trotzdem in die Gruppe – oder schreib mir an claudiaconen@umsatzstimme.de.
+          Die Anmeldung hat gerade nicht geklappt. Bitte versuch es gleich noch einmal oder schreib mir an claudiaconen@umsatzstimme.de.
         </p>
       )}
     </form>

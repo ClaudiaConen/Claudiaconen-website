@@ -30,6 +30,22 @@ const WEG: { tag: string; datum: string; titel: string; zusatz?: string }[] = [
 export default function ChallengeDanke() {
   const ort = useLocation();
   const vorname = ((ort.state as { vorname?: string } | null)?.vorname ?? '').trim();
+  // Gruppenzugaenge nur nach erfolgreicher Anmeldung (Claudias Liste, Punkt 9). Wer die Adresse direkt oeffnet, wird zum Formular geschickt.
+  const angemeldet = Boolean(ort.state && (ort.state as { angemeldet?: boolean }).angemeldet);
+  if (!angemeldet) {
+    return (
+      <div className="min-h-screen bg-white text-midnight-blue">
+        <SEO title="Anmeldung zur Challenge" description="Melde dich zuerst zur kostenfreien 7-Tage-Challenge an." path="/challenge/danke" noindex />
+        <Navigation hell />
+        <main className="mx-auto max-w-2xl px-6 pt-36 pb-24 text-center">
+          <h1 className="font-montserrat text-3xl font-extrabold">Bitte melde dich zuerst an.</h1>
+          <p className="mt-4 font-inter text-lg">Nach deiner Anmeldung kannst du hier deine Gruppe wählen: WhatsApp oder Telegram.</p>
+          <Link to="/challenge#anmelden" className={`mt-8 inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue ${GOLD}`}>Zur Anmeldung →</Link>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
   return (
     <div className="min-h-screen bg-white text-midnight-blue">
       <SEO title="Danke – du bist eingetragen" description="Dein nächster Schritt in der 7-Tage-Challenge: Wähle deine Gruppe bei WhatsApp oder Telegram." path="/challenge/danke" noindex />
@@ -37,8 +53,13 @@ export default function ChallengeDanke() {
 
       <header className="bg-[#13233F] pt-28 pb-12 text-pearl-white sm:pt-32 sm:pb-16">
         <div className="mx-auto max-w-4xl px-6 text-center">
-          <p className="font-montserrat text-sm font-extrabold uppercase tracking-[0.18em] text-[#C9A961]">Video-Challenge · eingetragen</p>
-          <h1 className="mt-4 font-montserrat text-3xl font-extrabold leading-tight sm:text-5xl">Danke{vorname ? `, ${vorname}` : ''} – du bist dabei.</h1>
+          <ol className="mx-auto flex w-fit flex-wrap items-center gap-3 p-0 font-montserrat text-xs font-extrabold uppercase tracking-[0.14em]" aria-label="Zwei Schritte">
+            <li className="flex items-center gap-2 text-pearl-white/70"><span className="flex h-6 w-6 items-center justify-center rounded-full border border-[#C9A961] text-[#C9A961]">✓</span>Anmelden</li>
+            <li aria-hidden="true" className="h-px w-8 bg-pearl-white/30" />
+            <li className="flex items-center gap-2 text-[#C9A961]"><span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#C9A961] text-[#13233F]">2</span>Gruppe wählen</li>
+          </ol>
+          {/* Wortlaut aus Claudias Liste (24.10.2026 22:58, Punkt 9). */}
+          <h1 className="mt-6 font-montserrat text-3xl font-extrabold leading-tight sm:text-5xl">{vorname ? `${vorname}, du` : 'Du'} bist angemeldet.<br />Wähle jetzt deine Gruppe.</h1>
           <p className={`mt-6 inline-block rounded-md px-4 py-3 font-montserrat text-sm font-extrabold uppercase tracking-[0.06em] text-midnight-blue sm:text-base ${GOLD}`}>
             Start: Montag, 26. Oktober 2026 · 19 Uhr · live im Zoom
           </p>
@@ -47,12 +68,18 @@ export default function ChallengeDanke() {
 
       <section className="py-14 sm:py-20" aria-labelledby="gruppe-titel">
         <div className="mx-auto max-w-4xl px-6">
-          <p className="text-center font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] text-midnight-blue/70">Schritt 1 · deine Gruppe</p>
-          <h2 id="gruppe-titel" className="mt-3 text-center font-montserrat text-3xl font-extrabold sm:text-4xl">Wo fühlst du dich wohl?</h2>
+          <h2 id="gruppe-titel" className="text-center font-montserrat text-3xl font-extrabold sm:text-4xl">Wo fühlst du dich wohl?</h2>
+          <div className="mx-auto mt-6 max-w-2xl rounded-[12px] bg-pearl-white px-6 py-5 font-inter text-[15px] leading-relaxed">
+            <p className="font-bold">Wähle deine bevorzugte Gruppe aus.</p>
+            <p className="mt-1">Am Handy: Tippe auf den passenden Gruppenlink oder Button.</p>
+            <p>Am Computer: Scanne den passenden QR-Code mit deinem Handy.</p>
+            <p className="mt-1">Tritt anschließend der ausgewählten Gruppe bei, damit du die Informationen zur Challenge erhältst.</p>
+            <p className="mt-3 font-semibold text-midnight-blue/80">Wichtig: Die Anmeldung allein löst noch keinen Gruppenbeitritt aus.</p>
+          </div>
           <div className="mt-9 grid gap-5 sm:grid-cols-2">
             {[
-              { name: 'WhatsApp', zusatz: 'empfohlen – dort ist am meisten los', link: WHATSAPP, qr: '/challenge/qr-whatsapp.png', voll: true },
-              { name: 'Telegram', zusatz: 'ohne WhatsApp – gleiche Inhalte, gleiches Feedback', link: TELEGRAM, qr: '/challenge/qr-telegram.png', voll: false },
+              { name: 'WhatsApp', zusatz: 'empfohlen – dort ist am meisten los', link: WHATSAPP, anzeige: 'chat.whatsapp.com/IWSuqZ9ZrMn3dYNgVY1sp6', qr: '/challenge/qr-whatsapp.png', voll: true },
+              { name: 'Telegram', zusatz: 'ohne WhatsApp – gleiche Inhalte, gleiches Feedback', link: TELEGRAM, anzeige: 't.me/+Tn_rHmElfidjYzcy', qr: '/challenge/qr-telegram.png', voll: false },
             ].map((g) => (
               <div key={g.name} className={`flex flex-col items-center gap-4 rounded-[12px] border-2 px-6 py-7 text-center ${g.voll ? 'border-[#C9A961]' : 'border-midnight-blue/15'}`}>
                 <p className="font-montserrat text-2xl font-extrabold">{g.name}</p>
@@ -60,13 +87,13 @@ export default function ChallengeDanke() {
                 <a href={g.link} target="_blank" rel="noopener noreferrer" aria-label={`QR-Code: zur ${g.name}-Gruppe`}>
                   <img src={g.qr} alt={`QR-Code ${g.name}-Gruppe`} width={328} height={328} className="h-36 w-36 rounded-md bg-white ring-1 ring-midnight-blue/10" />
                 </a>
+                <a href={g.link} target="_blank" rel="noopener noreferrer" className="break-all font-inter text-sm text-midnight-blue underline decoration-[#C9A961] underline-offset-4">{g.anzeige}</a>
                 <a href={g.link} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center rounded-full px-7 py-3.5 font-montserrat text-sm font-bold ${g.voll ? `${GOLD} text-midnight-blue` : 'border-2 border-midnight-blue text-midnight-blue hover:bg-midnight-blue hover:text-pearl-white'}`}>
                   Zur {g.name}-Gruppe →
                 </a>
               </div>
             ))}
           </div>
-          <p className="mt-4 text-center font-inter text-sm text-midnight-blue/65">Am Handy: Knopf antippen. Am Computer: QR-Code mit dem Handy scannen.</p>
         </div>
       </section>
 

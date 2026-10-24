@@ -5,7 +5,6 @@ import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import Brotkrumen from '../components/Brotkrumen';
-import WorkbookBlaettern from '../components/WorkbookBlaettern';
 import Stimmwelle from '../components/Stimmwelle';
 import ChallengeAnmeldung from '../components/ChallengeAnmeldung';
 import FotoReihen from '../components/FotoReihen';
@@ -62,7 +61,6 @@ function FeedbackPlakette() {
  *  von ihr am 22.09.2026, 02:20 UTC). Aendert sie den Link, hier tauschen. */
 /** Workbook "Entdecke deine Stimmwirkung" (Brainself-Buchauszug), korrigierte Fassung vom 22.09.2026
  *  (Aufgabe 18: keine Millisekunden-Zahl, kein "Opfer", 37 Jahre, Nachtblau). Blaettern: WorkbookBlaettern.tsx. */
-const WORKBOOK_PDF = '/unverwechselbar/workbook-entdecke-deine-stimmwirkung.pdf';
 
 
 /** Fuenf Klapp-Kacheln (Claudia, 22.09.2026 13:13 UTC: "sieht sehr gequetscht aus ... als Klappkachel, das Icon neben
@@ -218,7 +216,6 @@ const MORGEN = {
 };
 
 /** Die Programm-Kacheln sind die sieben Tage (Claudias Briefing) - eine Liste, ein Inhalt. */
-const SCHRITTE = TAGE;
 
 /** Tipp 1, vor Tag 1 - Claudias Diktat vom 22.09.2026, 11:17 UTC ("Der Tipp soll Gold leuchten", aufklappbar,
  *  "das kannst du auch jetzt schon tun"). Anleitung fuer WhatsApp in vier Schritten; ihre Nummer aus dem Flyer. */
@@ -262,6 +259,16 @@ const NICHT_FUER = [
   'erwartest, dass die KI das Sprechen für dich übernimmt',
 ];
 
+
+/** Goldene Linie links neben den sieben Tagen; der Pfeil wandert beim Scrollen mit (setzt --p). */
+function Schiene() {
+  return (
+    <div className="cc-schiene" aria-hidden="true">
+      <span className="cc-schiene-wort">Deine sieben Tage</span>
+      <span className="cc-schiene-linie"><span className="cc-schiene-pfeil" data-pfeil>➜</span></span>
+    </div>
+  );
+}
 
 /** Unter den Tagen: kein direkter Weg in die Gruppe, nur zurueck zum Eintragen (Claudia, 22.09.2026). */
 function EintragBlock() {
@@ -377,7 +384,6 @@ function Haken() {
 }
 
 export default function Challenge() {
-  const [buchOffen, setBuchOffen] = useState(false);
   // Sprungmarke aus der Adresse (z. B. /challenge#anmelden vom Laufband der Startseite):
   // ScrollToTop springt bei jedem Seitenwechsel nach oben, deshalb hier nach dem Aufbau zum Ziel.
   useEffect(() => {
@@ -394,6 +400,26 @@ export default function Challenge() {
   // "nicht 'nach dem Eintragen', sondern 'in der Challenge-Woche' - vorher nicht") - siehe `frei`.
   // Welche Tage sind freigeschaltet? Beim Vorrendern gilt das Bau-Datum, im Browser der echte Tag.
   const frei = TAGE.map((_, i) => heute >= freischaltung(heute, i));
+  const listeRef = useRef<HTMLOListElement>(null);
+  // Pfeil auf der Schiene folgt dem Scrollen: 0 % am Anfang der Liste, 100 % am Ende.
+  useEffect(() => {
+    const liste = listeRef.current;
+    const pfeil = liste?.parentElement?.querySelector<HTMLElement>('[data-pfeil]');
+    if (!liste || !pfeil || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    let raf = 0;
+    const setzen = () => {
+      raf = 0;
+      const r = liste.getBoundingClientRect();
+      const mitte = window.innerHeight * 0.45;
+      const p = Math.min(1, Math.max(0, (mitte - r.top) / Math.max(1, r.height)));
+      pfeil.style.setProperty('--p', `${(p * 100).toFixed(1)}%`);
+    };
+    const onScroll = () => { if (!raf) raf = window.requestAnimationFrame(setzen); };
+    setzen();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => { window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll); if (raf) window.cancelAnimationFrame(raf); };
+  }, []);
 
   const strukturierteDaten = {
     '@context': 'https://schema.org',
@@ -485,63 +511,63 @@ export default function Challenge() {
           </div>
           {/* Die finale Kachel geht ueber die volle Breite (Claudia, 22.09.2026 13:05 UTC: "so breit wie drei ... von ganz
               links bis ganz rechts, das ist ja der finale"); die Inhalte oeffnen sich je an ihrem Tag der Challenge-Woche. */}
-          <ol className="mt-9 grid list-none gap-3.5 p-0 sm:grid-cols-2 lg:grid-cols-3">
-            {SCHRITTE.map((s, i) => {
-              const letzter = i === SCHRITTE.length - 1;
-              return (
-                <li
-                  key={s.titel}
-                  style={{ ['--i' as string]: i }}
-                  className={`cc-stufe p-6 hover:-translate-y-0.5 ${KACHEL} ${letzter ? `${FLAECHE} text-midnight-blue sm:col-span-2 lg:flex lg:items-start lg:gap-8` : 'bg-pearl-white text-midnight-blue'}`}
-                >
-                  {/* 3-D-Icons nach den Flyer-Piktogrammen (Claudias Impuls 22.09.2026 11:48 UTC), erzeugt mit
-                      skripte/schritt_icons.py ueber ihren Gemini-Schluessel. */}
-                  <div className="flex flex-none items-center gap-4">
-                    <img src={`/icons/${s.icon}.webp`} alt="" width={256} height={256} loading="lazy" decoding="async" className={`flex-none drop-shadow-[0_8px_12px_rgba(10,22,40,0.25)] ${letzter ? 'h-16 w-16 lg:h-24 lg:w-24' : 'h-16 w-16'}`} />
-                    <span aria-hidden="true" className={`font-montserrat text-3xl font-black ${letzter ? 'text-midnight-blue/40' : 'text-[#C9A961]'}`}>{String(i + 1).padStart(2, '0')}</span>
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    {letzter && <p className="mt-3 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-midnight-blue/80 lg:mt-0">Das Finale · Montag, 2. November · 19 Uhr live im Zoom</p>}
-                    <h3 className={`font-montserrat font-extrabold uppercase tracking-wide ${letzter ? 'mt-1 text-lg sm:text-xl' : 'mt-3 text-base'}`}>{s.titel}</h3>
-                    <p className="mt-1 font-montserrat text-[11px] font-bold uppercase tracking-[0.14em] text-midnight-blue/70">{s.schwerpunkt}</p>
-                    {s.feedback && <p className="mt-2"><FeedbackPlakette /></p>}
+          {/* Die sieben Tage untereinander, mit 3-D-Icon, zum Aufklappen; links die goldene Schiene mit Pfeil, der beim
+              Scrollen mitwandert (Claudia, 24.10.2026: "Icons untereinander ... aufklappen ... Schritt fuer Schritt nach unten"). */}
+          <div className="mt-9 grid gap-5 md:grid-cols-[34px_minmax(0,1fr)]">
+            <Schiene />
+            <ol ref={listeRef} className="grid list-none gap-3 p-0">
+              {TAGE.map((t, i) => {
+                const letzter = i === TAGE.length - 1;
+                const kopf = (
+                  <>
+                    <img src={`/icons/${t.icon}.webp`} alt="" width={256} height={256} loading="lazy" decoding="async" className="h-14 w-14 flex-none drop-shadow-[0_8px_12px_rgba(10,22,40,0.25)] sm:h-16 sm:w-16" />
+                    <span className="min-w-0 flex-1">
+                      <span className="flex flex-wrap items-center gap-2">
+                        <span className={`rounded-md px-2.5 py-1 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] ${letzter ? `${GOLD} text-midnight-blue` : 'bg-midnight-blue text-pearl-white'}`}>Tag {i + 1}</span>
+                        <span className="font-montserrat text-xs font-bold text-midnight-blue/70">{letzter ? 'Mo., 2. Nov. · 19 Uhr live im Zoom' : KURZ.format(freischaltung(heute, i))}</span>
+                        {t.feedback && <FeedbackPlakette />}
+                      </span>
+                      <span className="mt-1.5 block font-montserrat text-base font-extrabold uppercase leading-tight tracking-wide sm:text-lg">{t.titel}</span>
+                      <span className="mt-0.5 block font-montserrat text-[11px] font-bold uppercase tracking-[0.14em] text-midnight-blue/70">{t.schwerpunkt}</span>
+                    </span>
+                  </>
+                );
+                return (
+                  <li key={t.titel} style={{ ['--i' as string]: i }} className="cc-stufe">
                     {frei[i] ? (
-                      <details className="group mt-2">
-                        <summary className="cursor-pointer list-none font-montserrat text-sm font-bold underline decoration-[#C9A961] underline-offset-4 [&::-webkit-details-marker]:hidden">
-                          <span className="group-open:hidden">Aufklappen ▾</span><span className="hidden group-open:inline">Zuklappen ▴</span>
+                      <details className={`group bg-white text-midnight-blue ${KACHEL}`}>
+                        <summary className="flex cursor-pointer list-none items-center gap-4 px-4 py-3.5 sm:px-6 [&::-webkit-details-marker]:hidden">
+                          {kopf}
+                          <span className="hidden font-montserrat text-xs font-bold text-midnight-blue/70 sm:inline"><span className="group-open:hidden">Aufklappen ▾</span><span className="hidden group-open:inline">Zuklappen ▴</span></span>
                         </summary>
-                        <div className="mt-2.5"><TagInhalt t={s} /></div>
+                        <div className="border-t border-[#C9A961]/40 px-5 pb-5 pt-4 sm:px-7 sm:pb-6"><TagInhalt t={t} /></div>
                       </details>
-                    ) : letzter ? null : (
-                      // Beim Finale keine Freischalt-Zeile: der Termin steht schon darueber (Claudia, 24.10.2026).
-                      <p className="mt-2.5 flex items-center gap-2 font-montserrat text-xs font-bold uppercase tracking-[0.12em] text-midnight-blue/70">
-                        <Schluessel /> Entdecke den Inhalt in der Challenge-Woche · Tag {i + 1} · {KURZ.format(freischaltung(heute, i))}
-                      </p>
+                    ) : (
+                      <div className={`flex items-center gap-4 bg-white px-4 py-3.5 text-midnight-blue sm:px-6 ${KACHEL}`}>
+                        {kopf}
+                        <Schluessel />
+                      </div>
                     )}
-                  </div>
-                </li>
-              );
-            })}
-            {/* Workbook-Kachel neben dem Finale - ersetzt die Zeile aus "Entdecke in der Challenge" (Claudia, 23.10.2026). */}
-            {/* Die sieben Tages-Workbooks aufgefaechert (Deckblaetter aus challenge/workbooks/Tag1-7.pdf, Claudia 23.10.2026). */}
-            <li className={`cc-stufe flex flex-col bg-pearl-white p-6 text-midnight-blue hover:-translate-y-0.5 ${KACHEL}`}>
-              <img src="/challenge/sieben-workbooks.webp" alt="Die sieben Challenge-Workbooks, Tag 1 bis Tag 7" width={1000} height={472} loading="lazy" decoding="async" className="w-full" />
-              <h3 className="mt-3 font-montserrat text-base font-extrabold uppercase tracking-wide">7 Workbooks</h3>
-              <p className="mt-1 font-montserrat text-[11px] font-bold uppercase tracking-[0.14em] text-midnight-blue/70">Jeden Tag eins · in deiner Gruppe</p>
-            </li>
-            {/* Tag 8 ueber die volle Breite unter den Schritten (Claudia, 24.10.2026: "Tag acht Dienstag danach ... Werbetag in der Gruppe"). */}
-            <li className={`cc-stufe p-6 text-midnight-blue hover:-translate-y-0.5 sm:col-span-2 lg:col-span-3 lg:flex lg:items-center lg:gap-8 ${KACHEL} bg-pearl-white`}>
-              <div className="flex flex-none items-center gap-4">
-                <img src="/icons/schritt-2.webp" alt="" width={256} height={256} loading="lazy" decoding="async" className="h-16 w-16 flex-none drop-shadow-[0_8px_12px_rgba(10,22,40,0.25)] lg:h-20 lg:w-20" />
-                <span aria-hidden="true" className="font-montserrat text-3xl font-black text-[#C9A961]">08</span>
-              </div>
-              <div className="min-w-0 flex-1">
-                <p className="mt-3 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-midnight-blue/80 lg:mt-0">Zusätzlich · Tag 8 · Dienstag, 3. November</p>
-                <h3 className="mt-1 font-montserrat text-lg font-extrabold uppercase tracking-wide sm:text-xl">Netzwerken</h3>
-                <p className="mt-1 font-montserrat text-[11px] font-bold uppercase tracking-[0.14em] text-midnight-blue/70">Dein Werbetag in der Gruppe · stell dein Business vor</p>
-              </div>
-            </li>
-          </ol>
+                  </li>
+                );
+              })}
+              {/* Tag 8 (Claudia, 24.10.2026: Werbetag in der Gruppe am Dienstag danach). */}
+              <li className="cc-stufe">
+                <div className={`flex items-center gap-4 bg-pearl-white px-4 py-3.5 text-midnight-blue sm:px-6 ${KACHEL}`}>
+                  <img src="/icons/schritt-2.webp" alt="" width={256} height={256} loading="lazy" decoding="async" className="h-14 w-14 flex-none drop-shadow-[0_8px_12px_rgba(10,22,40,0.25)] sm:h-16 sm:w-16" />
+                  <span className="min-w-0 flex-1">
+                    <span className="flex flex-wrap items-center gap-2">
+                      <span className="rounded-md bg-midnight-blue px-2.5 py-1 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-pearl-white">Zusätzlich · Tag 8</span>
+                      <span className="font-montserrat text-xs font-bold text-midnight-blue/70">Di., 3. Nov.</span>
+                    </span>
+                    <span className="mt-1.5 block font-montserrat text-base font-extrabold uppercase leading-tight tracking-wide sm:text-lg">Netzwerken</span>
+                    <span className="mt-0.5 block font-montserrat text-[11px] font-bold uppercase tracking-[0.14em] text-midnight-blue/70">Dein Werbetag in der Gruppe · stell dein Business vor</span>
+                  </span>
+                </div>
+              </li>
+            </ol>
+          </div>
+          <EintragBlock />
         </div>
       </Abschnitt>
 
@@ -614,79 +640,7 @@ export default function Challenge() {
       {/* Die sieben Tage als Klapp-Kacheln (Claudia, 09:19 UTC: "damit die ganze Anleitung nicht die
           Seite ueberflutet"), dazwischen der WhatsApp-Einstieg mit QR-Code. Vorschau bleibt sichtbar
           (Designliste: nie alles hinter einem Klick). Tag 1 ist aufgeklappt. */}
-      <Abschnitt id="tage" className="bg-pearl-white pb-16 sm:pb-24" label="tage-titel">
-        <div className="mx-auto max-w-6xl px-6">
-          {/* Claudia, 22.09.2026 11:21 UTC: "Dein Wegweiser: sieben Tage, jeden Tag eine Anleitung zum Aufklappen,
-              jeden Tag 5 Minuten fuer deine Wirkung", Themen als Vorgeschmack, dann "ganz schlanke Banner in Gold"
-              mit Datum und Uhrzeit des Gruppentreffens, darunter sieben duenne Streifen: nur Zahl, Datum, Schluessel. */}
-          <Kicker text="Vorab" hell />
-          <h2 id="tage-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
-            Zwei Tipps, die du schon heute nutzen kannst.
-          </h2>
-          <p className="mt-5 max-w-3xl border-l-4 border-[#C9A961] bg-white px-5 py-4 font-cormorant text-2xl italic leading-snug text-midnight-blue sm:text-3xl">
-            „{UEBUNGSSATZ}"
-            <span className="mt-1 block font-montserrat text-[11px] font-extrabold not-italic uppercase tracking-[0.16em] text-midnight-blue/70">Zum Warmwerden – an allen sieben Tagen. Dazu kommt ab Tag 1 dein eigener Satz.</span>
-          </p>
-          <details className={`group mt-8 text-midnight-blue ${FLAECHE} ${KACHEL} shadow-[0_18px_40px_-24px_rgba(19,35,63,0.35)]`}>
-            <summary className="grid cursor-pointer list-none gap-x-6 gap-y-2 px-5 py-5 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:items-center sm:px-7 sm:py-6 [&::-webkit-details-marker]:hidden">
-              <span className="self-start rounded-md bg-midnight-blue px-2.5 py-2 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-[#EBD197]">Tipp 1 · jetzt schon</span>
-              <span className="min-w-0">
-                <span className="block font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">{WEGWEISER.titel}</span>
-                <span className="mt-1 block font-inter text-[15px] leading-relaxed">{WEGWEISER.vorschau}</span>
-              </span>
-              <span className="flex items-center gap-2 font-montserrat text-sm font-bold underline decoration-midnight-blue/40 underline-offset-4">
-                <span className="group-open:hidden">Anleitung lesen</span>
-                <span className="hidden group-open:inline">Zuklappen</span>
-                <span aria-hidden="true" className="inline-block transition-transform group-open:rotate-180">▾</span>
-              </span>
-            </summary>
-            <div className="border-t border-midnight-blue/20 px-5 pb-5 pt-4 sm:px-7 sm:pb-6">
-              <p className="font-inter text-[15px] leading-relaxed">{WEGWEISER.text}</p>
-              <p className="mt-3 font-montserrat text-[11px] font-extrabold uppercase tracking-[0.14em]">So legst du die Gruppe an:</p>
-              <ol className="mt-1.5 grid list-none gap-1.5 p-0">
-                {WEGWEISER.schritte.map((s, i) => (
-                  <li key={s} className="flex items-start gap-3 font-inter text-[15px] leading-normal">
-                    <span className="mt-0.5 flex h-5 w-5 flex-none items-center justify-center rounded-full bg-midnight-blue font-montserrat text-[11px] font-black text-[#EBD197]">{i + 1}</span>
-                    <span>{s}</span>
-                  </li>
-                ))}
-              </ol>
-            </div>
-          </details>
-
-          {/* Kleiner Tipp am Morgen - Claudias Aufwachuebung (ihr Wortlaut vom 22.09.2026 09:19 UTC), vor den sieben
-              Tagen zum Aufklappen; die Tage selbst bleiben Geheimnis (11:24 UTC). */}
-          <details className={`group mt-3 text-midnight-blue ${FLAECHE} ${KACHEL} shadow-[0_18px_40px_-24px_rgba(19,35,63,0.35)]`}>
-            <summary className="grid cursor-pointer list-none gap-x-6 gap-y-2 px-5 py-5 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:items-center sm:px-7 sm:py-6 [&::-webkit-details-marker]:hidden">
-              <span className="self-start rounded-md bg-midnight-blue px-2.5 py-2 font-montserrat text-[11px] font-black uppercase tracking-[0.16em] text-[#EBD197]">Tipp 2 · am Morgen</span>
-              <span className="min-w-0">
-                <span className="block font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">Lerne deine Stimmwirkung kennen</span>
-                <span className="mt-1 block font-inter text-[15px] leading-relaxed">Ein kleiner Tipp am Morgen, vorweg: ein Satz, fünf Minuten – und du hörst, was sich verändert.</span>
-              </span>
-              <span className="flex items-center gap-2 font-montserrat text-sm font-bold underline decoration-midnight-blue/40 underline-offset-4">
-                <span className="group-open:hidden">Aufklappen</span>
-                <span className="hidden group-open:inline">Zuklappen</span>
-                <span aria-hidden="true" className="inline-block transition-transform group-open:rotate-180">▾</span>
-              </span>
-            </summary>
-            <div className="border-t border-midnight-blue/20 px-5 pb-5 pt-4 sm:px-7 sm:pb-6">
-              <p className="font-inter text-[15px] leading-relaxed">{MORGEN.aufgabe}</p>
-              <blockquote className="mt-3 border-l-4 border-midnight-blue bg-white/60 px-5 py-3 font-cormorant text-xl italic leading-snug sm:text-2xl">„{MORGEN.satz}"</blockquote>
-              <p className="mt-3 font-montserrat text-[11px] font-extrabold uppercase tracking-[0.14em]">{MORGEN.schrittTitel}</p>
-              <ul className="mt-1.5 grid list-none gap-1.5 p-0">
-                {MORGEN.schritte.map((s) => (
-                  <li key={s} className="flex items-start gap-3 font-inter text-[15px] leading-normal"><Haken />{s}</li>
-                ))}
-              </ul>
-              <p className="mt-3 font-montserrat text-base font-bold">{MORGEN.danach}</p>
-            </div>
-          </details>
-
-          {/* Die Tagesstreifen sind raus (Claudia, 23.10.2026: "zu viele Wiederholungen"): Die sieben Tage stehen oben bei
-              den 3-D-Icons und oeffnen sich dort an ihrem Tag. */}
-          <EintragBlock />
-        </div>
-      </Abschnitt>
+      {/* Abschnitt "Vorab – Zwei Tipps" entfernt (Claudia, 24.10.2026: "die zwei Tipps ... nimm die raus"). */}
 
       {/* Abschnitt "Hand aufs Herz" (Lernbox) entfernt auf Claudias Anweisung (23.10.2026 18:31). */}
 
@@ -720,53 +674,7 @@ export default function Challenge() {
             ))}
           </div>
 
-          <div className="mt-14 grid items-center gap-10 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] md:gap-14">
-            {/* 3-D-Buch (Claudia, 22.09.2026 16:13 UTC: "3D Book Mockup Animation ... dreht oder aufklappt"): reines
-                CSS (.cc-buch* in index.css). Schwenkt langsam im Raum; beim Darueberfahren klappt der Deckel auf und
-                zeigt die erste Innenseite. Antippen oeffnet wie bisher das Blaetter-Fenster. Ohne Bewegung bei
-                prefers-reduced-motion. Kein Skript, keine Bibliothek, keine Ladezeit. */}
-            <button
-              type="button"
-              onClick={() => setBuchOffen(true)}
-              aria-label="Workbook öffnen und blättern"
-              className="cc-buch-buehne m-0 block w-full max-w-[420px] justify-self-center bg-transparent p-0 text-left"
-            >
-              <span className="cc-buch">
-                <span className="cc-buch-rueckseite" aria-hidden="true" />
-                <span className="cc-buch-ruecken" aria-hidden="true"><span>Entdecke deine Stimmwirkung · Claudia Conen</span></span>
-                <span className="cc-buch-kante" aria-hidden="true" />
-                <span className="cc-buch-block" aria-hidden="true">
-                  <img src="/unverwechselbar/workbook/seite-02.webp" alt="" width={900} height={1274} loading="lazy" decoding="async" />
-                </span>
-                <span className="cc-buch-deckel">
-                  <img src="/unverwechselbar/workbook/seite-01.webp" alt="Deckblatt des Workbooks Entdecke deine Stimmwirkung – Brainself, Buchauszug von Claudia Conen" width={900} height={1273} loading="lazy" decoding="async" />
-                  <span className="cc-buch-innen" aria-hidden="true" />
-                </span>
-              </span>
-              <span className="mt-6 block text-center font-montserrat text-xs font-extrabold uppercase tracking-[0.16em] text-midnight-blue">
-                Antippen und blättern →
-              </span>
-            </button>
-            <div>
-              <Kicker text="Zum Mitnehmen" hell />
-              <h3 className="mt-4 font-montserrat text-2xl font-extrabold uppercase text-midnight-blue sm:text-3xl">Workbook „Entdecke deine Stimmwirkung"</h3>
-              <p className="mt-3 font-montserrat text-base font-bold text-midnight-blue">
-                Mein Buchauszug aus dem <em>Brainself</em>-Buch, das ich gemeinsam mit dem Neurowissenschaftler Karsten Brocke und weiteren Experten veröffentlicht habe. Das Kapitel „Entdecke deine Stimmwirkung" stammt von mir.
-              </p>
-              <p className="mt-3 font-inter leading-relaxed text-midnight-blue">
-                Ein Workbook zur Selbsterkenntnis – für deine akustische Visitenkarte und eine wertschätzende, achtsame Kommunikation im Business. Zum Ausfüllen, mit Platz für deine eigenen Sätze. 41 Seiten zum Blättern – oder als PDF.
-              </p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <button type="button" onClick={() => setBuchOffen(true)} className={`inline-flex items-center rounded-full px-6 py-3.5 font-montserrat text-sm font-bold text-midnight-blue ${GOLD}`}>
-                  Im Workbook blättern
-                </button>
-                <a href={WORKBOOK_PDF} download className="inline-flex items-center rounded-full border-2 border-midnight-blue px-6 py-3.5 font-montserrat text-sm font-bold text-midnight-blue transition-colors hover:bg-midnight-blue hover:text-pearl-white">
-                  Als PDF speichern
-                </a>
-              </div>
-              <WorkbookBlaettern offen={buchOffen} schliessen={() => setBuchOffen(false)} />
-            </div>
-          </div>
+          {/* Workbook „Entdecke deine Stimmwirkung“ entfernt (Claudia, 24.10.2026: kommt als Geschenk fuer alle, die die sieben Tage dabei waren). */}
         </div>
       </Abschnitt>
 
@@ -929,50 +837,7 @@ export default function Challenge() {
           goldener Kontur, Schreibschrift, Satz in einer weissen Pille. Seit 14:51-15:01 UTC OHNE Liste, OHNE runde Bilder,
           OHNE Video ("alles zu unruhig", "nur das von Gabi und mir"), und der fruehere dunkle Schluss-Satz steht jetzt
           hier als Einstieg ("viel zu dunkel"). Gabi steht NUR hier. */}
-      <Abschnitt id="community" className="bg-pearl-white py-16 sm:py-24" label="community-titel">
-        <div className="mx-auto max-w-6xl px-6">
-          <p className="flex items-center gap-3 font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] text-midnight-blue">
-            <span aria-hidden="true" className={`cc-linie h-[3px] w-7 rounded-full ${GOLD}`} />
-            Willst du dich speichern?
-          </p>
-          <p className="mt-5 max-w-4xl font-montserrat text-2xl font-extrabold leading-tight text-midnight-blue sm:text-3xl">
-            Willst du im KI-Zeitalter mit deiner Persönlichkeit punkten – statt vergleichbar über den Preis Kunden zu gewinnen?
-            <span className="mt-1 block underline decoration-[#C9A961] decoration-[4px] underline-offset-[6px]">Dann schließ dich unserem Netzwerk an: die Unverwechselbaren, die Community für den Mittelstand.</span>
-          </p>
-          <div className={`mt-8 bg-white px-6 py-10 text-center text-midnight-blue sm:px-10 sm:py-14 ${KACHEL} border-[#C9A961] shadow-[0_18px_40px_-18px_rgba(212,175,55,0.5)]`}>
-            {/* Schriftgroesse waechst mit der Bildschirmbreite: "Unverwechselbaren." ist ein einziges Wort und lief auf dem
-                Handy 43 px ueber den rechten Rand - dadurch wurde die ganze Seite breiter und das Menue abgeschnitten
-                (Claudia, 22.09.2026 21:59 UTC). */}
-            <h2 id="community-titel" className="font-montserrat text-[clamp(1.45rem,6.8vw,2.25rem)] font-black leading-[1.05] tracking-tight sm:text-6xl">
-              Willkommen bei den
-              <span className="block text-[#F1E2B3]" style={{ WebkitTextStroke: '1.5px #C9A961' }}>Unverwechselbaren.</span>
-              <span className="mt-2 block font-cormorant text-4xl font-semibold italic tracking-normal text-[#C9A961] sm:text-6xl">Netzwerk Mittelstand</span>
-            </h2>
-            <p className="mx-auto mt-6 max-w-2xl rounded-2xl bg-pearl-white px-6 py-4 font-inter text-lg leading-relaxed">
-              Menschen, die sich zusammentun und ein wachsendes Netzwerk bilden – weil sie wissen: Gemeinsam sind wir stärker. Hier zählt Empfehlung mehr als Werbung.
-            </p>
-            <p className="mt-8 font-montserrat text-base font-extrabold sm:text-lg">Trag dich ein zum ersten Termin – sei einer von 27 Umsetzern.</p>
-            <div className="mt-4 flex flex-wrap justify-center gap-3">
-              <a href="https://community.claudiaconen.com/netzwerkwebinar/" target="_blank" rel="noopener noreferrer" className={`inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue transition-transform hover:-translate-y-px ${GOLD}`}>
-                Zum ersten Termin eintragen →
-              </a>
-              <a href="https://community.claudiaconen.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full border-2 border-midnight-blue px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue transition-colors hover:bg-midnight-blue hover:text-pearl-white">
-                Entdecken
-              </a>
-            </div>
-            <figure className={`relative mx-auto mt-10 aspect-[3/2] w-full max-w-[520px] overflow-hidden ${KACHEL}`}>
-              <img src="/unverwechselbar/gabi-und-claudia.webp" alt="Claudia Conen und Gabi Lindemann lachen zusammen" width={900} height={600} loading="lazy" decoding="async" className="h-full w-full object-cover" />
-              <figcaption className="absolute inset-x-0 bottom-0 bg-midnight-blue/75 px-3 py-2 font-montserrat text-[11px] font-bold text-[#EBD197]">
-                Gabi Lindemann und Claudia Conen – zusammen zuständig für die Community
-              </figcaption>
-            </figure>
-          </div>
-          <p className="mt-6 text-center font-inter text-[15px] text-midnight-blue">
-            Noch nicht in der Challenge?{' '}
-            <a href="#anmelden" className="font-montserrat font-bold underline decoration-[#C9A961] decoration-2 underline-offset-4">Hier eintragen ↑</a>
-          </p>
-        </div>
-      </Abschnitt>
+      {/* Abschnitt „Willkommen bei den Unverwechselbaren“ entfernt (Claudia, 24.10.2026). */}
 
       <Footer />
     </div>

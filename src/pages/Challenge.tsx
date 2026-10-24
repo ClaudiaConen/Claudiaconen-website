@@ -54,7 +54,7 @@ const FLAECHE = 'bg-[linear-gradient(135deg,#FCF6EC,#F7E7CE)] border border-[#C9
 /** Plakette wie in der Wochen-Grafik: nur an Tag 2 und 6 (Claudia, 22.10.2026 05:45 UTC: "dass die Leute nicht denken,
  *  sie bekommen jeden Tag ein Feedback"). */
 function FeedbackPlakette() {
-  return <span className={`flex-none rounded-md px-2.5 py-1.5 font-montserrat text-[10px] font-black uppercase tracking-[0.16em] text-midnight-blue ${GOLD}`}>Feedback</span>;
+  return <span className={`flex-none rounded-md px-2.5 py-1.5 font-montserrat text-[10px] font-black uppercase tracking-[0.16em] text-midnight-blue ${GOLD}`}>Wirkungscheck</span>;
 }
 /** Claudias Idee vom 22.09.2026, 02:13 UTC: vom Event per QR in eine Video-Challenge - sieben Tage,
  *  sieben Schritte, 60 Sekunden am Tag. Kanal: ihre WhatsApp-Gruppe "Video-Challenge" (Einladungslink
@@ -80,7 +80,7 @@ const WERKZEUG: { titel: string; vorschau: string; text: string; icon: string }[
  *  Mehrwert der Woche"). Die Mitte ist hervorgehoben. */
 const AUF_EINEN_BLICK: { wann: string; was: string; punkte: string[] }[] = [
   { wann: 'Montag, 26. Oktober · 19 Uhr', was: 'Auftakt live im Zoom', punkte: ['Erstes Kennenlernen', 'Deinen Übungsplan für die Woche festlegen', 'Dein Vorher-Video aufnehmen'] },
-  { wann: '26. Oktober bis 2. November', was: 'Deine sieben Tage', punkte: ['7 Audio-Impulse von mir – jeden Tag einer', '7 Workbooks – jeden Tag eins', 'Jeden Tag dein 1-Minuten-Video – 24 Stunden Zeit', '2 persönliche Feedbacks von mir – an Tag 2 und Tag 6', '2 Live-Termine im Zoom – Auftakt und Abschluss'] },
+  { wann: '26. Oktober bis 2. November', was: 'Deine sieben Tage', punkte: ['7 Audio-Impulse von mir – jeden Tag einer', '7 Workbooks – jeden Tag eins', 'Jeden Tag dein 1-Minuten-Video – 24 Stunden Zeit', '2 persönliche Wirkungschecks deines Videos von mir – an Tag 2 und Tag 6', '2 Live-Termine im Zoom – Auftakt und Abschluss'] },
   { wann: 'Montag, 2. November · 19 Uhr', was: 'Abschluss live im Zoom', punkte: ['Deine Chance, vor allen Teilnehmern zu pitchen – freiwillig', 'Netzwerken untereinander – vielleicht sitzt dort dein bester Kunde', 'Deine Auszeichnung fürs Durchziehen'] },
 ];
 
@@ -237,7 +237,7 @@ const ABLAUF: { titel: string; text: string }[] = [
   // Gekuerzt am 23.10.2026 (Claudia: "nicht so viele Sachen doppelt"): Auftakt, Jeden Tag ein Impuls und Abschluss
   // stehen schon in "Dein Ablauf auf einen Blick", das Workbook als Kachel beim Programm.
   { titel: 'Die Gruppe', text: 'Austausch untereinander ist gern gesehen. Werbung nicht – dafür gibt es an Tag 8, Dienstag, 3. November, deinen Werbetag: Dann darfst du dein Business in der Gruppe vorstellen.' },
-  { titel: 'Dein Feedback', text: 'An Tag 2 und Tag 6 bekommst du persönliches Feedback von mir, wenn du dein Video innerhalb der 24 Stunden postest. Danach darfst du dein Video verbessern – für dich, um daran zu wachsen.' },
+  { titel: 'Dein Wirkungscheck', text: 'An Tag 2 und Tag 6 bekommst du deinen persönlichen Wirkungscheck von mir, wenn du dein Video innerhalb der 24 Stunden postest. Danach darfst du dein Video verbessern – für dich, um daran zu wachsen.' },
   { titel: 'Zwischendurch', text: 'Impulse zu Storytelling und Prompts für die KI, die du direkt nutzen kannst – um deine Positionierung zu schärfen und deine innere Haltung nach außen zu tragen.' },
 ];
 const ABLAUF_HINWEIS = 'Mein Tipp: Such dir eine feste Zeit am Tag – wann auch immer. Alles läuft in der Gruppe bei WhatsApp oder Telegram, bis unsere Plattform fertig ist. Dann lade ich euch alle dazu ein.';
@@ -309,7 +309,7 @@ function TagInhalt({ t }: { t: Tag }) {
       {t.zusatz && <p className="mt-2 text-midnight-blue/85">{t.zusatz}</p>}
       <p className="mt-3 border-l-4 border-[#C9A961] bg-pearl-white px-4 py-2 font-montserrat text-sm font-bold">Zum Warmwerden: „{UEBUNGSSATZ}"</p>
       <p className="mt-3"><b className="font-montserrat font-extrabold">Reflexion: </b>{t.reflexion}</p>
-      <p className="mt-3 text-[14px] text-midnight-blue/85">Wenn du magst, teile deinen Versuch in der Gruppe. {t.feedback ? 'Heute bekommst du persönliches Feedback von mir' : 'Persönliches Feedback von mir gibt es an Tag 2 und Tag 6'} – und wir können miteinander und aneinander wachsen. Wer still mitübt, gehört genauso dazu.</p>
+      <p className="mt-3 text-[14px] text-midnight-blue/85">Wenn du magst, teile deinen Versuch in der Gruppe. {t.feedback ? 'Heute bekommst du deinen persönlichen Wirkungscheck von mir' : 'Deinen persönlichen Wirkungscheck von mir gibt es an Tag 2 und Tag 6'} – und wir können miteinander und aneinander wachsen. Wer still mitübt, gehört genauso dazu.</p>
     </div>
   );
 }
@@ -425,7 +425,7 @@ export default function Challenge() {
     '@context': 'https://schema.org',
     '@type': 'HowTo',
     name: '7 Tage für deine Wirkungskraft – die Video-Challenge',
-    description: 'Sieben Tage, jeden Tag ein Audio-Impuls und eine Minute Video mit dem Handy – persönliches Feedback von Claudia Conen an Tag 2 und Tag 6. Kostenfrei, in einer WhatsApp-Gruppe.',
+    description: 'Sieben Tage, jeden Tag ein Audio-Impuls und eine Minute Video mit dem Handy – persönlicher Wirkungscheck von Claudia Conen an Tag 2 und Tag 6. Kostenfrei, in einer WhatsApp-Gruppe.',
     totalTime: 'P7D',
     step: TAGE.map((t, i) => ({ '@type': 'HowToStep', position: i + 1, name: `Tag ${i + 1}: ${t.titel} (${t.schwerpunkt})`, text: t.aufgabe })),
     url: `https://claudiaconen.com${PFAD}`,
@@ -435,7 +435,7 @@ export default function Challenge() {
     <div className="cc-2027 min-h-screen bg-pearl-white">
       <SEO
         title="7 Tage für deine Wirkungskraft – die Video-Challenge"
-        description="Sieben Tage, jeden Tag ein Audio-Impuls, eine Minute Video mit dem Handy, persönliches Feedback von Claudia Conen an Tag 2 und Tag 6. Kostenfrei, in einer WhatsApp-Gruppe – mit den sieben Schritten, dem Workbook und dem Weg danach."
+        description="Sieben Tage, jeden Tag ein Audio-Impuls, eine Minute Video mit dem Handy, persönlicher Wirkungscheck von Claudia Conen an Tag 2 und Tag 6. Kostenfrei, in einer WhatsApp-Gruppe – mit den sieben Schritten, dem Workbook und dem Weg danach."
         path={PFAD}
         ogImage="https://claudiaconen.com/a27/og/og-challenge.jpg"
       />

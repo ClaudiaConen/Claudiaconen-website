@@ -622,7 +622,7 @@ export default function Challenge() {
             </li>
           </ol>
           </div>
-          <p className="mt-5 font-inter text-[15px] text-midnight-blue/80">Jeden Tag: ein Audio-Impuls von mir, ein Workbook und dein 1-Minuten-Video – mit 24 Stunden Zeit.</p>
+          <p className="mt-5 font-inter text-[15px] text-midnight-blue/80">Jeden Tag bis 9 Uhr: Audio-Impuls und Workbook in der Gruppe. Für dein 1-Minuten-Video hast du 24 Stunden Zeit.</p>
           <p className="mt-2 font-inter text-[15px] text-midnight-blue/80">Zusatz-Geschenk: der Buchauszug „Entdecke deine Stimmwirkung“ aus dem Brainself-Buch.</p>
           {/* Formular direkt nach dem Wegweiser: dort faellt die Entscheidung (Claudia, 24.10.2026 20:08: "an welcher Stelle optimal"). */}
           <div id="anmeldung" className="mt-10">

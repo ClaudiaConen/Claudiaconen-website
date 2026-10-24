@@ -42,7 +42,7 @@ const PFAD = '/challenge';
 
 const GOLD = 'bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]';
 /** Der Schritt danach (Claudia, 23.10.2026 17:07: "entweder die 1 Stunde oder das Mentoring-Programm").
- *  Einzeltermin = Tentary "1:1 Training 90 min" (180 EUR Net), Mentoring = Tentary p/b95rPm (1.990 EUR Net, Fruehbucher bis 2.11.). Start verlegt auf Mo 16.11.2026 (Claudia, 23.10.2026 17:30). */
+ *  Einzeltermin = Tentary "1:1 Training 90 min" (180 EUR Net), Mentoring = Tentary p/b95rPm (1.990 EUR Net, Fruehbucher bis 2.11.). Start verlegt auf Di 12.01.2027 (Claudia 24.10.2026; vorher Mo 16.11.2026, Claudia, 23.10.2026 17:30). */
 const EINZEL_NETTO = 180;
 const EINZEL_LINK = 'https://umsatzstimme-claudiaconen.mytentary.com/p/zJYlWu/checkout';
 const MENTORING_NETTO = 1990;
@@ -742,7 +742,7 @@ export default function Challenge() {
               <p className="mt-1 font-inter text-2xl">Das 12-Wochen-Mentoring</p>
               <p className="mt-4 font-inter text-lg leading-relaxed">Für dich, wenn du deine Persönlichkeit, deine Marke und deinen Auftritt nachhaltig stärken möchtest.</p>
               <div className="mt-5 grid gap-2.5 border-y border-[#C9A961]/40 py-4 font-inter text-[15px]">
-                <p className="flex items-center gap-3"><Calendar size={20} className="flex-none text-[#C9A961]" aria-hidden="true" />Start: 16. November 2026</p>
+                <p className="flex items-center gap-3"><Calendar size={20} className="flex-none text-[#C9A961]" aria-hidden="true" />Start: Dienstag, 12. Januar 2027 · 9–11 Uhr</p>
                 <p className="flex items-center gap-3"><Users size={20} className="flex-none text-[#C9A961]" aria-hidden="true" />12 Live-Trainings online · Bis zu 6 Personen</p>
               </div>
               <ul className="mt-5 grid list-none gap-3.5 p-0">
@@ -753,7 +753,7 @@ export default function Challenge() {
               <div className="mt-6 border-t border-[#C9A961]/40 pt-6">
                 <p className="font-montserrat text-4xl font-black">{MENTORING_NETTO.toLocaleString('de-DE')} € <span className="font-inter text-base font-normal">zzgl. MwSt.</span></p>
                 <p className="font-inter text-sm text-midnight-blue/70">{brutto(MENTORING_NETTO)} € inkl. 19 % MwSt.</p>
-                <p className="mt-1 font-montserrat text-sm font-extrabold text-[#9A7B2F]">Frühbucherpreis bis 2. November 2026</p>
+                <p className="mt-1 font-montserrat text-sm font-extrabold text-[#9A7B2F]">Frühbucherpreis bis 8. November 2026</p>
               </div>
               <a href={MENTORING_LINK} target="_blank" rel="noopener" className={`mt-6 flex w-full items-center justify-center rounded-full px-6 py-4 font-montserrat text-base font-bold text-midnight-blue transition-transform hover:-translate-y-px ${GOLD}`}>
                 Platz im Mentoring sichern →

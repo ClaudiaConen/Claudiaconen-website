@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 
 /**
@@ -36,6 +36,7 @@ export default function ChallengeAnmeldung({ start, onEingetragen }: { start: st
   const [telefon, setTelefon] = useState('');
   const [angebote, setAngebote] = useState(false);
   const [zustand, setZustand] = useState<'offen' | 'sendet' | 'fertig' | 'fehler'>('offen');
+  const navigate = useNavigate();
 
   async function absenden(e: FormEvent) {
     e.preventDefault();
@@ -57,6 +58,8 @@ export default function ChallengeAnmeldung({ start, onEingetragen }: { start: st
     setZustand('fertig');
     try { window.localStorage.setItem(EINGETRAGEN_SCHLUESSEL, '1'); } catch { /* privater Modus o. ae. */ }
     onEingetragen?.();
+    // Eigene Danke-Seite mit Gruppenwahl und Wegweiser (Claudia, 24.10.2026 20:00).
+    navigate('/challenge/danke', { state: { vorname: vorname.trim() } });
   }
 
   if (zustand === 'fertig') {

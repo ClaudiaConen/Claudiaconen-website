@@ -246,8 +246,10 @@ function VideoKopf() {
   return (
     <button type="button" onClick={() => setAn(true)} className="group relative block w-full" aria-label="Video abspielen: Claudia Conen über die erste Emotion im Gespräch, 1 Minute 38">
       <img src="/challenge/video-claudia-start.jpg" alt="" width={540} height={960} className={cls} />
-      <span aria-hidden="true" className={`absolute right-3 top-3 flex items-center gap-2 rounded-full px-3.5 py-2 font-montserrat text-xs font-extrabold text-midnight-blue shadow-lg transition-transform group-hover:scale-105 ${GOLD}`}>
-        <span className="inline-block h-0 w-0 border-y-[6px] border-l-[9px] border-y-transparent border-l-[#13233F]" /> 1:38
+      {/* Deutlich zum Abspielen (Claudia, 24.10.2026 20:04), aber nicht auf dem Gesicht: grosser Goldknopf oben in der Ecke. */}
+      <span aria-hidden="true" className={`absolute left-1/2 top-3 flex -translate-x-1/2 items-center gap-2.5 whitespace-nowrap rounded-full py-2.5 pl-2.5 pr-5 font-montserrat text-sm font-extrabold text-midnight-blue shadow-[0_10px_30px_-8px_rgba(0,0,0,0.7)] ring-4 ring-[#C9A961]/35 transition-transform group-hover:scale-105 motion-safe:animate-pulse ${GOLD}`}>
+        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#13233F]"><span className="ml-0.5 inline-block h-0 w-0 border-y-[7px] border-l-[11px] border-y-transparent border-l-[#F7E7CE]" /></span>
+        Video abspielen · 1:38
       </span>
     </button>
   );
@@ -485,25 +487,7 @@ export default function Challenge() {
 
       {/* Neubau 24.10.2026 (Claudia: "neu anfangen, ganz klar und hoch professionell"): eine Seite, ein Ziel - die Anmeldung.
           Reihenfolge: Kopf -> Kennst du das? -> Loesung -> Sieben Tage -> Das bekommst du -> Fuer wen -> Trainerin -> Fragen -> Anmeldung. */}
-      <Abschnitt id="kennst-du-das" className="bg-pearl-white py-16 text-midnight-blue sm:py-24" label="spiegel-titel">
-        <div className="mx-auto max-w-6xl px-6">
-          <Kicker text="Kennst du das?" hell />
-          <h2 id="spiegel-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">Du weißt so viel. Du kannst so viel.</h2>
-          <div className="mt-9 grid gap-4 md:grid-cols-3">
-            {[
-              { t: 'Und es kommt nicht an.', x: 'Unsicherheit hört man. Dein Gegenüber weiß nicht, woher sie kommt. Er spürt nur: Unsicherheit. Und bucht nicht.' },
-              { t: 'Aufnehmen. Löschen. Wieder von vorn.', x: 'Im Kopf war alles klar. Vor der Kamera klingt es fremd. Am Ende postest du nichts.' },
-              { t: 'Perfekt kann jetzt jeder. Dank KI.', x: 'Wenn alle gleich klingen, entscheidet der Preis. Es sei denn, man spürt dich: deine Identität und deine Kompetenz.' },
-            ].map((k, i) => (
-              <div key={k.t} style={{ ['--i' as string]: i }} className={`cc-stufe bg-white p-6 ${KACHEL}`}>
-                <h3 className="font-montserrat text-xl font-extrabold leading-tight">{k.t}</h3>
-                <p className="mt-3 font-inter text-[16px] leading-relaxed text-midnight-blue/85">{k.x}</p>
-              </div>
-            ))}
-          </div>
-          <p className="mt-10 max-w-3xl font-montserrat text-2xl font-extrabold leading-snug sm:text-3xl">Das ist kein Talent. Das ist Wirkung. <span className="underline decoration-[#C9A961] decoration-[4px] underline-offset-[6px]">Und Wirkung kann man üben.</span></p>
-        </div>
-      </Abschnitt>
+      {/* Abschnitt "Kennst du das? / Du weisst so viel" entfernt (Claudia, 24.10.2026 20:02: "frei erfunden, kann ganz raus"). */}
 
       <Abschnitt id="loesung" className="bg-[#13233F] py-14 text-pearl-white sm:py-20" label="loesung-titel">
         <div className="mx-auto max-w-6xl px-6 text-center">

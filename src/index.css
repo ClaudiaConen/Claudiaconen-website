@@ -1593,6 +1593,8 @@ html, body { cursor: auto; }
 @media (prefers-reduced-motion: reduce) {
   .logo-band-track { animation: none; flex-wrap: wrap; width: 100%; justify-content: center; gap: 34px; }
   .logo-band { -webkit-mask: none; mask: none; }
+  /* Ohne Bewegung steht das Band still: die Kopie fuer die Endlosschleife ausblenden, sonst stehen alle Logos doppelt da (Claudia, 24.10.2026). */
+  .logo-band-track img[aria-hidden="true"] { display: none; }
 }
 
 

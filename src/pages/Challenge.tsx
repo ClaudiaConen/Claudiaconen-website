@@ -177,15 +177,14 @@ const TAGE: Tag[] = [
 
 
 /** Nach Claudias Diktat vom 24.10.2026 09:32 UTC. */
+// Auf vier Punkte gekuerzt, nur aus Claudias Diktat vom 24.10.2026 09:32 zusammengezogen (Vorschlag 24.10.2026 23:20);
+// die 30-Minuten-Zeile entfaellt, weil oben jetzt "Du entscheidest: eine Minute oder 30 Minuten" steht.
 const FUER = [
-  'dein Wissen präsentieren willst',
-  'dich von der Masse abheben möchtest – mit Persönlichkeit, die Vertrauen schafft',
-  'bereit bist, sieben Tage lang 30 Minuten am Tag in deine Weiterentwicklung zu investieren',
-  'bereit bist, jeden Tag ein Video von mindestens einer Minute aufzunehmen, um dich bestens vorzustellen und Vertrauen aufzubauen',
+  'dein Wissen präsentieren und dich von der Masse abheben möchtest – mit Persönlichkeit, die Vertrauen schafft',
+  'bereit bist, jeden Tag ein kurzes Video aufzunehmen – für mehr Vertrauen bei Interessenten und Kunden',
   'aktives Feedback möchtest statt Applaus',
-  'bereit bist, jeden Tag einen kleinen Schritt zu gehen – für mehr Vertrauen bei Interessenten und Kunden',
-  'respektvoll und achtsam kommunizierst und die Regeln achtest: kein ungebetenes Feedback, Werbung nur beim Abschluss im Zoom-Call am 2. November und an Tag 8 nach Aufforderung in der Gruppe',
-];
+  'respektvoll und achtsam kommunizierst und die Regeln achtest: Werbung nur am Abschluss und am Netzwerk-Tag',
+]
 const NICHT_FUER = [
   'eine perfekte Aufnahme willst statt einer echten',
   'Tipps sammeln, aber nichts ausprobieren möchtest',
@@ -629,7 +628,7 @@ export default function Challenge() {
           <div className="mt-8 grid gap-4 md:grid-cols-2">
             <div style={{ ['--i' as string]: 0 }} className={`cc-stufe bg-white p-6 sm:p-7 ${KACHEL}`}>
               <div className="flex items-center gap-4">
-                <img src="/icons/wirkung.webp" alt="" width={256} height={256} loading="lazy" decoding="async" className="h-16 w-16 flex-none drop-shadow-[0_8px_12px_rgba(10,22,40,0.25)]" />
+                <img src="/a27/p/angebote/i-gehirn.webp" alt="" width={320} height={282} loading="lazy" decoding="async" className="h-16 w-16 flex-none object-contain drop-shadow-[0_8px_12px_rgba(10,22,40,0.25)]" />
                 <h3 className="font-montserrat text-base font-extrabold uppercase tracking-wide">Für dich, wenn du</h3>
               </div>
               <ul className="mt-4 grid list-none gap-2.5 p-0">
@@ -683,8 +682,9 @@ export default function Challenge() {
       {/* Schluss: zurueck zum Formular (steht nach dem Wegweiser). */}
       <section className="bg-pearl-white pt-16 pb-4 sm:pt-20" aria-label="Eintragen">
         <div className="mx-auto max-w-6xl px-6 text-center">
-          <a href="#anmelden" className="inline-flex items-center rounded-full bg-midnight-blue px-8 py-4 font-montserrat text-sm font-bold text-pearl-white transition-colors hover:bg-royal-navy">
-            Ich bin dabei – eintragen ↑
+          {/* Hauptknopf unten golden (Anmeldung zaehlt vor dem Start), die drei Wege darunter ruhiger (Vorschlag 24.10.2026 23:20). */}
+          <a href="#anmelden" className={`inline-flex items-center rounded-full px-9 py-5 font-montserrat text-base font-extrabold text-midnight-blue shadow-[0_10px_24px_-12px_rgba(19,35,63,0.45)] transition-transform hover:-translate-y-px sm:text-lg ${GOLD}`}>
+            Jetzt kostenfrei anmelden ↑
           </a>
         </div>
       </section>
@@ -694,7 +694,7 @@ export default function Challenge() {
         <div className="mx-auto max-w-6xl px-6 text-center">
           <p className="font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] text-midnight-blue/70">Du willst nicht warten?</p>
           <p className="mx-auto mt-3 max-w-xl font-montserrat text-2xl font-extrabold leading-snug text-midnight-blue sm:text-3xl">Abkürzung und Vertiefung.</p>
-          <a href="/3-wege" className={`cc-abk-knopf mt-5 inline-flex items-center gap-3 rounded-full px-9 py-5 font-montserrat text-lg font-extrabold text-midnight-blue sm:text-xl ${GOLD}`}>
+          <a href="/3-wege" className="cc-abk-knopf mt-5 inline-flex items-center gap-3 rounded-full border-2 border-[#C9A961] bg-white px-9 py-4 font-montserrat text-base font-extrabold text-midnight-blue sm:text-lg">
             Nutze die Abkürzung – 3 Wege zum Ziel <span aria-hidden="true" className="cc-abk-pfeil">→</span>
           </a>
         </div>

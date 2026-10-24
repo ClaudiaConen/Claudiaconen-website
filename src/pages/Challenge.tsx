@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
+import LogoBand from '../components/LogoBand';
+import SocialProof from '../components/SocialProof';
 import { Link } from 'react-router-dom';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
@@ -274,7 +276,7 @@ function TagInhalt({ t }: { t: Tag }) {
 
 function Kicker({ text, hell }: { text: string; hell?: boolean }) {
   return (
-    <p className={`flex items-center gap-3 font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] ${hell ? 'text-midnight-blue' : 'text-[#EBD197]'}`}>
+    <p className={`flex items-center gap-3 font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] ${hell ? 'text-midnight-blue' : 'text-[#C9A961]'}`}>
       <span aria-hidden="true" className={`cc-linie h-[3px] w-7 rounded-full ${GOLD}`} />
       {text}
     </p>
@@ -445,6 +447,9 @@ export default function Challenge() {
           </div>
         </div>
       </header>
+
+      {/* Belege direkt unter dem Kopf (Webby-Muster, Recherche 24.10.2026): dasselbe Logo-Band wie auf der Startseite. */}
+      <LogoBand />
 
       {/* Neubau 24.10.2026 (Claudia: "neu anfangen, ganz klar und hoch professionell"): eine Seite, ein Ziel - die Anmeldung.
           Reihenfolge: Kopf -> Kennst du das? -> Loesung -> Sieben Tage -> Das bekommst du -> Fuer wen -> Trainerin -> Fragen -> Anmeldung. */}
@@ -656,6 +661,9 @@ export default function Challenge() {
           </div>
         </div>
       </Abschnitt>
+
+      {/* Echte Kundenstimmen mit Video, Bauart der Startseite (Claudias Freigabe der Namen 21./22.09.2026). */}
+      <SocialProof />
 
       <Abschnitt id="fragen" className="bg-pearl-white py-16 text-midnight-blue sm:py-24" label="fragen-titel">
         <div className="mx-auto max-w-3xl px-6">

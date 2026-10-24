@@ -63,6 +63,20 @@ const INHALT: ZielgruppenInhalt = {
     },
   ],
 
+  // Kundenstimme aus einer 1:1-Zusammenarbeit, Saetze woertlich wie in SocialProof.tsx (Freigabe 22.09.2026).
+  kundenstimme: {
+    titel: 'Eine Rede vor technischem Publikum',
+    name: 'Dr.-Ing. Ann-Kathrin Andresen',
+    rolle: 'Verfahrenstechnikerin, Mentorin und Beraterin · Ing.-up',
+    saetze: [
+      'Ich habe mit Claudia zusammen eine Rede erstellt und einstudiert, die ich vor einem technischen Publikum halte. Ich bin Ingenieurin.',
+      'Die Atmosphäre ist sehr herzlich, sehr direkt und sehr intensiv, aber wir lachen auch viel gemeinsam und es macht sehr viel Spaß.',
+      'Mit vollem Herzblut dabei und fordert dich auch gerne heraus.',
+    ],
+    video: { quelle: '/kundenstimmen/ann-kathrin-andresen.mp4', standbild: '/kundenstimmen/ann-kathrin-andresen-video.jpg', breite: 464, hoehe: 848 },
+    verweis: { text: 'Zur Webseite von Ann-Kathrin Andresen', ziel: 'https://ing-up.de/' },
+  },
+
   schrittTitel: 'Du entscheidest, wie intensiv du arbeiten möchtest',
   schrittText: 'Buche deine 90 Minuten und wähle danach deinen Termin.',
   schrittKnopf: 'Meinen Termin buchen',

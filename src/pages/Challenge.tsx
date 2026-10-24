@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
@@ -205,6 +205,30 @@ function Schiene() {
 }
 
 /** Unter den Tagen: kein direkter Weg in die Gruppe, nur zurueck zum Eintragen (Claudia, 22.09.2026). */
+/** Mobile Leiste "Kostenfrei dabei sein": erscheint nach dem Kopf, verschwindet, sobald das Formular im Bild ist.
+ *  Der Weg zur Anmeldung ist so auf dem Handy nie weiter als ein Daumen entfernt. */
+function MobilLeiste() {
+  const [zeigen, setZeigen] = useState(false);
+  useEffect(() => {
+    const pruefen = () => {
+      const form = document.getElementById('anmeldung');
+      const formSichtbar = form ? form.getBoundingClientRect().top < window.innerHeight : false;
+      setZeigen(window.scrollY > 650 && !formSichtbar);
+    };
+    pruefen();
+    window.addEventListener('scroll', pruefen, { passive: true });
+    window.addEventListener('resize', pruefen);
+    return () => { window.removeEventListener('scroll', pruefen); window.removeEventListener('resize', pruefen); };
+  }, []);
+  return (
+    <div aria-hidden={!zeigen} className={`fixed inset-x-0 bottom-0 z-40 border-t border-[#C9A961]/50 bg-[#13233F] px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] transition-transform duration-300 md:hidden ${zeigen ? 'translate-y-0' : 'pointer-events-none translate-y-full'}`}>
+      <a href="#anmelden" tabIndex={zeigen ? 0 : -1} className={`flex items-center justify-center rounded-full px-6 py-3.5 font-montserrat text-sm font-extrabold text-midnight-blue ${GOLD}`}>
+        Kostenfrei dabei sein – Start 26. Okt. →
+      </a>
+    </div>
+  );
+}
+
 function EintragBlock() {
   return (
     <div className={`mt-3 grid items-center gap-5 rounded-[10px] px-5 py-5 text-midnight-blue sm:grid-cols-[minmax(0,1fr)_auto] sm:px-7 ${FLAECHE}`}>
@@ -378,49 +402,46 @@ export default function Challenge() {
 
       {/* Kopf: Foto-Reihen laufen hinter dem Text (Claudia, 22.09.2026 10:38 UTC: "dass diese Kacheln
           von der Webinar-Seite im Hintergrund hier auch laufen"), davor eine deckende Text-Kachel. */}
-      <header className="relative overflow-hidden bg-[#0A1628] pt-28 pb-14 sm:pt-36 sm:pb-20">
+      <header className="relative overflow-hidden bg-[#13233F] pt-28 pb-12 sm:pt-32 sm:pb-16">
         <FotoReihen />
         <div className="relative z-10 mx-auto max-w-6xl px-6">
           <div className="mb-6 text-pearl-white/75">
             <Brotkrumen krumen={[{ name: '7 Tage für deine Wirkungskraft' }]} />
           </div>
-          <div className="max-w-3xl rounded-[12px] border border-[#C9A961]/45 bg-[rgba(19,35,63,0.86)] px-6 py-8 text-pearl-white shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)] sm:px-10 sm:py-11" style={{ borderTopColor: '#F7E7CE' }}>
-            {/* Claudia, 22.09.2026 11:16 UTC: Kicker groesser; "Sieben Tage" in derselben Schrift wie "fuer deine
-                Wirkung" (eine Zeile Gold-Schimmer, nicht zwei Schriften); weniger weisser Text; Punkte, was die
-                Challenge bringt; das Datum "damit es direkt auffaellt". */}
-            <p className="flex items-center gap-3 font-montserrat text-sm font-extrabold uppercase tracking-[0.22em] text-[#EBD197] sm:text-base">
-              <span aria-hidden="true" className={`cc-linie h-[3px] w-7 rounded-full ${GOLD}`} />
-              Video-Challenge
-            </p>
-            {/* Claudia, 22.09.2026 15:37/15:42 UTC - Wortlaut wie auf dem Vorschaubild: "die 7 groesser und heller",
-                "7 Tage fuer deine Wirkungskraft - weil Perfektion klickbar ist und Persoenlichkeit Vertrauen weckt",
-                Knopf "Nutze die Video-Challenge". Die 7 ist hell (kein Schimmer), der Rest traegt den Gold-Schimmer. */}
-            <h1 className="mt-5 flex items-center gap-4 font-montserrat font-black uppercase tracking-tight sm:gap-6">
-              <span className="text-[5.6rem] leading-[0.85] text-[#FFF6DC] drop-shadow-[0_0_28px_rgba(247,231,206,0.55)] sm:text-[10rem]">7</span>
-              <span className="gold-text-animated text-[1.45rem] leading-[1.04] sm:text-5xl">Tage für deine<br />Wirkungskraft</span>
-            </h1>
-            <p className="mt-5 font-cormorant text-2xl italic leading-snug text-[#F7E7CE] sm:text-3xl">– weil Perfektion klickbar ist<br className="hidden sm:block" /> und Persönlichkeit Vertrauen weckt.</p>
-            {/* Suchwoerter (Claudia 21.10.2026 11:53 UTC "ja"): selbstbewusst auftreten, vor der Kamera. */}
-            <p className="mt-3 font-montserrat text-lg font-extrabold leading-snug text-[#EBD197] sm:text-xl">Selbstbewusst auftreten – vor Kunden und vor der Kamera.</p>
-            {/* Claudia, 22.09.2026 13:01 UTC: "auf dem Banner ist mir zu viel Text" - ein Satz zur Dauer, der Fingerabdruck-
-                Satz, "mehr nicht". Die Punkte stehen hell unter dem Kopf, der WhatsApp-Hinweis steht im Formular. */}
-            <p className="mt-4 max-w-xl font-montserrat text-base font-extrabold leading-snug text-white sm:text-lg">
-              7 Tage. 30 Minuten am Tag. Und deine Wirkung wächst – hörbar, sichtbar, spürbar.
-            </p>
-            <p className="mt-4 max-w-xl font-inter text-lg leading-relaxed text-white">
-              Nutze eine der wertvollsten Marketing-Möglichkeiten der Welt: deinen akustischen Fingerabdruck. Weil du ein Unikat bist.
-            </p>
-            <p className={`mt-6 inline-block rounded-md px-4 py-3 font-montserrat text-sm font-extrabold uppercase tracking-[0.06em] text-midnight-blue sm:text-base ${GOLD}`}>
-              {stand}
-            </p>
-            <div className="mt-7 flex flex-wrap items-center gap-4">
-              <a href="#anmelden" className={`inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue transition-transform hover:-translate-y-px ${GOLD}`}>
-                Nutze die Video-Challenge →
-              </a>
-              <a href="#programm" className="font-montserrat text-sm font-semibold text-[#EBD197] underline decoration-[#C9A961]/50 underline-offset-4 hover:decoration-[#F7E7CE]">
-                Die 7 Tage ansehen ↓
-              </a>
+          {/* Kopf gekuerzt (Claudia, 24.10.2026 18:51: "der erste Slider eventuell nicht optimal in der Hoehe und
+              Beschriftung, das Logo dafuer ist besser"): links Titel, ein Satz, Datum, Knopf; rechts ihr rundes
+              Challenge-Logo ohne Rahmen. Der Satz "7 Tage. 30 Minuten..." steht direkt darunter im Block "Die Challenge". */}
+          <div className="grid items-center gap-6 rounded-[12px] border border-[#C9A961]/45 bg-[rgba(19,35,63,0.9)] px-6 py-7 text-pearl-white shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)] sm:px-10 sm:py-9 md:grid-cols-[1fr_auto] md:gap-10" style={{ borderTopColor: '#F7E7CE' }}>
+            <div className="min-w-0">
+              <p className="flex items-center gap-3 font-montserrat text-sm font-extrabold uppercase tracking-[0.14em] text-[#C9A961] sm:text-base sm:tracking-[0.22em]">
+                <span aria-hidden="true" className={`cc-linie h-[3px] w-7 rounded-full ${GOLD}`} />
+                Video-Challenge · kostenfrei
+              </p>
+              {/* Die grosse 7 steckt jetzt im Logo daneben, deshalb hier einzeilig statt doppelt. */}
+              <h1 className="mt-5 font-montserrat font-black uppercase leading-[1.05] tracking-tight">
+                <span className="gold-text-animated text-[1.9rem] sm:text-5xl">7 Tage für deine<br />Wirkungskraft</span>
+              </h1>
+              <p className="mt-5 font-cormorant text-2xl italic leading-snug text-[#F7E7CE] sm:text-3xl">– weil Perfektion klickbar ist<br className="hidden sm:block" /> und Persönlichkeit Vertrauen weckt.</p>
+              <p className="mt-4 max-w-xl font-inter text-lg leading-relaxed text-white">
+                Selbstbewusst auftreten – vor Kunden und vor der Kamera. Mit deinem akustischen Fingerabdruck. Weil du ein Unikat bist.
+              </p>
+              <p className={`mt-6 inline-block rounded-md px-4 py-3 font-montserrat text-sm font-extrabold uppercase tracking-[0.06em] text-midnight-blue sm:text-base ${GOLD}`}>
+                {stand}
+              </p>
+              <div className="mt-6 flex flex-wrap items-center gap-4">
+                <a href="#anmelden" className={`inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue transition-transform hover:-translate-y-px ${GOLD}`}>
+                  Nutze die Video-Challenge →
+                </a>
+                <a href="#programm" className="font-montserrat text-sm font-semibold text-[#C9A961] underline decoration-[#C9A961]/50 underline-offset-4 hover:decoration-[#F7E7CE]">
+                  Die 7 Tage ansehen ↓
+                </a>
+              </div>
+              {/* Vertrauen dort, wo die Entscheidung faellt: ihre belegten Eckdaten aus "Deine Trainerin". */}
+              <p className="mt-6 border-t border-[#C9A961]/30 pt-4 font-inter text-sm text-pearl-white/85">
+                Mit Claudia Conen · 37 Jahre Coach und Trainerin · zu hören bei Sat.1 und RTL
+              </p>
             </div>
+            <img src="/challenge/logo-challenge.webp" alt="Logo: 7 Tage Unverwechselbar – Video-Challenge mit Claudia Conen" width={720} height={720} className="order-first mx-auto w-48 [mask-image:radial-gradient(circle_closest-side,#000_90%,transparent_114%)] sm:w-60 md:order-none md:w-[340px]" />
           </div>
         </div>
       </header>
@@ -577,9 +598,6 @@ export default function Challenge() {
           <h2 id="fuer-wen-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">
             Diese Challenge eignet sich für dich, wenn du …
           </h2>
-          <p className={`mt-6 inline-block rounded-md px-4 py-3 font-montserrat text-sm font-extrabold uppercase tracking-[0.06em] text-midnight-blue ${GOLD}`}>
-            30 Minuten am Tag – für dich, deine Wirkung.
-          </p>
           <div className="mt-8 grid gap-4 md:grid-cols-2">
             <div style={{ ['--i' as string]: 0 }} className={`cc-stufe bg-white p-6 sm:p-7 ${KACHEL}`}>
               <div className="flex items-center gap-4">
@@ -672,6 +690,7 @@ export default function Challenge() {
       <section className="bg-pearl-white pb-20 pt-4 sm:pb-24" aria-label="Drei Wege zum Ziel">
         <div className="mx-auto max-w-6xl px-6 text-center">
           <p className="font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] text-midnight-blue/70">Du willst nicht warten?</p>
+          <p className="mx-auto mt-3 max-w-xl font-montserrat text-2xl font-extrabold leading-snug text-midnight-blue sm:text-3xl">Abkürzung und Vertiefung.</p>
           <a href="/angebote" className={`cc-abk-knopf mt-5 inline-flex items-center gap-3 rounded-full px-9 py-5 font-montserrat text-lg font-extrabold text-midnight-blue sm:text-xl ${GOLD}`}>
             Nutze die Abkürzung – 3 Wege zum Ziel <span aria-hidden="true" className="cc-abk-pfeil">→</span>
           </a>
@@ -698,6 +717,7 @@ export default function Challenge() {
       {/* Abschnitt „Willkommen bei den Unverwechselbaren“ entfernt (Claudia, 24.10.2026). */}
 
       <Footer />
+      <MobilLeiste />
     </div>
   );
 }

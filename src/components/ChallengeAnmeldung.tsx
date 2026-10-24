@@ -102,7 +102,7 @@ export default function ChallengeAnmeldung({ start, onEingetragen }: { start: st
 
   return (
     <form id="anmelden" onSubmit={absenden} className="mt-3 rounded-[10px] border border-[#C9A961]/55 bg-[#13233F] px-5 py-6 text-pearl-white sm:px-7 sm:py-7" aria-labelledby="anmelden-titel">
-      <p className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#EBD197]">Anmeldung · kostenfrei</p>
+      <p className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#C9A961]">Anmeldung · kostenfrei</p>
       <h3 id="anmelden-titel" className="mt-2 font-montserrat text-xl font-extrabold leading-tight text-white sm:text-2xl">
         Ich bin dabei.
       </h3>
@@ -137,10 +137,12 @@ export default function ChallengeAnmeldung({ start, onEingetragen }: { start: st
         <button type="submit" disabled={zustand === 'sendet'} className={`inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue transition-transform hover:-translate-y-px disabled:opacity-70 ${GOLD}`}>
           {zustand === 'sendet' ? 'Wird eingetragen …' : 'Eintragen und in die Gruppe'}
         </button>
+        {/* Letzte Huerde vor dem Klick: Kosten und Druck ausraeumen ("Kein Verkaufsdruck", Claudias Wortlaut 24.10.2026). */}
+        <span className="font-montserrat text-xs font-bold uppercase tracking-[0.12em] text-pearl-white/85">Kostenfrei · Kein Verkaufsdruck</span>
         {/* Claudia, 22.09.2026 16:19 UTC: "kleinen Button 'Vereinbarung widerrufen', der sich aufklappt - bedenke: was du
             selbst ins Netz gibst, kann ich nicht zurueckholen". Steht im Quelltext, nur per CSS zu. */}
         <details className="group w-full sm:w-auto">
-          <summary className="inline-flex cursor-pointer list-none items-center gap-2 rounded-full border border-[#C9A961]/60 px-4 py-2 font-montserrat text-xs font-bold uppercase tracking-[0.12em] text-[#EBD197] transition-colors hover:border-[#F7E7CE] hover:text-[#F7E7CE] [&::-webkit-details-marker]:hidden">
+          <summary className="inline-flex cursor-pointer list-none items-center gap-2 rounded-full border border-[#C9A961]/60 px-4 py-2 font-montserrat text-xs font-bold uppercase tracking-[0.12em] text-[#C9A961] transition-colors hover:border-[#F7E7CE] hover:text-[#F7E7CE] [&::-webkit-details-marker]:hidden">
             Vereinbarung widerrufen <span aria-hidden="true" className="transition-transform group-open:rotate-180">▾</span>
           </summary>
           <p className="mt-3 max-w-xl font-inter text-sm leading-relaxed text-pearl-white/90">

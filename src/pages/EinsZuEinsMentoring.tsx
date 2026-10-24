@@ -11,6 +11,8 @@ const TENTARY_1ZU1 = 'https://umsatzstimme-claudiaconen.mytentary.com/p/zJYlWu';
 
 const INHALT: ZielgruppenInhalt = {
   pfad: '/1-zu-1-mentoring',
+  // Hell und ruhig wie Challenge- und Startseite (Claudia, 24.10.2026 20:23: "klar, edel ... alle Seiten").
+  stimmung: 'ruhig',
   wer: '1:1-Coaching mit Claudia',
   frage: 'Du weißt, was du kannst. Nimm die Abkürzung. Und zeig es.',
   vorspann:

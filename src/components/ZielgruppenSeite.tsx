@@ -300,7 +300,7 @@ export default function ZielgruppenSeite({ inhalt }: { inhalt: ZielgruppenInhalt
         dangerouslySetInnerHTML={{ __html: JSON.stringify(strukturierteDaten) }}
       />
 
-      <Navigation />
+      <Navigation hell={(inhalt.stimmung ?? 'dunkel') !== 'dunkel'} />
 
       {/* 1. Die Frage */}
       <header

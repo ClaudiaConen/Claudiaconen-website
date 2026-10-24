@@ -525,7 +525,10 @@ export default function Challenge() {
       <Abschnitt id="loesung" className="bg-[#13233F] py-14 text-pearl-white sm:py-20" label="loesung-titel">
         <div className="mx-auto max-w-6xl px-6 text-center">
           <Kicker text="Die Challenge" />
-          <h2 id="loesung-titel" className="mx-auto mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">7 Tage. 30 Minuten am Tag. Und deine Wirkung wächst – hörbar, sichtbar, spürbar.</h2>
+          {/* Einleitung nach Claudias Diktat (Vinci-App, 24.10.2026 21:46): eine Woche, 30 Minuten am Tag, Selbsterkenntnis,
+              Selbstvertrauen, Vertrauen - "Vertrauen ist das Ganze". Wartet auf ihr Ja zum Wortlaut. */}
+          <h2 id="loesung-titel" className="mx-auto mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">Sieben Tage. 30 Minuten am Tag. Eine Woche lang für deine Wirkung.</h2>
+          <p className="mx-auto mt-4 max-w-2xl font-inter text-lg leading-relaxed text-pearl-white/85">Selbsterkenntnis, Selbstvertrauen und Vertrauen aufbauen. Denn Vertrauen ist das Ganze.</p>
           <div className="mx-auto mt-9 grid max-w-4xl gap-4 sm:grid-cols-3">
             {[['7 Tage', 'jeden Tag ein Schritt, ein Audio-Impuls, ein Video'], ['30 Minuten', 'am Tag, wann es dir passt'], ['Kostenfrei', 'Start und Abschluss live im Zoom']].map(([a, b]) => (
               <div key={a} className={`bg-pearl-white px-5 py-6 text-midnight-blue ${KACHEL}`}>

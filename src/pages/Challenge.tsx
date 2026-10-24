@@ -519,6 +519,7 @@ export default function Challenge() {
             </li>
           </ol>
           <p className="mt-5 font-inter text-[15px] text-midnight-blue/80">Jeden Tag: ein Audio-Impuls von mir, ein Workbook und dein 1-Minuten-Video – mit 24 Stunden Zeit.</p>
+          <p className="mt-2 font-inter text-[15px] text-midnight-blue/80">Zusatz-Geschenk: der Buchauszug „Entdecke deine Stimmwirkung“ aus dem Brainself-Buch.</p>
           {/* Formular direkt nach dem Wegweiser: dort faellt die Entscheidung (Claudia, 24.10.2026 20:08: "an welcher Stelle optimal"). */}
           <div id="anmeldung" className="mt-10">
             <ChallengeAnmeldung start={startKurz} />
@@ -526,30 +527,7 @@ export default function Challenge() {
         </div>
       </Abschnitt>
 
-      <Abschnitt id="das-bekommst-du" className="bg-pearl-white py-16 text-midnight-blue sm:py-24" label="bekommst-titel">
-        <div className="mx-auto max-w-6xl px-6">
-          <Kicker text="Das bekommst du – kostenfrei" hell />
-          <h2 id="bekommst-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">Alles, was du für deine sieben Tage brauchst.</h2>
-          <ul className="mt-9 grid list-none gap-3 p-0 sm:grid-cols-2">
-            {[
-              ['Auftakt live im Zoom', 'Montag, 26. Oktober, 19 Uhr: Kennenlernen, Übungsplan, dein Vorher-Video'],
-              ['7 Audio-Impulse von mir', 'jeden Tag einer, mit einem Gedanken und einer konkreten Aufgabe'],
-              ['7 Workbooks', 'jeden Tag eins, zum Ausfüllen'],
-              ['2 persönliche Wirkungschecks', 'an Tag 2 und Tag 6 schaue ich mir dein Video an'],
-              ['Abschluss live im Zoom', 'Montag, 2. November, 19 Uhr: dein Pitch in 30–60 Sekunden, freiwillig'],
-              ['Deine Auszeichnung fürs Durchziehen', 'für alle, die sieben Tage dabeibleiben und ihre Videos posten'],
-              ['Netzwerk-Tag', 'Dienstag, 3. November: stell dein Business in der Gruppe vor'],
-              ['Deine Gruppe', 'Austausch bei WhatsApp oder Telegram, ohne Werbung'],
-              ['Zusatz-Geschenk: Buchauszug', 'das Kapitel „Entdecke deine Stimmwirkung“ aus dem Brainself-Buch'],
-            ].map(([t, x], i) => (
-              <li key={t} style={{ ['--i' as string]: i }} className={`cc-stufe flex items-start gap-4 bg-white px-5 py-4 ${KACHEL}`}>
-                <GoldHaken />
-                <span><b className="block font-montserrat text-base font-extrabold">{t}</b><span className="mt-0.5 block font-inter text-[15px] text-midnight-blue/80">{x}</span></span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </Abschnitt>
+      {/* "Das bekommst du" entfernt (Claudia, 24.10.2026 20:52: "frei erfunden"); Auftakt, Abschluss, Netzwerk-Tag und Wirkungschecks stehen in der 7-Tage-Linie. */}
 
       <Abschnitt id="fuer-wen" className="bg-white py-16 text-midnight-blue sm:py-24" label="fuer-wen-titel">
         <div className="mx-auto max-w-6xl px-6">

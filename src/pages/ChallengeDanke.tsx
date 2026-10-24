@@ -97,7 +97,7 @@ export default function ChallengeDanke() {
               </li>
             ))}
           </ol>
-          <p className="mt-6 font-inter text-[15px] text-midnight-blue/80">Jeden Tag bis 9 Uhr: Audio-Impuls und Workbook in der Gruppe. Für dein 1-Minuten-Video hast du 24 Stunden Zeit.</p>
+          <p className="mt-6 font-inter text-[15px] text-midnight-blue/80">Jeden Tag bis 9 Uhr: Audio-Impuls und Workbook in deiner Gruppe – wahlweise bei WhatsApp oder Telegram. Für dein 1-Minuten-Video hast du 24 Stunden Zeit.</p>
           <div className="mt-10 flex flex-wrap items-center gap-4">
             <Link to="/challenge#programm" className="font-montserrat text-sm font-bold underline decoration-[#C9A961] decoration-2 underline-offset-4">Die Tage im Detail ansehen</Link>
             <a href={KALENDER} target="_blank" rel="noopener" className="inline-flex items-center rounded-full border-2 border-midnight-blue px-5 py-2.5 font-montserrat text-sm font-bold hover:bg-midnight-blue hover:text-pearl-white">Ruf mich an – zum Kalender →</a>

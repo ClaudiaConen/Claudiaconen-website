@@ -62,6 +62,8 @@ function FeedbackPlakette() {
  *  Tag 1 offen - als Vorbereitung (Aufwachuebung + Satz); Tag n oeffnet am n-ten Tag des Durchgangs. Nach dem
  *  Ende bleiben alle Tage lesbar, die Zeile im Kopf sagt, dass der Durchgang vorbei ist (Datum nie ohne Ablauf).
  *  Naechster Durchgang: START und ENDE hier aendern - sonst nichts. */
+/** Zahl der Eingetragenen, von Claudia genannt (Stand 24.10.2026, 21:59) - bis zum Start nachtragen. */
+const EINGETRAGEN = 32;
 const START = new Date(2026, 9, 26); // Montag, 26.10.2026, lokale Zeit
 const ENDE = new Date(2026, 10, 2); // Montag, 02.11.2026 (letzter Tag)
 const VORBEREITUNG_TAG1 = false; // Streifen bleiben vor dem Start zu - die Aufwachuebung steht als 'Tipp am Morgen' davor (22.09.2026 11:24 UTC)
@@ -530,7 +532,7 @@ export default function Challenge() {
           <h2 id="loesung-titel" className="mx-auto mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">Sieben Tage. 30 Minuten am Tag. Eine Woche lang für deine Wirkung.</h2>
           <p className="mx-auto mt-4 max-w-2xl font-inter text-lg leading-relaxed text-pearl-white/85">Selbsterkenntnis, Selbstvertrauen und Vertrauen aufbauen. Denn Vertrauen ist das Ganze.</p>
           <div className="mx-auto mt-9 grid max-w-4xl gap-4 sm:grid-cols-3">
-            {[['7 Tage', 'jeden Tag ein Schritt, ein Audio-Impuls, ein Video'], ['30 Minuten', 'am Tag, wann es dir passt'], ['Kostenfrei', 'Start und Abschluss live im Zoom']].map(([a, b]) => (
+            {[['7 Tage', 'jeden Tag ein Schritt, ein Audio-Impuls, ein Video'], ['30 Minuten', 'am Tag, wann es dir passt'], ['Kostenfrei', 'Kein Verkaufsdruck · Start und Abschluss live im Zoom']].map(([a, b]) => (
               <div key={a} className={`bg-pearl-white px-5 py-6 text-midnight-blue ${KACHEL}`}>
                 <p className="font-montserrat text-3xl font-black">{a}</p>
                 <p className="mt-1 font-inter text-[15px] text-midnight-blue/80">{b}</p>
@@ -617,6 +619,8 @@ export default function Challenge() {
           <p className="mt-2 font-inter text-[15px] text-midnight-blue/80">Zusatz-Geschenk: der Buchauszug „Entdecke deine Stimmwirkung“ aus dem Brainself-Buch.</p>
           {/* Formular direkt nach dem Wegweiser: dort faellt die Entscheidung (Claudia, 24.10.2026 20:08: "an welcher Stelle optimal"). */}
           <div id="anmeldung" className="mt-10">
+            {/* Echte Zahl von Claudia (24.10.2026 21:59: "Es sind 32 Personen eingetragen") - bis zum Start nachtragen. */}
+            <p className="mb-3 flex items-center gap-2 font-montserrat text-sm font-extrabold text-midnight-blue"><span aria-hidden="true" className="h-2.5 w-2.5 rounded-full bg-[#C9A961]" />Schon {EINGETRAGEN} Teilnehmende eingetragen</p>
             <ChallengeAnmeldung start={startKurz} />
           </div>
         </div>

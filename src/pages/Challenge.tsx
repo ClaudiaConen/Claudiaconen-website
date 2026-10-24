@@ -524,8 +524,7 @@ export default function Challenge() {
           {/* Claudias Wortlaut (Liste 24.10.2026 22:58, Punkt 4); die Pointe darunter ist mein Vorschlag (Punkt 6, offen). */}
           <h2 id="loesung-titel" className="cc-zeile mt-5 font-montserrat text-5xl font-extrabold leading-none sm:text-7xl" style={{ ['--z' as string]: 0 }}>Du entscheidest.</h2>
           <p className="cc-zeile mx-auto mt-6 max-w-2xl font-inter text-xl leading-relaxed text-pearl-white/90 sm:text-2xl" style={{ ['--z' as string]: 1 }}>Ob du eine Minute oder 30 Minuten am Tag in deine Wirkungskraft investierst.</p>
-          <p className="cc-zeile mx-auto mt-8 max-w-2xl font-inter text-lg leading-relaxed text-pearl-white/80" style={{ ['--z' as string]: 2 }}>Wer sich selbst erkennt, tritt sicherer auf. Wer sicher auftritt, weckt Vertrauen.</p>
-          <p className="cc-zeile mt-3 font-montserrat text-xl font-extrabold text-[#C9A961] sm:text-2xl" style={{ ['--z' as string]: 3 }}>Und Vertrauen ist das Gold von morgen.</p>
+          {/* Pointe (Claudias Punkt 6) bleibt leer, bis sie A, B oder nichts waehlt. */}
         </div>
       </Abschnitt>
 
@@ -556,7 +555,7 @@ export default function Challenge() {
               const letzter = i === TAGE.length - 1;
               return (
                 <li key={t.titel} data-tag={i}>
-                  <details className={`group bg-white text-midnight-blue transition-shadow duration-500 ${KACHEL} ${i === aktiverTag ? 'md:border-[#C9A961] md:shadow-[0_14px_34px_-18px_rgba(201,169,97,0.75)]' : ''}`}>
+                  <details style={{ ['--i' as string]: i + 1 }} className={`group bg-white text-midnight-blue transition-shadow duration-500 ${KACHEL} ${i === aktiverTag ? 'md:border-[#C9A961] md:shadow-[0_14px_34px_-18px_rgba(201,169,97,0.75)]' : ''}`}>
                     <summary className="grid cursor-pointer list-none gap-1 px-5 py-5 sm:grid-cols-[170px_minmax(0,1fr)_auto] sm:items-center sm:gap-6 sm:px-7 [&::-webkit-details-marker]:hidden">
                       <p className="font-montserrat text-sm font-extrabold">Tag {i + 1}<span className="block font-bold text-midnight-blue/65">{letzter ? 'Mo., 2. Nov. · 19 Uhr' : KURZ.format(freischaltung(heute, i))}</span></p>
                       <div className="flex min-w-0 items-start gap-4">

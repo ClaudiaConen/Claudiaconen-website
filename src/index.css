@@ -2754,7 +2754,7 @@ html, body { overflow-x: clip; }
 .cc-2027 .hover\:bg-royal-navy:hover { background-color: #1A2B4C; }
 .cc-2027 .cc-glanz-kachel { position: relative; overflow: hidden; }
 .cc-2027 .cc-glanz-kachel::after { content: ""; position: absolute; inset: -40%; transform: translateX(-125%) rotate(16deg); background: linear-gradient(90deg, transparent 42%, rgba(255,255,255,.55) 50%, transparent 58%); pointer-events: none; }
-.js .cc-2027 .cc-r.da .cc-glanz-kachel::after { animation: cc-glanz 1.6s ease .4s 1; }
+.js .cc-2027 .cc-r.da .cc-glanz-kachel::after { animation: cc-glanz 1.6s ease calc(.4s + var(--i, 0) * .18s) 1 both; }
 .cc-2027 .cc-glanz-kachel:hover::after { animation: cc-glanz 1.2s ease 1; }
 @keyframes cc-glanz { to { transform: translateX(125%) rotate(16deg); } }
 @media (prefers-reduced-motion: reduce) { .cc-2027 .cc-glanz-kachel::after { display: none; } }

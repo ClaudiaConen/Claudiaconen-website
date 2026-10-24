@@ -7,7 +7,7 @@ import ZielgruppenSeite, { ZielgruppenInhalt } from '../components/ZielgruppenSe
  * entschaerft. Die fruehere Zwoelf-Wochen-Einzelbegleitung (Preis im Erstgespraech) stand bis hierher auf dieser Seite.
  * Preis wie in Tentary: 180 EUR netto fuer 90 Minuten. Das 3er-Paket wird nicht gezeigt.
  */
-const TENTARY_1ZU1 = 'https://umsatzstimme-claudiaconen.mytentary.com/p/zJYlWu';
+// Tentary-Produkt fuer 90 Minuten: p/zJYlWu, wieder einsetzen, sobald es korrigiert ist.
 
 const INHALT: ZielgruppenInhalt = {
   pfad: '/1-zu-1-mentoring',
@@ -84,9 +84,10 @@ const INHALT: ZielgruppenInhalt = {
   ],
 
   schrittTitel: 'Du entscheidest, wie intensiv du arbeiten möchtest',
-  schrittText: 'Buche deine 90 Minuten und wähle danach deinen Termin.',
-  schrittKnopf: 'Meinen Termin buchen',
-  schrittZiel: TENTARY_1ZU1,
+  // Uebergang, bis das Tentary-Produkt korrigiert ist (zJYlWu beschreibt sich als "3x 90 min" fuer 180 EUR, Stand 24.10.2026).
+  schrittText: 'Wähle einen Termin für ein kurzes Vorgespräch. Dann vereinbaren wir deine 90 Minuten.',
+  schrittKnopf: 'Termin anfragen',
+  schrittZiel: 'https://meet.brevo.com/claudia-conen',
 
   bild: '/a27/p/angebote/einzel-coaching.webp',
   bildAlt: 'Claudia Conen im 1:1-Gespräch mit einer Kundin',

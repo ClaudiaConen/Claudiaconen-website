@@ -603,6 +603,7 @@ export default function Challenge() {
               ['Deine Auszeichnung fürs Durchziehen', 'für alle, die sieben Tage dabeibleiben und ihre Videos posten'],
               ['Netzwerk-Tag', 'Dienstag, 3. November: stell dein Business in der Gruppe vor'],
               ['Deine Gruppe', 'Austausch bei WhatsApp oder Telegram, ohne Werbung'],
+              ['Zusatz-Geschenk: Buchauszug', 'das Kapitel „Entdecke deine Stimmwirkung“ aus dem Brainself-Buch'],
             ].map(([t, x], i) => (
               <li key={t} style={{ ['--i' as string]: i }} className={`cc-stufe flex items-start gap-4 bg-white px-5 py-4 ${KACHEL}`}>
                 <GoldHaken />
@@ -681,27 +682,7 @@ export default function Challenge() {
       {/* Echte Kundenstimmen mit Video, Bauart der Startseite (Claudias Freigabe der Namen 21./22.09.2026). */}
       <SocialProof />
 
-      <Abschnitt id="fragen" className="bg-pearl-white py-16 text-midnight-blue sm:py-24" label="fragen-titel">
-        <div className="mx-auto max-w-3xl px-6">
-          <Kicker text="Häufige Fragen" hell />
-          <h2 id="fragen-titel" className="mt-5 font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">Gut zu wissen, bevor es losgeht.</h2>
-          <div className="mt-8 grid gap-3">
-            {[
-              ['Was kostet die Challenge?', 'Nichts. Die sieben Tage, die Audio-Impulse, die Workbooks, die beiden Wirkungschecks und die Live-Termine im Zoom sind kostenfrei.'],
-              ['Wie viel Zeit brauche ich?', 'Rund 30 Minuten am Tag. Such dir eine feste Zeit – wann auch immer. Für dein Video hast du jeweils 24 Stunden.'],
-              ['Muss ich mein Video zeigen?', 'Nein. Wenn du magst, teilst du deinen Versuch in der Gruppe. Wer still mitübt, gehört genauso dazu. Für deinen Wirkungscheck an Tag 2 und Tag 6 postest du dein Video innerhalb von 24 Stunden.'],
-              ['Wo läuft die Challenge?', 'In einer Gruppe bei WhatsApp oder Telegram, dazu Auftakt und Abschluss live im Zoom. Den Link bekommst du nach dem Eintragen.'],
-              ['Darf ich in der Gruppe Werbung machen?', 'Austausch ist gern gesehen, Werbung nicht. Dafür gibt es den Abschluss im Zoom am 2. November und den Netzwerk-Tag am 3. November.'],
-              ['Was passiert nach den sieben Tagen?', 'Du bekommst deine Auszeichnung fürs Durchziehen. Und wenn du weitermachen möchtest, zeige ich dir drei Wege – ohne Druck.'],
-            ].map(([f, a]) => (
-              <details key={f} className={`group bg-white text-midnight-blue ${KACHEL}`}>
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 font-montserrat text-base font-extrabold [&::-webkit-details-marker]:hidden">{f}<span aria-hidden="true" className="text-[#C9A961] transition-transform group-open:rotate-45">+</span></summary>
-                <p className="border-t border-[#C9A961]/40 px-5 pb-5 pt-3 font-inter text-[15px] leading-relaxed">{a}</p>
-              </details>
-            ))}
-          </div>
-        </div>
-      </Abschnitt>
+      {/* "Gut zu wissen, bevor es losgeht" entfernt (Claudia, 24.10.2026 20:06: zu viel Ablenkung, gehoert als Tipp-Box in die Challenge). */}
 
       {/* Anmeldung direkt unter dem Kopf (Kritiker-Durchgang 22.09.2026, Claudias Ja 12:22 UTC: "mach das alles so"). */}
       <section id="anmeldung" className="bg-pearl-white pt-6 pb-4 sm:pt-8" aria-label="Anmeldung zur Challenge">

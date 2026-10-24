@@ -680,12 +680,9 @@ export default function Challenge() {
             <Kicker text="Deine Trainerin" hell />
             <h2 id="warum" className="mt-5 font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">Claudia Conen,<br />genannt „die Umsatzstimme“</h2>
             <p className="mt-3 font-montserrat text-lg font-bold text-midnight-blue/80">Expertin für menschliche Wirkungskraft im KI-Zeitalter.</p>
-            <p className="mt-7 border-l-4 border-[#C9A961] pl-5 font-cormorant text-2xl italic leading-snug sm:text-3xl">
-              Alles, was wir erleben, formt uns. Mich hat es ganze 39 Jahre gekostet, um zu erkennen, warum ich diesen Job mache und warum ich so gut darin bin.
-            </p>
+            {/* Satz zu den 39 Jahren raus (gehoert zur Entfuehrungs-Geschichte; Claudia 24.10.2026 22:47: "der Text stimmt nicht"). Hier kommt ihr eigener Satz hin. */}
             <ul className="mt-7 grid list-none gap-2 p-0 font-inter text-[16px] text-midnight-blue">
               <li className="flex items-center gap-3"><span aria-hidden="true" className="h-2 w-2 flex-none rotate-45 bg-[#C9A961]" />37 Jahre als Coach und Trainerin</li>
-              <li className="flex items-center gap-3"><span aria-hidden="true" className="h-2 w-2 flex-none rotate-45 bg-[#C9A961]" />Auf Bühnen, vor Kameras, in Unternehmen</li>
               <li className="flex items-center gap-3"><span aria-hidden="true" className="h-2 w-2 flex-none rotate-45 bg-[#C9A961]" />Zu hören unter anderem bei Sat.1 und RTL</li>
             </ul>
             <Link to="/ueber-mich" className="mt-7 inline-flex items-center font-montserrat text-sm font-bold underline decoration-[#C9A961] decoration-2 underline-offset-4 hover:text-royal-navy">Mehr über Claudia →</Link>

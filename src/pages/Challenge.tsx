@@ -608,14 +608,14 @@ export default function Challenge() {
             </div>
           </div>
           {/* Formular direkt nach dem Wegweiser: dort faellt die Entscheidung (Claudia, 24.10.2026 20:08: "an welcher Stelle optimal"). */}
-          {/* "Was du wirklich mitnimmst" - Claudias Text vom 24.10.2026 23:52, nur Rechtschreibung und Satzzeichen geglaettet. */}
+          {/* "Was du wirklich mitnimmst" - nach Claudias Text vom 24.10.2026 23:52, Business-Fassung von ihr freigegeben (23:56). */}
           <div className="mt-14">
             <Kicker text="Was du wirklich mitnimmst" hell />
             <div className="mt-6 grid gap-4 md:grid-cols-3">
               {[
-                ['Selbstvertrauen, das du fühlst', 'Praktische Methoden, die dich nicht verändern, sondern dich an deine eigene Stärke erinnern. Du verstehst, wie du deine Energie bewusst lenkst und warum Klarheit dein größter Vorteil ist.'],
-                ['Souveränität in jeder Situation', 'Du verstehst, dich mit Haltung zu performen – ruhig, klar und ohne den ständigen Kampf. Psychologische Prinzipien geben dir Klarheit, wenn die Unsicherheit zurückkommt.'],
-                ['Kommunikation, die Vertrauen weckt und deine Dienstleistung als Lösung aufzeigt', 'Du erkennst, wann du sprichst und wann du einfach wirken darfst. Beherrsche die Kunst der Kommunikation und lerne, authentisch und mit Leichtigkeit dein Business zu präsentieren.'],
+                ['Selbstvertrauen vor Kunden', 'Praktische Methoden, die dich nicht verändern, sondern dich an deine eigene Stärke erinnern: im Pitch, im Kundengespräch, vor der Kamera.'],
+                ['Souveränität im Auftritt', 'Du präsentierst dich mit Haltung – ruhig, klar und ohne den ständigen Kampf. Psychologische Prinzipien geben dir Klarheit, wenn die Unsicherheit zurückkommt.'],
+                ['Kommunikation, die Vertrauen weckt', 'Du zeigst deine Dienstleistung als Lösung. Du erkennst, wann du sprichst und wann du einfach wirken darfst, und präsentierst dein Business authentisch und mit Leichtigkeit.'],
               ].map(([t, x], k) => (
                 <div key={t} style={{ ['--i' as string]: k }} className={`cc-stufe bg-white p-6 text-midnight-blue ${KACHEL}`}>
                   <p className="font-montserrat text-lg font-extrabold leading-snug">{t}</p>
@@ -624,7 +624,7 @@ export default function Challenge() {
               ))}
             </div>
             <p className="mx-auto mt-8 max-w-3xl text-center font-montserrat text-lg font-bold leading-relaxed text-midnight-blue sm:text-xl">
-              Du öffnest dich, ohne dich dabei zu verbiegen. Beziehungen werden tiefer und ehrlicher. <span className="text-[#9A7B2F]">Weil du dir selbst vertraust, weckst du Vertrauen.</span>
+              Du öffnest dich, ohne dich zu verbiegen. <span className="text-[#9A7B2F]">Weil du dir selbst vertraust, vertrauen dir auch deine Kunden.</span>
             </p>
           </div>
           <div id="anmeldung" className="mt-10">

@@ -1427,6 +1427,11 @@ html, body { cursor: auto; }
     animation: none;
     background: linear-gradient(135deg, #D4AF37, #F7E7CE);
     background-size: 100% 100%;
+    /* Die Kurzform 'background' setzt background-clip zurueck - ohne diese Zeilen wird der Text zum Goldbalken (24.10.2026). */
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
   }
   .keyword-highlight::after {
     display: none;
@@ -2767,3 +2772,12 @@ html, body { overflow-x: clip; }
 .cc-glas-bewegt > * { position: relative; }
 @keyframes cc-glas-wandern { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
 @media (prefers-reduced-motion: reduce) { .cc-glas-bewegt, .cc-glas-bewegt::before { animation: none; } }
+
+/* Bewegter Abkuerzungs-Knopf (Claudia, 24.10.2026): sanftes Atmen + Glanz, ohne Bewegung bei reduce. */
+.cc-abk-knopf { position: relative; overflow: hidden; box-shadow: 0 14px 34px -14px rgba(201,169,97,.75); animation: ccAbkAtmen 2.6s ease-in-out infinite; }
+.cc-abk-knopf::after { content: ""; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.55) 50%, transparent 70%); transform: translateX(-120%); animation: ccAbkGlanz 3.2s ease-in-out infinite; }
+.cc-abk-pfeil { display: inline-block; animation: ccAbkPfeil 1.3s ease-in-out infinite; }
+@keyframes ccAbkAtmen { 0%,100% { transform: scale(1); } 50% { transform: scale(1.035); } }
+@keyframes ccAbkGlanz { 0%,40% { transform: translateX(-120%); } 80%,100% { transform: translateX(120%); } }
+@keyframes ccAbkPfeil { 0%,100% { transform: translateX(0); } 50% { transform: translateX(6px); } }
+@media (prefers-reduced-motion: reduce) { .cc-abk-knopf, .cc-abk-knopf::after, .cc-abk-pfeil { animation: none; } }

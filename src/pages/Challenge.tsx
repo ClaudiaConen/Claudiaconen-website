@@ -576,6 +576,44 @@ export default function Challenge() {
         </div>
       </Abschnitt>
 
+      {/* Fuer wen - hell mit 3-D-Icons (Claudia, 22.09.2026 13:15/13:17 UTC: "doofer Satz", "sieht sehr haesslich aus",
+          "so schoene Icons ... bring da noch welche ein"). Ueberschrift und "30 Minuten am Tag" in ihrem Wortlaut. */}
+      <Abschnitt id="fuer-wen" className="bg-pearl-white py-16 text-midnight-blue sm:py-24" label="fuer-wen-titel">
+        <div className="mx-auto max-w-6xl px-6">
+          <Kicker text="Für wen das ist" hell />
+          <h2 id="fuer-wen-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">
+            Diese Challenge eignet sich für dich, wenn du …
+          </h2>
+          <p className={`mt-6 inline-block rounded-md px-4 py-3 font-montserrat text-sm font-extrabold uppercase tracking-[0.06em] text-midnight-blue ${GOLD}`}>
+            30 Minuten am Tag – für dich, deine Wirkung.
+          </p>
+          <div className="mt-8 grid gap-4 md:grid-cols-2">
+            <div style={{ ['--i' as string]: 0 }} className={`cc-stufe bg-white p-6 sm:p-7 ${KACHEL}`}>
+              <div className="flex items-center gap-4">
+                <img src="/icons/wirkung.webp" alt="" width={256} height={256} loading="lazy" decoding="async" className="h-16 w-16 flex-none drop-shadow-[0_8px_12px_rgba(10,22,40,0.25)]" />
+                <h3 className="font-montserrat text-base font-extrabold uppercase tracking-wide">Für dich, wenn du</h3>
+              </div>
+              <ul className="mt-4 grid list-none gap-2.5 p-0">
+                {FUER.map((z) => (
+                  <li key={z} className="flex items-start gap-3 font-inter text-[15px] leading-relaxed"><Haken /><span>{z}</span></li>
+                ))}
+              </ul>
+            </div>
+            <div style={{ ['--i' as string]: 1 }} className={`cc-stufe bg-white p-6 sm:p-7 ${KACHEL}`}>
+              <div className="flex items-center gap-4">
+                <img src="/icons/ki.webp" alt="" width={256} height={256} loading="lazy" decoding="async" className="h-16 w-16 flex-none drop-shadow-[0_8px_12px_rgba(10,22,40,0.25)]" />
+                <h3 className="font-montserrat text-base font-extrabold uppercase tracking-wide">Nicht für dich, wenn du</h3>
+              </div>
+              <ul className="mt-4 grid list-none gap-2.5 p-0">
+                {NICHT_FUER.map((z) => (
+                  <li key={z} className="flex items-start gap-3 font-inter text-[15px] leading-relaxed"><span aria-hidden="true" className="mt-0.5 font-montserrat font-black text-[#C9A961]">✕</span><span>{z}</span></li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </Abschnitt>
+
       {/* Ergebnis + Zertifikat + Ablauf (Claudia, 21.10.2026; umgebaut 23.10.2026: "Nach sieben Tagen hast du sieht
           voll langweilig aus", Ablauf "mit Laufline wie unten bei den Tagen, von links nach rechts, nicht so langweilig").
           Die Leistungsliste ist raus - jeder Punkt steht schon im Programm, im Ablauf oder als Workbook-Kachel. */}
@@ -609,9 +647,6 @@ export default function Challenge() {
         </div>
       </Abschnitt>
 
-      {/* "Entdecke in der Challenge" entfernt (Claudia, 23.10.2026): wiederholte die sieben Tage mit Icons weiter unten.
-          Das Workbook steht jetzt als eigene Kachel bei den Tagen. */}
-
       {/* Anmeldung direkt unter dem Kopf (Kritiker-Durchgang 22.09.2026, Claudias Ja 12:22 UTC: "mach das alles so"). */}
       <section id="anmeldung" className="bg-pearl-white pt-6 pb-4 sm:pt-8" aria-label="Anmeldung zur Challenge">
         <div className="mx-auto max-w-6xl px-6">
@@ -619,37 +654,44 @@ export default function Challenge() {
         </div>
       </section>
 
-
-      {/* So laeuft es ab - Claudias Diktate 13:07 + 13:10 UTC, sortiert (ABLAUF). */}
-      <Abschnitt id="ablauf" className="bg-pearl-white py-12 sm:py-16" label="ablauf-titel">
-        <div className="mx-auto max-w-6xl px-6">
-          <Kicker text="So läuft es ab" hell />
-          <h2 id="ablauf-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
-            Gut zu wissen, bevor es losgeht.
-          </h2>
-          <ol className="mt-7 grid list-none gap-3 p-0 sm:grid-cols-2 lg:grid-cols-3">
-            {ABLAUF.map((a, i) => (
-              <li key={a.titel} style={{ ['--i' as string]: i }} className={`cc-stufe bg-white px-5 py-5 text-midnight-blue ${KACHEL}`}>
-                <div className="flex items-center gap-3">
-                  <span className={`flex h-9 w-9 flex-none items-center justify-center rounded-md font-montserrat text-sm font-black text-midnight-blue ${GOLD}`}>{i + 1}</span>
-                  <h3 className="font-montserrat text-sm font-extrabold uppercase tracking-wide">{a.titel}</h3>
-                </div>
-                <p className="mt-3 font-inter text-[15px] leading-relaxed">{a.text}</p>
-              </li>
-            ))}
-          </ol>
-          <p className="mt-5 max-w-3xl border-l-4 border-[#C9A961] bg-white px-5 py-3 font-inter text-[15px] leading-relaxed text-midnight-blue">{ABLAUF_HINWEIS}</p>
+      {/* Warum ich - hell (Claudia, 22.09.2026 15:00 UTC: "der Bereich ist viel zu dunkel", "zu viel und zu dunkel"). */}
+      <Abschnitt className="bg-white py-16 text-midnight-blue sm:py-24" label="warum">
+        <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2 md:gap-14">
+          <div>
+            <Kicker text="Warum ich" hell />
+            {/* Nur Claudias eigene Worte (Claudia, 24.10.2026: "das Warum ... auf der Über-mich-Seite holen und nicht irgendwas
+                schreiben"): Positionierung vom 09.10.2026 + Saetze aus UeberMich.tsx, wortgleich. */}
+            <h2 id="warum" className="mt-5 font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">Die Brücke zwischen Mensch und Maschine.</h2>
+            <p className="mt-3 font-montserrat text-lg font-bold text-midnight-blue/80">Deine Persönlichkeit schafft Vertrauen. Vertrauen gewinnt Kunden.</p>
+            <p className="mt-7 border-l-4 border-[#C9A961] pl-5 font-cormorant text-3xl italic leading-snug sm:text-4xl">
+              Alles, was wir erleben, formt uns. Mich hat es ganze 39 Jahre gekostet, um zu erkennen, warum ich diesen Job mache und warum ich so gut darin bin.
+            </p>
+          </div>
+          <div>
+            <h3 className="font-montserrat text-base font-extrabold uppercase tracking-wide">Die Entführung, die meine Berufung prägte</h3>
+            <div className="mt-3 grid gap-3 font-inter text-[17px] leading-relaxed text-midnight-blue">
+              <p>72 Stunden kann sie nichts sehen, nur diese Stimmen hören.</p>
+              <p>Wie besessen hört sie hin, wenn Menschen miteinander reden.</p>
+              <p>Unbewusst ist sie fokussiert auf die Wahrnehmung der hörbaren Emotionen.</p>
+              <p className="font-semibold italic">Dieses kleine Mädchen steckt heute noch in mir.</p>
+            </div>
+            <p className="mt-6 font-inter text-[15px] text-midnight-blue">
+              Die ganze Geschichte findest du auf{' '}
+              <Link to="/ueber-mich" className="underline decoration-[#C9A961] decoration-2 underline-offset-4 hover:text-royal-navy">„Über mich"</Link>.
+            </p>
+          </div>
         </div>
       </Abschnitt>
 
-      {/* Die sieben Tage als Klapp-Kacheln (Claudia, 09:19 UTC: "damit die ganze Anleitung nicht die
-          Seite ueberflutet"), dazwischen der WhatsApp-Einstieg mit QR-Code. Vorschau bleibt sichtbar
-          (Designliste: nie alles hinter einem Klick). Tag 1 ist aufgeklappt. */}
-      {/* Abschnitt "Vorab – Zwei Tipps" entfernt (Claudia, 24.10.2026: "die zwei Tipps ... nimm die raus"). */}
-
-      {/* Abschnitt "Hand aufs Herz" (Lernbox) entfernt auf Claudias Anweisung (23.10.2026 18:31). */}
-
-      {/* Abschnitt "Dein KI-Agent ist effizient. Und du?" entfernt (Claudia, 23.10.2026: lenkt ab, doppelt). Text in der Git-Historie (f94af50). */}
+      {/* Bewegter Knopf zu den drei Wegen (Claudia, 24.10.2026: "ein bewegter Button: Nutze die Abkuerzung – 3 Wege zum Ziel"). */}
+      <section className="bg-pearl-white py-14 sm:py-20" aria-label="Drei Wege zum Ziel">
+        <div className="mx-auto max-w-6xl px-6 text-center">
+          <p className="font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] text-midnight-blue/70">Du willst nicht warten?</p>
+          <a href="#geschenk" className={`cc-abk-knopf mt-5 inline-flex items-center gap-3 rounded-full px-9 py-5 font-montserrat text-lg font-extrabold text-midnight-blue sm:text-xl ${GOLD}`}>
+            Nutze die Abkürzung – 3 Wege zum Ziel <span aria-hidden="true" className="cc-abk-pfeil">→</span>
+          </a>
+        </div>
+      </section>
 
       {/* Werkzeugkasten + Workbook */}
       <Abschnitt className="bg-white py-16 text-midnight-blue sm:py-24" label="werkzeug-titel">
@@ -680,6 +722,28 @@ export default function Challenge() {
           </div>
 
           {/* Workbook „Entdecke deine Stimmwirkung“ entfernt (Claudia, 24.10.2026: kommt als Geschenk fuer alle, die die sieben Tage dabei waren). */}
+        </div>
+      </Abschnitt>
+
+      {/* So laeuft es ab - Claudias Diktate 13:07 + 13:10 UTC, sortiert (ABLAUF). */}
+      <Abschnitt id="ablauf" className="bg-pearl-white py-12 sm:py-16" label="ablauf-titel">
+        <div className="mx-auto max-w-6xl px-6">
+          <Kicker text="Häufige Fragen" hell />
+          <h2 id="ablauf-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">
+            Gut zu wissen, bevor es losgeht.
+          </h2>
+          <ol className="mt-7 grid list-none gap-3 p-0 sm:grid-cols-2 lg:grid-cols-3">
+            {ABLAUF.map((a, i) => (
+              <li key={a.titel} style={{ ['--i' as string]: i }} className={`cc-stufe bg-white px-5 py-5 text-midnight-blue ${KACHEL}`}>
+                <div className="flex items-center gap-3">
+                  <span className={`flex h-9 w-9 flex-none items-center justify-center rounded-md font-montserrat text-sm font-black text-midnight-blue ${GOLD}`}>{i + 1}</span>
+                  <h3 className="font-montserrat text-sm font-extrabold uppercase tracking-wide">{a.titel}</h3>
+                </div>
+                <p className="mt-3 font-inter text-[15px] leading-relaxed">{a.text}</p>
+              </li>
+            ))}
+          </ol>
+          <p className="mt-5 max-w-3xl border-l-4 border-[#C9A961] bg-white px-5 py-3 font-inter text-[15px] leading-relaxed text-midnight-blue">{ABLAUF_HINWEIS}</p>
         </div>
       </Abschnitt>
 
@@ -768,74 +832,6 @@ export default function Challenge() {
         </div>
       </Abschnitt>
 
-      {/* Fuer wen - hell mit 3-D-Icons (Claudia, 22.09.2026 13:15/13:17 UTC: "doofer Satz", "sieht sehr haesslich aus",
-          "so schoene Icons ... bring da noch welche ein"). Ueberschrift und "30 Minuten am Tag" in ihrem Wortlaut. */}
-      <Abschnitt id="fuer-wen" className="bg-pearl-white py-16 text-midnight-blue sm:py-24" label="fuer-wen-titel">
-        <div className="mx-auto max-w-6xl px-6">
-          <Kicker text="Für wen das ist" hell />
-          <h2 id="fuer-wen-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">
-            Sieben Tage zur Selbsterkenntnis. Ein Anfang.
-            <span className="mt-1 block underline decoration-[#C9A961] decoration-[4px] underline-offset-[6px]">Eine unsichtbare Brücke in die Zuhörer hinein.</span>
-          </h2>
-          <p className={`mt-6 inline-block rounded-md px-4 py-3 font-montserrat text-sm font-extrabold uppercase tracking-[0.06em] text-midnight-blue ${GOLD}`}>
-            30 Minuten am Tag – für dich, deine Wirkung.
-          </p>
-          <div className="mt-8 grid gap-4 md:grid-cols-2">
-            <div style={{ ['--i' as string]: 0 }} className={`cc-stufe bg-white p-6 sm:p-7 ${KACHEL}`}>
-              <div className="flex items-center gap-4">
-                <img src="/icons/wirkung.webp" alt="" width={256} height={256} loading="lazy" decoding="async" className="h-16 w-16 flex-none drop-shadow-[0_8px_12px_rgba(10,22,40,0.25)]" />
-                <h3 className="font-montserrat text-base font-extrabold uppercase tracking-wide">Für dich, wenn du</h3>
-              </div>
-              <ul className="mt-4 grid list-none gap-2.5 p-0">
-                {FUER.map((z) => (
-                  <li key={z} className="flex items-start gap-3 font-inter text-[15px] leading-relaxed"><Haken /><span>{z}</span></li>
-                ))}
-              </ul>
-            </div>
-            <div style={{ ['--i' as string]: 1 }} className={`cc-stufe bg-white p-6 sm:p-7 ${KACHEL}`}>
-              <div className="flex items-center gap-4">
-                <img src="/icons/ki.webp" alt="" width={256} height={256} loading="lazy" decoding="async" className="h-16 w-16 flex-none drop-shadow-[0_8px_12px_rgba(10,22,40,0.25)]" />
-                <h3 className="font-montserrat text-base font-extrabold uppercase tracking-wide">Nicht für dich, wenn du</h3>
-              </div>
-              <ul className="mt-4 grid list-none gap-2.5 p-0">
-                {NICHT_FUER.map((z) => (
-                  <li key={z} className="flex items-start gap-3 font-inter text-[15px] leading-relaxed"><span aria-hidden="true" className="mt-0.5 font-montserrat font-black text-[#C9A961]">✕</span><span>{z}</span></li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </Abschnitt>
-
-
-      {/* Warum ich - hell (Claudia, 22.09.2026 15:00 UTC: "der Bereich ist viel zu dunkel", "zu viel und zu dunkel"). */}
-      <Abschnitt className="bg-white py-16 text-midnight-blue sm:py-24" label="warum">
-        <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2 md:gap-14">
-          <div>
-            <Kicker text="Warum ich" hell />
-            {/* Nur Claudias eigene Worte (Claudia, 24.10.2026: "das Warum ... auf der Über-mich-Seite holen und nicht irgendwas
-                schreiben"): Positionierung vom 09.10.2026 + Saetze aus UeberMich.tsx, wortgleich. */}
-            <h2 id="warum" className="mt-5 font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">Die Brücke zwischen Mensch und Maschine.</h2>
-            <p className="mt-3 font-montserrat text-lg font-bold text-midnight-blue/80">Deine Persönlichkeit schafft Vertrauen. Vertrauen gewinnt Kunden.</p>
-            <p className="mt-7 border-l-4 border-[#C9A961] pl-5 font-cormorant text-3xl italic leading-snug sm:text-4xl">
-              Alles, was wir erleben, formt uns. Mich hat es ganze 39 Jahre gekostet, um zu erkennen, warum ich diesen Job mache und warum ich so gut darin bin.
-            </p>
-          </div>
-          <div>
-            <h3 className="font-montserrat text-base font-extrabold uppercase tracking-wide">Die Entführung, die meine Berufung prägte</h3>
-            <div className="mt-3 grid gap-3 font-inter text-[17px] leading-relaxed text-midnight-blue">
-              <p>72 Stunden kann sie nichts sehen, nur diese Stimmen hören.</p>
-              <p>Wie besessen hört sie hin, wenn Menschen miteinander reden.</p>
-              <p>Unbewusst ist sie fokussiert auf die Wahrnehmung der hörbaren Emotionen.</p>
-              <p className="font-semibold italic">Dieses kleine Mädchen steckt heute noch in mir.</p>
-            </div>
-            <p className="mt-6 font-inter text-[15px] text-midnight-blue">
-              Die ganze Geschichte findest du auf{' '}
-              <Link to="/ueber-mich" className="underline decoration-[#C9A961] decoration-2 underline-offset-4 hover:text-royal-navy">„Über mich"</Link>.
-            </p>
-          </div>
-        </div>
-      </Abschnitt>
 
       {/* Netzwerk Mittelstand - deine Community, letzter Abschnitt (Claudia, 22.09.2026 13:19 UTC: "das soll unten als
           Letztes sein"). Machart ihrer Community-Startseite (Foto 13:17 UTC): grosse Ueberschrift, das Wort blass mit

@@ -486,10 +486,15 @@ export default function Challenge() {
             <div className="min-w-0 text-midnight-blue">
               <span aria-hidden="true" className={`block h-[3px] w-16 rounded-full ${GOLD}`} />
               <p className="mt-5 font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] sm:text-sm">Video-Challenge · kostenfrei</p>
-              <h1 className="mt-4 font-montserrat text-[2.4rem] font-extrabold leading-[1.04] tracking-tight sm:text-6xl">7 Tage für deine Wirkungskraft</h1>
+              {/* Die grosse goldene 7 von der Live-Seite zurueck (Claudia, 24.10.2026 22:19: "die goldene Sieben finde ich gut"),
+                  mit dem ruhigen Gold-Schimmer der Startseite als einzige Bewegung im Kopf. */}
+              <h1 className="mt-3 flex items-center gap-4 font-montserrat font-extrabold tracking-tight text-midnight-blue sm:gap-6">
+                <span className="gold-text-animated text-[6rem] leading-[0.85] sm:text-[9rem]">7</span>
+                <span className="text-[2.1rem] leading-[1.04] sm:text-5xl">Tage für deine<br />Wirkungskraft</span>
+              </h1>
               <p className="mt-5 font-cormorant text-2xl italic leading-snug sm:text-3xl">– weil Perfektion klickbar ist<br className="hidden sm:block" /> und Persönlichkeit Vertrauen weckt.</p>
               <p className="mt-4 max-w-xl font-inter text-lg leading-relaxed text-midnight-blue/85">
-                Selbstbewusst auftreten – vor Kunden und vor der Kamera. Mit deinem akustischen Fingerabdruck. Weil du ein Unikat bist.
+                Überzeugende Rhetorik, die Vertrauen weckt – authentisch, echt, mit Leichtigkeit und mit KI-Abkürzungen.
               </p>
               <p className={`mt-6 inline-block rounded-md px-4 py-3 font-montserrat text-sm font-extrabold uppercase tracking-[0.06em] text-midnight-blue sm:text-base ${GOLD}`}>
                 {stand}
@@ -583,11 +588,15 @@ export default function Challenge() {
                   <details className={`group bg-white text-midnight-blue transition-shadow duration-500 ${KACHEL} ${i === aktiverTag ? 'md:border-[#C9A961] md:shadow-[0_14px_34px_-18px_rgba(201,169,97,0.75)]' : ''}`}>
                     <summary className="grid cursor-pointer list-none gap-1 px-5 py-5 sm:grid-cols-[170px_minmax(0,1fr)_auto] sm:items-center sm:gap-6 sm:px-7 [&::-webkit-details-marker]:hidden">
                       <p className="font-montserrat text-sm font-extrabold">Tag {i + 1}<span className="block font-bold text-midnight-blue/65">{letzter ? 'Mo., 2. Nov. · 19 Uhr' : KURZ.format(freischaltung(heute, i))}</span></p>
-                      <div className="min-w-0">
+                      <div className="flex min-w-0 items-start gap-4">
+                        {/* Die 3-D-Icons klein in der Zeile (Claudia, 24.10.2026 22:20: "Icons mit auf den Ablaufplan ... aufklappen und erklaeren"). */}
+                        <img src={`/icons/${t.icon}.webp`} alt="" width={256} height={256} loading="lazy" decoding="async" className="mt-0.5 h-11 w-11 flex-none" />
+                        <div className="min-w-0">
                         <p className="flex flex-wrap items-center gap-2 font-montserrat text-lg font-extrabold">{t.titel}{t.feedback && <FeedbackPlakette />}</p>
                         <p className="mt-1 font-inter text-[15px] leading-relaxed text-midnight-blue/80">
                           {letzter ? 'Live im Zoom: deine Chance, vor allen Teilnehmern zu pitchen – freiwillig. Netzwerken untereinander und deine Auszeichnung fürs Durchziehen.' : t.schwerpunkt}
                         </p>
+                        </div>
                       </div>
                       <span className="font-montserrat text-xs font-bold text-midnight-blue/60"><span className="group-open:hidden">Mehr ↓</span><span className="hidden group-open:inline">Weniger ↑</span></span>
                     </summary>

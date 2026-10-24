@@ -335,10 +335,6 @@ function Kopfbild({ datei, alt, quer }: { datei: string; alt: string; quer?: boo
 }
 const KOPF = 'grid items-end gap-6 sm:grid-cols-[minmax(0,1fr)_auto] sm:gap-10';
 
-/** Goldener Kreis mit Haken (Angebotskarten, nach Claudias Entwurf 23.10.2026). */
-function GoldHaken() {
-  return <span aria-hidden="true" className="flex h-6 w-6 flex-none items-center justify-center rounded-full bg-[#C9A961] text-[12px] font-black text-white">✓</span>;
-}
 function Haken() {
   return <span aria-hidden="true" className="mt-2 h-2.5 w-2.5 flex-none rotate-[-45deg] border-b-2 border-r-2 border-[#C9A961]" />;
 }

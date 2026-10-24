@@ -608,6 +608,25 @@ export default function Challenge() {
             </div>
           </div>
           {/* Formular direkt nach dem Wegweiser: dort faellt die Entscheidung (Claudia, 24.10.2026 20:08: "an welcher Stelle optimal"). */}
+          {/* "Was du wirklich mitnimmst" - Claudias Text vom 24.10.2026 23:52, nur Rechtschreibung und Satzzeichen geglaettet. */}
+          <div className="mt-14">
+            <Kicker text="Was du wirklich mitnimmst" hell />
+            <div className="mt-6 grid gap-4 md:grid-cols-3">
+              {[
+                ['Selbstvertrauen, das du fühlst', 'Praktische Methoden, die dich nicht verändern, sondern dich an deine eigene Stärke erinnern. Du verstehst, wie du deine Energie bewusst lenkst und warum Klarheit dein größter Vorteil ist.'],
+                ['Souveränität in jeder Situation', 'Du verstehst, dich mit Haltung zu performen – ruhig, klar und ohne den ständigen Kampf. Psychologische Prinzipien geben dir Klarheit, wenn die Unsicherheit zurückkommt.'],
+                ['Kommunikation, die Vertrauen weckt und deine Dienstleistung als Lösung aufzeigt', 'Du erkennst, wann du sprichst und wann du einfach wirken darfst. Beherrsche die Kunst der Kommunikation und lerne, authentisch und mit Leichtigkeit dein Business zu präsentieren.'],
+              ].map(([t, x], k) => (
+                <div key={t} style={{ ['--i' as string]: k }} className={`cc-stufe bg-white p-6 text-midnight-blue ${KACHEL}`}>
+                  <p className="font-montserrat text-lg font-extrabold leading-snug">{t}</p>
+                  <p className="mt-3 font-inter text-[15px] leading-relaxed text-midnight-blue/85">{x}</p>
+                </div>
+              ))}
+            </div>
+            <p className="mx-auto mt-8 max-w-3xl text-center font-montserrat text-lg font-bold leading-relaxed text-midnight-blue sm:text-xl">
+              Du öffnest dich, ohne dich dabei zu verbiegen. Beziehungen werden tiefer und ehrlicher. <span className="text-[#9A7B2F]">Weil du dir selbst vertraust, weckst du Vertrauen.</span>
+            </p>
+          </div>
           <div id="anmeldung" className="mt-10">
             {/* Echte Zahl von Claudia (24.10.2026 21:59: "Es sind 32 Personen eingetragen") - bis zum Start nachtragen. */}
             <p className="mb-3 flex items-center gap-2 font-montserrat text-sm font-extrabold text-midnight-blue"><span aria-hidden="true" className="h-2.5 w-2.5 rounded-full bg-[#C9A961]" />Schon {EINGETRAGEN} Teilnehmende eingetragen</p>

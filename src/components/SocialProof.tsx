@@ -35,7 +35,7 @@ import VideoModal from './VideoModal';
  * ihre GESCHRIEBENE, schon veroeffentlichte Kundenstimme von claudia-conen.webflow.io.
  */
 
-type Stimme = {
+export type Stimme = {
   id: string;
   name: string;
   /** Zeilen der Unterschrift unter dem Namen: Beruf, dann Ort. */
@@ -54,7 +54,7 @@ type Stimme = {
 
 const kachel = (id: string) => `/kundenstimmen/${id}.webp`;
 
-const ALLE: Stimme[] = [
+export const ALLE: Stimme[] = [
   {
     id: 'verena-sommerfeld',
     name: 'Verena Sommerfeld',

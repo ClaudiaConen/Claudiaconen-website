@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import LogoBand from '../components/LogoBand';
-import SocialProof from '../components/SocialProof';
+import StimmenKarten from '../components/StimmenKarten';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
@@ -555,7 +555,7 @@ export default function Challenge() {
               <p className="font-montserrat text-sm font-extrabold">Start<span className="block font-bold text-midnight-blue/65">Mo., 26. Okt. · 19 Uhr</span></p>
               <div className="min-w-0">
                 <p className="font-montserrat text-lg font-extrabold">Auftakt live im Zoom</p>
-                <p className="mt-1 font-inter text-[15px] leading-relaxed text-midnight-blue/80">Erstes Kennenlernen, deinen Übungsplan für die Woche festlegen und dein Vorher-Video aufnehmen.</p>
+                <p className="mt-1 font-inter text-[15px] leading-relaxed text-midnight-blue/80">Ein gemütliches Treffen im Zoom: kennenlernen, gemeinsam die Strategie besprechen und klaren Durchblick bekommen. Dazu deine Wochenplanung für deinen eigenen Erfolg.</p>
               </div>
             </li>
             {TAGE.map((t, i) => {
@@ -699,8 +699,9 @@ export default function Challenge() {
         </div>
       </Abschnitt>
 
-      {/* Echte Kundenstimmen mit Video, Bauart der Startseite (Claudias Freigabe der Namen 21./22.09.2026). */}
-      <SocialProof />
+      {/* Kundenstimmen als ruhige Karten: Bild oben, Text darunter, jede Karte mit Worten (Claudia, 25.10.2026 02:29:
+          "bei Sommerfeld Text drin, bei den andern nicht ... Text unter dem Bild ... etwas freier"). */}
+      <StimmenKarten />
 
       {/* "Gut zu wissen, bevor es losgeht" entfernt (Claudia, 24.10.2026 20:06: zu viel Ablenkung, gehoert als Tipp-Box in die Challenge). */}
 

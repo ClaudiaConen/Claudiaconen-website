@@ -641,6 +641,22 @@ h3{font-weight:800!important}
 .kicker{font-weight:800!important;letter-spacing:.2em!important}
 .text-spalte p,.raute li,.begleit span{font-size:17px!important;line-height:1.6!important}
 .begleit b{font-family:'Montserrat',sans-serif!important;font-weight:800!important;font-size:18px!important}
+/* Stimmen aus Witten: Bild oben, Worte darunter, viel Luft (Claudia 25.10.2026) */
+.ws-stimmen{list-style:none;margin:40px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:56px 40px}
+@media(max-width:900px){.ws-stimmen{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.ws-stimmen{grid-template-columns:1fr;gap:44px}}
+.ws-stimmen li{display:flex;flex-direction:column;min-width:0}
+.ws-bild{position:relative;border-radius:16px;overflow:hidden;background:#13233F}
+.ws-bild.laeuft video{display:block;width:100%;aspect-ratio:4/5;background:#13233F}
+.ws-spiel{position:absolute;right:12px;bottom:12px;display:inline-flex;gap:8px;align-items:center;border:0;border-radius:999px;background:rgba(255,255,255,.95);color:#13233F;padding:9px 16px;font:700 13px/1 'Montserrat',sans-serif;cursor:pointer;box-shadow:0 6px 18px -8px rgba(19,35,63,.55)}
+.ws-spiel:focus-visible{outline:2px solid #C9A961;outline-offset:2px}
+.ws-stimmen img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:cover}
+.ws-zitat{margin:22px 0 0;font:600 18px/1.4 'Montserrat',sans-serif;color:var(--ink)}
+.ws-satz{margin:10px 0 0;font:400 15px/1.6 'Inter',sans-serif;color:var(--ink2)}
+.ws-name{margin-top:auto;padding-top:20px}
+.ws-name::before{content:"";display:block;width:40px;height:2px;background:#C9A961;margin-bottom:12px}
+.ws-name b{display:block;font:800 16px/1.3 'Montserrat',sans-serif;color:var(--ink)}
+.ws-name span{display:block;font:400 14px/1.4 'Inter',sans-serif;color:var(--ink2);margin-top:2px}
 </style>
 <a class="skip" href="#main">Zum Inhalt springen</a>
 
@@ -753,6 +769,21 @@ h3{font-weight:800!important}
    <div class="kachel nicht"><h3>Nicht für dich, wenn …</h3><ul class="raute"><li>du an einem Tag eine komplette Keynote erwartest.</li><li>du lieber zuhörst als selbst ausprobierst. Hier wirst du gefilmt.</li><li>du ein reines KI-Werkzeug-Seminar suchst.</li></ul></div>
   </div>
   <figure class="momente-breit"><img src="/a27/p/angebote/gruppe.webp" alt="Claudia Conen mit Teilnehmenden einer Veranstaltung" width="1200" height="800" loading="lazy"><img src="/a27/p/angebote/event-mikro.webp" alt="Claudia Conen mit Mikrofon und zwei Gästen vor einer Weltkarte" width="1200" height="800" loading="lazy"></figure>
+ </div>
+</section>
+
+<section aria-labelledby="witten-titel">
+ <div class="huelle">
+  <div class="kicker">Stimmen aus dem Workshop in Witten</div>
+  <h2 id="witten-titel">In ihren eigenen Worten</h2>
+  <ul class="ws-stimmen">
+   <li><div class="ws-bild"><img src="/a27/p/angebote/stimmen/sandy-loerx.webp" alt="Sandy Lörx" width="600" height="600" loading="lazy"><button type="button" class="ws-spiel" data-video="/a27/p/angebote/stimmen/sandy-loerx.mp4" aria-label="Video von Sandy Lörx ansehen, 38 Sekunden"><span aria-hidden="true">▶</span> Video</button></div><p class="ws-zitat">„Dieses Wissen zu haben und zu tanken ist einfach phänomenal.“</p><p class="ws-satz">„So viel Inspiration und Wissen tanken: Wie funktioniert Stimme, wie funktioniert eigentlich das Gehirn?“</p><p class="ws-name"><b>Sandy Lörx</b><span>Teilnehmerin in Witten</span></p></li>
+   <li><div class="ws-bild"><img src="/a27/p/angebote/stimmen/michael-kleinert.webp" alt="Michael Kleinert" width="600" height="600" loading="lazy"><button type="button" class="ws-spiel" data-video="/a27/p/angebote/stimmen/michael-kleinert.mp4" aria-label="Video von Michael Kleinert ansehen, 16 Sekunden"><span aria-hidden="true">▶</span> Video</button></div><p class="ws-zitat">„Worum geht es wirklich, wie fühlen sich Kunden richtig angesprochen. Da kann ich wieder so viel lernen.“</p><p class="ws-satz">„Das kann ich natürlich täglich nutzen.“</p><p class="ws-name"><b>Michael Kleinert</b><span>Video-Coach</span></p></li>
+   <li><div class="ws-bild"><img src="/a27/p/angebote/stimmen/diana-winter.webp" alt="Diana Winter" width="600" height="600" loading="lazy"><button type="button" class="ws-spiel" data-video="/a27/p/angebote/stimmen/diana-winter.mp4" aria-label="Video von Diana Winter ansehen, 27 Sekunden"><span aria-hidden="true">▶</span> Video</button></div><p class="ws-zitat">„Ist wirklich mega viel Input. Ich bin froh, dass ich hier dabei war.“</p><p class="ws-satz">„Das war ein wunderschönes Wochenende, die zwei super spannenden Tage.“</p><p class="ws-name"><b>Diana Winter</b><span>Teilnehmerin in Witten</span></p></li>
+   <li><div class="ws-bild"><img src="/a27/p/angebote/stimmen/marianne-bauer.webp" alt="Marianne Bauer" width="600" height="600" loading="lazy"><button type="button" class="ws-spiel" data-video="/a27/p/angebote/stimmen/marianne-bauer.mp4" aria-label="Video von Marianne Bauer ansehen, 15 Sekunden"><span aria-hidden="true">▶</span> Video</button></div><p class="ws-zitat">„Ihr Feedback, ihre Unterstützung. Das tut einfach der Seele gut.“</p><p class="ws-satz">„Ich bin so froh, bei der Claudia dieses Seminar gebucht zu haben.“</p><p class="ws-name"><b>Marianne Bauer</b><span>Teilnehmerin in Witten</span></p></li>
+   <li><div class="ws-bild"><img src="/a27/p/angebote/stimmen/martin-wolf.webp" alt="Martin Wolf" width="600" height="600" loading="lazy"><button type="button" class="ws-spiel" data-video="/a27/p/angebote/stimmen/martin-wolf.mp4" aria-label="Video von Martin Wolf ansehen, 7 Sekunden"><span aria-hidden="true">▶</span> Video</button></div><p class="ws-zitat">„Ich lerne bei Claudia richtig viel.“</p><p class="ws-satz">„Claudia hat diesen Workshop sehr gut organisiert und ich fühle mich hier sehr wohl.“</p><p class="ws-name"><b>Martin Wolf</b><span>Teilnehmer in Witten</span></p></li>
+  </ul>
+  <script>document.querySelectorAll(".ws-spiel").forEach(function(k){k.addEventListener("click",function(){var b=k.parentNode,v=document.createElement("video");v.src=k.dataset.video;v.controls=true;v.autoplay=true;v.playsInline=true;v.setAttribute("aria-label",k.getAttribute("aria-label"));b.classList.add("laeuft");b.innerHTML="";b.appendChild(v);v.play().catch(function(){});});});</script>
  </div>
 </section>
 

@@ -37,7 +37,7 @@ export default function MeinBereich() {
     const { error } = await supabaseCms.from('contact_inquiries').insert([{
       name: vorname.trim(),
       email: email.trim(),
-      message: 'MEIN-BEREICH-LOGIN – Login in den Mitgliederbereich der 7-Tage-Challenge (claudiaconen.com/mein-bereich)',
+      message: 'MEIN-BEREICH-LOGIN – Login in den Mitgliederbereich (claudiaconen.com/mein-bereich)', // bewusst ohne das Wort "Challenge": Zeilen mit diesem Wort sind per anon-Policy oeffentlich lesbar
     }]);
     setSendet(false);
     if (error) { console.error('Login-Eintrag fehlgeschlagen:', error); setMeldung('Das hat leider nicht geklappt. Bitte versuch es gleich noch einmal.'); return; }

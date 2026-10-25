@@ -7,6 +7,8 @@ import SEO from '../components/SEO';
 import Brotkrumen from '../components/Brotkrumen';
 import Stimmwelle from '../components/Stimmwelle';
 import ChallengeAnmeldung from '../components/ChallengeAnmeldung';
+import { TAGE, UEBUNGSSATZ, type Tag } from '../data/challengeTage';
+import Helix from '../components/Helix';
 
 /**
  * Die Challenge-Seite - EINE Seite aus zwei (Claudia, 22.09.2026 11:00 UTC: "jetzt hast du von beiden
@@ -88,88 +90,6 @@ function standZeile(heute: Date): string {
 }
 const KURZ = new Intl.DateTimeFormat('de-DE', { weekday: 'short', day: 'numeric', month: 'short' });
 
-type Tag = {
-  titel: string;
-  /** Schwerpunkt - steht auf der Programm-Kachel unter der Ueberschrift. */
-  schwerpunkt: string;
-  /** Der Gedanke zum Einstieg, in dem man sich wiedererkennt. */
-  einstieg: string;
-  /** Worum es geht - ein, zwei Saetze. */
-  inhalt: string;
-  aufgabe: string;
-  /** Freiwilliger Zusatz zur Aufgabe (z. B. Aufnahme). */
-  zusatz?: string;
-  reflexion: string;
-  /** Tag mit persoenlichem Feedback von Claudia (Tag 2 und 6 - Claudia, 21.10.2026 10:12 UTC). */
-  feedback?: boolean;
-  /** Icon in public/icons/ */
-  icon: string;
-};
-
-/** Der Uebungssatz - an allen sieben Tagen wortgleich (Claudias Briefing, 22.09.2026 12:54 UTC). */
-const UEBUNGSSATZ = 'Wo ich spreche, ist meine Bühne – mit Persönlichkeit, Achtsamkeit und Leichtigkeit berühre ich Menschen.';
-
-/** Die sieben Tage - Claudias Aufbau vom 21.10.2026 (Vinci-App + Discord, 10:42-11:34 UTC): Tag 1 und 2 in ihren
- *  Worten (Diktat in projects/claudiaconen/challenge/diktat_tage_2026-10-21.md), Tag 3 Redeangst, Tag 6 Kaufentscheidung
- *  + Call to Action, Tag 7 Generalprobe vor dem Pitch im Abschluss-Zoom. Tag 3-7 inhaltlich aus dem App-Plan von 09:49 UTC,
- *  bis Claudia sie diktiert. Keine Hirnforschungs-Behauptungen ohne Quelle (siehe Kopfkommentar). */
-const TAGE: Tag[] = [
-  {
-    // Tag 1 in Claudias Worten (Vinci-App, 21.10.2026 10:42-10:45 UTC), nur geordnet und geglaettet.
-    titel: 'Deine Kernbotschaft', schwerpunkt: 'Positionierung in einem Satz · dein Vorher-Video', icon: 'schritt-1',
-    einstieg: 'Die beste Positionierung bringt nichts, wenn niemand davon weiß.',
-    inhalt: 'Klarheit im Kopf bringt Klarheit in deine Worte – und in deine Selbstsicherheit. Verkauf keine Erklärung, sondern ein Ergebnis: das, was du für deinen Kunden kreierst. Von der Selbsterkenntnis zum selbstsicheren Auftritt – wo auch immer du den Mund aufmachst.',
-    aufgabe: 'Fixiere deine Kernbotschaft. Wer bist du? Für wen hast du eine Lösung? Welches Problem löst du – ohne Fachbegriffe, so dass es jeder versteht? Frag dich: Welches Bild, welches Gefühl kannst du dabei in anderen Menschen schnell wecken? Am ersten Tag darfst du es auch einfach erzählen. Nimm es als Video auf. Hau raus.',
-    zusatz: 'Bonus: Sag, warum du das überhaupt tust – und wie lange schon. Speicher dein Video: Es ist dein Vorher-Video. Daran entdeckst du selbst, wie du dich entwickelst.',
-    reflexion: 'Würde ein Fremder nach deinem Video wissen, ob er dich braucht?',
-  },
-  {
-    // Tag 2 in Claudias Worten (Vinci-App, 21.10.2026 10:46 UTC), nur geglaettet.
-    titel: 'Die Zielgruppenbrille', schwerpunkt: 'Dein Video mit Kundenaugen', icon: 'schritt-3', feedback: true,
-    einstieg: 'Würdest du bei dir kaufen?',
-    inhalt: 'Setz die Brille deiner Zielgruppe auf. Stell dir vor, du bist dein Kunde: Du hast einen Schmerz, ein Problem, einen Wunsch – und du willst, dass er erfüllt wird.',
-    aufgabe: 'Schau dir ganz objektiv dein Video von Tag 1 an. Frag dich: Ist sofort klar, welches Problem du löst? Hörst du heraus, dass du als Kunde hier gut bedient wirst? Wenn nicht, schauen wir genauer hin – dann brauchst du ein Story-Gerüst. Nimm dein Video neu auf, mit dem, was du entdeckt hast.',
-    reflexion: 'Was hat dein Kunde in deinem ersten Video vermisst?',
-  },
-  {
-    titel: 'Raus aus der Redeangst – auch vor der Kamera', schwerpunkt: 'Körper vor Kopf · Stand, Atem, Hände', icon: 'schritt-8',
-    einstieg: 'Festgehaltene Hände halten die Stimme fest. Wer oben atmet, klingt dünn und wird schnell.',
-    inhalt: 'Redeangst beginnt im Körper – und dort lässt sie sich auch lösen. Stand, Atem und Hände gehören zusammen.',
-    aufgabe: 'Stell dich hin. Atme viermal langsam aus, länger aus als ein. Dann sprich deine Kernbotschaft mit freien Händen. Das ist dein erstes Video im Stehen.',
-    zusatz: 'Eine Hauptübung reicht: das Ausatmen. Stand und Hände folgen meist von allein.',
-    reflexion: 'Was hat sich verändert, als du nach dem Ausatmen gesprochen hast?',
-  },
-  {
-    titel: 'Deine Stimme', schwerpunkt: 'Niemand klingt wie du – nutze deine Betonung und Pausen.', icon: 'schritt-9',
-    einstieg: 'Der Tag, an dem du dich zum ersten Mal wirklich hörst.',
-    inhalt: 'Derselbe Satz klingt unsicher oder überzeugt – je nachdem, wie du ihn meinst. Dann die drei Wörter, die Gewicht bekommen, und die Pause danach. Die besten Redner reden nicht mehr als andere, sie schweigen mehr.',
-    aufgabe: 'Sprich deine Kernbotschaft zweimal: einmal unsicher, einmal überzeugt. Dann markiere die drei Wörter, die Gewicht bekommen, und setz nach dem wichtigsten eine Pause. Poste die überzeugte Fassung.',
-    reflexion: 'Wo hast du die Pause gesetzt – und was macht sie mit deinem Satz?',
-  },
-  {
-    titel: 'Storytelling', schwerpunkt: 'Bilder können Lösungen aufzeigen – erwecke sie.', icon: 'schritt-4',
-    einstieg: 'Wer sich selbst zum Helden macht, erzählt einen Lebenslauf.',
-    inhalt: 'Ab hier wird aus dem Video eine Geschichte. Wer den Kunden zum Helden macht, erzählt etwas, das weitererzählt wird.',
-    aufgabe: 'Erzähl eine Geschichte in fünf Stationen: ein Kunde, ein Moment, ein Satz, den er gesagt hat, was sich verändert hat, was er heute sagt. Eine Minute, nicht länger.',
-    reflexion: 'Wer ist in deiner Geschichte der Held – du oder dein Kunde?',
-  },
-  {
-    titel: 'Wie Kunden entscheiden', schwerpunkt: 'Zuhören und Call to Action', icon: 'schritt-5', feedback: true,
-    einstieg: 'Menschen kaufen das Gefühl, verstanden zu sein.',
-    inhalt: 'Menschen entscheiden, bevor sie verstehen. Wer zuhört, merkt, wann der andere innerlich Ja sagt. Und dann braucht er einen klaren nächsten Schritt: Menschen müssen wissen, wo es langgeht.',
-    aufgabe: 'Lass heute einen echten Menschen zwei Minuten erzählen – Kollegin, Partner oder Kunde – und merk dir einen Satz von ihm. Dann erzähl deine Geschichte von Tag 5 noch einmal: mit der Pause nach dem Satz deines Kunden und einer klaren Handlungsaufforderung am Ende.',
-    zusatz: 'Zuhören übt man nicht allein vor der Kamera. Ein echtes Gespräch zählt mehr als ein perfektes Video.',
-    reflexion: 'Weiß dein Zuhörer am Ende genau, was er jetzt tun soll?',
-  },
-  {
-    titel: 'Dein Elevator Pitch', schwerpunkt: 'In 30–60 Sekunden · live im Zoom-Call', icon: 'schritt-7',
-    einstieg: 'Sein Problem. Dein Beweis. Warum du.',
-    inhalt: 'Alles in drei Sätzen, zu einem Menschen gesprochen, nicht in eine Linse. Das ist deine Generalprobe für die Bühne beim Abschluss.',
-    aufgabe: 'Sprich deinen Pitch in drei Sätzen – sein Problem, dein Beweis, warum du – mit deinem Call to Action am Ende. Leg danach dein Vorher-Video von Tag 1 daneben und poste beide zusammen, mit #unverwechselbar.',
-    zusatz: 'Schau dir beide Videos an. Das ist Selbstsicherheit: das Ergebnis von sieben Videos. Am Montag beim Abschluss kannst du ihn live vor der Gruppe halten, 30–60 Sekunden, freiwillig – vielleicht sitzt dort schon dein nächster Kunde.',
-    reflexion: 'Was hörst und siehst du heute, das an Tag 1 noch nicht da war?',
-  },
-];
 
 
 /** Die Programm-Kacheln sind die sieben Tage (Claudias Briefing) - eine Liste, ein Inhalt. */
@@ -197,74 +117,6 @@ const NICHT_FUER = [
 /** Unter den Tagen: kein direkter Weg in die Gruppe, nur zurueck zum Eintragen (Claudia, 22.09.2026). */
 /** Mobile Leiste "Kostenfrei dabei sein": erscheint nach dem Kopf, verschwindet, sobald das Formular im Bild ist.
  *  Der Weg zur Anmeldung ist so auf dem Handy nie weiter als ein Daumen entfernt. */
-/** Lichtspirale neben den sieben Tagen (Claudias Vorbilder 24.10.2026 21:10 und 21:33: DNA aus Lichtpunkten, der
- *  aktuelle Schritt leuchtet). Eigene Zeichnung in Gold auf Dunkelblau; jede Tages-Sprosse sitzt neben ihrem Tag. */
-function Helix({ aktiv, ys, hoehe }: { aktiv: number; ys: number[]; hoehe: number }) {
-  // Dreht sich um die eigene Achse (Claudia, 24.10.2026 21:34); steht still bei reduzierter Bewegung oder ausser Sicht.
-  const [winkel, setWinkel] = useState(0);
-  const boxRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    let raf = 0, sichtbar = false, letzte = 0;
-    const io = new IntersectionObserver(([e]) => { sichtbar = e.isIntersecting; });
-    if (boxRef.current) io.observe(boxRef.current);
-    const lauf = (t: number) => {
-      raf = requestAnimationFrame(lauf);
-      if (!sichtbar || t - letzte < 33) return;
-      letzte = t;
-      setWinkel((t / 1000) * 0.55);
-    };
-    raf = requestAnimationFrame(lauf);
-    return () => { cancelAnimationFrame(raf); io.disconnect(); };
-  }, []);
-  if (!hoehe || ys.length < 2) return <div ref={boxRef} className="hidden md:block" />;
-  const b = 132, a = 40, mitte = b / 2;
-  const welle = ((ys[ys.length - 1] - ys[0]) / (ys.length - 1)) * 2;
-  const phase = (y: number) => (2 * Math.PI * (y - ys[0])) / welle + Math.PI / 2 + winkel;
-  const x = (y: number, vorn: boolean) => mitte + (vorn ? 1 : -1) * a * Math.sin(phase(y));
-  // Tiefe: vorne groesser und heller, hinten kleiner und blasser
-  const tiefe = (y: number, vorn: boolean) => 0.5 + 0.5 * (vorn ? 1 : -1) * Math.cos(phase(y));
-  const punkte: { cx: number; cy: number; r: number; o: number }[] = [];
-  for (let y = 4; y <= hoehe - 4; y += 7) {
-    for (const vorn of [true, false]) {
-      const t = tiefe(y, vorn);
-      punkte.push({ cx: x(y, vorn), cy: y, r: 1.2 + 1.6 * t, o: 0.25 + 0.7 * t });
-    }
-  }
-  const zart: number[] = [];
-  for (let y = 10; y <= hoehe - 10; y += 18) if (!ys.some((t) => Math.abs(t - y) < 9)) zart.push(y);
-  return (
-    <div ref={boxRef} className="relative hidden overflow-hidden rounded-[14px] bg-[#13233F] shadow-[0_24px_50px_-28px_rgba(19,35,63,0.8)] md:block" aria-hidden="true">
-      <svg viewBox={`0 0 ${b} ${hoehe}`} width={b} height={hoehe} className="mx-auto block overflow-visible">
-        <defs>
-          <filter id="cc-glut" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3" result="b" /><feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
-        </defs>
-        {zart.map((y) => (
-          <line key={`z${y}`} x1={x(y, true)} y1={y} x2={x(y, false)} y2={y} stroke="#C9A961" strokeOpacity="0.28" strokeWidth="1.2" strokeDasharray="1.5 4" strokeLinecap="round" />
-        ))}
-        {ys.map((y, i) => {
-          const an = i === aktiv;
-          return (
-            <line key={`s${i}`} x1={x(y, true)} y1={y} x2={x(y, false)} y2={y} stroke={an ? '#F7E7CE' : '#C9A961'} strokeOpacity={an ? 1 : 0.6} strokeWidth={an ? 3.5 : 1.8} strokeDasharray={an ? undefined : '2 3'} strokeLinecap="round" filter={an ? 'url(#cc-glut)' : undefined} style={{ transition: 'all .45s ease' }} />
-          );
-        })}
-        <g filter="url(#cc-glut)">
-          {punkte.map((p, k) => <circle key={k} cx={p.cx} cy={p.cy} r={p.r} fill="#E2C98A" fillOpacity={p.o} />)}
-        </g>
-        {ys.map((y, i) => {
-          const an = i === aktiv;
-          return (
-            <g key={`k${i}`} style={{ transition: 'all .45s ease' }}>
-              <circle cx={x(y, true)} cy={y} r={an ? 7 : 4} fill={an ? '#F7E7CE' : '#C9A961'} filter="url(#cc-glut)" />
-              <circle cx={x(y, false)} cy={y} r={an ? 5 : 3} fill={an ? '#F7E7CE' : '#C9A961'} fillOpacity={an ? 1 : 0.6} />
-            </g>
-          );
-        })}
-      </svg>
-    </div>
-  );
-}
-
 function MobilLeiste() {
   const [zeigen, setZeigen] = useState(false);
   useEffect(() => {
@@ -638,9 +490,11 @@ export default function Challenge() {
             {/* Echte Zahl von Claudia (24.10.2026 21:59: "Es sind 32 Personen eingetragen") - bis zum Start nachtragen. */}
             <p className="mb-3 flex items-center gap-2 font-montserrat text-sm font-extrabold text-midnight-blue"><span aria-hidden="true" className="h-2.5 w-2.5 rounded-full bg-[#C9A961]" />Schon {EINGETRAGEN} Teilnehmende eingetragen</p>
             <ChallengeAnmeldung start={startKurz} />
+            <p className="mt-4 text-center font-inter text-sm">Schon angemeldet? <a href="/mein-bereich" className="font-bold underline decoration-[#C9A961] underline-offset-4">Zum Login in deinen Mitgliederbereich →</a></p>
           </div>
         </div>
       </Abschnitt>
+
 
       {/* "Das bekommst du" entfernt (Claudia, 24.10.2026 20:52: "frei erfunden"); Auftakt, Abschluss, Netzwerk-Tag und Wirkungschecks stehen in der 7-Tage-Linie. */}
 

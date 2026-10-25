@@ -18,7 +18,8 @@
 @media(max-width:900px){.lk-nav{display:none}.lk-marke span{display:none}.lk-knopf{margin-left:auto}}
 .lf{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:28px}
 @media(max-width:760px){.lf{grid-template-columns:1fr}}
-.preis-box.drei{grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}
+.preis-box.drei{grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch;max-width:900px}
+.weiterer-tag{margin:0 0 16px;padding:12px 14px;border:1.5px dashed var(--gold,#C9A961);border-radius:10px;font-size:15px;line-height:1.5}
 .preis-box ul.wert{list-style:none;padding:0;margin:10px 0 18px;display:grid;gap:9px;font-size:15.5px;line-height:1.45}
 .preis-box ul.wert li{position:relative;padding-left:28px}
 .preis-box ul.wert li::before{content:"✓";position:absolute;left:0;top:1px;width:19px;height:19px;border-radius:50%;background:linear-gradient(135deg,#C9A961,#F7E7CE 48%,#D4AF37);color:#13233F;font:900 11px/19px Inter,sans-serif;text-align:center}
@@ -675,7 +676,7 @@ h3{font-weight:800!important}
  </div>
  <div class="huelle voll">
   <div class="fakten" role="list">
-   <div role="listitem"><small>Dauer</small><b>90 Minuten, 1 Tag oder 2 Tage</b></div>
+   <div role="listitem"><small>Dauer</small><b>90 Minuten oder ganze Tage</b></div>
    <div role="listitem"><small>Ort</small><b>online per Zoom oder live in Witten</b></div>
    <div role="listitem"><small>Thema</small><b>Du hast die Wahl</b></div>
    <div role="listitem"><small>Aktionspreis</small><b>ab 180 € zzgl. MwSt.</b></div>
@@ -703,6 +704,11 @@ h3{font-weight:800!important}
    <p>Ganz in Ruhe, live vor Ort, mit voller Aufmerksamkeit für dein Anliegen: deine Rhetorik, deine Positionierung, deine Persönlichkeit, deine Texte mit KI.</p>
    <p>Alle sieben Themen stehen dir zur Auswahl. Wir vertiefen, was du wirklich brauchst, damit du es verinnerlichst.</p>
   </div>
+  <figure class="bk-video" style="position:relative;margin:30px 0 0;padding:0!important;border:0!important;max-width:760px;border-radius:16px;overflow:hidden;box-shadow:0 22px 44px -26px rgba(19,35,63,.45);aspect-ratio:16/9;background:#13233F">
+   <video id="bkVideo" src="/a27/p/angebote/business-kunden.mp4" poster="/a27/p/angebote/business-kunden-poster.webp" autoplay muted loop playsinline preload="metadata" style="display:block;width:100%;height:100%;object-fit:cover" aria-label="Claudia Conen spricht über Kommunikation, die Kunden und Mitarbeitende bindet"></video>
+   <button type="button" id="bkTon" style="position:absolute;right:12px;bottom:12px;padding:8px 14px;border:0;border-radius:999px;background:rgba(19,35,63,.82);color:#F7E7CE;font:700 12px/1 Inter,sans-serif;letter-spacing:.08em;text-transform:uppercase;cursor:pointer">Ton an</button>
+  </figure>
+  <script>(function(){var v=document.getElementById("bkVideo"),b=document.getElementById("bkTon");if(!v||!b)return;b.addEventListener("click",function(){v.muted=!v.muted;if(!v.muted){v.currentTime=0;v.play();}b.textContent=v.muted?"Ton an":"Ton aus";});})();</script>
   <div style="margin-top:34px;max-width:760px;border:1.5px solid var(--gold);border-top:5px solid var(--gold);border-radius:14px;padding:26px 28px;background:var(--weiss)">
    <small style="font:700 11.5px/1.3 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#9c7f3c">Plus bei jedem Live-Tag</small>
    <h3 style="font:800 clamp(24px,2.6vw,32px)/1.15 Montserrat,sans-serif;margin:8px 0 12px">KI für deine Abkürzung</h3>
@@ -743,6 +749,7 @@ h3{font-weight:800!important}
     <p class="karten-satz">Ein Tag. Nur du und ich.</p>
     <div class="preis-gross">1.490 € <span style="font-size:.5em">zzgl. MwSt.</span></div>
     <div class="brutto">1.773,10 € inkl. MwSt. · Aktionspreis 2026, danach 1.990 € zzgl. MwSt.</div>
+    <div class="anker" style="margin-top:6px;padding:8px 12px;border-left:3px solid #C9A961;background:#F6F8FB;font-size:14.5px;line-height:1.45">Mein Tagessatz für Unternehmen: <b>3.700 €</b>. Für dich als Einzelperson: <b>1.490 €</b>.</div>
     <ul class="wert">
      <li>ein ganzer Tag live, mindestens 6 Stunden</li>
      <li>nur du und ich, ganz in Ruhe</li>
@@ -751,30 +758,15 @@ h3{font-weight:800!important}
      <li>auf Wunsch mit Kamera: dein Video nimmst du mit</li>
      <li>Mittagessen inklusive</li>
      <li class="plus"><b>+ 30 Minuten Vorgespräch per Zoom:</b> was dir wirklich wichtig ist und was du am Abend mitnehmen möchtest</li>
+     <li class="plus"><b>+ 30 Minuten Nachgespräch per Zoom,</b> zwei Wochen später: Was hat sich verändert, wie geht es weiter?</li>
      <li class="plus"><b>+ KI für deine Abkürzung:</b> Keynote, Reden, Storytelling, Social Media, auf Wunsch automatisch posten</li>
     </ul>
+    <p class="weiterer-tag"><b>Du brauchst mehr Zeit?</b> Jeder weitere Tag nur <b>990 € zzgl. MwSt.</b> (1.178,10 € inkl. MwSt.) · ein Drittel günstiger als der erste Tag. Aktionspreis 2026, danach 1.290 €. Zwei Tage zusammen: 2.480 € statt zweimal 1.490 €. Ab zwei Tagen: <b>60 Minuten Vorgespräch</b>.</p>
     <a class="knopf" href="https://meet.brevo.com/claudia-conen" target="_blank" rel="noopener" style="margin-top:auto">Meinen Live-Tag anfragen</a>
    </div>
-   <div class="kachel">
-    <small class="klein-caps">Live in Witten · 2 Tage</small>
-    <p class="karten-satz">Erarbeiten. Üben. Verinnerlichen.</p>
-    <div class="preis-gross">2.690 € <span style="font-size:.5em">zzgl. MwSt.</span></div>
-    <div class="brutto">3.201,10 € inkl. MwSt. · Aktionspreis 2026, danach 3.590 € zzgl. MwSt.</div>
-    <ul class="wert">
-     <li>zwei ganze Tage live, je mindestens 6 Stunden</li>
-     <li>nur du und ich, ganz in Ruhe</li>
-     <li>Tag 1 erarbeiten, Tag 2 üben, filmen und vertiefen</li>
-     <li>alle sieben Themen zur Auswahl, so tief, wie du es brauchst</li>
-     <li>auf Wunsch mit Kamera: deine Videos nimmst du mit</li>
-     <li>ideal, wenn du anreist</li>
-     <li>Mittagessen an beiden Tagen inklusive</li>
-     <li class="plus"><b>+ 60 Minuten Vorgespräch per Zoom:</b> was dir wirklich wichtig ist und was du nach zwei Tagen mitnehmen möchtest</li>
-     <li class="plus"><b>+ KI für deine Abkürzung:</b> Keynote, Reden, Storytelling, Social Media, auf Wunsch automatisch posten</li>
-    </ul>
-    <a class="knopf" href="https://meet.brevo.com/claudia-conen" target="_blank" rel="noopener" style="margin-top:auto">Meine zwei Tage anfragen</a>
-   </div>
   </div>
-  <p class="notiz">Mehr Tage oder ein Ort deiner Wahl, mit Anfahrt und Übernachtung? <a href="https://meet.brevo.com/claudia-conen" target="_blank" rel="noopener">Lass uns reden.</a> Oder du gehst den ganzen Weg im <a href="/mentoring-programm">12-Wochen-Mentoring Unverwechselbar</a>.</p>
+  <p class="notiz"><b>Mein Geschenk für dich:</b> Steigst du nach deinem Live-Tag ins 12-Wochen-Mentoring ein, schenke ich dir 300 € auf dein Mentoring.</p>
+  <p class="notiz">Lieber an einem Ort deiner Wahl, mit Anfahrt und Übernachtung? <a href="https://meet.brevo.com/claudia-conen" target="_blank" rel="noopener">Lass uns reden.</a> Oder du gehst den ganzen Weg im <a href="/mentoring-programm">12-Wochen-Mentoring Unverwechselbar</a>.</p>
  </div>
 </section>
 <section id="wahl" aria-labelledby="wahl-titel">
@@ -838,10 +830,10 @@ h3{font-weight:800!important}
   <div class="kicker">Häufige Fragen</div>
   <h2 id="fragen-titel">Was du vorher wissen willst</h2>
   <div class="fragen">
-   <details class="klapp faq"><summary>Was kostet das?</summary><div class="inhalt"><p>Aktionspreise 2026: online 90 Minuten 180 € zzgl. MwSt. (214,20 € inkl. MwSt.), live in Witten 1 Tag 1.490 € zzgl. MwSt. (1.773,10 € inkl. MwSt.), 2 Tage 2.690 € zzgl. MwSt. (3.201,10 € inkl. MwSt.). Ab 2027 gelten 247 €, 1.990 € und 3.590 € zzgl. MwSt.</p></div></details>
+   <details class="klapp faq"><summary>Was kostet das?</summary><div class="inhalt"><p>Aktionspreise 2026: online 90 Minuten 180 € zzgl. MwSt. (214,20 € inkl. MwSt.), live in Witten 1 Tag 1.490 € zzgl. MwSt. (1.773,10 € inkl. MwSt.), jeder weitere Tag 990 € zzgl. MwSt. (1.178,10 € inkl. MwSt.). Ab 2027 gelten 247 €, 1.990 € und 1.290 € je weiterem Tag, zzgl. MwSt.</p></div></details>
    <details class="klapp faq"><summary>Reicht ein Termin?</summary><div class="inhalt"><p>Du kannst einen einzelnen Termin buchen, wenn du gezielte Unterstützung brauchst. Wenn dein Anliegen umfangreicher ist, klären wir in einem persönlichen Gespräch, welches Format sinnvoll ist und wie viele Termine du benötigst.</p></div></details>
    <details class="klapp faq"><summary>Was soll ich mitbringen?</summary><div class="inhalt"><p>Ein Thema, an dem dir etwas liegt: dein Angebot, eine Präsentation, ein Video oder ein Gespräch, das bald ansteht. Gern auch eine Aufnahme davon.</p></div></details>
-   <details class="klapp faq"><summary>Geht das auch vor Ort?</summary><div class="inhalt"><p>Ja, als Live-Tag in Witten, einen oder zwei Tage. Oder an einem Ort deiner Wahl: Lass uns auf einen Kaffee treffen und herausfinden, wo du dich am wohlsten fühlst. Anfahrt und Übernachtung klären wir dann im Gespräch.</p></div></details>
+   <details class="klapp faq"><summary>Geht das auch vor Ort?</summary><div class="inhalt"><p>Ja, als Live-Tag in Witten, einen Tag oder mehrere. Oder an einem Ort deiner Wahl: Lass uns auf einen Kaffee treffen und herausfinden, wo du dich am wohlsten fühlst. Anfahrt und Übernachtung klären wir dann im Gespräch.</p></div></details>
   </div>
  </div>
 </section>

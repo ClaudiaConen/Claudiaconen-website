@@ -35,8 +35,8 @@ export default function ChallengeAnmeldung({ start, onEingetragen }: { start: st
   const [email, setEmail] = useState('');
   const [telefon, setTelefon] = useState('');
   const [angebote, setAngebote] = useState(false);
-  const [zustand, setZustand] = useState<'offen' | 'sendet' | 'fertig' | 'fehler'>('offen');
   const navigate = useNavigate();
+  const [zustand, setZustand] = useState<'offen' | 'sendet' | 'fertig' | 'fehler'>('offen');
 
   async function absenden(e: FormEvent) {
     e.preventDefault();
@@ -58,7 +58,7 @@ export default function ChallengeAnmeldung({ start, onEingetragen }: { start: st
     setZustand('fertig');
     try { window.localStorage.setItem(EINGETRAGEN_SCHLUESSEL, '1'); } catch { /* privater Modus o. ae. */ }
     onEingetragen?.();
-    // Eigene Danke-Seite mit Gruppenwahl und Wegweiser (Claudia, 24.10.2026 20:00).
+    // Kurze Danke-Seite mit Gruppen, Zoom und Zugangscode zum Mitgliederbereich (Claudia, 25.10.2026 16:21).
     navigate('/challenge/danke', { state: { vorname: vorname.trim(), angemeldet: true } });
   }
 

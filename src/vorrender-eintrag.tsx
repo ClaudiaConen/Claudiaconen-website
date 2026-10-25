@@ -83,6 +83,7 @@ export const SEITEN: { pfad: string; laden: () => Promise<any> }[] = [
   { pfad: '/challenge', laden: () => import('./pages/Challenge') },
   // Danke-Seite vorrendern, sonst 404 beim Neuladen (24.10.2026). Ohne Router-State zeigt sie nur den Hinweis zur Anmeldung.
   { pfad: '/challenge/danke', laden: () => import('./pages/ChallengeDanke') },
+  { pfad: '/mein-bereich', laden: () => import('./pages/MeinBereich') },
   { pfad: '/dabei', laden: () => import('./pages/PowerOfAiCheckin') },
   { pfad: '/anmeldung', laden: () => import('./pages/PowerOfAiCheckin') },
   { pfad: '/wissensbibliothek', laden: () => import('./pages/Wissensbibliothek') },

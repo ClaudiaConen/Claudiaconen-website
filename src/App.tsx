@@ -62,6 +62,7 @@ const StimmeTrauer = lazy(() => import('./pages/StimmeTrauer'));
 const StimmeVoiceover = lazy(() => import('./pages/StimmeVoiceover'));
 const Challenge = lazy(() => import('./pages/Challenge'));
 const ChallengeDanke = lazy(() => import('./pages/ChallengeDanke'));
+const MeinBereich = lazy(() => import('./pages/MeinBereich'));
 const PowerOfAiCheckin = lazy(() => import('./pages/PowerOfAiCheckin'));
 
 const Wissensbibliothek = lazy(() => import('./pages/Wissensbibliothek'));
@@ -248,6 +249,7 @@ function App() {
         <Route path="/stimme-voiceover" element={<StimmeVoiceover />} />
         <Route path="/challenge" element={<Challenge />} />
         <Route path="/challenge/danke" element={<ChallengeDanke />} />
+        <Route path="/mein-bereich" element={<MeinBereich />} />
         {/* Angebotsseiten im neuen Design, fertig ausgeliefert aus public/ (Claudia 15.10.2026) */}
         <Route path="/angebote" element={<StatischeSeite />} />
         <Route path="/live-workshop" element={<StatischeSeite />} />

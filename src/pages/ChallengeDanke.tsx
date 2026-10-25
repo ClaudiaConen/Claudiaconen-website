@@ -52,8 +52,10 @@ export default function ChallengeDanke() {
       <Navigation hell />
 
       <header className="bg-[#13233F] pt-28 pb-12 text-pearl-white sm:pt-32 sm:pb-16">
-        <div className="mx-auto max-w-4xl px-6 text-center">
-          <ol className="mx-auto flex w-fit flex-wrap items-center gap-3 p-0 font-montserrat text-xs font-extrabold uppercase tracking-[0.14em]" aria-label="Zwei Schritte">
+        {/* Sympathisches Foto zur Begruessung (Claudia, 25.10.2026 00:04). */}
+        <div className="mx-auto grid max-w-5xl items-center gap-8 px-6 md:grid-cols-[minmax(0,1fr)_300px] md:gap-12">
+          <div className="min-w-0 text-center md:text-left">
+          <ol className="mx-auto flex w-fit md:mx-0 flex-wrap items-center gap-3 p-0 font-montserrat text-xs font-extrabold uppercase tracking-[0.14em]" aria-label="Zwei Schritte">
             <li className="flex items-center gap-2 text-pearl-white/70"><span className="flex h-6 w-6 items-center justify-center rounded-full border border-[#C9A961] text-[#C9A961]">✓</span>Anmelden</li>
             <li aria-hidden="true" className="h-px w-8 bg-pearl-white/30" />
             <li className="flex items-center gap-2 text-[#C9A961]"><span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#C9A961] text-[#13233F]">2</span>Gruppe wählen</li>
@@ -63,6 +65,8 @@ export default function ChallengeDanke() {
           <p className={`mt-6 inline-block rounded-md px-4 py-3 font-montserrat text-sm font-extrabold uppercase tracking-[0.06em] text-midnight-blue sm:text-base ${GOLD}`}>
             Start: Montag, 26. Oktober 2026 · 19 Uhr · live im Zoom
           </p>
+          </div>
+          <img src="/challenge/danke-handy.webp" alt="Claudia Conen nimmt sich mit dem Handy auf" width={640} height={800} className="mx-auto aspect-[4/5] w-56 rounded-[14px] object-cover shadow-[0_24px_50px_-24px_rgba(0,0,0,0.8)] md:w-full" />
         </div>
       </header>
 
@@ -129,6 +133,10 @@ export default function ChallengeDanke() {
             <Link to="/challenge#programm" className="font-montserrat text-sm font-bold underline decoration-[#C9A961] decoration-2 underline-offset-4">Die Tage im Detail ansehen</Link>
             <a href={KALENDER} target="_blank" rel="noopener" className="inline-flex items-center rounded-full border-2 border-midnight-blue px-5 py-2.5 font-montserrat text-sm font-bold hover:bg-midnight-blue hover:text-pearl-white">Ruf mich an – zum Kalender →</a>
           </div>
+          {/* Leiser Hinweis statt Verkaufsknopf direkt nach der Anmeldung ("Kein Verkaufsdruck"). */}
+          <p className="mt-12 border-t border-midnight-blue/10 pt-6 font-inter text-[15px] text-midnight-blue/75">
+            Du willst nicht warten? <a href="/3-wege" className="font-bold text-midnight-blue underline decoration-[#C9A961] decoration-2 underline-offset-4">Abkürzung und Vertiefung: 3 Wege zum Ziel →</a>
+          </p>
         </div>
       </section>
 

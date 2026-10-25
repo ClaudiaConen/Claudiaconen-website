@@ -108,7 +108,8 @@ export default function MitgliederBereich({ name }: { name?: string }) {
             Willkommen{gruss}
             <span className="mt-2 block whitespace-nowrap bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)] bg-clip-text text-transparent" style={{ fontSize: "min(1em, calc((100vw - 56px) / 10.6))" }}>Unverwechselbar</span>
           </h1>
-          <p className="mt-4 text-xl italic text-[#F7E7CE] sm:text-2xl" style={SERIF}>Jeden Morgen um 7 Uhr öffnet sich dein nächster Schritt.</p>
+          <p className="mt-4 text-xl italic text-[#F7E7CE] sm:text-2xl" style={SERIF}>Nutze die Inhalte für deine Unverwechselbarkeit im KI-Zeitalter.</p>
+          <p className="mt-2 font-inter text-sm text-pearl-white/75">Jeden Morgen um 7 Uhr öffnet sich dein nächster Schritt.</p>
         </div>
 
         {/* Ueberblick wie auf der Startseite: drei klare Kacheln */}

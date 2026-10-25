@@ -483,6 +483,13 @@ export default function Challenge() {
                 <span className="gold-text-animated text-[6rem] leading-[0.85] sm:text-[9rem]">7</span>
                 <span className="text-[2.1rem] leading-[1.04] sm:text-5xl">Tage für deine<br />Wirkungskraft</span>
               </h1>
+              {/* Handy: Video direkt unter der Ueberschrift (Claudia, 25.10.2026 02:19: "sonst wirkt das nicht"). */}
+              <figure className="mx-auto mt-6 w-64 md:hidden">
+              <VideoKopf />
+              <figcaption className="mt-4 text-center font-inter text-[15px] text-midnight-blue">
+                Du bist unsicher? <a href="tel:+4916093102073" className="font-bold underline decoration-[#C9A961] decoration-2 underline-offset-4 hover:text-royal-navy">Dann ruf mich an.</a>
+              </figcaption>
+            </figure>
               {/* Nur zwei Schriften im Kopf: Montserrat und Inter (Claudias Liste 24.10.2026 22:58, Punkt 1). */}
               <p className="mt-5 font-montserrat text-xl font-bold leading-snug text-midnight-blue/85 sm:text-2xl">Weil Perfektion klickbar ist und Persönlichkeit Vertrauen weckt.</p>
               <p className="mt-4 max-w-xl font-inter text-lg leading-relaxed text-midnight-blue/85">
@@ -499,7 +506,7 @@ export default function Challenge() {
               </div>
             </div>
             {/* Claudias Video komplett (Claudia, 24.10.2026 19:26), darunter der Weg zum Kalender (19:47). */}
-            <figure className="order-first mx-auto w-60 sm:w-72 md:order-none md:w-[320px]">
+            <figure className="mx-auto hidden w-[320px] md:block">
               <VideoKopf />
               <figcaption className="mt-4 text-center font-inter text-[15px] text-midnight-blue">
                 Du bist unsicher? <a href="tel:+4916093102073" className="font-bold underline decoration-[#C9A961] decoration-2 underline-offset-4 hover:text-royal-navy">Dann ruf mich an.</a>

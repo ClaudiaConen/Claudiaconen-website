@@ -29,11 +29,13 @@ const INHALT: ZielgruppenInhalt = {
   angebotPreis: '180 € zzgl. MwSt. · 214,20 € inkl. MwSt.',
   angebotPreisHinweis: 'Den Termin wählst du nach der Buchung in meinem Kalender.',
   angebotPunkte: [
+    // Die sieben Challenge-Themen als Einstieg (Claudia, 25.10.2026 00:41: "manche wollen Positionierung oder Storytelling oder Stimme ... plus KI zur Abkuerzung").
+    'Ein Thema aus der Challenge, ganz für dich: Positionierung, Zielgruppe, Redeangst, Stimme, Storytelling, wie Kunden entscheiden oder dein Pitch.',
     'Dein Elevator Pitch: verständlich machen, wer du bist, wofür du stehst und warum das relevant ist.',
     'Deine Keynote oder Präsentation: einen roten Faden entwickeln, Geschichten gezielt einsetzen und deine Kernbotschaft herausarbeiten.',
     'Deine Stimme und Präsenz: Sprechtempo, Pausen, Betonung und Haltung bewusst einsetzen.',
     'Deine persönliche Wirkung: erkennen, was bereits überzeugt und was deine Kompetenz noch verdeckt.',
-    'Deine Kommunikation mit KI: Ideen strukturieren, Varianten entwickeln und Texte verdichten, ohne dass deine persönliche Stimme verloren geht.',
+    'Plus KI als Abkürzung: für deine Werbung, deine Kundenkommunikation und deine Keynote – Ideen strukturieren, Varianten entwickeln und Texte verdichten, ohne dass deine persönliche Stimme verloren geht.',
   ],
 
   ablaufTitel: 'So läuft die Zusammenarbeit ab',

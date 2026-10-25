@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import Helix from './Helix';
+import NetzwerkTag8 from './NetzwerkTag8';
 import { TAGE as TAG_TEXTE } from '../data/challengeTage';
 
 /**
@@ -168,6 +169,8 @@ export default function MitgliederBereich({ name }: { name?: string }) {
           })}
           </ol>
         </div>
+
+        <NetzwerkTag8 jetzt={jetzt} />
 
         <div className="mt-14 grid gap-6 rounded-[20px] border border-[#C9A961]/40 bg-white/[0.04] p-6 sm:p-8 lg:grid-cols-[1.3fr_1fr]">
           <div className="min-w-0">

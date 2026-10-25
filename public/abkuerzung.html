@@ -18,6 +18,18 @@
 @media(max-width:900px){.lk-nav{display:none}.lk-marke span{display:none}.lk-knopf{margin-left:auto}}
 .lf{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:28px}
 @media(max-width:760px){.lf{grid-template-columns:1fr}}
+.preis-box.drei{grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}
+.preis-box ul.wert{list-style:none;padding:0;margin:10px 0 18px;display:grid;gap:9px;font-size:15.5px;line-height:1.45}
+.preis-box ul.wert li{position:relative;padding-left:28px}
+.preis-box ul.wert li::before{content:"✓";position:absolute;left:0;top:1px;width:19px;height:19px;border-radius:50%;background:linear-gradient(135deg,#C9A961,#F7E7CE 48%,#D4AF37);color:#13233F;font:900 11px/19px Inter,sans-serif;text-align:center}
+.preis-box ul.wert li.plus{background:#F28C3A;color:#13233F;border-radius:10px;padding:9px 12px 9px 38px}
+.preis-box ul.wert li.plus::before{content:"+";left:10px;top:9px;background:#13233F;color:#F28C3A;font-size:14px}
+.karten-satz{font:600 italic 22px/1.2 "Cormorant Garamond",Georgia,serif;margin:2px 0 4px}
+.kachel.hier{position:relative}
+.beliebt{position:absolute;top:-14px;right:20px;padding:6px 14px;border-radius:999px;background:#13233F;color:#F7E7CE;font:700 11px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+.aktion-pill{display:inline-block;margin-right:8px;padding:5px 12px;border-radius:999px;background:#F28C3A;color:#13233F;font:800 12px/1.2 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase}
+@media (max-width:980px){.preis-box.drei{grid-template-columns:1fr}}
+.preis-box .kachel.hier{border:1.5px solid var(--gold);border-top:5px solid var(--gold);box-shadow:0 22px 44px -26px rgba(19,35,63,.38)}
 </style>
 <link rel="stylesheet" href="/a27/style.css">
 <style>
@@ -387,7 +399,7 @@ section.knapp{padding-block:72px}
 .zurueck-angebote:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 @keyframes puls{0%{box-shadow:0 12px 28px -12px rgba(19,35,63,.7),0 0 0 0 rgba(201,169,97,.55)}70%{box-shadow:0 12px 28px -12px rgba(19,35,63,.7),0 0 0 14px rgba(201,169,97,0)}100%{box-shadow:0 12px 28px -12px rgba(19,35,63,.7),0 0 0 0 rgba(201,169,97,0)}}
 @media(prefers-reduced-motion:reduce){.zurueck-angebote{animation:none}}
-@media(max-width:600px){.zurueck-angebote{left:12px;bottom:12px;padding:10px 14px;font-size:12px}}
+@media(max-width:900px){.zurueck-angebote{display:none}}
 .fall-links img{max-width:340px}
 .muster3{grid-template-columns:repeat(3,minmax(0,1fr))}
 @media(max-width:900px){.muster3{grid-template-columns:1fr}}
@@ -648,12 +660,12 @@ h3{font-weight:800!important}
 <section class="skopf" aria-labelledby="h1">
  <div class="huelle">
   <div>
-   <div class="eyebrow">1:1-Coaching · online · 90 Minuten</div>
+   <div class="eyebrow">1:1-Coaching · online oder live vor Ort</div>
    <p class="programmname">Deine Abkürzung. <span>1:1 mit Claudia</span></p>
    <h1 id="h1">Du weißt, was du kannst. Nimm die Abkürzung. Und zeig es.</h1>
    <p class="sub" style="margin-top:14px">Stell dir deinen nächsten Auftritt vor. Du stehst da, ruhig und klar, und spürst: Sie hören dir zu. Genau dahin arbeiten wir – gezielt an dem, was dich gerade noch zurückhält. Ich höre, was andere überhören. Du nimmst den direkten Weg.</p>
    <div class="handlung">
-    <a class="knopf" href="https://meet.brevo.com/claudia-conen" target="_blank" rel="noopener">Termin anfragen</a>
+    <a class="knopf" href="#preise">Wähle deinen Weg</a>
     <a class="leise" href="#wahl">Wähle dein Thema</a>
    </div>
   </div>
@@ -663,10 +675,10 @@ h3{font-weight:800!important}
  </div>
  <div class="huelle voll">
   <div class="fakten" role="list">
-   <div role="listitem"><small>Dauer</small><b>90 Minuten, nur du und ich</b></div>
-   <div role="listitem"><small>Ort</small><b>online per Zoom oder vor Ort</b></div>
+   <div role="listitem"><small>Dauer</small><b>90 Minuten, 1 Tag oder 2 Tage</b></div>
+   <div role="listitem"><small>Ort</small><b>online per Zoom oder live in Witten</b></div>
    <div role="listitem"><small>Thema</small><b>Du hast die Wahl</b></div>
-   <div role="listitem"><small>Investition</small><b>180 € zzgl. MwSt.</b></div>
+   <div role="listitem"><small>Aktionspreis</small><b>ab 180 € zzgl. MwSt.</b></div>
   </div>
  </div>
 </section>
@@ -683,6 +695,88 @@ h3{font-weight:800!important}
  </div>
 </section>
 
+<section class="knapp" aria-labelledby="live-titel">
+ <div class="huelle">
+  <div class="kicker">Live vor Ort</div>
+  <h2 id="live-titel">Ein Tag. Nur du und ich. Für das, was du wirklich brauchst.</h2>
+  <div class="text-spalte">
+   <p>Ganz in Ruhe, live vor Ort, mit voller Aufmerksamkeit für dein Anliegen: deine Rhetorik, deine Positionierung, deine Persönlichkeit, deine Texte mit KI.</p>
+   <p>Alle sieben Themen stehen dir zur Auswahl. Wir vertiefen, was du wirklich brauchst, damit du es verinnerlichst.</p>
+  </div>
+  <div style="margin-top:34px;max-width:760px;border:1.5px solid var(--gold);border-top:5px solid var(--gold);border-radius:14px;padding:26px 28px;background:var(--weiss)">
+   <small style="font:700 11.5px/1.3 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#9c7f3c">Plus bei jedem Live-Tag</small>
+   <h3 style="font:800 clamp(24px,2.6vw,32px)/1.15 Montserrat,sans-serif;margin:8px 0 12px">KI für deine Abkürzung</h3>
+   <p style="font-size:17px;line-height:1.6;margin:0 0 10px">Ich zeige dir, wie du KI nutzt: für deine Keynote, deine Reden, dein Storytelling und deine Texte für Social Media. In deinen eigenen Worten.</p>
+   <p style="font-size:17px;line-height:1.6;margin:0"><b>Auf Wunsch:</b> wie du mit den richtigen Schnittstellen sogar automatisch posten kannst.</p>
+  </div>
+  <div style="margin-top:30px;max-width:760px">
+   <small style="font:700 11.5px/1.3 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#9c7f3c">Stell dir den Abend vor</small>
+   <p style="font-size:18px;line-height:1.65;margin:8px 0 0">Du fährst nach Hause. Auf deinem Handy ist dein Pitch, gesprochen von dir. In deinem Kopf ein Satz, der sagt, wofür du stehst. Und du weißt, was du morgen als Erstes machst.</p>
+  </div>
+  <p class="ki-satz">Du kommst von weiter her? <em>Dann nimm dir zwei Tage.</em></p>
+ </div>
+</section>
+
+<section id="preise" class="hell knapp" aria-labelledby="preis-titel">
+ <div class="huelle">
+  <div class="kicker">Investition</div>
+  <h2 id="preis-titel">Wähle deinen Weg</h2>
+  <p class="einleitung"><span class="aktion-pill">Aktionspreise 2026</span> gültig bis 31. Dezember 2026. Danach gelten die regulären Preise.</p>
+  <div class="preis-box drei">
+   <div class="kachel">
+    <small class="klein-caps">Online · 90 Minuten</small>
+    <p class="karten-satz">Ein Thema. Ganz konzentriert.</p>
+    <div class="preis-gross">180 € <span style="font-size:.5em">zzgl. MwSt.</span></div>
+    <div class="brutto">214,20 € inkl. MwSt. · Aktionspreis 2026, danach 247 € zzgl. MwSt.</div>
+    <ul class="wert">
+     <li>90 Minuten, nur du und ich</li>
+     <li>dein Thema, frei gewählt aus allen sieben</li>
+     <li>direktes, ehrliches Feedback</li>
+     <li>dein konkreter nächster Schritt</li>
+     <li>per Zoom, Termin nach Absprache</li>
+    </ul>
+    <a class="knopf" href="https://meet.brevo.com/claudia-conen" target="_blank" rel="noopener" style="margin-top:auto">Termin anfragen</a>
+   </div>
+   <div class="kachel hier">
+    <span class="beliebt">Das Herzstück</span>
+    <small class="klein-caps">Live in Witten · 1 Tag</small>
+    <p class="karten-satz">Ein Tag. Nur du und ich.</p>
+    <div class="preis-gross">1.490 € <span style="font-size:.5em">zzgl. MwSt.</span></div>
+    <div class="brutto">1.773,10 € inkl. MwSt. · Aktionspreis 2026, danach 1.990 € zzgl. MwSt.</div>
+    <ul class="wert">
+     <li>ein ganzer Tag live, mindestens 6 Stunden</li>
+     <li>nur du und ich, ganz in Ruhe</li>
+     <li>alle sieben Themen zur Auswahl: Positionierung, Zielgruppe, Redeangst, Stimme, Storytelling, wie Kunden entscheiden, Pitch</li>
+     <li>trainieren, ausprobieren, sofort Feedback</li>
+     <li>auf Wunsch mit Kamera: dein Video nimmst du mit</li>
+     <li>Mittagessen inklusive</li>
+     <li class="plus"><b>+ 30 Minuten Vorgespräch per Zoom:</b> was dir wirklich wichtig ist und was du am Abend mitnehmen möchtest</li>
+     <li class="plus"><b>+ KI für deine Abkürzung:</b> Keynote, Reden, Storytelling, Social Media, auf Wunsch automatisch posten</li>
+    </ul>
+    <a class="knopf" href="https://meet.brevo.com/claudia-conen" target="_blank" rel="noopener" style="margin-top:auto">Meinen Live-Tag anfragen</a>
+   </div>
+   <div class="kachel">
+    <small class="klein-caps">Live in Witten · 2 Tage</small>
+    <p class="karten-satz">Erarbeiten. Üben. Verinnerlichen.</p>
+    <div class="preis-gross">2.690 € <span style="font-size:.5em">zzgl. MwSt.</span></div>
+    <div class="brutto">3.201,10 € inkl. MwSt. · Aktionspreis 2026, danach 3.590 € zzgl. MwSt.</div>
+    <ul class="wert">
+     <li>zwei ganze Tage live, je mindestens 6 Stunden</li>
+     <li>nur du und ich, ganz in Ruhe</li>
+     <li>Tag 1 erarbeiten, Tag 2 üben, filmen und vertiefen</li>
+     <li>alle sieben Themen zur Auswahl, so tief, wie du es brauchst</li>
+     <li>auf Wunsch mit Kamera: deine Videos nimmst du mit</li>
+     <li>ideal, wenn du anreist</li>
+     <li>Mittagessen an beiden Tagen inklusive</li>
+     <li class="plus"><b>+ 60 Minuten Vorgespräch per Zoom:</b> was dir wirklich wichtig ist und was du nach zwei Tagen mitnehmen möchtest</li>
+     <li class="plus"><b>+ KI für deine Abkürzung:</b> Keynote, Reden, Storytelling, Social Media, auf Wunsch automatisch posten</li>
+    </ul>
+    <a class="knopf" href="https://meet.brevo.com/claudia-conen" target="_blank" rel="noopener" style="margin-top:auto">Meine zwei Tage anfragen</a>
+   </div>
+  </div>
+  <p class="notiz">Mehr Tage oder ein Ort deiner Wahl, mit Anfahrt und Übernachtung? <a href="https://meet.brevo.com/claudia-conen" target="_blank" rel="noopener">Lass uns reden.</a> Oder du gehst den ganzen Weg im <a href="/mentoring-programm">12-Wochen-Mentoring Unverwechselbar</a>.</p>
+ </div>
+</section>
 <section id="wahl" aria-labelledby="wahl-titel">
  <div class="huelle">
   <div class="kicker">Du hast die Wahl</div>
@@ -696,7 +790,7 @@ h3{font-weight:800!important}
    <li class="glas auf"><b>Storytelling</b><span>Bilder können Lösungen aufzeigen. Erwecke sie.</span></li>
    <li class="glas auf"><b>Wie Kunden entscheiden</b><span>Zuhören, verstehen und einen klaren nächsten Schritt anbieten.</span></li>
    <li class="glas auf"><b>Pitch</b><span>Deine Botschaft in 30 bis 60 Sekunden, für Netzwerk, Video oder Kundengespräch.</span></li>
-   <li class="glas auf"><b>KI als Abkürzung</b><span>Ideen strukturieren, Varianten entwickeln, Texte verdichten. In deinen eigenen Worten, für Werbung, Kundenkommunikation und Keynote.</span></li>
+   <li class="glas auf"><b>Plus: KI als Abkürzung</b><span>Ideen strukturieren, Varianten entwickeln, Texte verdichten. In deinen eigenen Worten, für Werbung, Kundenkommunikation und Keynote.</span></li>
   </ul>
  </div>
 </section>
@@ -713,27 +807,6 @@ h3{font-weight:800!important}
  </div>
 </section>
 
-<section id="preise" class="hell knapp" aria-labelledby="preis-titel">
- <div class="huelle">
-  <div class="kicker">Investition</div>
-  <h2 id="preis-titel">Deine 90 Minuten</h2>
-  <div class="preis-box">
-   <div class="kachel">
-    <small class="klein-caps">1:1 online per Zoom</small>
-    <div class="preis-gross">180 € <span style="font-size:.5em">zzgl. MwSt.</span></div>
-    <div class="brutto">214,20 € inkl. MwSt.</div>
-    <ul><li>90 Minuten, nur du und ich</li><li>dein Thema, frei gewählt</li><li>Termin nach Absprache</li></ul>
-    <a class="knopf" href="https://meet.brevo.com/claudia-conen" target="_blank" rel="noopener" style="margin-top:14px">Termin anfragen</a>
-   </div>
-   <div class="kachel">
-    <small class="klein-caps">Lieber vor Ort?</small>
-    <p style="font-size:17px;line-height:1.6;margin:10px 0 16px">Oder an einem Ort deiner Wahl. Lass uns auf einen Kaffee treffen und herausfinden, wo du dich am wohlsten fühlst.</p>
-    <a class="knopf zweit" href="https://meet.brevo.com/claudia-conen" target="_blank" rel="noopener">Lass uns reden</a>
-   </div>
-  </div>
-  <p class="notiz">Dein Anliegen braucht mehr als einen Termin? Dann klären wir in einem kurzen Gespräch, welches Format sinnvoll ist. Oder du gehst den ganzen Weg im <a href="/mentoring-programm">12-Wochen-Mentoring Unverwechselbar</a>.</p>
- </div>
-</section>
 
 <section aria-labelledby="stimmen-titel">
  <div class="huelle">
@@ -765,10 +838,10 @@ h3{font-weight:800!important}
   <div class="kicker">Häufige Fragen</div>
   <h2 id="fragen-titel">Was du vorher wissen willst</h2>
   <div class="fragen">
-   <details class="klapp faq"><summary>Was kostet das?</summary><div class="inhalt"><p>180 € zzgl. MwSt. (214,20 € inkl. MwSt.) für 90 Minuten.</p></div></details>
+   <details class="klapp faq"><summary>Was kostet das?</summary><div class="inhalt"><p>Aktionspreise 2026: online 90 Minuten 180 € zzgl. MwSt. (214,20 € inkl. MwSt.), live in Witten 1 Tag 1.490 € zzgl. MwSt. (1.773,10 € inkl. MwSt.), 2 Tage 2.690 € zzgl. MwSt. (3.201,10 € inkl. MwSt.). Ab 2027 gelten 247 €, 1.990 € und 3.590 € zzgl. MwSt.</p></div></details>
    <details class="klapp faq"><summary>Reicht ein Termin?</summary><div class="inhalt"><p>Du kannst einen einzelnen Termin buchen, wenn du gezielte Unterstützung brauchst. Wenn dein Anliegen umfangreicher ist, klären wir in einem persönlichen Gespräch, welches Format sinnvoll ist und wie viele Termine du benötigst.</p></div></details>
    <details class="klapp faq"><summary>Was soll ich mitbringen?</summary><div class="inhalt"><p>Ein Thema, an dem dir etwas liegt: dein Angebot, eine Präsentation, ein Video oder ein Gespräch, das bald ansteht. Gern auch eine Aufnahme davon.</p></div></details>
-   <details class="klapp faq"><summary>Geht das auch vor Ort?</summary><div class="inhalt"><p>Ja. Lass uns auf einen Kaffee treffen und herausfinden, wo du dich am wohlsten fühlst.</p></div></details>
+   <details class="klapp faq"><summary>Geht das auch vor Ort?</summary><div class="inhalt"><p>Ja, als Live-Tag in Witten, einen oder zwei Tage. Oder an einem Ort deiner Wahl: Lass uns auf einen Kaffee treffen und herausfinden, wo du dich am wohlsten fühlst. Anfahrt und Übernachtung klären wir dann im Gespräch.</p></div></details>
   </div>
  </div>
 </section>
@@ -791,7 +864,7 @@ h3{font-weight:800!important}
 <footer>
  <div class="huelle lf">
   <div><p class="marke-fuss">Claudia Conen – Die Umsatzstimme</p><p style="margin-top:8px">Expertin für menschliche Wirkungskraft im KI-Zeitalter</p></div>
-  <div><b>Angebote</b><ul><li><a href="/challenge">7-Tage-Challenge</a></li><li><a href="/live-workshop">Live-Workshop Köln</a></li><li><a href="/mentoring-programm">Unverwechselbar. Das 12-Wochen-Mentoring</a></li><li><a href="/angebote">Alle Angebote</a></li></ul></div>
+  <div><b>Angebote</b><ul><li><a href="/challenge">7-Tage-Challenge</a></li><li><a href="/abkuerzung">Deine Abkürzung (1:1)</a></li><li><a href="/live-workshop">Live-Workshop Köln</a></li><li><a href="/mentoring-programm">Unverwechselbar. Das 12-Wochen-Mentoring</a></li><li><a href="/angebote">Alle Angebote</a></li></ul></div>
   <div><b>Kontakt</b><ul><li><a href="https://meet.brevo.com/claudia-conen" target="_blank" rel="noopener">Gespräch vereinbaren</a></li><li><a href="/impressum">Impressum</a></li><li><a href="/datenschutz">Datenschutz</a></li><li><a href="/agb">AGB</a></li></ul></div>
  </div>
 </footer>

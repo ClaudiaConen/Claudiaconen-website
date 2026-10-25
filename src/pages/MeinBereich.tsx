@@ -24,6 +24,8 @@ export default function MeinBereich() {
 
   useEffect(() => {
     try { setName(window.localStorage.getItem(BEREICH_SCHLUESSEL)); } catch { /* privater Modus */ }
+    // Vorschau fuer Claudia ohne Login: /mein-bereich?vorschau=alle
+    if (/[?&]vorschau=alle/.test(window.location.search)) setName((n) => n || 'Claudia');
     setGeladen(true);
   }, []);
 

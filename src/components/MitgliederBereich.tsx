@@ -60,9 +60,13 @@ function AudioSpur({ datei }: { datei: string }) {
 }
 
 export default function MitgliederBereich({ name }: { name?: string }) {
-  const [jetzt, setJetzt] = useState(() => Date.now());
+  // Vorschau fuer Claudia: /mein-bereich?vorschau=alle zeigt alle Tage offen (fuer Teilnehmende nicht verlinkt).
+  const vorschau = typeof window !== 'undefined' && /[?&]vorschau=alle/.test(window.location.search);
+  const [uhr, setJetzt] = useState(() => Date.now());
+  const jetzt = vorschau ? Date.parse('2026-11-03T08:00:00+01:00') : uhr;
   useEffect(() => { const u = window.setInterval(() => setJetzt(Date.now()), 60_000); return () => window.clearInterval(u); }, []);
   const gruss = name && name !== '1' ? `, ${name}` : '';
+  const letzterFrei = TAGE.reduce((n, t, i) => (jetzt >= Date.parse(t.ab) ? i : n), -1);
 
   // DNA-Spur: Sprossen neben die Tage setzen, der Tag in Bildschirmmitte leuchtet (wie auf der Challenge-Seite).
   const listeRef = useRef<HTMLOListElement>(null);
@@ -129,41 +133,50 @@ export default function MitgliederBereich({ name }: { name?: string }) {
             const frei = jetzt >= Date.parse(t.ab);
             const text = TAG_TEXTE[i];
             return (
-              <li key={t.nr} data-tag={i} className={`grid overflow-hidden rounded-[18px] border bg-[linear-gradient(180deg,#1E3257,#13233F)] shadow-[0_22px_44px_-28px_rgba(0,0,0,0.7)] transition-[border-color] duration-300 sm:grid-cols-[200px_minmax(0,1fr)] ${frei ? 'border-[#C9A961]/60' : 'border-[#C9A961]/25'} ${i === aktiverTag ? 'md:border-[#C9A961]' : ''}`}>
-                <div className="relative self-start overflow-hidden bg-[#13233F]">
-                  <img src={`/a27/p/mitglieder/bilder/tag${t.nr}.webp`} alt={`Workbook Tag ${t.nr}: ${t.titel}`} width={640} height={906} loading="lazy"
-                    className={`aspect-[640/906] h-full w-full ${frei ? 'object-contain' : 'object-cover blur-[2px] brightness-75'} max-sm:aspect-[16/9] max-sm:object-cover max-sm:object-[50%_28%]`} />
-                  {!frei && <span className="absolute inset-x-3 bottom-3 rounded-xl bg-[#13233F]/85 px-3 py-2 text-center font-inter text-sm font-extrabold text-[#F7E7CE]">Öffnet am {t.datum} um {Number(t.ab.slice(11, 13))} Uhr</span>}
-                </div>
-                <div className="flex flex-1 flex-col gap-3 p-5">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className={`rounded-full px-3 py-1 font-inter text-[11px] font-black uppercase tracking-[0.12em] text-midnight-blue ${GOLD}`}>Tag {t.nr}</span>
-                    {t.feedback && <span className="rounded-full bg-[#F28C3A] px-3 py-1 font-inter text-[11px] font-black uppercase tracking-[0.12em] text-midnight-blue">Feedback</span>}
-                    <span className="font-inter text-xs font-bold uppercase tracking-[0.08em] text-[#C9A961]">{t.datum}</span>
-                  </div>
-                  <h2 className="font-montserrat text-lg font-extrabold leading-snug text-white">{t.titel}</h2>
-                  {frei ? (
-                    <div className="grid gap-2 font-inter text-sm">
-                      <div className="rounded-xl border border-white/10 bg-white/[0.05] p-3"><b className="mb-2 block text-white">Dein Audio</b><AudioSpur datei={t.audio} /></div>
-                      <div className="rounded-xl border border-white/10 bg-white/[0.05] p-3"><b className="block text-white">Deine Erklärung</b>
-                        {t.anleitung ? <span className="text-pearl-white/80">{t.anleitung}</span> : text ? (
-                          <span className="grid gap-1.5 text-pearl-white/85">
-                            <span className="italic text-[#F7E7CE]">„{text.einstieg}“</span>
-                            <span>{text.inhalt}</span>
-                            <span><b className="text-white">Deine Aufgabe:</b> {text.aufgabe}</span>
-                            {text.zusatz && <span className="text-pearl-white/75">{text.zusatz}</span>}
-                            <span><b className="text-white">Zum Nachdenken:</b> {text.reflexion}</span>
-                          </span>
-                        ) : <span className="text-[#C9A961]">folgt heute</span>}
-                      </div>
-                      <div className="rounded-xl border border-white/10 bg-white/[0.05] p-3"><b className="block text-white">Dein Workbook</b><a href={`/a27/p/mitglieder/workbooks/Workbook_Tag${t.nr}.pdf`} download className="font-bold text-[#F7E7CE] underline decoration-[#C9A961] underline-offset-2">Herunterladen (PDF)</a></div>
-                      <div className="rounded-xl border border-[#F28C3A]/60 bg-[#F28C3A]/10 p-3"><b className="block text-white">Dein Video</b><span className="text-pearl-white/85">Nimm dein 1-Minuten-Video auf und poste es in deiner Gruppe.</span>
-                        <span className="mt-2 flex flex-wrap gap-2"><a href={WHATSAPP} target="_blank" rel="noopener noreferrer" className="rounded-full bg-white px-3 py-1.5 font-bold text-midnight-blue">WhatsApp →</a><a href={TELEGRAM} target="_blank" rel="noopener noreferrer" className="rounded-full border border-white/40 px-3 py-1.5 font-bold text-white">Telegram →</a></span></div>
+              <li key={t.nr} data-tag={i}>
+                {/* Zum Aufklappen wie auf der Challenge-Seite (Claudia 25.10.2026 16:59); der aktuelle Tag ist offen. */}
+                <details open={i === letzterFrei} className={`group overflow-hidden rounded-[18px] border bg-[linear-gradient(180deg,#1E3257,#13233F)] shadow-[0_22px_44px_-28px_rgba(0,0,0,0.7)] transition-[border-color] duration-300 ${frei ? 'border-[#C9A961]/60' : 'border-[#C9A961]/25'} ${i === aktiverTag ? 'md:border-[#C9A961]' : ''}`}>
+                  <summary className="flex cursor-pointer list-none items-center gap-4 p-4 sm:p-5 [&::-webkit-details-marker]:hidden">
+                    <img src={`/a27/p/mitglieder/bilder/tag${t.nr}.webp`} alt="" width={640} height={906} loading="lazy" className={`h-[72px] w-[51px] flex-none rounded-md object-cover ${frei ? '' : 'blur-[1px] brightness-75'}`} />
+                    <span className="min-w-0 flex-1">
+                      <span className="flex flex-wrap items-center gap-2">
+                        <span className={`rounded-full px-3 py-1 font-inter text-[11px] font-black uppercase tracking-[0.12em] text-midnight-blue ${GOLD}`}>Tag {t.nr}</span>
+                        {t.feedback && <span className="rounded-full bg-[#F28C3A] px-3 py-1 font-inter text-[11px] font-black uppercase tracking-[0.12em] text-midnight-blue">Feedback</span>}
+                        <span className="font-inter text-xs font-bold uppercase tracking-[0.08em] text-[#C9A961]">{t.datum}</span>
+                      </span>
+                      <h2 className="mt-1.5 font-montserrat text-lg font-extrabold leading-snug text-white">{t.titel}</h2>
+                      <span className="font-inter text-xs text-pearl-white/70">{frei ? 'Offen · antippen zum Öffnen' : `Öffnet am ${t.datum} um ${Number(t.ab.slice(11, 13))} Uhr`}</span>
+                    </span>
+                    <span aria-hidden="true" className="grid h-9 w-9 flex-none place-items-center rounded-full border border-[#C9A961]/60 text-[#C9A961] transition-transform duration-300 group-open:rotate-180">⌄</span>
+                  </summary>
+                  <div className="grid gap-4 border-t border-white/10 p-4 sm:grid-cols-[200px_minmax(0,1fr)] sm:p-5">
+                    <div className="relative self-start overflow-hidden rounded-xl bg-[#13233F]">
+                      <img src={`/a27/p/mitglieder/bilder/tag${t.nr}.webp`} alt={`Workbook Tag ${t.nr}: ${t.titel}`} width={640} height={906} loading="lazy"
+                        className={`aspect-[640/906] w-full object-contain ${frei ? '' : 'blur-[2px] brightness-75'}`} />
                     </div>
-                  ) : (
-                    <p className="font-inter text-sm leading-relaxed text-pearl-white/70">Audio, Erklärung und Workbook öffnen sich am {t.datum} um {Number(t.ab.slice(11, 13))} Uhr.</p>
-                  )}
-                </div>
+                    {frei ? (
+                      <div className="grid content-start gap-2 font-inter text-sm">
+                        <div className="rounded-xl border border-white/10 bg-white/[0.05] p-3"><b className="mb-2 block text-white">Dein Audio</b><AudioSpur datei={t.audio} /></div>
+                        <div className="rounded-xl border border-white/10 bg-white/[0.05] p-3"><b className="block text-white">Deine Erklärung</b>
+                          {t.anleitung ? <span className="text-pearl-white/80">{t.anleitung}</span> : text ? (
+                            <span className="grid gap-1.5 text-pearl-white/85">
+                              <span className="italic text-[#F7E7CE]">„{text.einstieg}“</span>
+                              <span>{text.inhalt}</span>
+                              <span><b className="text-white">Deine Aufgabe:</b> {text.aufgabe}</span>
+                              {text.zusatz && <span className="text-pearl-white/75">{text.zusatz}</span>}
+                              <span><b className="text-white">Zum Nachdenken:</b> {text.reflexion}</span>
+                            </span>
+                          ) : <span className="text-[#C9A961]">folgt heute</span>}
+                        </div>
+                        <div className="rounded-xl border border-white/10 bg-white/[0.05] p-3"><b className="block text-white">Dein Workbook</b><a href={`/a27/p/mitglieder/workbooks/Workbook_Tag${t.nr}.pdf`} download className="font-bold text-[#F7E7CE] underline decoration-[#C9A961] underline-offset-2">Herunterladen (PDF)</a></div>
+                        <div className="rounded-xl border border-[#F28C3A]/60 bg-[#F28C3A]/10 p-3"><b className="block text-white">Dein Video</b><span className="text-pearl-white/85">Nimm dein 1-Minuten-Video auf und poste es in deiner Gruppe.</span>
+                          <span className="mt-2 flex flex-wrap gap-2"><a href={WHATSAPP} target="_blank" rel="noopener noreferrer" className="rounded-full bg-white px-3 py-1.5 font-bold text-midnight-blue">WhatsApp →</a><a href={TELEGRAM} target="_blank" rel="noopener noreferrer" className="rounded-full border border-white/40 px-3 py-1.5 font-bold text-white">Telegram →</a></span></div>
+                      </div>
+                    ) : (
+                      <p className="font-inter text-sm leading-relaxed text-pearl-white/70">Audio, Erklärung, Workbook und dein Video-Auftrag öffnen sich am {t.datum} um {Number(t.ab.slice(11, 13))} Uhr.</p>
+                    )}
+                  </div>
+                </details>
               </li>
             );
           })}

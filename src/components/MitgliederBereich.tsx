@@ -14,12 +14,12 @@ export const BEREICH_SCHLUESSEL = 'mein-bereich-login';
 type Tag = { nr: number; titel: string; datum: string; ab: string; audio: string; anleitung: string; feedback?: boolean };
 
 const TAGE: Tag[] = [
-  { nr: 1, titel: 'Deine Kernbotschaft', datum: 'Mo 26.10.', ab: '2026-10-26T07:00:00+01:00', audio: '', anleitung: '' },
-  { nr: 2, titel: 'Die Zielgruppenbrille', datum: 'Di 27.10.', ab: '2026-10-27T07:00:00+01:00', audio: '', anleitung: '', feedback: true },
-  { nr: 3, titel: 'Raus aus der Redeangst', datum: 'Mi 28.10.', ab: '2026-10-28T07:00:00+01:00', audio: '', anleitung: '' },
-  { nr: 4, titel: 'Deine Stimme: Betonung & Pause', datum: 'Do 29.10.', ab: '2026-10-29T07:00:00+01:00', audio: '', anleitung: '' },
-  { nr: 5, titel: 'Storytelling: Der Kunde ist der Held', datum: 'Fr 30.10.', ab: '2026-10-30T07:00:00+01:00', audio: '', anleitung: '' },
-  { nr: 6, titel: 'Wie Kunden entscheiden', datum: 'Sa 31.10.', ab: '2026-10-31T07:00:00+01:00', audio: '', anleitung: '', feedback: true },
+  { nr: 1, titel: 'Deine Kernbotschaft', datum: 'Di 27.10.', ab: '2026-10-27T07:00:00+01:00', audio: '', anleitung: '' },
+  { nr: 2, titel: 'Die Zielgruppenbrille', datum: 'Mi 28.10.', ab: '2026-10-28T07:00:00+01:00', audio: '', anleitung: '', feedback: true },
+  { nr: 3, titel: 'Raus aus der Redeangst', datum: 'Do 29.10.', ab: '2026-10-29T07:00:00+01:00', audio: '', anleitung: '' },
+  { nr: 4, titel: 'Deine Stimme: Betonung & Pause', datum: 'Fr 30.10.', ab: '2026-10-30T07:00:00+01:00', audio: '', anleitung: '' },
+  { nr: 5, titel: 'Storytelling: Der Kunde ist der Held', datum: 'Sa 31.10.', ab: '2026-10-31T07:00:00+01:00', audio: '', anleitung: '' },
+  { nr: 6, titel: 'Wie Kunden entscheiden', datum: 'So 1.11.', ab: '2026-11-01T07:00:00+01:00', audio: '', anleitung: '', feedback: true },
   { nr: 7, titel: 'Dein Elevator Pitch', datum: 'Mo 2.11.', ab: '2026-11-02T07:00:00+01:00', audio: '', anleitung: '' },
 ];
 

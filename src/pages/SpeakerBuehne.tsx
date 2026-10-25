@@ -41,7 +41,7 @@ const inhalt: ZielgruppenInhalt = {
     'Stand und Bewegung: wann man geht, wann man stehen bleibt und warum das ein Unterschied ist.',
     'Der Blick: Wohin schaut man in einem Saal mit dreihundert Leuten, und wohin in einem Raum mit zwölf.',
     'Pausen setzen und aushalten. Der am schnellsten sichtbare Gewinn des ganzen Tages.',
-    'Stimme im Raum: tragen statt lauter werden. Das sind zwei verschiedene Dinge.',
+    'Stimme im Raum: wie sie trägt, bis in die letzte Reihe.',
     'Die ersten neunzig Sekunden — sie entscheiden, ob zugehört wird, und sie lassen sich auswendig können.',
     'Was tun, wenn etwas schiefgeht: Technik weg, Blackout, Zwischenruf.',
     'Aufnahme und gemeinsames Ansehen. Unangenehm, und der wirksamste Teil.',

@@ -25,7 +25,7 @@ const INHALT: ZielgruppenInhalt = {
   ],
 
   angebotName: 'Deine Abkürzung. 1:1 mit Claudia',
-  angebotZeile: '90 Minuten, nur du und ich. Online per Zoom.',
+  angebotZeile: 'Du hast die Wahl: Bei was darf ich dich unterstützen? 90 Minuten, nur du und ich, online per Zoom.',
   angebotPreis: '180 € zzgl. MwSt. · 214,20 € inkl. MwSt.',
   angebotPreisHinweis: 'Den Termin wählst du nach der Buchung in meinem Kalender.',
   angebotPunkte: [

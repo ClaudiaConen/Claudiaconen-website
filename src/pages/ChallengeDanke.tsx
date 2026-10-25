@@ -104,9 +104,10 @@ export default function ChallengeDanke() {
       <section className="pb-14 sm:pb-20" aria-label="Ein Wort von Claudia">
         <div className="mx-auto max-w-3xl px-6">
           <div className="border-l-4 border-[#C9A961] pl-6 font-inter text-lg leading-relaxed text-midnight-blue">
-            <p className="font-montserrat text-xl font-extrabold leading-snug sm:text-2xl">Noch nie war die persönliche Kommunikation wertvoller.</p>
-            <p className="mt-3">Weil die künstliche Intelligenz in Zukunft extrem viele Kontaktpunkte übernimmt, ist die eigene Wirkung essenziell für die Kundengewinnung. Denn sie präsentiert dich unverwechselbar: am Telefon, auf Social Media genauso wie im persönlichen Live-Kontakt.</p>
-            <p className="mt-3">Ich freue mich, dass du dabei bist. Leider leidet bei vielen Menschen die Wirkungskraft unter der Redeangst. Und genau das ändern wir.</p>
+            <p className="font-montserrat text-xl font-extrabold leading-snug sm:text-2xl">Schön, dass du dabei bist.</p>
+            <p className="mt-3">Noch nie war persönliche Kommunikation so wertvoll. Die KI wird viele Kontaktpunkte mit deinen Kunden übernehmen. Umso mehr entscheidet deine eigene Wirkung, ob Menschen dir vertrauen – am Telefon, auf Social Media und im persönlichen Gespräch.</p>
+            <p className="mt-3">Manche bremst die Redeangst, andere wollen ihre Performance verbessern. Für beides sind die nächsten sieben Tage da.</p>
+            <p className="mt-3">Ich freue mich auf dich.</p>
             <p className="mt-4 font-montserrat text-base font-bold">Claudia</p>
           </div>
         </div>

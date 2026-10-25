@@ -50,7 +50,7 @@ export default function MeinBereich() {
 
   return (
     <div className="min-h-screen bg-[#13233F] text-pearl-white">
-      <SEO title="Dein Mitgliederbereich · UNVERWECHSELBAR" description="Nutze die Inhalte für deine Unverwechselbarkeit im KI-Zeitalter." path="/mein-bereich" ogImage="https://claudiaconen.com/a27/og/og-mein-bereich-v2.jpg" noindex />
+      <SEO title="Unverwechselbar bist du – dein Mitgliederbereich" description="Herzlich willkommen bei Claudia. Nutze die Inhalte für deine Unverwechselbarkeit im KI-Zeitalter." path="/mein-bereich" ogImage="https://claudiaconen.com/a27/og/og-mein-bereich-v3.jpg" noindex />
       <Navigation />
       {!geladen ? <div className="min-h-[60vh]" /> : name ? (
         <MitgliederBereich name={name} />

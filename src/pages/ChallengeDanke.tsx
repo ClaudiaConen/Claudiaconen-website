@@ -29,7 +29,6 @@ const WEG: { tag: string; datum: string; titel: string; zusatz?: string }[] = [
 
 export default function ChallengeDanke() {
   const ort = useLocation();
-  const vorname = ((ort.state as { vorname?: string } | null)?.vorname ?? '').trim();
   // Gruppenzugaenge nur nach erfolgreicher Anmeldung (Claudias Liste, Punkt 9). Wer die Adresse direkt oeffnet, wird zum Formular geschickt.
   const angemeldet = Boolean(ort.state && (ort.state as { angemeldet?: boolean }).angemeldet);
   if (!angemeldet) {
@@ -61,7 +60,7 @@ export default function ChallengeDanke() {
             <li className="flex items-center gap-2 text-[#C9A961]"><span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#C9A961] text-[#13233F]">2</span>Gruppe wählen</li>
           </ol>
           {/* Wortlaut aus Claudias Liste (24.10.2026 22:58, Punkt 9). */}
-          <h1 className="mt-6 font-montserrat text-3xl font-extrabold leading-tight sm:text-5xl">{vorname ? `${vorname}, du` : 'Du'} bist angemeldet.<br />Wähle jetzt deine Gruppe.</h1>
+          <h1 className="mt-6 font-montserrat text-3xl font-extrabold leading-tight sm:text-5xl">Du bist angemeldet.<br />Wähle jetzt deine Gruppe.</h1>
           <p className={`mt-6 inline-block rounded-md px-4 py-3 font-montserrat text-sm font-extrabold uppercase tracking-[0.06em] text-midnight-blue sm:text-base ${GOLD}`}>
             Start: Montag, 26. Oktober 2026 · 19 Uhr · live im Zoom
           </p>
@@ -97,6 +96,18 @@ export default function ChallengeDanke() {
                 </a>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Claudias Worte zur Begruessung (25.10.2026 00:13), nur Rechtschreibung und Satzbau geglaettet. */}
+      <section className="pb-14 sm:pb-20" aria-label="Ein Wort von Claudia">
+        <div className="mx-auto max-w-3xl px-6">
+          <div className="border-l-4 border-[#C9A961] pl-6 font-inter text-lg leading-relaxed text-midnight-blue">
+            <p className="font-montserrat text-xl font-extrabold leading-snug sm:text-2xl">Noch nie war die persönliche Kommunikation wertvoller.</p>
+            <p className="mt-3">Weil die künstliche Intelligenz in Zukunft extrem viele Kontaktpunkte übernimmt, ist die eigene Wirkung essenziell für die Kundengewinnung. Denn sie präsentiert dich unverwechselbar: am Telefon, auf Social Media genauso wie im persönlichen Live-Kontakt.</p>
+            <p className="mt-3">Ich freue mich, dass du dabei bist. Leider leidet bei vielen Menschen die Wirkungskraft unter der Redeangst. Und genau das ändern wir.</p>
+            <p className="mt-4 font-montserrat text-base font-bold">Claudia</p>
           </div>
         </div>
       </section>

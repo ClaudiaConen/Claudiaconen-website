@@ -14,12 +14,12 @@ export const BEREICH_SCHLUESSEL = 'mein-bereich-login';
 type Tag = { nr: number; titel: string; datum: string; ab: string; audio: string; anleitung: string; feedback?: boolean };
 
 const TAGE: Tag[] = [
-  { nr: 1, titel: 'Deine Kernbotschaft', datum: 'Di 27.10.', ab: '2026-10-27T07:00:00+01:00', audio: '', anleitung: '' },
-  { nr: 2, titel: 'Die Zielgruppenbrille', datum: 'Mi 28.10.', ab: '2026-10-28T07:00:00+01:00', audio: '', anleitung: '', feedback: true },
-  { nr: 3, titel: 'Raus aus der Redeangst', datum: 'Do 29.10.', ab: '2026-10-29T07:00:00+01:00', audio: '', anleitung: '' },
-  { nr: 4, titel: 'Deine Stimme: Betonung & Pause', datum: 'Fr 30.10.', ab: '2026-10-30T07:00:00+01:00', audio: '', anleitung: '' },
-  { nr: 5, titel: 'Storytelling: Der Kunde ist der Held', datum: 'Sa 31.10.', ab: '2026-10-31T07:00:00+01:00', audio: '', anleitung: '' },
-  { nr: 6, titel: 'Wie Kunden entscheiden', datum: 'So 1.11.', ab: '2026-11-01T07:00:00+01:00', audio: '', anleitung: '', feedback: true },
+  { nr: 1, titel: 'Deine Kernbotschaft', datum: 'Mo 26.10.', ab: '2026-10-26T20:00:00+01:00', audio: '', anleitung: '' },
+  { nr: 2, titel: 'Die Zielgruppenbrille', datum: 'Di 27.10.', ab: '2026-10-27T07:00:00+01:00', audio: '', anleitung: '', feedback: true },
+  { nr: 3, titel: 'Raus aus der Redeangst', datum: 'Mi 28.10.', ab: '2026-10-28T07:00:00+01:00', audio: '', anleitung: '' },
+  { nr: 4, titel: 'Deine Stimme: Betonung & Pause', datum: 'Do 29.10.', ab: '2026-10-29T07:00:00+01:00', audio: '', anleitung: '' },
+  { nr: 5, titel: 'Storytelling: Der Kunde ist der Held', datum: 'Fr 30.10.', ab: '2026-10-30T07:00:00+01:00', audio: '', anleitung: '' },
+  { nr: 6, titel: 'Wie Kunden entscheiden', datum: 'Sa 31.10.', ab: '2026-10-31T07:00:00+01:00', audio: '', anleitung: '', feedback: true },
   { nr: 7, titel: 'Dein Elevator Pitch', datum: 'Mo 2.11.', ab: '2026-11-02T07:00:00+01:00', audio: '', anleitung: '' },
 ];
 
@@ -132,7 +132,7 @@ export default function MitgliederBereich({ name }: { name?: string }) {
                 <div className="relative self-start overflow-hidden bg-[#13233F]">
                   <img src={`/a27/p/mitglieder/bilder/tag${t.nr}.webp`} alt={`Workbook Tag ${t.nr}: ${t.titel}`} width={640} height={906} loading="lazy"
                     className={`aspect-[640/906] h-full w-full ${frei ? 'object-contain' : 'object-cover blur-[2px] brightness-75'} max-sm:aspect-[16/9] max-sm:object-cover max-sm:object-[50%_28%]`} />
-                  {!frei && <span className="absolute inset-x-3 bottom-3 rounded-xl bg-[#13233F]/85 px-3 py-2 text-center font-inter text-sm font-extrabold text-[#F7E7CE]">Öffnet am {t.datum} um 7 Uhr</span>}
+                  {!frei && <span className="absolute inset-x-3 bottom-3 rounded-xl bg-[#13233F]/85 px-3 py-2 text-center font-inter text-sm font-extrabold text-[#F7E7CE]">Öffnet am {t.datum} um {Number(t.ab.slice(11, 13))} Uhr</span>}
                 </div>
                 <div className="flex flex-1 flex-col gap-3 p-5">
                   <div className="flex flex-wrap items-center gap-2">
@@ -160,7 +160,7 @@ export default function MitgliederBereich({ name }: { name?: string }) {
                         <span className="mt-2 flex flex-wrap gap-2"><a href={WHATSAPP} target="_blank" rel="noopener noreferrer" className="rounded-full bg-white px-3 py-1.5 font-bold text-midnight-blue">WhatsApp →</a><a href={TELEGRAM} target="_blank" rel="noopener noreferrer" className="rounded-full border border-white/40 px-3 py-1.5 font-bold text-white">Telegram →</a></span></div>
                     </div>
                   ) : (
-                    <p className="font-inter text-sm leading-relaxed text-pearl-white/70">Audio, Erklärung und Workbook öffnen sich am {t.datum} um 7 Uhr.</p>
+                    <p className="font-inter text-sm leading-relaxed text-pearl-white/70">Audio, Erklärung und Workbook öffnen sich am {t.datum} um {Number(t.ab.slice(11, 13))} Uhr.</p>
                   )}
                 </div>
               </li>

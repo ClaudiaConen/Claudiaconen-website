@@ -58,7 +58,7 @@ export default function MeinBereich() {
             <p className="inline-flex items-center gap-3 font-montserrat text-xs font-extrabold uppercase tracking-[0.26em] text-[#C9A961]"><span className="h-px w-10 bg-[#C9A961]" />Mitgliederbereich<span className="h-px w-10 bg-[#C9A961]" /></p>
             <h1 className="mt-6 text-[34px] font-semibold uppercase leading-[1.05] tracking-[0.03em] sm:text-5xl" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
               Login
-              <span className="mt-1 block bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)] bg-clip-text text-transparent">Unverwechselbar</span>
+              <span className="mt-1 block whitespace-nowrap bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)] bg-clip-text text-transparent" style={{ fontSize: "min(1em, calc((100vw - 56px) / 10.6))" }}>Unverwechselbar</span>
             </h1>
             <p className="mt-4 font-inter text-base text-pearl-white/80">Hier warten jeden Morgen um 7 Uhr dein Audio, deine Erklärung und dein Workbook.</p>
           </div>

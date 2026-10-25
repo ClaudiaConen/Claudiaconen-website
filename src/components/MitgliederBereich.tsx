@@ -101,7 +101,7 @@ export default function MitgliederBereich({ name }: { name?: string }) {
           <p className="inline-flex items-center gap-3 font-montserrat text-xs font-extrabold uppercase tracking-[0.26em] text-[#C9A961]"><span className="h-px w-10 bg-[#C9A961]" />Dein Mitgliederbereich<span className="h-px w-10 bg-[#C9A961]" /></p>
           <h1 id="bereich-titel" className="mt-6 text-[29px] font-semibold uppercase leading-[1.08] tracking-[0.02em] text-white min-[420px]:text-4xl sm:text-6xl sm:tracking-[0.06em]" style={SERIF}>
             Willkommen{gruss}
-            <span className="mt-2 block bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)] bg-clip-text text-transparent">Unverwechselbar</span>
+            <span className="mt-2 block whitespace-nowrap bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)] bg-clip-text text-transparent" style={{ fontSize: "min(1em, calc((100vw - 56px) / 10.6))" }}>Unverwechselbar</span>
           </h1>
           <p className="mt-4 text-xl italic text-[#F7E7CE] sm:text-2xl" style={SERIF}>Jeden Morgen um 7 Uhr öffnet sich dein nächster Schritt.</p>
         </div>

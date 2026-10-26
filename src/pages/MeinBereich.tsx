@@ -48,12 +48,18 @@ export default function MeinBereich() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
+  function ausloggen() {
+    try { window.localStorage.removeItem(BEREICH_SCHLUESSEL); } catch { /* privater Modus */ }
+    setName(null);
+    window.scrollTo({ top: 0 });
+  }
+
   return (
     <div className="min-h-screen bg-[#13233F] text-pearl-white">
       <SEO title="Unverwechselbar bist du – dein Mitgliederbereich" description="Herzlich willkommen bei Claudia. Nutze die Inhalte für deine Unverwechselbarkeit im KI-Zeitalter." path="/mein-bereich" ogImage="https://claudiaconen.com/a27/og/og-mein-bereich-v3.jpg" noindex />
       <Navigation />
       {!geladen ? <div className="min-h-[60vh]" /> : name ? (
-        <MitgliederBereich name={name} />
+        <MitgliederBereich name={name} onLogout={ausloggen} />
       ) : (
         <main className="relative overflow-hidden bg-[radial-gradient(ellipse_70%_60%_at_70%_10%,#2A4170_0%,#1A2B4C_45%,#13233F_100%)] px-6 pt-32 pb-24 sm:pt-40">
           <div className="mx-auto max-w-md text-center">

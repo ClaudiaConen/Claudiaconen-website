@@ -112,6 +112,16 @@ export default function MitgliederBereich({ name }: { name?: string }) {
           <p className="mt-2 font-inter text-sm text-pearl-white/75">Jeden Morgen um 7 Uhr öffnet sich dein nächster Schritt.</p>
         </div>
 
+        {/* Einstiegs-Workbook (Tag 0): ganz oben, getrennt von den Tagen – fuer den Start heute Abend/Zoom (Claudia/Anke 26.10.2026). */}
+        <div className="mt-10 flex flex-col items-start gap-4 rounded-[18px] border-2 border-[#C9A961]/70 bg-white/[0.06] p-6 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] text-[#C9A961]">Hier beginnst du</p>
+            <b className="mt-1 block font-montserrat text-lg font-extrabold text-white">Dein Einstiegs-Workbook</b>
+            <span className="font-inter text-sm text-pearl-white/75">Der Überblick, der Ablauf und dein Vorher-Video – dein Einstieg für den Start heute Abend. Lad es dir herunter und leg direkt los.</span>
+          </div>
+          <a href="/a27/p/mitglieder/workbooks/Workbook_Tag0_Starter.pdf" download className={`inline-flex flex-none items-center rounded-full px-6 py-3 font-montserrat text-sm font-bold text-midnight-blue ${GOLD}`}>Einstiegs-Workbook herunterladen (PDF)</a>
+        </div>
+
         {/* Ueberblick wie auf der Startseite: drei klare Kacheln */}
         <div className="mt-10 grid gap-4 sm:grid-cols-3">
           {[

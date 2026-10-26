@@ -98,7 +98,12 @@ export default function MitgliederBereich({ name, onLogout }: { name?: string; o
     <section id="mitgliederbereich" className="relative overflow-hidden bg-[radial-gradient(ellipse_70%_60%_at_70%_10%,#2A4170_0%,#1A2B4C_45%,#13233F_100%)] pt-32 pb-20 text-pearl-white sm:pt-36" aria-labelledby="bereich-titel">
       <style>{`.cc-mb-licht{animation:ccSchweben 9s ease-in-out infinite}@keyframes ccSchweben{0%,100%{transform:translateY(0)}50%{transform:translateY(-24px)}}
 .cc-spur-an{animation:ccSpur 1.1s ease-in-out infinite alternate;transform-origin:center}@keyframes ccSpur{from{transform:scaleY(.35)}to{transform:scaleY(1)}}
-@media(prefers-reduced-motion:reduce){.cc-mb-licht,.cc-spur-an{animation:none}}`}</style>
+.cc-cta-shine{position:relative;overflow:hidden}
+.cc-cta-shine::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 25%,rgba(255,255,255,.5) 48%,transparent 72%);transform:translateX(-130%) skewX(-16deg);animation:ccShine 3.6s ease-in-out infinite;pointer-events:none}
+@keyframes ccShine{0%{transform:translateX(-130%) skewX(-16deg)}60%,100%{transform:translateX(230%) skewX(-16deg)}}
+.cc-cta-glow{animation:ccCtaGlow 3s ease-in-out infinite}
+@keyframes ccCtaGlow{0%,100%{box-shadow:0 14px 34px -12px rgba(242,118,12,.5)}50%{box-shadow:0 20px 48px -12px rgba(242,118,12,.85)}}
+@media(prefers-reduced-motion:reduce){.cc-mb-licht,.cc-spur-an,.cc-cta-glow{animation:none}.cc-cta-shine::before{animation:none;display:none}}`}</style>
       <span aria-hidden="true" className="cc-mb-licht pointer-events-none absolute left-[6%] top-[14%] h-36 w-36 rounded-full bg-[radial-gradient(circle,#F7E7CE,rgba(201,169,97,0)_70%)] opacity-40" />
       <span aria-hidden="true" className="cc-mb-licht pointer-events-none absolute bottom-[8%] right-[4%] h-48 w-48 rounded-full bg-[radial-gradient(circle,#F7E7CE,rgba(201,169,97,0)_70%)] opacity-30 [animation-delay:-4s]" />
       <div className="relative mx-auto max-w-6xl px-6">
@@ -209,6 +214,21 @@ export default function MitgliederBereich({ name, onLogout }: { name?: string; o
           </ol>
         </div>
 
+        {/* Conversion-CTA "Deine Abkürzung" – direkt nach Tag 7, vor "Vernetzt euch" (Claudia 26.10.2026). Glas-Look, Orange-Akzent, kein Schwarz/Grau. */}
+        <div className="relative mt-16 mb-4 overflow-hidden rounded-[26px] border border-[#C9A961]/55 bg-[linear-gradient(135deg,rgba(247,231,206,0.16),rgba(255,255,255,0.05))] p-8 text-center shadow-[0_30px_70px_-28px_rgba(13,24,44,0.6)] backdrop-blur-sm sm:p-12">
+          <span aria-hidden="true" className="pointer-events-none absolute -right-12 -top-12 h-44 w-44 rounded-full bg-[radial-gradient(circle,rgba(242,140,58,0.55),transparent_70%)] blur-2xl" />
+          <span aria-hidden="true" className="pointer-events-none absolute -bottom-16 -left-10 h-44 w-44 rounded-full bg-[radial-gradient(circle,rgba(201,169,97,0.4),transparent_70%)] blur-2xl" />
+          <div className="relative">
+            <p className="font-montserrat text-xs font-extrabold uppercase tracking-[0.26em] text-[#F2760C]">Deine Abkürzung</p>
+            <h2 className="mt-3 font-semibold leading-[1.04] text-white" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: 'clamp(30px,6vw,52px)' }}>3 Wege. <span className="bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)] bg-clip-text text-transparent">Deine Entscheidung.</span></h2>
+            <p className="mx-auto mt-4 max-w-xl font-inter text-[17px] leading-relaxed text-pearl-white/90">Finde den Weg, der zu deinem Ziel passt, und entdecke deine nächsten Möglichkeiten.</p>
+            <a href="/3-wege" className="cc-cta-shine cc-cta-glow mx-auto mt-7 inline-flex min-h-[58px] items-center justify-center rounded-full bg-[linear-gradient(135deg,#FFAC55,#F2760C)] px-10 font-montserrat text-base font-extrabold uppercase tracking-[0.03em] text-white transition-[transform,filter] duration-200 hover:-translate-y-0.5 hover:brightness-[1.06] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#F7E7CE] active:translate-y-0 active:brightness-95">
+              <span className="relative z-10">Jetzt deinen Weg finden →</span>
+            </a>
+            <p className="mt-4 font-inter text-sm font-semibold text-[#F7E7CE]">Persönlich. Unkompliziert. Auf dich zugeschnitten.</p>
+          </div>
+        </div>
+
         <NetzwerkTag8 jetzt={jetzt} />
 
         <div className="mt-14 grid gap-6 rounded-[20px] border border-[#C9A961]/40 bg-white/[0.04] p-6 sm:p-8 lg:grid-cols-[1.3fr_1fr]">
@@ -235,12 +255,6 @@ export default function MitgliederBereich({ name, onLogout }: { name?: string; o
             <a href={ZOOM} target="_blank" rel="noopener noreferrer" className={`mt-4 inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue ${GOLD}`}>Zum Zoom-Raum</a>
           </div>
         </div>
-          {/* Zu den drei Wegen / Abkuerzung (Anke 26.10.2026) */}
-          <div className="mt-16 rounded-[18px] border border-[#C9A961]/50 bg-white/[0.05] p-6 text-center">
-            <p className="font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] text-[#C9A961]">Dein nächster Schritt</p>
-            <p className="mt-2 font-inter text-pearl-white/85">Du brauchst eine Abkürzung? Dann hier entlang.</p>
-            <a href="/3-wege" className={`mt-4 inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue ${GOLD}`}>Zu den drei Wegen →</a>
-          </div>
       </div>
     </section>
   );

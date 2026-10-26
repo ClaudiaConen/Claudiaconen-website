@@ -15,12 +15,12 @@ export const BEREICH_SCHLUESSEL = 'mein-bereich-login';
 type Tag = { nr: number; titel: string; datum: string; ab: string; audio: string; anleitung: string; feedback?: boolean };
 
 const TAGE: Tag[] = [
-  { nr: 1, titel: 'Deine Kernbotschaft', datum: 'Mo 26.10.', ab: '2026-10-26T19:00:00+01:00', audio: 'tag1.mp3', anleitung: '' },
-  { nr: 2, titel: 'Die Zielgruppenbrille', datum: 'Di 27.10.', ab: '2026-10-27T07:00:00+01:00', audio: '', anleitung: '', feedback: true },
-  { nr: 3, titel: 'Raus aus der Redeangst', datum: 'Mi 28.10.', ab: '2026-10-28T07:00:00+01:00', audio: '', anleitung: '' },
-  { nr: 4, titel: 'Deine Stimme: Betonung & Pause', datum: 'Do 29.10.', ab: '2026-10-29T07:00:00+01:00', audio: '', anleitung: '' },
-  { nr: 5, titel: 'Storytelling: Der Kunde ist der Held', datum: 'Fr 30.10.', ab: '2026-10-30T07:00:00+01:00', audio: '', anleitung: '' },
-  { nr: 6, titel: 'Wie Kunden entscheiden', datum: 'Sa 31.10.', ab: '2026-10-31T07:00:00+01:00', audio: '', anleitung: '', feedback: true },
+  { nr: 1, titel: 'Deine Kernbotschaft', datum: 'Di 27.10.', ab: '2026-10-27T07:00:00+01:00', audio: 'tag1.mp3', anleitung: '' },
+  { nr: 2, titel: 'Die Zielgruppenbrille', datum: 'Mi 28.10.', ab: '2026-10-28T07:00:00+01:00', audio: '', anleitung: '', feedback: true },
+  { nr: 3, titel: 'Raus aus der Redeangst', datum: 'Do 29.10.', ab: '2026-10-29T07:00:00+01:00', audio: '', anleitung: '' },
+  { nr: 4, titel: 'Deine Stimme: Betonung & Pause', datum: 'Fr 30.10.', ab: '2026-10-30T07:00:00+01:00', audio: '', anleitung: '' },
+  { nr: 5, titel: 'Storytelling: Der Kunde ist der Held', datum: 'Sa 31.10.', ab: '2026-10-31T07:00:00+01:00', audio: '', anleitung: '' },
+  { nr: 6, titel: 'Wie Kunden entscheiden', datum: 'So 1.11.', ab: '2026-11-01T07:00:00+01:00', audio: '', anleitung: '', feedback: true },
   { nr: 7, titel: 'Dein Elevator Pitch', datum: 'Mo 2.11.', ab: '2026-11-02T07:00:00+01:00', audio: '', anleitung: '' },
 ];
 
@@ -235,6 +235,12 @@ export default function MitgliederBereich({ name, onLogout }: { name?: string; o
             <a href={ZOOM} target="_blank" rel="noopener noreferrer" className={`mt-4 inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue ${GOLD}`}>Zum Zoom-Raum</a>
           </div>
         </div>
+          {/* Zu den drei Wegen / Abkuerzung (Anke 26.10.2026) */}
+          <div className="mt-16 rounded-[18px] border border-[#C9A961]/50 bg-white/[0.05] p-6 text-center">
+            <p className="font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] text-[#C9A961]">Dein nächster Schritt</p>
+            <p className="mt-2 font-inter text-pearl-white/85">Du brauchst eine Abkürzung? Dann hier entlang.</p>
+            <a href="/3-wege" className={`mt-4 inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue ${GOLD}`}>Zu den drei Wegen →</a>
+          </div>
       </div>
     </section>
   );

@@ -15,7 +15,7 @@ export const BEREICH_SCHLUESSEL = 'mein-bereich-login';
 type Tag = { nr: number; titel: string; datum: string; ab: string; audio: string; anleitung: string; feedback?: boolean };
 
 const TAGE: Tag[] = [
-  { nr: 1, titel: 'Deine Kernbotschaft', datum: 'Mo 26.10.', ab: '2026-10-26T20:00:00+01:00', audio: '', anleitung: '' },
+  { nr: 1, titel: 'Deine Kernbotschaft', datum: 'Mo 26.10.', ab: '2026-10-26T19:00:00+01:00', audio: 'tag1.mp3', anleitung: '' },
   { nr: 2, titel: 'Die Zielgruppenbrille', datum: 'Di 27.10.', ab: '2026-10-27T07:00:00+01:00', audio: '', anleitung: '', feedback: true },
   { nr: 3, titel: 'Raus aus der Redeangst', datum: 'Mi 28.10.', ab: '2026-10-28T07:00:00+01:00', audio: '', anleitung: '' },
   { nr: 4, titel: 'Deine Stimme: Betonung & Pause', datum: 'Do 29.10.', ab: '2026-10-29T07:00:00+01:00', audio: '', anleitung: '' },
@@ -124,6 +124,16 @@ export default function MitgliederBereich({ name }: { name?: string }) {
               <span><b className="block font-montserrat text-lg font-extrabold text-white">{k.titel}</b><span className="font-inter text-sm text-pearl-white/75">{k.text}</span></span>
             </div>
           ))}
+        </div>
+
+        {/* Starter-Workbook (Tag 0): sofort verfügbar, zum Loslegen (Anke 26.10.2026). */}
+        <div className="mt-10 flex flex-col items-start gap-4 rounded-[18px] border border-[#C9A961]/50 bg-white/[0.05] p-6 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] text-[#C9A961]">Dein Start</p>
+            <b className="mt-1 block font-montserrat text-lg font-extrabold text-white">Starter-Workbook</b>
+            <span className="font-inter text-sm text-pearl-white/75">Überblick, Ablauf und dein Vorher-Video. Lad es dir jetzt herunter und leg direkt los.</span>
+          </div>
+          <a href="/a27/p/mitglieder/workbooks/Workbook_Tag0_Starter.pdf" download className={`inline-flex flex-none items-center rounded-full px-6 py-3 font-montserrat text-sm font-bold text-midnight-blue ${GOLD}`}>Starter-Workbook herunterladen (PDF)</a>
         </div>
 
         {/* Ablauf wie auf der Challenge-Seite: goldene DNA-Spur links, die Tage rechts (Claudia 25.10.2026 16:28). */}

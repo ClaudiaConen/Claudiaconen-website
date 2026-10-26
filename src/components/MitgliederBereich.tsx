@@ -59,7 +59,7 @@ function AudioSpur({ datei }: { datei: string }) {
   );
 }
 
-export default function MitgliederBereich({ name }: { name?: string }) {
+export default function MitgliederBereich({ name, onLogout }: { name?: string; onLogout?: () => void }) {
   // Vorschau fuer Claudia: /mein-bereich?vorschau=alle zeigt alle Tage offen (fuer Teilnehmende nicht verlinkt).
   const vorschau = typeof window !== 'undefined' && /[?&]vorschau=alle/.test(window.location.search);
   const [uhr, setJetzt] = useState(() => Date.now());
@@ -102,6 +102,11 @@ export default function MitgliederBereich({ name }: { name?: string }) {
       <span aria-hidden="true" className="cc-mb-licht pointer-events-none absolute left-[6%] top-[14%] h-36 w-36 rounded-full bg-[radial-gradient(circle,#F7E7CE,rgba(201,169,97,0)_70%)] opacity-40" />
       <span aria-hidden="true" className="cc-mb-licht pointer-events-none absolute bottom-[8%] right-[4%] h-48 w-48 rounded-full bg-[radial-gradient(circle,#F7E7CE,rgba(201,169,97,0)_70%)] opacity-30 [animation-delay:-4s]" />
       <div className="relative mx-auto max-w-6xl px-6">
+        {onLogout && (
+          <div className="mb-6 flex justify-end">
+            <button type="button" onClick={onLogout} className="font-inter text-xs font-semibold uppercase tracking-[0.12em] text-pearl-white/60 underline decoration-[#C9A961]/50 underline-offset-4 transition-colors hover:text-pearl-white">Ausloggen</button>
+          </div>
+        )}
         <div className="text-center">
           <p className="inline-flex items-center gap-3 font-montserrat text-xs font-extrabold uppercase tracking-[0.26em] text-[#C9A961]"><span className="h-px w-10 bg-[#C9A961]" />Dein Mitgliederbereich<span className="h-px w-10 bg-[#C9A961]" /></p>
           <h1 id="bereich-titel" className="mt-6 text-[29px] font-semibold uppercase leading-[1.08] tracking-[0.02em] text-white min-[420px]:text-4xl sm:text-6xl sm:tracking-[0.06em]" style={SERIF}>

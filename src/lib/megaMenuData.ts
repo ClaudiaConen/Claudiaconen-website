@@ -243,7 +243,7 @@ export const megaMenuItems: MegaMenuItem[] = [
         panelSubtitle: 'Erleben, erkennen, verankern',
         tiles: [
           { name: '7-Tage-Challenge', desc: 'Kostenfrei, Start 26. Oktober', href: '/challenge', icon: Gift },
-          { name: 'Live-Workshop Köln', desc: '4. Februar 2027, STARTPLATZ', href: '/live-workshop', icon: Mic, statisch: true },
+          { name: 'Live-Workshop Köln', desc: '28. Januar 2027, STARTPLATZ', href: '/live-workshop', icon: Mic, statisch: true },
           { name: 'Unverwechselbar. Das 12-Wochen-Mentoring', desc: 'Start 12. Januar 2027, bis zu 6 Personen', href: '/mentoring-programm', icon: Star, statisch: true },
         ],
         uebersicht: { name: 'Alle Angebote im Vergleich', href: '/angebote', statisch: true },

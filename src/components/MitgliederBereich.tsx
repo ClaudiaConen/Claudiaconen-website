@@ -4,7 +4,7 @@ import NetzwerkTag8 from './NetzwerkTag8';
 import { TAGE as TAG_TEXTE } from '../data/challengeTage';
 
 /**
- * Inhalt des Mitgliederbereichs (Seite /mein-bereich, Claudia 25.10.2026 16:21): jeden Morgen um 7 Uhr oeffnet sich
+ * Inhalt des Mitgliederbereichs (Seite /mein-bereich, Claudia 25.10.2026 16:21): jeden Morgen um 5 Uhr oeffnet sich
  * ein Tag mit Audio, Erklaerung, Workbook und der Aufforderung, das eigene Video in der Gruppe zu posten.
  * Stil wie community.claudiaconen.com (dunkel, Cormorant-Versalien, Goldrand).
  * PFLEGE: audio = Dateiname in /public/a27/p/mitglieder/audio/, anleitung = Text. Leer = Platzhalter.
@@ -15,13 +15,13 @@ export const BEREICH_SCHLUESSEL = 'mein-bereich-login';
 type Tag = { nr: number; titel: string; datum: string; ab: string; audio: string; anleitung: string; feedback?: boolean };
 
 const TAGE: Tag[] = [
-  { nr: 1, titel: 'Deine Kernbotschaft', datum: 'Di 27.10.', ab: '2026-10-27T07:00:00+01:00', audio: 'tag1.mp3', anleitung: '' },
-  { nr: 2, titel: 'Die Zielgruppenbrille', datum: 'Mi 28.10.', ab: '2026-10-28T07:00:00+01:00', audio: '', anleitung: '', feedback: true },
-  { nr: 3, titel: 'Raus aus der Redeangst', datum: 'Do 29.10.', ab: '2026-10-29T07:00:00+01:00', audio: '', anleitung: '' },
-  { nr: 4, titel: 'Deine Stimme: Betonung & Pause', datum: 'Fr 30.10.', ab: '2026-10-30T07:00:00+01:00', audio: '', anleitung: '' },
-  { nr: 5, titel: 'Storytelling: Der Kunde ist der Held', datum: 'Sa 31.10.', ab: '2026-10-31T07:00:00+01:00', audio: '', anleitung: '' },
-  { nr: 6, titel: 'Wie Kunden entscheiden', datum: 'So 1.11.', ab: '2026-11-01T07:00:00+01:00', audio: '', anleitung: '', feedback: true },
-  { nr: 7, titel: 'Dein Elevator Pitch', datum: 'Mo 2.11.', ab: '2026-11-02T07:00:00+01:00', audio: '', anleitung: '' },
+  { nr: 1, titel: 'Deine Kernbotschaft', datum: 'Di 27.10.', ab: '2026-10-27T05:00:00+01:00', audio: 'tag1.mp3', anleitung: '' },
+  { nr: 2, titel: 'Die Zielgruppenbrille', datum: 'Mi 28.10.', ab: '2026-10-28T05:00:00+01:00', audio: '', anleitung: '', feedback: true },
+  { nr: 3, titel: 'Raus aus der Redeangst', datum: 'Do 29.10.', ab: '2026-10-29T05:00:00+01:00', audio: '', anleitung: '' },
+  { nr: 4, titel: 'Deine Stimme: Betonung & Pause', datum: 'Fr 30.10.', ab: '2026-10-30T05:00:00+01:00', audio: '', anleitung: '' },
+  { nr: 5, titel: 'Storytelling: Der Kunde ist der Held', datum: 'Sa 31.10.', ab: '2026-10-31T05:00:00+01:00', audio: '', anleitung: '' },
+  { nr: 6, titel: 'Wie Kunden entscheiden', datum: 'So 1.11.', ab: '2026-11-01T05:00:00+01:00', audio: '', anleitung: '', feedback: true },
+  { nr: 7, titel: 'Dein Elevator Pitch', datum: 'Mo 2.11.', ab: '2026-11-02T05:00:00+01:00', audio: '', anleitung: '' },
 ];
 
 const WHATSAPP = 'https://chat.whatsapp.com/IWSuqZ9ZrMn3dYNgVY1sp6?s=qt&p=i&mlu=4&ilr=4';
@@ -114,7 +114,7 @@ export default function MitgliederBereich({ name, onLogout }: { name?: string; o
             <span className="mt-2 block whitespace-nowrap bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)] bg-clip-text text-transparent" style={{ fontSize: "min(1em, calc((100vw - 56px) / 10.6))" }}>Unverwechselbar</span>
           </h1>
           <p className="mt-4 text-xl italic text-[#F7E7CE] sm:text-2xl" style={SERIF}>Nutze die Inhalte für deine Unverwechselbarkeit im KI-Zeitalter.</p>
-          <p className="mt-2 font-inter text-sm text-pearl-white/75">Jeden Morgen um 7 Uhr öffnet sich dein nächster Schritt.</p>
+          <p className="mt-2 font-inter text-sm text-pearl-white/75">Jeden Morgen um 5 Uhr öffnet sich dein nächster Schritt.</p>
         </div>
 
         {/* Einstiegs-Workbook (Tag 0): ganz oben, getrennt von den Tagen – fuer den Start heute Abend/Zoom (Claudia/Anke 26.10.2026). */}

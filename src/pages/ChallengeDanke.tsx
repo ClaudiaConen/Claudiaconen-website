@@ -44,7 +44,7 @@ export default function ChallengeDanke() {
             Du bist dabei{name ? `, ${name}` : ''}.
             <span className="mt-2 block bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)] bg-clip-text text-transparent">Es geht los.</span>
           </h1>
-          <p className="mx-auto mt-5 max-w-xl font-inter text-lg leading-relaxed text-pearl-white/85">Drei kleine Schritte, dann bist du startklar. Und jeden Morgen um 7 Uhr wartet etwas Neues auf dich.</p>
+          <p className="mx-auto mt-5 max-w-xl font-inter text-lg leading-relaxed text-pearl-white/85">Drei kleine Schritte, dann bist du startklar. Und jeden Morgen um 5 Uhr wartet etwas Neues auf dich.</p>
         </div>
       </header>
 
@@ -76,7 +76,7 @@ export default function ChallengeDanke() {
           <li className="rounded-[18px] border-2 border-[#C9A961] bg-[linear-gradient(180deg,#24396A,#13233F)] p-6">
             <p className="font-montserrat text-xs font-extrabold uppercase tracking-[0.2em] text-[#C9A961]">Schritt 3</p>
             <h2 className="mt-2 font-montserrat text-xl font-extrabold text-white">Dein Mitgliederbereich</h2>
-            <p className="mt-2 font-inter text-sm text-pearl-white/80">Jeden Morgen um 7 Uhr öffnet sich dort dein nächster Schritt: Erklärung, Audio und Workbook.</p>
+            <p className="mt-2 font-inter text-sm text-pearl-white/80">Jeden Morgen um 5 Uhr öffnet sich dort dein nächster Schritt: Erklärung, Audio und Workbook.</p>
             <div className="mt-4 rounded-[12px] border border-[#C9A961]/50 bg-white/[0.06] p-4 text-center">
               <p className="font-inter text-xs uppercase tracking-[0.16em] text-pearl-white/70">Dein Zugangscode</p>
               <p className="mt-1 font-montserrat text-2xl font-black tracking-[0.12em] text-[#F7E7CE]">{ZUGANGSCODE}</p>

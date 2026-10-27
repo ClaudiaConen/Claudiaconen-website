@@ -68,7 +68,7 @@ export default function MeinBereich() {
               Login
               <span className="mt-1 block whitespace-nowrap bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)] bg-clip-text text-transparent" style={{ fontSize: "min(1em, calc((100vw - 56px) / 10.6))" }}>Unverwechselbar</span>
             </h1>
-            <p className="mt-4 font-inter text-base text-pearl-white/80">Hier warten jeden Morgen um 7 Uhr dein Audio, deine Erklärung und dein Workbook.</p>
+            <p className="mt-4 font-inter text-base text-pearl-white/80">Hier warten jeden Morgen um 5 Uhr dein Audio, deine Erklärung und dein Workbook.</p>
           </div>
           <form onSubmit={einloggen} noValidate className="mx-auto mt-8 grid max-w-md gap-4 rounded-[20px] border border-[#C9A961]/50 bg-white/[0.05] p-6 text-left sm:p-8">
             <label className="grid gap-1.5 font-inter text-sm font-bold">Vorname

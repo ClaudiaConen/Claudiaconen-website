@@ -7,7 +7,7 @@ import { supabaseCms } from '../lib/supabaseCms';
  * (legt Gabi per SQL an, siehe projects/claudiaconen/angebote/gabi_tentary/SQL_Netzwerk_Tag8.sql). Ohne Tabelle
  * zeigt die Wand einen freundlichen Hinweis statt eines Fehlers.
  */
-const AB = '2026-11-03T07:00:00+01:00';
+const AB = '2026-11-03T05:00:00+01:00';
 const GOLD = 'bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]';
 const SERIF = { fontFamily: "'Cormorant Garamond', Georgia, serif" };
 
@@ -71,7 +71,7 @@ export default function NetzwerkTag8({ jetzt }: { jetzt: number }) {
       </div>
 
       {!offen ? (
-        <p className="mx-auto mt-8 w-fit rounded-xl bg-[#13233F]/85 px-5 py-3 text-center font-inter text-sm font-extrabold text-[#F7E7CE]">Öffnet am Di 3.11. um 7 Uhr</p>
+        <p className="mx-auto mt-8 w-fit rounded-xl bg-[#13233F]/85 px-5 py-3 text-center font-inter text-sm font-extrabold text-[#F7E7CE]">Öffnet am Di 3.11. um 5 Uhr</p>
       ) : (
         <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
           <form onSubmit={eintragen} noValidate className="grid content-start gap-3 rounded-[16px] border border-white/15 bg-white/[0.05] p-5">

@@ -236,17 +236,21 @@ export const megaMenuItems: MegaMenuItem[] = [
     id: 'experten',
     categories: [
       {
+        // 28.10.2026: aktuell nur Challenge + Masterclass. Live-Workshop, 12-Wochen-Mentoring und /angebote sind
+        // unsichtbar gestellt (Seiten bleiben unter ihrer Adresse, noindex; Liste in VERSTECKTE_SEITEN.md) - zum Zurueckholen:
+        // { name: 'Live-Workshop Köln', desc: '28. Januar 2027, STARTPLATZ', href: '/live-workshop', icon: Mic, statisch: true },
+        // { name: 'Unverwechselbar. Das 12-Wochen-Mentoring', desc: 'Start 12. Januar 2027, bis zu 6 Personen', href: '/mentoring-programm', icon: Star, statisch: true },
+        // uebersicht: { name: 'Alle Angebote im Vergleich', href: '/angebote', statisch: true },
         id: 'experten-angebote',
-        label: 'Die drei Wege',
+        label: 'Die Masterclass',
         icon: Gift,
         panelTitle: 'Für Experten und Selbstständige',
-        panelSubtitle: 'Erleben, erkennen, verankern',
+        panelSubtitle: 'Präsenz, Persönlichkeit und Wirkung',
         tiles: [
-          { name: '7-Tage-Challenge', desc: 'Kostenfrei, Start 26. Oktober', href: '/challenge', icon: Gift },
-          { name: 'Live-Workshop Köln', desc: '28. Januar 2027, STARTPLATZ', href: '/live-workshop', icon: Mic, statisch: true },
-          { name: 'Unverwechselbar. Das 12-Wochen-Mentoring', desc: 'Start 12. Januar 2027, bis zu 6 Personen', href: '/mentoring-programm', icon: Star, statisch: true },
+          { name: '7-Tage-Challenge', desc: 'Kostenfrei', href: '/challenge', icon: Gift },
+          { name: 'Masterclass UNVERWECHSELBAR', desc: '4 Wochen online, Start Januar 2027', href: '/masterclass', icon: Star },
         ],
-        uebersicht: { name: 'Alle Angebote im Vergleich', href: '/angebote', statisch: true },
+        uebersicht: { name: 'Masterclass UNVERWECHSELBAR', href: '/masterclass' },
       },
       {
         id: 'einzelarbeit',

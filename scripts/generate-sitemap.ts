@@ -106,10 +106,12 @@ const staticPages = [
   // Vorhandene Seiten, die bisher in keiner Sitemap standen (18.09.2026)
   { path: '/premiumangebote', priority: '0.9', changefreq: 'monthly' },
   { path: '/challenge', priority: '0.9', changefreq: 'weekly' },
+  { path: '/masterclass', priority: '0.9', changefreq: 'weekly' },
   // Angebotsseiten im neuen Design (fertige Seiten in public/, 15.10.2026); /mentoring-inhalte bewusst NICHT (nur fuer Teilnehmende)
-  { path: '/angebote', priority: '0.9', changefreq: 'weekly' },
-  { path: '/live-workshop', priority: '0.9', changefreq: 'weekly' },
-  { path: '/mentoring-programm', priority: '0.9', changefreq: 'weekly' },
+  // 28.10.2026 unsichtbar gestellt (Seiten bleiben erreichbar, noindex; siehe VERSTECKTE_SEITEN.md):
+  // { path: '/angebote', priority: '0.9', changefreq: 'weekly' },
+  // { path: '/live-workshop', priority: '0.9', changefreq: 'weekly' },
+  // { path: '/mentoring-programm', priority: '0.9', changefreq: 'weekly' },
   { path: '/shop/', priority: '0.8', changefreq: 'weekly' },
   { path: '/termin-buchen', priority: '0.8', changefreq: 'monthly' },
   { path: '/events', priority: '0.8', changefreq: 'weekly' },

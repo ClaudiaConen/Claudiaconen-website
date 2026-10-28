@@ -1,10 +1,11 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import Brotkrumen from '../components/Brotkrumen';
 import LogoBand from '../components/LogoBand';
 import Stimmwelle from '../components/Stimmwelle';
+import Helix from '../components/Helix';
 import { TAGE } from '../data/challengeTage';
 
 /**
@@ -177,6 +178,33 @@ export default function Masterclass() {
     return () => window.clearTimeout(t);
   }, []);
 
+  // DNA-Spur neben den sieben Tagen wie auf /challenge (Auftraggeber, 28.10.2026): Sprossen neben die Zeilen,
+  // der Tag, dessen Zeile die Bildschirmmitte passiert hat, leuchtet.
+  const tageRef = useRef<HTMLOListElement>(null);
+  const [aktiverTag, setAktiverTag] = useState(0);
+  const [sprossen, setSprossen] = useState<{ ys: number[]; h: number }>({ ys: [], h: 0 });
+  useEffect(() => {
+    const liste = tageRef.current;
+    if (!liste) return;
+    const messen = () => {
+      const oben = liste.getBoundingClientRect().top;
+      const ys = [...liste.querySelectorAll<HTMLElement>('[data-tag]')].map((z) => {
+        const r = z.getBoundingClientRect();
+        return r.top - oben + r.height / 2;
+      });
+      setSprossen({ ys, h: liste.offsetHeight });
+    };
+    const pruefen = () => {
+      let n = 0;
+      liste.querySelectorAll<HTMLElement>('[data-tag]').forEach((z) => { if (z.getBoundingClientRect().top < window.innerHeight * 0.55) n = Number(z.dataset.tag); });
+      setAktiverTag(n);
+    };
+    messen(); pruefen();
+    const ro = new ResizeObserver(messen); ro.observe(liste);
+    window.addEventListener('scroll', pruefen, { passive: true });
+    return () => { ro.disconnect(); window.removeEventListener('scroll', pruefen); };
+  }, []);
+
   const kurz = 'UNVERWECHSELBAR ist die Masterclass für Menschen, die ihre Präsenz, Persönlichkeit und Wirkung gezielt weiterentwickeln möchten. Von Positionierung und Kernbotschaft über Stimme, Körpersprache und Storytelling bis hin zu Kundenkommunikation, Signature Pitch und Sichtbarkeit.';
   const strukturierteDaten = {
     '@context': 'https://schema.org',
@@ -273,9 +301,11 @@ export default function Masterclass() {
               Wer bereits an einer Challenge teilgenommen hat, kann Bekanntes vertiefen und weiterentwickeln. Wer neu einsteigt, findet ebenfalls Zugang zu den relevanten Themen. Niemand muss vorher an einer Challenge teilgenommen haben.
             </p>
           </div>
-          <ol className="mt-12 grid list-none gap-3 p-0">
+          <div className="mt-12 grid items-start gap-6 md:grid-cols-[140px_minmax(0,1fr)]">
+          <Helix aktiv={aktiverTag} ys={sprossen.ys} hoehe={sprossen.h} />
+          <ol ref={tageRef} className="grid min-w-0 list-none content-start gap-3 p-0">
             {BRUECKE.map((b, k) => (
-              <li key={b.tag} style={{ ['--i' as string]: k }} className="cc-stufe grid items-center gap-3 rounded-[14px] border border-[#C9A961]/35 bg-white/[0.04] p-4 sm:grid-cols-[minmax(0,1fr)_40px_minmax(0,1fr)] sm:gap-5 sm:p-5">
+              <li key={b.tag} data-tag={k} style={{ ['--i' as string]: k }} className={`cc-stufe grid items-center gap-3 rounded-[14px] border bg-white/[0.04] p-4 transition-[border-color,box-shadow] duration-500 sm:grid-cols-[minmax(0,1fr)_40px_minmax(0,1fr)] sm:gap-5 sm:p-5 ${k === aktiverTag ? 'border-[#C9A961] md:shadow-[0_14px_34px_-18px_rgba(201,169,97,0.75)]' : 'border-[#C9A961]/35'}`}>
                 <div className="min-w-0">
                   <p className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.18em] text-pearl-white/60">Challenge · Tag {b.tag}</p>
                   <p className="mt-1 font-montserrat text-base font-extrabold text-white">{TAGE[b.tag - 1].titel}</p>
@@ -292,6 +322,7 @@ export default function Masterclass() {
               </li>
             ))}
           </ol>
+          </div>
         </div>
       </Abschnitt>
 

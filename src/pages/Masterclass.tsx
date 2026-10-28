@@ -16,7 +16,8 @@ import { TAGE } from '../data/challengeTage';
  * Start Januar 2027 (Auftraggeber, 28.10.2026; genaues Datum folgt).
  *
  * Regeln aus dem Briefing (Abschnitt 7): eigenstaendiges Angebot, Challenge KEINE Voraussetzung; Zielgruppe offen;
- * KI-Agent als Bonus hervorheben, aber nicht ueber die Module stellen; KEINE Ergebnisse garantieren; Ablauf,
+ * KI-Agent: KEIN Gratis-Bonus (Auftraggeber, 28.10.2026) - in der Masterclass wird er gezeigt, kaufen kann man ihn
+ * separat im Monats- oder Jahresabo; nicht ueber die Module stellen; KEINE Ergebnisse garantieren; Ablauf,
  * Termine, Preis, Testimonials und Anmeldung erst nach Bestaetigung eintragen (siehe OFFEN unten).
  * Bezahlung kuenftig ueber Stripe (Einmalzahlung + Raten 6/12 Monate), nicht mehr Tentary.
  */
@@ -119,8 +120,8 @@ const ARBEITSWEISE: [string, string][] = [
   ['Transfer in den Alltag', 'Konkrete nächste Schritte für die Anwendung im Berufsleben festlegen.'],
 ];
 
-/** Briefing Abschnitt 5 - Bonus, wortgleich. */
-const BONUS = [
+/** Briefing Abschnitt 5 - was der KI-Agent kann, wortgleich. */
+const KI_AGENT = [
   'Ideen für Posts, Reels und Videos entwickeln.',
   'Eigene Themen und Botschaften in Content verwandeln.',
   'Texte und Hooks formulieren, die zur eigenen Persönlichkeit passen.',
@@ -137,7 +138,7 @@ const FRAGEN: [string, string][] = [
   ['Wie wird in der Masterclass gearbeitet?', 'Praxisnah: mit einer individuellen Wirkungsanalyse zu Beginn, praxisnahen Übungen, Videoanalyse und konkretem Feedback, Live-Training und Hot Seats, Peer-Feedback und Austausch sowie Übungen unter Realbedingungen. Zum Abschluss entwickelst und präsentierst du deinen persönlichen Signature-Auftritt und legst konkrete nächste Schritte für deinen Berufsalltag fest.'],
   ['Bekomme ich persönliches Feedback?', 'Ja. Videoanalyse und konkretes Feedback gehören fest dazu: Du nimmst wahr, was bereits wirkt und wo gezielte Veränderungen helfen können. In den Hot Seats bearbeiten wir individuelle Herausforderungen anhand konkreter Fälle.'],
   ['Ich bin vor der Kamera unsicher oder habe Redeangst. Ist das trotzdem etwas für mich?', 'Ja. Auch persönliche Herausforderungen beim Auftreten, Unsicherheiten vor der Kamera oder Fragen zur eigenen Wirkung bekommen Raum. Jeder Mensch bringt andere Voraussetzungen mit und steht an einem anderen Punkt seiner Entwicklung. Du lernst nicht, jemand anderes zu werden oder eine perfekte Rolle zu spielen.'],
-  ['Was ist der KI-Agent für die Hosentasche?', 'Dein Bonus: Du entdeckst, wie du KI als persönlichen Assistenten nutzen kannst, um deine Sichtbarkeit einfacher und effizienter zu gestalten – ohne dabei deine eigene Stimme und Authentizität zu verlieren. Zum Beispiel für Ideen für Posts, Reels und Videos, für Texte und Hooks und für deine Content-Planung.'],
+  ['Ist der KI-Agent für die Hosentasche im Preis enthalten?', 'Nein. In der Masterclass zeige ich dir, wie der KI-Agent dir den Alltag im Business erleichtert. Den KI-Agenten selbst gibt es separat im Monats- oder Jahresabo. Mit ihm kannst du KI als persönlichen Assistenten nutzen, um deine Sichtbarkeit einfacher und effizienter zu gestalten – ohne dabei deine eigene Stimme und Authentizität zu verlieren. Zum Beispiel für Ideen für Posts, Reels und Videos, für Texte und Hooks und für deine Content-Planung.'],
   ['Kann ich in Raten zahlen?', 'Ja. Neben der Einmalzahlung kannst du in 6 oder 12 Monatsraten zahlen.'],
   ['Ich habe noch eine Frage. Wen kann ich fragen?', 'Mich direkt. Ruf mich an unter +49 160 93102073 oder vereinbare ein kostenloses Gespräch.'],
 ];
@@ -395,26 +396,29 @@ export default function Masterclass() {
         </div>
       </Abschnitt>
 
-      {/* Briefing Abschnitt 5 - Bonus, optisch hervorgehoben, aber nach den Modulen (Briefing 7: nicht ueberlagern). */}
+      {/* Briefing Abschnitt 5 - KI-Agent: in der Masterclass gezeigt, aber separat im Abo (kein Gratis-Bonus, 28.10.2026). */}
       <Abschnitt id="bonus" className="bg-pearl-white pb-16 text-midnight-blue sm:pb-24" label="bonus-titel">
         <div className="mx-auto max-w-6xl px-6">
           <div className="relative overflow-hidden rounded-[20px] border-2 border-[#C9A961] bg-white p-7 shadow-[0_30px_60px_-36px_rgba(201,169,97,0.9)] sm:p-10">
             <span aria-hidden="true" className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[radial-gradient(circle,rgba(247,231,206,0.95),rgba(247,231,206,0)_70%)]" />
             <div className="relative grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:gap-12">
               <div className="min-w-0">
-                <span className={`inline-block rounded-md px-3 py-1.5 font-montserrat text-[11px] font-black uppercase tracking-[0.18em] text-midnight-blue ${GOLD}`}>Bonus</span>
-                <h2 id="bonus-titel" className="mt-4 font-montserrat text-3xl font-extrabold leading-tight">Dein KI-Agent für die Hosentasche</h2>
+                <span className="inline-block rounded-md border border-[#C9A961] px-3 py-1.5 font-montserrat text-[11px] font-black uppercase tracking-[0.18em] text-[#9A7B2F]">Einblick in der Masterclass</span>
+                <h2 id="bonus-titel" className="mt-4 font-montserrat text-3xl font-extrabold leading-tight">Der KI-Agent für die Hosentasche</h2>
                 <p className="mt-2 font-cormorant text-2xl italic text-[#9A7B2F]">Social Media mit Leichtigkeit gestalten</p>
-                <p className="mt-5 font-inter text-[17px] leading-relaxed text-midnight-blue/90">Entdecke, wie du KI als persönlichen Assistenten nutzen kannst, um deine Sichtbarkeit einfacher und effizienter zu gestalten – ohne dabei deine eigene Stimme und Authentizität zu verlieren.</p>
+                <p className="mt-5 font-inter text-[17px] leading-relaxed text-midnight-blue/90">In der Masterclass zeige ich dir, wie der KI-Agent dir den Alltag im Business erleichtert. Entdecke, wie du KI als persönlichen Assistenten nutzen kannst, um deine Sichtbarkeit einfacher und effizienter zu gestalten – ohne dabei deine eigene Stimme und Authentizität zu verlieren.</p>
               </div>
               <div className="min-w-0">
                 <ul className="grid list-none gap-2.5 p-0">
-                  {BONUS.map((b) => (
+                  {KI_AGENT.map((b) => (
                     <li key={b} className="flex items-start gap-3 font-inter text-[15px] leading-relaxed"><Haken /><span>{b}</span></li>
                   ))}
                 </ul>
                 <p className="mt-6 border-l-4 border-[#C9A961] bg-pearl-white px-4 py-3 font-inter text-[15px] leading-relaxed">
-                  <b className="font-montserrat font-extrabold">Dein Vorteil:</b> Du musst nicht jedes Mal bei null anfangen. Du hast einen digitalen Sparringspartner an deiner Seite, der dich dabei unterstützt, deine Expertise sichtbar zu machen und Social Media mit mehr Leichtigkeit in deinen Alltag zu integrieren.
+                  <b className="font-montserrat font-extrabold">Dein Vorteil:</b> Mit dem KI-Agenten musst du nicht jedes Mal bei null anfangen. Du hast einen digitalen Sparringspartner an deiner Seite, der dich dabei unterstützt, deine Expertise sichtbar zu machen und Social Media mit mehr Leichtigkeit in deinen Alltag zu integrieren.
+                </p>
+                <p className="mt-4 font-inter text-sm leading-relaxed text-midnight-blue/75">
+                  <b className="font-montserrat font-bold text-midnight-blue">Gut zu wissen:</b> Der KI-Agent ist nicht im Preis der Masterclass enthalten. Du bekommst ihn separat im Monats- oder Jahresabo.
                 </p>
               </div>
             </div>

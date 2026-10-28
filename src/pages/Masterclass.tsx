@@ -25,7 +25,13 @@ const PFAD = '/masterclass';
 
 /** OFFEN - erst nach Claudias Bestaetigung fuellen. Solange leer, zeigt die Seite "folgt" statt einer Zahl. */
 const STARTDATUM = ''; // z. B. 'Di., 12. Januar 2027'
-const PREIS = ''; // z. B. '… € zzgl. MwSt.'
+/** Preise (Auftraggeber, 28.10.2026): Fruehbucher 497 €, regulaer 797 €. Wie alle Angebote auf der Seite zzgl. MwSt.
+ *  FRUEHBUCHER_BIS: Datum eintragen, sobald festgelegt (z. B. '15. Dezember 2026'); leer = ohne Datum. */
+const FRUEHBUCHER = 497;
+const REGULAER = 797;
+const FRUEHBUCHER_BIS = '';
+const EURO = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: Number.isInteger(n) ? 0 : 2, maximumFractionDigits: 2 }) + ' €';
+const BRUTTO = (n: number) => EURO(Math.round(n * 119) / 100);
 /** Bezahlung ueber Stripe (nicht mehr Tentary, Fabian 28.10.2026): je Zahlweg ein Stripe-Zahlungslink und der
  *  Betrag, wie er auf der Seite stehen soll. Leere Zeilen werden nicht angezeigt; ist kein Link gesetzt, fuehrt
  *  der Knopf zum Gespraech. */
@@ -471,7 +477,14 @@ export default function Masterclass() {
                 </div>
               ))}
             </dl>
-            <p className="mt-8 font-montserrat text-2xl font-extrabold">{PREIS || 'Preis und Anmeldung folgen in Kürze.'}</p>
+            <div className="mt-8">
+              <p className="font-montserrat text-xs font-extrabold uppercase tracking-[0.2em] text-[#9A7B2F]">Frühbucherpreis{FRUEHBUCHER_BIS ? ` bis ${FRUEHBUCHER_BIS}` : ''}</p>
+              <p className="mt-2 flex flex-wrap items-baseline justify-center gap-x-4 gap-y-1">
+                <span className="gold-text-animated font-montserrat text-5xl font-extrabold sm:text-6xl">{EURO(FRUEHBUCHER)}</span>
+                <span className="font-montserrat text-xl font-bold text-midnight-blue/55 line-through decoration-[#C9A961] decoration-2">{EURO(REGULAER)}</span>
+              </p>
+              <p className="mt-2 font-inter text-sm text-midnight-blue/75">zzgl. MwSt. · {BRUTTO(FRUEHBUCHER)} inkl. MwSt. · regulär {EURO(REGULAER)} zzgl. MwSt.</p>
+            </div>
             {OFFENE_ZAHLWEGE.length > 0 ? (
               <div className="mx-auto mt-8 grid max-w-3xl gap-4 sm:grid-cols-3">
                 {OFFENE_ZAHLWEGE.map((z, k) => (

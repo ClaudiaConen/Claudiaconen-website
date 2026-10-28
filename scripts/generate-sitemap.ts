@@ -108,7 +108,7 @@ const staticPages = [
   { path: '/challenge', priority: '0.9', changefreq: 'weekly' },
   { path: '/masterclass', priority: '0.9', changefreq: 'weekly' },
   // Angebotsseiten im neuen Design (fertige Seiten in public/, 15.10.2026); /mentoring-inhalte bewusst NICHT (nur fuer Teilnehmende)
-  // 28.10.2026 unsichtbar gestellt (Umleitung auf /masterclass in public/_redirects), Seiten bleiben erhalten:
+  // 28.10.2026 unsichtbar gestellt (Seiten bleiben erreichbar, noindex; siehe VERSTECKTE_SEITEN.md):
   // { path: '/angebote', priority: '0.9', changefreq: 'weekly' },
   // { path: '/live-workshop', priority: '0.9', changefreq: 'weekly' },
   // { path: '/mentoring-programm', priority: '0.9', changefreq: 'weekly' },

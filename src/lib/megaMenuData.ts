@@ -237,7 +237,7 @@ export const megaMenuItems: MegaMenuItem[] = [
     categories: [
       {
         // 28.10.2026: aktuell nur Challenge + Masterclass. Live-Workshop, 12-Wochen-Mentoring und /angebote sind
-        // unsichtbar gestellt (Seiten bleiben, Umleitung in public/_redirects) - zum Zurueckholen die alten Kacheln:
+        // unsichtbar gestellt (Seiten bleiben unter ihrer Adresse, noindex; Liste in VERSTECKTE_SEITEN.md) - zum Zurueckholen:
         // { name: 'Live-Workshop Köln', desc: '28. Januar 2027, STARTPLATZ', href: '/live-workshop', icon: Mic, statisch: true },
         // { name: 'Unverwechselbar. Das 12-Wochen-Mentoring', desc: 'Start 12. Januar 2027, bis zu 6 Personen', href: '/mentoring-programm', icon: Star, statisch: true },
         // uebersicht: { name: 'Alle Angebote im Vergleich', href: '/angebote', statisch: true },

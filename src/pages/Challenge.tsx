@@ -569,14 +569,22 @@ export default function Challenge() {
         </div>
       </section>
 
-      {/* Bewegter Knopf zu den drei Wegen (Claudia, 24.10.2026), fuehrt auf die eigene Angebotsseite. */}
-      <section className="bg-pearl-white pb-20 pt-4 sm:pb-24" aria-label="Drei Wege zum Ziel">
-        <div className="mx-auto max-w-6xl px-6 text-center">
-          <p className="font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] text-midnight-blue/70">Du willst nicht warten?</p>
-          <p className="mx-auto mt-3 max-w-xl font-montserrat text-2xl font-extrabold leading-snug text-midnight-blue sm:text-3xl">Abkürzung und Vertiefung.</p>
-          <a href="/3-wege" className="cc-abk-knopf mt-5 inline-flex items-center justify-center gap-2.5 rounded-full border-2 border-[#C9A961] bg-white px-9 py-[18px] font-montserrat text-base font-extrabold text-midnight-blue transition-colors hover:bg-pearl-white sm:text-lg">
-            Nutze die Abkürzung – 3 Wege zum Ziel <span aria-hidden="true" className="cc-abk-pfeil">→</span>
-          </a>
+      {/* Nach der Challenge nur noch EIN Angebot: die Masterclass (28.10.2026, statt der drei Wege). Text = Claudias
+          Kurzbeschreibung aus dem Masterclass-Briefing, Abschnitt 8. Das 1:1 bleibt als leiser Zusatz darunter. */}
+      <section className="bg-pearl-white pb-20 pt-4 sm:pb-24" aria-labelledby="masterclass-titel">
+        <div className="mx-auto max-w-4xl px-6">
+          <div className="rounded-[20px] border-2 border-[#C9A961] bg-white p-7 text-center text-midnight-blue shadow-[0_30px_60px_-36px_rgba(201,169,97,0.9)] sm:p-10">
+            <p className="font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] text-midnight-blue/70">Nach der Challenge · Masterclass · 4 Wochen</p>
+            <h2 id="masterclass-titel" className="mt-3 font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl"><span className="gold-text-animated">UNVERWECHSELBAR</span></h2>
+            <p className="mt-2 font-cormorant text-2xl italic">Zeig, was in dir steckt. Schärfe deine Botschaft. Entfalte deine Wirkung.</p>
+            <p className="mx-auto mt-5 max-w-2xl font-inter text-[16px] leading-relaxed text-midnight-blue/85">
+              UNVERWECHSELBAR ist die Masterclass für Menschen, die ihre Präsenz, Persönlichkeit und Wirkung gezielt weiterentwickeln möchten. Von Positionierung und Kernbotschaft über Stimme, Körpersprache und Storytelling bis hin zu Kundenkommunikation, Signature Pitch und Sichtbarkeit.
+            </p>
+            <a href="/masterclass" className="cc-abk-knopf mt-7 inline-flex items-center justify-center gap-2.5 rounded-full border-2 border-[#C9A961] bg-white px-9 py-[18px] font-montserrat text-base font-extrabold text-midnight-blue transition-colors hover:bg-pearl-white sm:text-lg">
+              Zur Masterclass <span aria-hidden="true" className="cc-abk-pfeil">→</span>
+            </a>
+            <p className="mt-5 font-inter text-sm text-midnight-blue/75">Lieber ganz für dich allein? <a href="/1-zu-1-mentoring" className="font-bold underline decoration-[#C9A961] underline-offset-4">1:1 mit Claudia →</a></p>
+          </div>
         </div>
       </section>
 

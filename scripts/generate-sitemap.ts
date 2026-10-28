@@ -106,6 +106,7 @@ const staticPages = [
   // Vorhandene Seiten, die bisher in keiner Sitemap standen (18.09.2026)
   { path: '/premiumangebote', priority: '0.9', changefreq: 'monthly' },
   { path: '/challenge', priority: '0.9', changefreq: 'weekly' },
+  { path: '/masterclass', priority: '0.9', changefreq: 'weekly' },
   // Angebotsseiten im neuen Design (fertige Seiten in public/, 15.10.2026); /mentoring-inhalte bewusst NICHT (nur fuer Teilnehmende)
   { path: '/angebote', priority: '0.9', changefreq: 'weekly' },
   { path: '/live-workshop', priority: '0.9', changefreq: 'weekly' },

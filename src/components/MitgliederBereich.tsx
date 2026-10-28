@@ -235,11 +235,11 @@ export default function MitgliederBereich({ name, onLogout }: { name?: string; o
             <a href={ZOOM} target="_blank" rel="noopener noreferrer" className={`mt-4 inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue ${GOLD}`}>Zum Zoom-Raum</a>
           </div>
         </div>
-          {/* Zu den drei Wegen / Abkuerzung (Anke 26.10.2026) */}
+          {/* Naechster Schritt: nur noch die Masterclass (28.10.2026, statt der drei Wege). */}
           <div className="mt-16 rounded-[18px] border border-[#C9A961]/50 bg-white/[0.05] p-6 text-center">
             <p className="font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] text-[#C9A961]">Dein nächster Schritt</p>
-            <p className="mt-2 font-inter text-pearl-white/85">Du brauchst eine Abkürzung? Dann hier entlang.</p>
-            <a href="/3-wege" className={`mt-4 inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue ${GOLD}`}>Zu den drei Wegen →</a>
+            <p className="mt-2 text-2xl italic text-[#F7E7CE]" style={SERIF}>Zeig, was in dir steckt. Schärfe deine Botschaft. Entfalte deine Wirkung.</p>
+            <a href="/masterclass" className={`mt-4 inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue ${GOLD}`}>Zur Masterclass UNVERWECHSELBAR →</a>
           </div>
       </div>
     </section>

@@ -26,7 +26,15 @@ const PFAD = '/masterclass';
 /** OFFEN - erst nach Claudias Bestaetigung fuellen. Solange leer, zeigt die Seite "folgt" statt einer Zahl. */
 const STARTDATUM = ''; // z. B. 'Di., 12. Januar 2027'
 const PREIS = ''; // z. B. '… € zzgl. MwSt.'
-const STRIPE_LINK = ''; // Stripe-Checkout; solange leer, fuehrt der Knopf zum Gespraech
+/** Bezahlung ueber Stripe (nicht mehr Tentary, Fabian 28.10.2026): je Zahlweg ein Stripe-Zahlungslink und der
+ *  Betrag, wie er auf der Seite stehen soll. Leere Zeilen werden nicht angezeigt; ist kein Link gesetzt, fuehrt
+ *  der Knopf zum Gespraech. */
+const ZAHLWEGE: { titel: string; betrag: string; link: string }[] = [
+  { titel: 'Einmalzahlung', betrag: '', link: '' },
+  { titel: '6 Monatsraten', betrag: '', link: '' },
+  { titel: '12 Monatsraten', betrag: '', link: '' },
+];
+const OFFENE_ZAHLWEGE = ZAHLWEGE.filter((z) => z.link && z.betrag);
 
 const GOLD = 'bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]';
 const KACHEL = 'cc-glanz-kachel rounded-[10px] border border-[#13233F]/[0.13] transition-[border-color,box-shadow] duration-200 hover:border-[#C9A961] hover:shadow-[0_18px_40px_-20px_rgba(19,35,63,0.35)]';
@@ -464,12 +472,22 @@ export default function Masterclass() {
               ))}
             </dl>
             <p className="mt-8 font-montserrat text-2xl font-extrabold">{PREIS || 'Preis und Anmeldung folgen in Kürze.'}</p>
-            {PREIS && <p className="mt-2 font-inter text-sm text-midnight-blue/75">Auch in 6 oder 12 Monatsraten möglich.</p>}
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-              {STRIPE_LINK
-                ? <a href={STRIPE_LINK} className={KNOPF}>Jetzt anmelden →</a>
-                : <a href={GESPRAECH} className={KNOPF}>Platz vormerken – lass uns sprechen →</a>}
-            </div>
+            {OFFENE_ZAHLWEGE.length > 0 ? (
+              <div className="mx-auto mt-8 grid max-w-3xl gap-4 sm:grid-cols-3">
+                {OFFENE_ZAHLWEGE.map((z, k) => (
+                  <a key={z.titel} href={z.link} className={`flex flex-col items-center gap-1 rounded-[14px] px-5 py-5 text-midnight-blue transition-transform hover:-translate-y-0.5 ${k === 0 ? `${GOLD} shadow-[0_10px_24px_-12px_rgba(19,35,63,0.45)]` : 'border-2 border-[#C9A961] bg-white'}`}>
+                    <span className="font-montserrat text-xs font-extrabold uppercase tracking-[0.16em]">{z.titel}</span>
+                    <span className="font-montserrat text-xl font-extrabold">{z.betrag}</span>
+                    <span className="font-montserrat text-sm font-bold">Jetzt anmelden →</span>
+                  </a>
+                ))}
+              </div>
+            ) : (
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+                <a href={GESPRAECH} className={KNOPF}>Platz vormerken – lass uns sprechen →</a>
+              </div>
+            )}
+            {OFFENE_ZAHLWEGE.length > 0 && <p className="mt-4 font-inter text-sm text-midnight-blue/75">Sichere Bezahlung über Stripe.</p>}
             <p className="mt-5 font-inter text-[15px] text-midnight-blue/80">
               Du hast Fragen? <a href="tel:+4916093102073" className="font-bold underline decoration-[#C9A961] decoration-2 underline-offset-4 hover:text-royal-navy">Dann ruf mich an.</a>
             </p>

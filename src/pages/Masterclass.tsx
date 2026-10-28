@@ -6,6 +6,7 @@ import Brotkrumen from '../components/Brotkrumen';
 import LogoBand from '../components/LogoBand';
 import Stimmwelle from '../components/Stimmwelle';
 import Helix from '../components/Helix';
+import StimmenKarten from '../components/StimmenKarten';
 import { TAGE } from '../data/challengeTage';
 
 /**
@@ -112,6 +113,20 @@ const BONUS = [
   'Zeit sparen und leichter regelmäßig sichtbar werden.',
 ];
 
+/** Haeufige Fragen. Antworten nur aus Claudias Briefing und bestaetigten Eckdaten (4 Wochen, online, Start Januar
+ *  2027, Raten 6/12 Monate laut Fabian). Preis und genaue Termine erst nach Bestaetigung ergaenzen. */
+const FRAGEN: [string, string][] = [
+  ['Muss ich vorher an der 7-Tage-Challenge teilgenommen haben?', 'Nein. Die Masterclass ist ein eigenständiges Angebot und offen für Menschen mit unterschiedlichen Vorerfahrungen. Wer bereits an einer Challenge teilgenommen hat, kann Bekanntes vertiefen und weiterentwickeln. Wer neu einsteigt, findet ebenfalls Zugang zu den relevanten Themen.'],
+  ['Für wen ist die Masterclass?', 'Für Menschen, die ihre Persönlichkeit, Kommunikation und Wirkung gezielt weiterentwickeln möchten – vor Kunden, in Gesprächen, bei Präsentationen und vor der Kamera.'],
+  ['Wie lange dauert die Masterclass und wann geht es los?', 'Die Masterclass läuft vier Wochen online. Start ist im Januar 2027, die genauen Termine geben wir in Kürze bekannt.'],
+  ['Wie wird in der Masterclass gearbeitet?', 'Praxisnah: mit einer individuellen Wirkungsanalyse zu Beginn, praxisnahen Übungen, Videoanalyse und konkretem Feedback, Live-Training und Hot Seats, Peer-Feedback und Austausch sowie Übungen unter Realbedingungen. Zum Abschluss entwickelst und präsentierst du deinen persönlichen Signature-Auftritt und legst konkrete nächste Schritte für deinen Berufsalltag fest.'],
+  ['Bekomme ich persönliches Feedback?', 'Ja. Videoanalyse und konkretes Feedback gehören fest dazu: Du nimmst wahr, was bereits wirkt und wo gezielte Veränderungen helfen können. In den Hot Seats bearbeiten wir individuelle Herausforderungen anhand konkreter Fälle.'],
+  ['Ich bin vor der Kamera unsicher oder habe Redeangst. Ist das trotzdem etwas für mich?', 'Ja. Auch persönliche Herausforderungen beim Auftreten, Unsicherheiten vor der Kamera oder Fragen zur eigenen Wirkung bekommen Raum. Jeder Mensch bringt andere Voraussetzungen mit und steht an einem anderen Punkt seiner Entwicklung. Du lernst nicht, jemand anderes zu werden oder eine perfekte Rolle zu spielen.'],
+  ['Was ist der KI-Agent für die Hosentasche?', 'Dein Bonus: Du entdeckst, wie du KI als persönlichen Assistenten nutzen kannst, um deine Sichtbarkeit einfacher und effizienter zu gestalten – ohne dabei deine eigene Stimme und Authentizität zu verlieren. Zum Beispiel für Ideen für Posts, Reels und Videos, für Texte und Hooks und für deine Content-Planung.'],
+  ['Kann ich in Raten zahlen?', 'Ja. Neben der Einmalzahlung kannst du in 6 oder 12 Monatsraten zahlen.'],
+  ['Ich habe noch eine Frage. Wen kann ich fragen?', 'Mich direkt. Ruf mich an unter +49 160 93102073 oder vereinbare ein kostenloses Gespräch.'],
+];
+
 /** Challenge-Tag -> Masterclass-Modul. Zitate wortgleich aus Claudias Workbooks (Tag 1, 2, 3); fuer Tag 4-7
  *  stehen nur die Tagestitel, bis die Workbooks fertig sind. Modulnummern 1-basiert. */
 const BRUECKE: { tag: number; modul: number[]; zitat?: string }[] = [
@@ -215,6 +230,11 @@ export default function Masterclass() {
     hasCourseInstance: { '@type': 'CourseInstance', courseMode: 'online', duration: 'P4W' },
     url: `https://claudiaconen.com${PFAD}`,
   };
+  const faqDaten = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: FRAGEN.map(([f, a]) => ({ '@type': 'Question', name: f, acceptedAnswer: { '@type': 'Answer', text: a } })),
+  };
 
   return (
     <div className="cc-2027 min-h-screen bg-pearl-white">
@@ -225,6 +245,7 @@ export default function Masterclass() {
         ogImage="https://claudiaconen.com/a27/og/og-challenge.jpg"
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(strukturierteDaten) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqDaten) }} />
       <Navigation hell />
 
       {/* Kopf im Stil von /challenge und der Startseite: heller Grund, links Text, rechts Claudias Foto. */}
@@ -418,6 +439,9 @@ export default function Masterclass() {
         </div>
       </Abschnitt>
 
+      {/* Kundenstimmen: dieselben echten Stimmen wie auf /challenge (woertlich, mit Foto, siehe SocialProof.tsx). */}
+      <StimmenKarten />
+
       {/* Anmeldung. Termine, Preis und Stripe-Link oben unter OFFEN eintragen; bis dahin "folgt" + Gespraech.
           Testimonials erst nach Bestaetigung (Briefing 7). */}
       <Abschnitt id="anmeldung" className="bg-white py-16 text-midnight-blue sm:py-24" label="anmeldung-titel">
@@ -453,6 +477,28 @@ export default function Masterclass() {
           <p className="mx-auto mt-12 max-w-3xl text-center font-montserrat text-xl font-extrabold leading-relaxed sm:text-2xl">
             Du musst nicht werden wie andere. <span className="text-[#9A7B2F]">Entdecke, was dich ausmacht, und bring es wirkungsvoll zum Ausdruck.</span>
           </p>
+        </div>
+      </Abschnitt>
+
+      {/* Haeufige Fragen - Antworten nur aus dem Briefing (siehe FRAGEN oben). */}
+      <Abschnitt id="fragen" className="bg-pearl-white py-16 text-midnight-blue sm:py-24" label="fragen-titel">
+        <div className="mx-auto max-w-3xl px-6">
+          <Kicker text="Häufige Fragen" hell />
+          <h2 id="fragen-titel" className="mt-5 font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">Fragen und Antworten zur Masterclass</h2>
+          <div className="mt-8 grid gap-3">
+            {FRAGEN.map(([f, a], k) => (
+              <details key={f} style={{ ['--i' as string]: k % 3 }} className={`cc-stufe group bg-white ${KACHEL}`}>
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 font-montserrat text-base font-extrabold sm:px-6 sm:py-5 [&::-webkit-details-marker]:hidden">
+                  <span className="min-w-0">{f}</span>
+                  <span aria-hidden="true" className="grid h-8 w-8 flex-none place-items-center rounded-full border border-[#C9A961] text-[#9A7B2F] transition-transform duration-300 group-open:rotate-45">+</span>
+                </summary>
+                <p className="border-t border-[#C9A961]/35 px-5 pb-5 pt-4 font-inter text-[15px] leading-relaxed text-midnight-blue/90 sm:px-6">{a}</p>
+              </details>
+            ))}
+          </div>
+          <div className="mt-10 text-center">
+            <a href="#anmeldung" className={KNOPF}>Deinen Platz sichern →</a>
+          </div>
         </div>
       </Abschnitt>
 

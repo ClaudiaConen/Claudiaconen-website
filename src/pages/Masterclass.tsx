@@ -303,24 +303,31 @@ export default function Masterclass() {
       <LogoBand />
 
       {/* Briefing Abschnitt 2 - Hauptbereich, wortgleich. */}
-      <Abschnitt id="worum" className="bg-white py-16 text-midnight-blue sm:py-24" label="worum-titel">
-        <div className="mx-auto max-w-3xl px-6">
+      <Abschnitt id="worum" className="bg-white py-20 text-midnight-blue sm:py-28" label="worum-titel">
+        {/* Luftiger gesetzt (Auftraggeber, 28.10.2026: "gedrungen, zusammengepresst"): volle Breite, Frage oben,
+            darunter zwei Spalten - links Claudias Satz und die vier Anlaesse, rechts ihr Text. */}
+        <div className="mx-auto max-w-6xl px-6">
           <Kicker text="Worum es geht" hell />
-          <h2 id="worum-titel" className="mt-5 font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">
+          <h2 id="worum-titel" className="mt-6 max-w-5xl text-balance font-montserrat text-[1.75rem] font-bold leading-[1.3] tracking-normal sm:text-[2.4rem] sm:leading-[1.25]">
             Du möchtest mit deiner Persönlichkeit überzeugen, deine Botschaft klar vermitteln und Menschen wirklich erreichen?
           </h2>
-          <ul className="mt-6 flex list-none flex-wrap gap-2.5 p-0">
-            {['vor Kunden', 'in Gesprächen', 'bei Präsentationen', 'vor der Kamera'].map((o) => (
-              <li key={o} className="rounded-full border border-[#C9A961]/70 bg-pearl-white px-4 py-2 font-montserrat text-sm font-bold">{o}</li>
-            ))}
-          </ul>
-          <p className="mt-8 font-montserrat text-2xl font-extrabold text-[#9A7B2F] sm:text-3xl">Dann ist es Zeit, tiefer einzusteigen.</p>
-          <div className="mt-6 grid gap-4 font-inter text-lg leading-relaxed text-midnight-blue/90">
-            <p>In der Masterclass UNVERWECHSELBAR geht es darum, deine persönliche Wirkung gezielt weiterzuentwickeln. Du beschäftigst dich mit deiner Positionierung, deiner Kommunikation, deiner Präsenz und der Frage, wie du deine Stärken so einsetzt, dass sie bei anderen ankommen.</p>
-            <p>Dabei schauen wir nicht nur darauf, was du sagst, sondern auch darauf, wie du es sagst, wie du wahrgenommen wirst und was deine Kommunikation bei deinem Gegenüber auslöst.</p>
-            <p>Du entwickelst deine Kernbotschaft, lernst deine Zielgruppe besser zu verstehen, arbeitest an deiner Stimme und Körpersprache, vertiefst dein Storytelling und stärkst deine Fähigkeit, überzeugend zu kommunizieren.</p>
-            <p>Auch persönliche Herausforderungen beim Auftreten, Unsicherheiten vor der Kamera oder Fragen zur eigenen Wirkung bekommen Raum. Jeder Mensch bringt andere Voraussetzungen mit und steht an einem anderen Punkt seiner Entwicklung.</p>
-            <p>Ob du bereits Erfahrung mitbringst oder dich intensiver mit diesen Themen beschäftigen möchtest: Wir beleuchten die relevanten Bereiche, vertiefen die Inhalte und arbeiten praxisnah an deiner individuellen Entwicklung – mit konkreten Übungen, Feedback, neuen Perspektiven und Raum zum Ausprobieren.</p>
+          <span aria-hidden="true" className={`mt-10 block h-px w-full ${GOLD} opacity-60`} />
+          <div className="mt-12 grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
+            <div className="min-w-0 lg:sticky lg:top-32 lg:self-start">
+              <p className="font-cormorant text-[2rem] italic leading-snug text-[#9A7B2F] sm:text-[2.5rem]">Dann ist es Zeit, tiefer einzusteigen.</p>
+              <ul className="mt-8 flex list-none flex-wrap gap-3 p-0">
+                {['vor Kunden', 'in Gesprächen', 'bei Präsentationen', 'vor der Kamera'].map((o) => (
+                  <li key={o} className="flex items-center gap-2.5 whitespace-nowrap rounded-full border border-[#C9A961]/70 bg-pearl-white px-5 py-2.5 font-montserrat text-[15px] font-semibold"><span aria-hidden="true" className={`h-2 w-2 flex-none rounded-full ${GOLD}`} />{o}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="grid min-w-0 gap-6 font-inter text-[17px] leading-[1.8] text-midnight-blue/85">
+              <p>In der Masterclass UNVERWECHSELBAR geht es darum, deine persönliche Wirkung gezielt weiterzuentwickeln. Du beschäftigst dich mit deiner Positionierung, deiner Kommunikation, deiner Präsenz und der Frage, wie du deine Stärken so einsetzt, dass sie bei anderen ankommen.</p>
+              <p>Dabei schauen wir nicht nur darauf, was du sagst, sondern auch darauf, wie du es sagst, wie du wahrgenommen wirst und was deine Kommunikation bei deinem Gegenüber auslöst.</p>
+              <p>Du entwickelst deine Kernbotschaft, lernst deine Zielgruppe besser zu verstehen, arbeitest an deiner Stimme und Körpersprache, vertiefst dein Storytelling und stärkst deine Fähigkeit, überzeugend zu kommunizieren.</p>
+              <p>Auch persönliche Herausforderungen beim Auftreten, Unsicherheiten vor der Kamera oder Fragen zur eigenen Wirkung bekommen Raum. Jeder Mensch bringt andere Voraussetzungen mit und steht an einem anderen Punkt seiner Entwicklung.</p>
+              <p>Ob du bereits Erfahrung mitbringst oder dich intensiver mit diesen Themen beschäftigen möchtest: Wir beleuchten die relevanten Bereiche, vertiefen die Inhalte und arbeiten praxisnah an deiner individuellen Entwicklung – mit konkreten Übungen, Feedback, neuen Perspektiven und Raum zum Ausprobieren.</p>
+            </div>
           </div>
         </div>
       </Abschnitt>

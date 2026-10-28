@@ -33,6 +33,7 @@ const SPALTEN: { titel: string; links: { label: string; href: string; extern?: b
   {
     titel: 'Angebote',
     links: [
+      { label: 'Masterclass UNVERWECHSELBAR', href: '/masterclass' },
       { label: 'Speaker-Ausbildung', href: '/speaker-ausbildung' },
       { label: '1:1-Coaching', href: '/1-zu-1-mentoring' },
       { label: 'Premium-Workshop', href: '/premiumangebote' },

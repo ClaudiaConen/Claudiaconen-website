@@ -45,7 +45,7 @@ const INHALT: ZielgruppenInhalt = {
     { schritt: 'Dein nächster Schritt', text: 'Du weißt, was du verändern kannst, worauf du achten solltest und wie du deinen nächsten Schritt umsetzt.' },
   ],
 
-  brotkrumen: [{ name: '3 Wege', ziel: '/3-wege' }, { name: 'Deine Abkürzung' }],
+  brotkrumen: [{ name: 'Deine Abkürzung' }],
 
   fragen: [
     {

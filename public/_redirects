@@ -18,6 +18,18 @@
 # Muss VOR der /*-Regel stehen - Netlify nimmt die erste passende Regel.
 /ki-heygen-kurs    /ki-einsteiger-coaching    301
 
+# 28.10.2026: Aktuell gibt es nur die Masterclass. Die alten Angebotsseiten bleiben als Dateien erhalten
+# (public/3-wege.html, angebote.html, live-workshop.html, mentoring-programm.html), sind aber unsichtbar:
+# 302 = voruebergehend, "!" = gilt auch, obwohl die Datei existiert. Zum Zurueckholen die Zeilen loeschen.
+/3-wege                  /masterclass   302!
+/3-wege.html             /masterclass   302!
+/angebote                /masterclass   302!
+/angebote.html           /masterclass   302!
+/live-workshop           /masterclass   302!
+/live-workshop.html      /masterclass   302!
+/mentoring-programm      /masterclass   302!
+/mentoring-programm.html /masterclass   302!
+
 # Bereiche, die es nur im Browser gibt (Anmeldung, Mitglieder, Buchung).
 # Sie brauchen das Auffangnetz mit Status 200. Die Liste stammt aus dem
 # Abgleich App.tsx gegen vorrender-eintrag.tsx vom 21.09.2026: 60 Routen,

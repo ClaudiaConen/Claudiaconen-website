@@ -16,7 +16,7 @@ type Tag = { nr: number; titel: string; datum: string; ab: string; audio: string
 
 const TAGE: Tag[] = [
   { nr: 1, titel: 'Deine Kernbotschaft', datum: 'Di 27.10.', ab: '2026-10-27T05:00:00+01:00', audio: 'tag1.mp3', anleitung: '' },
-  { nr: 2, titel: 'Die Zielgruppenbrille', datum: 'Mi 28.10.', ab: '2026-10-28T05:00:00+01:00', audio: '', anleitung: '', feedback: true },
+  { nr: 2, titel: 'Die Zielgruppenbrille', datum: 'Mi 28.10.', ab: '2026-10-28T05:00:00+01:00', audio: 'tag2.mp3', anleitung: '', feedback: true },
   { nr: 3, titel: 'Raus aus der Redeangst', datum: 'Do 29.10.', ab: '2026-10-29T05:00:00+01:00', audio: '', anleitung: '' },
   { nr: 4, titel: 'Deine Stimme: Betonung & Pause', datum: 'Fr 30.10.', ab: '2026-10-30T05:00:00+01:00', audio: '', anleitung: '' },
   { nr: 5, titel: 'Storytelling: Der Kunde ist der Held', datum: 'Sa 31.10.', ab: '2026-10-31T05:00:00+01:00', audio: '', anleitung: '' },

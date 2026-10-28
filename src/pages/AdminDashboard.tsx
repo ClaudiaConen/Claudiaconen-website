@@ -57,7 +57,8 @@ export default function AdminDashboard() {
         supabase.from('step_media').select('id', { count: 'exact', head: true }),
         supabase.from('testimonials').select('id', { count: 'exact', head: true }),
         supabase.from('ki_manager_bookings').select('id', { count: 'exact', head: true }),
-        supabaseBuchprojekt.from('buchprojekt_anmeldungen').select('id', { count: 'exact', head: true }),
+        // Anmeldungen sind nicht mehr öffentlich lesbar – nur die anonyme Anzahl per Funktion.
+        supabaseBuchprojekt.rpc('buchprojekt_anzahl'),
         supabase.from('member_students').select('id', { count: 'exact', head: true }),
         supabase.from('member_courses').select('id', { count: 'exact', head: true })
       ]);
@@ -67,7 +68,7 @@ export default function AdminDashboard() {
         stepMedia: mediaResult.count || 0,
         testimonials: testimonialsResult.count || 0,
         kiManagerBookings: kiManagerResult.count || 0,
-        buchprojektAnmeldungen: buchprojektResult.count || 0,
+        buchprojektAnmeldungen: (typeof buchprojektResult.data === 'number' ? buchprojektResult.data : 0),
         students: studentsResult.count || 0,
         courses: coursesResult.count || 0
       });

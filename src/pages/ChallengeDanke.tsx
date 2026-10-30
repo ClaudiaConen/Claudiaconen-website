@@ -81,7 +81,7 @@ export default function ChallengeDanke() {
               <p className="font-inter text-xs uppercase tracking-[0.16em] text-pearl-white/70">Dein Zugangscode</p>
               <p className="mt-1 font-montserrat text-2xl font-black tracking-[0.12em] text-[#F7E7CE]">{ZUGANGSCODE}</p>
             </div>
-            <Link to="/mein-bereich" className={`mt-5 inline-flex items-center rounded-full px-7 py-3.5 font-montserrat text-sm font-bold text-midnight-blue ${GOLD}`}>Zum Mitgliederbereich →</Link>
+            <a href="https://community.claudiaconen.com/mein-bereich/start" className={`mt-5 inline-flex items-center rounded-full px-7 py-3.5 font-montserrat text-sm font-bold text-midnight-blue ${GOLD}`}>Zum Mitgliederbereich →</a>
           </li>
         </ol>
 

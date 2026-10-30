@@ -120,6 +120,29 @@ const ARBEITSWEISE: [string, string][] = [
   ['Transfer in den Alltag', 'Konkrete nächste Schritte für die Anwendung im Berufsleben festlegen.'],
 ];
 
+/** Briefing Abschnitt 6 - Vorschlag fuer einen moeglichen Ablauf, wortgleich (Gabi 30.10.2026: Rubrik ergaenzt).
+ *  Die Masterclass dauert VIER Wochen (Auftraggeber, 30.10.2026 - verbindlich, nicht die acht im Briefing-Beispiel).
+ *  Die acht Themenbloecke aus dem Briefing sind daher zu zweit je Woche gruppiert (Texte wortgleich, nur neu
+ *  sortiert - wie schon bei der Bruecke von der 7-Tage-Challenge, wo Tag 7 ebenfalls zwei Module traegt). */
+const ABLAUF: { woche: number; themen: { titel: string; text: string }[] }[] = [
+  { woche: 1, themen: [
+    { titel: 'Standortbestimmung und Wirkungsanalyse', text: 'Ausgangsvideo oder Pitch, persönliche Ziele und individuelle Entwicklungsfelder.' },
+    { titel: 'Persönliche Marke und Positionierung', text: 'Profil, Kernbotschaft und klare Differenzierung.' },
+  ] },
+  { woche: 2, themen: [
+    { titel: 'Präsenz und Körpersprache', text: 'Haltung, Blickkontakt und souveräner Auftritt.' },
+    { titel: 'Stimme und Rhetorik', text: 'Sprachliche Präzision, Betonung, Pausen und spontane Rede.' },
+  ] },
+  { woche: 3, themen: [
+    { titel: 'Storytelling und emotionale Wirkung', text: 'Persönliche Geschichten und überzeugende Kundenbeispiele.' },
+    { titel: 'Kundenkommunikation und Einwände', text: 'Gesprächsführung, Nutzenargumentation und Entscheidungssicherheit.' },
+  ] },
+  { woche: 4, themen: [
+    { titel: 'Signature Pitch und Kamera-Performance', text: 'Individuelle Pitches und Videos entwickeln, testen und verbessern.' },
+    { titel: 'Abschluss und Wirkungsvergleich', text: 'Abschlusspräsentation, Feedback und persönlicher Umsetzungsplan.' },
+  ] },
+];
+
 /** Briefing Abschnitt 5 - was der KI-Agent kann, wortgleich. */
 const KI_AGENT = [
   'Ideen für Posts, Reels und Videos entwickeln.',
@@ -443,6 +466,33 @@ export default function Masterclass() {
           <p className="mx-auto mt-10 max-w-3xl text-center font-inter text-lg leading-relaxed text-midnight-blue/90">
             Du lernst nicht, jemand anderes zu werden oder eine perfekte Rolle zu spielen. Du erkundest deine Stärken, beleuchtest persönliche Herausforderungen und entwickelst deinen eigenen Weg, deine Botschaft klarer und deine Wirkung bewusster zu gestalten.
           </p>
+        </div>
+      </Abschnitt>
+
+      {/* Briefing Abschnitt 6 - Vorschlag fuer einen moeglichen Ablauf, wortgleich (Gabi 30.10.2026: Rubrik ergaenzt).
+          Beispielstruktur - Umfang und Termine stehen laut Briefing noch nicht fest, deshalb der Hinweistext darunter. */}
+      <Abschnitt id="ablauf" className="bg-pearl-white py-16 text-midnight-blue sm:py-24" label="ablauf-titel">
+        <div className="mx-auto max-w-6xl px-6">
+          <Kicker text="Vorschlag für einen möglichen Ablauf" hell />
+          <h2 id="ablauf-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">So könnte dein Weg aussehen.</h2>
+          <p className="mt-4 max-w-3xl font-inter text-base leading-relaxed text-midnight-blue/75">
+            Beispielstruktur für eine begleitete Masterclass über vier Wochen. Die genauen Termine werden noch festgelegt.
+          </p>
+          <ol className="mt-10 grid list-none gap-5 p-0 lg:grid-cols-2">
+            {ABLAUF.map((w, k) => (
+              <li key={w.woche} style={{ ['--i' as string]: k % 2 }} className={`cc-stufe bg-white p-6 sm:p-7 ${KACHEL}`}>
+                <span className="gold-text-animated font-montserrat text-xs font-extrabold uppercase tracking-[0.2em]">Woche {w.woche}</span>
+                <div className="mt-3 grid gap-4 divide-y divide-[#C9A961]/25">
+                  {w.themen.map((t, i) => (
+                    <div key={t.titel} className={i === 0 ? '' : 'pt-4'}>
+                      <h3 className="font-montserrat text-base font-extrabold leading-snug">{t.titel}</h3>
+                      <p className="mt-1.5 font-inter text-[15px] leading-relaxed text-midnight-blue/80">{t.text}</p>
+                    </div>
+                  ))}
+                </div>
+              </li>
+            ))}
+          </ol>
         </div>
       </Abschnitt>
 

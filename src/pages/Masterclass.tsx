@@ -120,17 +120,27 @@ const ARBEITSWEISE: [string, string][] = [
   ['Transfer in den Alltag', 'Konkrete nächste Schritte für die Anwendung im Berufsleben festlegen.'],
 ];
 
-/** Briefing Abschnitt 6 - Vorschlag fuer einen moeglichen Ablauf, wortgleich (Gabi 30.10.2026: Rubrik fehlte noch
- *  auf der Seite). Ausdruecklich eine Beispielstruktur - Umfang und Termine stehen laut Briefing noch nicht fest. */
-const ABLAUF: { woche: number; titel: string; text: string }[] = [
-  { woche: 1, titel: 'Standortbestimmung und Wirkungsanalyse', text: 'Ausgangsvideo oder Pitch, persönliche Ziele und individuelle Entwicklungsfelder.' },
-  { woche: 2, titel: 'Persönliche Marke und Positionierung', text: 'Profil, Kernbotschaft und klare Differenzierung.' },
-  { woche: 3, titel: 'Präsenz und Körpersprache', text: 'Haltung, Blickkontakt und souveräner Auftritt.' },
-  { woche: 4, titel: 'Stimme und Rhetorik', text: 'Sprachliche Präzision, Betonung, Pausen und spontane Rede.' },
-  { woche: 5, titel: 'Storytelling und emotionale Wirkung', text: 'Persönliche Geschichten und überzeugende Kundenbeispiele.' },
-  { woche: 6, titel: 'Kundenkommunikation und Einwände', text: 'Gesprächsführung, Nutzenargumentation und Entscheidungssicherheit.' },
-  { woche: 7, titel: 'Signature Pitch und Kamera-Performance', text: 'Individuelle Pitches und Videos entwickeln, testen und verbessern.' },
-  { woche: 8, titel: 'Abschluss und Wirkungsvergleich', text: 'Abschlusspräsentation, Feedback und persönlicher Umsetzungsplan.' },
+/** Briefing Abschnitt 6 - Vorschlag fuer einen moeglichen Ablauf, wortgleich (Gabi 30.10.2026: Rubrik ergaenzt).
+ *  Die Masterclass dauert VIER Wochen (Auftraggeber, 30.10.2026 - verbindlich, nicht die acht im Briefing-Beispiel).
+ *  Die acht Themenbloecke aus dem Briefing sind daher zu zweit je Woche gruppiert (Texte wortgleich, nur neu
+ *  sortiert - wie schon bei der Bruecke von der 7-Tage-Challenge, wo Tag 7 ebenfalls zwei Module traegt). */
+const ABLAUF: { woche: number; themen: { titel: string; text: string }[] }[] = [
+  { woche: 1, themen: [
+    { titel: 'Standortbestimmung und Wirkungsanalyse', text: 'Ausgangsvideo oder Pitch, persönliche Ziele und individuelle Entwicklungsfelder.' },
+    { titel: 'Persönliche Marke und Positionierung', text: 'Profil, Kernbotschaft und klare Differenzierung.' },
+  ] },
+  { woche: 2, themen: [
+    { titel: 'Präsenz und Körpersprache', text: 'Haltung, Blickkontakt und souveräner Auftritt.' },
+    { titel: 'Stimme und Rhetorik', text: 'Sprachliche Präzision, Betonung, Pausen und spontane Rede.' },
+  ] },
+  { woche: 3, themen: [
+    { titel: 'Storytelling und emotionale Wirkung', text: 'Persönliche Geschichten und überzeugende Kundenbeispiele.' },
+    { titel: 'Kundenkommunikation und Einwände', text: 'Gesprächsführung, Nutzenargumentation und Entscheidungssicherheit.' },
+  ] },
+  { woche: 4, themen: [
+    { titel: 'Signature Pitch und Kamera-Performance', text: 'Individuelle Pitches und Videos entwickeln, testen und verbessern.' },
+    { titel: 'Abschluss und Wirkungsvergleich', text: 'Abschlusspräsentation, Feedback und persönlicher Umsetzungsplan.' },
+  ] },
 ];
 
 /** Briefing Abschnitt 5 - was der KI-Agent kann, wortgleich. */
@@ -466,14 +476,20 @@ export default function Masterclass() {
           <Kicker text="Vorschlag für einen möglichen Ablauf" hell />
           <h2 id="ablauf-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">So könnte dein Weg aussehen.</h2>
           <p className="mt-4 max-w-3xl font-inter text-base leading-relaxed text-midnight-blue/75">
-            Beispielstruktur für eine begleitete Masterclass über acht Wochen. Der genaue Umfang und die Termine werden noch festgelegt.
+            Beispielstruktur für eine begleitete Masterclass über vier Wochen. Die genauen Termine werden noch festgelegt.
           </p>
-          <ol className="mt-10 grid list-none gap-4 p-0 sm:grid-cols-2 lg:grid-cols-4">
+          <ol className="mt-10 grid list-none gap-5 p-0 lg:grid-cols-2">
             {ABLAUF.map((w, k) => (
-              <li key={w.woche} style={{ ['--i' as string]: k % 4 }} className={`cc-stufe bg-white p-6 ${KACHEL}`}>
+              <li key={w.woche} style={{ ['--i' as string]: k % 2 }} className={`cc-stufe bg-white p-6 sm:p-7 ${KACHEL}`}>
                 <span className="gold-text-animated font-montserrat text-xs font-extrabold uppercase tracking-[0.2em]">Woche {w.woche}</span>
-                <h3 className="mt-3 font-montserrat text-base font-extrabold leading-snug">{w.titel}</h3>
-                <p className="mt-2 font-inter text-[15px] leading-relaxed text-midnight-blue/80">{w.text}</p>
+                <div className="mt-3 grid gap-4 divide-y divide-[#C9A961]/25">
+                  {w.themen.map((t, i) => (
+                    <div key={t.titel} className={i === 0 ? '' : 'pt-4'}>
+                      <h3 className="font-montserrat text-base font-extrabold leading-snug">{t.titel}</h3>
+                      <p className="mt-1.5 font-inter text-[15px] leading-relaxed text-midnight-blue/80">{t.text}</p>
+                    </div>
+                  ))}
+                </div>
               </li>
             ))}
           </ol>

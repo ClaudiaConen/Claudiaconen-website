@@ -142,19 +142,22 @@ export default function Masterclass() {
     return () => { ro.disconnect(); window.removeEventListener('scroll', pruefen); };
   }, []);
 
-  // Mitlaufender Kauf-Knopf (Sales-Leiste): erscheint nach dem Kopf, verschwindet, sobald die Anmeldung im Bild ist.
+  // Mitlaufender Kauf-Knopf (Sales-Leiste): erscheint nach dem Kopf, verschwindet, sobald die Anmeldung ODER der
+  // Footer im Bild ist (sonst verdeckt die Leiste Impressum/Datenschutz im Footer, Gabi 31.10.2026).
   const [leiste, setLeiste] = useState(false);
   const ankerRef = useRef<HTMLDivElement>(null);
   const anmeldungRef = useRef<HTMLDivElement>(null);
+  const footerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    const anker = ankerRef.current, anmeldung = anmeldungRef.current;
-    if (!anker || !anmeldung) return;
-    let hinterKopf = false, inAnmeldung = false;
-    const aktualisieren = () => setLeiste(hinterKopf && !inAnmeldung);
+    const anker = ankerRef.current, anmeldung = anmeldungRef.current, footer = footerRef.current;
+    if (!anker || !anmeldung || !footer) return;
+    let hinterKopf = false, inAnmeldung = false, inFooter = false;
+    const aktualisieren = () => setLeiste(hinterKopf && !inAnmeldung && !inFooter);
     const io1 = new IntersectionObserver(([e]) => { hinterKopf = !e.isIntersecting; aktualisieren(); });
     const io2 = new IntersectionObserver(([e]) => { inAnmeldung = e.isIntersecting; aktualisieren(); }, { rootMargin: '0px 0px -20% 0px' });
-    io1.observe(anker); io2.observe(anmeldung);
-    return () => { io1.disconnect(); io2.disconnect(); };
+    const io3 = new IntersectionObserver(([e]) => { inFooter = e.isIntersecting; aktualisieren(); });
+    io1.observe(anker); io2.observe(anmeldung); io3.observe(footer);
+    return () => { io1.disconnect(); io2.disconnect(); io3.disconnect(); };
   }, []);
 
   const kurz = 'UNVERWECHSELBAR ist die Masterclass für Menschen, die ihre Präsenz, Persönlichkeit und Wirkung gezielt weiterentwickeln möchten: vier Live-Termine in kleiner Gruppe, persönliches Feedback und eine finale 1:1-Übungsstunde mit Claudia Conen.';
@@ -462,7 +465,7 @@ export default function Masterclass() {
         </div>
       </div>
 
-      <Footer />
+      <div ref={footerRef}><Footer /></div>
     </div>
   );
 }

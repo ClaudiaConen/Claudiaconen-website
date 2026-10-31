@@ -16,26 +16,22 @@ import { START_LABEL, FRUEH, ABEND, TERMINE, SCHRITTE, BEGLEITUNG, BLICK, CLAUDI
  * zwischen den Terminen inkl. finaler 1:1-Uebungsstunde. Gemeinsame Daten in ../data/masterclassDaten.
  * Dankesseite: ../pages/MasterclassDanke (Route /masterclass/danke).
  *
- * Preis/Stripe: unten unter ZAHLWEGE/Preis bestaetigen (offene Punkte siehe masterclassDaten.ts).
+ * Preis 797 € zzgl. MwSt.; Kauf ueber KAUF_LINK (Stripe), Ratenzahlung ueber Klarna im Checkout. Rabatt-Code
+ * WIRKUNG7 nur fuer Challenge-Teilnehmer, NICHT auf der Seite (siehe Kommentar bei KAUF_LINK).
  */
 
 const PFAD = '/masterclass';
 
 /** Preise (Auftraggeber, 28.10.2026): Fruehbucher 497 €, regulaer 797 €, zzgl. MwSt. Fruehbucher bis 12.11.2026. */
-const FRUEHBUCHER = 497;
 const REGULAER = 797;
-const FRUEHBUCHER_BIS = '12. November 2026';
-const FRUEHBUCHER_ENDE = new Date('2026-11-12T23:59:59+01:00');
 const EURO = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: Number.isInteger(n) ? 0 : 2, maximumFractionDigits: 2 }) + ' €';
 const BRUTTO = (n: number) => EURO(Math.round(n * 119) / 100);
 
-/** Bezahlung ueber Stripe (Fabian 28.10.2026): je Zahlweg ein Stripe-Zahlungslink + Betrag. Leere Zeilen werden
- *  nicht angezeigt; ist kein Link gesetzt, fuehrt der Knopf zum Gespraech. */
-const ZAHLWEGE: { titel: string; betrag: string; link: string }[] = [
-  { titel: 'Einmalzahlung', betrag: '', link: '' },
-  { titel: '2 Monatsraten', betrag: '', link: '' },
-];
-const OFFENE_ZAHLWEGE = ZAHLWEGE.filter((z) => z.link && z.betrag);
+/** Kauf ueber Stripe-Zahlungslink. Ratenzahlung laeuft fuer die Kundin ueber Klarna im Bezahlfenster (Claudia bekommt
+ *  sofort den vollen Betrag). Der Rabatt-Code WIRKUNG7 (-300 €) steht BEWUSST NICHT auf der Seite: Claudia gibt ihn nur
+ *  den Challenge-Teilnehmern persoenlich am letzten Challenge-Tag (Gabi 31.10.2026); im Stripe-Checkout gibt es dafuer
+ *  das Feld "Code hinzufuegen". */
+const KAUF_LINK = 'https://buy.stripe.com/9B600j5vWaOQd2w3ba3oA00';
 const GESPRAECH = '/buchen/erstgespraech';
 
 const GOLD = 'bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]';
@@ -61,7 +57,7 @@ const FRAGEN: [string, string][] = [
   ['Bekomme ich persönliches Feedback?', 'Ja. Wir schauen gemeinsam auf deine Videos, und zum Abschluss bekommst du deine persönliche 1:1-Übungsstunde mit mir: 60 Minuten nur für dich, in der Woche vom 14. bis 18. Dezember.'],
   ['Wie viele Plätze gibt es?', 'Höchstens 9 Personen pro Gruppe. Darum laufen alle Termine live, und jede und jeder kommt dran.'],
   ['Ich bin vor der Kamera unsicher oder habe Redeangst. Ist das trotzdem etwas für mich?', 'Ja, gerade dann. Lampenfieber wird kleiner durch Üben, nicht durch Warten. Du lernst nicht, jemand anderes zu werden – du findest deinen eigenen, sicheren Weg.'],
-  ['Kann ich in Raten zahlen?', 'Ja. Neben der Einmalzahlung kannst du auf Wunsch in Raten zahlen. Melde dich einfach, dann finden wir den passenden Weg.'],
+  ['Kann ich in Raten zahlen?', 'Ja. Im Bezahlfenster kannst du neben der Einmalzahlung auch Klarna wählen und bequem in Raten zahlen.'],
   ['Ich habe noch eine Frage. Wen kann ich fragen?', 'Mich direkt. Ruf mich an unter +49 160 93102073 oder vereinbare ein kostenloses Kennenlernen.'],
 ];
 
@@ -112,9 +108,6 @@ function Haken() {
 }
 
 export default function Masterclass() {
-  const fruehAktiv = new Date() <= FRUEHBUCHER_ENDE;
-  const preisAktuell = fruehAktiv ? FRUEHBUCHER : REGULAER;
-
   useEffect(() => {
     const id = window.location.hash.replace('#', '');
     if (!id) return;
@@ -416,40 +409,16 @@ export default function Masterclass() {
                 <li key={b} className="flex items-start gap-3 rounded-[12px] border border-[#13233F]/10 bg-white px-4 py-3 font-inter text-[15px] leading-relaxed text-midnight-blue/90"><Haken /><span>{b}</span></li>
               ))}
             </ul>
-            {fruehAktiv ? (
-              <div className="mt-8">
-                <p className="font-montserrat text-xs font-extrabold uppercase tracking-[0.2em] text-[#9A7B2F]">Frühbucherpreis bis {FRUEHBUCHER_BIS}</p>
-                <p className="mt-2 flex flex-wrap items-baseline justify-center gap-x-4 gap-y-1">
-                  <span className="gold-text-animated font-montserrat text-5xl font-extrabold sm:text-6xl">{EURO(FRUEHBUCHER)}</span>
-                  <span className="font-montserrat text-xl font-bold text-midnight-blue/55 line-through decoration-[#C9A961] decoration-2">{EURO(REGULAER)}</span>
-                </p>
-                <p className="mt-2 font-inter text-sm text-midnight-blue/75">zzgl. MwSt. · {BRUTTO(FRUEHBUCHER)} inkl. MwSt. · auf Wunsch in Raten</p>
-              </div>
-            ) : (
-              <div className="mt-8">
-                <p className="gold-text-animated font-montserrat text-5xl font-extrabold sm:text-6xl">{EURO(REGULAER)}</p>
-                <p className="mt-2 font-inter text-sm text-midnight-blue/75">zzgl. MwSt. · {BRUTTO(REGULAER)} inkl. MwSt. · auf Wunsch in Raten</p>
-              </div>
-            )}
-            {OFFENE_ZAHLWEGE.length > 0 ? (
-              <>
-                <div className="mx-auto mt-8 grid max-w-xl gap-4 sm:grid-cols-2">
-                  {OFFENE_ZAHLWEGE.map((z, k) => (
-                    <a key={z.titel} href={z.link} className={`flex flex-col items-center gap-1 rounded-[14px] px-5 py-5 text-midnight-blue transition-transform hover:-translate-y-0.5 ${k === 0 ? `${GOLD} shadow-[0_10px_24px_-12px_rgba(19,35,63,0.45)]` : 'border-2 border-[#C9A961] bg-white'}`}>
-                      <span className="font-montserrat text-xs font-extrabold uppercase tracking-[0.16em]">{z.titel}</span>
-                      <span className="font-montserrat text-xl font-extrabold">{z.betrag}</span>
-                      <span className="font-montserrat text-sm font-bold">Platz sichern →</span>
-                    </a>
-                  ))}
-                </div>
-                <p className="mt-4 font-inter text-sm text-midnight-blue/75">Sichere Bezahlung über Stripe.</p>
-              </>
-            ) : (
-              <div className="mt-8 flex flex-col items-center gap-4">
-                <a href={GESPRAECH} className={KNOPF}>Platz sichern →</a>
-                <a href={GESPRAECH} className="font-montserrat text-sm font-bold text-midnight-blue underline decoration-[#C9A961] decoration-2 underline-offset-4 hover:text-royal-navy">Lieber erst sprechen? 15 Minuten kennenlernen</a>
-              </div>
-            )}
+            <div className="mt-8">
+              <p className="gold-text-animated font-montserrat text-5xl font-extrabold sm:text-6xl">{EURO(REGULAER)}</p>
+              <p className="mt-2 font-inter text-sm text-midnight-blue/75">zzgl. MwSt. · {BRUTTO(REGULAER)} inkl. MwSt. · Ratenzahlung über Klarna möglich</p>
+            </div>
+            <div className="mt-8 flex flex-col items-center gap-4">
+              <a href={KAUF_LINK} className={KNOPF}>Platz sichern →</a>
+              <a href={GESPRAECH} className="font-montserrat text-sm font-bold text-midnight-blue underline decoration-[#C9A961] decoration-2 underline-offset-4 hover:text-royal-navy">Lieber erst sprechen? 15 Minuten kennenlernen</a>
+            </div>
+            <p className="mt-4 font-inter text-sm text-midnight-blue/75">Sichere Bezahlung über Stripe.</p>
+            <p className="mt-2 font-inter text-sm text-midnight-blue/60">Du hast einen Gutscheincode? Den kannst du im nächsten Schritt im Bezahlfenster eingeben.</p>
             <p className="mt-6 font-inter text-[15px] text-midnight-blue/80">
               Du hast Fragen? <a href="tel:+4916093102073" className="font-bold underline decoration-[#C9A961] decoration-2 underline-offset-4 hover:text-royal-navy">Dann ruf mich an.</a>
             </p>
@@ -487,7 +456,7 @@ export default function Masterclass() {
         <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
           <div className="min-w-0">
             <p className="truncate font-montserrat text-sm font-extrabold text-midnight-blue sm:text-base">UNVERWECHSELBAR · ab {START_LABEL.replace('Donnerstag, ', '')}</p>
-            <p className="truncate font-inter text-xs text-midnight-blue/70 sm:text-[13px]">{fruehAktiv ? `Frühbucher ${EURO(preisAktuell)} zzgl. MwSt.` : `${EURO(preisAktuell)} zzgl. MwSt.`} · höchstens 9 Plätze</p>
+            <p className="truncate font-inter text-xs text-midnight-blue/70 sm:text-[13px]">{EURO(REGULAER)} zzgl. MwSt. · Ratenzahlung möglich · höchstens 9 Plätze</p>
           </div>
           <a href="#anmeldung" className={`${GOLD} inline-flex flex-none items-center gap-2 rounded-full px-5 py-3 font-montserrat text-sm font-extrabold text-midnight-blue shadow-[0_8px_18px_-10px_rgba(19,35,63,0.5)] sm:px-7 sm:text-base`}>Platz sichern →</a>
         </div>

@@ -170,7 +170,7 @@ export default function ElevatorPitchKurs() {
         <span aria-hidden="true" className="pointer-events-none absolute -right-40 -top-40 h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(circle,rgba(247,231,206,0.9),rgba(247,231,206,0)_65%)]" />
         <div className="relative mx-auto max-w-6xl px-6">
           <div className="mb-8 text-midnight-blue/70"><Brotkrumen krumen={[{ name: 'Elevator-Pitch-Kurs' }]} /></div>
-          <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,560px)] lg:gap-12">
+          <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-12">
             <div className="min-w-0 text-midnight-blue">
               <span aria-hidden="true" className={`block h-[3px] w-16 rounded-full ${GOLD}`} />
               <p className="mt-5 font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] sm:text-sm">Online-Selbstlernkurs</p>

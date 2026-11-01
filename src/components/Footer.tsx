@@ -80,7 +80,7 @@ export default function Footer() {
                 Perfektion ist klickbar.<br />Persönlichkeit weckt Vertrauen.<br />Und Vertrauen gewinnt.
               </p>
               <p className="mt-4 max-w-lg font-inter text-[15px] leading-relaxed text-pearl-white/85">
-                Seit 37 Jahren begleite ich Selbstständige, Teams und Unternehmen dabei, mit Rhetorik und Persönlichkeit zu wirken: im Gespräch, auf der Bühne, vor der Kamera. Bekannt als „Die Umsatzstimme“.
+                Seit 37 Jahren an der Seite von Selbstständigen, Teams und Unternehmen. Bekannt als „Die Umsatzstimme“.
               </p>
             </div>
 

@@ -5,6 +5,7 @@ import SEO from '../components/SEO';
 import Brotkrumen from '../components/Brotkrumen';
 import LogoBand from '../components/LogoBand';
 import Stimmwelle from '../components/Stimmwelle';
+import StimmenKarten from '../components/StimmenKarten';
 
 /**
  * Elevator-Pitch – Online-Selbstlernkurs (Verkaufsseite). Umbau der alten /elevator-pitch-kurs-Seite ins
@@ -71,6 +72,18 @@ const BIO = [
   'Claudia Conen ist Expertin für menschliche Wirkungskraft. Mein ganzes Leben lang beschäftige ich mich damit, dass manche Menschen eine Wirkungskraft haben, die unvergesslich ist, und andere nicht.',
   'Rhetorik, Storytelling, Präsentation und der Auftritt vor der Kamera – seit 37 Jahren. Bekannt als „die Umsatzstimme".',
   'Und das habe ich zu meinem Beruf gemacht und darum begleite ich dich.',
+];
+
+/** Häufige Fragen VOR dem Kauf. Antworten NUR aus gesicherten Fakten (Selbstlernkurs, 9 Module/87 Lektionen/
+ *  Arbeitsbücher, 249 € einmalig, Zugang per Mail + /member/login, Zielgruppe aus der echten Kursbeschreibung).
+ *  Nichts erfunden. Widerruf/Garantie und Zugangsdauer bewusst NICHT behauptet (bitte von Claudia ergänzen). */
+const FRAGEN: [string, string][] = [
+  ['Ist das ein Live-Kurs oder lerne ich selbst?', 'Es ist ein reiner Selbstlernkurs. Du lernst jederzeit und in deinem eigenen Tempo im Mitgliederbereich – Modul für Modul.'],
+  ['Was ist alles enthalten?', '9 Module mit insgesamt 87 Lektionen (Videos und Übungen) sowie Arbeitsbücher zum Download zu den Lektionen.'],
+  ['Für wen ist der Kurs?', 'Für selbstständige Unternehmer, Coaches und Trainer, die mit wenigen Sätzen begeistern und in Erinnerung bleiben möchten – vor Kunden, in Gesprächen und bei Präsentationen.'],
+  ['Wie bekomme ich nach dem Kauf Zugang?', 'Nach dem Kauf erhältst du deine Zugangsdaten per E-Mail. Damit loggst du dich im Mitgliederbereich unter claudiaconen.com/member/login ein und startest sofort.'],
+  ['Ist das eine Einmalzahlung?', 'Ja. Der Kurs kostet einmalig 249 € – kein Abo.'],
+  ['Wie kann ich bezahlen?', 'Sicher und bequem über Stripe. Eine Zahlungsbestätigung bekommst du automatisch per E-Mail.'],
 ];
 
 function Kicker({ text, hell }: { text: string; hell?: boolean }) {
@@ -157,12 +170,18 @@ export default function ElevatorPitchKurs() {
     url: `https://claudiaconen.com${PFAD}`,
   };
 
+  const faqDaten = {
+    '@context': 'https://schema.org', '@type': 'FAQPage',
+    mainEntity: FRAGEN.map(([f, a]) => ({ '@type': 'Question', name: f, acceptedAnswer: { '@type': 'Answer', text: a } })),
+  };
+
   const kaufHref = KAUF_LINK || '#kaufen';
 
   return (
     <div className="cc-2027 min-h-screen bg-pearl-white">
       <SEO title="Elevator-Pitch-Kurs – Die Macht der Sekunde | Claudia Conen" description={kurz} path={PFAD} ogImage="https://claudiaconen.com/seiten/mikrofon.webp" />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(strukturierteDaten) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqDaten) }} />
       <Navigation hell />
 
       {/* Kopf: links Text, rechts das Vimeo-Video. */}
@@ -311,6 +330,9 @@ export default function ElevatorPitchKurs() {
         </div>
       </Abschnitt>
 
+      {/* Echte Kundenstimmen (dieselben echten Stimmen mit Foto wie auf /challenge und der Masterclass). */}
+      <StimmenKarten />
+
       {/* Kauf. */}
       <Abschnitt id="kaufen" className="bg-white py-16 text-midnight-blue sm:py-24" label="kaufen-titel">
         <div ref={kaufenRef} className="mx-auto max-w-4xl px-6">
@@ -329,6 +351,26 @@ export default function ElevatorPitchKurs() {
             <p className="mt-4 font-inter text-sm text-midnight-blue/75">Sichere Bezahlung über Stripe.</p>
             <p className="mt-2 font-inter text-sm text-midnight-blue/60">Nach dem Kauf erhältst du deine Zugangsdaten per E-Mail und loggst dich im <a href={MEMBER_LOGIN} className="font-semibold underline decoration-[#C9A961] decoration-2 underline-offset-4">Mitgliederbereich</a> ein.</p>
           </div>
+        </div>
+      </Abschnitt>
+
+      {/* Häufige Fragen vor dem Kauf. */}
+      <Abschnitt id="fragen" className="bg-pearl-white py-16 text-midnight-blue sm:py-24" label="fragen-titel">
+        <div className="mx-auto max-w-3xl px-6">
+          <Kicker text="Häufige Fragen" hell />
+          <h2 id="fragen-titel" className="mt-5 font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">Fragen und Antworten zum Kurs</h2>
+          <div className="mt-8 grid gap-3">
+            {FRAGEN.map(([f, a], k) => (
+              <details key={f} style={{ ['--i' as string]: k % 3 }} className={`cc-stufe group bg-white ${KACHEL}`}>
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 font-montserrat text-base font-extrabold sm:px-6 sm:py-5 [&::-webkit-details-marker]:hidden">
+                  <span className="min-w-0">{f}</span>
+                  <span aria-hidden="true" className="grid h-8 w-8 flex-none place-items-center rounded-full border border-[#C9A961] text-[#9A7B2F] transition-transform duration-300 group-open:rotate-45">+</span>
+                </summary>
+                <p className="border-t border-[#C9A961]/35 px-5 pb-5 pt-4 font-inter text-[15px] leading-relaxed text-midnight-blue/90 sm:px-6">{a}</p>
+              </details>
+            ))}
+          </div>
+          <div className="mt-10 text-center"><a href={kaufHref} className={KNOPF}>Jetzt Zugang sichern – {EURO(PREIS)} →</a></div>
         </div>
       </Abschnitt>
 

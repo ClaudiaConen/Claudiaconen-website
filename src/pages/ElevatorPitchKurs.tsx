@@ -24,8 +24,8 @@ const VIMEO = 'https://player.vimeo.com/video/150929970';
 const PREIS = 249;
 const EURO = (n: number) => n.toLocaleString('de-DE') + ' €';
 
-/** OFFEN: Stripe-Zahlungslink des Auftraggebers hier eintragen. Solange leer, führt der Knopf zum #kaufen-Block. */
-const KAUF_LINK = '';
+/** Stripe-Zahlungslink Elevator-Pitch-Kurs (Auftraggeber, 01.11.2026). */
+const KAUF_LINK = 'https://buy.stripe.com/4gM00jaQg7CE4w0h203oA01';
 const MEMBER_LOGIN = '/member/login';
 
 const GOLD = 'bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]';

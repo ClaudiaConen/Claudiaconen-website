@@ -53,7 +53,7 @@ const SPALTEN: { titel: string; links: { label: string; href: string; extern?: b
   },
 ];
 
-const RUND = 'flex h-10 w-10 items-center justify-center rounded-full border border-[#D4AF37]/40 text-[#EBD197] transition-colors hover:border-[#F7E7CE] hover:bg-white/5';
+const RUND = 'flex h-11 w-11 items-center justify-center rounded-full border border-[#D4AF37]/40 text-[#EBD197] transition-colors hover:border-[#F7E7CE] hover:bg-white/5';
 
 export default function Footer() {
   const nachOben = () => window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -61,39 +61,39 @@ export default function Footer() {
   return (
     <>
       <Seitenuebersicht />
-      <footer className="bg-midnight-blue text-pearl-white" style={{ borderTop: '3px solid transparent', borderImage: 'linear-gradient(90deg,#C9A961,#F7E7CE,#D4AF37) 1' }}>
+      <footer className="bg-[#13233F] text-pearl-white" style={{ borderTop: '3px solid transparent', borderImage: 'linear-gradient(90deg,#C9A961,#F7E7CE,#D4AF37) 1' }}>
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           {/* Oben: wer sie ist - und wie man sie erreicht */}
           <div className="grid gap-10 py-14 md:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] md:gap-14">
             <div>
               <div className="flex items-center gap-4">
-                <picture>
+                <picture className="flex-none">
                   <source srcSet="/logo-cc-192.webp" type="image/webp" />
                   <img src="/logo-cc-192.jpg" alt="Claudia Conen" width={56} height={56} loading="lazy" decoding="async" className="h-14 w-14 flex-none rounded-full object-cover ring-2 ring-[#D4AF37]/60" />
                 </picture>
                 <div>
                   <p className="font-montserrat text-2xl font-extrabold text-[#EBD197]">Claudia Conen</p>
-                  <p className="font-montserrat text-[11px] font-bold uppercase tracking-[0.18em] text-pearl-white/80">Expertin für menschliche Wirkungskraft</p>
+                  <p className="font-montserrat text-[13px] font-bold uppercase tracking-[0.18em] text-pearl-white/80">Expertin für menschliche Wirkungskraft im&nbsp;KI&#8209;Zeitalter</p>
                 </div>
               </div>
               <p className="mt-6 max-w-lg font-cormorant text-2xl italic leading-snug text-[#F7E7CE] sm:text-3xl">
-                Perfektion ist klickbar. Persönlichkeit weckt Vertrauen. Und bleibt.
+                Perfektion ist klickbar.<br />Persönlichkeit weckt Vertrauen.<br />Und Vertrauen gewinnt.
               </p>
               <p className="mt-4 max-w-lg font-inter text-[15px] leading-relaxed text-pearl-white/85">
-                Rhetorik, Storytelling, Präsentation und der Auftritt vor der Kamera – seit 37 Jahren. Bekannt als „Die Umsatzstimme".
+                Seit 37 Jahren an der Seite von Selbstständigen, Teams und Unternehmen. Bekannt als „Die Umsatzstimme“.
               </p>
             </div>
 
             <div className="md:justify-self-end">
-              <p className="font-montserrat text-[11px] font-bold uppercase tracking-[0.18em] text-pearl-white/70">Kontakt</p>
+              <p className="font-montserrat text-[13px] font-bold uppercase tracking-[0.18em] text-pearl-white/70">Kontakt</p>
               <ul className="mt-4 grid list-none gap-3 p-0 font-inter text-[15px]">
                 <li>
-                  <a href="mailto:claudiaconen@umsatzstimme.de" className="inline-flex items-center gap-3 text-pearl-white/90 transition-colors hover:text-[#F7E7CE]">
+                  <a href="mailto:claudiaconen@umsatzstimme.de" className="inline-flex min-h-[44px] items-center gap-3 text-pearl-white/90 transition-colors hover:text-[#F7E7CE]">
                     <Mail size={18} className="text-[#EBD197]" /> claudiaconen@umsatzstimme.de
                   </a>
                 </li>
                 <li>
-                  <a href="https://wa.me/4916093102073" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 text-pearl-white/90 transition-colors hover:text-[#F7E7CE]">
+                  <a href="https://wa.me/4916093102073" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[44px] items-center gap-3 text-pearl-white/90 transition-colors hover:text-[#F7E7CE]">
                     <Phone size={18} className="text-[#EBD197]" /> +49 160 93102073 · WhatsApp
                   </a>
                 </li>
@@ -109,7 +109,7 @@ export default function Footer() {
                 <a href="mailto:claudiaconen@umsatzstimme.de" aria-label="E-Mail an Claudia Conen" className={RUND}><Mail size={18} /></a>
                 {/* Zeichen "KI & Mensch": zeigt, dass mit KI gearbeitet wird - NICHT Claudias Logo,
                     deshalb klein bei den Kanaelen (Claudia, 23.10.2026). */}
-                <span title="KI & Mensch – wir arbeiten mit KI" className="flex h-10 w-10 flex-none overflow-hidden rounded-full border border-[#D4AF37]/40">
+                <span title="KI & Mensch – wir arbeiten mit KI" className="flex h-11 w-11 flex-none overflow-hidden rounded-full border border-[#D4AF37]/40">
                   <picture>
                     <source srcSet="/logo-ki-mensch-192.webp" type="image/webp" />
                     <img src="/logo-ki-mensch-192.jpg" alt="Zeichen KI & Mensch" width={40} height={40} loading="lazy" decoding="async" className="h-full w-full object-cover" />
@@ -123,14 +123,14 @@ export default function Footer() {
           <div className="grid gap-8 border-t border-[#D4AF37]/25 py-10 sm:grid-cols-3">
             {SPALTEN.map((sp) => (
               <div key={sp.titel}>
-                <p className="font-montserrat text-[11px] font-bold uppercase tracking-[0.18em] text-[#EBD197]">{sp.titel}</p>
-                <ul className="mt-4 grid list-none gap-2.5 p-0 font-inter text-[15px]">
+                <p className="font-montserrat text-[13px] font-bold uppercase tracking-[0.18em] text-[#EBD197]">{sp.titel}</p>
+                <ul className="mt-3 grid list-none gap-0 p-0 font-inter text-[15px]">
                   {sp.links.map((l) => (
                     <li key={l.label}>
                       {l.extern ? (
-                        <a href={l.href} target="_blank" rel="noopener noreferrer" className="text-pearl-white/85 transition-colors hover:text-[#F7E7CE]">{l.label}</a>
+                        <a href={l.href} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[44px] items-center text-pearl-white/85 transition-colors hover:text-[#F7E7CE]">{l.label}</a>
                       ) : (
-                        <Link to={l.href} className="text-pearl-white/85 transition-colors hover:text-[#F7E7CE]">{l.label}</Link>
+                        <Link to={l.href} className="inline-flex min-h-[44px] items-center text-pearl-white/85 transition-colors hover:text-[#F7E7CE]">{l.label}</Link>
                       )}
                     </li>
                   ))}
@@ -142,11 +142,11 @@ export default function Footer() {
           {/* Unten: Rechtliches, Anschrift, nach oben */}
           <div className="flex flex-col gap-4 border-t border-[#D4AF37]/25 py-7 font-inter text-sm text-pearl-white/70 md:flex-row md:items-center md:justify-between">
             <p>© 2026 Conen UG (haftungsbeschränkt) · Beisenweg 20, 58452 Witten</p>
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-              <Link to="/impressum" className="font-semibold transition-colors hover:text-[#F7E7CE]">Impressum</Link>
-              <Link to="/datenschutz" className="font-semibold transition-colors hover:text-[#F7E7CE]">Datenschutz</Link>
-              <Link to="/agb" className="font-semibold transition-colors hover:text-[#F7E7CE]">AGB</Link>
-              <button type="button" onClick={nachOben} aria-label="Nach oben" className="inline-flex items-center gap-1.5 font-semibold text-[#EBD197] transition-colors hover:text-[#F7E7CE]">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-0">
+              <Link to="/impressum" className="inline-flex min-h-[44px] items-center font-semibold transition-colors hover:text-[#F7E7CE]">Impressum</Link>
+              <Link to="/datenschutz" className="inline-flex min-h-[44px] items-center font-semibold transition-colors hover:text-[#F7E7CE]">Datenschutz</Link>
+              <Link to="/agb" className="inline-flex min-h-[44px] items-center font-semibold transition-colors hover:text-[#F7E7CE]">AGB</Link>
+              <button type="button" onClick={nachOben} aria-label="Nach oben" className="inline-flex min-h-[44px] items-center gap-1.5 font-semibold text-[#EBD197] transition-colors hover:text-[#F7E7CE]">
                 <ArrowUp size={16} /> Nach oben
               </button>
             </div>

@@ -67,13 +67,13 @@ export default function Footer() {
           <div className="grid gap-10 py-14 md:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] md:gap-14">
             <div>
               <div className="flex items-center gap-4">
-                <picture>
+                <picture className="flex-none">
                   <source srcSet="/logo-cc-192.webp" type="image/webp" />
                   <img src="/logo-cc-192.jpg" alt="Claudia Conen" width={56} height={56} loading="lazy" decoding="async" className="h-14 w-14 flex-none rounded-full object-cover ring-2 ring-[#D4AF37]/60" />
                 </picture>
                 <div>
                   <p className="font-montserrat text-2xl font-extrabold text-[#EBD197]">Claudia Conen</p>
-                  <p className="font-montserrat text-[13px] font-bold uppercase tracking-[0.18em] text-pearl-white/80">Expertin für menschliche Wirkungskraft im KI-Zeitalter</p>
+                  <p className="font-montserrat text-[13px] font-bold uppercase tracking-[0.18em] text-pearl-white/80">Expertin für menschliche Wirkungskraft im&nbsp;KI&#8209;Zeitalter</p>
                 </div>
               </div>
               <p className="mt-6 max-w-lg font-cormorant text-2xl italic leading-snug text-[#F7E7CE] sm:text-3xl">

@@ -88,12 +88,12 @@ export default function Footer() {
               <p className="font-montserrat text-[13px] font-bold uppercase tracking-[0.18em] text-pearl-white/70">Kontakt</p>
               <ul className="mt-4 grid list-none gap-3 p-0 font-inter text-[15px]">
                 <li>
-                  <a href="mailto:claudiaconen@umsatzstimme.de" className="inline-flex items-center gap-3 text-pearl-white/90 transition-colors hover:text-[#F7E7CE]">
+                  <a href="mailto:claudiaconen@umsatzstimme.de" className="inline-flex min-h-[44px] items-center gap-3 text-pearl-white/90 transition-colors hover:text-[#F7E7CE]">
                     <Mail size={18} className="text-[#EBD197]" /> claudiaconen@umsatzstimme.de
                   </a>
                 </li>
                 <li>
-                  <a href="https://wa.me/4916093102073" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 text-pearl-white/90 transition-colors hover:text-[#F7E7CE]">
+                  <a href="https://wa.me/4916093102073" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[44px] items-center gap-3 text-pearl-white/90 transition-colors hover:text-[#F7E7CE]">
                     <Phone size={18} className="text-[#EBD197]" /> +49 160 93102073 · WhatsApp
                   </a>
                 </li>

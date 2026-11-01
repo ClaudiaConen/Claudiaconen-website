@@ -20,7 +20,7 @@ import Stimmwelle from '../components/Stimmwelle';
  */
 
 const PFAD = '/elevator-pitch-kurs';
-const VIMEO = 'https://player.vimeo.com/video/150929970';
+const VIMEO = 'https://player.vimeo.com/video/925404058';
 const PREIS = 249;
 const EURO = (n: number) => n.toLocaleString('de-DE') + ' €';
 

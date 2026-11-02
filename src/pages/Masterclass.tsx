@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
-import Brotkrumen from '../components/Brotkrumen';
 import LogoBand from '../components/LogoBand';
 import Stimmwelle from '../components/Stimmwelle';
 import Helix from '../components/Helix';
@@ -183,15 +181,24 @@ export default function Masterclass() {
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(strukturierteDaten) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqDaten) }} />
-      <Navigation hell />
+      {/* Ohne Menue (Auftraggeber, 02.11.2026): Verkaufsseite ohne Ablenkung, nur Logo + ein Weg zur Startseite. */}
+      <div className="border-b border-[#C9A961]/40 bg-pearl-white">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4">
+          <a href="/" className="flex items-center gap-3 transition-opacity hover:opacity-80" aria-label="Claudia Conen – zur Startseite">
+            <picture>
+              <source srcSet="/logo-cc-192.webp" type="image/webp" />
+              <img src="/logo-cc-192.jpg" alt="" width={48} height={48} className="h-11 w-11 rounded-full object-cover" style={{ filter: 'drop-shadow(0 0 8px rgba(212,175,55,0.4))' }} />
+            </picture>
+            <span className="hidden font-montserrat text-sm font-extrabold uppercase tracking-[0.14em] text-midnight-blue sm:inline">Claudia Conen</span>
+          </a>
+          <a href="/" className="font-montserrat text-sm font-bold text-midnight-blue underline decoration-[#C9A961] decoration-2 underline-offset-4 hover:text-royal-navy">← Zur Startseite</a>
+        </div>
+      </div>
 
       {/* Kopf: heller Grund, links Text + Verkaufs-Versprechen, rechts Claudias Foto. */}
-      <header className="relative overflow-hidden bg-pearl-white pt-28 pb-14 sm:pt-32 sm:pb-20">
+      <header className="relative overflow-hidden bg-pearl-white pt-12 pb-14 sm:pt-16 sm:pb-20">
         <span aria-hidden="true" className="pointer-events-none absolute -right-40 -top-40 h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(circle,rgba(247,231,206,0.9),rgba(247,231,206,0)_65%)]" />
         <div className="relative mx-auto max-w-6xl px-6">
-          <div className="mb-8 text-midnight-blue/70">
-            <Brotkrumen krumen={[{ name: 'Masterclass UNVERWECHSELBAR' }]} />
-          </div>
           <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,340px)] lg:gap-12">
             <div className="min-w-0 text-midnight-blue">
               <span aria-hidden="true" className={`block h-[3px] w-16 rounded-full ${GOLD}`} />

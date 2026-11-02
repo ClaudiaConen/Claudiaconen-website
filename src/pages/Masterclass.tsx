@@ -228,7 +228,7 @@ export default function Masterclass() {
                 Jetzt geht's in die Selbstsicherheit. Jetzt geht's weiter.
               </p>
               <figure className="mx-auto mt-8 w-64 sm:w-72 lg:hidden">
-                <img src="/a27/p/masterclass/claudia-mikrofon.webp" alt="Claudia Conen mit Mikrofon, lächelnd" width={1067} height={1601} className="aspect-[4/5] w-full rounded-[14px] border border-[#C9A961]/60 object-cover object-center shadow-[0_24px_50px_-28px_rgba(19,35,63,0.6)]" />
+                <img src="/a27/p/masterclass/claudia-blazer.webp" alt="Claudia Conen im beigen Blazer, lächelnd" width={1067} height={1194} className="aspect-[4/5] w-full rounded-[14px] border border-[#C9A961]/60 object-cover object-center shadow-[0_24px_50px_-28px_rgba(19,35,63,0.6)]" />
               </figure>
               <p className="mt-7 font-inter text-[17px] leading-relaxed text-midnight-blue/85">
                 4 Wochen live mit Claudia Conen · in kleiner Gruppe · mit persönlichem Feedback · plus deine persönliche 1:1-Übungsstunde.
@@ -243,7 +243,7 @@ export default function Masterclass() {
             </div>
             <figure className="relative mx-auto hidden w-full lg:block">
               <span aria-hidden="true" className="absolute -inset-3 rounded-[20px] border border-[#C9A961]/50" />
-              <img src="/a27/p/masterclass/claudia-mikrofon.webp" alt="Claudia Conen mit Mikrofon, lächelnd" width={1067} height={1601} className="relative aspect-[4/5] w-full rounded-[14px] object-cover object-center shadow-[0_30px_60px_-30px_rgba(19,35,63,0.65)]" />
+              <img src="/a27/p/masterclass/claudia-blazer.webp" alt="Claudia Conen im beigen Blazer, lächelnd" width={1067} height={1194} className="relative aspect-[4/5] w-full rounded-[14px] object-cover object-center shadow-[0_30px_60px_-30px_rgba(19,35,63,0.65)]" />
             </figure>
           </div>
         </div>

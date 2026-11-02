@@ -82,7 +82,6 @@ export const SCHRITTE: { nr: number; titel: string; datum: string; text: string;
 export const BEGLEITUNG: { titel: string; text: string; stern?: boolean }[] = [
   { titel: 'Täglicher Audioimpuls', text: 'Montag bis Freitag ein Audioimpuls von etwa drei Minuten mit einer Mini-Übung, von Claudia gesprochen.' },
   { titel: 'Drei Übungsvideos pro Woche', text: 'Jeweils etwa eine Minute – zum Mitmachen und Dranbleiben.' },
-  { titel: 'Ein fester Übungspartner', text: 'Du übst nicht allein: an deiner Seite ein fester Übungspartner aus der Gruppe.' },
   {
     titel: 'Deine persönliche 1:1-Übungsstunde',
     text: 'Zum Abschluss deine persönliche 1:1-Übungsstunde mit Claudia: 60 Minuten nur für dich, in der Woche vom 14. bis 18. Dezember. Dein Pitch bekommt den letzten Schliff, und du gehst mit deinem nächsten Schritt.',

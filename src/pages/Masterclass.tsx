@@ -303,7 +303,7 @@ export default function Masterclass() {
             ))}
           </div>
           <p className="mt-6 font-montserrat text-base font-extrabold text-midnight-blue sm:text-lg">
-            Vier Wochen. Vier Live-Termine. <span className="text-[#7A5C14]">Insgesamt sechs Stunden pro Gruppe.</span>
+            Vier Wochen. Vier Live-Termine. <span className="text-[#C9A961]">Insgesamt sechs Stunden pro Gruppe.</span>
           </p>
         </div>
       </Abschnitt>
@@ -345,7 +345,7 @@ export default function Masterclass() {
             {BEGLEITUNG.map((b, k) => (
               <article key={b.titel} style={{ ['--i' as string]: k % 2 }} className={`cc-stufe p-6 sm:p-7 ${b.stern ? 'relative overflow-hidden rounded-[10px] border-2 border-[#C9A961] bg-white shadow-[0_24px_50px_-30px_rgba(201,169,97,0.9)] md:col-span-2' : `bg-white ${KACHEL} ${BEGLEITUNG.filter((x) => !x.stern).length === 1 ? 'md:col-span-2' : ''}`}`}>
                 <div className="relative">
-                  {b.stern && <span className="inline-block rounded-md border border-[#C9A961] px-3 py-1.5 font-montserrat text-[11px] font-black uppercase tracking-[0.18em] text-[#7A5C14]">Dein Höhepunkt zum Abschluss</span>}
+                  {b.stern && <span className="inline-block rounded-md border border-[#C9A961] px-3 py-1.5 font-montserrat text-[11px] font-black uppercase tracking-[0.18em] text-[#C9A961]">Dein Höhepunkt zum Abschluss</span>}
                   <h3 className={`font-montserrat font-extrabold leading-snug ${b.stern ? 'mt-3 text-2xl sm:text-3xl' : 'text-lg sm:text-xl'}`}>{b.titel}</h3>
                   <p className="mt-2 font-inter text-[15px] leading-relaxed text-midnight-blue/85 sm:text-base">{b.text}</p>
                 </div>
@@ -360,7 +360,7 @@ export default function Masterclass() {
         <div className="mx-auto max-w-6xl px-6">
           <Kicker text="Für wen ist die Masterclass?" hell />
           <h2 id="fuer-wen-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">
-            Für alle, die gespürt haben: <span className="text-[#7A5C14]">Da steckt mehr in mir.</span>
+            Für alle, die gespürt haben: <span className="text-[#C9A961]">Da steckt mehr in mir.</span>
           </h2>
           <div className="mt-10 grid gap-5 md:grid-cols-3">
             {[
@@ -425,7 +425,7 @@ export default function Masterclass() {
             </p>
           </div>
           <p className="mx-auto mt-12 max-w-3xl text-center font-montserrat text-xl font-extrabold leading-relaxed sm:text-2xl">
-            Du musst nicht werden wie andere. <span className="text-[#7A5C14]">Entdecke, was dich ausmacht, und bring es wirkungsvoll zum Ausdruck.</span>
+            Du musst nicht werden wie andere. <span className="text-[#C9A961]">Entdecke, was dich ausmacht, und bring es wirkungsvoll zum Ausdruck.</span>
           </p>
         </div>
       </Abschnitt>
@@ -440,7 +440,7 @@ export default function Masterclass() {
               <details key={f} style={{ ['--i' as string]: k % 3 }} className={`cc-stufe group bg-white ${KACHEL}`}>
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 font-montserrat text-base font-extrabold sm:px-6 sm:py-5 [&::-webkit-details-marker]:hidden">
                   <span className="min-w-0">{f}</span>
-                  <span aria-hidden="true" className="grid h-8 w-8 flex-none place-items-center rounded-full border border-[#C9A961] text-[#7A5C14] transition-transform duration-300 group-open:rotate-45">+</span>
+                  <span aria-hidden="true" className="grid h-8 w-8 flex-none place-items-center rounded-full border border-[#C9A961] text-[#C9A961] transition-transform duration-300 group-open:rotate-45">+</span>
                 </summary>
                 <p className="border-t border-[#C9A961]/35 px-5 pb-5 pt-4 font-inter text-[15px] leading-relaxed text-midnight-blue/90 sm:px-6">{a}</p>
               </details>

@@ -40,7 +40,7 @@ const ERGEBNISSE: [string, string][] = [
   ['Stimme', 'Betonung, Pause und Tempo, die Vertrauen wecken'],
   ['Storytelling', 'deine Beweisgeschichte und eine Sammlung von Geschichten, die nur du erzählen kannst'],
   ['Emotionale Verkaufserkenntnisse', 'die Worte und Fragen, mit denen Menschen sich für dich entscheiden'],
-  ['Dein Pitch', '60 Sekunden, fertig als Video, von mir persönlich geschliffen'],
+  ['Dein Pitch', 'dein 60-Sekunden-Pitch als Video, von mir geschliffen'],
 ];
 
 const GOLD = 'bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]';
@@ -153,11 +153,13 @@ export default function Masterclass() {
     if (!anker || !anmeldung || !fuss) return;
     let hinterKopf = false, inAnmeldung = false, amFuss = false;
     const aktualisieren = () => setLeiste(hinterKopf && !inAnmeldung && !amFuss);
-    const io1 = new IntersectionObserver(([e]) => { hinterKopf = !e.isIntersecting; aktualisieren(); });
+    // Erst wenn der Kopf nach OBEN aus dem Bild gescrollt ist (vorher erschien die Leiste auf dem Handy schon ganz oben).
+    const kopfPruefen = () => { hinterKopf = anker.getBoundingClientRect().top < 0; aktualisieren(); };
     const io2 = new IntersectionObserver(([e]) => { inAnmeldung = e.isIntersecting; aktualisieren(); }, { rootMargin: '0px 0px -20% 0px' });
     const io3 = new IntersectionObserver(([e]) => { amFuss = e.isIntersecting; aktualisieren(); });
-    io1.observe(anker); io2.observe(anmeldung); io3.observe(fuss);
-    return () => { io1.disconnect(); io2.disconnect(); io3.disconnect(); };
+    kopfPruefen(); window.addEventListener('scroll', kopfPruefen, { passive: true });
+    io2.observe(anmeldung); io3.observe(fuss);
+    return () => { window.removeEventListener('scroll', kopfPruefen); io2.disconnect(); io3.disconnect(); };
   }, []);
 
   const kurz = 'UNVERWECHSELBAR ist die Masterclass für Menschen, die ihre Präsenz, Persönlichkeit und Wirkung gezielt weiterentwickeln möchten: vier Live-Termine in kleiner Gruppe, persönliches Feedback und eine finale 1:1-Übungsstunde mit Claudia Conen.';
@@ -177,7 +179,7 @@ export default function Masterclass() {
   };
 
   return (
-    <div className="cc-2027 min-h-screen bg-pearl-white">
+    <div className="cc-2027 min-h-screen bg-white">
       <SEO
         title="UNVERWECHSELBAR – Die Masterclass für Präsenz, Persönlichkeit und Wirkung"
         description={`${kurz} Start 19. November 2026.`}
@@ -187,7 +189,7 @@ export default function Masterclass() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(strukturierteDaten) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqDaten) }} />
       {/* Ohne Menue (Auftraggeber, 02.11.2026): Verkaufsseite ohne Ablenkung, nur Logo + ein Weg zur Startseite. */}
-      <div className="border-b border-[#C9A961]/40 bg-pearl-white">
+      <div className="border-b border-[#C9A961]/40 bg-white">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4">
           <a href="/" className="flex items-center gap-3 transition-opacity hover:opacity-80" aria-label="Claudia Conen – zur Startseite">
             <picture>
@@ -200,28 +202,18 @@ export default function Masterclass() {
         </div>
       </div>
 
-      {/* Kopf: heller Grund, links Text + Verkaufs-Versprechen, rechts Claudias Foto. */}
-      <header className="relative overflow-hidden bg-pearl-white pt-12 pb-14 sm:pt-16 sm:pb-20">
-        <span aria-hidden="true" className="pointer-events-none absolute -right-40 -top-40 h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(circle,rgba(247,231,206,0.9),rgba(247,231,206,0)_65%)]" />
+      {/* Kopf (02.11.2026, Vincis Pruefung): EINE Aussage statt vier, kein Gold auf hellem Grund, weiss statt Creme.
+          Auf dem Handy steht der Knopf vor dem Foto. */}
+      <header className="relative overflow-hidden bg-white pt-12 pb-14 sm:pt-16 sm:pb-20">
         <div className="relative mx-auto max-w-6xl px-6">
           <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,340px)] lg:gap-12">
             <div className="min-w-0 text-midnight-blue">
               <span aria-hidden="true" className={`block h-[3px] w-16 rounded-full ${GOLD}`} />
-              <p className="mt-5 font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] sm:text-sm">Masterclass · online · 4 Wochen · kleine Gruppe</p>
-              <h1 className="mt-4 font-montserrat font-extrabold tracking-tight text-midnight-blue">
-                <span className="gold-text-animated block whitespace-nowrap text-[length:min(3.6rem,calc((100vw_-_56px)/11.3))] leading-none lg:text-[3.2rem] xl:text-[3.6rem]">UNVERWECHSELBAR</span>
-                <span className="mt-4 block text-2xl leading-tight sm:text-[2.1rem]">Die Masterclass für Präsenz, Persönlichkeit und Wirkung</span>
+              <p className="mt-5 font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] sm:text-sm">Masterclass UNVERWECHSELBAR · online · 4 Wochen · kleine Gruppe</p>
+              <h1 className="mt-5 text-balance font-montserrat text-[2.4rem] font-extrabold leading-[1.08] tracking-tight text-midnight-blue sm:text-6xl">
+                Klar im Kopf. Klar im Auftritt. Klar im Verkauf.
               </h1>
-              <p className="mt-6 font-cormorant text-2xl italic leading-snug text-midnight-blue sm:text-[1.9rem]">
-                Sieben Tage hast du investiert. Jetzt geht's ans Eingemachte.
-              </p>
-              <p className="mt-2 font-montserrat text-lg font-extrabold leading-snug text-[#9A7B2F] sm:text-xl">
-                Jetzt geht's in die Selbstsicherheit. Jetzt geht's weiter.
-              </p>
-              <figure className="mx-auto mt-8 w-64 sm:w-72 lg:hidden">
-                <img src="/a27/p/masterclass/claudia-blazer.webp" alt="Claudia Conen im beigen Blazer, lächelnd" width={1067} height={1194} className="aspect-[4/5] w-full rounded-[14px] border border-[#C9A961]/60 object-cover object-center shadow-[0_24px_50px_-28px_rgba(19,35,63,0.6)]" />
-              </figure>
-              <p className="mt-7 font-inter text-[17px] leading-relaxed text-midnight-blue/85">
+              <p className="mt-6 max-w-xl font-inter text-lg leading-relaxed text-midnight-blue/85">
                 4 Wochen live mit Claudia Conen · in kleiner Gruppe · mit persönlichem Feedback · plus deine persönliche 1:1-Übungsstunde.
               </p>
               <p className="mt-6 max-w-xl border-l-4 border-[#C9A961] pl-4 font-montserrat text-base font-extrabold uppercase leading-snug tracking-[0.04em] sm:text-lg">
@@ -231,6 +223,9 @@ export default function Masterclass() {
                 <a href="#anmeldung" className={KNOPF}>Platz sichern →</a>
                 <a href="#schritte" className="font-montserrat text-sm font-bold text-midnight-blue underline decoration-[#C9A961] decoration-2 underline-offset-4 hover:text-royal-navy">Deine sieben Schritte ansehen</a>
               </div>
+              <figure className="mx-auto mt-10 w-64 sm:w-72 lg:hidden">
+                <img src="/a27/p/masterclass/claudia-blazer.webp" alt="Claudia Conen im beigen Blazer, lächelnd" width={1067} height={1194} className="aspect-[4/5] w-full rounded-[14px] border border-[#C9A961]/60 object-cover object-center shadow-[0_24px_50px_-28px_rgba(19,35,63,0.6)]" />
+              </figure>
             </div>
             <figure className="relative mx-auto hidden w-full lg:block">
               <span aria-hidden="true" className="absolute -inset-3 rounded-[20px] border border-[#C9A961]/50" />
@@ -247,7 +242,7 @@ export default function Masterclass() {
           <div className="text-center">
             <div className="flex justify-center"><Kicker text="Dein Ergebnis" /></div>
             <h2 id="ergebnis-titel" className="cc-zeile mt-5 text-balance font-montserrat text-3xl font-extrabold leading-tight sm:text-5xl" style={{ ['--z' as string]: 0 }}>
-              <span className="text-[#E6CC8F]">Klar im Kopf.</span> Klar im Auftritt. <span className="text-[#E6CC8F]">Klar im Verkauf.</span>
+              Das nimmst du nach <span className="text-[#E6CC8F]">vier Wochen</span> mit.
             </h2>
           </div>
           <ol className="mt-10 grid list-none gap-3 p-0 sm:grid-cols-2">
@@ -261,7 +256,7 @@ export default function Masterclass() {
           <div className="mx-auto mt-10 max-w-2xl text-center">
             <p className="font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] text-[#C9A961]">Und darüber hinaus</p>
             <p className="mt-3 font-inter text-lg font-semibold leading-relaxed text-white">
-              Selbstsicherheit: Du präsentierst dein Business souverän und frei, statt auswendig Gelerntes aufzusagen.
+              Selbstsicherheit als Ziel: dein Business souverän und frei präsentieren, statt auswendig Gelerntes aufzusagen.
             </p>
           </div>
         </div>
@@ -277,7 +272,7 @@ export default function Masterclass() {
             Du hast gezeigt, dass du es <span className="text-[#E6CC8F]">ernst meinst.</span>
           </h2>
           <p className="cc-zeile mt-6 font-inter text-lg leading-relaxed text-pearl-white/85" style={{ ['--z' as string]: 1 }}>
-            Sieben Tage, sieben Videos, sieben Mal Mut. Du hast deine Kernbotschaft gefunden, deine Stimme gehört und dich gezeigt. Jetzt gehst du in die Tiefe: üben, bis es sitzt, mit Feedback, das dich wirklich weiterbringt.
+            Sieben Tage, sieben Videos, sieben Mal Mut. Du hast deine Kernbotschaft gefunden, deine Stimme gehört und dich gezeigt. Jetzt gehst du in die Tiefe: üben, mit persönlicher Rückmeldung zu deinen Übungen.
           </p>
           <div className="cc-zeile mt-9" style={{ ['--z' as string]: 2 }}>
             <a href="#anmeldung" className={KNOPF}>Platz sichern →</a>
@@ -300,7 +295,7 @@ export default function Masterclass() {
               <div className="px-4 py-3.5 text-center font-montserrat text-[11px] font-extrabold uppercase tracking-[0.14em] text-[#E6CC8F] sm:px-6 sm:text-xs">Abendgruppe</div>
             </div>
             {TERMINE.map((t, i) => (
-              <div key={t} className={`grid grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)_minmax(0,1fr)] items-center ${i % 2 ? 'bg-pearl-white' : 'bg-white'}`}>
+              <div key={t} className={`grid grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)_minmax(0,1fr)] items-center ${i % 2 ? 'bg-[#F5F7FA]' : 'bg-white'}`}>
                 <div className="px-4 py-4 font-montserrat text-[13px] font-extrabold leading-snug sm:px-6 sm:text-base">{t}</div>
                 <div className="px-4 py-4 text-center font-inter text-[13px] font-semibold text-midnight-blue/80 sm:px-6 sm:text-[15px]">{FRUEH}</div>
                 <div className="px-4 py-4 text-center font-inter text-[13px] font-semibold text-midnight-blue/80 sm:px-6 sm:text-[15px]">{ABEND}</div>
@@ -308,18 +303,18 @@ export default function Masterclass() {
             ))}
           </div>
           <p className="mt-6 font-montserrat text-base font-extrabold text-midnight-blue sm:text-lg">
-            Vier Wochen. Vier Live-Termine. <span className="text-[#9A7B2F]">Insgesamt sechs Stunden pro Gruppe.</span>
+            Vier Wochen. Vier Live-Termine. <span className="text-[#7A5C14]">Insgesamt sechs Stunden pro Gruppe.</span>
           </p>
         </div>
       </Abschnitt>
 
       {/* Von der Challenge in die Tiefe: deine sieben Schritte (mit DNA-Spur). */}
-      <Abschnitt id="schritte" className="bg-pearl-white py-16 text-midnight-blue sm:py-24" label="schritte-titel">
+      <Abschnitt id="schritte" className="bg-[#F5F7FA] py-16 text-midnight-blue sm:py-24" label="schritte-titel">
         <div className="mx-auto max-w-6xl px-6">
           <Kicker text="Von der Challenge in die Tiefe" hell />
           <h2 id="schritte-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">Deine sieben Schritte.</h2>
           <p className="mt-4 max-w-2xl font-inter text-[17px] leading-relaxed text-midnight-blue/85">
-            Jeder Schritt bringt dich näher an deinen souveränen Auftritt. Und aus jedem nimmst du etwas Konkretes mit.
+            Schritt für Schritt arbeitest du an deinem souveränen Auftritt. Und aus jedem nimmst du etwas Konkretes mit.
           </p>
           <div className="mt-10 grid items-start gap-6 md:grid-cols-[140px_minmax(0,1fr)]">
             <Helix aktiv={aktiv} ys={sprossen.ys} hoehe={sprossen.h} />
@@ -327,11 +322,10 @@ export default function Masterclass() {
               {SCHRITTE.map((s, k) => (
                 <li key={s.nr} data-schritt={k} style={{ ['--i' as string]: k % 2 }} className={`cc-stufe bg-white p-6 sm:p-7 ${KACHEL} ${k === aktiv ? 'border-[#C9A961] shadow-[0_18px_40px_-22px_rgba(201,169,97,0.75)]' : ''}`}>
                   <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-                    <span className="gold-text-animated font-montserrat text-3xl font-extrabold leading-none sm:text-4xl">{s.nr}</span>
+                    <span aria-hidden="true" className={`grid h-11 w-11 flex-none place-items-center rounded-full font-montserrat text-lg font-black text-midnight-blue ${GOLD}`}>{s.nr}</span>
                     <h3 className="min-w-0 flex-1 font-montserrat text-lg font-extrabold leading-snug sm:text-xl">{s.titel}</h3>
-                    <span className="whitespace-nowrap rounded-full border border-[#C9A961]/70 bg-pearl-white px-3.5 py-1.5 font-montserrat text-xs font-extrabold text-[#9A7B2F]">{s.datum}</span>
                   </div>
-                  <p className="mt-4 font-inter text-[15px] leading-relaxed text-midnight-blue/90 sm:text-base">{s.text}</p>
+                  <p className="mt-4 font-inter text-[15px] leading-relaxed text-midnight-blue/90 sm:text-base">{s.text}{s.quelle && <span className="ml-1 font-inter text-xs text-midnight-blue/60">({s.quelle})</span>}</p>
                   <p className="mt-4 flex items-start gap-3 border-t border-[#C9A961]/35 pt-4 font-inter text-[15px] leading-relaxed text-midnight-blue/90">
                     <Haken /><span><b className="font-montserrat font-extrabold text-midnight-blue">Du nimmst mit:</b> {s.mit}</span>
                   </p>
@@ -349,10 +343,9 @@ export default function Masterclass() {
           <h2 id="begleitung-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">Du bleibst nicht allein. Deine Begleitung.</h2>
           <div className="mt-10 grid gap-5 md:grid-cols-2">
             {BEGLEITUNG.map((b, k) => (
-              <article key={b.titel} style={{ ['--i' as string]: k % 2 }} className={`cc-stufe p-6 sm:p-7 ${b.stern ? 'relative overflow-hidden rounded-[10px] border-2 border-[#C9A961] bg-[linear-gradient(180deg,#FFFFFF,#FBF7EE)] shadow-[0_24px_50px_-30px_rgba(201,169,97,0.9)] md:col-span-2' : `bg-white ${KACHEL}`}`}>
-                {b.stern && <span aria-hidden="true" className="pointer-events-none absolute -right-20 -top-20 h-60 w-60 rounded-full bg-[radial-gradient(circle,rgba(247,231,206,0.9),rgba(247,231,206,0)_70%)]" />}
+              <article key={b.titel} style={{ ['--i' as string]: k % 2 }} className={`cc-stufe p-6 sm:p-7 ${b.stern ? 'relative overflow-hidden rounded-[10px] border-2 border-[#C9A961] bg-white shadow-[0_24px_50px_-30px_rgba(201,169,97,0.9)] md:col-span-2' : `bg-white ${KACHEL} ${BEGLEITUNG.filter((x) => !x.stern).length === 1 ? 'md:col-span-2' : ''}`}`}>
                 <div className="relative">
-                  {b.stern && <span className="inline-block rounded-md border border-[#C9A961] px-3 py-1.5 font-montserrat text-[11px] font-black uppercase tracking-[0.18em] text-[#9A7B2F]">Dein Höhepunkt zum Abschluss</span>}
+                  {b.stern && <span className="inline-block rounded-md border border-[#C9A961] px-3 py-1.5 font-montserrat text-[11px] font-black uppercase tracking-[0.18em] text-[#7A5C14]">Dein Höhepunkt zum Abschluss</span>}
                   <h3 className={`font-montserrat font-extrabold leading-snug ${b.stern ? 'mt-3 text-2xl sm:text-3xl' : 'text-lg sm:text-xl'}`}>{b.titel}</h3>
                   <p className="mt-2 font-inter text-[15px] leading-relaxed text-midnight-blue/85 sm:text-base">{b.text}</p>
                 </div>
@@ -363,11 +356,11 @@ export default function Masterclass() {
       </Abschnitt>
 
       {/* Fuer wen ist die Masterclass. */}
-      <Abschnitt id="fuer-wen" className="bg-pearl-white py-16 text-midnight-blue sm:py-24" label="fuer-wen-titel">
+      <Abschnitt id="fuer-wen" className="bg-[#F5F7FA] py-16 text-midnight-blue sm:py-24" label="fuer-wen-titel">
         <div className="mx-auto max-w-6xl px-6">
           <Kicker text="Für wen ist die Masterclass?" hell />
           <h2 id="fuer-wen-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">
-            Für alle, die gespürt haben: <span className="text-[#9A7B2F]">Da steckt mehr in mir.</span>
+            Für alle, die gespürt haben: <span className="text-[#7A5C14]">Da steckt mehr in mir.</span>
           </h2>
           <div className="mt-10 grid gap-5 md:grid-cols-3">
             {[
@@ -401,16 +394,16 @@ export default function Masterclass() {
         </div>
       </Abschnitt>
 
-      {/* Kundenstimmen: echte Stimmen wie auf /challenge (woertlich, mit Foto). */}
-      <StimmenKarten />
+      {/* Kundenstimmen wie auf /challenge, ohne die zwei Sprecher-Kunden (Vinci 02.11.2026: keine Rhetorik-Kunden). */}
+      <StimmenKarten ohne={['mario-fuerst', 'julien-backhaus']} />
 
       {/* Das Wichtigste auf einen Blick + Anmeldung (Verkaufs-Block). */}
       <Abschnitt id="anmeldung" className="bg-white py-16 text-midnight-blue sm:py-24" label="anmeldung-titel">
         <div ref={anmeldungRef} className="mx-auto max-w-4xl px-6">
-          <div className="rounded-[22px] border border-[#C9A961]/70 bg-[linear-gradient(180deg,#FFFFFF,#FBF7EE)] p-7 text-center shadow-[0_30px_70px_-40px_rgba(19,35,63,0.55)] sm:p-12">
+          <div className="rounded-[22px] border border-[#C9A961]/70 bg-white p-7 text-center shadow-[0_30px_70px_-40px_rgba(19,35,63,0.55)] sm:p-12">
             <div className="flex justify-center"><Kicker text="Das Wichtigste auf einen Blick" hell /></div>
             <h2 id="anmeldung-titel" className="mt-5 font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">
-              <span className="gold-text-animated">UNVERWECHSELBAR</span><br />Die Masterclass
+              UNVERWECHSELBAR<br /><span className="font-bold">Die Masterclass</span>
             </h2>
             <ul className="mx-auto mt-8 grid max-w-2xl list-none gap-2.5 p-0 text-left">
               {BLICK.map((b) => (
@@ -418,7 +411,7 @@ export default function Masterclass() {
               ))}
             </ul>
             <div className="mt-8">
-              <p className="gold-text-animated font-montserrat text-5xl font-extrabold sm:text-6xl">{EURO(REGULAER)}</p>
+              <p className="font-montserrat text-5xl font-extrabold text-midnight-blue sm:text-6xl">{EURO(REGULAER)}</p>
               <p className="mt-2 font-inter text-sm text-midnight-blue/75">zzgl. MwSt. · {BRUTTO(REGULAER)} inkl. MwSt. · Ratenzahlung über Klarna möglich</p>
             </div>
             <div className="mt-8 flex flex-col items-center gap-4">
@@ -432,13 +425,13 @@ export default function Masterclass() {
             </p>
           </div>
           <p className="mx-auto mt-12 max-w-3xl text-center font-montserrat text-xl font-extrabold leading-relaxed sm:text-2xl">
-            Du musst nicht werden wie andere. <span className="text-[#9A7B2F]">Entdecke, was dich ausmacht, und bring es wirkungsvoll zum Ausdruck.</span>
+            Du musst nicht werden wie andere. <span className="text-[#7A5C14]">Entdecke, was dich ausmacht, und bring es wirkungsvoll zum Ausdruck.</span>
           </p>
         </div>
       </Abschnitt>
 
       {/* Haeufige Fragen. */}
-      <Abschnitt id="fragen" className="bg-pearl-white py-16 text-midnight-blue sm:py-24" label="fragen-titel">
+      <Abschnitt id="fragen" className="bg-[#F5F7FA] py-16 text-midnight-blue sm:py-24" label="fragen-titel">
         <div className="mx-auto max-w-3xl px-6">
           <Kicker text="Häufige Fragen" hell />
           <h2 id="fragen-titel" className="mt-5 font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">Fragen und Antworten zur Masterclass</h2>
@@ -447,7 +440,7 @@ export default function Masterclass() {
               <details key={f} style={{ ['--i' as string]: k % 3 }} className={`cc-stufe group bg-white ${KACHEL}`}>
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 font-montserrat text-base font-extrabold sm:px-6 sm:py-5 [&::-webkit-details-marker]:hidden">
                   <span className="min-w-0">{f}</span>
-                  <span aria-hidden="true" className="grid h-8 w-8 flex-none place-items-center rounded-full border border-[#C9A961] text-[#9A7B2F] transition-transform duration-300 group-open:rotate-45">+</span>
+                  <span aria-hidden="true" className="grid h-8 w-8 flex-none place-items-center rounded-full border border-[#C9A961] text-[#7A5C14] transition-transform duration-300 group-open:rotate-45">+</span>
                 </summary>
                 <p className="border-t border-[#C9A961]/35 px-5 pb-5 pt-4 font-inter text-[15px] leading-relaxed text-midnight-blue/90 sm:px-6">{a}</p>
               </details>

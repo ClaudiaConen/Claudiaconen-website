@@ -1,7 +1,7 @@
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
-import { TERMINE, FRUEH, ABEND, SCHRITTE, BEGLEITUNG } from '../data/masterclassDaten';
+import { FRUEH, ABEND, SCHRITTE, BEGLEITUNG } from '../data/masterclassDaten';
 
 /**
  * Dankesseite nach der Buchung der Masterclass UNVERWECHSELBAR (Route /masterclass/danke, von Stripe/Tentary als
@@ -124,7 +124,7 @@ export default function MasterclassDanke() {
           <h2 id="begleitung-titel" className="mt-5 font-montserrat text-3xl font-extrabold leading-tight text-midnight-blue sm:text-4xl">Du bleibst nicht allein.</h2>
           <div className="mt-8 grid gap-4 md:grid-cols-2">
             {BEGLEITUNG.map((b) => (
-              <article key={b.titel} className={`p-6 ${b.stern ? 'border-2 border-[#C9A961] bg-[linear-gradient(180deg,#FFFFFF,#FBF7EE)] md:col-span-2' : `bg-white ${KACHEL}`} rounded-[10px]`}>
+              <article key={b.titel} className={`p-6 ${b.stern ? 'border-2 border-[#C9A961] bg-[linear-gradient(180deg,#FFFFFF,#FBF7EE)] md:col-span-2' : `bg-white ${KACHEL} ${BEGLEITUNG.filter((x) => !x.stern).length === 1 ? 'md:col-span-2' : ''}`} rounded-[10px]`}>
                 <h3 className={`font-montserrat font-extrabold leading-snug text-midnight-blue ${b.stern ? 'text-xl sm:text-2xl' : 'text-lg'}`}>{b.titel}</h3>
                 <p className="mt-2 font-inter text-[15px] leading-relaxed text-midnight-blue/85">{b.text}</p>
               </article>

@@ -32,6 +32,17 @@ const BRUTTO = (n: number) => EURO(Math.round(n * 119) / 100);
 const KAUF_LINK = 'https://buy.stripe.com/9B600j5vWaOQd2w3ba3oA00';
 const GESPRAECH = '/buchen/erstgespraech';
 
+/** Dein Ergebnis nach vier Wochen - wortgleich vom Auftraggeber (02.11.2026). */
+const ERGEBNISSE: [string, string][] = [
+  ['Klarheit', 'deine Positionierung in einem Satz, den man weitererzählt'],
+  ['Perspektive', 'der Blick deiner Kunden auf dich, ehrlich und konkret'],
+  ['Spontaneität', 'dein Notfallkoffer für jeden spontanen Moment'],
+  ['Stimme', 'Betonung, Pause und Tempo, die Vertrauen wecken'],
+  ['Storytelling', 'deine Beweisgeschichte und eine Sammlung von Geschichten, die nur du erzählen kannst'],
+  ['Emotionale Verkaufserkenntnisse', 'die Worte und Fragen, mit denen Menschen sich für dich entscheiden'],
+  ['Dein Pitch', '60 Sekunden, fertig als Video, von mir persönlich geschliffen'],
+];
+
 const GOLD = 'bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]';
 const KACHEL = 'cc-glanz-kachel rounded-[10px] border border-[#13233F]/[0.13] transition-[border-color,box-shadow] duration-200 hover:border-[#C9A961] hover:shadow-[0_18px_40px_-20px_rgba(19,35,63,0.35)]';
 const KNOPF = `inline-flex items-center justify-center gap-2.5 rounded-full px-9 py-5 font-montserrat text-base font-extrabold text-midnight-blue shadow-[0_10px_24px_-12px_rgba(19,35,63,0.45)] transition-transform hover:-translate-y-px sm:text-lg ${GOLD}`;
@@ -238,6 +249,32 @@ export default function Masterclass() {
         </div>
       </header>
       <div ref={ankerRef} aria-hidden="true" />
+
+      {/* Dein Ergebnis - direkt nach dem Kopf, Text wortgleich vom Auftraggeber (02.11.2026). */}
+      <Abschnitt id="ergebnis" className="bg-[#13233F] py-16 text-pearl-white sm:py-24" label="ergebnis-titel">
+        <div className="mx-auto max-w-5xl px-6">
+          <div className="text-center">
+            <div className="flex justify-center"><Kicker text="Dein Ergebnis" /></div>
+            <h2 id="ergebnis-titel" className="cc-zeile mt-5 text-balance font-montserrat text-3xl font-extrabold leading-tight sm:text-5xl" style={{ ['--z' as string]: 0 }}>
+              <span className="text-[#E6CC8F]">Klar im Kopf.</span> Klar im Auftritt. <span className="text-[#E6CC8F]">Klar im Verkauf.</span>
+            </h2>
+          </div>
+          <ol className="mt-10 grid list-none gap-3 p-0 sm:grid-cols-2">
+            {ERGEBNISSE.map(([t, x], k) => (
+              <li key={t} style={{ ['--i' as string]: k }} className={`cc-stufe flex items-start gap-4 rounded-[14px] border border-[#C9A961]/35 bg-white/[0.05] p-5 ${k === ERGEBNISSE.length - 1 ? 'sm:col-span-2' : ''}`}>
+                <span aria-hidden="true" className={`grid h-10 w-10 flex-none place-items-center rounded-full font-montserrat text-sm font-black text-midnight-blue ${GOLD}`}>{k + 1}</span>
+                <p className="min-w-0 pt-1.5 font-inter text-[16px] leading-relaxed text-pearl-white/85"><b className="font-montserrat font-extrabold text-white">{t}:</b> {x}</p>
+              </li>
+            ))}
+          </ol>
+          <div className="mx-auto mt-10 max-w-2xl text-center">
+            <p className="font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] text-[#C9A961]">Und darüber hinaus</p>
+            <p className="mt-3 font-inter text-lg font-semibold leading-relaxed text-white">
+              Selbstsicherheit: Du präsentierst dein Business souverän und frei, statt auswendig Gelerntes aufzusagen.
+            </p>
+          </div>
+        </div>
+      </Abschnitt>
 
       <LogoBand />
 

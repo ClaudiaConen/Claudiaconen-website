@@ -140,19 +140,22 @@ export default function Masterclass() {
     return () => { ro.disconnect(); window.removeEventListener('scroll', pruefen); };
   }, []);
 
-  // Mitlaufender Kauf-Knopf (Sales-Leiste): erscheint nach dem Kopf, verschwindet, sobald die Anmeldung im Bild ist.
+  // Mitlaufender Kauf-Knopf (Sales-Leiste): erscheint nach dem Kopf, verschwindet, sobald die Anmeldung oder die
+  // Fusszeile im Bild ist - Impressum und Datenschutz duerfen nie verdeckt sein (Auftraggeber, 02.11.2026).
   const [leiste, setLeiste] = useState(false);
   const ankerRef = useRef<HTMLDivElement>(null);
   const anmeldungRef = useRef<HTMLDivElement>(null);
+  const fussRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    const anker = ankerRef.current, anmeldung = anmeldungRef.current;
-    if (!anker || !anmeldung) return;
-    let hinterKopf = false, inAnmeldung = false;
-    const aktualisieren = () => setLeiste(hinterKopf && !inAnmeldung);
+    const anker = ankerRef.current, anmeldung = anmeldungRef.current, fuss = fussRef.current;
+    if (!anker || !anmeldung || !fuss) return;
+    let hinterKopf = false, inAnmeldung = false, amFuss = false;
+    const aktualisieren = () => setLeiste(hinterKopf && !inAnmeldung && !amFuss);
     const io1 = new IntersectionObserver(([e]) => { hinterKopf = !e.isIntersecting; aktualisieren(); });
     const io2 = new IntersectionObserver(([e]) => { inAnmeldung = e.isIntersecting; aktualisieren(); }, { rootMargin: '0px 0px -20% 0px' });
-    io1.observe(anker); io2.observe(anmeldung);
-    return () => { io1.disconnect(); io2.disconnect(); };
+    const io3 = new IntersectionObserver(([e]) => { amFuss = e.isIntersecting; aktualisieren(); });
+    io1.observe(anker); io2.observe(anmeldung); io3.observe(fuss);
+    return () => { io1.disconnect(); io2.disconnect(); io3.disconnect(); };
   }, []);
 
   const kurz = 'UNVERWECHSELBAR ist die Masterclass für Menschen, die ihre Präsenz, Persönlichkeit und Wirkung gezielt weiterentwickeln möchten: vier Live-Termine in kleiner Gruppe, persönliches Feedback und eine finale 1:1-Übungsstunde mit Claudia Conen.';
@@ -458,18 +461,20 @@ export default function Masterclass() {
         </div>
       </Abschnitt>
 
-      {/* Mitlaufende Verkaufs-Leiste (erscheint nach dem Kopf, verschwindet in der Anmeldung). */}
-      <div className={`fixed inset-x-0 bottom-0 z-40 border-t border-[#C9A961]/50 bg-white/95 backdrop-blur transition-transform duration-300 ${leiste ? 'translate-y-0' : 'translate-y-full'}`}>
+      {/* Mitlaufende Verkaufs-Leiste (erscheint nach dem Kopf, verschwindet in der Anmeldung und an der Fusszeile). */}
+      <div aria-hidden={!leiste} className={`fixed inset-x-0 bottom-0 z-40 border-t border-[#C9A961]/50 bg-white/95 backdrop-blur transition-transform duration-300 ${leiste ? 'translate-y-0' : 'pointer-events-none translate-y-full'}`}>
         <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
           <div className="min-w-0">
             <p className="truncate font-montserrat text-sm font-extrabold text-midnight-blue sm:text-base">UNVERWECHSELBAR · ab {START_LABEL.replace('Donnerstag, ', '')}</p>
             <p className="truncate font-inter text-xs text-midnight-blue/70 sm:text-[13px]">{EURO(REGULAER)} zzgl. MwSt. · Ratenzahlung möglich · höchstens 9 Plätze</p>
           </div>
-          <a href="#anmeldung" className={`${GOLD} inline-flex flex-none items-center gap-2 rounded-full px-5 py-3 font-montserrat text-sm font-extrabold text-midnight-blue shadow-[0_8px_18px_-10px_rgba(19,35,63,0.5)] sm:px-7 sm:text-base`}>Platz sichern →</a>
+          <a href="#anmeldung" className={`${GOLD} inline-flex flex-none items-center gap-2 rounded-full px-5 py-3 font-montserrat text-sm font-extrabold text-midnight-blue shadow-[0_8px_18px_-10px_rgba(19,35,63,0.5)] sm:px-7 sm:text-base`} tabIndex={leiste ? 0 : -1}>Platz sichern →</a>
         </div>
       </div>
 
-      <Footer />
+      <div ref={fussRef}>
+        <Footer />
+      </div>
     </div>
   );
 }

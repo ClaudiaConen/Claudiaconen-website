@@ -60,14 +60,14 @@ const KACHEL = 'cc-glanz-kachel rounded-[10px] border border-[#13233F]/[0.13] tr
 const KNOPF = `inline-flex items-center justify-center gap-2.5 rounded-full px-9 py-5 font-montserrat text-base font-extrabold text-midnight-blue shadow-[0_10px_24px_-12px_rgba(19,35,63,0.45)] transition-transform hover:-translate-y-px sm:text-lg ${GOLD}`;
 
 /** Haeufige Fragen. Fakten aus dem Dokument (Termine 19.11.-10.12.2026, zwei Gruppen, max. 9, 1:1-Stunde, Zoom ohne
- *  Aufzeichnung, Challenge keine Voraussetzung). */
+ *  Aufzeichnung im Mitgliederbereich (Auftraggeber 02.11.2026), Challenge keine Voraussetzung). */
 const FRAGEN: [string, string][] = [
   ['Muss ich vorher an der 7-Tage-Challenge teilgenommen haben?', 'Nein. Du hast in der Challenge schon einen Vorsprung, aber die Masterclass ist ein eigenständiges Angebot. Wer neu einsteigt, findet genauso Zugang zu allen Themen.'],
   ['Für wen ist die Masterclass?', 'Für Selbstständige, Coaches und Unternehmerinnen, die sich zeigen wollen, ohne sich zu verbiegen – und die jetzt dranbleiben wollen, mit Begleitung statt allein.'],
   ['Wann sind die Termine?', '4 Live-Termine, donnerstags: 19. November, 26. November, 3. Dezember und 10. Dezember 2026. Du wählst die Frühgruppe (7:30–9:00 Uhr) oder die Abendgruppe (18:30–20:00 Uhr). Die Inhalte sind in beiden Gruppen gleich.'],
   ['Wie wähle ich meine Gruppe?', 'Ganz einfach nach deiner Buchung: Schreib mir kurz, ob du in die Frühgruppe (7:30–9:00 Uhr) oder in die Abendgruppe (18:30–20:00 Uhr) möchtest, per E-Mail an claudiaconen@umsatzstimme.de oder per WhatsApp an +49 160 93102073. Die Inhalte sind in beiden Gruppen gleich.'],
-  ['Was, wenn ich einen Termin verpasse?', 'Alle Termine laufen live per Zoom, ohne Aufzeichnung. Die Inhalte sind in der Früh- und der Abendgruppe gleich. Wenn du einen Termin nicht schaffst, sag mir bitte vorher Bescheid, per E-Mail an claudiaconen@umsatzstimme.de oder per WhatsApp an +49 160 93102073. Dann finden wir gemeinsam eine Lösung.'],
-  ['Was brauche ich dafür?', 'Keine Technik-Kenntnisse, kein Studio und kein perfektes Video. Dein Handy und deinen Mut – mehr nicht. Alle Termine laufen live per Zoom, ohne Aufzeichnung.'],
+  ['Was, wenn ich einen Termin verpasse?', 'Kein Problem: Die Aufzeichnung jedes Live-Termins findest du in deinem Mitgliederbereich. So kannst du alles in Ruhe nachholen. Gib mir trotzdem kurz Bescheid, wenn du nicht dabei sein kannst, per E-Mail an claudiaconen@umsatzstimme.de oder per WhatsApp an +49 160 93102073.'],
+  ['Was brauche ich dafür?', 'Keine Technik-Kenntnisse, kein Studio und kein perfektes Video. Dein Handy und deinen Mut – mehr nicht. Alle Termine laufen live per Zoom, die Aufzeichnung findest du danach in deinem Mitgliederbereich.'],
   ['Bekomme ich persönliches Feedback?', 'Ja. Wir schauen gemeinsam auf deine Videos, und zum Abschluss bekommst du deine persönliche 1:1-Übungsstunde mit mir: 60 Minuten nur für dich, in der Woche vom 14. bis 18. Dezember.'],
   ['Wie viele Plätze gibt es?', 'Höchstens 9 Personen pro Gruppe. Darum laufen alle Termine live, und jede und jeder kommt dran.'],
   ['Ich bin vor der Kamera unsicher oder habe Redeangst. Ist das trotzdem etwas für mich?', 'Ja, gerade dann. Lampenfieber wird kleiner durch Üben, nicht durch Warten. Du lernst nicht, jemand anderes zu werden – du findest deinen eigenen, sicheren Weg.'],
@@ -384,7 +384,7 @@ export default function Masterclass() {
           <h2 id="inklusive-titel" className="mt-5 font-montserrat text-3xl font-extrabold leading-tight text-white sm:text-5xl">Alles an einem Ort.</h2>
           <div className="mt-10 grid gap-6 md:grid-cols-2">
             {[
-              { titel: 'Dein Mitgliederbereich', bild: '/a27/p/masterclass/mitgliederbereich.webp', alt: 'Ausschnitt aus dem Mitgliederbereich: Willkommen Unverwechselbar, mit Hören, Üben und Zeigen', b: 1100, h: 410, punkte: ['Audios, Videos und Unterlagen zum Download', 'Austausch mit deiner Gruppe', 'Täglich ein Impuls und eine Lernaufgabe'] },
+              { titel: 'Dein Mitgliederbereich', bild: '/a27/p/masterclass/mitgliederbereich.webp', alt: 'Ausschnitt aus dem Mitgliederbereich: Willkommen Unverwechselbar, mit Hören, Üben und Zeigen', b: 1100, h: 410, punkte: ['Audios, Videos und Unterlagen zum Download', 'Die Aufzeichnung jedes Live-Termins', 'Austausch mit deiner Gruppe', 'Täglich ein Impuls und eine Lernaufgabe'] },
               { titel: 'Dein Workbook', bild: '/challenge/sieben-workbooks.webp', alt: 'Die Workbooks von Claudia Conen, aufgefächert', b: 1000, h: 472, punkte: ['Zum Ausfüllen, Ausdrucken, Nachschlagen', 'Deine Antworten bleiben dir'] },
             ].map((k, i) => (
               <article key={k.titel} style={{ ['--i' as string]: i }} className="cc-stufe flex flex-col rounded-[18px] border-2 border-[#C9A961] bg-white/[0.04] p-6 shadow-[0_24px_60px_-30px_rgba(201,169,97,0.55)] sm:p-8">
@@ -414,7 +414,7 @@ export default function Masterclass() {
             {[
               ['Für dich', 'Für Selbstständige, Coaches und Unternehmerinnen, die sich zeigen wollen, ohne sich zu verbiegen. Und die jetzt dranbleiben wollen, mit Begleitung statt allein.'],
               ['Was du nicht brauchst', 'Keine Technik-Kenntnisse, kein Studio und kein perfektes Video. Dein Handy und den Mut aus der Challenge hast du schon.'],
-              ['Live und persönlich', 'Alle Termine laufen live per Zoom, ohne Aufzeichnung. Darum sind die Gruppen klein, und jede und jeder kommt dran.'],
+              ['Live und persönlich', 'Alle Termine laufen live per Zoom, die Aufzeichnung findest du danach in deinem Mitgliederbereich. Die Gruppen sind klein, damit jede und jeder drankommt.'],
             ].map(([t, x], k) => (
               <article key={t} style={{ ['--i' as string]: k % 3 }} className={`cc-stufe bg-white p-6 sm:p-7 ${KACHEL}`}>
                 <h3 className="font-montserrat text-lg font-extrabold leading-snug">{t}</h3>

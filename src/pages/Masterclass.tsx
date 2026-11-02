@@ -47,15 +47,6 @@ const GOLD = 'bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]';
 const KACHEL = 'cc-glanz-kachel rounded-[10px] border border-[#13233F]/[0.13] transition-[border-color,box-shadow] duration-200 hover:border-[#C9A961] hover:shadow-[0_18px_40px_-20px_rgba(19,35,63,0.35)]';
 const KNOPF = `inline-flex items-center justify-center gap-2.5 rounded-full px-9 py-5 font-montserrat text-base font-extrabold text-midnight-blue shadow-[0_10px_24px_-12px_rgba(19,35,63,0.45)] transition-transform hover:-translate-y-px sm:text-lg ${GOLD}`;
 
-/** Der KI-Agent wird in der Masterclass gezeigt, ist aber separat im Abo (kein Gratis-Bonus, Auftraggeber 28.10.2026). */
-const KI_AGENT = [
-  'Ideen für Posts, Reels und Videos entwickeln.',
-  'Eigene Themen und Botschaften in Content verwandeln.',
-  'Texte und Hooks formulieren, die zur eigenen Persönlichkeit passen.',
-  'Content planen und den Redaktionsalltag vereinfachen.',
-  'Zeit sparen und leichter regelmäßig sichtbar werden.',
-];
-
 /** Haeufige Fragen. Fakten aus dem Dokument (Termine 19.11.-10.12.2026, zwei Gruppen, max. 9, 1:1-Stunde, Zoom ohne
  *  Aufzeichnung, Challenge keine Voraussetzung). */
 const FRAGEN: [string, string][] = [
@@ -412,36 +403,6 @@ export default function Masterclass() {
 
       {/* Kundenstimmen: echte Stimmen wie auf /challenge (woertlich, mit Foto). */}
       <StimmenKarten />
-
-      {/* KI-Agent: in der Masterclass gezeigt, separat im Abo (kein Gratis-Bonus, 28.10.2026). */}
-      <Abschnitt id="bonus" className="bg-pearl-white py-16 text-midnight-blue sm:py-24" label="bonus-titel">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="relative overflow-hidden rounded-[20px] border-2 border-[#C9A961] bg-white p-7 shadow-[0_30px_60px_-36px_rgba(201,169,97,0.9)] sm:p-10">
-            <span aria-hidden="true" className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[radial-gradient(circle,rgba(247,231,206,0.95),rgba(247,231,206,0)_70%)]" />
-            <div className="relative grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:gap-12">
-              <div className="min-w-0">
-                <span className="inline-block rounded-md border border-[#C9A961] px-3 py-1.5 font-montserrat text-[11px] font-black uppercase tracking-[0.18em] text-[#9A7B2F]">Einblick in der Masterclass</span>
-                <h2 id="bonus-titel" className="mt-4 font-montserrat text-3xl font-extrabold leading-tight">Der KI-Agent für die Hosentasche</h2>
-                <p className="mt-2 font-cormorant text-2xl italic text-[#9A7B2F]">Social Media mit Leichtigkeit gestalten</p>
-                <p className="mt-5 font-inter text-[17px] leading-relaxed text-midnight-blue/90">In der Masterclass zeige ich dir, wie der KI-Agent dir den Alltag im Business erleichtert. Entdecke, wie du KI als persönlichen Assistenten nutzen kannst, um deine Sichtbarkeit einfacher und effizienter zu gestalten – ohne dabei deine eigene Stimme und Authentizität zu verlieren.</p>
-              </div>
-              <div className="min-w-0">
-                <ul className="grid list-none gap-2.5 p-0">
-                  {KI_AGENT.map((b) => (
-                    <li key={b} className="flex items-start gap-3 font-inter text-[15px] leading-relaxed"><Haken /><span>{b}</span></li>
-                  ))}
-                </ul>
-                <p className="mt-6 border-l-4 border-[#C9A961] bg-pearl-white px-4 py-3 font-inter text-[15px] leading-relaxed">
-                  <b className="font-montserrat font-extrabold">Dein Vorteil:</b> Mit dem KI-Agenten musst du nicht jedes Mal bei null anfangen. Du hast einen digitalen Sparringspartner an deiner Seite, der dich dabei unterstützt, deine Expertise sichtbar zu machen.
-                </p>
-                <p className="mt-4 font-inter text-sm leading-relaxed text-midnight-blue/75">
-                  <b className="font-montserrat font-bold text-midnight-blue">Gut zu wissen:</b> Der KI-Agent ist nicht im Preis der Masterclass enthalten. Du bekommst ihn separat im Monats- oder Jahresabo.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Abschnitt>
 
       {/* Das Wichtigste auf einen Blick + Anmeldung (Verkaufs-Block). */}
       <Abschnitt id="anmeldung" className="bg-white py-16 text-midnight-blue sm:py-24" label="anmeldung-titel">

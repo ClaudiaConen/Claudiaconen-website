@@ -81,7 +81,7 @@ export const SCHRITTE: { nr: number; titel: string; datum: string; text: string;
 
 /** Deine Begleitung zwischen den Terminen (Dokument). Das letzte Element ist die 1:1-Uebungsstunde (hervorgehoben). */
 export const BEGLEITUNG: { titel: string; text: string; stern?: boolean }[] = [
-  { titel: 'Dein Impuls von Montag bis Freitag', text: 'Montag bis Freitag ein Impuls mit kleiner Übung, von Claudia, in der geschlossenen WhatsApp-Gruppe.' },
+  { titel: 'Dein Impuls von Montag bis Freitag', text: 'Montag bis Freitag Audioimpulse mit kleinen Übungen, ohne Druck, in der geschlossenen WhatsApp-Gruppe.' },
   {
     titel: 'Deine persönliche 1:1-Übungsstunde',
     text: 'Zum Abschluss deine persönliche 1:1-Übungsstunde mit Claudia: 60 Minuten nur für dich, in der Woche vom 14. bis 18. Dezember. Dein Pitch bekommt den letzten Schliff, und du gehst mit deinem nächsten Schritt.',

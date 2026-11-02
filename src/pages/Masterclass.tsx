@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { BadgeCheck, BookOpen, Clock, Lightbulb, MessageCircle, Play, Users, type LucideIcon } from 'lucide-react';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import LogoBand from '../components/LogoBand';
@@ -43,6 +44,17 @@ const ERGEBNISSE: [string, string][] = [
   ['Dein Pitch', 'dein 60-Sekunden-Pitch als Video, von mir geschliffen'],
 ];
 
+/** Was du bekommst - Claudias Folie "Dein Weg mit mir" (02.11.2026), wortgleich. Das 1:1-Intensivtraining steht als
+ *  hervorgehobene Karte darunter (aus der Begleitung), die Audioimpulse mit dem WhatsApp-Hinweis zusammengefuehrt. */
+const LEISTUNGEN: { icon: LucideIcon; fett: string; rest: string }[] = [
+  { icon: Users, fett: 'Jede Woche live per Zoom', rest: ', 90 Minuten, früh oder abends' },
+  { icon: Clock, fett: 'Montag bis Freitag Audioimpulse', rest: ' mit kleinen Übungen, ohne Druck, in der geschlossenen WhatsApp-Gruppe' },
+  { icon: MessageCircle, fett: '4 persönliche, gesprochene Feedbacks', rest: ' von mir' },
+  { icon: Play, fett: 'Einmal pro Woche gemeinsam live', rest: ' auf Social Media, bis 15 Minuten SPONTAN' },
+  { icon: Lightbulb, fett: 'Tipps zu Licht und Mikrofon', rest: ' für deine Aufnahmen' },
+  { icon: BookOpen, fett: 'Entspannung und Selbstreflexion', rest: ' als Audio-Übung' },
+];
+
 const GOLD = 'bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]';
 const KACHEL = 'cc-glanz-kachel rounded-[10px] border border-[#13233F]/[0.13] transition-[border-color,box-shadow] duration-200 hover:border-[#C9A961] hover:shadow-[0_18px_40px_-20px_rgba(19,35,63,0.35)]';
 const KNOPF = `inline-flex items-center justify-center gap-2.5 rounded-full px-9 py-5 font-montserrat text-base font-extrabold text-midnight-blue shadow-[0_10px_24px_-12px_rgba(19,35,63,0.45)] transition-transform hover:-translate-y-px sm:text-lg ${GOLD}`;
@@ -53,6 +65,7 @@ const FRAGEN: [string, string][] = [
   ['Muss ich vorher an der 7-Tage-Challenge teilgenommen haben?', 'Nein. Du hast in der Challenge schon einen Vorsprung, aber die Masterclass ist ein eigenständiges Angebot. Wer neu einsteigt, findet genauso Zugang zu allen Themen.'],
   ['Für wen ist die Masterclass?', 'Für Selbstständige, Coaches und Unternehmerinnen, die sich zeigen wollen, ohne sich zu verbiegen – und die jetzt dranbleiben wollen, mit Begleitung statt allein.'],
   ['Wann sind die Termine?', '4 Live-Termine, donnerstags: 19. November, 26. November, 3. Dezember und 10. Dezember 2026. Du wählst die Frühgruppe (7:30–9:00 Uhr) oder die Abendgruppe (18:30–20:00 Uhr). Die Inhalte sind in beiden Gruppen gleich.'],
+  ['Wie wähle ich meine Gruppe?', 'Ganz einfach nach deiner Buchung: Schreib mir kurz, ob du in die Frühgruppe (7:30–9:00 Uhr) oder in die Abendgruppe (18:30–20:00 Uhr) möchtest, per E-Mail an claudiaconen@umsatzstimme.de oder per WhatsApp an +49 160 93102073. Die Inhalte sind in beiden Gruppen gleich.'],
   ['Was brauche ich dafür?', 'Keine Technik-Kenntnisse, kein Studio und kein perfektes Video. Dein Handy und deinen Mut – mehr nicht. Alle Termine laufen live per Zoom, ohne Aufzeichnung.'],
   ['Bekomme ich persönliches Feedback?', 'Ja. Wir schauen gemeinsam auf deine Videos, und zum Abschluss bekommst du deine persönliche 1:1-Übungsstunde mit mir: 60 Minuten nur für dich, in der Woche vom 14. bis 18. Dezember.'],
   ['Wie viele Plätze gibt es?', 'Höchstens 9 Personen pro Gruppe. Darum laufen alle Termine live, und jede und jeder kommt dran.'],
@@ -284,7 +297,7 @@ export default function Masterclass() {
       <Abschnitt id="termine" className="bg-white py-16 text-midnight-blue sm:py-24" label="termine-titel">
         <div className="mx-auto max-w-5xl px-6">
           <Kicker text="Gruppen und Termine" hell />
-          <h2 id="termine-titel" className="mt-5 font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">Deine Masterclass. Passend zu deinem Alltag.</h2>
+          <h2 id="termine-titel" className="mt-5 font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">Früh oder abends: du wählst.</h2>
           <p className="mt-4 max-w-2xl font-inter text-[17px] leading-relaxed text-midnight-blue/85">
             Starte morgens mit frischem Kopf oder nimm dir abends Zeit für deine Wirkungskraft. Du wählst deine Gruppe, die Inhalte sind in beiden Gruppen gleich.
           </p>
@@ -336,19 +349,53 @@ export default function Masterclass() {
         </div>
       </Abschnitt>
 
-      {/* Deine Begleitung zwischen den Terminen. */}
+      {/* Was du bekommst - Claudias Folie "Dein Weg mit mir", ergaenzt um die 1:1-Karte aus der Begleitung. */}
       <Abschnitt id="begleitung" className="bg-white py-16 text-midnight-blue sm:py-24" label="begleitung-titel">
         <div className="mx-auto max-w-6xl px-6">
-          <Kicker text="Zwischen den Terminen" hell />
-          <h2 id="begleitung-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">Du bleibst nicht allein. Deine Begleitung.</h2>
-          <div className="mt-10 grid gap-5 md:grid-cols-2">
-            {BEGLEITUNG.map((b, k) => (
-              <article key={b.titel} style={{ ['--i' as string]: k % 2 }} className={`cc-stufe p-6 sm:p-7 ${b.stern ? 'relative overflow-hidden rounded-[10px] border-2 border-[#C9A961] bg-white shadow-[0_24px_50px_-30px_rgba(201,169,97,0.9)] md:col-span-2' : `bg-white ${KACHEL} ${BEGLEITUNG.filter((x) => !x.stern).length === 1 ? 'md:col-span-2' : ''}`}`}>
-                <div className="relative">
-                  {b.stern && <span className="inline-block rounded-md border border-[#C9A961] px-3 py-1.5 font-montserrat text-[11px] font-black uppercase tracking-[0.18em] text-[#C9A961]">Dein Höhepunkt zum Abschluss</span>}
-                  <h3 className={`font-montserrat font-extrabold leading-snug ${b.stern ? 'mt-3 text-2xl sm:text-3xl' : 'text-lg sm:text-xl'}`}>{b.titel}</h3>
-                  <p className="mt-2 font-inter text-[15px] leading-relaxed text-midnight-blue/85 sm:text-base">{b.text}</p>
+          <Kicker text="Dein Weg mit mir · Masterclass UNVERWECHSELBAR" hell />
+          <h2 id="begleitung-titel" className="mt-5 max-w-3xl font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">Vier Wochen, passend zu deinem Alltag.</h2>
+          <ul className="mt-10 grid list-none gap-4 p-0 md:grid-cols-2">
+            {LEISTUNGEN.map(({ icon: Icon, fett, rest }, k) => (
+              <li key={fett} style={{ ['--i' as string]: k % 2 }} className={`cc-stufe flex items-center gap-4 bg-[#F5F7FA] px-5 py-4 sm:px-6 sm:py-5 ${KACHEL}`}>
+                <Icon aria-hidden="true" size={24} strokeWidth={1.6} className="flex-none text-[#C9A961]" />
+                <p className="min-w-0 font-inter text-[16px] leading-snug text-midnight-blue/85 sm:text-[17px]"><b className="font-montserrat font-extrabold text-midnight-blue">{fett}</b>{rest}</p>
+              </li>
+            ))}
+            <li className="cc-stufe flex items-center gap-4 rounded-[10px] border border-[#C9A961] bg-[#13233F] px-5 py-4 text-pearl-white sm:px-6 sm:py-5 md:col-span-2">
+              <BadgeCheck aria-hidden="true" size={24} strokeWidth={1.6} className="flex-none text-[#C9A961]" />
+              <p className="min-w-0 font-inter text-[16px] leading-snug sm:text-[17px]"><b className="font-montserrat font-extrabold text-white">Höchstens 9 Personen</b>, jede kommt dran</p>
+            </li>
+          </ul>
+          {BEGLEITUNG.filter((b) => b.stern).map((b) => (
+            <article key={b.titel} className="cc-stufe relative mt-5 overflow-hidden rounded-[10px] border-2 border-[#C9A961] bg-white p-6 shadow-[0_24px_50px_-30px_rgba(201,169,97,0.9)] sm:p-7">
+              <span className="inline-block rounded-md border border-[#C9A961] px-3 py-1.5 font-montserrat text-[11px] font-black uppercase tracking-[0.18em] text-[#C9A961]">Dein Höhepunkt zum Abschluss</span>
+              <h3 className="mt-3 font-montserrat text-2xl font-extrabold leading-snug sm:text-3xl">Dein 1:1-Intensivtraining</h3>
+              <p className="mt-2 font-inter text-[15px] leading-relaxed text-midnight-blue/85 sm:text-base">{b.text}</p>
+            </article>
+          ))}
+        </div>
+      </Abschnitt>
+
+      {/* Inklusive - Claudias Folie "Alles an einem Ort" (02.11.2026), Texte wortgleich. */}
+      <Abschnitt id="inklusive" className="bg-[#13233F] py-16 text-pearl-white sm:py-24" label="inklusive-titel">
+        <div className="mx-auto max-w-6xl px-6">
+          <Kicker text="Inklusive · Für dich gemacht" />
+          <h2 id="inklusive-titel" className="mt-5 font-montserrat text-3xl font-extrabold leading-tight text-white sm:text-5xl">Alles an einem Ort.</h2>
+          <div className="mt-10 grid gap-6 md:grid-cols-2">
+            {[
+              { titel: 'Dein Mitgliederbereich', bild: '/a27/p/masterclass/mitgliederbereich.webp', alt: 'Ausschnitt aus dem Mitgliederbereich: Willkommen Unverwechselbar, mit Hören, Üben und Zeigen', b: 1100, h: 410, punkte: ['Audios, Videos und Unterlagen zum Download', 'Austausch mit deiner Gruppe', 'Täglich ein Impuls und eine Lernaufgabe'] },
+              { titel: 'Dein Workbook', bild: '/challenge/sieben-workbooks.webp', alt: 'Die Workbooks von Claudia Conen, aufgefächert', b: 1000, h: 472, punkte: ['Zum Ausfüllen, Ausdrucken, Nachschlagen', 'Deine Antworten bleiben dir'] },
+            ].map((k, i) => (
+              <article key={k.titel} style={{ ['--i' as string]: i }} className="cc-stufe flex flex-col rounded-[18px] border-2 border-[#C9A961] bg-white/[0.04] p-6 shadow-[0_24px_60px_-30px_rgba(201,169,97,0.55)] sm:p-8">
+                <h3 className="font-montserrat text-2xl font-extrabold text-[#E6CC8F] sm:text-3xl">{k.titel}</h3>
+                <div className="mt-5 flex min-h-[180px] items-center justify-center overflow-hidden rounded-[12px]">
+                  <img src={k.bild} alt={k.alt} width={k.b} height={k.h} loading="lazy" decoding="async" className={`w-full ${i === 0 ? 'rounded-[12px] border border-[#C9A961]/40' : 'drop-shadow-[0_18px_30px_rgba(0,0,0,0.45)]'}`} />
                 </div>
+                <ul className="mt-6 grid list-none gap-3 p-0">
+                  {k.punkte.map((p) => (
+                    <li key={p} className="flex items-start gap-3 font-inter text-[17px] leading-snug text-pearl-white/90"><span aria-hidden="true" className="font-black text-[#C9A961]">✓</span>{p}</li>
+                  ))}
+                </ul>
               </article>
             ))}
           </div>

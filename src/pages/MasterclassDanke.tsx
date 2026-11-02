@@ -107,7 +107,7 @@ export default function MasterclassDanke() {
                 <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
                   <span className={`inline-grid h-10 w-10 flex-none place-items-center rounded-full font-montserrat text-base font-extrabold text-midnight-blue ${GOLD}`}>{s.nr}</span>
                   <h3 className="min-w-0 flex-1 font-montserrat text-lg font-extrabold leading-snug text-midnight-blue sm:text-xl">{s.titel}</h3>
-                  <span className="whitespace-nowrap rounded-full border border-[#C9A961]/70 bg-pearl-white px-3.5 py-1.5 font-montserrat text-xs font-extrabold text-[#9A7B2F]">{s.datum}</span>
+                  <span className="whitespace-nowrap rounded-full border border-[#C9A961]/70 bg-pearl-white px-3.5 py-1.5 font-montserrat text-xs font-extrabold text-[#C9A961]">{s.datum}</span>
                 </div>
                 <p className="mt-4 font-inter text-[15px] leading-relaxed text-midnight-blue/90 sm:text-base">{s.text}</p>
                 <p className="mt-4 flex items-start gap-3 border-t border-[#C9A961]/35 pt-4 font-inter text-[15px] leading-relaxed text-midnight-blue/90">
@@ -137,7 +137,7 @@ export default function MasterclassDanke() {
           <p className="font-inter text-[17px] leading-relaxed text-midnight-blue/90">
             Du hast eine Frage? Schreib mir einfach: <a href={`mailto:${KONTAKT}`} className="font-bold underline decoration-[#C9A961] decoration-2 underline-offset-4 hover:text-royal-navy">{KONTAKT}</a>
           </p>
-          <p className="mt-6 font-cormorant text-3xl italic text-[#9A7B2F] sm:text-4xl" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>Bis bald, deine Claudia</p>
+          <p className="mt-6 font-cormorant text-3xl italic text-[#C9A961] sm:text-4xl" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>Bis bald, deine Claudia</p>
         </section>
       </main>
 

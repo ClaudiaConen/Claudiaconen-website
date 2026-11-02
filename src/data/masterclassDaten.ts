@@ -26,7 +26,7 @@ export const TERMINE: string[] = [
 
 /** Von der Challenge in die Tiefe: deine sieben Schritte (Dokument). Reihenfolge und Nummern wie im Dokument;
  *  die Termine sind absichtlich nicht aufsteigend - sie folgen dem Dokument (jeder Donnerstag traegt ~2 Schritte). */
-export const SCHRITTE: { nr: number; titel: string; datum: string; text: string; mit: string }[] = [
+export const SCHRITTE: { nr: number; titel: string; datum: string; text: string; mit: string; quelle?: string }[] = [
   {
     nr: 1,
     titel: 'Kernbotschaft und Positionierung in der Tiefe',
@@ -38,8 +38,8 @@ export const SCHRITTE: { nr: number; titel: string; datum: string; text: string;
     nr: 2,
     titel: 'Zielgruppenbrille: Achtung, knallharte Wahrheit',
     datum: '3. Dezember',
-    text: 'Dein Kunde hört nicht, was du sagst. Er hört, was er davon hat. Wir schauen ehrlich auf deine Videos: Wo sprichst du über dich, wo über ihn? Daraus wächst echte Selbstsicherheit.',
-    mit: 'klares Feedback und Tipps, wie du dich authentisch, echt und einfach präsentieren kannst, ohne dich zu verbiegen.',
+    text: 'Dein Kunde hört nicht, was du sagst. Er hört, was er davon hat. Wir schauen ehrlich auf deine Videos: Wo sprichst du über dich, wo über ihn? So gehst du deinen Weg zu mehr Selbstvertrauen, damit du Vertrauen weckst.',
+    mit: 'klares Feedback und Tipps, wie du dich präsentierst, ohne dich zu verbiegen.',
   },
   {
     nr: 3,
@@ -53,7 +53,7 @@ export const SCHRITTE: { nr: number; titel: string; datum: string; text: string;
     titel: 'Deine Stimme: dein kostbarstes Marketinginstrument',
     datum: '26. November',
     text: 'Was du sagst, entscheidet, ob man dich versteht. Wie du es sagst, entscheidet, ob man dir glaubt. Mit Aufnahmen und Sprechübungen arbeitest du an Betonung, Pause, Tempo und Haltung.',
-    mit: 'wichtige Tipps und Techniken, um mit deiner Stimme Wirkung zu erzielen, denn deine Stimme ist unverwechselbar. Du lernst deine Stimme besser kennen und redest selbstsicher.',
+    mit: 'wichtige Tipps und Techniken, um mit deiner Stimme Wirkung zu erzielen, denn deine Stimme ist unverwechselbar. Du lernst deine Stimme besser kennen und übst, mit Selbstvertrauen zu sprechen.',
   },
   {
     nr: 5,
@@ -67,21 +67,21 @@ export const SCHRITTE: { nr: number; titel: string; datum: string; text: string;
     titel: 'Wie Kunden entscheiden: was die Forschung über Zuhören weiß',
     datum: '3. Dezember',
     text: 'Wer fragt, gewinnt. Studien zeigen: Wer im Gespräch mehr Nachfragen stellt, wird als sympathischer erlebt.',
+    quelle: 'Huang u. a., Harvard Business School, 2017',
     mit: 'kostbare Erkenntnisse, welche Sätze, welche Worte und welche Art der Kommunikation wichtig sind, damit Menschen sich für dich entscheiden können.',
   },
   {
     nr: 7,
-    titel: 'Elevator Pitch: authentisch, echt und einfach überall präsentieren',
+    titel: 'Elevator Pitch: dich überall auf den Punkt präsentieren',
     datum: '10. Dezember',
     text: 'Aus allem wird ein 60-Sekunden-Auftritt, manchmal sogar kürzer. Du willst dich doch im Gehirn anderer Menschen speichern, richtig? Das Kostbare ist: Menschen haben keine Reset-Taste. Du kannst dich positiv speichern, sodass man gern mit dir zusammenarbeiten möchte, weil du Vertrauen weckst. Genau darum geht es.',
-    mit: 'deinen Fahrplan, die Übung und die Selbstsicherheit.',
+    mit: 'deinen Fahrplan und viel Übung für deinen Auftritt.',
   },
 ];
 
 /** Deine Begleitung zwischen den Terminen (Dokument). Das letzte Element ist die 1:1-Uebungsstunde (hervorgehoben). */
 export const BEGLEITUNG: { titel: string; text: string; stern?: boolean }[] = [
-  { titel: 'Täglicher Audioimpuls', text: 'Montag bis Freitag ein Audioimpuls von etwa drei Minuten mit einer Mini-Übung, von Claudia gesprochen.' },
-  { titel: 'Drei Übungsvideos pro Woche', text: 'Jeweils etwa eine Minute – zum Mitmachen und Dranbleiben.' },
+  { titel: 'Dein Impuls von Montag bis Freitag', text: 'Montag bis Freitag ein Impuls mit kleiner Übung, von Claudia, in der geschlossenen WhatsApp-Gruppe.' },
   {
     titel: 'Deine persönliche 1:1-Übungsstunde',
     text: 'Zum Abschluss deine persönliche 1:1-Übungsstunde mit Claudia: 60 Minuten nur für dich, in der Woche vom 14. bis 18. Dezember. Dein Pitch bekommt den letzten Schliff, und du gehst mit deinem nächsten Schritt.',

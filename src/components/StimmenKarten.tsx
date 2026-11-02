@@ -32,14 +32,16 @@ const AUSWAHL = [
   'fabian-mahnke',
 ];
 
-const KARTEN: Stimme[] = AUSWAHL.map((id) => {
+const ALLE_KARTEN: Stimme[] = AUSWAHL.map((id) => {
   const s = ALLE.find((x) => x.id === id);
   return s ? { ...s, ...ERGAENZT[id] } : undefined;
 }).filter((s): s is Stimme => Boolean(s && s.zitat && s.bild));
 
 const ZUERST = 6;
 
-export default function StimmenKarten() {
+/** ohne: Stimmen-IDs, die auf dieser Seite nicht passen (z. B. Sprecher-Kunden auf /masterclass, 02.11.2026). */
+export default function StimmenKarten({ ohne = [] }: { ohne?: string[] } = {}) {
+  const KARTEN = ALLE_KARTEN.filter((s) => !ohne.includes(s.id));
   const [alle, setAlle] = useState(false);
   const [vimeo, setVimeo] = useState<string | null>(null);
   const [laeuft, setLaeuft] = useState<string | null>(null);

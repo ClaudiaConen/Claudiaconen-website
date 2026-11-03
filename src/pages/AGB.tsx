@@ -50,6 +50,9 @@ export default function AGB() {
                 <p className="leading-relaxed">
                   (6) Für einen Onlinetermin, der nicht mindestens 12 Stunden im Voraus verlegt wurde, stellen wir eine Ausfallpauschale von 300,00 Euro in Rechnung.
                 </p>
+                <p className="leading-relaxed mt-4">
+                  (7) Masterclass und Gruppenprogramme: Kann eine gebuchte Person nicht teilnehmen, darf eine Ersatzperson ab 18 Jahren den Platz übernehmen. Eine Rückerstattung erfolgt nicht. Das gesetzliche Widerrufsrecht für Verbraucher bleibt unberührt.
+                </p>
               </section>
 
               <section>

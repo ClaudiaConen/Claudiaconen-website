@@ -61,7 +61,7 @@ export default function MasterclassDanke() {
                 </p>
                 <p className="mt-2 font-inter text-[15px] text-pearl-white/85">Frühgruppe {FRUEH} oder Abendgruppe {ABEND}</p>
                 <p className="mt-3 border-t border-[#C9A961]/40 pt-3 font-inter text-[15px] text-pearl-white/85">
-                  Dazu deine 1:1-Übungsstunde von 60 Minuten in der Woche vom 14. bis 18. Dezember.
+                  Dazu deine 1:1-Übungsstunde von 60 Minuten, innerhalb der vier Wochen nach persönlicher Absprache.
                 </p>
               </div>
             </div>

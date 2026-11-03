@@ -35,7 +35,7 @@ export default function MasterclassDanke() {
         title="Danke – deine Masterclass UNVERWECHSELBAR"
         description="Dein Platz in der Masterclass UNVERWECHSELBAR ist gesichert. Hier findest du deine Termine und die komplette Übersicht, wie die Masterclass abläuft."
         path={PFAD}
-        ogImage="https://claudiaconen.com/a27/og/og-challenge.jpg"
+        ogImage="https://claudiaconen.com/a27/og/og-masterclass.jpg"
         noindex
       />
       <Navigation hell />

@@ -198,9 +198,9 @@ export default function Masterclass() {
     <div className="cc-2027 min-h-screen bg-white">
       <SEO
         title="UNVERWECHSELBAR – Die Masterclass für Präsenz, Persönlichkeit und Wirkung"
-        description={`${kurz} Start 19. November 2026.`}
+        description={`${kurz} Start 19. November 2026 (morgens oder abends) oder 21. Januar 2027.`}
         path={PFAD}
-        ogImage="https://claudiaconen.com/a27/og/og-challenge.jpg"
+        ogImage="https://claudiaconen.com/a27/og/og-masterclass.jpg"
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(strukturierteDaten) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqDaten) }} />

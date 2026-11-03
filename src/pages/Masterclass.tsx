@@ -15,14 +15,16 @@ import { START_LABEL, START2_LABEL, FRUEH, ABEND, TERMINE, SCHRITTE, BEGLEITUNG,
  * zwischen den Terminen inkl. finaler 1:1-Uebungsstunde. Gemeinsame Daten in ../data/masterclassDaten.
  * Dankesseite: ../pages/MasterclassDanke (Route /masterclass/danke).
  *
- * Preis 797 € zzgl. MwSt.; Kauf ueber KAUF_LINK (Stripe), Ratenzahlung ueber Klarna im Checkout. Rabatt-Code
- * WIRKUNG7 nur fuer Challenge-Teilnehmer, NICHT auf der Seite (siehe Kommentar bei KAUF_LINK).
+ * Preis aktuell 497 € zzgl. MwSt. (Stripe-Produkt ohne Promo-Code, 04.11.2026; regulaer 797 €). Kauf ueber KAUF_LINK,
+ * Ratenzahlung ueber Klarna im Checkout. Spaeter zurueck auf 797 €: PREIS = REGULAER und KAUF_LINK tauschen.
  */
 
 const PFAD = '/masterclass';
 
 /** Preise (Auftraggeber, 28.10.2026): Fruehbucher 497 €, regulaer 797 €, zzgl. MwSt. Fruehbucher bis 12.11.2026. */
 const REGULAER = 797;
+/** Aktueller Preis im Stripe-Link (Auftraggeber 04.11.2026: neues Produkt fuer 497 €, kein Gutscheincode mehr). */
+const PREIS = 497;
 const EURO = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: Number.isInteger(n) ? 0 : 2, maximumFractionDigits: 2 }) + ' €';
 const BRUTTO = (n: number) => EURO(Math.round(n * 119) / 100);
 
@@ -30,7 +32,7 @@ const BRUTTO = (n: number) => EURO(Math.round(n * 119) / 100);
  *  sofort den vollen Betrag). Der Rabatt-Code WIRKUNG7 (-300 €) steht BEWUSST NICHT auf der Seite: Claudia gibt ihn nur
  *  den Challenge-Teilnehmern persoenlich am letzten Challenge-Tag (Gabi 31.10.2026); im Stripe-Checkout gibt es dafuer
  *  das Feld "Code hinzufuegen". */
-const KAUF_LINK = 'https://buy.stripe.com/9B600j5vWaOQd2w3ba3oA00';
+const KAUF_LINK = 'https://buy.stripe.com/dRm6oHgaA3mo5A4cLK3oA03';
 const GESPRAECH = '/buchen/erstgespraech';
 
 /** Dein Ergebnis nach vier Wochen - wortgleich vom Auftraggeber (02.11.2026). */
@@ -235,7 +237,7 @@ export default function Masterclass() {
                 <span className="mt-1 block text-[0.85em] text-midnight-blue/75">2. Starttermin: {START2_LABEL}</span>
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
-                <a href="#anmeldung" className={KNOPF}>Platz sichern →</a>
+                <a href={KAUF_LINK} className={KNOPF}>Platz sichern →</a>
                 <a href="#schritte" className="font-montserrat text-sm font-bold text-midnight-blue underline decoration-[#C9A961] decoration-2 underline-offset-4 hover:text-royal-navy">Deine sieben Schritte ansehen</a>
               </div>
               <figure className="mx-auto mt-10 w-64 sm:w-72 lg:hidden">
@@ -290,7 +292,7 @@ export default function Masterclass() {
             Sieben Tage, sieben Videos, sieben Mal Mut. Du hast deine Kernbotschaft gefunden, deine Stimme gehört und dich gezeigt. Jetzt gehst du in die Tiefe: üben, mit persönlicher Rückmeldung zu deinen Übungen.
           </p>
           <div className="cc-zeile mt-9" style={{ ['--z' as string]: 2 }}>
-            <a href="#anmeldung" className={KNOPF}>Platz sichern →</a>
+            <a href={KAUF_LINK} className={KNOPF}>Platz sichern →</a>
           </div>
         </div>
       </Abschnitt>
@@ -463,15 +465,14 @@ export default function Masterclass() {
               ))}
             </ul>
             <div className="mt-8">
-              <p className="font-montserrat text-5xl font-extrabold text-midnight-blue sm:text-6xl">{EURO(REGULAER)}</p>
-              <p className="mt-2 font-inter text-sm text-midnight-blue/75">zzgl. MwSt. · {BRUTTO(REGULAER)} inkl. MwSt. · Ratenzahlung über Klarna möglich</p>
+              <p className="flex flex-wrap items-baseline justify-center gap-x-4"><span className="font-montserrat text-5xl font-extrabold text-midnight-blue sm:text-6xl">{EURO(PREIS)}</span>{PREIS < REGULAER && <span className="font-montserrat text-xl font-bold text-midnight-blue/50 line-through decoration-[#C9A961] decoration-2">{EURO(REGULAER)}</span>}</p>
+              <p className="mt-2 font-inter text-sm text-midnight-blue/75">zzgl. MwSt. · {BRUTTO(PREIS)} inkl. MwSt. · Ratenzahlung über Klarna möglich</p>
             </div>
             <div className="mt-8 flex flex-col items-center gap-4">
               <a href={KAUF_LINK} className={KNOPF}>Platz sichern →</a>
               <a href={GESPRAECH} className="font-montserrat text-sm font-bold text-midnight-blue underline decoration-[#C9A961] decoration-2 underline-offset-4 hover:text-royal-navy">Lieber erst sprechen? 15 Minuten kennenlernen</a>
             </div>
             <p className="mt-4 font-inter text-sm text-midnight-blue/75">Sichere Bezahlung über Stripe.</p>
-            <p className="mt-2 font-inter text-sm text-midnight-blue/60">Du hast einen Gutscheincode? Den kannst du im nächsten Schritt im Bezahlfenster eingeben.</p>
             <p className="mt-6 font-inter text-[15px] text-midnight-blue/80">
               Du hast Fragen? <a href="tel:+4916093102073" className="font-bold underline decoration-[#C9A961] decoration-2 underline-offset-4 hover:text-royal-navy">Dann ruf mich an.</a>
             </p>
@@ -499,7 +500,7 @@ export default function Masterclass() {
             ))}
           </div>
           <div className="mt-10 text-center">
-            <a href="#anmeldung" className={KNOPF}>Platz sichern →</a>
+            <a href={KAUF_LINK} className={KNOPF}>Platz sichern →</a>
           </div>
         </div>
       </Abschnitt>
@@ -509,9 +510,9 @@ export default function Masterclass() {
         <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
           <div className="min-w-0">
             <p className="truncate font-montserrat text-sm font-extrabold text-midnight-blue sm:text-base">UNVERWECHSELBAR · ab {START_LABEL.replace('Donnerstag, ', '')}</p>
-            <p className="truncate font-inter text-xs text-midnight-blue/70 sm:text-[13px]">{EURO(REGULAER)} zzgl. MwSt. · Ratenzahlung möglich · höchstens 9 Plätze</p>
+            <p className="truncate font-inter text-xs text-midnight-blue/70 sm:text-[13px]">{EURO(PREIS)} zzgl. MwSt. · Ratenzahlung möglich · höchstens 9 Plätze</p>
           </div>
-          <a href="#anmeldung" className={`${GOLD} inline-flex flex-none items-center gap-2 rounded-full px-5 py-3 font-montserrat text-sm font-extrabold text-midnight-blue shadow-[0_8px_18px_-10px_rgba(19,35,63,0.5)] sm:px-7 sm:text-base`} tabIndex={leiste ? 0 : -1}>Platz sichern →</a>
+          <a href={KAUF_LINK} className={`${GOLD} inline-flex flex-none items-center gap-2 rounded-full px-5 py-3 font-montserrat text-sm font-extrabold text-midnight-blue shadow-[0_8px_18px_-10px_rgba(19,35,63,0.5)] sm:px-7 sm:text-base`} tabIndex={leiste ? 0 : -1}>Platz sichern →</a>
         </div>
       </div>
 

@@ -466,6 +466,7 @@ export default function Masterclass() {
             </ul>
             <div className="mt-8">
               <p className="flex flex-wrap items-baseline justify-center gap-x-4"><span className="font-montserrat text-5xl font-extrabold text-midnight-blue sm:text-6xl">{EURO(PREIS)}</span>{PREIS < REGULAER && <span className="font-montserrat text-xl font-bold text-midnight-blue/50 line-through decoration-[#C9A961] decoration-2">{EURO(REGULAER)}</span>}</p>
+              {PREIS < REGULAER && <p className="mt-2 font-montserrat text-sm font-extrabold uppercase tracking-[0.14em] text-[#C9A961]">Statt Normalpreis {EURO(REGULAER)}</p>}
               <p className="mt-2 font-inter text-sm text-midnight-blue/75">zzgl. MwSt. · {BRUTTO(PREIS)} inkl. MwSt. · Ratenzahlung über Klarna möglich</p>
             </div>
             <div className="mt-8 flex flex-col items-center gap-4">
@@ -510,7 +511,7 @@ export default function Masterclass() {
         <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
           <div className="min-w-0">
             <p className="truncate font-montserrat text-sm font-extrabold text-midnight-blue sm:text-base">UNVERWECHSELBAR · ab {START_LABEL.replace('Donnerstag, ', '')}</p>
-            <p className="truncate font-inter text-xs text-midnight-blue/70 sm:text-[13px]">{EURO(PREIS)} zzgl. MwSt. · Ratenzahlung möglich · höchstens 9 Plätze</p>
+            <p className="truncate font-inter text-xs text-midnight-blue/70 sm:text-[13px]">{EURO(PREIS)} statt {EURO(REGULAER)} zzgl. MwSt. · Ratenzahlung möglich · höchstens 9 Plätze</p>
           </div>
           <a href={KAUF_LINK} className={`${GOLD} inline-flex flex-none items-center gap-2 rounded-full px-5 py-3 font-montserrat text-sm font-extrabold text-midnight-blue shadow-[0_8px_18px_-10px_rgba(19,35,63,0.5)] sm:px-7 sm:text-base`} tabIndex={leiste ? 0 : -1}>Platz sichern →</a>
         </div>

@@ -6,7 +6,7 @@ import LogoBand from '../components/LogoBand';
 import Stimmwelle from '../components/Stimmwelle';
 import Helix from '../components/Helix';
 import StimmenKarten from '../components/StimmenKarten';
-import { START_LABEL, FRUEH, ABEND, TERMINE, SCHRITTE, BEGLEITUNG, BLICK, CLAUDIA_ZITAT } from '../data/masterclassDaten';
+import { START_LABEL, START2_LABEL, FRUEH, ABEND, TERMINE, SCHRITTE, BEGLEITUNG, BLICK, CLAUDIA_ZITAT } from '../data/masterclassDaten';
 
 /**
  * Masterclass UNVERWECHSELBAR - Angebots-/Verkaufsseite. Texte WORTGLEICH aus Claudias Dokument
@@ -64,7 +64,7 @@ const KNOPF = `inline-flex items-center justify-center gap-2.5 rounded-full px-9
 const FRAGEN: [string, string][] = [
   ['Muss ich vorher an der 7-Tage-Challenge teilgenommen haben?', 'Nein. Du hast in der Challenge schon einen Vorsprung, aber die Masterclass ist ein eigenständiges Angebot. Wer neu einsteigt, findet genauso Zugang zu allen Themen.'],
   ['Für wen ist die Masterclass?', 'Für Selbstständige, Coaches und Unternehmerinnen, die sich zeigen wollen, ohne sich zu verbiegen – und die jetzt dranbleiben wollen, mit Begleitung statt allein.'],
-  ['Wann sind die Termine?', '4 Live-Termine, donnerstags: 19. November, 26. November, 3. Dezember und 10. Dezember 2026. Du wählst die Frühgruppe (7:30–9:00 Uhr) oder die Abendgruppe (18:30–20:00 Uhr). Die Inhalte sind in beiden Gruppen gleich.'],
+  ['Wann sind die Termine?', '4 Live-Termine, donnerstags: 19. November, 26. November, 3. Dezember und 10. Dezember 2026. Du wählst die Frühgruppe (7:30–9:00 Uhr) oder die Abendgruppe (18:30–20:00 Uhr). Die Inhalte sind in beiden Gruppen gleich. Der 2. Durchgang startet am Donnerstag, 21. Januar 2027.'],
   ['Wie wähle ich meine Gruppe?', 'Ganz einfach nach deiner Buchung: Schreib mir kurz, ob du in die Frühgruppe (7:30–9:00 Uhr) oder in die Abendgruppe (18:30–20:00 Uhr) möchtest, per E-Mail an claudiaconen@umsatzstimme.de oder per WhatsApp an +49 160 93102073. Die Inhalte sind in beiden Gruppen gleich.'],
   ['Was, wenn ich einen Termin verpasse?', 'Kein Problem: Du kannst in derselben Woche einfach in die andere Gruppe kommen, früh statt abends oder umgekehrt. Die Inhalte sind in beiden Gruppen gleich. Außerdem findest du die Aufzeichnung jedes Live-Termins in deinem Mitgliederbereich. Gib mir kurz Bescheid, wenn du nicht dabei sein kannst, per E-Mail an claudiaconen@umsatzstimme.de oder per WhatsApp an +49 160 93102073.'],
   ['Was brauche ich dafür?', 'Keine Technik-Kenntnisse, kein Studio und kein perfektes Video. Dein Handy und deinen Mut – mehr nicht. Alle Termine laufen live per Zoom, die Aufzeichnung findest du danach in deinem Mitgliederbereich.'],
@@ -232,6 +232,7 @@ export default function Masterclass() {
               </p>
               <p className="mt-6 max-w-xl border-l-4 border-[#C9A961] pl-4 font-montserrat text-base font-extrabold uppercase leading-snug tracking-[0.04em] sm:text-lg">
                 Start: {START_LABEL}
+                <span className="mt-1 block text-[0.85em] text-midnight-blue/75">2. Starttermin: {START2_LABEL}</span>
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
                 <a href="#anmeldung" className={KNOPF}>Platz sichern →</a>
@@ -318,6 +319,9 @@ export default function Masterclass() {
           </div>
           <p className="mt-6 font-montserrat text-base font-extrabold text-midnight-blue sm:text-lg">
             Vier Wochen. Vier Live-Termine. <span className="text-[#C9A961]">Insgesamt sechs Stunden pro Gruppe.</span>
+          </p>
+          <p className="mt-4 rounded-[12px] border border-[#C9A961]/60 bg-[#F5F7FA] px-5 py-4 font-inter text-[16px] leading-relaxed text-midnight-blue/85">
+            <b className="font-montserrat font-extrabold text-midnight-blue">2. Starttermin: {START2_LABEL}.</b> Die weiteren Termine des zweiten Durchgangs folgen.
           </p>
         </div>
       </Abschnitt>

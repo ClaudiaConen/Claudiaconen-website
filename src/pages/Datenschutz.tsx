@@ -100,7 +100,8 @@ export default function Datenschutz() {
                   5. Hosting
                 </h2>
                 <p className="leading-relaxed">
-                  Diese Website wird über <strong>Cloudflare</strong> gehostet. Dabei können technische Daten (IP-Adresse, Zugriffszeiten etc.) auf Servern innerhalb der EU oder in den USA verarbeitet werden. Es besteht ein Data-Processing-Agreement (DPA) mit Cloudflare nach Art. 28 DSGVO.
+                  Diese Website wird bei <strong>Netlify</strong> gehostet (Netlify, Inc., USA). Beim Aufruf der Website werden technische Daten wie IP-Adresse, Zeitpunkt des Zugriffs und Browserinformationen verarbeitet, um die Website auszuliefern und vor Missbrauch zu schützen. Rechtsgrundlage ist unser berechtigtes Interesse an einer sicheren und zuverlässigen Bereitstellung der Website (Art. 6 Abs. 1 lit. f DSGVO). Die Übermittlung in die USA stützt sich auf die Standardvertragsklauseln der EU-Kommission bzw. – soweit der Anbieter zertifiziert ist – auf das EU-US Data Privacy Framework. Weitere Informationen:{' '}
+                  <a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener noreferrer" className="text-bright-gold hover:underline">https://www.netlify.com/privacy/</a>
                 </p>
               </section>
 
@@ -143,7 +144,7 @@ export default function Datenschutz() {
                   Die Nutzung von Vimeo erfolgt im Interesse einer ansprechenden Darstellung unserer Online-Angebote. Dies stellt ein berechtigtes Interesse im Sinne des Art. 6 Abs. 1 lit. f DSGVO dar. Sofern eine entsprechende Einwilligung abgefragt wurde, erfolgt die Verarbeitung ausschließlich auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO; die Einwilligung ist jederzeit widerrufbar.
                 </p>
                 <p className="leading-relaxed mb-4">
-                  Vimeo verfügt über eine Zertifizierung nach dem EU-US-Privacy-Shield, der die Verarbeitung personenbezogener Daten in den USA nach EU-Standards sicherstellen soll.
+                  Die Übermittlung von Daten in die USA stützt sich auf die Standardvertragsklauseln der EU-Kommission bzw. – soweit der Anbieter zertifiziert ist – auf das EU-US Data Privacy Framework.
                 </p>
                 <p className="leading-relaxed">
                   Weitere Informationen zum Umgang mit Nutzerdaten finden Sie in der Datenschutzerklärung von Vimeo unter:{' '}
@@ -158,7 +159,7 @@ export default function Datenschutz() {
                   8. Datenweitergabe
                 </h2>
                 <p className="leading-relaxed">
-                  Eine Weitergabe deiner Daten an Dritte erfolgt ausschließlich im Rahmen gesetzlicher Vorschriften, etwa an Zahlungsanbieter, Kursplattformen oder Auftragsverarbeiter nach Art. 28 DSGVO.
+                  Eine Weitergabe deiner Daten an Dritte erfolgt ausschließlich im Rahmen gesetzlicher Vorschriften, etwa an Zahlungsanbieter (Stripe), Kursplattformen oder Auftragsverarbeiter nach Art. 28 DSGVO.
                 </p>
               </section>
 
@@ -188,29 +189,30 @@ export default function Datenschutz() {
                 </p>
 
                 <h3 className="text-xl font-montserrat font-semibold text-bright-gold mb-3">
-                  Digistore24
+                  Zahlungsabwicklung über Stripe
                 </h3>
                 <p className="leading-relaxed mb-4">
-                  Einige unserer Produkte, Dienstleistungen und Inhalte werden von Digistore24 als Reseller angeboten. Anbieter und Vertragspartner ist die Digistore24 GmbH, St.-Godehard-Straße 32 in 31139 Hildesheim. Welche Daten Digistore24 bei diesem Website-Aufruf speichert und verarbeitet, legt die Digistore24 GmbH als Verantwortlicher in der eigenen Datenschutzerklärung dar. Weitere Informationen erhalten Sie in der Datenschutzerklärung von Digistore24:{' '}
-                  <a href="https://www.digistore24.com/dataschutz" target="_blank" rel="noopener noreferrer" className="text-bright-gold hover:underline">
-                    https://www.digistore24.com/dataschutz
-                  </a>
+                  Die Bezahlung unserer Kurse, Masterclasses und weiterer Angebote erfolgt über den Zahlungsdienstleister <strong>Stripe</strong>. Anbieter für Kundinnen und Kunden in der EU ist die Stripe Payments Europe, Limited, 1 Grand Canal Street Lower, Grand Canal Dock, Dublin, D02 H210, Irland („Stripe“).
+                </p>
+                <p className="leading-relaxed mb-4">
+                  Wenn Sie über einen Bezahl-Link auf unserer Website eine Buchung vornehmen, werden Sie auf die Bezahlseite von Stripe weitergeleitet. Dort werden die für die Zahlung erforderlichen Daten verarbeitet, insbesondere Name, E-Mail-Adresse, Telefonnummer (falls angegeben), Rechnungsadresse, gegebenenfalls Firmenname und Umsatzsteuer-Identifikationsnummer, Zahlungsdaten (z. B. Kartennummer, Kontodaten), Betrag, Datum und Uhrzeit des Kaufs sowie technische Daten wie IP-Adresse und Geräteinformationen. Ihre vollständigen Kartendaten werden ausschließlich von Stripe verarbeitet; wir erhalten sie nicht.
+                </p>
+                <p className="leading-relaxed mb-4">
+                  Rechtsgrundlage ist die Erfüllung des Vertrags mit Ihnen (Art. 6 Abs. 1 lit. b DSGVO) sowie die Erfüllung gesetzlicher Pflichten, etwa steuerrechtlicher Aufbewahrungspflichten (Art. 6 Abs. 1 lit. c DSGVO). Stripe verarbeitet Daten zudem zur Betrugsprävention und zur Erfüllung eigener gesetzlicher Pflichten (z. B. Geldwäscheprävention) teilweise in eigener Verantwortung. Stripe kann Daten an verbundene Unternehmen, auch in den USA, übermitteln; die Übermittlung stützt sich auf die Standardvertragsklauseln der EU-Kommission bzw. auf das EU-US Data Privacy Framework.
+                </p>
+                <p className="leading-relaxed mb-4">
+                  Wir haben mit Stripe eine Vereinbarung zur Auftragsverarbeitung (Data Processing Agreement) nach Art. 28 DSGVO geschlossen. Weitere Informationen finden Sie in der Datenschutzerklärung von Stripe:{' '}
+                  <a href="https://stripe.com/de/privacy" target="_blank" rel="noopener noreferrer" className="text-bright-gold hover:underline">https://stripe.com/de/privacy</a>
                 </p>
 
                 <h3 className="text-xl font-montserrat font-semibold text-pearl-white mb-3 mt-6">
-                  Conversion-Tools/Warenkorb
+                  Klarna, PayPal und Amazon Pay im Stripe-Bezahlfenster
                 </h3>
                 <p className="leading-relaxed mb-4">
-                  Digistore24 bietet die Möglichkeit, über HTML- und Javascript-Codes verschiedene Dienste auf der eigenen Website einzubinden, z. B. die Social-Proof-Bubble oder den Digistore24-Warenkorb.
-                </p>
-                <p className="leading-relaxed mb-4">
-                  Bei jeder Einbindung werden nicht-personenbezogene Daten vom Digistore24-Server nachgeladen (z. B. eine Javascript-Datei). Bei diesem Nachladen ruft Ihr Webbrowser eine Webseite vom Digistore24-Server ab. Unser Server hat keinen Einfluss darauf, in welchem Umfang Ihr Webbrowser dabei Daten an den Digistore24-Server überträgt. Unser Server selbst übermittelt in diesem Zusammenhang keine Daten an die Digistore24-Server.
-                </p>
-                <p className="leading-relaxed">
-                  Welche Daten Digistore24 bei diesem Webseiten-Aufruf speichert und verarbeitet, legt die Digistore24 GmbH als Verantwortlicher in der eigenen Datenschutzerklärung dar. Die Datenschutzerklärung von Digistore24 finden Sie hier:{' '}
-                  <a href="https://www.digistore24.com/dataschutz" target="_blank" rel="noopener noreferrer" className="text-bright-gold hover:underline">
-                    https://www.digistore24.com/dataschutz
-                  </a>
+                  Im Bezahlfenster von Stripe können Sie auch Zahlarten anderer Anbieter wählen, z. B. Ratenzahlung über Klarna, PayPal oder Amazon Pay. Wählen Sie eine dieser Zahlarten, werden die für die Zahlung erforderlichen Daten an den jeweiligen Anbieter übermittelt, der sie in eigener Verantwortung verarbeitet (Art. 6 Abs. 1 lit. b DSGVO). Bei Klarna kann dafür auch eine Identitäts- und Bonitätsprüfung erfolgen. Weitere Informationen finden Sie in den Datenschutzhinweisen der Anbieter:{' '}
+                  <a href="https://www.klarna.com/de/datenschutz/" target="_blank" rel="noopener noreferrer" className="text-bright-gold hover:underline">Klarna</a>,{' '}
+                  <a href="https://www.paypal.com/de/legalhub/privacy-full" target="_blank" rel="noopener noreferrer" className="text-bright-gold hover:underline">PayPal</a>,{' '}
+                  <a href="https://pay.amazon.de/help/201212490" target="_blank" rel="noopener noreferrer" className="text-bright-gold hover:underline">Amazon Pay</a>.
                 </p>
               </section>
 
@@ -263,7 +265,7 @@ export default function Datenschutz() {
                   Zoom
                 </h3>
                 <p className="leading-relaxed mb-4">
-                  Wir nutzen Zoom. Anbieter dieses Dienstes ist die Zoom Communications Inc., San Jose, 55 Almaden Boulevard, 6th Floor, San Jose, CA 95113. Zoom verfügt über eine Zertifizierung nach dem EU-US-Privacy-Shield. Details zur Datenverarbeitung entnehmen Sie der Datenschutzerklärung von Zoom:{' '}
+                  Wir nutzen Zoom. Anbieter dieses Dienstes ist die Zoom Communications Inc., San Jose, 55 Almaden Boulevard, 6th Floor, San Jose, CA 95113. Die Übermittlung von Daten in die USA stützt sich auf die Standardvertragsklauseln der EU-Kommission bzw. – soweit der Anbieter zertifiziert ist – auf das EU-US Data Privacy Framework. Details zur Datenverarbeitung entnehmen Sie der Datenschutzerklärung von Zoom:{' '}
                   <a href="https://zoom.us/de-de/privacy.html" target="_blank" rel="noopener noreferrer" className="text-bright-gold hover:underline">
                     https://zoom.us/de-de/privacy.html
                   </a>
@@ -274,6 +276,13 @@ export default function Datenschutz() {
                 </h3>
                 <p className="leading-relaxed">
                   Wir haben mit dem Anbieter von Zoom einen Vertrag zur Auftragsverarbeitung abgeschlossen und setzen die strengen Vorgaben der deutschen Datenschutzbehörden bei der Nutzung von Zoom vollständig um.
+                </p>
+
+                <h3 className="text-xl font-montserrat font-semibold text-pearl-white mb-3 mt-6">
+                  Aufzeichnung von Live-Terminen
+                </h3>
+                <p className="leading-relaxed">
+                  Live-Termine unserer Masterclasses und Kurse können aufgezeichnet werden. Die Aufzeichnungen stellen wir ausschließlich den Teilnehmenden der jeweiligen Gruppe in unserem geschützten Mitgliederbereich zur Verfügung, damit verpasste Termine nachgeholt werden können. Wir weisen zu Beginn jedes Termins auf die Aufzeichnung hin. Wer nicht im Bild oder Ton erscheinen möchte, kann Kamera und Mikrofon ausgeschaltet lassen und Fragen über den Chat stellen. Rechtsgrundlage ist die Durchführung des Vertrags (Art. 6 Abs. 1 lit. b DSGVO) bzw. Ihre Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Die Aufzeichnungen werden gelöscht, sobald sie für diesen Zweck nicht mehr benötigt werden.
                 </p>
               </section>
 
@@ -320,7 +329,7 @@ export default function Datenschutz() {
 
               <div className="pt-8 border-t border-luxury-gold/20">
                 <p className="text-pearl-white/60 text-sm">
-                  Letzte Aktualisierung: Oktober 2025
+                  Letzte Aktualisierung: November 2026
                 </p>
               </div>
             </div>

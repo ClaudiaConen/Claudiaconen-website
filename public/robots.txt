@@ -2,6 +2,7 @@ User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /_redirects
+Disallow: /mail/
 
 Sitemap: https://claudiaconen.com/sitemap.xml
 

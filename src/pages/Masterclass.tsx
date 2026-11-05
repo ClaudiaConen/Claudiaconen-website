@@ -512,7 +512,7 @@ export default function Masterclass() {
         <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
           <div className="min-w-0">
             <p className="truncate font-montserrat text-sm font-extrabold text-midnight-blue sm:text-base">UNVERWECHSELBAR · ab {START_LABEL.replace('Donnerstag, ', '')}</p>
-            <p className="truncate font-inter text-xs text-midnight-blue/70 sm:text-[13px]">{EURO(PREIS)} statt {EURO(REGULAER)} zzgl. MwSt. · Ratenzahlung möglich · höchstens 9 Plätze</p>
+            <p className="truncate font-inter text-xs text-midnight-blue/70 sm:text-[13px]"><b className="font-bold text-midnight-blue">{EURO(PREIS)}</b>{PREIS < REGULAER && <> <span className="line-through decoration-[#9B2C1F] decoration-[1.5px]">{EURO(REGULAER)}</span></>} zzgl. MwSt. · Ratenzahlung möglich · höchstens 9 Plätze</p>
           </div>
           <a href={KAUF_LINK} className={`${GOLD} inline-flex flex-none items-center gap-2 rounded-full px-5 py-3 font-montserrat text-sm font-extrabold text-midnight-blue shadow-[0_8px_18px_-10px_rgba(19,35,63,0.5)] sm:px-7 sm:text-base`} tabIndex={leiste ? 0 : -1}>Platz sichern →</a>
         </div>

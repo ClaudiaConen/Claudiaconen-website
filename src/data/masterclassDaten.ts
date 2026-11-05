@@ -101,7 +101,7 @@ export const BEGLEITUNG: { titel: string; text: string; stern?: boolean }[] = [
 export const BLICK: string[] = [
   '4 Live-Termine, donnerstags vom 19. November bis 10. Dezember 2026',
   '2. Durchgang: donnerstags am 21. und 28. Januar, 4. und 11. Februar 2027',
-  'Frühgruppe 7:30–9:00 Uhr oder Abendgruppe 18:30–20:00 Uhr',
+  'Frühgruppe 7:30–9:00 Uhr oder Abendgruppe 18:30–20:00 Uhr (im November ausverkauft)',
   'Begleitung von Montag bis Freitag und eine finale 1:1-Übungsstunde von 60 Minuten',
   'Höchstens 9 Personen pro Gruppe',
 ];

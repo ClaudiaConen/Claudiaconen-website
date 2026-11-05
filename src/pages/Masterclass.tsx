@@ -66,8 +66,8 @@ const KNOPF = `inline-flex items-center justify-center gap-2.5 rounded-full px-9
 const FRAGEN: [string, string][] = [
   ['Muss ich vorher an der 7-Tage-Challenge teilgenommen haben?', 'Nein. Du hast in der Challenge schon einen Vorsprung, aber die Masterclass ist ein eigenständiges Angebot. Wer neu einsteigt, findet genauso Zugang zu allen Themen.'],
   ['Für wen ist die Masterclass?', 'Für Selbstständige, Coaches und Unternehmerinnen, die sich zeigen wollen, ohne sich zu verbiegen – und die jetzt dranbleiben wollen, mit Begleitung statt allein.'],
-  ['Wann sind die Termine?', '4 Live-Termine, donnerstags: 19. November, 26. November, 3. Dezember und 10. Dezember 2026. Du wählst die Frühgruppe (7:30–9:00 Uhr) oder die Abendgruppe (18:30–20:00 Uhr). Die Inhalte sind in beiden Gruppen gleich. Der 2. Durchgang: 21. Januar, 28. Januar, 4. Februar und 11. Februar 2027, ebenfalls donnerstags, morgens oder abends.'],
-  ['Wie wähle ich meine Gruppe?', 'Ganz einfach nach deiner Buchung: Schreib mir kurz, ob du in die Frühgruppe (7:30–9:00 Uhr) oder in die Abendgruppe (18:30–20:00 Uhr) möchtest, per E-Mail an claudiaconen@umsatzstimme.de oder per WhatsApp an +49 160 93102073. Die Inhalte sind in beiden Gruppen gleich.'],
+  ['Wann sind die Termine?', '4 Live-Termine, donnerstags: 19. November, 26. November, 3. Dezember und 10. Dezember 2026, in der Frühgruppe (7:30–9:00 Uhr). Die Abendgruppe (18:30–20:00 Uhr) ist im November ausverkauft. Der 2. Durchgang: 21. Januar, 28. Januar, 4. Februar und 11. Februar 2027, ebenfalls donnerstags, morgens oder abends.'],
+  ['Wie wähle ich meine Gruppe?', 'Ganz einfach nach deiner Buchung: Schreib mir kurz, ob du in die Frühgruppe (7:30–9:00 Uhr) oder in die Abendgruppe (18:30–20:00 Uhr) möchtest, per E-Mail an claudiaconen@umsatzstimme.de oder per WhatsApp an +49 160 93102073. Die Inhalte sind in beiden Gruppen gleich. Im November ist die Abendgruppe ausverkauft, dort gibt es noch Plätze in der Frühgruppe.'],
   ['Was, wenn ich einen Termin verpasse?', 'Kein Problem: Du kannst in derselben Woche einfach in die andere Gruppe kommen, früh statt abends oder umgekehrt. Die Inhalte sind in beiden Gruppen gleich. Außerdem findest du die Aufzeichnung jedes Live-Termins in deinem Mitgliederbereich. Gib mir kurz Bescheid, wenn du nicht dabei sein kannst, per E-Mail an claudiaconen@umsatzstimme.de oder per WhatsApp an +49 160 93102073.'],
   ['Was passiert, wenn ich nicht teilnehmen kann?', 'Dann darf eine Ersatzperson ab 18 Jahren deinen Platz übernehmen. Eine Rückerstattung gibt es nicht. Das gesetzliche Widerrufsrecht für Verbraucherinnen und Verbraucher bleibt davon unberührt.'],
   ['Was brauche ich dafür?', 'Keine Technik-Kenntnisse, kein Studio und kein perfektes Video. Dein Handy und deinen Mut – mehr nicht. Alle Termine laufen live per Zoom, die Aufzeichnung findest du danach in deinem Mitgliederbereich.'],
@@ -309,14 +309,14 @@ export default function Masterclass() {
           <div className="mt-10 overflow-hidden rounded-[16px] border border-[#C9A961]/50 shadow-[0_24px_50px_-34px_rgba(19,35,63,0.5)]">
             <div className="grid grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)_minmax(0,1fr)] bg-[#13233F] text-pearl-white">
               <div className="px-4 py-3.5 font-montserrat text-[11px] font-extrabold uppercase tracking-[0.14em] sm:px-6 sm:text-xs">Termin</div>
-              <div className="px-4 py-3.5 text-center font-montserrat text-[11px] font-extrabold uppercase tracking-[0.14em] text-[#E6CC8F] sm:px-6 sm:text-xs">Frühgruppe</div>
-              <div className="px-4 py-3.5 text-center font-montserrat text-[11px] font-extrabold uppercase tracking-[0.14em] text-[#E6CC8F] sm:px-6 sm:text-xs">Abendgruppe</div>
+              <div className="px-2 py-3.5 text-center font-montserrat text-[10px] font-extrabold uppercase tracking-normal sm:tracking-[0.14em] text-[#E6CC8F] sm:px-6 sm:text-xs">Frühgruppe</div>
+              <div className="px-2 py-3.5 text-center font-montserrat text-[10px] font-extrabold uppercase tracking-normal sm:tracking-[0.14em] text-[#E6CC8F] sm:px-6 sm:text-xs">Abendgruppe<span className="mt-1.5 block"><span className={`inline-block rounded-full px-2 py-0.5 text-[9px] tracking-[0.04em] sm:px-2.5 sm:text-[11px] sm:tracking-[0.12em] text-[#13233F] ${GOLD}`}>Ausverkauft</span></span></div>
             </div>
             {TERMINE.map((t, i) => (
               <div key={t} className={`grid grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)_minmax(0,1fr)] items-center ${i % 2 ? 'bg-[#F5F7FA]' : 'bg-white'}`}>
                 <div className="px-4 py-4 font-montserrat text-[13px] font-extrabold leading-snug sm:px-6 sm:text-base">{t}</div>
-                <div className="px-4 py-4 text-center font-inter text-[13px] font-semibold text-midnight-blue/80 sm:px-6 sm:text-[15px]">{FRUEH}</div>
-                <div className="px-4 py-4 text-center font-inter text-[13px] font-semibold text-midnight-blue/80 sm:px-6 sm:text-[15px]">{ABEND}</div>
+                <div className="px-2 py-4 text-center font-inter text-[13px] font-semibold text-midnight-blue/80 sm:px-6 sm:text-[15px]">{FRUEH}</div>
+                <div className="px-2 py-4 text-center font-inter text-[13px] font-semibold text-midnight-blue/80 sm:px-6 sm:text-[15px]"><span className="text-midnight-blue/45 line-through">{ABEND}</span><span className="mt-0.5 block font-montserrat text-[10px] font-extrabold uppercase tracking-[0.03em] text-[#9B2C1F] sm:text-xs sm:tracking-[0.12em]">Ausverkauft</span></div>
               </div>
             ))}
           </div>

@@ -309,13 +309,13 @@ export default function Masterclass() {
           <div className="mt-10 overflow-hidden rounded-[16px] border border-[#C9A961]/50 shadow-[0_24px_50px_-34px_rgba(19,35,63,0.5)]">
             <div className="grid grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)_minmax(0,1fr)] bg-[#13233F] text-pearl-white">
               <div className="px-4 py-3.5 font-montserrat text-[11px] font-extrabold uppercase tracking-[0.14em] sm:px-6 sm:text-xs">Termin</div>
-              <div className="px-2 py-3.5 text-center font-montserrat text-[10px] font-extrabold uppercase tracking-normal sm:tracking-[0.14em] text-[#E6CC8F] sm:px-6 sm:text-xs">Frühgruppe</div>
-              <div className="px-2 py-3.5 text-center font-montserrat text-[10px] font-extrabold uppercase tracking-normal sm:tracking-[0.14em] text-[#E6CC8F] sm:px-6 sm:text-xs">Abendgruppe<span className="mt-1.5 block"><span className={`inline-block rounded-full px-2 py-0.5 text-[9px] tracking-[0.04em] sm:px-2.5 sm:text-[11px] sm:tracking-[0.12em] text-[#13233F] ${GOLD}`}>Ausverkauft</span></span></div>
+              <div className="px-2 py-3.5 text-center font-montserrat text-[10px] font-extrabold uppercase tracking-normal sm:tracking-[0.14em] text-[#E6CC8F] sm:px-6 sm:text-xs">Frühgruppe<span className="mt-1.5 block"><span className="inline-block whitespace-nowrap rounded-full bg-[#1F7A4D] px-1.5 py-0.5 text-[9px] tracking-[0.04em] text-white sm:px-2.5 sm:text-[11px] sm:tracking-[0.12em]">Plätze frei</span></span></div>
+              <div className="px-2 py-3.5 text-center font-montserrat text-[10px] font-extrabold uppercase tracking-normal sm:tracking-[0.14em] text-[#E6CC8F] sm:px-6 sm:text-xs">Abendgruppe<span className="mt-1.5 block"><span className={`inline-block whitespace-nowrap rounded-full px-2 py-0.5 text-[9px] tracking-[0.04em] sm:px-2.5 sm:text-[11px] sm:tracking-[0.12em] text-[#13233F] ${GOLD}`}>Ausverkauft</span></span></div>
             </div>
             {TERMINE.map((t, i) => (
               <div key={t} className={`grid grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)_minmax(0,1fr)] items-center ${i % 2 ? 'bg-[#F5F7FA]' : 'bg-white'}`}>
                 <div className="px-4 py-4 font-montserrat text-[13px] font-extrabold leading-snug sm:px-6 sm:text-base">{t}</div>
-                <div className="px-2 py-4 text-center font-inter text-[13px] font-semibold text-midnight-blue/80 sm:px-6 sm:text-[15px]">{FRUEH}</div>
+                <div className="px-2 py-4 text-center font-inter text-[13px] font-semibold text-midnight-blue/80 sm:px-6 sm:text-[15px]">{FRUEH}<span className="mt-0.5 block font-montserrat text-[10px] font-extrabold uppercase tracking-[0.03em] text-[#1F7A4D] sm:text-xs sm:tracking-[0.12em]">Plätze frei</span></div>
                 <div className="px-2 py-4 text-center font-inter text-[13px] font-semibold text-midnight-blue/80 sm:px-6 sm:text-[15px]"><span className="text-midnight-blue/45 line-through">{ABEND}</span><span className="mt-0.5 block font-montserrat text-[10px] font-extrabold uppercase tracking-[0.03em] text-[#9B2C1F] sm:text-xs sm:tracking-[0.12em]">Ausverkauft</span></div>
               </div>
             ))}

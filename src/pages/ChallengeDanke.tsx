@@ -69,8 +69,8 @@ export default function ChallengeDanke() {
           <li className="rounded-[18px] border border-[#C9A961]/35 bg-[linear-gradient(180deg,#1E3257,#13233F)] p-6">
             <p className="font-montserrat text-xs font-extrabold uppercase tracking-[0.2em] text-[#C9A961]">Schritt 2</p>
             <h2 className="mt-2 font-montserrat text-xl font-extrabold text-white">Speichere den Zoom-Link</h2>
-            <p className="mt-3 inline-block rounded-md bg-[#F28C3A] px-3 py-2 font-montserrat text-sm font-extrabold text-midnight-blue">Mo 26. Oktober · 19 Uhr</p>
-            <p className="mt-3 font-inter text-sm text-pearl-white/75">Unser Live-Start. Und am Mo 2. November, 19 Uhr, präsentierst du deinen Pitch.</p>
+            <p className="mt-3 inline-block rounded-md bg-[#F28C3A] px-3 py-2 font-montserrat text-sm font-extrabold text-midnight-blue">Mo 23. November · 19 Uhr</p>
+            <p className="mt-3 font-inter text-sm text-pearl-white/75">Unser Live-Start. Und am Di 1. Dezember, 19 Uhr, präsentierst du deinen Pitch.</p>
             <a href={ZOOM} target="_blank" rel="noopener noreferrer" className={`mt-5 inline-flex items-center rounded-full px-7 py-3.5 font-montserrat text-sm font-bold text-midnight-blue ${GOLD}`}>Zum Zoom-Raum</a>
           </li>
           <li className="rounded-[18px] border-2 border-[#C9A961] bg-[linear-gradient(180deg,#24396A,#13233F)] p-6">

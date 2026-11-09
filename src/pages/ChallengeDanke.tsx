@@ -116,6 +116,7 @@ export default function ChallengeDanke() {
               </div>
               <div className="rounded-[16px] border border-[#C9A961]/50 bg-white/[0.06] p-6 text-center">
                 <p className="font-inter text-xs uppercase tracking-[0.16em] text-pearl-white/60">Einmaliges Angebot · nur für neue Teilnehmer</p>
+                <p className="mt-2 font-inter text-sm text-pearl-white/65">statt <s className="text-pearl-white/50">97 €</s> – heute nur</p>
                 <p className="mt-1 font-cormorant text-6xl font-bold text-[#F7E7CE]" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>47 €</p>
                 <a href={PLUS_LINK} target="_blank" rel="noopener noreferrer" className={`mt-5 inline-flex w-full items-center justify-center rounded-full px-7 py-4 font-montserrat text-sm font-extrabold text-midnight-blue ${GOLD}`}>Jetzt sichern – 47 € →</a>
                 <p className="mt-3 font-inter text-xs text-pearl-white/60">Sichere Zahlung über Stripe · sofort danach geht’s weiter</p>

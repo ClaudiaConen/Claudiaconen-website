@@ -59,34 +59,46 @@ function FeedbackPlakette() {
 
 
 
-/** Der Durchgang: Montag, 26.10.2026 bis Montag, 02.11.2026 (Claudia, 22.09.2026 11:02 UTC). Vorher ist nur
- *  Tag 1 offen - als Vorbereitung (Aufwachuebung + Satz); Tag n oeffnet am n-ten Tag des Durchgangs. Nach dem
- *  Ende bleiben alle Tage lesbar, die Zeile im Kopf sagt, dass der Durchgang vorbei ist (Datum nie ohne Ablauf).
- *  Naechster Durchgang: START und ENDE hier aendern - sonst nichts. */
-/** Zahl der Eingetragenen, von Claudia genannt (Stand 24.10.2026, 21:59) - bis zum Start nachtragen. */
-const EINGETRAGEN = 32;
-const START = new Date(2026, 9, 26); // Montag, 26.10.2026, lokale Zeit
-const ENDE = new Date(2026, 10, 2); // Montag, 02.11.2026 (letzter Tag)
+/** Der Durchgang: Montag, 23.11.2026 bis Dienstag, 01.12.2026 (Claudia, 09.11.2026). Samstag + Sonntag sind frei,
+ *  deshalb laufen die sieben Tage NICHT am Stueck: Tag 1-5 = Mo-Fr (23.-27.11.), Wochenend-Pause, Tag 6 = Mo 30.11.,
+ *  Tag 7 = Di 01.12. Tag n oeffnet am n-ten Werktag des Durchgangs. Nach dem Ende bleiben alle Tage lesbar, die
+ *  Zeile im Kopf sagt, dass der Durchgang vorbei ist (Datum nie ohne Ablauf).
+ *  Naechster Durchgang: START und ENDE hier aendern (die Wochenend-Pause steckt in freischaltung/standZeile). */
+/** Zahl der Eingetragenen, von Claudia genannt - bis zum Start nachtragen. */
+const EINGETRAGEN = 0;
+const START = new Date(2026, 10, 23); // Montag, 23.11.2026, lokale Zeit
+const ENDE = new Date(2026, 11, 1); // Dienstag, 01.12.2026 (letzter Tag)
 const VORBEREITUNG_TAG1 = false; // Streifen bleiben vor dem Start zu - die Aufwachuebung steht als 'Tipp am Morgen' davor (22.09.2026 11:24 UTC)
 
-/** Freischaltdatum je Tag (0-basiert). */
+/** Freischaltdatum je Tag (0-basiert). Samstag + Sonntag sind frei und werden uebersprungen,
+ *  d. h. Tag-Index 5 (= Tag 6) faellt auf den Montag nach dem Wochenende. */
 function freischaltung(heute: Date, tag: number): Date {
   const start = new Date(heute); start.setHours(0, 0, 0, 0);
-  const d = new Date(START); d.setDate(d.getDate() + tag);
+  const d = new Date(START);
+  let offen = tag;
+  while (offen > 0) {
+    d.setDate(d.getDate() + 1);
+    const wt = d.getDay();
+    if (wt !== 0 && wt !== 6) offen -= 1; // nur Werktage (Mo-Fr) zaehlen
+  }
   if (start < START && tag === 0 && VORBEREITUNG_TAG1) return new Date(0);
   return d;
 }
 
 /** Die Zeile im Kopf - je nachdem, ob der Durchgang bevorsteht, laeuft oder vorbei ist. Live-Termine
- *  (Claudia, 22.09.2026 11:16 UTC): Start-Zoom Mo 26.10. 19:00 Uhr, Abschlusstreffen Mo 02.11. 19:00 Uhr. */
+ *  (Claudia, 09.11.2026): Start-Zoom Mo 23.11. 19:00 Uhr, Abschlusstreffen Di 01.12. 19:00 Uhr. */
 function standZeile(heute: Date): string {
   const h = new Date(heute); h.setHours(0, 0, 0, 0);
-  if (h < START) return 'Start: Montag, 26. Oktober 2026 · 19 Uhr · live im Zoom';
+  if (h < START) return 'Start: Montag, 23. November 2026 · 19 Uhr · live im Zoom';
   if (h <= ENDE) {
-    const tag = Math.min(7, Math.floor((h.getTime() - START.getTime()) / 86400000) + 1);
+    // Werktage von START bis heute zaehlen (Samstag + Sonntag sind frei).
+    let tag = 0; const d = new Date(START);
+    while (d <= h) { const wt = d.getDay(); if (wt !== 0 && wt !== 6) tag += 1; d.setDate(d.getDate() + 1); }
+    tag = Math.min(7, tag);
+    if (h.getDay() === 0 || h.getDay() === 6) return `Wochenend-Pause – weiter geht es am Montag mit Tag ${Math.min(7, tag + 1)} von 7`;
     return `Die Challenge läuft – heute ist Tag ${tag} von 7`;
   }
-  return 'Der Durchgang vom 26. Oktober ist beendet – trag dich ein, du erfährst als Erste, wann es wieder losgeht';
+  return 'Der Durchgang vom 23. November ist beendet – trag dich ein, du erfährst als Erste, wann es wieder losgeht';
 }
 const KURZ = new Intl.DateTimeFormat('de-DE', { weekday: 'short', day: 'numeric', month: 'short' });
 
@@ -134,7 +146,7 @@ function MobilLeiste() {
   return (
     <div aria-hidden={!zeigen} className={`fixed inset-x-0 bottom-0 z-40 border-t border-[#C9A961]/50 bg-[#13233F] px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] transition-transform duration-300 md:hidden ${zeigen ? 'translate-y-0' : 'pointer-events-none translate-y-full'}`}>
       <a href="#anmelden" tabIndex={zeigen ? 0 : -1} className={`flex items-center justify-center rounded-full px-6 py-3.5 font-montserrat text-sm font-extrabold text-midnight-blue ${GOLD}`}>
-        Kostenfrei dabei sein – Start 26. Okt. →
+        Kostenfrei dabei sein – Start 23. Nov. →
       </a>
     </div>
   );
@@ -404,7 +416,7 @@ export default function Challenge() {
           <Helix aktiv={aktiverTag} ys={sprossen.ys} hoehe={sprossen.h} />
           <ol ref={tageRef} className="grid list-none content-start gap-3 self-start p-0">
             <li className={`grid gap-1 bg-white px-5 py-5 text-midnight-blue sm:grid-cols-[170px_minmax(0,1fr)] sm:gap-6 sm:px-7 ${KACHEL}`}>
-              <p className="font-montserrat text-sm font-extrabold">Start<span className="block font-bold text-midnight-blue/65">Mo., 26. Okt. · 19 Uhr</span></p>
+              <p className="font-montserrat text-sm font-extrabold">Start<span className="block font-bold text-midnight-blue/65">Mo., 23. Nov. · 19 Uhr</span></p>
               <div className="min-w-0">
                 <p className="font-montserrat text-lg font-extrabold">Auftakt live im Zoom</p>
                 <p className="mt-1 font-inter text-[15px] leading-relaxed text-midnight-blue/80">Ein gemütliches Treffen im Zoom: kennenlernen, gemeinsam die Strategie besprechen und klaren Durchblick bekommen. Dazu deine Wochenplanung für deinen eigenen Erfolg.</p>
@@ -416,7 +428,7 @@ export default function Challenge() {
                 <li key={t.titel} data-tag={i}>
                   <details style={{ ['--i' as string]: i + 1 }} className={`group bg-white text-midnight-blue transition-shadow duration-500 ${KACHEL} ${i === aktiverTag ? 'md:border-[#C9A961] md:shadow-[0_14px_34px_-18px_rgba(201,169,97,0.75)]' : ''}`}>
                     <summary className="grid cursor-pointer list-none gap-1 px-5 py-5 sm:grid-cols-[170px_minmax(0,1fr)_auto] sm:items-center sm:gap-6 sm:px-7 [&::-webkit-details-marker]:hidden">
-                      <p className="font-montserrat text-sm font-extrabold">Tag {i + 1}<span className="block font-bold text-midnight-blue/65">{letzter ? 'Mo., 2. Nov. · 19 Uhr' : KURZ.format(freischaltung(heute, i))}</span></p>
+                      <p className="font-montserrat text-sm font-extrabold">Tag {i + 1}<span className="block font-bold text-midnight-blue/65">{letzter ? 'Di., 1. Dez. · 19 Uhr' : KURZ.format(freischaltung(heute, i))}</span></p>
                       <div className="flex min-w-0 items-start gap-4">
                         {/* Die 3-D-Icons klein in der Zeile (Claudia, 24.10.2026 22:20: "Icons mit auf den Ablaufplan ... aufklappen und erklaeren"). */}
                         <img src={`/icons/${t.icon}.webp`} alt="" width={256} height={256} loading="lazy" decoding="async" className="mt-0.5 h-11 w-11 flex-none" />
@@ -487,8 +499,10 @@ export default function Challenge() {
             </p>
           </div>
           <div id="anmeldung" className="mt-10">
-            {/* Echte Zahl von Claudia (24.10.2026 21:59: "Es sind 32 Personen eingetragen") - bis zum Start nachtragen. */}
-            <p className="mb-3 flex items-center gap-2 font-montserrat text-sm font-extrabold text-midnight-blue"><span aria-hidden="true" className="h-2.5 w-2.5 rounded-full bg-[#C9A961]" />Schon {EINGETRAGEN} Teilnehmende eingetragen</p>
+            {/* Echte Zahl von Claudia - bis zum Start nachtragen. Bei 0 bleibt die Zeile aus (keine "0 eingetragen"). */}
+            {EINGETRAGEN > 0 && (
+              <p className="mb-3 flex items-center gap-2 font-montserrat text-sm font-extrabold text-midnight-blue"><span aria-hidden="true" className="h-2.5 w-2.5 rounded-full bg-[#C9A961]" />Schon {EINGETRAGEN} Teilnehmende eingetragen</p>
+            )}
             <ChallengeAnmeldung start={startKurz} />
             <p className="mt-4 text-center font-inter text-sm">Schon angemeldet? <a href="/mein-bereich" className="font-bold underline decoration-[#C9A961] underline-offset-4">Zum Login in deinen Mitgliederbereich →</a></p>
           </div>

@@ -62,6 +62,7 @@ const StimmeTrauer = lazy(() => import('./pages/StimmeTrauer'));
 const StimmeVoiceover = lazy(() => import('./pages/StimmeVoiceover'));
 const Challenge = lazy(() => import('./pages/Challenge'));
 const ChallengeDanke = lazy(() => import('./pages/ChallengeDanke'));
+const ChallengePlusDanke = lazy(() => import('./pages/ChallengePlusDanke'));
 const Masterclass = lazy(() => import('./pages/Masterclass'));
 const MasterclassDanke = lazy(() => import('./pages/MasterclassDanke'));
 const MeinBereich = lazy(() => import('./pages/MeinBereich'));
@@ -251,6 +252,7 @@ function App() {
         <Route path="/stimme-voiceover" element={<StimmeVoiceover />} />
         <Route path="/challenge" element={<Challenge />} />
         <Route path="/challenge/danke" element={<ChallengeDanke />} />
+        <Route path="/challenge/plus-danke" element={<ChallengePlusDanke />} />
         <Route path="/masterclass" element={<Masterclass />} />
         <Route path="/masterclass/danke" element={<MasterclassDanke />} />
         <Route path="/mein-bereich" element={<MeinBereich />} />

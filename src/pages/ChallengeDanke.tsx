@@ -13,6 +13,15 @@ const WHATSAPP = 'https://chat.whatsapp.com/IWSuqZ9ZrMn3dYNgVY1sp6?s=qt&p=i&mlu=
 const TELEGRAM = 'https://t.me/+Tn_rHmElfidjYzcy';
 const ZOOM = 'https://us02web.zoom.us/j/3240814498';
 const GOLD = 'bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]';
+/** Tripwire „Unverwechselbar PLUS" (47 €) – Stripe Payment-Link (Claudia, 09.11.2026). */
+const PLUS_LINK = 'https://buy.stripe.com/dRmcN57E4bSU1jO7rq3oA04';
+const PLUS_INHALT = [
+  '4 Wochen exklusiver Zugang zu den wertvollen Challenge-Inhalten',
+  'Elevator-Pitch-Selbstlernkurs im Wert von 249 € – gratis obendrauf',
+  '7 Workbooks + 7 Audios zum Mitnehmen',
+  '2 persönliche Feedbacks von Claudia',
+  'Exklusive Betreuung & Support',
+];
 
 export default function ChallengeDanke() {
   const ort = useLocation();
@@ -69,8 +78,8 @@ export default function ChallengeDanke() {
           <li className="rounded-[18px] border border-[#C9A961]/35 bg-[linear-gradient(180deg,#1E3257,#13233F)] p-6">
             <p className="font-montserrat text-xs font-extrabold uppercase tracking-[0.2em] text-[#C9A961]">Schritt 2</p>
             <h2 className="mt-2 font-montserrat text-xl font-extrabold text-white">Speichere den Zoom-Link</h2>
-            <p className="mt-3 inline-block rounded-md bg-[#F28C3A] px-3 py-2 font-montserrat text-sm font-extrabold text-midnight-blue">Mo 26. Oktober · 19 Uhr</p>
-            <p className="mt-3 font-inter text-sm text-pearl-white/75">Unser Live-Start. Und am Mo 2. November, 19 Uhr, präsentierst du deinen Pitch.</p>
+            <p className="mt-3 inline-block rounded-md bg-[#F28C3A] px-3 py-2 font-montserrat text-sm font-extrabold text-midnight-blue">Mo 23. November · 19 Uhr</p>
+            <p className="mt-3 font-inter text-sm text-pearl-white/75">Unser Live-Start. Und am Di 1. Dezember, 19 Uhr, präsentierst du deinen Pitch.</p>
             <a href={ZOOM} target="_blank" rel="noopener noreferrer" className={`mt-5 inline-flex items-center rounded-full px-7 py-3.5 font-montserrat text-sm font-bold text-midnight-blue ${GOLD}`}>Zum Zoom-Raum</a>
           </li>
           <li className="rounded-[18px] border-2 border-[#C9A961] bg-[linear-gradient(180deg,#24396A,#13233F)] p-6">
@@ -84,6 +93,38 @@ export default function ChallengeDanke() {
             <a href="https://community.claudiaconen.com/mein-bereich/start" className={`mt-5 inline-flex items-center rounded-full px-7 py-3.5 font-montserrat text-sm font-bold text-midnight-blue ${GOLD}`}>Zum Mitgliederbereich →</a>
           </li>
         </ol>
+
+        {/* Tripwire: einmaliges Angebot direkt nach der Anmeldung (Claudia, 09.11.2026). Hauptsache bleibt oben
+            der Gratis-Zugang + Zoom; dieses Angebot kommt als eigene, ruhige Karte darunter. */}
+        <section aria-labelledby="plus-titel" className="mt-14">
+          <div className="relative overflow-hidden rounded-[22px] border-2 border-[#C9A961] bg-[radial-gradient(ellipse_80%_90%_at_80%_0%,#2A4170_0%,#1A2B4C_50%,#13233F_100%)] p-7 shadow-[0_24px_60px_-28px_rgba(0,0,0,0.8)] sm:p-10">
+            <p className="inline-flex items-center gap-2 rounded-full border border-[#C9A961]/60 px-3 py-1 font-montserrat text-[11px] font-extrabold uppercase tracking-[0.18em] text-[#F7E7CE]">Nur für neue Teilnehmer · einmaliges Angebot</p>
+            <div className="mt-5 grid gap-8 lg:grid-cols-[1.3fr_1fr] lg:items-center">
+              <div>
+                <h2 id="plus-titel" className="font-cormorant text-[30px] font-semibold leading-[1.1] text-white sm:text-4xl" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
+                  Mach mehr aus deinen 7 Tagen:
+                  <span className="block bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)] bg-clip-text text-transparent">Unverwechselbar PLUS</span>
+                </h2>
+                <p className="mt-3 font-inter text-[15px] leading-relaxed text-pearl-white/80">Dein Komplett-Paket, das die Challenge verlängert und vertieft – damit aus Üben echtes Können wird.</p>
+                <ul className="mt-5 grid gap-2.5">
+                  {PLUS_INHALT.map((z) => (
+                    <li key={z} className="flex items-start gap-3 font-inter text-[15px] text-pearl-white/90">
+                      <span aria-hidden className="mt-0.5 flex h-5 w-5 flex-none items-center justify-center rounded-full bg-[#C9A961] text-[12px] font-black text-midnight-blue">✓</span>
+                      {z}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="rounded-[16px] border border-[#C9A961]/50 bg-white/[0.06] p-6 text-center">
+                <p className="font-inter text-sm text-pearl-white/70">Allein der Elevator-Pitch-Kurs kostet <b className="text-pearl-white">249 €</b>.</p>
+                <p className="mt-3 font-inter text-xs uppercase tracking-[0.16em] text-pearl-white/60">Heute alles zusammen für</p>
+                <p className="mt-1 font-cormorant text-6xl font-bold text-[#F7E7CE]" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>47 €</p>
+                <a href={PLUS_LINK} target="_blank" rel="noopener noreferrer" className={`mt-5 inline-flex w-full items-center justify-center rounded-full px-7 py-4 font-montserrat text-sm font-extrabold text-midnight-blue ${GOLD}`}>Jetzt sichern – 47 € →</a>
+                <p className="mt-3 font-inter text-xs text-pearl-white/60">Sichere Zahlung über Stripe · sofort danach geht’s weiter</p>
+              </div>
+            </div>
+          </div>
+        </section>
 
         <section className="mt-14 text-center" aria-labelledby="neugier-titel">
           <h2 id="neugier-titel" className="font-cormorant text-3xl italic text-[#F7E7CE] sm:text-4xl" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>Das wartet auf dich …</h2>

@@ -65,7 +65,7 @@ function FeedbackPlakette() {
  *  Zeile im Kopf sagt, dass der Durchgang vorbei ist (Datum nie ohne Ablauf).
  *  Naechster Durchgang: START und ENDE hier aendern (die Wochenend-Pause steckt in freischaltung/standZeile). */
 /** Zahl der Eingetragenen, von Claudia genannt - bis zum Start nachtragen. */
-const EINGETRAGEN = 32;
+const EINGETRAGEN = 0;
 const START = new Date(2026, 10, 23); // Montag, 23.11.2026, lokale Zeit
 const ENDE = new Date(2026, 11, 1); // Dienstag, 01.12.2026 (letzter Tag)
 const VORBEREITUNG_TAG1 = false; // Streifen bleiben vor dem Start zu - die Aufwachuebung steht als 'Tipp am Morgen' davor (22.09.2026 11:24 UTC)
@@ -499,8 +499,10 @@ export default function Challenge() {
             </p>
           </div>
           <div id="anmeldung" className="mt-10">
-            {/* Echte Zahl von Claudia (24.10.2026 21:59: "Es sind 32 Personen eingetragen") - bis zum Start nachtragen. */}
-            <p className="mb-3 flex items-center gap-2 font-montserrat text-sm font-extrabold text-midnight-blue"><span aria-hidden="true" className="h-2.5 w-2.5 rounded-full bg-[#C9A961]" />Schon {EINGETRAGEN} Teilnehmende eingetragen</p>
+            {/* Echte Zahl von Claudia - bis zum Start nachtragen. Bei 0 bleibt die Zeile aus (keine "0 eingetragen"). */}
+            {EINGETRAGEN > 0 && (
+              <p className="mb-3 flex items-center gap-2 font-montserrat text-sm font-extrabold text-midnight-blue"><span aria-hidden="true" className="h-2.5 w-2.5 rounded-full bg-[#C9A961]" />Schon {EINGETRAGEN} Teilnehmende eingetragen</p>
+            )}
             <ChallengeAnmeldung start={startKurz} />
             <p className="mt-4 text-center font-inter text-sm">Schon angemeldet? <a href="/mein-bereich" className="font-bold underline decoration-[#C9A961] underline-offset-4">Zum Login in deinen Mitgliederbereich →</a></p>
           </div>

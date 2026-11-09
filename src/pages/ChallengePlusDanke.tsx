@@ -12,7 +12,6 @@ const GOLD = 'bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]';
 
 const ENTHALTEN = [
   '4 Wochen exklusiver Zugang zu den wertvollen Challenge-Inhalten',
-  'Elevator-Pitch-Selbstlernkurs im Wert von 249 €',
   '7 Workbooks + 7 Audios zum Mitnehmen',
   '2 persönliche Feedbacks von Claudia',
   'Exklusive Betreuung & Support',

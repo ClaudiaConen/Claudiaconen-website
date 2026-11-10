@@ -30,6 +30,7 @@ export default function AdminDashboard() {
     checklistDownloads: 0,
     linkedinFreebie: 0,
     kiManagerBookings: 0,
+    tripwire: 0,
   });
   const [expandedSource, setExpandedSource] = useState<string | null>(null);
   const [sourceData, setSourceData] = useState<Record<string, any[]>>({});
@@ -94,6 +95,7 @@ export default function AdminDashboard() {
         checklistDownloads: counts.checklistDownloads || 0,
         linkedinFreebie: counts.linkedinFreebie || 0,
         kiManagerBookings: counts.kiManagerBookings || 0,
+        tripwire: counts.tripwire || 0,
       });
     } catch (error) {
       console.error('Error loading email stats:', error);
@@ -232,6 +234,7 @@ export default function AdminDashboard() {
   const emailSources: EmailSource[] = [
     { key: 'kiManagerBookings', label: 'KI-Manager Anmeldungen', table: 'ki_manager_bookings', count: emailStats.kiManagerBookings, color: 'bg-orange-100 text-orange-800', emailField: 'email', nameField: 'vorname' },
     { key: 'challenge', label: 'Challenge-Anmeldungen', table: 'contact_inquiries', count: emailStats.challenge, color: 'bg-fuchsia-100 text-fuchsia-800', emailField: 'email', nameField: 'name', filter: (q: any) => q.or('message.ilike.*CHALLENGE*,message.ilike.*Video-Training ab 26.10.*: ja*') },
+    { key: 'tripwire', label: 'Tripwire-Käufer (47 € · Unverwechselbar PLUS)', table: 'tripwire_kaeufer', count: emailStats.tripwire, color: 'bg-emerald-100 text-emerald-800', emailField: 'email', nameField: 'name' },
     { key: 'powerofai', label: 'EventKöln – THE POWER OF AI (Check-in)', table: 'contact_inquiries', count: emailStats.powerofai, color: 'bg-amber-100 text-amber-800', emailField: 'email', nameField: 'name', filter: (q: any) => q.ilike('message', '%POWER-OF-AI CHECK-IN%') },
     { key: 'adventRegistrations', label: 'Adventskalender Registrierungen', table: 'advent_registrations', count: emailStats.adventRegistrations, color: 'bg-red-100 text-red-800', emailField: 'email', nameField: 'first_name' },
     { key: 'checklistDownloads', label: 'Checklisten Downloads', table: 'checklist_downloads', count: emailStats.checklistDownloads, color: 'bg-blue-100 text-blue-800', emailField: 'email', nameField: 'article_title' },

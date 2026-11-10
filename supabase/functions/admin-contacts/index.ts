@@ -24,6 +24,7 @@ const ALLOWED = new Set([
   "abkuerzung_bookings",
   "beta_waitlist",
   "ki_manager_bookings",
+  "tripwire_kaeufer",
 ]);
 
 async function verifyAdmin(req: Request, supabase: any) {
@@ -80,6 +81,8 @@ function buildInsert(table: string, email: string, first: string, last: string, 
       return { first_name: first || full, last_name: last || "-", email };
     case "ki_manager_bookings":
       return { vorname: first || full, name: last || "-", adresse: "-", email, telefon: "-", selected_package: "manuell" };
+    case "tripwire_kaeufer":
+      return { email, name: full, produkt: "Manuell im Admin hinzugefügt" };
     default:
       return null;
   }
@@ -97,7 +100,7 @@ async function allCounts(supabase: any) {
       return 0;
     }
   };
-  const [challenge, powerofai, contactInquiries, adventRegistrations, checklistDownloads, linkedinFreebie, coachingInquiries, abkuerzungBookings, betaWaitlist, kiManagerBookings] = await Promise.all([
+  const [challenge, powerofai, contactInquiries, adventRegistrations, checklistDownloads, linkedinFreebie, coachingInquiries, abkuerzungBookings, betaWaitlist, kiManagerBookings, tripwire] = await Promise.all([
     countTable("contact_inquiries", (q) => applyListKeyFilter(q, "challenge")),
     countTable("contact_inquiries", (q) => applyListKeyFilter(q, "powerofai")),
     countTable("contact_inquiries", (q) => applyListKeyFilter(q, "contactInquiries")),
@@ -108,8 +111,9 @@ async function allCounts(supabase: any) {
     countTable("abkuerzung_bookings"),
     countTable("beta_waitlist"),
     countTable("ki_manager_bookings"),
+    countTable("tripwire_kaeufer"),
   ]);
-  return { challenge, powerofai, contactInquiries, adventRegistrations, checklistDownloads, linkedinFreebie, coachingInquiries, abkuerzungBookings, betaWaitlist, kiManagerBookings };
+  return { challenge, powerofai, contactInquiries, adventRegistrations, checklistDownloads, linkedinFreebie, coachingInquiries, abkuerzungBookings, betaWaitlist, kiManagerBookings, tripwire };
 }
 
 Deno.serve(async (req: Request) => {

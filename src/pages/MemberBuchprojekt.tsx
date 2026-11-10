@@ -13,7 +13,6 @@ import {
   Truck,
   Receipt,
 } from 'lucide-react';
-import { supabaseBuchprojekt as supabase } from '../lib/supabaseBuchprojekt';
 import { useStudentAuth } from '../contexts/StudentAuthContext';
 import MemberNavigation from '../components/MemberNavigation';
 
@@ -72,18 +71,11 @@ export default function MemberBuchprojekt() {
   async function fetchAnmeldung() {
     if (!student?.email) return;
     setLoading(true);
-    const { data, error } = await supabase
-      .from('buchprojekt_anmeldungen')
-      .select('id, name, unternehmen, stadt, email, beitragstitel, tier, tier_price, addon_sparring, addon_chronist, total_price, photo_url, qr_url, status, created_at')
-      .ilike('email', student.email)
-      .order('created_at', { ascending: false })
-      .limit(1)
-      .maybeSingle();
-
-    if (error) {
-      console.error('Fehler beim Laden der Anmeldung:', error);
-    }
-    setAnmeldung((data as Anmeldung | null) ?? null);
+    // Hinweis: Buchprojekt-Anmeldungen sind aus Datenschutzgründen nicht mehr öffentlich lesbar
+    // (nur Admins bzw. Server). Eine sichere Zuordnung „diese Anmeldung gehört diesem Mitglied"
+    // ist ohne überprüfbaren Login nicht möglich. Deshalb zeigen wir hier keine fremden Daten,
+    // sondern einen allgemeinen Status-Hinweis (siehe InfoPanel).
+    setAnmeldung(null);
     setLoading(false);
   }
 
@@ -134,11 +126,18 @@ function EmptyState() {
         <BookOpen className="h-7 w-7" />
       </span>
       <h2 className="font-montserrat text-2xl font-bold text-slate-900 mb-3">
-        Noch keine Anmeldung gefunden
+        Dein Buchprojekt
       </h2>
-      <p className="text-slate-600 max-w-md mx-auto leading-relaxed">
-        Wir haben unter deiner E-Mail keine Bewerbung für das Hauptbuch gefunden.
-        Wenn du dabei sein willst — der Premiere-Edition gehören 77 Persönlichkeiten an.
+      <p className="text-slate-600 max-w-lg mx-auto leading-relaxed">
+        Deine Buchprojekt-Daten werden aus Datenschutzgründen vertraulich behandelt und sind
+        hier nicht einsehbar. Den persönlichen Status deiner Bewerbung – von der Rechnung bis zur
+        Auslieferung – bekommst du direkt per E-Mail von uns. Bei Fragen schreib uns einfach an{' '}
+        <a href="mailto:claudiaconen@umsatzstimme.de" className="font-semibold text-fuchsia-600 hover:underline">
+          claudiaconen@umsatzstimme.de
+        </a>.
+      </p>
+      <p className="text-slate-500 text-sm max-w-lg mx-auto mt-4 leading-relaxed">
+        Du bist noch nicht dabei? Der Premiere-Edition gehören 77 Persönlichkeiten an.
       </p>
       <Link
         to="/buchprojekt"

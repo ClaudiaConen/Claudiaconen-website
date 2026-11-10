@@ -40,19 +40,16 @@ Deno.serve(async (req: Request) => {
     const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-    const isRefresh = accessCode.trim() === 'refresh';
-
-    let query = supabase
+    // WICHTIG (Sicherheit): Früher konnte man sich mit accessCode === 'refresh' ganz ohne
+    // Zugangscode als beliebiges Mitglied einloggen – nur über die E-Mail. Das ist eine Lücke
+    // und wurde entfernt. Jeder Login UND jeder Refresh braucht jetzt den echten Zugangscode.
+    const { data: student, error: studentError } = await supabase
       .from('member_students')
       .select('*')
       .eq('email', email.toLowerCase().trim())
-      .eq('is_active', true);
-
-    if (!isRefresh) {
-      query = query.eq('access_code', accessCode.trim());
-    }
-
-    const { data: student, error: studentError } = await query.maybeSingle();
+      .eq('is_active', true)
+      .eq('access_code', accessCode.trim())
+      .maybeSingle();
 
     if (studentError) {
       console.error('Database error:', studentError);

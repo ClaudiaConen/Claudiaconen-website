@@ -62,6 +62,9 @@ export function StudentAuthProvider({ children }: { children: React.ReactNode })
 
     setStudent(data.student);
     localStorage.setItem('student', JSON.stringify(data.student));
+    // Zugangscode des Mitglieds (eigene Zugangsdaten, eigenes Gerät) merken, damit „refreshStudent"
+    // sich sicher neu anmelden kann. Ein Login ganz ohne Code ist serverseitig nicht mehr möglich.
+    localStorage.setItem('student_code', accessCode);
 
     await updateStreak(data.student.id);
   };
@@ -69,6 +72,7 @@ export function StudentAuthProvider({ children }: { children: React.ReactNode })
   const logout = () => {
     setStudent(null);
     localStorage.removeItem('student');
+    localStorage.removeItem('student_code');
   };
 
   const updateProfile = async (updates: Partial<Student>) => {
@@ -103,6 +107,11 @@ export function StudentAuthProvider({ children }: { children: React.ReactNode })
   const refreshStudent = async () => {
     if (!student) return;
 
+    // Refresh meldet sich mit dem gespeicherten Zugangscode neu an. Ohne gespeicherten Code
+    // (z. B. alte Session) bleiben die vorhandenen Daten einfach bestehen.
+    const code = localStorage.getItem('student_code');
+    if (!code) return;
+
     const response = await fetch(
       `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/student-login`,
       {
@@ -111,7 +120,7 @@ export function StudentAuthProvider({ children }: { children: React.ReactNode })
           'Content-Type': 'application/json',
           Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
         },
-        body: JSON.stringify({ email: student.email, accessCode: 'refresh' }),
+        body: JSON.stringify({ email: student.email, accessCode: code }),
       }
     );
 

@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { Award, Plus, Edit2, Trash2, Eye, EyeOff, Star, Save, X, ChevronUp, ChevronDown, GripVertical } from 'lucide-react';
 import { checkAdminAuth } from '../lib/adminAuth';
 import AdminLayout from '../components/AdminLayout';
-import { supabaseCms, type MentoringPackage } from '../lib/supabaseCms';
+import { type MentoringPackage } from '../lib/supabaseCms';
+import { cmsList, cmsInsert, cmsUpdate, cmsDelete } from '../lib/cmsAdmin';
 
 const COLOR_THEMES = [
   { value: 'gold', label: 'Gold', color: 'bg-yellow-100 text-yellow-800' },
@@ -51,15 +52,11 @@ export default function AdminMentoring() {
 
   const loadPackages = async () => {
     setLoading(true);
-    const { data, error } = await supabaseCms
-      .from('mentoring_packages')
-      .select('*')
-      .order('display_order', { ascending: true });
-
-    if (error) {
-      setError('Fehler beim Laden: ' + error.message);
-    } else {
-      setPackages(data || []);
+    try {
+      const data = await cmsList<MentoringPackage>('mentoring_packages');
+      setPackages(data);
+    } catch (err) {
+      setError('Fehler beim Laden: ' + (err instanceof Error ? err.message : String(err)));
     }
     setLoading(false);
   };
@@ -75,16 +72,13 @@ export default function AdminMentoring() {
     setError('');
     const maxOrder = packages.reduce((max, p) => Math.max(max, p.display_order), 0);
     const slug = formData.slug || generateSlug(formData.name);
-    const { error } = await supabaseCms
-      .from('mentoring_packages')
-      .insert({ ...formData, slug, display_order: maxOrder + 1 });
-
-    if (error) {
-      setError('Fehler: ' + error.message);
-    } else {
+    try {
+      await cmsInsert('mentoring_packages', { ...formData, slug, display_order: maxOrder + 1 });
       setFormData(emptyPackage);
       setShowAddForm(false);
       await loadPackages();
+    } catch (err) {
+      setError('Fehler: ' + (err instanceof Error ? err.message : String(err)));
     }
     setSaving(false);
   };
@@ -93,41 +87,33 @@ export default function AdminMentoring() {
     if (!editingId) return;
     setSaving(true);
     setError('');
-    const { error } = await supabaseCms
-      .from('mentoring_packages')
-      .update({ ...formData, updated_at: new Date().toISOString() })
-      .eq('id', editingId);
-
-    if (error) {
-      setError('Fehler: ' + error.message);
-    } else {
+    try {
+      await cmsUpdate('mentoring_packages', editingId, { ...formData, updated_at: new Date().toISOString() });
       setEditingId(null);
       await loadPackages();
+    } catch (err) {
+      setError('Fehler: ' + (err instanceof Error ? err.message : String(err)));
     }
     setSaving(false);
   };
 
   const handleDelete = async (id: string) => {
     if (!confirm('Mentoring-Paket wirklich löschen?')) return;
-    const { error } = await supabaseCms.from('mentoring_packages').delete().eq('id', id);
-    if (error) {
-      setError('Fehler: ' + error.message);
-    } else {
+    try {
+      await cmsDelete('mentoring_packages', id);
       await loadPackages();
+    } catch (err) {
+      setError('Fehler: ' + (err instanceof Error ? err.message : String(err)));
     }
   };
 
   const toggleActive = async (pkg: MentoringPackage) => {
-    await supabaseCms.from('mentoring_packages')
-      .update({ is_active: !pkg.is_active, updated_at: new Date().toISOString() })
-      .eq('id', pkg.id);
+    await cmsUpdate('mentoring_packages', pkg.id, { is_active: !pkg.is_active, updated_at: new Date().toISOString() });
     await loadPackages();
   };
 
   const toggleHighlighted = async (pkg: MentoringPackage) => {
-    await supabaseCms.from('mentoring_packages')
-      .update({ is_highlighted: !pkg.is_highlighted, updated_at: new Date().toISOString() })
-      .eq('id', pkg.id);
+    await cmsUpdate('mentoring_packages', pkg.id, { is_highlighted: !pkg.is_highlighted, updated_at: new Date().toISOString() });
     await loadPackages();
   };
 
@@ -136,8 +122,8 @@ export default function AdminMentoring() {
     const swapIdx = direction === 'up' ? idx - 1 : idx + 1;
     if (swapIdx < 0 || swapIdx >= packages.length) return;
     const other = packages[swapIdx];
-    await supabaseCms.from('mentoring_packages').update({ display_order: other.display_order }).eq('id', pkg.id);
-    await supabaseCms.from('mentoring_packages').update({ display_order: pkg.display_order }).eq('id', other.id);
+    await cmsUpdate('mentoring_packages', pkg.id, { display_order: other.display_order });
+    await cmsUpdate('mentoring_packages', other.id, { display_order: pkg.display_order });
     await loadPackages();
   };
 

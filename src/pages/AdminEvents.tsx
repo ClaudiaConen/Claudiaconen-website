@@ -5,6 +5,7 @@ import { checkAdminAuth } from '../lib/adminAuth';
 import AdminNavigation from '../components/AdminNavigation';
 import AdminLayout from '../components/AdminLayout';
 import { supabaseCms, type WebsiteEvent } from '../lib/supabaseCms';
+import { cmsList, cmsInsert, cmsUpdate, cmsDelete, cmsEventImageUploadUrl } from '../lib/cmsAdmin';
 
 const EVENT_TYPES = [
   { value: 'online', label: 'Online' },
@@ -71,18 +72,20 @@ function EventForm({ formData, setFormData, error, saving, onSave, onCancel, isN
 
     const fileExt = file.name.split('.').pop()?.toLowerCase() || 'jpg';
     const fileName = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}.${fileExt}`;
-    const { error: uploadErr } = await supabaseCms.storage
-      .from('event-images')
-      .upload(fileName, file, { upsert: true });
-    if (uploadErr) {
-      setUploadError('Upload fehlgeschlagen: ' + uploadErr.message);
+    try {
+      // Signierten Upload-Link über die Admin-Server-Funktion holen (prüft das Admin-Login),
+      // danach die Datei direkt zum Storage hochladen.
+      const { path, token, publicUrl } = await cmsEventImageUploadUrl(fileName);
+      const { error: uploadErr } = await supabaseCms.storage
+        .from('event-images')
+        .uploadToSignedUrl(path, token, file);
+      if (uploadErr) throw new Error(uploadErr.message);
+      setFormData(prev => ({ ...prev, image_url: publicUrl }));
+    } catch (err) {
+      setUploadError('Upload fehlgeschlagen: ' + (err instanceof Error ? err.message : String(err)));
       URL.revokeObjectURL(localPreview);
       setPreviewUrl('');
-      setUploading(false);
-      return;
     }
-    const { data } = supabaseCms.storage.from('event-images').getPublicUrl(fileName);
-    setFormData(prev => ({ ...prev, image_url: data.publicUrl }));
     setUploading(false);
   };
 
@@ -352,15 +355,11 @@ export default function AdminEvents() {
 
   const loadEvents = async () => {
     setLoading(true);
-    const { data, error } = await supabaseCms
-      .from('website_events')
-      .select('*')
-      .order('display_order', { ascending: true });
-
-    if (error) {
-      setError('Fehler beim Laden: ' + error.message);
-    } else {
-      setEvents(data || []);
+    try {
+      const data = await cmsList<WebsiteEvent>('website_events');
+      setEvents(data);
+    } catch (err) {
+      setError('Fehler beim Laden: ' + (err instanceof Error ? err.message : String(err)));
     }
     setLoading(false);
   };
@@ -369,17 +368,14 @@ export default function AdminEvents() {
     setSaving(true);
     setError('');
     const maxOrder = events.reduce((max, e) => Math.max(max, e.display_order), 0);
-    const { error } = await supabaseCms
-      .from('website_events')
-      .insert({ ...formData, display_order: maxOrder + 1 });
-
-    if (error) {
-      setError('Fehler beim Erstellen: ' + error.message);
-    } else {
+    try {
+      await cmsInsert('website_events', { ...formData, display_order: maxOrder + 1 });
       playSuccessSound();
       setFormData(emptyEvent);
       setShowAddForm(false);
       await loadEvents();
+    } catch (err) {
+      setError('Fehler beim Erstellen: ' + (err instanceof Error ? err.message : String(err)));
     }
     setSaving(false);
   };
@@ -388,44 +384,34 @@ export default function AdminEvents() {
     if (!editingId) return;
     setSaving(true);
     setError('');
-    const { error } = await supabaseCms
-      .from('website_events')
-      .update({ ...formData, updated_at: new Date().toISOString() })
-      .eq('id', editingId);
-
-    if (error) {
-      setError('Fehler beim Speichern: ' + error.message);
-    } else {
+    try {
+      await cmsUpdate('website_events', editingId, { ...formData, updated_at: new Date().toISOString() });
       playSuccessSound();
       setEditingId(null);
       await loadEvents();
+    } catch (err) {
+      setError('Fehler beim Speichern: ' + (err instanceof Error ? err.message : String(err)));
     }
     setSaving(false);
   };
 
   const handleDelete = async (id: string) => {
     if (!confirm('Event wirklich löschen?')) return;
-    const { error } = await supabaseCms.from('website_events').delete().eq('id', id);
-    if (error) {
-      setError('Fehler beim Löschen: ' + error.message);
-    } else {
+    try {
+      await cmsDelete('website_events', id);
       await loadEvents();
+    } catch (err) {
+      setError('Fehler beim Löschen: ' + (err instanceof Error ? err.message : String(err)));
     }
   };
 
   const toggleActive = async (event: WebsiteEvent) => {
-    await supabaseCms
-      .from('website_events')
-      .update({ is_active: !event.is_active, updated_at: new Date().toISOString() })
-      .eq('id', event.id);
+    await cmsUpdate('website_events', event.id, { is_active: !event.is_active, updated_at: new Date().toISOString() });
     await loadEvents();
   };
 
   const toggleFeatured = async (event: WebsiteEvent) => {
-    await supabaseCms
-      .from('website_events')
-      .update({ is_featured: !event.is_featured, updated_at: new Date().toISOString() })
-      .eq('id', event.id);
+    await cmsUpdate('website_events', event.id, { is_featured: !event.is_featured, updated_at: new Date().toISOString() });
     await loadEvents();
   };
 
@@ -435,8 +421,8 @@ export default function AdminEvents() {
     if (swapIdx < 0 || swapIdx >= events.length) return;
 
     const other = events[swapIdx];
-    await supabaseCms.from('website_events').update({ display_order: other.display_order }).eq('id', event.id);
-    await supabaseCms.from('website_events').update({ display_order: event.display_order }).eq('id', other.id);
+    await cmsUpdate('website_events', event.id, { display_order: other.display_order });
+    await cmsUpdate('website_events', other.id, { display_order: event.display_order });
     await loadEvents();
   };
 

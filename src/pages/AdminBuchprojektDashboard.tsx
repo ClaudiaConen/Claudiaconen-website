@@ -15,7 +15,7 @@ import {
   Star,
   Download,
 } from 'lucide-react';
-import { supabaseBuchprojekt as supabase } from '../lib/supabaseBuchprojekt';
+import { cmsList, cmsUpdate } from '../lib/cmsAdmin';
 import { checkAdminAuth } from '../lib/adminAuth';
 import AdminNavigation from '../components/AdminNavigation';
 
@@ -84,25 +84,20 @@ export default function AdminBuchprojektDashboard() {
 
   async function fetchList() {
     setLoading(true);
-    const { data, error } = await supabase
-      .from('buchprojekt_anmeldungen')
-      .select('*')
-      .order('created_at', { ascending: false });
-    if (error) {
+    try {
+      const data = await cmsList<Anmeldung>('buchprojekt_anmeldungen');
+      setList(data);
+    } catch (error) {
       console.error('Fehler beim Laden der Anmeldungen:', error);
-    } else if (data) {
-      setList(data as Anmeldung[]);
     }
     setLoading(false);
   }
 
   async function updateStatus(id: string, status: Anmeldung['status']) {
-    const { error } = await supabase
-      .from('buchprojekt_anmeldungen')
-      .update({ status })
-      .eq('id', id);
-    if (error) {
-      alert('Status konnte nicht aktualisiert werden: ' + error.message);
+    try {
+      await cmsUpdate('buchprojekt_anmeldungen', id, { status });
+    } catch (error) {
+      alert('Status konnte nicht aktualisiert werden: ' + (error instanceof Error ? error.message : String(error)));
       return;
     }
     fetchList();
@@ -112,12 +107,10 @@ export default function AdminBuchprojektDashboard() {
   }
 
   async function saveAdminNotes(id: string, notes: string) {
-    const { error } = await supabase
-      .from('buchprojekt_anmeldungen')
-      .update({ admin_notes: notes })
-      .eq('id', id);
-    if (error) {
-      alert('Notizen konnten nicht gespeichert werden: ' + error.message);
+    try {
+      await cmsUpdate('buchprojekt_anmeldungen', id, { admin_notes: notes });
+    } catch (error) {
+      alert('Notizen konnten nicht gespeichert werden: ' + (error instanceof Error ? error.message : String(error)));
       return;
     }
     fetchList();

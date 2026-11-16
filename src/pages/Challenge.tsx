@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import LogoBand from '../components/LogoBand';
 import StimmenKarten from '../components/StimmenKarten';
+import { CHALLENGE_STIMMEN } from '../data/challengeStimmen';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
@@ -569,7 +570,7 @@ export default function Challenge() {
 
       {/* Kundenstimmen als ruhige Karten: Bild oben, Text darunter, jede Karte mit Worten (Claudia, 25.10.2026 02:29:
           "bei Sommerfeld Text drin, bei den andern nicht ... Text unter dem Bild ... etwas freier"). */}
-      <StimmenKarten />
+      <StimmenKarten stimmen={CHALLENGE_STIMMEN} titel="Das sagen Teilnehmerinnen der letzten Challenge" untertitel="Echte Stimmen, in ihren eigenen Worten." />
 
       {/* "Gut zu wissen, bevor es losgeht" entfernt (Claudia, 24.10.2026 20:06: zu viel Ablenkung, gehoert als Tipp-Box in die Challenge). */}
 

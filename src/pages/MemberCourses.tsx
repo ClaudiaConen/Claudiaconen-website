@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useStudentAuth } from '../contexts/StudentAuthContext';
 import { supabase } from '../lib/supabase';
+import { freigegebeneKurse, kursErlaubt } from '../lib/kursFreigabe';
 import MemberNavigation from '../components/MemberNavigation';
 import MemberWelcomeSection from '../components/MemberWelcomeSection';
 import CourseWelcomeSection from '../components/CourseWelcomeSection';
@@ -57,6 +58,7 @@ export default function MemberCourses() {
   const [modules, setModules] = useState<Module[]>([]);
   const [expandedModules, setExpandedModules] = useState<Set<string>>(new Set());
   const [isLoading, setIsLoading] = useState(true);
+  const [gesperrt, setGesperrt] = useState(false);
 
   useEffect(() => {
     loadCourses();
@@ -68,6 +70,14 @@ export default function MemberCourses() {
         setIsLoading(false);
         return;
       }
+
+      // Kurs nicht freigegeben (z. B. Masterclass-Zugang nur fuer Elevator Pitch): nichts laden.
+      if (!kursErlaubt(await freigegebeneKurse(student.id), courseId)) {
+        setGesperrt(true);
+        setIsLoading(false);
+        return;
+      }
+      setGesperrt(false);
 
       const { data: courseData, error: courseError } = await supabase
         .from('member_courses')
@@ -249,6 +259,22 @@ export default function MemberCourses() {
                 <div className="h-4 bg-slate-200 rounded w-2/3"></div>
               </div>
             ))}
+          </div>
+        ) : gesperrt ? (
+          <div className="bg-white rounded-2xl shadow-lg p-12 text-center border-2 border-blue-200">
+            <Lock className="w-16 h-16 text-blue-500 mx-auto mb-4" />
+            <h3 className="text-2xl font-bold text-slate-900 mb-2">
+              Dieser Kurs ist für dich nicht freigeschaltet
+            </h3>
+            <p className="text-slate-600 mb-6">
+              Dein Zugang gilt für andere Kurse. Bei Fragen melde dich gern bei uns.
+            </p>
+            <Link
+              to="/member/courses"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-md"
+            >
+              Zu meinen Kursen
+            </Link>
           </div>
         ) : modules.length === 0 ? (
           <div className="bg-white rounded-2xl shadow-lg p-12 text-center">

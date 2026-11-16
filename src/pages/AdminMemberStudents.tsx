@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { GraduationCap, UserPlus, Mail, Key, RefreshCw, Trash2, Eye, EyeOff, Copy, CheckCircle } from 'lucide-react';
+import { GraduationCap, UserPlus, Mail, Key, RefreshCw, Trash2, Eye, EyeOff, Copy, CheckCircle, Link2 } from 'lucide-react';
 import AdminNavigation from '../components/AdminNavigation';
 import { supabase } from '../lib/supabase';
+import { loginLink } from '../lib/kursFreigabe';
 
 interface MemberStudent {
   id: string;
@@ -15,6 +16,11 @@ interface MemberStudent {
   is_active: boolean;
   created_at: string;
   last_login_at: string | null;
+}
+
+interface Kurs {
+  id: string;
+  title: string;
 }
 
 export default function AdminMemberStudents() {
@@ -33,6 +39,12 @@ export default function AdminMemberStudents() {
   const [isCreating, setIsCreating] = useState(false);
   const [createError, setCreateError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  // Kurs-Freigabe pro Person (16.11.2026). Keine Freigabe = alle Kurse (wie bisher).
+  const [kurse, setKurse] = useState<Kurs[]>([]);
+  const [freigaben, setFreigaben] = useState<Map<string, Set<string>>>(new Map());
+  const [freigabeFehlt, setFreigabeFehlt] = useState(false);
+  const [neueKurse, setNeueKurse] = useState<Set<string>>(new Set());
+  const [kopierterLink, setKopierterLink] = useState<string | null>(null);
 
   useEffect(() => {
     fetchStudents();
@@ -51,6 +63,23 @@ export default function AdminMemberStudents() {
       if (error) throw error;
 
       setStudents(data || []);
+
+      const { data: kursDaten } = await supabase
+        .from('member_courses')
+        .select('id, title')
+        .order('order_index', { ascending: true });
+      setKurse(kursDaten || []);
+
+      const { data: freigabeDaten, error: freigabeFehler } = await supabase
+        .from('member_student_course_access')
+        .select('student_id, course_id');
+      setFreigabeFehlt(!!freigabeFehler);
+      const karte = new Map<string, Set<string>>();
+      (freigabeDaten || []).forEach((z: { student_id: string; course_id: string }) => {
+        if (!karte.has(z.student_id)) karte.set(z.student_id, new Set());
+        karte.get(z.student_id)!.add(z.course_id);
+      });
+      setFreigaben(karte);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Fehler beim Laden der Studenten');
     } finally {
@@ -75,7 +104,7 @@ export default function AdminMemberStudents() {
     try {
       const accessCode = newStudent.access_code || generateAccessCode();
 
-      const { error } = await supabase
+      const { data: angelegt, error } = await supabase
         .from('member_students')
         .insert([{
           email: newStudent.email,
@@ -86,13 +115,23 @@ export default function AdminMemberStudents() {
           total_xp: 0,
           current_streak: 0,
           is_active: true
-        }]);
+        }])
+        .select('id')
+        .single();
 
       if (error) throw error;
 
-      setSuccessMessage('Student erfolgreich erstellt');
+      if (angelegt && neueKurse.size > 0) {
+        const { error: fFehler } = await supabase
+          .from('member_student_course_access')
+          .insert([...neueKurse].map((course_id) => ({ student_id: angelegt.id, course_id })));
+        if (fFehler) throw new Error('Teilnehmerin angelegt, aber die Kurs-Freigabe konnte nicht gespeichert werden: ' + fFehler.message);
+      }
+
+      setSuccessMessage('Teilnehmerin angelegt. Jetzt „Login-Link kopieren“ klicken und den Link verschicken.');
       setShowCreateModal(false);
       setNewStudent({ email: '', first_name: '', last_name: '', access_code: '' });
+      setNeueKurse(new Set());
       await fetchStudents();
 
       setTimeout(() => setSuccessMessage(''), 3000);
@@ -139,6 +178,25 @@ export default function AdminMemberStudents() {
     }
   };
 
+  const kursUmschalten = async (studentId: string, courseId: string) => {
+    const hat = freigaben.get(studentId)?.has(courseId);
+    const { error: fFehler } = hat
+      ? await supabase.from('member_student_course_access').delete().eq('student_id', studentId).eq('course_id', courseId)
+      : await supabase.from('member_student_course_access').insert([{ student_id: studentId, course_id: courseId }]);
+    if (fFehler) { setError('Kurs-Freigabe konnte nicht gespeichert werden: ' + fFehler.message); return; }
+    await fetchStudents();
+  };
+
+  const linkKopieren = async (student: MemberStudent) => {
+    try {
+      await navigator.clipboard.writeText(loginLink(student.email, student.access_code));
+      setKopierterLink(student.id);
+      setTimeout(() => setKopierterLink(null), 2500);
+    } catch {
+      window.prompt('Login-Link zum Kopieren:', loginLink(student.email, student.access_code));
+    }
+  };
+
   const copyToClipboard = async (text: string, id: string) => {
     try {
       await navigator.clipboard.writeText(text);
@@ -162,7 +220,7 @@ export default function AdminMemberStudents() {
                 Member-Studenten
               </h1>
               <p className="text-gray-600 mt-2">
-                Verwalte die Teilnehmer der KI-Manager Ausbildung
+                Teilnehmende im Mitgliederbereich und ihre freigeschalteten Kurse
               </p>
             </div>
             <button
@@ -184,6 +242,14 @@ export default function AdminMemberStudents() {
         {error && (
           <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-800">
             {error}
+          </div>
+        )}
+
+        {freigabeFehlt && (
+          <div className="mb-6 p-4 bg-amber-50 border border-amber-300 rounded-lg text-amber-900 text-sm">
+            <b>Kurs-Freigabe noch nicht aktiv:</b> Die Datenbank-Erweiterung fehlt noch. Bitte die Datei
+            <code className="mx-1">supabase/migrations/20261116120000_create_member_student_course_access.sql</code>
+            im Supabase-Dashboard unter „SQL Editor“ einspielen. Bis dahin sehen alle Teilnehmenden alle Kurse.
           </div>
         )}
 
@@ -216,6 +282,7 @@ export default function AdminMemberStudents() {
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Name</th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">E-Mail</th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Access Code</th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Kurse</th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Level / XP</th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Streak</th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Status</th>
@@ -274,6 +341,21 @@ export default function AdminMemberStudents() {
                       </div>
                     </td>
                     <td className="px-6 py-4">
+                      <div className="flex max-w-[240px] flex-wrap gap-1.5">
+                        {kurse.map((k) => {
+                          const an = freigaben.get(student.id)?.has(k.id);
+                          return (
+                            <button key={k.id} type="button" disabled={freigabeFehlt} onClick={() => kursUmschalten(student.id, k.id)}
+                              title={an ? 'Klicken zum Entziehen' : 'Klicken zum Freischalten'}
+                              className={`rounded-full border px-2.5 py-1 text-xs font-medium transition-colors disabled:opacity-50 ${an ? 'border-blue-600 bg-blue-600 text-white' : 'border-gray-300 bg-white text-gray-500 hover:border-blue-400'}`}>
+                              {an ? '✓ ' : ''}{k.title}
+                            </button>
+                          );
+                        })}
+                      </div>
+                      {!freigaben.get(student.id)?.size && <div className="mt-1 text-xs text-gray-500">keine Auswahl = alle Kurse</div>}
+                    </td>
+                    <td className="px-6 py-4">
                       <div className="text-sm">
                         <div className="font-semibold text-blue-600">Level {student.level}</div>
                         <div className="text-gray-500">{student.total_xp} XP</div>
@@ -299,6 +381,14 @@ export default function AdminMemberStudents() {
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-2">
                         <button
+                          onClick={() => linkKopieren(student)}
+                          className="flex items-center gap-1.5 whitespace-nowrap rounded-lg border border-blue-200 px-3 py-2 text-sm font-medium text-blue-700 hover:bg-blue-50 transition-colors"
+                          title="Persönlichen Ein-Klick-Login-Link kopieren"
+                        >
+                          {kopierterLink === student.id ? <CheckCircle size={16} className="text-green-600" /> : <Link2 size={16} />}
+                          {kopierterLink === student.id ? 'Kopiert' : 'Login-Link kopieren'}
+                        </button>
+                        <button
                           onClick={() => handleDeleteStudent(student.id)}
                           className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                           title="Löschen"
@@ -317,7 +407,7 @@ export default function AdminMemberStudents() {
 
       {showCreateModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl shadow-2xl max-w-md w-full p-8">
+          <div className="bg-white rounded-xl shadow-2xl max-w-md w-full p-8 max-h-[90vh] overflow-y-auto">
             <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
               <UserPlus className="text-blue-600" size={28} />
               Neuer Student
@@ -398,10 +488,30 @@ export default function AdminMemberStudents() {
                 </p>
               </div>
 
+              <div>
+                <label className="block text-sm font-semibold text-gray-900 mb-2">
+                  Freigeschaltete Kurse
+                </label>
+                <div className="space-y-2 rounded-lg border border-gray-200 p-3">
+                  {kurse.length === 0 && <p className="text-xs text-gray-500">Keine Kurse gefunden.</p>}
+                  {kurse.map((k) => (
+                    <label key={k.id} className="flex items-center gap-2 text-sm text-gray-800">
+                      <input type="checkbox" disabled={freigabeFehlt} checked={neueKurse.has(k.id)}
+                        onChange={() => setNeueKurse((alt) => { const n = new Set(alt); if (n.has(k.id)) n.delete(k.id); else n.add(k.id); return n; })} />
+                      {k.title}
+                    </label>
+                  ))}
+                </div>
+                <p className="text-xs text-gray-500 mt-1">
+                  Masterclass-Teilnehmende: nur „Elevator Pitch“ anhaken. Keine Auswahl = Zugang zu allen Kursen.
+                </p>
+              </div>
+
               <div className="flex gap-3 pt-4">
                 <button
                   type="button"
                   onClick={() => {
+                    setNeueKurse(new Set());
                     setShowCreateModal(false);
                     setCreateError('');
                     setNewStudent({ email: '', first_name: '', last_name: '', access_code: '' });

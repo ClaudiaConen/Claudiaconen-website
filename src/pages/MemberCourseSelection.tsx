@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useStudentAuth } from '../contexts/StudentAuthContext';
 import { supabase } from '../lib/supabase';
+import { freigegebeneKurse, kursErlaubt } from '../lib/kursFreigabe';
 import MemberNavigation from '../components/MemberNavigation';
 import {
   BookOpen,
@@ -68,7 +69,9 @@ export default function MemberCourseSelection() {
         progressData?.map((p) => [p.course_id, p]) || []
       );
 
-      const formattedCourses: Course[] = coursesData.map((course: any) => {
+      // Nur freigegebene Kurse zeigen (Masterclass-Teilnehmende: nur Elevator Pitch). Ohne Freigabe: alle wie bisher.
+      const freigabe = await freigegebeneKurse(student?.id);
+      const formattedCourses: Course[] = coursesData.filter((course: { id: string }) => kursErlaubt(freigabe, course.id)).map((course: any) => {
         const progress = progressMap.get(course.id);
         return {
           id: course.id,

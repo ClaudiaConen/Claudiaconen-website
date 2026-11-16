@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStudentAuth } from '../contexts/StudentAuthContext';
 import { LogIn, Mail, Key, Loader2, GraduationCap, Sparkles } from 'lucide-react';
@@ -10,6 +10,23 @@ export default function MemberLogin() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { login } = useStudentAuth();
+
+  // Ein-Klick-Link aus dem Admin-Bereich: /member/login?email=...&code=... meldet direkt an.
+  const automatisch = useRef(false);
+  useEffect(() => {
+    if (automatisch.current) return;
+    const p = new URLSearchParams(window.location.search);
+    const e = p.get('email'), c = p.get('code');
+    if (!e || !c) return;
+    automatisch.current = true;
+    setEmail(e);
+    setAccessCode(c);
+    setIsLoading(true);
+    login(e, c)
+      .then(() => navigate('/member/dashboard', { replace: true }))
+      .catch((err: unknown) => setError((err instanceof Error ? err.message : 'Login fehlgeschlagen') + ' – bitte prüfe E-Mail und Zugangscode.'))
+      .finally(() => setIsLoading(false));
+  }, [login, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,7 +57,7 @@ export default function MemberLogin() {
               <GraduationCap className="w-8 h-8 text-white" />
             </div>
             <h1 className="text-3xl font-bold text-white mb-2">
-              KI-Manager Memberbereich
+              Mitgliederbereich
             </h1>
             <p className="text-white/80 text-sm">
               Willkommen zurück! Melde dich an um fortzufahren.

@@ -9,16 +9,16 @@ export async function mitgliederAktion<T = Record<string, unknown>>(payload: Rec
   if (!token) throw new Error('Keine Anmeldung gefunden. Bitte neu einloggen.');
   let response: Response;
   try {
-    response = await fetch(`${SUPABASE_URL}/functions/v1/admin-member-students`, {
+    response = await fetch(`${SUPABASE_URL}/functions/v1/admin-member-student`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
       body: JSON.stringify(payload),
     });
   } catch {
-    throw new Error('Server-Funktion „admin-member-students“ nicht erreichbar – ist sie in Supabase eingerichtet?');
+    throw new Error('Server-Funktion „admin-member-student“ nicht erreichbar – ist sie in Supabase eingerichtet?');
   }
   const result = await response.json().catch(() => ({}));
-  if (response.status === 404) throw new Error('Server-Funktion „admin-member-students“ ist in Supabase noch nicht eingerichtet.');
+  if (response.status === 404) throw new Error('Server-Funktion „admin-member-student“ ist in Supabase noch nicht eingerichtet.');
   if (!response.ok) throw new Error(result.error || 'Aktion fehlgeschlagen.');
   return result as T;
 }

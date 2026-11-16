@@ -6,6 +6,7 @@ import LogoBand from '../components/LogoBand';
 import Stimmwelle from '../components/Stimmwelle';
 import Helix from '../components/Helix';
 import StimmenKarten from '../components/StimmenKarten';
+import { CHALLENGE_STIMMEN } from '../data/challengeStimmen';
 import { START_LABEL, START2_LABEL, FRUEH, ABEND, TERMINE, TERMINE2, SCHRITTE, BEGLEITUNG, BLICK, CLAUDIA_ZITAT } from '../data/masterclassDaten';
 
 /**
@@ -448,6 +449,15 @@ export default function Masterclass() {
           </div>
         </div>
       </Abschnitt>
+
+      {/* Echte Stimmen aus der letzten Challenge (Gabi, 16.11.2026: "Ja das wäre sehr gut"). Gaby zuerst: sie macht direkt weiter. */}
+      <StimmenKarten
+        stimmen={['challenge-gaby-brueckmann', 'challenge-nicole-schwuchow', 'challenge-annette-welsch']
+          .map((id) => CHALLENGE_STIMMEN.find((s) => s.id === id))
+          .filter((s): s is (typeof CHALLENGE_STIMMEN)[number] => Boolean(s))}
+        titel="Das sagen Teilnehmerinnen der letzten Challenge"
+        untertitel="Echte Stimmen, in ihren eigenen Worten."
+      />
 
       {/* Kundenstimmen wie auf /challenge, ohne die zwei Sprecher-Kunden (Vinci 02.11.2026: keine Rhetorik-Kunden). */}
       <StimmenKarten ohne={['mario-fuerst', 'julien-backhaus']} />

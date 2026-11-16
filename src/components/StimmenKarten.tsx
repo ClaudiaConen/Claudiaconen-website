@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import { ALLE, type Stimme } from './SocialProof';
 import VideoModal from './VideoModal';
 
@@ -43,14 +43,15 @@ const ZUERST = 6;
  *  stimmen/titel/untertitel: eigene Liste und Ueberschrift (z. B. echte Challenge-Stimmen auf /challenge, 16.11.2026). */
 export default function StimmenKarten({ ohne = [], stimmen, titel = 'Menschen, mit denen ich gearbeitet habe', untertitel = 'In ihren eigenen Worten.' }: { ohne?: string[]; stimmen?: Stimme[]; titel?: string; untertitel?: string } = {}) {
   const KARTEN = (stimmen ?? ALLE_KARTEN).filter((s) => !ohne.includes(s.id));
+  const titelId = useId();
   const [alle, setAlle] = useState(false);
   const [vimeo, setVimeo] = useState<string | null>(null);
   const [laeuft, setLaeuft] = useState<string | null>(null);
 
   return (
-    <section className="bg-white py-16 text-midnight-blue sm:py-24" aria-labelledby="stimmen-titel">
+    <section className="bg-white py-16 text-midnight-blue sm:py-24" aria-labelledby={titelId}>
       <div className="mx-auto max-w-6xl px-6">
-        <h2 id="stimmen-titel" className="font-montserrat text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">
+        <h2 id={titelId} className="font-montserrat text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">
           {titel}
         </h2>
         <p className="mt-3 max-w-2xl font-inter text-lg leading-relaxed text-midnight-blue/75">{untertitel}</p>

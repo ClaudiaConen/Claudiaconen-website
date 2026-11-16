@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useStudentAuth } from '../contexts/StudentAuthContext';
 import { supabase } from '../lib/supabase';
+import { freigegebeneKurse, kursErlaubt } from '../lib/kursFreigabe';
 import { getEmbedUrl } from '../lib/videoUtils';
 import MemberNavigation from '../components/MemberNavigation';
 import LessonTakeaway from '../components/lesson/LessonTakeaway';
@@ -221,6 +222,20 @@ export default function MemberLesson() {
         .single();
 
       if (lessonError) throw lessonError;
+
+      // Lektion aus einem nicht freigegebenen Kurs: wie "nicht gefunden" behandeln.
+      const freigabe = await freigegebeneKurse(student?.id);
+      if (freigabe) {
+        const { data: modul } = await supabase
+          .from('member_course_modules')
+          .select('course_id')
+          .eq('id', lessonData.module_id)
+          .maybeSingle();
+        if (!kursErlaubt(freigabe, modul?.course_id)) {
+          setLesson(null);
+          return;
+        }
+      }
 
       setLesson(lessonData);
 

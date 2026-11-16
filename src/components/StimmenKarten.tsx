@@ -39,9 +39,10 @@ const ALLE_KARTEN: Stimme[] = AUSWAHL.map((id) => {
 
 const ZUERST = 6;
 
-/** ohne: Stimmen-IDs, die auf dieser Seite nicht passen (z. B. Sprecher-Kunden auf /masterclass, 02.11.2026). */
-export default function StimmenKarten({ ohne = [] }: { ohne?: string[] } = {}) {
-  const KARTEN = ALLE_KARTEN.filter((s) => !ohne.includes(s.id));
+/** ohne: Stimmen-IDs, die auf dieser Seite nicht passen (z. B. Sprecher-Kunden auf /masterclass, 02.11.2026).
+ *  stimmen/titel/untertitel: eigene Liste und Ueberschrift (z. B. echte Challenge-Stimmen auf /challenge, 16.11.2026). */
+export default function StimmenKarten({ ohne = [], stimmen, titel = 'Menschen, mit denen ich gearbeitet habe', untertitel = 'In ihren eigenen Worten.' }: { ohne?: string[]; stimmen?: Stimme[]; titel?: string; untertitel?: string } = {}) {
+  const KARTEN = (stimmen ?? ALLE_KARTEN).filter((s) => !ohne.includes(s.id));
   const [alle, setAlle] = useState(false);
   const [vimeo, setVimeo] = useState<string | null>(null);
   const [laeuft, setLaeuft] = useState<string | null>(null);
@@ -50,16 +51,17 @@ export default function StimmenKarten({ ohne = [] }: { ohne?: string[] } = {}) {
     <section className="bg-white py-16 text-midnight-blue sm:py-24" aria-labelledby="stimmen-titel">
       <div className="mx-auto max-w-6xl px-6">
         <h2 id="stimmen-titel" className="font-montserrat text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">
-          Menschen, mit denen ich gearbeitet habe
+          {titel}
         </h2>
-        <p className="mt-3 max-w-2xl font-inter text-lg leading-relaxed text-midnight-blue/75">In ihren eigenen Worten.</p>
+        <p className="mt-3 max-w-2xl font-inter text-lg leading-relaxed text-midnight-blue/75">{untertitel}</p>
       </div>
 
       {/* Handy: seitlich wischen, eine Karte nach der anderen. Computer: drei nebeneinander, mit viel Luft. */}
       <ul className="cc-ohne-leiste mx-auto mt-10 flex max-w-6xl list-none snap-x snap-mandatory scroll-px-6 gap-6 overflow-x-auto px-6 pb-4 sm:mt-14 md:grid md:grid-cols-2 md:gap-x-10 md:gap-y-16 md:overflow-visible lg:grid-cols-3">
         {KARTEN.map((s, i) => {
-          const video = Boolean(s.vimeo || s.video);
+          const video = Boolean(s.vimeo || s.video || s.audio);
           const spielt = laeuft === s.id && s.video;
+          const hoert = laeuft === s.id && s.audio;
           return (
             <li key={s.id} className={`flex w-[82%] flex-none snap-start flex-col sm:w-[60%] md:w-auto ${!alle && i >= ZUERST ? 'md:hidden' : ''}`}>
               <div className="relative aspect-square overflow-hidden rounded-2xl bg-midnight-blue">
@@ -70,14 +72,17 @@ export default function StimmenKarten({ ohne = [] }: { ohne?: string[] } = {}) {
                 ) : (
                   <img src={s.bild} alt={s.name} width={540} height={960} loading="lazy" decoding="async" className="h-full w-full object-cover object-[50%_22%]" />
                 )}
-                {video && !spielt && (
+                {hoert && (
+                  <audio controls autoPlay src={s.audio} className="absolute inset-x-3 bottom-3 w-[calc(100%-1.5rem)]" aria-label={`Sprachnachricht von ${s.name}`} />
+                )}
+                {video && !spielt && !hoert && (
                   <button
                     type="button"
                     onClick={() => (s.vimeo ? setVimeo(s.vimeo) : setLaeuft(s.id))}
                     className="absolute bottom-3 right-3 inline-flex items-center gap-2 rounded-full bg-white/95 px-4 py-2 font-montserrat text-xs font-bold text-midnight-blue shadow-[0_6px_18px_-8px_rgba(19,35,63,0.55)] transition-transform hover:-translate-y-px focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C9A961]"
                     aria-label={`Video von ${s.name} ansehen`}
                   >
-                    <span aria-hidden="true">▶</span> Video
+                    <span aria-hidden="true">▶</span> {s.audio ? 'Anhören' : 'Video'}
                   </button>
                 )}
               </div>

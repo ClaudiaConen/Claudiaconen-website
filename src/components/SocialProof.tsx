@@ -46,6 +46,8 @@ export type Stimme = {
   vimeo?: string;
   /** Eigenes Video statt Vimeo (Verena). */
   video?: { quelle: string; standbild: string; dauer: string; hochkant?: boolean };
+  /** Sprachnachricht statt Video (Challenge-Stimmen, 16.11.2026). */
+  audio?: string;
   ergebnis?: string;
   zitat?: string;
   saetze?: string[];

@@ -2,7 +2,7 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
 import * as jose from "npm:jose@5";
 
-// admin-member-students — Teilnehmende des Mitgliederbereichs im Admin verwalten (16.11.2026).
+// admin-member-students — (in Supabase deployt als "admin-member-student", ohne s) Teilnehmende des Mitgliederbereichs im Admin verwalten (16.11.2026).
 // Das Admin-Login laeuft ueber ein eigenes JWT (wie bei admin-contacts), member_students ist per RLS nur fuer
 // "authenticated" offen. Darum prueft diese Funktion das Admin-Login und arbeitet danach mit dem Server-Schluessel.
 // Aktionen: list, create, delete, setActive, setCourse (Kurs-Freigabe pro Person, Tabelle member_student_course_access).

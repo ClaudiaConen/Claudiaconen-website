@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { GraduationCap, UserPlus, Mail, Key, RefreshCw, Trash2, Eye, EyeOff, Copy, CheckCircle, Link2 } from 'lucide-react';
 import AdminNavigation from '../components/AdminNavigation';
-import { supabase } from '../lib/supabase';
 import { loginLink } from '../lib/kursFreigabe';
+import { mitgliederAktion } from '../lib/adminMemberStudents';
 
 interface MemberStudent {
   id: string;
@@ -55,33 +55,19 @@ export default function AdminMemberStudents() {
     setError('');
 
     try {
-      const { data, error } = await supabase
-        .from('member_students')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      if (error) throw error;
-
-      setStudents(data || []);
-
-      const { data: kursDaten } = await supabase
-        .from('member_courses')
-        .select('id, title')
-        .order('order_index', { ascending: true });
-      setKurse(kursDaten || []);
-
-      const { data: freigabeDaten, error: freigabeFehler } = await supabase
-        .from('member_student_course_access')
-        .select('student_id, course_id');
-      setFreigabeFehlt(!!freigabeFehler);
+      // Ueber die Server-Funktion: der Admin-Login ist kein Supabase-Login, RLS wuerde direkte Zugriffe blocken.
+      const d = await mitgliederAktion<{ students: MemberStudent[]; courses: Kurs[]; access: { student_id: string; course_id: string }[]; accessReady: boolean }>({ action: 'list' });
+      setStudents(d.students || []);
+      setKurse(d.courses || []);
+      setFreigabeFehlt(!d.accessReady);
       const karte = new Map<string, Set<string>>();
-      (freigabeDaten || []).forEach((z: { student_id: string; course_id: string }) => {
+      (d.access || []).forEach((z) => {
         if (!karte.has(z.student_id)) karte.set(z.student_id, new Set());
         karte.get(z.student_id)!.add(z.course_id);
       });
       setFreigaben(karte);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Fehler beim Laden der Studenten');
+      setError(err instanceof Error ? err.message : 'Fehler beim Laden der Teilnehmenden');
     } finally {
       setIsLoading(false);
     }
@@ -102,31 +88,14 @@ export default function AdminMemberStudents() {
     setIsCreating(true);
 
     try {
-      const accessCode = newStudent.access_code || generateAccessCode();
-
-      const { data: angelegt, error } = await supabase
-        .from('member_students')
-        .insert([{
-          email: newStudent.email,
-          first_name: newStudent.first_name,
-          last_name: newStudent.last_name,
-          access_code: accessCode,
-          level: 1,
-          total_xp: 0,
-          current_streak: 0,
-          is_active: true
-        }])
-        .select('id')
-        .single();
-
-      if (error) throw error;
-
-      if (angelegt && neueKurse.size > 0) {
-        const { error: fFehler } = await supabase
-          .from('member_student_course_access')
-          .insert([...neueKurse].map((course_id) => ({ student_id: angelegt.id, course_id })));
-        if (fFehler) throw new Error('Teilnehmerin angelegt, aber die Kurs-Freigabe konnte nicht gespeichert werden: ' + fFehler.message);
-      }
+      await mitgliederAktion({
+        action: 'create',
+        email: newStudent.email,
+        firstName: newStudent.first_name,
+        lastName: newStudent.last_name,
+        accessCode: newStudent.access_code || generateAccessCode(),
+        courseIds: [...neueKurse],
+      });
 
       setSuccessMessage('Teilnehmerin angelegt. Jetzt „Login-Link kopieren“ klicken und den Link verschicken.');
       setShowCreateModal(false);
@@ -146,12 +115,7 @@ export default function AdminMemberStudents() {
     if (!confirm('Möchtest du diesen Studenten wirklich löschen?')) return;
 
     try {
-      const { error } = await supabase
-        .from('member_students')
-        .delete()
-        .eq('id', studentId);
-
-      if (error) throw error;
+      await mitgliederAktion({ action: 'delete', id: studentId });
 
       setSuccessMessage('Student erfolgreich gelöscht');
       await fetchStudents();
@@ -163,12 +127,7 @@ export default function AdminMemberStudents() {
 
   const toggleStudentStatus = async (studentId: string, currentStatus: boolean) => {
     try {
-      const { error } = await supabase
-        .from('member_students')
-        .update({ is_active: !currentStatus })
-        .eq('id', studentId);
-
-      if (error) throw error;
+      await mitgliederAktion({ action: 'setActive', id: studentId, active: !currentStatus });
 
       await fetchStudents();
       setSuccessMessage('Status erfolgreich aktualisiert');
@@ -180,11 +139,12 @@ export default function AdminMemberStudents() {
 
   const kursUmschalten = async (studentId: string, courseId: string) => {
     const hat = freigaben.get(studentId)?.has(courseId);
-    const { error: fFehler } = hat
-      ? await supabase.from('member_student_course_access').delete().eq('student_id', studentId).eq('course_id', courseId)
-      : await supabase.from('member_student_course_access').insert([{ student_id: studentId, course_id: courseId }]);
-    if (fFehler) { setError('Kurs-Freigabe konnte nicht gespeichert werden: ' + fFehler.message); return; }
-    await fetchStudents();
+    try {
+      await mitgliederAktion({ action: 'setCourse', studentId, courseId, on: !hat });
+      await fetchStudents();
+    } catch (err) {
+      setError('Kurs-Freigabe konnte nicht gespeichert werden: ' + (err instanceof Error ? err.message : ''));
+    }
   };
 
   const linkKopieren = async (student: MemberStudent) => {
@@ -248,7 +208,7 @@ export default function AdminMemberStudents() {
         {freigabeFehlt && (
           <div className="mb-6 p-4 bg-amber-50 border border-amber-300 rounded-lg text-amber-900 text-sm">
             <b>Kurs-Freigabe noch nicht aktiv:</b> Die Datenbank-Erweiterung fehlt noch. Bitte die Datei
-            <code className="mx-1">supabase/migrations/20261116120000_create_member_student_course_access.sql</code>
+            <code className="mx-1">20261116120000_create_member_student_course_access.sql</code>
             im Supabase-Dashboard unter „SQL Editor“ einspielen. Bis dahin sehen alle Teilnehmenden alle Kurse.
           </div>
         )}

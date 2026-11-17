@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { BadgeCheck, BookOpen, Clock, Lightbulb, MessageCircle, Play, Users, type LucideIcon } from 'lucide-react';
+import { BadgeCheck, BookOpen, Clock, Lightbulb, MessageCircle, Moon, Play, Sunrise, Users, type LucideIcon } from 'lucide-react';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import LogoBand from '../components/LogoBand';
@@ -12,7 +12,7 @@ import { START_LABEL, START2_LABEL, FRUEH, ABEND, TERMINE, TERMINE2, SCHRITTE, B
 /**
  * Masterclass UNVERWECHSELBAR - Angebots-/Verkaufsseite. Texte WORTGLEICH aus Claudias Dokument
  * "Masterclass_Unverwechselbar_Angebotsseite" (29.10.2026). Konkrete Termine (19.11.-10.12.2026),
- * zwei Gruppen (Frueh 7:30-9:00 / Abend 18:30-20:00), sieben Schritte mit "Du nimmst mit", Begleitung
+ * zwei Gruppen (Frueh 7:30-9:00 / Abend 19:00-20:30), sieben Schritte mit "Du nimmst mit", Begleitung
  * zwischen den Terminen inkl. finaler 1:1-Uebungsstunde. Gemeinsame Daten in ../data/masterclassDaten.
  * Dankesseite: ../pages/MasterclassDanke (Route /masterclass/danke).
  *
@@ -62,13 +62,23 @@ const GOLD = 'bg-[linear-gradient(135deg,#C9A961,#F7E7CE_48%,#D4AF37)]';
 const KACHEL = 'cc-glanz-kachel rounded-[10px] border border-[#13233F]/[0.13] transition-[border-color,box-shadow] duration-200 hover:border-[#C9A961] hover:shadow-[0_18px_40px_-20px_rgba(19,35,63,0.35)]';
 const KNOPF = `inline-flex items-center justify-center gap-2.5 rounded-full px-9 py-5 font-montserrat text-base font-extrabold text-midnight-blue shadow-[0_10px_24px_-12px_rgba(19,35,63,0.45)] transition-transform hover:-translate-y-px sm:text-lg ${GOLD}`;
 
+/** Gruppen und Durchgaenge fuer den Termin-Abschnitt. */
+const GRUPPEN: { name: string; zeit: string; text: string; icon: LucideIcon }[] = [
+  { name: 'Frühgruppe', zeit: FRUEH.replace(' Uhr', ''), text: 'Starte morgens mit frischem Kopf.', icon: Sunrise },
+  { name: 'Abendgruppe', zeit: ABEND.replace(' Uhr', ''), text: 'Nimm dir abends Zeit für deine Wirkungskraft.', icon: Moon },
+];
+const DURCHGAENGE = [
+  { titel: '1. Durchgang', start: START_LABEL, termine: TERMINE },
+  { titel: '2. Durchgang', start: START2_LABEL, termine: TERMINE2 },
+];
+
 /** Haeufige Fragen. Fakten aus dem Dokument (Termine 19.11.-10.12.2026, zwei Gruppen, max. 9, 1:1-Stunde, Zoom ohne
  *  Aufzeichnung im Mitgliederbereich (Auftraggeber 02.11.2026), Challenge keine Voraussetzung). */
 const FRAGEN: [string, string][] = [
   ['Muss ich vorher an der 7-Tage-Challenge teilgenommen haben?', 'Nein. Du hast in der Challenge schon einen Vorsprung, aber die Masterclass ist ein eigenständiges Angebot. Wer neu einsteigt, findet genauso Zugang zu allen Themen.'],
   ['Für wen ist die Masterclass?', 'Für Selbstständige, Coaches und Unternehmerinnen, die sich zeigen wollen, ohne sich zu verbiegen – und die jetzt dranbleiben wollen, mit Begleitung statt allein.'],
-  ['Wann sind die Termine?', '4 Live-Termine, donnerstags: 19. November, 26. November, 3. Dezember und 10. Dezember 2026, in der Frühgruppe (7:30–9:00 Uhr). Die Abendgruppe (18:30–20:00 Uhr) ist im November ausverkauft. Der 2. Durchgang: 21. Januar, 28. Januar, 4. Februar und 11. Februar 2027, ebenfalls donnerstags, morgens oder abends.'],
-  ['Wie wähle ich meine Gruppe?', 'Ganz einfach nach deiner Buchung: Schreib mir kurz, ob du in die Frühgruppe (7:30–9:00 Uhr) oder in die Abendgruppe (18:30–20:00 Uhr) möchtest, per E-Mail an claudiaconen@umsatzstimme.de oder per WhatsApp an +49 160 93102073. Die Inhalte sind in beiden Gruppen gleich. Im November ist die Abendgruppe ausverkauft, dort gibt es noch Plätze in der Frühgruppe.'],
+  ['Wann sind die Termine?', '4 Live-Termine, donnerstags: 19. November, 26. November, 3. Dezember und 10. Dezember 2026, morgens in der Frühgruppe (7:30–9:00 Uhr) oder abends in der Abendgruppe (19:00–20:30 Uhr). Der 2. Durchgang: 21. Januar, 28. Januar, 4. Februar und 11. Februar 2027, ebenfalls donnerstags, morgens oder abends.'],
+  ['Wie wähle ich meine Gruppe?', 'Ganz einfach nach deiner Buchung: Schreib mir kurz, ob du in die Frühgruppe (7:30–9:00 Uhr) oder in die Abendgruppe (19:00–20:30 Uhr) möchtest, per E-Mail an claudiaconen@umsatzstimme.de oder per WhatsApp an +49 160 93102073. Die Inhalte sind in beiden Gruppen gleich.'],
   ['Was, wenn ich einen Termin verpasse?', 'Kein Problem: Du kannst in derselben Woche einfach in die andere Gruppe kommen, früh statt abends oder umgekehrt. Die Inhalte sind in beiden Gruppen gleich. Außerdem findest du die Aufzeichnung jedes Live-Termins in deinem Mitgliederbereich. Gib mir kurz Bescheid, wenn du nicht dabei sein kannst, per E-Mail an claudiaconen@umsatzstimme.de oder per WhatsApp an +49 160 93102073.'],
   ['Was passiert, wenn ich nicht teilnehmen kann?', 'Dann darf eine Ersatzperson ab 18 Jahren deinen Platz übernehmen. Eine Rückerstattung gibt es nicht. Das gesetzliche Widerrufsrecht für Verbraucherinnen und Verbraucher bleibt davon unberührt.'],
   ['Was brauche ich dafür?', 'Keine Technik-Kenntnisse, kein Studio und kein perfektes Video. Dein Handy und deinen Mut – mehr nicht. Alle Termine laufen live per Zoom, die Aufzeichnung findest du danach in deinem Mitgliederbereich.'],
@@ -301,32 +311,61 @@ export default function Masterclass() {
 
       {/* Gruppen und Termine. */}
       <Abschnitt id="termine" className="bg-white py-16 text-midnight-blue sm:py-24" label="termine-titel">
-        <div className="mx-auto max-w-5xl px-6">
+        <div className="mx-auto max-w-6xl px-6">
           <Kicker text="Gruppen und Termine" hell />
           <h2 id="termine-titel" className="mt-5 font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">Früh oder abends: du wählst.</h2>
           <p className="mt-4 max-w-2xl font-inter text-[17px] leading-relaxed text-midnight-blue/85">
-            Starte morgens mit frischem Kopf oder nimm dir abends Zeit für deine Wirkungskraft. Du wählst deine Gruppe, die Inhalte sind in beiden Gruppen gleich.
+            Du wählst deine Gruppe, die Inhalte sind in beiden Gruppen gleich. Und du kannst im 1. oder im 2. Durchgang starten.
           </p>
-          <div className="mt-10 overflow-hidden rounded-[16px] border border-[#C9A961]/50 shadow-[0_24px_50px_-34px_rgba(19,35,63,0.5)]">
-            <div className="grid grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)_minmax(0,1fr)] bg-[#13233F] text-pearl-white">
-              <div className="px-4 py-3.5 font-montserrat text-[11px] font-extrabold uppercase tracking-[0.14em] sm:px-6 sm:text-xs">Termin</div>
-              <div className="px-2 py-3.5 text-center font-montserrat text-[10px] font-extrabold uppercase tracking-normal sm:tracking-[0.14em] text-[#E6CC8F] sm:px-6 sm:text-xs">Frühgruppe<span className="mt-1.5 block"><span className="inline-block whitespace-nowrap rounded-full bg-[#1F7A4D] px-1.5 py-0.5 text-[9px] tracking-[0.04em] text-white sm:px-2.5 sm:text-[11px] sm:tracking-[0.12em]">Plätze frei</span></span></div>
-              <div className="px-2 py-3.5 text-center font-montserrat text-[10px] font-extrabold uppercase tracking-normal sm:tracking-[0.14em] text-[#E6CC8F] sm:px-6 sm:text-xs">Abendgruppe<span className="mt-1.5 block"><span className={`inline-block whitespace-nowrap rounded-full px-2 py-0.5 text-[9px] tracking-[0.04em] sm:px-2.5 sm:text-[11px] sm:tracking-[0.12em] text-[#13233F] ${GOLD}`}>Ausverkauft</span></span></div>
-            </div>
-            {TERMINE.map((t, i) => (
-              <div key={t} className={`grid grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)_minmax(0,1fr)] items-center ${i % 2 ? 'bg-[#F5F7FA]' : 'bg-white'}`}>
-                <div className="px-4 py-4 font-montserrat text-[13px] font-extrabold leading-snug sm:px-6 sm:text-base">{t}</div>
-                <div className="px-2 py-4 text-center font-inter text-[13px] font-semibold text-midnight-blue/80 sm:px-6 sm:text-[15px]">{FRUEH}<span className="mt-0.5 block font-montserrat text-[10px] font-extrabold uppercase tracking-[0.03em] text-[#1F7A4D] sm:text-xs sm:tracking-[0.12em]">Plätze frei</span></div>
-                <div className="px-2 py-4 text-center font-inter text-[13px] font-semibold text-midnight-blue/80 sm:px-6 sm:text-[15px]"><span className="text-midnight-blue/45 line-through">{ABEND}</span><span className="mt-0.5 block font-montserrat text-[10px] font-extrabold uppercase tracking-[0.03em] text-[#9B2C1F] sm:text-xs sm:tracking-[0.12em]">Ausverkauft</span></div>
+          {/* Die zwei Gruppen: gross und luftig (Auftraggeber 17.11.2026: "zu klein, zu gedrungen ... schöner und breiter"). */}
+          <div className="mt-12 grid gap-6 md:grid-cols-2">
+            {GRUPPEN.map((g) => (
+              <div key={g.name} className="relative overflow-hidden rounded-[22px] border border-[#C9A961]/60 bg-white p-7 shadow-[0_30px_60px_-40px_rgba(19,35,63,0.55)] sm:p-9">
+                <div className="flex items-start justify-between gap-4">
+                  <span className="grid h-14 w-14 place-items-center rounded-2xl bg-[#13233F] text-[#E6CC8F]"><g.icon className="h-7 w-7" aria-hidden="true" /></span>
+                  <span className="rounded-full bg-[#1F7A4D] px-3.5 py-1.5 font-montserrat text-[11px] font-extrabold uppercase tracking-[0.14em] text-white">Plätze frei</span>
+                </div>
+                <p className="mt-6 font-montserrat text-xs font-extrabold uppercase tracking-[0.18em] text-[#B08D45]">{g.name}</p>
+                <p className="mt-2 font-montserrat text-4xl font-extrabold tracking-tight text-midnight-blue sm:text-5xl">{g.zeit}</p>
+                <p className="mt-4 font-inter text-[17px] leading-relaxed text-midnight-blue/75">{g.text}</p>
               </div>
             ))}
           </div>
-          <p className="mt-6 font-montserrat text-base font-extrabold text-midnight-blue sm:text-lg">
-            Vier Wochen. Vier Live-Termine. <span className="text-[#C9A961]">Insgesamt sechs Stunden pro Gruppe.</span>
+
+          <p className="mt-10 text-center font-montserrat text-lg font-extrabold text-midnight-blue sm:text-xl">
+            Vier Wochen. Vier Live-Termine. <span className="text-[#B08D45]">Insgesamt sechs Stunden pro Gruppe.</span>
           </p>
-          <p className="mt-4 rounded-[12px] border border-[#C9A961]/60 bg-[#F5F7FA] px-5 py-4 font-inter text-[16px] leading-relaxed text-midnight-blue/85">
-            <b className="font-montserrat font-extrabold text-midnight-blue">2. Durchgang ab {START2_LABEL}:</b> {TERMINE2.map((t) => t.replace('Donnerstag, ', '')).join(', ').replace(/, ([^,]*)$/, ' und $1')}, jeweils donnerstags, morgens oder abends.
-          </p>
+
+          {/* Die zwei Durchgaenge mit allen Donnerstagen als Kalenderblaetter. */}
+          <div className="mt-12 grid gap-8 lg:grid-cols-2">
+            {DURCHGAENGE.map((d) => (
+              <div key={d.titel} className="rounded-[22px] bg-[#13233F] p-7 text-pearl-white shadow-[0_30px_60px_-36px_rgba(19,35,63,0.7)] sm:p-9">
+                <p className="font-montserrat text-xs font-extrabold uppercase tracking-[0.18em] text-[#E6CC8F]">{d.titel}</p>
+                <p className="mt-2 font-montserrat text-2xl font-extrabold leading-snug text-white sm:text-[1.7rem]">Start {d.start}</p>
+                <ul className="mt-7 grid list-none grid-cols-2 gap-3 sm:grid-cols-4">
+                  {d.termine.map((t) => {
+                    const [, tag, monat, jahr] = t.match(/(\d+)\. (\S+) (\d{4})/) ?? [];
+                    return (
+                      <li key={t} className="rounded-2xl bg-white px-3 py-4 text-center text-midnight-blue">
+                        <span className="block font-montserrat text-[11px] font-extrabold uppercase tracking-[0.14em] text-[#B08D45]">Do</span>
+                        <span className="mt-1 block font-montserrat text-4xl font-extrabold leading-none">{tag}.</span>
+                        <span className="mt-1.5 block font-inter text-sm font-semibold text-midnight-blue/75">{monat} {jahr}</span>
+                      </li>
+                    );
+                  })}
+                </ul>
+                <div className="mt-7 grid gap-2 border-t border-white/15 pt-6 font-inter text-[15px] text-pearl-white/90">
+                  <p className="flex items-center gap-2"><Sunrise className="h-4 w-4 text-[#E6CC8F]" aria-hidden="true" /> Früh: {FRUEH}</p>
+                  <p className="flex items-center gap-2"><Moon className="h-4 w-4 text-[#E6CC8F]" aria-hidden="true" /> Abends: {ABEND}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-12 flex flex-col items-center gap-3 text-center">
+            <a href={KAUF_LINK} className={KNOPF}>Platz sichern →</a>
+            <p className="font-inter text-sm text-midnight-blue/70">Höchstens 9 Personen pro Gruppe. Deine Gruppe wählst du nach der Buchung.</p>
+          </div>
         </div>
       </Abschnitt>
 

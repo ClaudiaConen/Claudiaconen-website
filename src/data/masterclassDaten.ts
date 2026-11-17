@@ -24,7 +24,8 @@ export const TERMINE2: string[] = [
 
 /** Die vier Live-Termine (donnerstags) mit beiden Gruppenzeiten. */
 export const FRUEH = '7:30–9:00 Uhr';
-export const ABEND = '18:30–20:00 Uhr';
+/** Abendgruppe wieder offen, neue Zeit (Auftraggeber, 17.11.2026: "19 Uhr bis 20:30 Uhr"). */
+export const ABEND = '19:00–20:30 Uhr';
 export const TERMINE: string[] = [
   'Donnerstag, 19. November 2026',
   'Donnerstag, 26. November 2026',
@@ -101,7 +102,7 @@ export const BEGLEITUNG: { titel: string; text: string; stern?: boolean }[] = [
 export const BLICK: string[] = [
   '4 Live-Termine, donnerstags vom 19. November bis 10. Dezember 2026',
   '2. Durchgang: donnerstags am 21. und 28. Januar, 4. und 11. Februar 2027',
-  'Frühgruppe 7:30–9:00 Uhr oder Abendgruppe 18:30–20:00 Uhr (im November ausverkauft)',
+  'Frühgruppe 7:30–9:00 Uhr oder Abendgruppe 19:00–20:30 Uhr',
   'Begleitung von Montag bis Freitag und eine finale 1:1-Übungsstunde von 60 Minuten',
   'Höchstens 9 Personen pro Gruppe',
 ];

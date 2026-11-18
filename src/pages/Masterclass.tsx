@@ -67,15 +67,15 @@ const KNOPF = `inline-flex items-center justify-center gap-2.5 rounded-full px-9
 /** Gruppen und Durchgaenge fuer den Termin-Abschnitt. */
 /** Auftraggeber 18.11.2026: vier Fenster, Frueh und Abend je Durchgang getrennt. November frueh noch 3 Plaetze
  *  (nach aussen kommuniziert), November abends ausgebucht, Januar beide frei. Stand hier pflegen. */
-const FENSTER: { durchgang: string; start: string; name: string; zeit: string; icon: LucideIcon; schild: string; voll?: boolean }[] = [
-  { durchgang: '1. Durchgang', start: 'ab Do, 19. November 2026', name: 'Frühgruppe', zeit: FRUEH.replace(' Uhr', ''), icon: Sunrise, schild: 'Noch 3 Plätze frei' },
-  { durchgang: '1. Durchgang', start: 'ab Do, 19. November 2026', name: 'Abendgruppe', zeit: ABEND.replace(' Uhr', ''), icon: Moon, schild: 'Ausgebucht', voll: true },
-  { durchgang: '2. Durchgang', start: 'ab Do, 21. Januar 2027', name: 'Frühgruppe', zeit: FRUEH.replace(' Uhr', ''), icon: Sunrise, schild: 'Plätze frei' },
-  { durchgang: '2. Durchgang', start: 'ab Do, 21. Januar 2027', name: 'Abendgruppe', zeit: ABEND.replace(' Uhr', ''), icon: Moon, schild: 'Plätze frei' },
+const FENSTER: { durchgang: string; start: string; name: string; zeit: string; icon: LucideIcon; schild: string; plaetze: number; voll?: boolean }[] = [
+  { durchgang: '1. Masterclass-Start', start: 'ab Do, 19. November 2026', name: 'Frühgruppe', zeit: FRUEH.replace(' Uhr', ''), icon: Sunrise, schild: 'Für Kurzentschlossene · noch 3 Plätze frei', plaetze: 9 },
+  { durchgang: '1. Masterclass-Start', start: 'ab Do, 19. November 2026', name: 'Abendgruppe', zeit: ABEND.replace(' Uhr', ''), icon: Moon, schild: 'Ausgebucht', plaetze: 9, voll: true },
+  { durchgang: '2. Masterclass-Start', start: 'ab Do, 21. Januar 2027', name: 'Frühgruppe', zeit: FRUEH.replace(' Uhr', ''), icon: Sunrise, schild: 'Plätze frei', plaetze: 12 },
+  { durchgang: '2. Masterclass-Start', start: 'ab Do, 21. Januar 2027', name: 'Abendgruppe', zeit: ABEND.replace(' Uhr', ''), icon: Moon, schild: 'Plätze frei', plaetze: 12 },
 ];
 const DURCHGAENGE = [
-  { titel: '1. Durchgang', start: START_LABEL, termine: TERMINE, abendVoll: true },
-  { titel: '2. Durchgang', start: START2_LABEL, termine: TERMINE2, abendVoll: false },
+  { titel: '1. Masterclass-Start', start: START_LABEL, termine: TERMINE, abendVoll: true },
+  { titel: '2. Masterclass-Start', start: START2_LABEL, termine: TERMINE2, abendVoll: false },
 ];
 
 /** Haeufige Fragen. Fakten aus dem Dokument (Termine 19.11.-10.12.2026, zwei Gruppen, max. 9, 1:1-Stunde, Zoom ohne
@@ -83,13 +83,13 @@ const DURCHGAENGE = [
 const FRAGEN: [string, string][] = [
   ['Muss ich vorher an der 7-Tage-Challenge teilgenommen haben?', 'Nein. Du hast in der Challenge schon einen Vorsprung, aber die Masterclass ist ein eigenständiges Angebot. Wer neu einsteigt, findet genauso Zugang zu allen Themen.'],
   ['Für wen ist die Masterclass?', 'Für Selbstständige, Coaches und Unternehmerinnen, die sich zeigen wollen, ohne sich zu verbiegen – und die jetzt dranbleiben wollen, mit Begleitung statt allein.'],
-  ['Wann sind die Termine?', '4 Live-Termine, donnerstags: 19. November, 26. November, 3. Dezember und 10. Dezember 2026, morgens in der Frühgruppe (7:30–9:00 Uhr) oder abends in der Abendgruppe (19:00–20:30 Uhr). Der 2. Durchgang: 21. Januar, 28. Januar, 4. Februar und 11. Februar 2027, ebenfalls donnerstags, morgens oder abends.'],
+  ['Wann sind die Termine?', '4 Live-Termine, donnerstags: 19. November, 26. November, 3. Dezember und 10. Dezember 2026, morgens in der Frühgruppe (7:30–9:00 Uhr); die Abendgruppe im November ist ausgebucht. Der 2. Masterclass-Start: 21. Januar, 28. Januar, 4. Februar und 11. Februar 2027, ebenfalls donnerstags, morgens oder abends.'],
   ['Wie wähle ich meine Gruppe?', 'Ganz einfach nach deiner Buchung: Schreib mir kurz, ob du in die Frühgruppe (7:30–9:00 Uhr) oder in die Abendgruppe (19:00–20:30 Uhr) möchtest, per E-Mail an claudiaconen@umsatzstimme.de oder per WhatsApp an +49 160 93102073. Die Inhalte sind in beiden Gruppen gleich.'],
   ['Was, wenn ich einen Termin verpasse?', 'Kein Problem: Du kannst in derselben Woche einfach in die andere Gruppe kommen, früh statt abends oder umgekehrt. Die Inhalte sind in beiden Gruppen gleich. Außerdem findest du die Aufzeichnung jedes Live-Termins in deinem Mitgliederbereich. Gib mir kurz Bescheid, wenn du nicht dabei sein kannst, per E-Mail an claudiaconen@umsatzstimme.de oder per WhatsApp an +49 160 93102073.'],
   ['Was passiert, wenn ich nicht teilnehmen kann?', 'Dann darf eine Ersatzperson ab 18 Jahren deinen Platz übernehmen. Eine Rückerstattung gibt es nicht. Das gesetzliche Widerrufsrecht für Verbraucherinnen und Verbraucher bleibt davon unberührt.'],
   ['Was brauche ich dafür?', 'Keine Technik-Kenntnisse, kein Studio und kein perfektes Video. Dein Handy und deinen Mut – mehr nicht. Alle Termine laufen live per Zoom, die Aufzeichnung findest du danach in deinem Mitgliederbereich.'],
   ['Bekomme ich persönliches Feedback?', 'Ja. Wir schauen gemeinsam auf deine Videos, und du bekommst deine persönliche 1:1-Übungsstunde mit mir: 60 Minuten nur für dich, innerhalb der vier Wochen nach persönlicher Absprache.'],
-  ['Wie viele Plätze gibt es?', 'Höchstens 9 Personen pro Gruppe. Darum laufen alle Termine live, und jede und jeder kommt dran.'],
+  ['Wie viele Plätze gibt es?', 'Im November höchstens 9 Personen pro Gruppe, im Januar höchstens 12. Darum laufen alle Termine live, und jede und jeder kommt dran.'],
   ['Ich bin vor der Kamera unsicher oder habe Redeangst. Ist das trotzdem etwas für mich?', 'Ja, gerade dann. Lampenfieber wird kleiner durch Üben, nicht durch Warten. Du lernst nicht, jemand anderes zu werden – du findest deinen eigenen, sicheren Weg.'],
   ['Kann ich in Raten zahlen?', 'Ja. Im Bezahlfenster kannst du neben der Einmalzahlung auch Klarna wählen und bequem in Raten zahlen.'],
   ['Ich habe noch eine Frage. Wen kann ich fragen?', 'Mich direkt. Ruf mich an unter +49 160 93102073 oder vereinbare ein kostenloses Kennenlernen.'],
@@ -321,7 +321,7 @@ export default function Masterclass() {
           <Kicker text="Gruppen und Termine" hell />
           <h2 id="termine-titel" className="mt-5 font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">Früh oder abends: du wählst.</h2>
           <p className="mt-4 max-w-2xl font-inter text-[17px] leading-relaxed text-midnight-blue/85">
-            Du wählst deine Gruppe, die Inhalte sind in beiden Gruppen gleich. Und du kannst im 1. oder im 2. Durchgang starten.
+            Du wählst deine Gruppe, die Inhalte sind in beiden Gruppen gleich. Und du kannst im November oder im Januar starten.
           </p>
           {/* Vier Fenster: Frueh und Abend je Durchgang getrennt (Auftraggeber 18.11.2026). */}
           <div className="mt-12 grid gap-6 md:grid-cols-2">
@@ -333,7 +333,7 @@ export default function Masterclass() {
                 </div>
                 <p className="mt-6 font-montserrat text-xs font-extrabold uppercase tracking-[0.18em] text-[#B08D45]">{g.durchgang} · {g.name}</p>
                 <p className={`mt-2 font-montserrat text-4xl font-extrabold tracking-tight sm:text-5xl ${g.voll ? 'text-midnight-blue/45 line-through decoration-[#9B2C1F] decoration-[3px]' : 'text-midnight-blue'}`}>{g.zeit}</p>
-                <p className="mt-3 font-inter text-[17px] leading-relaxed text-midnight-blue/75">{g.start}</p>
+                <p className="mt-3 font-inter text-[17px] leading-relaxed text-midnight-blue/75">{g.start} · höchstens {g.plaetze} Personen</p>
               </div>
             ))}
           </div>
@@ -370,7 +370,7 @@ export default function Masterclass() {
 
           <div className="mt-12 flex flex-col items-center gap-3 text-center">
             <a href={KAUF_LINK} className={KNOPF}>Platz sichern →</a>
-            <p className="font-inter text-sm text-midnight-blue/70">Höchstens 9 Personen pro Gruppe. Deine Gruppe wählst du nach der Buchung.</p>
+            <p className="font-inter text-sm text-midnight-blue/70">Im November höchstens 9, im Januar höchstens 12 Personen pro Gruppe. Deine Gruppe wählst du nach der Buchung.</p>
           </div>
         </div>
       </Abschnitt>
@@ -417,7 +417,7 @@ export default function Masterclass() {
             ))}
             <li className="cc-stufe flex items-center gap-4 rounded-[10px] border border-[#C9A961] bg-[#13233F] px-5 py-4 text-pearl-white sm:px-6 sm:py-5 md:col-span-2">
               <BadgeCheck aria-hidden="true" size={24} strokeWidth={1.6} className="flex-none text-[#C9A961]" />
-              <p className="min-w-0 font-inter text-[16px] leading-snug sm:text-[17px]"><b className="font-montserrat font-extrabold text-white">Höchstens 9 Personen</b>, jede kommt dran</p>
+              <p className="min-w-0 font-inter text-[16px] leading-snug sm:text-[17px]"><b className="font-montserrat font-extrabold text-white">Kleine Gruppen</b> mit höchstens 9 (November) oder 12 Personen (Januar), jede kommt dran</p>
             </li>
           </ul>
           {BEGLEITUNG.filter((b) => b.stern).map((b) => (
@@ -568,7 +568,7 @@ export default function Masterclass() {
         <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
           <div className="min-w-0">
             <p className="truncate font-montserrat text-sm font-extrabold text-midnight-blue sm:text-base">UNVERWECHSELBAR · ab {START_LABEL.replace('Donnerstag, ', '')}</p>
-            <p className="truncate font-inter text-xs text-midnight-blue/70 sm:text-[13px]"><b className="font-bold text-midnight-blue">{EURO(PREIS)}</b>{PREIS < REGULAER && <> <span className="line-through decoration-[#9B2C1F] decoration-[1.5px]">{EURO(REGULAER)}</span></>} zzgl. MwSt.{PREIS < REGULAER && <> · <b className="font-bold text-midnight-blue">nur bis Fr 20.11.</b></>} · Ratenzahlung möglich · höchstens 9 Plätze</p>
+            <p className="truncate font-inter text-xs text-midnight-blue/70 sm:text-[13px]"><b className="font-bold text-midnight-blue">{EURO(PREIS)}</b>{PREIS < REGULAER && <> <span className="line-through decoration-[#9B2C1F] decoration-[1.5px]">{EURO(REGULAER)}</span></>} zzgl. MwSt.{PREIS < REGULAER && <> · <b className="font-bold text-midnight-blue">nur bis Fr 20.11.</b></>} · Ratenzahlung möglich · kleine Gruppen</p>
           </div>
           <a href={KAUF_LINK} className={`${GOLD} inline-flex flex-none items-center gap-2 rounded-full px-5 py-3 font-montserrat text-sm font-extrabold text-midnight-blue shadow-[0_8px_18px_-10px_rgba(19,35,63,0.5)] sm:px-7 sm:text-base`} tabIndex={leiste ? 0 : -1}>Platz sichern →</a>
         </div>

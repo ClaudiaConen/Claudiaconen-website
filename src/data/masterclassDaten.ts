@@ -101,10 +101,10 @@ export const BEGLEITUNG: { titel: string; text: string; stern?: boolean }[] = [
 /** Das Wichtigste auf einen Blick (Dokument). Preis wird auf der Seite dynamisch eingesetzt. */
 export const BLICK: string[] = [
   '4 Live-Termine, donnerstags vom 19. November bis 10. Dezember 2026',
-  '2. Durchgang: donnerstags am 21. und 28. Januar, 4. und 11. Februar 2027',
+  '2. Masterclass-Start: donnerstags am 21. und 28. Januar, 4. und 11. Februar 2027',
   'Frühgruppe 7:30–9:00 Uhr oder Abendgruppe 19:00–20:30 Uhr',
   'Begleitung von Montag bis Freitag und eine finale 1:1-Übungsstunde von 60 Minuten',
-  'Höchstens 9 Personen pro Gruppe',
+  'Höchstens 9 Personen pro Gruppe im November, 12 im Januar',
 ];
 
 /** Persoenlich von Claudia (Dokument, Zitat wortgleich). */

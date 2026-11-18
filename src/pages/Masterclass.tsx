@@ -26,6 +26,8 @@ const PFAD = '/masterclass';
 const REGULAER = 797;
 /** Aktueller Preis im Stripe-Link (Auftraggeber 04.11.2026: neues Produkt fuer 497 €, kein Gutscheincode mehr). */
 const PREIS = 497;
+/** Frist fuer den Aktionspreis (Auftraggeber 18.11.2026: "497 noch 48 Stunden laenger"). */
+const FRIST = 'Freitag, 20. November';
 const EURO = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: Number.isInteger(n) ? 0 : 2, maximumFractionDigits: 2 }) + ' €';
 const BRUTTO = (n: number) => EURO(Math.round(n * 119) / 100);
 
@@ -63,13 +65,17 @@ const KACHEL = 'cc-glanz-kachel rounded-[10px] border border-[#13233F]/[0.13] tr
 const KNOPF = `inline-flex items-center justify-center gap-2.5 rounded-full px-9 py-5 font-montserrat text-base font-extrabold text-midnight-blue shadow-[0_10px_24px_-12px_rgba(19,35,63,0.45)] transition-transform hover:-translate-y-px sm:text-lg ${GOLD}`;
 
 /** Gruppen und Durchgaenge fuer den Termin-Abschnitt. */
-const GRUPPEN: { name: string; zeit: string; text: string; icon: LucideIcon }[] = [
-  { name: 'Frühgruppe', zeit: FRUEH.replace(' Uhr', ''), text: 'Starte morgens mit frischem Kopf.', icon: Sunrise },
-  { name: 'Abendgruppe', zeit: ABEND.replace(' Uhr', ''), text: 'Nimm dir abends Zeit für deine Wirkungskraft.', icon: Moon },
+/** Auftraggeber 18.11.2026: vier Fenster, Frueh und Abend je Durchgang getrennt. November frueh noch 3 Plaetze
+ *  (nach aussen kommuniziert), November abends ausgebucht, Januar beide frei. Stand hier pflegen. */
+const FENSTER: { durchgang: string; start: string; name: string; zeit: string; icon: LucideIcon; schild: string; voll?: boolean }[] = [
+  { durchgang: '1. Durchgang', start: 'ab Do, 19. November 2026', name: 'Frühgruppe', zeit: FRUEH.replace(' Uhr', ''), icon: Sunrise, schild: 'Noch 3 Plätze frei' },
+  { durchgang: '1. Durchgang', start: 'ab Do, 19. November 2026', name: 'Abendgruppe', zeit: ABEND.replace(' Uhr', ''), icon: Moon, schild: 'Ausgebucht', voll: true },
+  { durchgang: '2. Durchgang', start: 'ab Do, 21. Januar 2027', name: 'Frühgruppe', zeit: FRUEH.replace(' Uhr', ''), icon: Sunrise, schild: 'Plätze frei' },
+  { durchgang: '2. Durchgang', start: 'ab Do, 21. Januar 2027', name: 'Abendgruppe', zeit: ABEND.replace(' Uhr', ''), icon: Moon, schild: 'Plätze frei' },
 ];
 const DURCHGAENGE = [
-  { titel: '1. Durchgang', start: START_LABEL, termine: TERMINE },
-  { titel: '2. Durchgang', start: START2_LABEL, termine: TERMINE2 },
+  { titel: '1. Durchgang', start: START_LABEL, termine: TERMINE, abendVoll: true },
+  { titel: '2. Durchgang', start: START2_LABEL, termine: TERMINE2, abendVoll: false },
 ];
 
 /** Haeufige Fragen. Fakten aus dem Dokument (Termine 19.11.-10.12.2026, zwei Gruppen, max. 9, 1:1-Stunde, Zoom ohne
@@ -317,17 +323,17 @@ export default function Masterclass() {
           <p className="mt-4 max-w-2xl font-inter text-[17px] leading-relaxed text-midnight-blue/85">
             Du wählst deine Gruppe, die Inhalte sind in beiden Gruppen gleich. Und du kannst im 1. oder im 2. Durchgang starten.
           </p>
-          {/* Die zwei Gruppen: gross und luftig (Auftraggeber 17.11.2026: "zu klein, zu gedrungen ... schöner und breiter"). */}
+          {/* Vier Fenster: Frueh und Abend je Durchgang getrennt (Auftraggeber 18.11.2026). */}
           <div className="mt-12 grid gap-6 md:grid-cols-2">
-            {GRUPPEN.map((g) => (
-              <div key={g.name} className="relative overflow-hidden rounded-[22px] border border-[#C9A961]/60 bg-white p-7 shadow-[0_30px_60px_-40px_rgba(19,35,63,0.55)] sm:p-9">
+            {FENSTER.map((g) => (
+              <div key={g.durchgang + g.name} className={`relative overflow-hidden rounded-[22px] border bg-white p-7 shadow-[0_30px_60px_-40px_rgba(19,35,63,0.55)] sm:p-8 ${g.voll ? 'border-[#13233F]/15 opacity-80' : 'border-[#C9A961]/60'}`}>
                 <div className="flex items-start justify-between gap-4">
                   <span className="grid h-14 w-14 place-items-center rounded-2xl bg-[#13233F] text-[#E6CC8F]"><g.icon className="h-7 w-7" aria-hidden="true" /></span>
-                  <span className="rounded-full bg-[#1F7A4D] px-3.5 py-1.5 font-montserrat text-[11px] font-extrabold uppercase tracking-[0.14em] text-white">Plätze frei</span>
+                  <span className={`rounded-full ${g.voll ? 'bg-[#9B2C1F]' : 'bg-[#1F7A4D]'} px-3.5 py-1.5 text-center font-montserrat text-[11px] font-extrabold uppercase tracking-[0.14em] text-white`}>{g.schild}</span>
                 </div>
-                <p className="mt-6 font-montserrat text-xs font-extrabold uppercase tracking-[0.18em] text-[#B08D45]">{g.name}</p>
-                <p className="mt-2 font-montserrat text-4xl font-extrabold tracking-tight text-midnight-blue sm:text-5xl">{g.zeit}</p>
-                <p className="mt-4 font-inter text-[17px] leading-relaxed text-midnight-blue/75">{g.text}</p>
+                <p className="mt-6 font-montserrat text-xs font-extrabold uppercase tracking-[0.18em] text-[#B08D45]">{g.durchgang} · {g.name}</p>
+                <p className={`mt-2 font-montserrat text-4xl font-extrabold tracking-tight sm:text-5xl ${g.voll ? 'text-midnight-blue/45 line-through decoration-[#9B2C1F] decoration-[3px]' : 'text-midnight-blue'}`}>{g.zeit}</p>
+                <p className="mt-3 font-inter text-[17px] leading-relaxed text-midnight-blue/75">{g.start}</p>
               </div>
             ))}
           </div>
@@ -356,7 +362,7 @@ export default function Masterclass() {
                 </ul>
                 <div className="mt-7 grid gap-2 border-t border-white/15 pt-6 font-inter text-[15px] text-pearl-white/90">
                   <p className="flex items-center gap-2"><Sunrise className="h-4 w-4 text-[#E6CC8F]" aria-hidden="true" /> Früh: {FRUEH}</p>
-                  <p className="flex items-center gap-2"><Moon className="h-4 w-4 text-[#E6CC8F]" aria-hidden="true" /> Abends: {ABEND}</p>
+                  <p className="flex items-center gap-2"><Moon className="h-4 w-4 text-[#E6CC8F]" aria-hidden="true" /> Abends: {d.abendVoll ? <b className="font-bold text-[#F5B7A8]">ausgebucht</b> : ABEND}</p>
                 </div>
               </div>
             ))}
@@ -518,6 +524,7 @@ export default function Masterclass() {
               <p className="flex flex-wrap items-baseline justify-center gap-x-4"><span className="font-montserrat text-5xl font-extrabold text-midnight-blue sm:text-6xl">{EURO(PREIS)}</span>{PREIS < REGULAER && <span className="font-montserrat text-xl font-bold text-midnight-blue/50 line-through decoration-[#C9A961] decoration-2">{EURO(REGULAER)}</span>}</p>
               {PREIS < REGULAER && <p className="mt-2 font-montserrat text-sm font-extrabold uppercase tracking-[0.14em] text-[#C9A961]">Statt Normalpreis {EURO(REGULAER)}</p>}
               <p className="mt-2 font-inter text-sm text-midnight-blue/75">zzgl. MwSt. · {BRUTTO(PREIS)} inkl. MwSt. · Ratenzahlung über Klarna möglich</p>
+              {PREIS < REGULAER && <p className="mt-3 font-montserrat text-base font-extrabold text-midnight-blue">Nur bis {FRIST}</p>}
             </div>
             <div className="mt-8 flex flex-col items-center gap-4">
               <a href={KAUF_LINK} className={KNOPF}>Platz sichern →</a>
@@ -561,7 +568,7 @@ export default function Masterclass() {
         <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
           <div className="min-w-0">
             <p className="truncate font-montserrat text-sm font-extrabold text-midnight-blue sm:text-base">UNVERWECHSELBAR · ab {START_LABEL.replace('Donnerstag, ', '')}</p>
-            <p className="truncate font-inter text-xs text-midnight-blue/70 sm:text-[13px]"><b className="font-bold text-midnight-blue">{EURO(PREIS)}</b>{PREIS < REGULAER && <> <span className="line-through decoration-[#9B2C1F] decoration-[1.5px]">{EURO(REGULAER)}</span></>} zzgl. MwSt. · Ratenzahlung möglich · höchstens 9 Plätze</p>
+            <p className="truncate font-inter text-xs text-midnight-blue/70 sm:text-[13px]"><b className="font-bold text-midnight-blue">{EURO(PREIS)}</b>{PREIS < REGULAER && <> <span className="line-through decoration-[#9B2C1F] decoration-[1.5px]">{EURO(REGULAER)}</span></>} zzgl. MwSt.{PREIS < REGULAER && <> · <b className="font-bold text-midnight-blue">nur bis Fr 20.11.</b></>} · Ratenzahlung möglich · höchstens 9 Plätze</p>
           </div>
           <a href={KAUF_LINK} className={`${GOLD} inline-flex flex-none items-center gap-2 rounded-full px-5 py-3 font-montserrat text-sm font-extrabold text-midnight-blue shadow-[0_8px_18px_-10px_rgba(19,35,63,0.5)] sm:px-7 sm:text-base`} tabIndex={leiste ? 0 : -1}>Platz sichern →</a>
         </div>

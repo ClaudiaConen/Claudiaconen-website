@@ -1,7 +1,7 @@
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
-import { FRUEH, ABEND, SCHRITTE, BEGLEITUNG } from '../data/masterclassDaten';
+import { FRUEH, ABEND, SCHRITTE, BEGLEITUNG, TERMINE2 } from '../data/masterclassDaten';
 
 /**
  * Dankesseite nach der Buchung der Masterclass UNVERWECHSELBAR (Route /masterclass/danke, von Stripe/Tentary als
@@ -57,7 +57,7 @@ export default function MasterclassDanke() {
               <div className="mt-8 rounded-[16px] border-2 border-[#C9A961] bg-white/[0.06] p-5 sm:p-6">
                 <p className="font-montserrat text-[11px] font-extrabold uppercase tracking-[0.18em] text-[#E6CC8F]">Deine Termine</p>
                 <p className="mt-2 font-montserrat text-lg font-extrabold leading-snug text-white sm:text-xl">
-                  Donnerstags am 19. November, 26. November, 3. Dezember und 10. Dezember 2026
+                  Donnerstags am {TERMINE2.map((t) => t.replace('Donnerstag, ', '').replace(/ \d{4}$/, '')).join(', ').replace(/, ([^,]*)$/, ' und $1')} 2027, live per Zoom
                 </p>
                 <p className="mt-2 font-inter text-[15px] text-pearl-white/85">Frühgruppe {FRUEH} oder Abendgruppe {ABEND}</p>
                 <p className="mt-3 border-t border-[#C9A961]/40 pt-3 font-inter text-[15px] text-pearl-white/85">

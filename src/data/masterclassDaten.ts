@@ -35,46 +35,47 @@ export const TERMINE: string[] = [
 
 /** Von der Challenge in die Tiefe: deine sieben Schritte (Dokument). Reihenfolge und Nummern wie im Dokument;
  *  die Termine sind absichtlich nicht aufsteigend - sie folgen dem Dokument (jeder Donnerstag traegt ~2 Schritte). */
+/* Termine je Schritt auf den 2. Durchgang umgestellt (Auftraggeber 21.11.2026: naechste Masterclass ab 21.1.2027). */
 export const SCHRITTE: { nr: number; titel: string; datum: string; text: string; mit: string; quelle?: string }[] = [
   {
     nr: 1,
     titel: 'Kernbotschaft und Positionierung in der Tiefe',
-    datum: '19. November',
+    datum: '21. Januar',
     text: 'Die meisten beschreiben, was sie tun. Die Erfolgreichen sagen, wofür sie stehen. Du findest den einen Satz, den man nach einem Gespräch mit dir weitererzählt, so formuliert, wie ein Profi ihn sagen würde.',
     mit: 'deinen Kernsatz und eine Geschichte von einer Minute, die ihn beweist.',
   },
   {
     nr: 2,
     titel: 'Zielgruppenbrille: Achtung, knallharte Wahrheit',
-    datum: '3. Dezember',
+    datum: '4. Februar',
     text: 'Dein Kunde hört nicht, was du sagst. Er hört, was er davon hat. Wir schauen ehrlich auf deine Videos: Wo sprichst du über dich, wo über ihn? So gehst du deinen Weg zu mehr Selbstvertrauen, damit du Vertrauen weckst.',
     mit: 'klares Feedback und Tipps, wie du dich präsentierst, ohne dich zu verbiegen.',
   },
   {
     nr: 3,
     titel: 'Raus aus der Redeangst: spontan und flexibel pitchen',
-    datum: '26. November',
+    datum: '28. Januar',
     text: 'Netzwerktreffen, jemand fragt: „Und was machst du so?" Und du bist einfach da. Lampenfieber wird kleiner durch Üben, nicht durch Warten.',
     mit: 'den Weg zu deiner Selbstsicherheit und einen Notfallkoffer mit wertvollen Tipps.',
   },
   {
     nr: 4,
     titel: 'Deine Stimme: dein kostbarstes Marketinginstrument',
-    datum: '26. November',
+    datum: '28. Januar',
     text: 'Was du sagst, entscheidet, ob man dich versteht. Wie du es sagst, entscheidet, ob man dir glaubt. Mit Aufnahmen und Sprechübungen arbeitest du an Betonung, Pause, Tempo und Haltung.',
     mit: 'wichtige Tipps und Techniken, um mit deiner Stimme Wirkung zu erzielen, denn deine Stimme ist unverwechselbar. Du lernst deine Stimme besser kennen und übst, mit Selbstvertrauen zu sprechen.',
   },
   {
     nr: 5,
     titel: 'Storytelling: der Türöffner zu Kopf und Herz deiner Kunden',
-    datum: '19. November',
+    datum: '21. Januar',
     text: 'Fakten informieren. Geschichten bleiben. Du findest die Momente, die nur du erzählen kannst. Der Held ist dein Kunde, du zeigst den Weg.',
     mit: 'eine Schatzkiste voller Ideen und echter Geschichten, die authentisch zu dir passen. Denn wir beleuchten den Weg, wie du dein Business damit klar kommunizierst und neugierig machst.',
   },
   {
     nr: 6,
     titel: 'Wie Kunden entscheiden: was die Forschung über Zuhören weiß',
-    datum: '3. Dezember',
+    datum: '4. Februar',
     text: 'Wer fragt, gewinnt. Studien zeigen: Wer im Gespräch mehr Nachfragen stellt, wird als sympathischer erlebt.',
     quelle: 'Huang u. a., Harvard Business School, 2017',
     mit: 'kostbare Erkenntnisse, welche Sätze, welche Worte und welche Art der Kommunikation wichtig sind, damit Menschen sich für dich entscheiden können.',
@@ -82,7 +83,7 @@ export const SCHRITTE: { nr: number; titel: string; datum: string; text: string;
   {
     nr: 7,
     titel: 'Elevator Pitch: dich überall auf den Punkt präsentieren',
-    datum: '10. Dezember',
+    datum: '11. Februar',
     text: 'Aus allem wird ein 60-Sekunden-Auftritt, manchmal sogar kürzer. Du willst dich doch im Gehirn anderer Menschen speichern, richtig? Das Kostbare ist: Menschen haben keine Reset-Taste. Du kannst dich positiv speichern, sodass man gern mit dir zusammenarbeiten möchte, weil du Vertrauen weckst. Genau darum geht es.',
     mit: 'deinen Fahrplan und viel Übung für deinen Auftritt.',
   },

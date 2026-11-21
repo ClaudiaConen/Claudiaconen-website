@@ -2,12 +2,11 @@ import { useLocation, Link } from 'react-router-dom';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
-import { ZUGANGSCODE } from '../components/MitgliederBereich';
 
 /**
  * Danke-Seite nach dem Eintragen – kurz und neugierig machend (Claudia, 25.10.2026 16:21).
- * Drei Schritte: Gruppe, Zoom, Mitgliederbereich (Login mit E-Mail + Zugangscode, taeglich 7 Uhr ein neuer Schritt).
- * Gruppen-, Zoom-Link und Zugangscode stehen nur hier, deshalb noindex. Der Vorname kommt aus dem Formular (Router-State).
+ * Drei Schritte: Gruppe, Zoom, Mitgliederbereich (Community, ohne Zugangscode seit 21.11.2026; taeglich 5 Uhr ein neuer Schritt).
+ * Gruppen- und Zoom-Link stehen nur hier, deshalb noindex. Der Vorname kommt aus dem Formular (Router-State).
  */
 const WHATSAPP = 'https://chat.whatsapp.com/IWSuqZ9ZrMn3dYNgVY1sp6?s=qt&p=i&mlu=4&ilr=4';
 const TELEGRAM = 'https://t.me/+Tn_rHmElfidjYzcy';
@@ -85,11 +84,7 @@ export default function ChallengeDanke() {
             <p className="font-montserrat text-xs font-extrabold uppercase tracking-[0.2em] text-[#C9A961]">Schritt 3</p>
             <h2 className="mt-2 font-montserrat text-xl font-extrabold text-white">Dein Mitgliederbereich</h2>
             <p className="mt-2 font-inter text-sm text-pearl-white/80">Jeden Morgen um 5 Uhr öffnet sich dort dein nächster Schritt: Erklärung, Audio und Workbook.</p>
-            <div className="mt-4 rounded-[12px] border border-[#C9A961]/50 bg-white/[0.06] p-4 text-center">
-              <p className="font-inter text-xs uppercase tracking-[0.16em] text-pearl-white/70">Dein Zugangscode</p>
-              <p className="mt-1 font-montserrat text-2xl font-black tracking-[0.12em] text-[#F7E7CE]">{ZUGANGSCODE}</p>
-            </div>
-            <a href="https://community.claudiaconen.com/mein-bereich/start" className={`mt-5 inline-flex items-center rounded-full px-7 py-3.5 font-montserrat text-sm font-bold text-midnight-blue ${GOLD}`}>Zum Mitgliederbereich →</a>
+            <a href="https://community.claudiaconen.com/community/s/challenge-tage" className={`mt-5 inline-flex items-center rounded-full px-7 py-3.5 font-montserrat text-sm font-bold text-midnight-blue ${GOLD}`}>Zum Mitgliederbereich →</a>
           </li>
         </ol>
 

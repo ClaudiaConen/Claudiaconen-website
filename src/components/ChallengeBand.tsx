@@ -15,7 +15,7 @@ const SAETZE = [
   '7-Tage-Video-Challenge',
   'Zeig dich. Sei dabei.',
   'Jeden Tag eine Aufgabe · 30 Minuten · Feedback in der Gruppe',
-  'Start: Montag, 23. November',
+  'Start: Montag, 7. Dezember',
   'Kostenfrei mitmachen – klick hier',
 ];
 

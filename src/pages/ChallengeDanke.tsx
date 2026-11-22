@@ -40,7 +40,7 @@ export default function ChallengeDanke() {
       <SEO title="Du bist dabei" description="Deine nächsten Schritte in der 7-Tage-Challenge UNVERWECHSELBAR." path="/challenge/danke" noindex />
       <Navigation hell />
 
-      <header className="bg-[linear-gradient(180deg,#FFFFFF_0%,#F5F5F7_100%)] pt-32 pb-14 text-center sm:pt-36 sm:pb-16">
+      <header className="bg-[linear-gradient(180deg,#FFFFFF_0%,#F5F5F7_100%)] pt-44 pb-14 text-center sm:pt-48 sm:pb-16">
         <div className="mx-auto max-w-3xl px-6">
           <p className={`inline-flex items-center gap-3 font-montserrat text-xs font-extrabold uppercase tracking-[0.26em] ${GOLD_TEXT}`}><span className="h-px w-10 bg-[#C9A961]" />7 Tage UNVERWECHSELBAR<span className="h-px w-10 bg-[#C9A961]" /></p>
           <h1 className="mt-6 font-cormorant text-[34px] font-semibold uppercase leading-[1.05] tracking-[0.03em] text-[#13233F] sm:text-6xl" style={SERIF}>

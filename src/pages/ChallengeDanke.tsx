@@ -1,4 +1,4 @@
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
@@ -23,21 +23,10 @@ const PLUS_INHALT = [
 
 export default function ChallengeDanke() {
   const ort = useLocation();
-  const zustand = (ort.state || {}) as { angemeldet?: boolean; vorname?: string };
-  if (!zustand.angemeldet) {
-    return (
-      <div className="min-h-screen bg-white text-midnight-blue">
-        <SEO title="Anmeldung zur Challenge" description="Melde dich zuerst zur kostenfreien 7-Tage-Challenge an." path="/challenge/danke" noindex />
-        <Navigation hell />
-        <main className="mx-auto max-w-2xl px-6 pt-36 pb-24 text-center">
-          <h1 className="font-montserrat text-3xl font-extrabold">Bitte melde dich zuerst an.</h1>
-          <p className="mt-4 font-inter text-lg">Nach deiner Anmeldung geht es hier weiter.</p>
-          <Link to="/challenge#anmeldung" className={`mt-8 inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue ${GOLD}`}>Zur Anmeldung →</Link>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
+  // Kein Zugangs-Schutz mehr (Claudia, 22.11.2026): Beim Double-Opt-in wird diese Seite ERST nach dem Klick
+  // auf den Bestätigungslink in der E-Mail aufgerufen – also ohne Formular-Zustand. Deshalb immer anzeigen.
+  // Der Vorname (falls direkt aus dem Formular vorhanden) wird weiter zur Begrüßung genutzt, ist aber optional.
+  const zustand = (ort.state || {}) as { vorname?: string };
   const name = zustand.vorname?.trim();
   return (
     <div className="min-h-screen bg-[#13233F] text-pearl-white">

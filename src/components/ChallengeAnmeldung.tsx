@@ -58,8 +58,9 @@ export default function ChallengeAnmeldung({ start, onEingetragen }: { start: st
     setZustand('fertig');
     try { window.localStorage.setItem(EINGETRAGEN_SCHLUESSEL, '1'); } catch { /* privater Modus o. ae. */ }
     onEingetragen?.();
-    // Kurze Danke-Seite mit Gruppen, Zoom und Zugangscode zum Mitgliederbereich (Claudia, 25.10.2026 16:21).
-    navigate('/challenge/danke', { state: { vorname: vorname.trim(), angemeldet: true } });
+    // Double-Opt-in (Claudia, 22.11.2026): zuerst auf die Bestätigungsseite ("Fast geschafft - bitte bestaetige
+    // deine E-Mail"). Auf die Danke-Seite (/challenge/danke) kommt sie erst ueber den Link in der E-Mail.
+    navigate('/challenge/bestaetigen', { state: { vorname: vorname.trim(), angemeldet: true } });
   }
 
   if (zustand === 'fertig') {

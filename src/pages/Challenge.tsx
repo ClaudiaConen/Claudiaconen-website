@@ -60,15 +60,15 @@ function FeedbackPlakette() {
 
 
 
-/** Der Durchgang: Montag, 23.11.2026 bis Dienstag, 01.12.2026 (Claudia, 09.11.2026). Samstag + Sonntag sind frei,
- *  deshalb laufen die sieben Tage NICHT am Stueck: Tag 1-5 = Mo-Fr (23.-27.11.), Wochenend-Pause, Tag 6 = Mo 30.11.,
- *  Tag 7 = Di 01.12. Tag n oeffnet am n-ten Werktag des Durchgangs. Nach dem Ende bleiben alle Tage lesbar, die
+/** Der Durchgang: Montag, 07.12.2026 bis Dienstag, 15.12.2026 (Claudia, 22.11.2026). Samstag + Sonntag sind frei,
+ *  deshalb laufen die sieben Tage NICHT am Stueck: Tag 1-5 = Mo-Fr (07.-11.12.), Wochenend-Pause, Tag 6 = Mo 14.12.,
+ *  Tag 7 = Di 15.12. Tag n oeffnet am n-ten Werktag des Durchgangs. Nach dem Ende bleiben alle Tage lesbar, die
  *  Zeile im Kopf sagt, dass der Durchgang vorbei ist (Datum nie ohne Ablauf).
  *  Naechster Durchgang: START und ENDE hier aendern (die Wochenend-Pause steckt in freischaltung/standZeile). */
 /** Zahl der Eingetragenen, von Claudia genannt - bis zum Start nachtragen. */
 const EINGETRAGEN = 0;
-const START = new Date(2026, 10, 23); // Montag, 23.11.2026, lokale Zeit
-const ENDE = new Date(2026, 11, 1); // Dienstag, 01.12.2026 (letzter Tag)
+const START = new Date(2026, 11, 7); // Montag, 07.12.2026, lokale Zeit
+const ENDE = new Date(2026, 11, 15); // Dienstag, 15.12.2026 (letzter Tag)
 const VORBEREITUNG_TAG1 = false; // Streifen bleiben vor dem Start zu - die Aufwachuebung steht als 'Tipp am Morgen' davor (22.09.2026 11:24 UTC)
 
 /** Freischaltdatum je Tag (0-basiert). Samstag + Sonntag sind frei und werden uebersprungen,
@@ -87,10 +87,10 @@ function freischaltung(heute: Date, tag: number): Date {
 }
 
 /** Die Zeile im Kopf - je nachdem, ob der Durchgang bevorsteht, laeuft oder vorbei ist. Live-Termine
- *  (Claudia, 09.11.2026): Start-Zoom Mo 23.11. 19:00 Uhr, Abschlusstreffen Di 01.12. 19:00 Uhr. */
+ *  (Claudia, 22.11.2026): Start-Zoom Mo 07.12. 19:00 Uhr, Abschlusstreffen Di 15.12. 19:00 Uhr. */
 function standZeile(heute: Date): string {
   const h = new Date(heute); h.setHours(0, 0, 0, 0);
-  if (h < START) return 'Start: Montag, 23. November 2026 · 19 Uhr · live im Zoom';
+  if (h < START) return 'Start: Montag, 7. Dezember 2026 · 19 Uhr · live im Zoom';
   if (h <= ENDE) {
     // Werktage von START bis heute zaehlen (Samstag + Sonntag sind frei).
     let tag = 0; const d = new Date(START);
@@ -99,7 +99,7 @@ function standZeile(heute: Date): string {
     if (h.getDay() === 0 || h.getDay() === 6) return `Wochenend-Pause – weiter geht es am Montag mit Tag ${Math.min(7, tag + 1)} von 7`;
     return `Die Challenge läuft – heute ist Tag ${tag} von 7`;
   }
-  return 'Der Durchgang vom 23. November ist beendet – trag dich ein, du erfährst als Erste, wann es wieder losgeht';
+  return 'Der Durchgang vom 7. Dezember ist beendet – trag dich ein, du erfährst als Erste, wann es wieder losgeht';
 }
 const KURZ = new Intl.DateTimeFormat('de-DE', { weekday: 'short', day: 'numeric', month: 'short' });
 
@@ -429,7 +429,7 @@ export default function Challenge() {
                 <li key={t.titel} data-tag={i}>
                   <details style={{ ['--i' as string]: i + 1 }} className={`group bg-white text-midnight-blue transition-shadow duration-500 ${KACHEL} ${i === aktiverTag ? 'md:border-[#C9A961] md:shadow-[0_14px_34px_-18px_rgba(201,169,97,0.75)]' : ''}`}>
                     <summary className="grid cursor-pointer list-none gap-1 px-5 py-5 sm:grid-cols-[170px_minmax(0,1fr)_auto] sm:items-center sm:gap-6 sm:px-7 [&::-webkit-details-marker]:hidden">
-                      <p className="font-montserrat text-sm font-extrabold">Tag {i + 1}<span className="block font-bold text-midnight-blue/65">{letzter ? 'Di., 1. Dez. · 19 Uhr' : KURZ.format(freischaltung(heute, i))}</span></p>
+                      <p className="font-montserrat text-sm font-extrabold">Tag {i + 1}<span className="block font-bold text-midnight-blue/65">{letzter ? 'Di., 15. Dez. · 19 Uhr' : KURZ.format(freischaltung(heute, i))}</span></p>
                       <div className="flex min-w-0 items-start gap-4">
                         {/* Die 3-D-Icons klein in der Zeile (Claudia, 24.10.2026 22:20: "Icons mit auf den Ablaufplan ... aufklappen und erklaeren"). */}
                         <img src={`/icons/${t.icon}.webp`} alt="" width={256} height={256} loading="lazy" decoding="async" className="mt-0.5 h-11 w-11 flex-none" />

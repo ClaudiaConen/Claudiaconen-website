@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 
 /** Lichtspirale neben den sieben Tagen (Claudias Vorbilder 24.10.2026 21:10 und 21:33: DNA aus Lichtpunkten, der
  *  aktuelle Schritt leuchtet). Eigene Zeichnung in Gold auf Dunkelblau; jede Tages-Sprosse sitzt neben ihrem Tag. */
-export default function Helix({ aktiv, ys, hoehe }: { aktiv: number; ys: number[]; hoehe: number }) {
+/** immer + breite: auch auf dem Handy zeigen, schmaler (Danke-Seite, Claudia 22.11.2026). Ohne Angabe wie bisher. */
+export default function Helix({ aktiv, ys, hoehe, immer = false, breite = 132 }: { aktiv: number; ys: number[]; hoehe: number; immer?: boolean; breite?: number }) {
   // Dreht sich um die eigene Achse (Claudia, 24.10.2026 21:34); steht still bei reduzierter Bewegung oder ausser Sicht.
   const [winkel, setWinkel] = useState(0);
   const boxRef = useRef<HTMLDivElement>(null);
@@ -20,8 +21,9 @@ export default function Helix({ aktiv, ys, hoehe }: { aktiv: number; ys: number[
     raf = requestAnimationFrame(lauf);
     return () => { cancelAnimationFrame(raf); io.disconnect(); };
   }, []);
-  if (!hoehe || ys.length < 2) return <div ref={boxRef} className="hidden md:block" />;
-  const b = 132, a = 40, mitte = b / 2;
+  const sicht = immer ? 'block' : 'hidden md:block';
+  if (!hoehe || ys.length < 2) return <div ref={boxRef} className={sicht} />;
+  const b = breite, a = Math.round(breite * 0.3), mitte = b / 2;
   const welle = ((ys[ys.length - 1] - ys[0]) / (ys.length - 1)) * 2;
   const phase = (y: number) => (2 * Math.PI * (y - ys[0])) / welle + Math.PI / 2 + winkel;
   const x = (y: number, vorn: boolean) => mitte + (vorn ? 1 : -1) * a * Math.sin(phase(y));
@@ -37,7 +39,7 @@ export default function Helix({ aktiv, ys, hoehe }: { aktiv: number; ys: number[
   const zart: number[] = [];
   for (let y = 10; y <= hoehe - 10; y += 18) if (!ys.some((t) => Math.abs(t - y) < 9)) zart.push(y);
   return (
-    <div ref={boxRef} className="relative hidden overflow-hidden rounded-[14px] bg-[#13233F] shadow-[0_24px_50px_-28px_rgba(19,35,63,0.8)] md:block" aria-hidden="true">
+    <div ref={boxRef} className={`relative overflow-hidden rounded-[14px] bg-[#13233F] shadow-[0_24px_50px_-28px_rgba(19,35,63,0.8)] ${sicht}`} aria-hidden="true">
       <svg viewBox={`0 0 ${b} ${hoehe}`} width={b} height={hoehe} className="mx-auto block overflow-visible">
         <defs>
           <filter id="cc-glut" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3" result="b" /><feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge></filter>

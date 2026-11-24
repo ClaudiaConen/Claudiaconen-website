@@ -67,9 +67,9 @@ const KNOPF = `inline-flex items-center justify-center gap-2.5 rounded-full px-9
 /** Gruppen und Durchgaenge fuer den Termin-Abschnitt. */
 /** Auftraggeber 18.11.2026: vier Fenster, Frueh und Abend je Durchgang getrennt. November frueh noch 3 Plaetze
  *  (nach aussen kommuniziert), November abends ausgebucht, Januar beide frei. Stand hier pflegen. */
-const FENSTER: { durchgang: string; start: string; name: string; zeit: string; icon: LucideIcon; schild: string; plaetze: number; voll?: boolean }[] = [
-  { durchgang: '1. Masterclass-Start', start: 'ab Do, 19. November 2026', name: 'Frühgruppe', zeit: FRUEH.replace(' Uhr', ''), icon: Sunrise, schild: 'Für Kurzentschlossene · noch 3 Plätze frei', plaetze: 9 },
-  { durchgang: '1. Masterclass-Start', start: 'ab Do, 19. November 2026', name: 'Abendgruppe', zeit: ABEND.replace(' Uhr', ''), icon: Moon, schild: 'Ausgebucht', plaetze: 9, voll: true },
+const FENSTER: { durchgang: string; start: string; name: string; zeit: string; icon: LucideIcon; schild: string; plaetze: number; voll?: boolean; hinweis?: string }[] = [
+  { durchgang: '1. Masterclass-Start', start: 'ab Do, 19. November 2026', name: 'Frühgruppe', zeit: FRUEH.replace(' Uhr', ''), icon: Sunrise, schild: 'Läuft bereits · gestartet am 19.11.', plaetze: 9, voll: true, hinweis: 'Sei gern bei der nächsten dabei: ab Do, 21. Januar 2027' },
+  { durchgang: '1. Masterclass-Start', start: 'ab Do, 19. November 2026', name: 'Abendgruppe', zeit: ABEND.replace(' Uhr', ''), icon: Moon, schild: 'Läuft bereits · gestartet am 19.11.', plaetze: 9, voll: true, hinweis: 'Sei gern bei der nächsten dabei: ab Do, 21. Januar 2027' },
   { durchgang: '2. Masterclass-Start', start: 'ab Do, 21. Januar 2027', name: 'Frühgruppe', zeit: FRUEH.replace(' Uhr', ''), icon: Sunrise, schild: 'Plätze frei', plaetze: 12 },
   { durchgang: '2. Masterclass-Start', start: 'ab Do, 21. Januar 2027', name: 'Abendgruppe', zeit: ABEND.replace(' Uhr', ''), icon: Moon, schild: 'Plätze frei', plaetze: 12 },
 ];
@@ -83,7 +83,7 @@ const DURCHGAENGE = [
 const FRAGEN: [string, string][] = [
   ['Muss ich vorher an der 7-Tage-Challenge teilgenommen haben?', 'Nein. Du hast in der Challenge schon einen Vorsprung, aber die Masterclass ist ein eigenständiges Angebot. Wer neu einsteigt, findet genauso Zugang zu allen Themen.'],
   ['Für wen ist die Masterclass?', 'Für Selbstständige, Coaches und Unternehmerinnen, die sich zeigen wollen, ohne sich zu verbiegen – und die jetzt dranbleiben wollen, mit Begleitung statt allein.'],
-  ['Wann sind die Termine?', '4 Live-Termine, donnerstags: 19. November, 26. November, 3. Dezember und 10. Dezember 2026, morgens in der Frühgruppe (7:30–9:00 Uhr); die Abendgruppe im November ist ausgebucht. Der 2. Masterclass-Start: 21. Januar, 28. Januar, 4. Februar und 11. Februar 2027, ebenfalls donnerstags, morgens oder abends.'],
+  ['Wann sind die Termine?', 'Die erste Masterclass (ab 19. November 2026) läuft bereits. Der nächste Start: 4 Live-Termine, donnerstags am 21. Januar, 28. Januar, 4. Februar und 11. Februar 2027, morgens in der Frühgruppe (7:30–9:00 Uhr) oder abends (19:00–20:30 Uhr).'],
   ['Wie wähle ich meine Gruppe?', 'Ganz einfach nach deiner Buchung: Schreib mir kurz, ob du in die Frühgruppe (7:30–9:00 Uhr) oder in die Abendgruppe (19:00–20:30 Uhr) möchtest, per E-Mail an claudiaconen@umsatzstimme.de oder per WhatsApp an +49 160 93102073. Die Inhalte sind in beiden Gruppen gleich.'],
   ['Was, wenn ich einen Termin verpasse?', 'Kein Problem: Du kannst in derselben Woche einfach in die andere Gruppe kommen, früh statt abends oder umgekehrt. Die Inhalte sind in beiden Gruppen gleich. Außerdem findest du die Aufzeichnung jedes Live-Termins in deinem Mitgliederbereich. Gib mir kurz Bescheid, wenn du nicht dabei sein kannst, per E-Mail an claudiaconen@umsatzstimme.de oder per WhatsApp an +49 160 93102073.'],
   ['Was passiert, wenn ich nicht teilnehmen kann?', 'Dann darf eine Ersatzperson ab 18 Jahren deinen Platz übernehmen. Eine Rückerstattung gibt es nicht. Das gesetzliche Widerrufsrecht für Verbraucherinnen und Verbraucher bleibt davon unberührt.'],
@@ -216,7 +216,7 @@ export default function Masterclass() {
     <div className="cc-2027 min-h-screen bg-white">
       <SEO
         title="UNVERWECHSELBAR – Die Masterclass für Präsenz, Persönlichkeit und Wirkung"
-        description={`${kurz} Start 19. November 2026 (morgens oder abends) oder 21. Januar 2027.`}
+        description={`${kurz} Nächster Start: 21. Januar 2027, morgens oder abends.`}
         path={PFAD}
         ogImage="https://claudiaconen.com/a27/og/og-masterclass.jpg"
       />
@@ -251,8 +251,8 @@ export default function Masterclass() {
                 4 Wochen live mit Claudia Conen · in kleiner Gruppe · mit persönlichem Feedback · plus deine persönliche 1:1-Übungsstunde.
               </p>
               <p className="mt-6 max-w-xl border-l-4 border-[#C9A961] pl-4 font-montserrat text-base font-extrabold uppercase leading-snug tracking-[0.04em] sm:text-lg">
-                Start: {START_LABEL}
-                <span className="mt-1 block text-[0.85em] text-midnight-blue/75">2. Starttermin: {START2_LABEL}</span>
+                Nächster Start: {START2_LABEL}
+                <span className="mt-1 block text-[0.85em] text-midnight-blue/75">Die erste Masterclass läuft bereits.</span>
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
                 <a href={KAUF_LINK} className={KNOPF}>Platz sichern →</a>
@@ -321,7 +321,7 @@ export default function Masterclass() {
           <Kicker text="Gruppen und Termine" hell />
           <h2 id="termine-titel" className="mt-5 font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">Früh oder abends: du wählst.</h2>
           <p className="mt-4 max-w-2xl font-inter text-[17px] leading-relaxed text-midnight-blue/85">
-            Du wählst deine Gruppe, die Inhalte sind in beiden Gruppen gleich. Und du kannst im November oder im Januar starten.
+            Du wählst deine Gruppe, die Inhalte sind in beiden Gruppen gleich. Der nächste Start ist am 21. Januar 2027.
           </p>
           {/* Vier Fenster: Frueh und Abend je Durchgang getrennt (Auftraggeber 18.11.2026). */}
           <div className="mt-12 grid gap-6 md:grid-cols-2">
@@ -334,6 +334,7 @@ export default function Masterclass() {
                 <p className="mt-6 font-montserrat text-xs font-extrabold uppercase tracking-[0.18em] text-[#B08D45]">{g.durchgang} · {g.name}</p>
                 <p className={`mt-2 font-montserrat text-4xl font-extrabold tracking-tight sm:text-5xl ${g.voll ? 'text-midnight-blue/45 line-through decoration-[#9B2C1F] decoration-[3px]' : 'text-midnight-blue'}`}>{g.zeit}</p>
                 <p className="mt-3 font-inter text-[17px] leading-relaxed text-midnight-blue/75">{g.start} · höchstens {g.plaetze} Personen</p>
+                {g.hinweis && <a href={KAUF_LINK} className="mt-4 inline-block font-montserrat text-[15px] font-extrabold text-midnight-blue underline decoration-[#C9A961] decoration-2 underline-offset-4">{g.hinweis} →</a>}
               </div>
             ))}
           </div>
@@ -567,7 +568,7 @@ export default function Masterclass() {
       <div aria-hidden={!leiste} className={`fixed inset-x-0 bottom-0 z-40 border-t border-[#C9A961]/50 bg-white/95 backdrop-blur transition-transform duration-300 ${leiste ? 'translate-y-0' : 'pointer-events-none translate-y-full'}`}>
         <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
           <div className="min-w-0">
-            <p className="truncate font-montserrat text-sm font-extrabold text-midnight-blue sm:text-base">UNVERWECHSELBAR · ab {START_LABEL.replace('Donnerstag, ', '')}</p>
+            <p className="truncate font-montserrat text-sm font-extrabold text-midnight-blue sm:text-base">UNVERWECHSELBAR · nächster Start {START2_LABEL.replace('Donnerstag, ', '')}</p>
             <p className="truncate font-inter text-xs text-midnight-blue/70 sm:text-[13px]"><b className="font-bold text-midnight-blue">{EURO(PREIS)}</b>{PREIS < REGULAER && <> <span className="line-through decoration-[#9B2C1F] decoration-[1.5px]">{EURO(REGULAER)}</span></>} zzgl. MwSt.{PREIS < REGULAER && <> · <b className="font-bold text-midnight-blue">nur bis Fr 20.11.</b></>} · Ratenzahlung möglich · kleine Gruppen</p>
           </div>
           <a href={KAUF_LINK} className={`${GOLD} inline-flex flex-none items-center gap-2 rounded-full px-5 py-3 font-montserrat text-sm font-extrabold text-midnight-blue shadow-[0_8px_18px_-10px_rgba(19,35,63,0.5)] sm:px-7 sm:text-base`} tabIndex={leiste ? 0 : -1}>Platz sichern →</a>

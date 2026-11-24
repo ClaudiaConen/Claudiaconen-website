@@ -324,7 +324,7 @@ export default function Challenge() {
         title="7 Tage für deine Wirkungskraft – die Video-Challenge"
         description="Sieben Tage, jeden Tag ein Audio-Impuls, eine Minute Video mit dem Handy, persönlicher Wirkungscheck von Claudia Conen an Tag 2 und Tag 6. Kostenfrei, in einer WhatsApp-Gruppe – mit den sieben Schritten, dem Workbook und dem Weg danach."
         path={PFAD}
-        ogImage="https://claudiaconen.com/a27/og/og-challenge.jpg"
+        ogImage="https://claudiaconen.com/a27/og/og-challenge-v2.jpg"
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(strukturierteDaten) }} />
       <Navigation hell />

@@ -41,7 +41,7 @@ const ZUERST = 6;
 
 /** ohne: Stimmen-IDs, die auf dieser Seite nicht passen (z. B. Sprecher-Kunden auf /masterclass, 02.11.2026).
  *  stimmen/titel/untertitel: eigene Liste und Ueberschrift (z. B. echte Challenge-Stimmen auf /challenge, 16.11.2026). */
-export default function StimmenKarten({ ohne = [], stimmen, titel = 'Menschen, mit denen ich gearbeitet habe', untertitel = 'In ihren eigenen Worten.' }: { ohne?: string[]; stimmen?: Stimme[]; titel?: string; untertitel?: string } = {}) {
+export default function StimmenKarten({ ohne = [], stimmen, titel = 'Menschen, mit denen ich gearbeitet habe', untertitel = 'In ihren eigenen Worten.', rund = false }: { ohne?: string[]; stimmen?: Stimme[]; titel?: string; untertitel?: string; rund?: boolean } = {}) {
   const KARTEN = (stimmen ?? ALLE_KARTEN).filter((s) => !ohne.includes(s.id));
   const titelId = useId();
   const [alle, setAlle] = useState(false);
@@ -65,7 +65,7 @@ export default function StimmenKarten({ ohne = [], stimmen, titel = 'Menschen, m
           const hoert = laeuft === s.id && s.audio;
           return (
             <li key={s.id} className={`flex w-[82%] flex-none snap-start flex-col sm:w-[60%] md:w-auto ${!alle && i >= ZUERST ? 'md:hidden' : ''}`}>
-              <div className="relative aspect-square overflow-hidden rounded-2xl bg-midnight-blue">
+              <div className={`relative aspect-square overflow-hidden bg-midnight-blue ${rund && !spielt && !hoert ? 'rounded-full ring-2 ring-[#C9A961] ring-offset-4 ring-offset-white' : 'rounded-2xl'}`}>
                 {spielt ? (
                   <video controls autoPlay playsInline poster={s.video!.standbild} className="h-full w-full bg-midnight-blue object-contain" aria-label={`${s.name} erzählt von der Zusammenarbeit`}>
                     <source src={s.video!.quelle} type="video/mp4" />
@@ -80,7 +80,7 @@ export default function StimmenKarten({ ohne = [], stimmen, titel = 'Menschen, m
                   <button
                     type="button"
                     onClick={() => (s.vimeo ? setVimeo(s.vimeo) : setLaeuft(s.id))}
-                    className="absolute bottom-3 right-3 inline-flex items-center gap-2 rounded-full bg-white/95 px-4 py-2 font-montserrat text-xs font-bold text-midnight-blue shadow-[0_6px_18px_-8px_rgba(19,35,63,0.55)] transition-transform hover:-translate-y-px focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C9A961]"
+                    className={`absolute bottom-3 ${rund ? 'left-1/2 -translate-x-1/2' : 'right-3'} inline-flex items-center gap-2 rounded-full bg-white/95 px-4 py-2 font-montserrat text-xs font-bold text-midnight-blue shadow-[0_6px_18px_-8px_rgba(19,35,63,0.55)] transition-transform hover:-translate-y-px focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C9A961]`}
                     aria-label={`Video von ${s.name} ansehen`}
                   >
                     <span aria-hidden="true">▶</span> {s.audio ? 'Anhören' : 'Video'}

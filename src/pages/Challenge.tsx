@@ -378,7 +378,7 @@ export default function Challenge() {
                     </li>
                     <li className="flex items-center gap-3">
                       <svg aria-hidden="true" viewBox="0 0 24 24" className="h-6 w-6 shrink-0" fill="none" stroke="#C9A961" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="10" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
-                      <span><span className="font-extrabold">Alle Inhalte in deinem Mitgliederbereich</span> <span className="font-semibold text-midnight-blue/75">rund um die Uhr</span></span>
+                      <span><span className="font-extrabold">Entdecke täglich deinen Mitgliederbereich:</span> <span className="font-semibold text-midnight-blue/75">deine Inhalte und Arbeitswerkzeuge. Und es wartet noch eine Überraschung auf dich.</span></span>
                     </li>
                   </ul>
                 </div>
@@ -610,15 +610,15 @@ export default function Challenge() {
       {/* Nach der Challenge nur noch EIN Angebot: die Masterclass (28.10.2026, statt der drei Wege). Text = Claudias
           Kurzbeschreibung aus dem Masterclass-Briefing, Abschnitt 8. Das 1:1 bleibt als leiser Zusatz darunter. */}
       <section className="bg-pearl-white pb-20 pt-4 sm:pb-24" aria-labelledby="masterclass-titel">
-        <div className="mx-auto max-w-4xl px-6">
-          <div className="rounded-[20px] border-2 border-[#C9A961] bg-white p-7 text-center text-midnight-blue shadow-[0_30px_60px_-36px_rgba(201,169,97,0.9)] sm:p-10">
-            <p className="font-montserrat text-xs font-extrabold uppercase tracking-[0.22em] text-midnight-blue/70">Nach der Challenge · Masterclass · 4 Wochen</p>
-            <h2 id="masterclass-titel" className="mt-3 font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl"><span className="gold-text-animated">UNVERWECHSELBAR</span></h2>
-            <p className="mt-2 font-cormorant text-2xl italic">Zeig, was in dir steckt. Schärfe deine Botschaft. Entfalte deine Wirkung.</p>
-            <p className="mx-auto mt-5 max-w-2xl font-inter text-[16px] leading-relaxed text-midnight-blue/85">
+        <div className="mx-auto max-w-5xl px-6">
+          <div className="rounded-[24px] border-2 border-[#C9A961] bg-white px-7 py-10 text-center text-midnight-blue shadow-[0_30px_60px_-36px_rgba(201,169,97,0.9)] sm:px-14 sm:py-16">
+            <p className="font-montserrat text-sm font-extrabold uppercase tracking-[0.22em] text-midnight-blue/75 sm:text-base">Nach der Challenge · Masterclass · 4 Wochen</p>
+            <h2 id="masterclass-titel" className="mt-4 font-montserrat text-4xl font-extrabold leading-tight sm:text-6xl"><span className="block text-2xl text-midnight-blue sm:text-3xl">Masterclass</span><span className="gold-text-animated">UNVERWECHSELBAR</span></h2>
+            <p className="mt-4 font-cormorant text-2xl italic sm:text-3xl">Zeig, was in dir steckt. Schärfe deine Botschaft. Entfalte deine Wirkung.</p>
+            <p className="mx-auto mt-6 max-w-3xl font-inter text-[17px] leading-relaxed text-midnight-blue/85 sm:text-lg">
               UNVERWECHSELBAR ist die Masterclass für Menschen, die ihre Präsenz, Persönlichkeit und Wirkung gezielt weiterentwickeln möchten. Von Positionierung und Kernbotschaft über Stimme, Körpersprache und Storytelling bis hin zu Kundenkommunikation, Signature Pitch und Sichtbarkeit.
             </p>
-            <a href="/masterclass" className="cc-abk-knopf mt-7 inline-flex items-center justify-center gap-2.5 rounded-full border-2 border-[#C9A961] bg-white px-9 py-[18px] font-montserrat text-base font-extrabold text-midnight-blue transition-colors hover:bg-pearl-white sm:text-lg">
+            <a href="/masterclass" className={`cc-abk-knopf mt-9 inline-flex items-center justify-center gap-2.5 rounded-full px-11 py-5 font-montserrat text-lg font-extrabold text-midnight-blue shadow-[0_10px_24px_-12px_rgba(19,35,63,0.45)] transition-transform hover:-translate-y-px sm:text-xl ${GOLD}`}>
               Zur Masterclass <span aria-hidden="true" className="cc-abk-pfeil">→</span>
             </a>
             <p className="mt-5 font-inter text-sm text-midnight-blue/75">Lieber ganz für dich allein? <a href="/1-zu-1-mentoring" className="font-bold underline decoration-[#C9A961] underline-offset-4">1:1 mit Claudia →</a></p>

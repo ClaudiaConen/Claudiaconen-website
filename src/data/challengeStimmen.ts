@@ -11,7 +11,7 @@ const v = (slug: string, dauer: string) => ({ quelle: `${DIR}/${slug}.mp4`, stan
 
 export const CHALLENGE_STIMMEN: Stimme[] = [
   {
-    id: 'challenge-nicole-schwuchow', name: 'Nicole Schwuchow', rolle: ROLLE, kurz: 'Nicole', bild: `${DIR}/nicole-schwuchow.webp`,
+    id: 'challenge-nicole-schwuchow', name: 'Nicole Schwuchow', rolle: ROLLE, kurz: 'Nicole', bild: `${DIR}/nicole-schwuchow-foto.webp`,
     video: v('nicole-schwuchow', '1 Minute'),
     zitat: 'Ich habe so das Gefühl, bei mir ist so ein Knoten geplatzt.',
     saetze: ['Eine Kollegin sagte mir: Deine Reels sind noch lebendiger, interessanter, und ich bleibe noch lieber bis zum Schluss dabei.'],
@@ -31,13 +31,13 @@ export const CHALLENGE_STIMMEN: Stimme[] = [
     zitat: 'Es ist unglaublich, was möglich ist, wenn man nicht so alleine ist und neue Impulse bekommt.',
   },
   {
-    id: 'challenge-cordula-wetzel', name: 'Dr. Cordula Wetzel', rolle: ROLLE, kurz: 'Cordula', bild: `${DIR}/cordula-wetzel.webp`,
+    id: 'challenge-cordula-wetzel', name: 'Dr. Cordula Wetzel', rolle: ROLLE, kurz: 'Cordula', bild: `${DIR}/cordula-wetzel-foto.webp`,
     video: v('cordula-wetzel', '1 Minute'),
     zitat: 'Besonders toll war die tägliche Unterstützung mit dem Feedback.',
     saetze: ['Das Ganze hat sich im Laufe der Woche wirklich entwickelt.'],
   },
   {
-    id: 'challenge-annette-welsch', name: 'Annette Welsch', rolle: ROLLE, kurz: 'Annette', bild: `${DIR}/annette-welsch.webp`,
+    id: 'challenge-annette-welsch', name: 'Annette Welsch', rolle: ROLLE, kurz: 'Annette', bild: `${DIR}/annette-welsch-foto.webp`,
     video: v('annette-welsch', '1 Minute'),
     zitat: 'Es ist einfach kein Vergleich zum ersten Tag.',
     saetze: ['Ihr habt das mit so viel Liebe zum Detail gemacht und mich so viel weitergebracht.'],
@@ -55,7 +55,7 @@ export const CHALLENGE_STIMMEN: Stimme[] = [
     saetze: ['Allein deine Videos, deine Beispiele haben mir gezeigt, wie leicht es doch ist, eine Botschaft rüberzubringen.'],
   },
   {
-    id: 'challenge-gaby-brueckmann', name: 'Gaby Brückmann', rolle: ROLLE, kurz: 'Gaby', bild: `${DIR}/gaby-brueckmann.webp`,
+    id: 'challenge-gaby-brueckmann', name: 'Gaby Brückmann', rolle: ROLLE, kurz: 'Gaby', bild: `${DIR}/gaby-brueckmann-foto.webp`,
     video: v('gaby-brueckmann', '40 Sekunden'),
     zitat: 'Ich mache direkt weiter, weil es so gut war.',
     saetze: ['Ich bin ein Stück weit weitergekommen. Ich kann es nur empfehlen.'],

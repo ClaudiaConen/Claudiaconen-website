@@ -16,8 +16,22 @@ export const CHALLENGE_STIMMEN: Stimme[] = [
     zitat: 'Ich habe so das Gefühl, bei mir ist so ein Knoten geplatzt.',
     saetze: ['Eine Kollegin sagte mir: Deine Reels sind noch lebendiger, interessanter, und ich bleibe noch lieber bis zum Schluss dabei.'],
   },
+  // Michael, Ann-Kathrin, Diana: auf Claudias Wunsch 26.11.2026 19:28 (Fotos und Worte wie im Challenge-Heft).
   {
-    id: 'challenge-cordula-wetzel', name: 'Cordula Wetzel', rolle: ROLLE, kurz: 'Cordula', bild: `${DIR}/cordula-wetzel.webp`,
+    id: 'challenge-michael-kleinert', name: 'Michael Kleinert', rolle: ['Videocoach · Teilnehmer der 7-Tage-Challenge'], kurz: 'Michael', bild: `${DIR}/michael-kleinert.webp`,
+    zitat: 'Es ist unglaublich, was ich in der kurzen Zeit mitnehme.',
+    saetze: ['Gerade in meinem Beruf als Videocoach ist es Gold wert, noch einmal so in die Tiefe zu schauen: Was denken und fühlen Menschen?'],
+  },
+  {
+    id: 'challenge-ann-kathrin-andresen', name: 'Dr.-Ing. Ann-Kathrin Andresen', rolle: ['Teilnehmerin der 7-Tage-Challenge'], kurz: 'Ann-Kathrin', bild: `${DIR}/ann-kathrin-andresen.webp`,
+    zitat: 'Denn der Mensch macht aus der Idee Realität.',
+  },
+  {
+    id: 'challenge-diana-winter', name: 'Diana Winter', rolle: ROLLE, kurz: 'Diana', bild: `${DIR}/diana-winter.webp`,
+    zitat: 'Es ist unglaublich, was möglich ist, wenn man nicht so alleine ist und neue Impulse bekommt.',
+  },
+  {
+    id: 'challenge-cordula-wetzel', name: 'Dr. Cordula Wetzel', rolle: ROLLE, kurz: 'Cordula', bild: `${DIR}/cordula-wetzel.webp`,
     video: v('cordula-wetzel', '1 Minute'),
     zitat: 'Besonders toll war die tägliche Unterstützung mit dem Feedback.',
     saetze: ['Das Ganze hat sich im Laufe der Woche wirklich entwickelt.'],

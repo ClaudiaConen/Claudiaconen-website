@@ -361,9 +361,32 @@ export default function Challenge() {
                 Überzeugende Rhetorik, die Vertrauen weckt – authentisch, echt, mit Leichtigkeit und mit KI-Abkürzungen.
               </p>
               {/* Ohne Goldflaeche, dafuer groessere Schrift (Claudia, 24.10.2026 23:32); feine Goldlinie links als Markierung. */}
-              <p className="mt-6 whitespace-pre-line border-l-4 border-[#C9A961] pl-4 font-montserrat text-lg font-extrabold uppercase leading-snug tracking-[0.04em] text-midnight-blue sm:text-2xl">
-                {stand.replace(' · 18:18 Uhr', '\n18:18 Uhr')}
-              </p>
+              {/* Vor dem Start: Zeiten klar untereinander, Uhr + Kamera (Claudia, 26.11.2026 19:12). */}
+              {heute < START ? (
+                <div className="mt-6 border-l-4 border-[#C9A961] pl-4 font-montserrat text-midnight-blue">
+                  <p className="text-lg font-extrabold uppercase leading-snug tracking-[0.04em] sm:text-2xl">Start: Montag, 7. Dezember 2026</p>
+                  <ul className="mt-3 space-y-2 text-lg font-bold sm:text-xl">
+                    {([['7:30 Uhr', 'für Frühaufsteher'], ['18:18 Uhr', 'am Abend']] as const).map(([zeit, wer]) => (
+                      <li key={zeit} className="flex items-center gap-3">
+                        <svg aria-hidden="true" viewBox="0 0 24 24" className="h-6 w-6 shrink-0" fill="none" stroke="#C9A961" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="13" r="8" /><path d="M12 9v4l2.5 2" /><path d="M5 3 2 6M19 3l3 3" /></svg>
+                        <span><span className="font-extrabold">{zeit}</span> <span className="font-semibold text-midnight-blue/75">{wer}</span></span>
+                      </li>
+                    ))}
+                    <li className="flex items-center gap-3">
+                      <svg aria-hidden="true" viewBox="0 0 24 24" className="h-6 w-6 shrink-0" fill="none" stroke="#C9A961" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="6" width="14" height="12" rx="2" /><path d="m16 10 6-3v10l-6-3" /></svg>
+                      <span className="font-extrabold">Live im Zoom-Call</span>
+                    </li>
+                    <li className="flex items-center gap-3">
+                      <svg aria-hidden="true" viewBox="0 0 24 24" className="h-6 w-6 shrink-0" fill="none" stroke="#C9A961" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="10" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
+                      <span><span className="font-extrabold">Alle Inhalte in deinem Mitgliederbereich</span> <span className="font-semibold text-midnight-blue/75">rund um die Uhr</span></span>
+                    </li>
+                  </ul>
+                </div>
+              ) : (
+                <p className="mt-6 whitespace-pre-line border-l-4 border-[#C9A961] pl-4 font-montserrat text-lg font-extrabold uppercase leading-snug tracking-[0.04em] text-midnight-blue sm:text-2xl">
+                  {stand}
+                </p>
+              )}
               <div className="mt-7 flex flex-wrap items-center gap-4">
                 <a href="#anmelden" className={`inline-flex items-center justify-center gap-2.5 rounded-full px-9 py-5 font-montserrat text-base font-extrabold text-midnight-blue shadow-[0_10px_24px_-12px_rgba(19,35,63,0.45)] transition-transform hover:-translate-y-px sm:text-lg ${GOLD}`}>
                   Nutze die Video-Challenge →
@@ -570,7 +593,7 @@ export default function Challenge() {
 
       {/* Kundenstimmen als ruhige Karten: Bild oben, Text darunter, jede Karte mit Worten (Claudia, 25.10.2026 02:29:
           "bei Sommerfeld Text drin, bei den andern nicht ... Text unter dem Bild ... etwas freier"). */}
-      <StimmenKarten stimmen={CHALLENGE_STIMMEN} titel="Das sagen Teilnehmerinnen der letzten Challenge" untertitel="Echte Stimmen, in ihren eigenen Worten." />
+      <StimmenKarten stimmen={CHALLENGE_STIMMEN} ohne={['challenge-sybille', 'challenge-kornelia']} titel="Das sagen Teilnehmende der letzten Challenge" untertitel="Echte Stimmen, in ihren eigenen Worten." />
 
       {/* "Gut zu wissen, bevor es losgeht" entfernt (Claudia, 24.10.2026 20:06: zu viel Ablenkung, gehoert als Tipp-Box in die Challenge). */}
 

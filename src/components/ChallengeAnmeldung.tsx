@@ -76,7 +76,7 @@ export default function ChallengeAnmeldung({ start, onEingetragen }: { start: st
         <div className="min-w-0">
           <p className="font-montserrat text-xl font-extrabold leading-tight sm:text-2xl">Danke, {vorname.trim() || 'du'} – du bist eingetragen.</p>
           <p className="mt-2 font-inter text-[15px] leading-relaxed sm:text-base">
-            Start: Montag, {start}, 19 Uhr, live im Zoom. Speichere dir den Link gleich:
+            Start: Montag, {start}, 18:18 Uhr oder morgens 7:30 Uhr, live im Zoom. Speichere dir den Link gleich:
           </p>
           <a href={ZOOM_LINK} target="_blank" rel="noopener noreferrer" className={`mt-3 inline-flex items-center rounded-full px-7 py-4 font-montserrat text-sm font-bold text-midnight-blue transition-transform hover:-translate-y-px ${GOLD}`}>
             Zum Zoom-Raum

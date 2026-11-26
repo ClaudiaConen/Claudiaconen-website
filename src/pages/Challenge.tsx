@@ -87,10 +87,10 @@ function freischaltung(heute: Date, tag: number): Date {
 }
 
 /** Die Zeile im Kopf - je nachdem, ob der Durchgang bevorsteht, laeuft oder vorbei ist. Live-Termine
- *  (Claudia, 22.11.2026): Start-Zoom Mo 07.12. 19:00 Uhr, Abschlusstreffen Di 15.12. 19:00 Uhr. */
+ *  (Claudia, 22.11./25.11.2026): Live-Tage Mo 07.12., Mi 09.12., Mo 14.12., je 18:18 Uhr oder morgens 7:30 Uhr (gleicher Inhalt). */
 function standZeile(heute: Date): string {
   const h = new Date(heute); h.setHours(0, 0, 0, 0);
-  if (h < START) return 'Start: Montag, 7. Dezember 2026 · 19 Uhr · live im Zoom';
+  if (h < START) return 'Start: Montag, 7. Dezember 2026 · 18:18 Uhr oder 7:30 Uhr · live im Zoom';
   if (h <= ENDE) {
     // Werktage von START bis heute zaehlen (Samstag + Sonntag sind frei).
     let tag = 0; const d = new Date(START);
@@ -362,7 +362,7 @@ export default function Challenge() {
               </p>
               {/* Ohne Goldflaeche, dafuer groessere Schrift (Claudia, 24.10.2026 23:32); feine Goldlinie links als Markierung. */}
               <p className="mt-6 whitespace-pre-line border-l-4 border-[#C9A961] pl-4 font-montserrat text-lg font-extrabold uppercase leading-snug tracking-[0.04em] text-midnight-blue sm:text-2xl">
-                {stand.replace(' · 19 Uhr', '\n19 Uhr')}
+                {stand.replace(' · 18:18 Uhr', '\n18:18 Uhr')}
               </p>
               <div className="mt-7 flex flex-wrap items-center gap-4">
                 <a href="#anmelden" className={`inline-flex items-center justify-center gap-2.5 rounded-full px-9 py-5 font-montserrat text-base font-extrabold text-midnight-blue shadow-[0_10px_24px_-12px_rgba(19,35,63,0.45)] transition-transform hover:-translate-y-px sm:text-lg ${GOLD}`}>
@@ -417,7 +417,7 @@ export default function Challenge() {
           <Helix aktiv={aktiverTag} ys={sprossen.ys} hoehe={sprossen.h} />
           <ol ref={tageRef} className="grid list-none content-start gap-3 self-start p-0">
             <li className={`grid gap-1 bg-white px-5 py-5 text-midnight-blue sm:grid-cols-[170px_minmax(0,1fr)] sm:gap-6 sm:px-7 ${KACHEL}`}>
-              <p className="font-montserrat text-sm font-extrabold">Start<span className="block font-bold text-midnight-blue/65">Mo., 23. Nov. · 19 Uhr</span></p>
+              <p className="font-montserrat text-sm font-extrabold">Start<span className="block font-bold text-midnight-blue/65">Mo., 7. Dez. · 18:18 Uhr<br />oder 7:30 Uhr</span></p>
               <div className="min-w-0">
                 <p className="font-montserrat text-lg font-extrabold">Auftakt live im Zoom</p>
                 <p className="mt-1 font-inter text-[15px] leading-relaxed text-midnight-blue/80">Ein gemütliches Treffen im Zoom: kennenlernen, gemeinsam die Strategie besprechen und klaren Durchblick bekommen. Dazu deine Wochenplanung für deinen eigenen Erfolg.</p>
@@ -429,7 +429,7 @@ export default function Challenge() {
                 <li key={t.titel} data-tag={i}>
                   <details style={{ ['--i' as string]: i + 1 }} className={`group bg-white text-midnight-blue transition-shadow duration-500 ${KACHEL} ${i === aktiverTag ? 'md:border-[#C9A961] md:shadow-[0_14px_34px_-18px_rgba(201,169,97,0.75)]' : ''}`}>
                     <summary className="grid cursor-pointer list-none gap-1 px-5 py-5 sm:grid-cols-[170px_minmax(0,1fr)_auto] sm:items-center sm:gap-6 sm:px-7 [&::-webkit-details-marker]:hidden">
-                      <p className="font-montserrat text-sm font-extrabold">Tag {i + 1}<span className="block font-bold text-midnight-blue/65">{letzter ? 'Di., 15. Dez. · 19 Uhr' : KURZ.format(freischaltung(heute, i))}</span></p>
+                      <p className="font-montserrat text-sm font-extrabold">Tag {i + 1}<span className="block font-bold text-midnight-blue/65">{letzter ? 'Di., 15. Dez.' : KURZ.format(freischaltung(heute, i))}{(i === 2 || i === 5) && <span className="mt-0.5 block font-extrabold text-[#9A7B2F]">LIVE · 18:18 oder 7:30 Uhr</span>}</span></p>
                       <div className="flex min-w-0 items-start gap-4">
                         {/* Die 3-D-Icons klein in der Zeile (Claudia, 24.10.2026 22:20: "Icons mit auf den Ablaufplan ... aufklappen und erklaeren"). */}
                         <img src={`/icons/${t.icon}.webp`} alt="" width={256} height={256} loading="lazy" decoding="async" className="mt-0.5 h-11 w-11 flex-none" />

@@ -254,7 +254,7 @@ export default function PowerOfAiCheckin() {
               <img src="/powerofai/icon-challenge.webp" alt="" width={64} height={64} className="h-16 w-16 flex-none object-contain" />
               <span className="flex-1">
                 <span className="block font-montserrat text-[17px] font-bold leading-snug text-white">7-Tage-Video-Challenge</span>
-                <span className="block font-inter text-[15px] leading-snug text-pearl-white/85">Kostenfrei · Start 26. Oktober · 7 Tage, 1 Minute Aufwand</span>
+                <span className="block font-inter text-[15px] leading-snug text-pearl-white/85">Kostenfrei · Start 7. Dezember · 7 Tage, 1 Minute Aufwand</span>
                 <span className="mt-1 block font-cormorant text-[19px] font-semibold italic text-[#E4BC5D]">Wie wirkst du auf andere?</span>
               </span>
               <input name="challenge" type="checkbox" checked={challenge} onChange={(e) => setChallenge(e.target.checked)} className="h-6 w-6 flex-none accent-[#D4AF37]" aria-label="Ja, ich will bei der 7-Tage-Video-Challenge dabei sein" />

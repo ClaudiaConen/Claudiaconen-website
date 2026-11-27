@@ -98,7 +98,7 @@ export default function Unverwechselbare() {
           <div className="flex flex-col gap-8 order-2 lg:order-1">
             <div>
               <p className="font-montserrat text-xs font-semibold uppercase tracking-[0.2em] text-luxury-gold">
-                Erstes Treffen am 12. November
+                Einmal im Monat
               </p>
               <h1 className="mt-4 font-montserrat text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
                 Die Unverwechselbaren
@@ -120,7 +120,7 @@ export default function Unverwechselbare() {
               <div className="max-w-xl border-l-4 border-luxury-gold bg-warm px-6 py-7">
                 <p className="font-montserrat text-lg font-semibold">Du stehst auf der Liste.</p>
                 <p className="mt-2 font-inter text-midnight-blue/70">
-                  Die Einladung zum 12. November kommt per E-Mail. Bis dahin passiert nichts weiter.
+                  Die Einladung zum nächsten Treffen kommt per E-Mail. Bis dahin passiert nichts weiter.
                 </p>
               </div>
             ) : (

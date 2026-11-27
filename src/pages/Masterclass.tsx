@@ -27,7 +27,6 @@ const REGULAER = 797;
 /** Aktueller Preis im Stripe-Link (Auftraggeber 04.11.2026: neues Produkt fuer 497 €, kein Gutscheincode mehr). */
 const PREIS = 497;
 /** Frist fuer den Aktionspreis (Auftraggeber 18.11.2026: "497 noch 48 Stunden laenger"). */
-const FRIST = 'Freitag, 20. November';
 const EURO = (n: number) => n.toLocaleString('de-DE', { minimumFractionDigits: Number.isInteger(n) ? 0 : 2, maximumFractionDigits: 2 }) + ' €';
 const BRUTTO = (n: number) => EURO(Math.round(n * 119) / 100);
 
@@ -525,7 +524,6 @@ export default function Masterclass() {
               <p className="flex flex-wrap items-baseline justify-center gap-x-4"><span className="font-montserrat text-5xl font-extrabold text-midnight-blue sm:text-6xl">{EURO(PREIS)}</span>{PREIS < REGULAER && <span className="font-montserrat text-xl font-bold text-midnight-blue/50 line-through decoration-[#C9A961] decoration-2">{EURO(REGULAER)}</span>}</p>
               {PREIS < REGULAER && <p className="mt-2 font-montserrat text-sm font-extrabold uppercase tracking-[0.14em] text-[#C9A961]">Statt Normalpreis {EURO(REGULAER)}</p>}
               <p className="mt-2 font-inter text-sm text-midnight-blue/75">zzgl. MwSt. · {BRUTTO(PREIS)} inkl. MwSt. · Ratenzahlung über Klarna möglich</p>
-              {PREIS < REGULAER && <p className="mt-3 font-montserrat text-base font-extrabold text-midnight-blue">Nur bis {FRIST}</p>}
             </div>
             <div className="mt-8 flex flex-col items-center gap-4">
               <a href={KAUF_LINK} className={KNOPF}>Platz sichern →</a>
